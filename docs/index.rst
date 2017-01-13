@@ -1,6 +1,10 @@
 MappyFile Design Notes
 ======================
 
+Python 2 and Python 3 compatible. 
+Windows and Linux. 
+Pure Python - no issues with having to match C-runtimes
+
 Parsing
 -------
 
@@ -40,12 +44,168 @@ http://mapserver.org/mapfile/include.html
 .. code-block:: mapfile
 
     MAP
-     NAME "include_mapfile"
-     EXTENT 0 0 500 500
-     SIZE 250 250
+        NAME "include_mapfile"
+        EXTENT 0 0 500 500
+        SIZE 250 250
 
-     INCLUDE "test_include_symbols.map"
-     INCLUDE "test_include_layer.map"
+        INCLUDE "test_include_symbols.map"
+        INCLUDE "test_include_layer.map"
     END
 
+API Examples
+------------
 
+
+The API is based on Python's configparser API. 
+https://docs.python.org/3/library/configparser.html#mapping-protocol-access
+
++ all values will be returned as strings by default from the parsing?
+
+Accessing Values
+++++++++++++++++
+
+.. code-block:: python
+
+    import mappyfile
+    
+    mf = r"C:\MapFiles\example.map"
+    mapfile = mappyfile.parse(mf)
+    
+    # access layers
+    layers = mapfile["layers"] # note this will be an OrderedDict
+    
+    layer1 = layers.items()[0]     
+    #layer1 = list(d.items())[0] # for Python 3 - http://stackoverflow.com/questions/10058140/accessing-items-in-a-ordereddict
+
+    # access classes in a layer
+    classes = layer1["classes"]
+    
+    for c in classes:
+        print(c["name"])
+        
+Modifying Values
+++++++++++++++++
+
+.. code-block:: python
+
+    layer = layers.items()[0] 
+    layer["name"] = "MyLayer"
+    
+Adding Items
+++++++++++++
+        
+Adding a new layer:
+
+.. code-block:: python
+
+    layers = mapfile["layers"]
+    
+    new_layer_string = """
+    LAYER
+        NAME 'land'
+        TYPE POLYGON
+        DATA '../data/vector/naturalearth/ne_110m_land'
+        CLASS
+            STYLE
+                COLOR 107 208 107
+                OUTLINECOLOR 2 2 2
+                WIDTH 1
+            END
+        END
+    END
+    """
+    
+    new_layer = mappyfile.parse(new_layer_string)
+    layers.insert(0, new_layer) # can insert the new layer at any index
+    
+Adding a new class to a layer:
+
+.. code-block:: python
+
+    layers = mapfile["layers"]
+    layer = layers.items()[0] 
+    
+    new_class_string = """
+    CLASS
+        STYLE
+            COLOR 107 208 107
+            OUTLINECOLOR 2 2 2
+            WIDTH 1
+        END
+    END
+    """
+    
+    new_class = mappyfile.parse(new_class_string)
+    layer["classes"].insert(1, new_class) # can insert the new class at any index
+    
+Pretty Printing
++++++++++++++++
+
+.. code-block:: python
+
+    mf = r"C:\MapFiles\example.map"
+    mapfile = mappyfile.parse(mf)
+    
+    with open('compact.map', 'w') as mf2:
+    mapfile.write(mf2)
+
+Taking an input similar to below:
+
+.. code-block:: mapfile
+
+    MAP
+    WEB
+    METADATA
+    "wms_enable_request"  "*"
+    END
+    END
+    PROJECTION
+    "init=epsg:4326"
+    END
+
+    # START OF THE LAYER DEFINITION
+    LAYER
+    NAME 'land'
+    TYPE POLYGON
+    DATA '../data/vector/naturalearth/ne_110m_land'
+    # START OF THE CLASS DEFINITION
+    CLASS
+    # START OF THE STYLE DEFINITION
+    STYLE
+    COLOR 107 208 107
+    OUTLINECOLOR 2 2 2
+    WIDTH 1
+    END
+    END
+    END
+    END
+    
+mappyfile will output a nicely indented version. 
+
+*Can there be an option to include or remove comments?*
+
+.. code-block:: mapfile
+
+    MAP
+        WEB
+            METADATA
+                "wms_enable_request"  "*"
+            END
+        END
+        PROJECTION
+            "init=epsg:4326"
+        END
+
+        LAYER
+            NAME 'land'
+            TYPE POLYGON
+            DATA '../data/vector/naturalearth/ne_110m_land'
+            CLASS
+                STYLE
+                    COLOR 107 208 107
+                    OUTLINECOLOR 2 2 2
+                    WIDTH 1
+                END
+            END
+        END
+    END
