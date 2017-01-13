@@ -108,51 +108,51 @@ Would become:
 .. code-block:: python
 
 	{
-		"map": {
-			"layers": {
-				"layer1": {
-					"classes": {
-						"class1": {
-							"name": "class1", 
-							"styles": {
-								"0": {
-									"color": "107 208 107", 
-									"width": 1
-								}
-							}
-						}, 
-						"class2": {
-							"name": "class2", 
-							"styles": {
-								"1": {
-									"color": "10 108 207", 
-									"width": 1
-								}
-							}
-						}
-					}, 
-					"name": "layer1"
-				}, 
-				"layer2": {
-					"classes": {
-						"name": "0", 
-						"styles": {
-							"0": {
-								"color": "99 231 117", 
-								"width": 1
-							}
-						}
-					}, 
-					"name": "layer2"
+	  "map": {
+		"layers": {
+		  "layer1": {
+			"classes": {
+			  "class1": {
+				"name": "class1", 
+				"styles": {
+				  "0": {
+					"color": "107 208 107", 
+					"width": 1
+				  }
 				}
+			  }, 
+			  "class2": {
+				"name": "class2", 
+				"styles": {
+				  "1": {
+					"color": "10 108 207", 
+					"width": 1
+				  }
+				}
+			  }
 			}, 
-			"projection": "init=epsg:4326", 
-			"web": {
-				"metadata": {
-					"wms_enable_request": "*"
+			"name": "layer1"
+		  }, 
+		  "layer2": {
+			"classes": {
+			  "name": "0", 
+			  "styles": {
+				"0": {
+				  "color": "99 231 117", 
+				  "width": 1
 				}
-			}
+			  }
+			}, 
+			"name": "layer2"
+		  }
+		}, 
+		"projection": "init=epsg:4326", 
+		"web": {
+		  "metadata": {
+			"wms_enable_request": "*"
+		  }
 		}
+	  }
 	}
 
 ``mappyfile`` will include a single method, ``parse`` which will return a ``Mapfile`` object, which can be treated in a similar manner to a dictionary.

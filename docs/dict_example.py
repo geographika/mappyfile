@@ -37,7 +37,7 @@ m = OrderedDict({"map":
 
 pp.pprint(m)
 
-print json.dumps(m, sort_keys=True, indent=4)
+print json.dumps(m, sort_keys=True, indent=2)
 
 """
 d = {
