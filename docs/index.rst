@@ -103,8 +103,8 @@ For example:
         END		
     END
 	
-Would become a nested dictionary similar to below. Note the use of "FakeKey" where objects have no ``NAME`` properties. These can then
-be ignored when outputting the representation back to a Mapfile. 
+Would become a nested dictionary similar to below. Note the use of an index for a key where objects have no ``NAME`` properties. These are
+ignored when outputting the representation back to a Mapfile. 
 
 Most objects have a set of key/value pairs. ``PROJECTION`` however should be treated as a list (see http://www.mapserver.org/mapfile/projection.html).
 
@@ -112,13 +112,20 @@ Most objects have a set of key/value pairs. ``PROJECTION`` however should be tre
 
     {
       "map": {
+        "web": {
+          "metadata": {
+            "wms_enable_request": "*"
+          }
+        },       
+        "projection": ["init=epsg:4326"],      
         "layers": {
           "layer1": {
+            "name": "layer1",
             "classes": {
               "class1": {
                 "name": "class1", 
                 "styles": {
-                  "FakeKey.0": {
+                  "0": {
                     "color": "107 208 107", 
                     "width": 1
                   }
@@ -127,32 +134,26 @@ Most objects have a set of key/value pairs. ``PROJECTION`` however should be tre
               "class2": {
                 "name": "class2", 
                 "styles": {
-                  "FakeKey.1": {
+                  "0": {
                     "color": "10 108 207", 
                     "width": 1
                   }
                 }
               }
-            }, 
-            "name": "layer1"
+            }
           }, 
           "layer2": {
+            "name": "layer2",
             "classes": {
-              "name": "FakeKey.0", 
-              "styles": {
-                "FakeKey.0": {
-                  "color": "99 231 117", 
-                  "width": 1
+              "0": {
+                "styles": {
+                  "0": {
+                    "color": "99 231 117", 
+                    "width": 1
+                  }
                 }
               }
-            }, 
-            "name": "layer2"
-          }
-        }, 
-        "projection": ["init=epsg:4326"], 
-        "web": {
-          "metadata": {
-            "wms_enable_request": "*"
+            }
           }
         }
       }
