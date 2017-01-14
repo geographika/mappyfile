@@ -8,9 +8,15 @@ d = OrderedDict()
 
 layers = OrderedDict()
 
+# http://www.wellho.net/mouth/3934_Multiple-identical-keys-in-a-Python-dict-yes-you-can-.html
+
+class FakeKey(object):
+    def __init__(self, name):
+        self.name = name
+
 classes = OrderedDict({
-"class1": {"name": "class1","styles": OrderedDict({"0": {"color": "107 208 107", "width": 1 }})},
-"class2": {"name": "class2", "styles": OrderedDict({"1": {"color": "10 108 207", "width": 1 }})}
+"class1": {"name": "class1","styles": OrderedDict({"FakeKey.0": {"color": "107 208 107", "width": 1 }})},
+"class2": {"name": "class2", "styles": OrderedDict({"FakeKey.1": {"color": "10 108 207", "width": 1 }})}
 })
 
 layers["layer1"] = OrderedDict(
@@ -19,8 +25,8 @@ layers["layer1"] = OrderedDict(
      })
     
 layers["layer2"] = OrderedDict({"name": "layer2",
-                    "classes": OrderedDict({"name": "0",
-                                "styles": OrderedDict({"0": {"color": "99 231 117",
+                    "classes": OrderedDict({"name": "FakeKey.0",
+                                "styles": OrderedDict({"FakeKey.0": {"color": "99 231 117",
                                           "width": 1
                                           }})}
                                            )
