@@ -106,6 +106,8 @@ For example:
 Would become a nested dictionary similar to below. Note the use of "FakeKey" where objects have no ``NAME`` properties. These can then
 be ignored when outputting the representation back to a Mapfile. 
 
+Most objects have a set of key/value pairs. ``PROJECTION`` however should be treated as a list (see http://www.mapserver.org/mapfile/projection.html).
+
 .. code-block:: python
 
     {
@@ -147,7 +149,7 @@ be ignored when outputting the representation back to a Mapfile.
             "name": "layer2"
           }
         }, 
-        "projection": "init=epsg:4326", 
+        "projection": ["init=epsg:4326"], 
         "web": {
           "metadata": {
             "wms_enable_request": "*"

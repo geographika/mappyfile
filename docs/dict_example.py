@@ -38,7 +38,7 @@ pp.pprint(layers)
 m = OrderedDict({"map":
                  OrderedDict({
 "web": {"metadata": {"wms_enable_request": "*"}},
-"projection": "init=epsg:4326",
+"projection": ["init=epsg:4326"],
                      "layers": layers})})
 
 pp.pprint(m)
