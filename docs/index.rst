@@ -65,7 +65,6 @@ How can STree collections be turned into a dictionary type object? It would then
 For example:
 
 .. code-block:: mapfile
-   :dedent: 4
    
     MAP
         WEB
