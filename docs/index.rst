@@ -34,7 +34,7 @@ Details on the structure of the Mapfile can be found at: http://mapserver.org/ma
 + Strings containing non-alphanumeric characters or a MapServer keyword MUST be quoted. It is recommended to put ALL strings in double-quotes.
 + The Mapfile has a hierarchical structure, with the MAP object being the root All other objects fall under this one.
 + Comments are designated with a #.
-+ Note C-style comments have recently been added: https://github.com/mapserver/mapserver/pull/5362 - Both single line (e.g. /* foo /) and multi-line comments work.
++ Note C-style comments have recently been added: https://github.com/mapserver/mapserver/pull/5362 - Both single line (e.g. ``/* foo */``) and multi-line comments work.
 
 Design Notes
 ++++++++++++
@@ -113,13 +113,16 @@ See http://mapserver.org/mapfile/include.html for further details.
         INCLUDE "C:\Includes\test_include_layer.map"
     END
 
+*Is it easy to have an option to not process the INCLUDEs and leave them as a simple line of text?*
+
 Processing the Parsed File
 --------------------------
 
 + *To allow updates of objects and properties would the best approach may be to use a transformer to change the tree into a OrderedDict type class? 
   STree objects are read-only?*
-+ *How can STree collections be turned into a nested dictionary type object? It would then need to be turned back into a tree object 
-   to use the STransformer class for pretty printing and creating diagrams. Alternatively a pretty printing function could be used directly on the dictionary type Mapfile class?* The pydot diagrams however are a nice feature. 
++ *How can STree collections be turned into a nested dictionary type object?*
+  It would then need to be turned back into a tree object to use the STransformer class for pretty printing and creating diagrams. 
+  *Alternatively a pretty printing function could be used directly on the dictionary type Mapfile class?* The pydot diagrams however are a nice feature. 
 + Could one approach be to write the dict to a Mapfile string and reparse this for diagrams?
 
 For example taking the Mapfile below:
@@ -223,7 +226,30 @@ Notes on the above:
   the representation back to a Mapfile. 
 + Most objects have a set of key/value pairs. ``PROJECTION`` however should be treated as a list 
   (see http://www.mapserver.org/mapfile/projection.html).
++ Some keys are already quoted e.g. in the ``METADATA`` object items such as "wms_enable_request" are strings rather than keywords. Maybe values need to be tuples to
+  record this e.g. ``"wms_enable_request": ("*", False)`` where ``False`` is to indicate the key is not a keyword. This can be checked when outputting to text so the key is quoted. 
++ Some keys are duplicated within an object. E.g.
 
+  .. code-block:: mapfile
+  
+        PROCESSING "BANDS=1"
+        PROCESSING "CONTOUR_ITEM=elevation"
+        PROCESSING "CONTOUR_INTERVAL=20"
+        
+        # Same for POINTS
+        
+  Could turn this into a list? E.g.
+  
+  .. code-block:: python
+  
+      "layer": {
+        "processing": ["BANDS=1", "CONTOUR_ITEM=elevation", "CONTOUR_INTERVAL=20"]
+      }
+      
+      # to update and manipulate then use an API such as below
+      layer["processing"][0] = "BANDS=1,2,3"
+
+  
 Implementation Notes
 ++++++++++++++++++++
 
