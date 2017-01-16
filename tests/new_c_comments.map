@@ -1,0 +1,25 @@
+# RUN_PARMS: empty.png [SHP2IMG] -m [MAPFILE] -i png -o [RESULT]
+# RUN_PARMS: empty.pdf [SHP2IMG] -m [MAPFILE] -i pdf -o [RESULT]
+# RUN_PARMS: empty.svg [SHP2IMG] -m [MAPFILE] -i svg -o [RESULT]
+# RUN_PARMS: empty.cairo.png [SHP2IMG] -m [MAPFILE] -i cairopng -o [RESULT]
+#
+map
+
+/*
+Multi-line comments as implemented in https://github.com/mapserver/mapserver/issues/4097
+Original ticket in trac at http://trac.osgeo.org/mapserver/ticket/4097
+*/
+imagetype png
+size 10 10
+extent 0 0 400 300
+shapepath "../misc/data"
+fontset "../misc/fonts.lst"
+symbolset "symbolset"
+
+/* Single line comments are also supported */
+
+layer
+    type point
+end
+
+end
