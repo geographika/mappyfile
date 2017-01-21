@@ -489,3 +489,8 @@ Testing - there are many sample Mapfiles available in the testing suite of MapSe
 + https://github.com/mapserver/mapserver/tree/master/msautotest/gdal
 
 These have been downloaded and added to the ``/tests`` folder. This folder also contains a script to download these files again in the future.
+
+Future Development
+------------------
+
++ Enable MapServer to accept a "Mapfile" as a stream: https://github.com/mapserver/mapserver/issues/4031
