@@ -1,6 +1,6 @@
 from mappyfile.types import *
 
-class PrettyPrinter:
+class PrettyPrinter(object):
     def __init__(self, indent=4, spacer=" ", quote="'", lfchar="\n"):
         """
         Option use "\t" for spacer with an indent of 1
@@ -78,7 +78,8 @@ class PrettyPrinter:
             type_ = container[MAPFILE_TYPE].upper()
             s = self.spacer * level + type_                           
             lines.append(s)
-            items = container.items()
+            # we can now filter out the type property
+            items = ((k, v) for k, v in container.items() if k != MAPFILE_TYPE)
         else:
             assert(isinstance(container, HiddenContainer))
             items = enumerate(container)
@@ -91,27 +92,26 @@ class PrettyPrinter:
             elif isinstance(value, Container):
                 lines += self._format(value, level + 1)
             else:
-                if key != MAPFILE_TYPE:
-                    # properties
-                    spacer = self.spacer * (level + 1)
+                # properties
+                spacer = self.spacer * (level + 1)
 
-                    if isinstance(value, KeyValueList):
-                        for v in value:
-                            lines.append(self.format_line(spacer, key, v))
-                    elif isinstance(value, list):
-                        # add KEYWORD to signify start of block
-                        lines.append(spacer + self.format_key(key))
+                if isinstance(value, KeyValueList):
+                    for v in value:
+                        lines.append(self.format_line(spacer, key, v))
+                elif isinstance(value, list):
+                    # add KEYWORD to signify start of block
+                    lines.append(spacer + self.format_key(key))
 
-                        # add the items in the list
-                        list_spacer = self.spacer * (level + 2)
-                        s = self.format_list(value, list_spacer)
-                        lines.append(s)
+                    # add the items in the list
+                    list_spacer = self.spacer * (level + 2)
+                    s = self.format_list(value, list_spacer)
+                    lines.append(s)
 
-                        # add END to close the block
-                        s = self.spacer * (level + 1) + self.end
-                        lines.append(s)
-                    else:
-                        lines.append(self.format_line(spacer, key, value))
+                    # add END to close the block
+                    s = self.spacer * (level + 1) + self.end
+                    lines.append(s)
+                else:
+                    lines.append(self.format_line(spacer, key, value))
 
         if isinstance(container, Container):
             # close the container block with an END            

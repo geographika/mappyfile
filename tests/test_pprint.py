@@ -1,3 +1,4 @@
+import pytest
 from mappyfile.pprint import PrettyPrinter
 from tests.helper import create_sample_map, create_style1
 
@@ -72,9 +73,7 @@ END"""
     txt = pp.pprint(mf)
     assert(expected == txt)
 
-def run_tests():
-    import pytest
-    
+def run_tests():        
     #pytest.main(["tests/test_pprint.py::test_print_map"])
     pytest.main(["tests/test_pprint.py"])
 
