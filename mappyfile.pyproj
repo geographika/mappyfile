@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>tests\test_pprint.py</StartupFile>
+    <SearchPath>.</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>mappyfile</Name>
+    <RootNamespace>mappyfile</RootNamespace>
+    <InterpreterId>{12d1f485-c156-494d-9df8-ffcde558477f}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="docs\" />
+    <Folder Include="docs\images\" />
+    <Folder Include="docs\_build\" />
+    <Folder Include="docs\_build\doctrees\" />
+    <Folder Include="docs\_build\html\" />
+    <Folder Include="docs\_build\html\_images\" />
+    <Folder Include="docs\_build\html\_sources\" />
+    <Folder Include="docs\_build\html\_static\" />
+    <Folder Include="docs\_static\" />
+    <Folder Include="docs\_templates\" />
+    <Folder Include="mappyfile\" />
+    <Folder Include="tests\" />
+    <Folder Include="tests\sample_maps\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="docs\.gitignore" />
+    <Content Include="docs\images\banner.png" />
+    <Content Include="docs\images\calling_popen.png" />
+    <Content Include="docs\images\roll-36697_1280.png" />
+    <Content Include="docs\images\roll-36697_640.png" />
+    <Content Include="docs\index.rst" />
+    <Content Include="docs\make.bat" />
+    <Content Include="docs\Makefile" />
+    <Content Include="docs\maplexer.l" />
+    <Content Include="docs\_build\doctrees\environment.pickle" />
+    <Content Include="docs\_build\doctrees\index.doctree" />
+    <Content Include="docs\_build\html\.buildinfo" />
+    <Content Include="docs\_build\html\genindex.html" />
+    <Content Include="docs\_build\html\index.html" />
+    <Content Include="docs\_build\html\objects.inv" />
+    <Content Include="docs\_build\html\search.html" />
+    <Content Include="docs\_build\html\searchindex.js" />
+    <Content Include="docs\_build\html\_images\banner.png" />
+    <Content Include="docs\_build\html\_images\calling_popen.png" />
+    <Content Include="docs\_build\html\_images\roll-36697_1280.png" />
+    <Content Include="docs\_build\html\_images\roll-36697_640.png" />
+    <Content Include="docs\_build\html\_sources\index.rst.txt" />
+    <Content Include="docs\_build\html\_sources\index.txt" />
+    <Content Include="docs\_build\html\_static\ajax-loader.gif" />
+    <Content Include="docs\_build\html\_static\alabaster.css" />
+    <Content Include="docs\_build\html\_static\basic.css" />
+    <Content Include="docs\_build\html\_static\comment-bright.png" />
+    <Content Include="docs\_build\html\_static\comment-close.png" />
+    <Content Include="docs\_build\html\_static\comment.png" />
+    <Content Include="docs\_build\html\_static\custom.css" />
+    <Content Include="docs\_build\html\_static\doctools.js" />
+    <Content Include="docs\_build\html\_static\down-pressed.png" />
+    <Content Include="docs\_build\html\_static\down.png" />
+    <Content Include="docs\_build\html\_static\file.png" />
+    <Content Include="docs\_build\html\_static\jquery-1.11.1.js" />
+    <Content Include="docs\_build\html\_static\jquery-3.1.0.js" />
+    <Content Include="docs\_build\html\_static\jquery.js" />
+    <Content Include="docs\_build\html\_static\minus.png" />
+    <Content Include="docs\_build\html\_static\plus.png" />
+    <Content Include="docs\_build\html\_static\pygments.css" />
+    <Content Include="docs\_build\html\_static\searchtools.js" />
+    <Content Include="docs\_build\html\_static\underscore-1.3.1.js" />
+    <Content Include="docs\_build\html\_static\underscore.js" />
+    <Content Include="docs\_build\html\_static\up-pressed.png" />
+    <Content Include="docs\_build\html\_static\up.png" />
+    <Content Include="docs\_build\html\_static\websupport.js" />
+    <Content Include="notes.private.txt" />
+    <Content Include="README.md" />
+    <Content Include="tests\new_c_comments.map" />
+    <Content Include="tests\sample_maps\256color_overdose.map" />
+    <Content Include="tests\sample_maps\256color_overdose_cmt.map" />
+    <Content Include="tests\sample_maps\256color_overdose_res.map" />
+    <Content Include="tests\sample_maps\256_overlay_res.map" />
+    <Content Include="tests\sample_maps\alpha_on_alpha_overlay.map" />
+    <Content Include="tests\sample_maps\attrbind.map" />
+    <Content Include="tests\sample_maps\autostyle.map" />
+    <Content Include="tests\sample_maps\autostyle_quoted.map" />
+    <Content Include="tests\sample_maps\average_rgb.map" />
+    <Content Include="tests\sample_maps\average_rgb_plug.map" />
+    <Content Include="tests\sample_maps\baseline_text.map" />
+    <Content Include="tests\sample_maps\bilinear_float.map" />
+    <Content Include="tests\sample_maps\bilinear_src_transp.map" />
+    <Content Include="tests\sample_maps\bilinear_src_transp2.map" />
+    <Content Include="tests\sample_maps\bug1526.map" />
+    <Content Include="tests\sample_maps\chartlayer_bar.map" />
+    <Content Include="tests\sample_maps\chartlayer_pie.map" />
+    <Content Include="tests\sample_maps\chartlayer_pie2.map" />
+    <Content Include="tests\sample_maps\chartlayer_pie_expressions.map" />
+    <Content Include="tests\sample_maps\chartlayer_vbar.map" />
+    <Content Include="tests\sample_maps\circle_layer.map" />
+    <Content Include="tests\sample_maps\class16.map" />
+    <Content Include="tests\sample_maps\class16_intoddscale.map" />
+    <Content Include="tests\sample_maps\class16_ndmap.map" />
+    <Content Include="tests\sample_maps\class16_oddscale.map" />
+    <Content Include="tests\sample_maps\class16_range.map" />
+    <Content Include="tests\sample_maps\class8_range.map" />
+    <Content Include="tests\sample_maps\classtest1.map" />
+    <Content Include="tests\sample_maps\classtest2.map" />
+    <Content Include="tests\sample_maps\classtest2_plugin.map" />
+    <Content Include="tests\sample_maps\compositing.map" />
+    <Content Include="tests\sample_maps\context.map" />
+    <Content Include="tests\sample_maps\contour.map" />
+    <Content Include="tests\sample_maps\contour_tileindex.map" />
+    <Content Include="tests\sample_maps\dateline.map" />
+    <Content Include="tests\sample_maps\deferred.map" />
+    <Content Include="tests\sample_maps\embed_legend.map" />
+    <Content Include="tests\sample_maps\embed_legend_rgba.map" />
+    <Content Include="tests\sample_maps\embed_legend_rgba_tr.map" />
+    <Content Include="tests\sample_maps\embed_legend_tr.map" />
+    <Content Include="tests\sample_maps\embed_sb_rgb.map" />
+    <Content Include="tests\sample_maps\embed_sb_rgba.map" />
+    <Content Include="tests\sample_maps\embed_sb_rgba_tr.map" />
+    <Content Include="tests\sample_maps\embed_sb_rgb_tr.map" />
+    <Content Include="tests\sample_maps\empty.map" />
+    <Content Include="tests\sample_maps\encoding.map" />
+    <Content Include="tests\sample_maps\entity_encoded_follow_text.map" />
+    <Content Include="tests\sample_maps\filters.map" />
+    <Content Include="tests\sample_maps\font-fail.map" />
+    <Content Include="tests\sample_maps\force_palette.map" />
+    <Content Include="tests\sample_maps\force_palette_rgba.map" />
+    <Content Include="tests\sample_maps\force_pc256.map" />
+    <Content Include="tests\sample_maps\force_pc256_rgba.map" />
+    <Content Include="tests\sample_maps\gdal_png_256_res.map" />
+    <Content Include="tests\sample_maps\gdal_png_tr_256.map" />
+    <Content Include="tests\sample_maps\gdal_png_tr_256_res.map" />
+    <Content Include="tests\sample_maps\gd_png_256_res.map" />
+    <Content Include="tests\sample_maps\gd_png_tr_256.map" />
+    <Content Include="tests\sample_maps\gd_png_tr_256_res.map" />
+    <Content Include="tests\sample_maps\geomtransform-vertex.map" />
+    <Content Include="tests\sample_maps\geopdf.map" />
+    <Content Include="tests\sample_maps\grayalpha.map" />
+    <Content Include="tests\sample_maps\grayalpha_8bit.map" />
+    <Content Include="tests\sample_maps\grayalpha_plug.map" />
+    <Content Include="tests\sample_maps\grid.map" />
+    <Content Include="tests\sample_maps\heat.map" />
+    <Content Include="tests\sample_maps\label-multifont.map" />
+    <Content Include="tests\sample_maps\labelcacheoff.map" />
+    <Content Include="tests\sample_maps\labelpnt.map" />
+    <Content Include="tests\sample_maps\labelrot.map" />
+    <Content Include="tests\sample_maps\labels-alignment.map" />
+    <Content Include="tests\sample_maps\labels-anno.map" />
+    <Content Include="tests\sample_maps\labels-bitmap-multiline.map" />
+    <Content Include="tests\sample_maps\labels-bitmap.map" />
+    <Content Include="tests\sample_maps\labels-leader.map" />
+    <Content Include="tests\sample_maps\labels.map" />
+    <Content Include="tests\sample_maps\label_noclip.map" />
+    <Content Include="tests\sample_maps\legend.map" />
+    <Content Include="tests\sample_maps\legend_label_offset.map" />
+    <Content Include="tests\sample_maps\legend_raster_gradient.map" />
+    <Content Include="tests\sample_maps\legend_sizeunits_meters.map" />
+    <Content Include="tests\sample_maps\line_anchorpoint.map" />
+    <Content Include="tests\sample_maps\line_label_auto.map" />
+    <Content Include="tests\sample_maps\line_label_auto2.map" />
+    <Content Include="tests\sample_maps\line_label_follow.map" />
+    <Content Include="tests\sample_maps\line_label_follow_offsetted.map" />
+    <Content Include="tests\sample_maps\line_marker_pixmap.map" />
+    <Content Include="tests\sample_maps\line_marker_svg.map" />
+    <Content Include="tests\sample_maps\line_marker_truetype.map" />
+    <Content Include="tests\sample_maps\line_marker_vector.map" />
+    <Content Include="tests\sample_maps\line_offset.map" />
+    <Content Include="tests\sample_maps\line_pattern.map" />
+    <Content Include="tests\sample_maps\line_pattern_offset.map" />
+    <Content Include="tests\sample_maps\line_short_gap.map" />
+    <Content Include="tests\sample_maps\line_simple.map" />
+    <Content Include="tests\sample_maps\listexpression.map" />
+    <Content Include="tests\sample_maps\lon_wrap_180.map" />
+    <Content Include="tests\sample_maps\lots_of_text.map" />
+    <Content Include="tests\sample_maps\lut_1_crv.map" />
+    <Content Include="tests\sample_maps\lut_float.map" />
+    <Content Include="tests\sample_maps\lut_inline.map" />
+    <Content Include="tests\sample_maps\lut_rgb_crv.map" />
+    <Content Include="tests\sample_maps\marker_anchorpoint.map" />
+    <Content Include="tests\sample_maps\marker_pixmap.map" />
+    <Content Include="tests\sample_maps\mask.map" />
+    <Content Include="tests\sample_maps\mask_1.map" />
+    <Content Include="tests\sample_maps\mask_3.map" />
+    <Content Include="tests\sample_maps\mask_opacity.map" />
+    <Content Include="tests\sample_maps\maxfeatures.map" />
+    <Content Include="tests\sample_maps\multilabel-leader.map" />
+    <Content Include="tests\sample_maps\multilabel.map" />
+    <Content Include="tests\sample_maps\multipoint.map" />
+    <Content Include="tests\sample_maps\nodata_8bit.map" />
+    <Content Include="tests\sample_maps\nodata_rgb.map" />
+    <Content Include="tests\sample_maps\nodata_scaled.map" />
+    <Content Include="tests\sample_maps\nonsquare.map" />
+    <Content Include="tests\sample_maps\nonsquare_multiraw.map" />
+    <Content Include="tests\sample_maps\offsite_8bitgrey.map" />
+    <Content Include="tests\sample_maps\offsite_pct_rgb.map" />
+    <Content Include="tests\sample_maps\offsite_pct_rgb_torgb.map" />
+    <Content Include="tests\sample_maps\ogrbrush.map" />
+    <Content Include="tests\sample_maps\ogrmultitool.map" />
+    <Content Include="tests\sample_maps\ogrpen.map" />
+    <Content Include="tests\sample_maps\ogr_attrfilter.map" />
+    <Content Include="tests\sample_maps\ogr_direct.map" />
+    <Content Include="tests\sample_maps\ogr_empty_geojson.map" />
+    <Content Include="tests\sample_maps\ogr_join.map" />
+    <Content Include="tests\sample_maps\ogr_multi_defer.map" />
+    <Content Include="tests\sample_maps\ogr_query.map" />
+    <Content Include="tests\sample_maps\ogr_select.map" />
+    <Content Include="tests\sample_maps\ogr_vrtconnect.map" />
+    <Content Include="tests\sample_maps\ogr_wkt.map" />
+    <Content Include="tests\sample_maps\ortho.map" />
+    <Content Include="tests\sample_maps\ows_all.map" />
+    <Content Include="tests\sample_maps\ows_disable.map" />
+    <Content Include="tests\sample_maps\ows_empty.map" />
+    <Content Include="tests\sample_maps\ows_sos.map" />
+    <Content Include="tests\sample_maps\ows_test_xml_escaping.map" />
+    <Content Include="tests\sample_maps\ows_wcs.map" />
+    <Content Include="tests\sample_maps\ows_wfs.map" />
+    <Content Include="tests\sample_maps\ows_wms.map" />
+    <Content Include="tests\sample_maps\plb_embed_legend.map" />
+    <Content Include="tests\sample_maps\plb_embed_legend_rgba.map" />
+    <Content Include="tests\sample_maps\plb_embed_legend_rgba_tr.map" />
+    <Content Include="tests\sample_maps\plb_embed_legend_tr.map" />
+    <Content Include="tests\sample_maps\point-polaroffset.map" />
+    <Content Include="tests\sample_maps\point_ellipse.map" />
+    <Content Include="tests\sample_maps\point_pixmap.map" />
+    <Content Include="tests\sample_maps\point_pixmap_gif.map" />
+    <Content Include="tests\sample_maps\point_svg.map" />
+    <Content Include="tests\sample_maps\point_truetype.map" />
+    <Content Include="tests\sample_maps\point_vector.map" />
+    <Content Include="tests\sample_maps\poly-label-multiline-pos-auto.map" />
+    <Content Include="tests\sample_maps\poly-label-pos-auto.map" />
+    <Content Include="tests\sample_maps\polygon-as-line-offset.map" />
+    <Content Include="tests\sample_maps\polygon-as-line.map" />
+    <Content Include="tests\sample_maps\polygon-hatch-dashed.map" />
+    <Content Include="tests\sample_maps\polygon-hatch.map" />
+    <Content Include="tests\sample_maps\polygon-pixmap.map" />
+    <Content Include="tests\sample_maps\polygon-simple.map" />
+    <Content Include="tests\sample_maps\polygon-ttf.map" />
+    <Content Include="tests\sample_maps\polygon-vector.map" />
+    <Content Include="tests\sample_maps\polyline_no_clip.map" />
+    <Content Include="tests\sample_maps\poly_geomtransform_anchor.map" />
+    <Content Include="tests\sample_maps\processing_bands.map" />
+    <Content Include="tests\sample_maps\processing_scale_auto.map" />
+    <Content Include="tests\sample_maps\quantized.map" />
+    <Content Include="tests\sample_maps\query.map" />
+    <Content Include="tests\sample_maps\querymap.map" />
+    <Content Include="tests\sample_maps\query_ogr.map" />
+    <Content Include="tests\sample_maps\query_postgis.map" />
+    <Content Include="tests\sample_maps\quoted_data.map" />
+    <Content Include="tests\sample_maps\quoting.map" />
+    <Content Include="tests\sample_maps\raster_simple.map" />
+    <Content Include="tests\sample_maps\raster_simple_opacity.map" />
+    <Content Include="tests\sample_maps\rawmode_multiband.map" />
+    <Content Include="tests\sample_maps\rawmode_nodata.map" />
+    <Content Include="tests\sample_maps\rawmode_nodata_resample.map" />
+    <Content Include="tests\sample_maps\reproj.map" />
+    <Content Include="tests\sample_maps\resolution.map" />
+    <Content Include="tests\sample_maps\rfc14.map" />
+    <Content Include="tests\sample_maps\rfc36.map" />
+    <Content Include="tests\sample_maps\rfc36_ogr.map" />
+    <Content Include="tests\sample_maps\rfc62.map" />
+    <Content Include="tests\sample_maps\rgba_overlay_res.map" />
+    <Content Include="tests\sample_maps\rgb_16bit.map" />
+    <Content Include="tests\sample_maps\rgb_overlay.map" />
+    <Content Include="tests\sample_maps\rgb_overlay_plug.map" />
+    <Content Include="tests\sample_maps\rgb_overlay_res.map" />
+    <Content Include="tests\sample_maps\rgb_overlay_res_to8bit.map" />
+    <Content Include="tests\sample_maps\rgb_overlay_res_to8bit_dithered.map" />
+    <Content Include="tests\sample_maps\rot_out.map" />
+    <Content Include="tests\sample_maps\runtime_sub.map" />
+    <Content Include="tests\sample_maps\scaletoken.map" />
+    <Content Include="tests\sample_maps\sde_bug2072.map" />
+    <Content Include="tests\sample_maps\sde_join.map" />
+    <Content Include="tests\sample_maps\sde_utf.map" />
+    <Content Include="tests\sample_maps\sde_utf2.map" />
+    <Content Include="tests\sample_maps\sde_view.map" />
+    <Content Include="tests\sample_maps\sde_wms.map" />
+    <Content Include="tests\sample_maps\shp2img-size.map" />
+    <Content Include="tests\sample_maps\simplealpha.map" />
+    <Content Include="tests\sample_maps\simplealpha_bg.map" />
+    <Content Include="tests\sample_maps\simplealpha_plug.map" />
+    <Content Include="tests\sample_maps\sos.map" />
+    <Content Include="tests\sample_maps\style_opacity.map" />
+    <Content Include="tests\sample_maps\template.map" />
+    <Content Include="tests\sample_maps\testuppercase.map" />
+    <Content Include="tests\sample_maps\test_xmp.map" />
+    <Content Include="tests\sample_maps\text-shaping.map" />
+    <Content Include="tests\sample_maps\text.map" />
+    <Content Include="tests\sample_maps\ticket_5032_optim_1.map" />
+    <Content Include="tests\sample_maps\ticket_5032_optim_2.map" />
+    <Content Include="tests\sample_maps\tileindex.map" />
+    <Content Include="tests\sample_maps\tileindexmixedsrs.map" />
+    <Content Include="tests\sample_maps\tileindexmixedsrs2.map" />
+    <Content Include="tests\sample_maps\tileindexmixedsrs3.map" />
+    <Content Include="tests\sample_maps\tileindexmixedsrs4.map" />
+    <Content Include="tests\sample_maps\tileindex_mi.map" />
+    <Content Include="tests\sample_maps\tomk_workshop.map" />
+    <Content Include="tests\sample_maps\transparent_layer.map" />
+    <Content Include="tests\sample_maps\trlay1.map" />
+    <Content Include="tests\sample_maps\trlay2.map" />
+    <Content Include="tests\sample_maps\trlay3.map" />
+    <Content Include="tests\sample_maps\unclassified.map" />
+    <Content Include="tests\sample_maps\utfgrid-escaping.map" />
+    <Content Include="tests\sample_maps\uvraster.map" />
+    <Content Include="tests\sample_maps\uvraster_reproj.map" />
+    <Content Include="tests\sample_maps\wcs_mask.map" />
+    <Content Include="tests\sample_maps\wcs_multi.map" />
+    <Content Include="tests\sample_maps\wcs_post.map" />
+    <Content Include="tests\sample_maps\wcs_simple.map" />
+    <Content Include="tests\sample_maps\wcs_tileindexmixedsrs.map" />
+    <Content Include="tests\sample_maps\wfs_200.map" />
+    <Content Include="tests\sample_maps\wfs_200_allgeoms.map" />
+    <Content Include="tests\sample_maps\wfs_200_cite.map" />
+    <Content Include="tests\sample_maps\wfs_200_cite_postgis.map" />
+    <Content Include="tests\sample_maps\wfs_200_inspire.map" />
+    <Content Include="tests\sample_maps\wfs_200_inspire_missing_md.map" />
+    <Content Include="tests\sample_maps\wfs_200_inspire_scenario1.map" />
+    <Content Include="tests\sample_maps\wfs_200_low_wfsmaxfeatures.map" />
+    <Content Include="tests\sample_maps\wfs_200_low_wfsmaxfeatures_no_compute_number_matched.map" />
+    <Content Include="tests\sample_maps\wfs_alltypes.map" />
+    <Content Include="tests\sample_maps\wfs_combined_filter.map" />
+    <Content Include="tests\sample_maps\wfs_default_version_110.map" />
+    <Content Include="tests\sample_maps\wfs_filter.map" />
+    <Content Include="tests\sample_maps\wfs_filter_ogr.map" />
+    <Content Include="tests\sample_maps\wfs_filter_postgis.map" />
+    <Content Include="tests\sample_maps\wfs_filter_projmeter.map" />
+    <Content Include="tests\sample_maps\wfs_group.map" />
+    <Content Include="tests\sample_maps\wfs_misc.map" />
+    <Content Include="tests\sample_maps\wfs_multi_geom_elements.map" />
+    <Content Include="tests\sample_maps\wfs_ogr.map" />
+    <Content Include="tests\sample_maps\wfs_ogr_25d.map" />
+    <Content Include="tests\sample_maps\wfs_ogr_drv_nocreatedatasource.map" />
+    <Content Include="tests\sample_maps\wfs_ogr_geojson.map" />
+    <Content Include="tests\sample_maps\wfs_ogr_invalid_filename.map" />
+    <Content Include="tests\sample_maps\wfs_ogr_native_sql.map" />
+    <Content Include="tests\sample_maps\wfs_ogr_nonexistingdrv.map" />
+    <Content Include="tests\sample_maps\wfs_ogr_no_native_sql.map" />
+    <Content Include="tests\sample_maps\wfs_optional_items.map" />
+    <Content Include="tests\sample_maps\wfs_postgis_25d.map" />
+    <Content Include="tests\sample_maps\wfs_shp_tileindex_of_shp.map" />
+    <Content Include="tests\sample_maps\wfs_simple.map" />
+    <Content Include="tests\sample_maps\wfs_simple_ogr.map" />
+    <Content Include="tests\sample_maps\wfs_test5299.map" />
+    <Content Include="tests\sample_maps\wfs_time.map" />
+    <Content Include="tests\sample_maps\wfs_time_ogr.map" />
+    <Content Include="tests\sample_maps\wfs_time_postgis.map" />
+    <Content Include="tests\sample_maps\wld_override.map" />
+    <Content Include="tests\sample_maps\wld_rotate.map" />
+    <Content Include="tests\sample_maps\wld_upsidedown.map" />
+    <Content Include="tests\sample_maps\wmsclient.map" />
+    <Content Include="tests\sample_maps\wmsclient_3543.map" />
+    <Content Include="tests\sample_maps\wms_dimensions.map" />
+    <Content Include="tests\sample_maps\wms_inspire.map" />
+    <Content Include="tests\sample_maps\wms_inspire_scenario1.map" />
+    <Content Include="tests\sample_maps\wms_inspire_scenario2.map" />
+    <Content Include="tests\sample_maps\wms_legend.map" />
+    <Content Include="tests\sample_maps\wms_nosld.map" />
+    <Content Include="tests\sample_maps\wms_nosld_postgis.map" />
+    <Content Include="tests\sample_maps\wms_ogr_native_sql.map" />
+    <Content Include="tests\sample_maps\wms_raster.map" />
+    <Content Include="tests\sample_maps\wms_simple.map" />
+    <Content Include="tests\sample_maps\wms_simple_kml.map" />
+    <Content Include="tests\sample_maps\wms_simple_postgis.map" />
+    <Content Include="tests\sample_maps\wms_sld.map" />
+    <Content Include="tests\sample_maps\wms_sld2.map" />
+    <Content Include="tests\sample_maps\wms_sld_postgis.map" />
+    <Content Include="tests\sample_maps\wms_sld_proj.map" />
+    <Content Include="tests\sample_maps\wms_sld_validation.map" />
+    <Content Include="tests\sample_maps\wms_tileindexmixedsrs.map" />
+    <Content Include="tests\sample_maps\wms_time1.map" />
+    <Content Include="tests\sample_maps\wms_time1_postgis.map" />
+    <Content Include="tests\sample_maps\wms_time2.map" />
+    <Content Include="tests\sample_maps\wms_time2_postgis.map" />
+    <Content Include="tests\sample_maps\wms_time_pattern.map" />
+    <Content Include="tests\sample_maps\wms_time_pattern_12_13_test.map" />
+    <Content Include="tests\sample_maps\wms_time_pattern_12_13_test_postgis.map" />
+    <Content Include="tests\sample_maps\wms_time_pattern_fail.map" />
+    <Content Include="tests\sample_maps\wms_time_pattern_postgis.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="docs\conf.py" />
+    <Compile Include="docs\dict_example.py" />
+    <Compile Include="mappyfile\pprint.py" />
+    <Compile Include="mappyfile\__init__.py" />
+    <Compile Include="tests\sample_maps_downloader.py" />
+    <Compile Include="tests\test_pprint.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
+      <Id>{12d1f485-c156-494d-9df8-ffcde558477f}</Id>
+      <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>mappyfile (Python 2.7 x64)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>
+      </PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
