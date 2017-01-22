@@ -1,0 +1,63 @@
+{
+    "__type__": "map", 
+    "web": {
+        "__type__": "web", 
+        "metadata": {
+            "__type__": "metadata", 
+            "wms_enable_request": "*"
+        }
+    }, 
+    "projection": [
+        "proj=utm", 
+        "ellps=GRS80", 
+        "datum=NAD83", 
+        "zone=15", 
+        "units=m", 
+        "north", 
+        "no_defs"
+    ], 
+    "layers": [
+        {
+            "__type__": "layer", 
+            "name": "Layer1", 
+            "classes": [
+                {
+                    "__type__": "class", 
+                    "name": "Class1", 
+                    "styles": [
+                        {
+                            "__type__": "style", 
+                            "color": "99 231 117", 
+                            "width": "1"
+                        }, 
+                        {
+                            "__type__": "style", 
+                            "name": "MyStyle", 
+                            "color": "108 201 187", 
+                            "width": "2"
+                        }
+                    ]
+                }
+            ], 
+            "features": [
+                {
+                    "__type__": "feature", 
+                    "points": [
+                        "0 100", 
+                        "100 200", 
+                        "40 90"
+                    ]
+                }
+            ]
+        }, 
+        {
+            "__type__": "layer", 
+            "name": "Layer2", 
+            "processing": [
+                "BANDS=1", 
+                "CONTOUR_ITEM=elevation", 
+                "CONTOUR_INTERVAL=20"
+            ]
+        }
+    ]
+}

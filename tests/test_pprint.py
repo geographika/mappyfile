@@ -1,15 +1,15 @@
 from mappyfile.pprint import PrettyPrinter
-from tests import helper
+from tests.helper import create_sample_map, create_style1
 
 def export_map():
-    map_ = helper.create_sample_map()
+    map_ = create_sample_map()
 
     pp = PrettyPrinter()
     print(pp.pprint(map_))
 
     # print a partial part of the map
-    print(pp.pprint(map_["layers"][0]["classes"][0]))
-    print(pp.pprint(map_["layers"][0]["classes"]))
+    #print(pp.pprint(map_["layers"][0]["classes"][0]))
+    #print(pp.pprint(map_["layers"][0]["classes"]))
 
 def test_print_style():
     style1 = create_style1()
@@ -67,7 +67,7 @@ def test_print_map():
     END
 END"""
 
-    mf = create_sample_dict()
+    mf = create_sample_map()
     pp = PrettyPrinter() # expected
     txt = pp.pprint(mf)
     assert(expected == txt)
@@ -79,6 +79,6 @@ def run_tests():
     pytest.main(["tests/test_pprint.py"])
 
 if __name__ == "__main__":
+    export_map()
     run_tests()
-    #export_map()
 
