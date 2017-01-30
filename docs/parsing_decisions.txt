@@ -1,0 +1,60 @@
+The Mapfile has a very flexible syntax.
+This document points out some of those syntax features, tries to explain their significance to parsing, and to explain what solution was used to accomodate them.
+
+
+UNQUOTED STRINGS
+===================
+
+Most programming languages insist that all strings are quoted. That is because unquoted strings can lead to a lot of ambiguity, and it does in the Mapfile format.
+For example, in the line:
+
+    TYPE LINE
+
+    (example from tests/polyline_no_clip.map)
+
+It is unclear to the lexer if LINE is a command like TYPE, or a string. In this case of course it's a string, but it's left to the parser to disambiguate it. As we'll see later, that is not always simple.
+
+In our parser, we simply allowed for attribute names as a value. In post-processing, we treat them the same as strings.
+
+
+COMPOSITE/ATTRIBUTE AMBIGUITY
+================================
+
+When seeing a composite name (e.g. STYLE) it's unknown whether we are looking at the opening of a composite, that has to end with END, or an attribute, that will end with a newline.
+
+    STYLE SELECTED
+
+    (example from tests/querymap.map)
+
+This alone is not a problem to parse, but it becomes very tricky when compounded with the next one:
+
+
+LINE-BREAK FLUIDITY
+=====================
+
+On its surface, the Mapfile format appears very consistent in its line-break usage. But actually, there is a lot of variance allowed. For example:
+
+    STYLE  COLOR 255 0 0  END
+
+    (example from tests/class16_oddscale.map)
+
+
+It is allowed for containers to be placed completely on one line.
+But also partially:
+
+
+  LAYER DEBUG 5
+    GROUP "default"
+    ...
+  END
+
+  (example from tests/polyline_no_clip.map)
+
+In this example, both attributes belong to LAYER, but only one of them is on the same line.
+
+Notice that in this last example, we see a culmination of all 3 issues into a big ambiguity:
+It's impossible to know if LAYER here is a composite or an attribute. Only after looking much further ahead, a smart parser could figure it out.
+
+This is why we chose to use the Earley algorithm, instead of the much faster LALR(1). LR algorithms simply cannot handle this kind of ambiguity.
+
+
