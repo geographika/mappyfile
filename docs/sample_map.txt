@@ -1,0 +1,44 @@
+MAP
+    WEB
+        METADATA
+            'wms_enable_request' '*'
+        END
+    END
+    PROJECTION
+        'proj=utm'
+        'ellps=GRS80'
+        'datum=NAD83'
+        'zone=15'
+        'units=m'
+        'north'
+        'no_defs'
+    END
+    LAYER
+        NAME 'Layer1'
+        CLASS
+            NAME 'Class1'
+            STYLE
+                COLOR 99 231 117
+                WIDTH 1
+            END
+            STYLE
+                NAME 'MyStyle'
+                COLOR 108 201 187
+                WIDTH 2
+            END
+        END
+        FEATURE
+            POINTS
+                0 100
+                100 200
+                40 90
+            END
+        END
+    END
+    LAYER
+        NAME 'Layer2'
+        PROCESSING 'BANDS=1'
+        PROCESSING 'CONTOUR_ITEM=elevation'
+        PROCESSING 'CONTOUR_INTERVAL=20'
+    END
+END
