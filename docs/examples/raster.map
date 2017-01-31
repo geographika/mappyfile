@@ -1,0 +1,53 @@
+MAP
+    MAXSIZE 4096 # allow for images greater than 2048x2048 pixels to be generated
+    EXTENT -180 -90 180 90    
+
+    # START WEB METADATA
+    WEB
+        METADATA
+            "wms_enable_request"  "*"
+            'wms_feature_info_mime_type' 'text/html' # this is required to return the content-type for GetFeatureInfo requests       
+        END
+    END
+    # END WEB METADATA
+
+    PROJECTION
+        "init=epsg:4326"
+    END
+    
+    # START OF THE LAYER DEFINITION
+    LAYER
+        EXTENT -180 -90 180 90 # set this here as it is not stored in the image
+        NAME "rgb"
+        TYPE RASTER
+        DATA '../data/raster/bluemarble.tif' 
+        TEMPLATE 'raster.template.html'    
+    END
+    # END OF THE LAYER DEFINITION 
+    
+    LAYER
+        EXTENT -180 -90 180 90
+        NAME "highlighted"
+        TYPE RASTER
+        DATA '../data/raster/bluemarble.tif' 
+        TEMPLATE 'raster.template.html'
+
+        # START OF CLASS DEFINITION
+        CLASS 
+            NAME "sea"
+            EXPRESSION ([red] = 10 AND [green] = 10 AND [blue] = 10)        
+            STYLE
+                COLOR '#9AFEFF' # Electric Blue
+            END
+        END
+        # END OF CLASS DEFINITION
+  
+        CLASS
+            NAME "other"    
+            STYLE
+                COLOR -1 -1 -1 
+            END
+        END    
+
+    END        
+END

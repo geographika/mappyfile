@@ -5,13 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_pprint.py</StartupFile>
+    <StartupFile>tests\test_pprint2.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>{12d1f485-c156-494d-9df8-ffcde558477f}</InterpreterId>
+    <InterpreterId>{5c4076db-883e-4df1-9c9e-e3721d8b1774}</InterpreterId>
     <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -29,6 +29,7 @@
   <ItemGroup>
     <Folder Include="docs\" />
     <Folder Include="docs\images\" />
+    <Folder Include="docs\examples\" />
     <Folder Include="docs\_build\" />
     <Folder Include="docs\_build\doctrees\" />
     <Folder Include="docs\_build\html\" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="docs\.gitignore" />
+    <Content Include="docs\examples\raster.map" />
     <Content Include="docs\images\banner.png" />
     <Content Include="docs\images\calling_popen.png" />
     <Content Include="docs\images\roll-36697_1280.png" />
@@ -51,6 +53,15 @@
     <Content Include="docs\make.bat" />
     <Content Include="docs\Makefile" />
     <Content Include="docs\maplexer.l" />
+    <Content Include="docs\parser.rst" />
+    <Content Include="docs\pretty_printing.rst" />
+    <Content Include="docs\sample_dict.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="docs\sample_map.txt">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="docs\transformer.rst" />
     <Content Include="docs\_build\doctrees\environment.pickle" />
     <Content Include="docs\_build\doctrees\index.doctree" />
     <Content Include="docs\_build\html\.buildinfo" />
@@ -88,8 +99,15 @@
     <Content Include="docs\_build\html\_static\up-pressed.png" />
     <Content Include="docs\_build\html\_static\up.png" />
     <Content Include="docs\_build\html\_static\websupport.js" />
+    <Content Include="docs\_static\placeholder.txt" />
+    <Content Include="docs\_templates\placeholder.txt" />
+    <Content Include="MANIFEST.in" />
+    <Content Include="mappyfile\mapfile.g" />
+    <Content Include="Notes.ignore.txt" />
     <Content Include="notes.private.txt" />
-    <Content Include="README.md" />
+    <Content Include="README.rst" />
+    <Content Include="requirements-dev.txt" />
+    <Content Include="requirements.txt" />
     <Content Include="tests\new_c_comments.map" />
     <Content Include="tests\sample_maps\256color_overdose.map" />
     <Content Include="tests\sample_maps\256color_overdose_cmt.map" />
@@ -392,26 +410,61 @@
     <Content Include="tests\sample_maps\wms_time_pattern_12_13_test_postgis.map" />
     <Content Include="tests\sample_maps\wms_time_pattern_fail.map" />
     <Content Include="tests\sample_maps\wms_time_pattern_postgis.map" />
+    <Content Include="tox.ini" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="docs\conf.py" />
     <Compile Include="docs\dict_example.py" />
+    <Compile Include="docs\examples\adding_values.py" />
+    <Compile Include="docs\examples\modifying_values.py" />
+    <Compile Include="docs\examples\accessing_values.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="mappyfile\parser.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyfile\pprint.py" />
+    <Compile Include="mappyfile\test.py" />
+    <Compile Include="mappyfile\transformer.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="mappyfile\types.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyfile\__init__.py" />
+    <Compile Include="setup.py" />
+    <Compile Include="tests\helper.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\point_vector.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\symbolset">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_parser.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\sample_maps_downloader.py" />
+    <Compile Include="tests\test_pprint2.py" />
     <Compile Include="tests\test_pprint.py" />
+    <Compile Include="tests\test_transformer.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
-      <Id>{12d1f485-c156-494d-9df8-ffcde558477f}</Id>
-      <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
+      <Id>{5c4076db-883e-4df1-9c9e-e3721d8b1774}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
       <Version>2.7</Version>
-      <Description>mappyfile (Python 2.7 x64)</Description>
+      <Description>mappyfile (Python 64-bit 2.7)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>
-      </PathEnvironmentVariable>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>Amd64</Architecture>
     </Interpreter>
   </ItemGroup>

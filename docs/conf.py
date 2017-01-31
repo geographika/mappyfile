@@ -176,7 +176,10 @@ html_static_path = ['_static']
 
 # Custom sidebar templates, maps document names to template names.
 #
-# html_sidebars = {}
+#html_sidebars = {'**': ['globaltoc.html','searchbox.html','localtoc.html','relations.html']}
+# 
+
+html_logo = 'images/roll-36697_640.png'
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
