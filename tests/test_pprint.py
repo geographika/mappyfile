@@ -1,6 +1,7 @@
 import pytest
 from mappyfile.pprint import PrettyPrinter
 from tests.helper import create_sample_map, create_style1
+from tests.point_vector import create_sample_map
 
 def export_map():
     map_ = create_sample_map()

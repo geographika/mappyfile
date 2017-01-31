@@ -2,6 +2,8 @@ import json
 from tests import helper
 from mappyfile.types import *
 
+# point_vector.map
+
 def print_dict_structure():
     """
     # http://stackoverflow.com/questions/3229419/pretty-printing-nested-dictionaries-in-python
