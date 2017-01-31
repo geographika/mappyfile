@@ -1,4 +1,4 @@
-from mappyfile.types import *
+# from mappyfile.types import *
 
 class PrettyPrinter(object):
     def __init__(self, indent=4, spacer=" ", quote="'", lfchar="\n"):

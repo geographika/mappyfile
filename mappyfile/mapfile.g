@@ -2,12 +2,10 @@ start: NL* composite NL*;
 
 composite: composite_type attr? NL+ composite_body END
        | composite_type points END
-       | CLASS attr END     // XXX TODO 
-       | LABEL attr END     // XXX TODO 
-       | STYLE attr END     // XXX TODO 
+       | composite_type attr END
        ;
 composite_body: composite_item* ;
-composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) NL+;
+@composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) NL+;
 
 points: POINTS NL+ (num_pair NL*)* END
       | POINTS num_pair* END
@@ -23,7 +21,7 @@ validation: VALIDATION NL+ ((attr NL+)+|(string NL*)+) END;
 attr: attr_name value+;
 
 attr_name: NAME | composite_type;
-value: bare_string | string | int | float | expression | attr_bind | path | regexp | runtime_var | list;
+@value: bare_string | string | int | float | expression | attr_bind | path | regexp | runtime_var | list;
 
 int: INT;
 int_pair: int int;
@@ -41,13 +39,13 @@ list: '{' value (',' value)* '}';
 
 attr_bind: '\[' bare_string '\]';
 
-expression: '\(' or_test '\)';
-or_test : (or_test OR)? and_test;
-and_test : (and_test AND)? comparison;
-comparison: (comparison compare_op)? add;
+@expression: '\(' or_test '\)';
+?or_test : (or_test OR)? and_test;
+?and_test : (and_test AND)? comparison;
+?comparison: (comparison compare_op)? add;
 compare_op: '>=' | '<' | '=[*]' | '==' | '=' | '~' | '~[*]' | '>' | '<=' | IN;
 
-add: (add '\+')? (func_call | value);
+?add: (add '\+')? (func_call | value);
 func_call: attr_name '\(' func_params '\)';
 func_params: value (',' value)*;
 
@@ -78,7 +76,7 @@ composite_type: CLASS
 %fragment I: '(?i)';    // Case Insensitive
 %fragment S: '(?s)';    // Dot Matches Newline
 
-NAME: I '[a-z_][a-z0-9_]*' (%unless
+NAME: I '[a-z_][a-z0-9_]*(?=([\s(]|\]))' (%unless
     END: I 'END';
     AND: I 'AND';
     OR: I 'OR';
@@ -120,7 +118,7 @@ NAME: I '[a-z_][a-z0-9_]*' (%unless
 
 %fragment EXP_POSTFIX: I 'e[-+]?\d+';
 
-PATH: I '[./][a-z0-9_/.]+' ;
+PATH: I '[a-z_]*[./][a-z0-9_/.]+' ;
 
 INT: I '-?\d+';
 FLOAT: '-?(\d+\.\d*|\.\d+)(' EXP_POSTFIX ')?'
