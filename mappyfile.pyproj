@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_pprint.py</StartupFile>
+    <StartupFile>tests\test_parser.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -88,6 +88,7 @@
     <Content Include="docs\_build\html\_static\up-pressed.png" />
     <Content Include="docs\_build\html\_static\up.png" />
     <Content Include="docs\_build\html\_static\websupport.js" />
+    <Content Include="mappyfile\mapfile.g" />
     <Content Include="notes.private.txt" />
     <Content Include="README.md" />
     <Content Include="tests\new_c_comments.map" />
@@ -396,10 +397,21 @@
   <ItemGroup>
     <Compile Include="docs\conf.py" />
     <Compile Include="docs\dict_example.py" />
+    <Compile Include="mappyfile\map_pprint.py" />
+    <Compile Include="mappyfile\parser.py" />
     <Compile Include="mappyfile\pprint.py" />
+    <Compile Include="mappyfile\test.py" />
+    <Compile Include="mappyfile\test_transformer.py" />
+    <Compile Include="mappyfile\tokens.py" />
+    <Compile Include="mappyfile\transformer.py" />
+    <Compile Include="mappyfile\types.py" />
     <Compile Include="mappyfile\__init__.py" />
+    <Compile Include="tests\helper.py" />
     <Compile Include="tests\sample_maps_downloader.py" />
+    <Compile Include="tests\test_parser.py" />
     <Compile Include="tests\test_pprint.py" />
+    <Compile Include="tests\test_transformer.py" />
+    <Compile Include="tests\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="..\..\VirtualEnvs\mappyfile\">

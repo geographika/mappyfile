@@ -2,6 +2,11 @@ import os
 import pytest
 from mappyfile.parser import Parser
 
+def graphviz_setup():
+
+    gviz = r"C:\Program Files (x86)\Graphviz2.38\bin"
+    os.environ['PATH'] = gviz + ';' + os.environ['PATH']
+
 def test_parse_style():
     s = """
             STYLE
@@ -12,7 +17,9 @@ def test_parse_style():
     p = Parser()
     ast = p.parse(s)
     print(ast)
-    #r.to_png_with_pydot(r'style.png')
+
+
+    ast.to_png_with_pydot(r'style.png')
 
 
 def test_all_maps():
@@ -22,7 +29,8 @@ def test_all_maps():
     p = Parser()
 
     for fn in os.listdir(sample_dir):
-        r = p.parse_file(os.path.join(sample_dir, fn))
+        ast = p.parse_file(os.path.join(sample_dir, fn))
+        ast.to_png_with_pydot(r'C:\Temp\Trees\%s.png' % os.path.basename(fn))
 
 def run_tests():        
     pytest.main(["tests/test_parser.py::test_parse_style"])
@@ -30,5 +38,7 @@ def run_tests():
     #pytest.main(["tests/test_parser.py"])
 
 if __name__ == '__main__':
+    graphviz_setup()
     #run_tests()
-    test_parse_style()
+    #test_parse_style()
+    test_all_maps()
