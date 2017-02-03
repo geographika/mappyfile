@@ -2,6 +2,7 @@
 Module to transform an AST (Abstract Syntax Tree) to a 
 Python dict structure
 """
+
 from collections import defaultdict
 
 from plyplus import STransformer, is_stree
@@ -24,13 +25,13 @@ class MapFile2Dict__Transformer(STransformer):
 
     def composite(self, t):
         if len(t.tail) == 3:
-            # Parser artifact. See LINE-BREAK FLUIDITY in parsing_decisions.txt
+            # Parser artefact. See LINE-BREAK FLUIDITY in parsing_decisions.txt
             type_, attr, body = t.tail
         else:
             type_, body = t.tail
             attr = None
         if isinstance(body, tuple):
-            assert body[0] == 'attr' or body[1] == 'points', body  # Parser artifcats
+            assert body[0] == 'attr' or body[1] == 'points', body  # Parser artefacts
             body = [body]
         else:
             body = body.tail
@@ -46,9 +47,17 @@ class MapFile2Dict__Transformer(STransformer):
         composites = defaultdict(list)
 
         d = {}
-        for itemtype, k, v in body:
+        for itemtype, k, v in body:             
             if itemtype == 'attr':
-                d[k] = v
+
+                if k == 'processing':
+                    # HACK as PROCESSING can be repeated
+                    if 'processing' not in d.keys():
+                        d[k] = [v]
+                    else:
+                        d[k].append(v)
+                else:
+                    d[k] = v
             elif itemtype == 'composite':
                 composites[k].append(v)
             else:
@@ -63,7 +72,7 @@ class MapFile2Dict__Transformer(STransformer):
     def attr(self, t):
         name = t.tail[0].tail[0]
         if is_stree(name):
-            name = name.tail[0] # Solve a parser artifact for composite names
+            name = name.tail[0] # Solve a parser artefact for composite names
         name = name.lower()
         assert name in ATTRIBUTE_NAMES, name
         value = t.tail[1:]
