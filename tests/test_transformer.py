@@ -1,35 +1,65 @@
+import os, logging
+from mappyfile.pprint import PrettyPrinter
+from mappyfile.parser import Parser
+
+from mappyfile.transformer import MapFile2Dict__Transformer
+import glob
 import json
-from tests import helper
-from mappyfile.types import *
+import pprint
 
-# point_vector.map
+from tests import utils
 
-def print_dict_structure():
-    """
-    # http://stackoverflow.com/questions/3229419/pretty-printing-nested-dictionaries-in-python
-    """
-    d = helper.create_sample_map()
-    print json.dumps(d, indent=4)
+parser = Parser(try_ply=False)
+ast = parser.parse_file('./tests/sample_maps/labels-bitmap-multiline.map')
 
-def test_add_layer():
-    d = helper.create_sample_map()
+m = MapFile2Dict__Transformer()
+d = (m.transform(ast))
 
-    assert(len(d["layers"]) == 2)
-
-    layer = Container()
-    layer[MAPFILE_TYPE] = "layer"
-    layer["name"] = QuotedString("Layer1.5")
-    d["layers"].insert(1, layer)
-
-    assert(len(d["layers"]) == 3)
-
-def run_tests():
-    import pytest
-    
-    #pytest.main(["tests/test_transformer.py::test_add_layer"])
-    pytest.main(["tests/test_transformer.py"])
+#print pprint(d, indent=4)
 
 
-if __name__ == "__main__":
-    print_dict_structure()
-    run_tests()
+# valid JSON
+#print json.dumps(d, indent=4)
+
+
+
+def main():
+    DIR = './tests/sample_maps/'
+    pp = PrettyPrinter()
+
+    #utils.setup()
+
+    fld = r"C:\Temp\msautotest"
+
+
+    mapfiles = glob.glob(fld + '/**/*.map')
+    mapfiles = [f for f in mapfiles if '.tmp.' not in f]
+
+    mapfiles = [f for f in mapfiles if f.endswith('indx_q100kpy4_ogr.map')] 
+
+    for fn in mapfiles:
+        print fn
+
+        ast = parser.parse_file(fn)
+
+        d = m.transform(ast)
+
+        dpp = pprint.PrettyPrinter()
+        print dpp.pprint(d)
+
+
+        map_string = pp.pprint(d)
+
+        print map_string
+
+        output_file = fn.replace(".map", ".tmp.map")
+
+        map_file = utils.write_map_to_file(map_string, output_file)
+
+        utils.create_image_from_map(map_file) # fn for original map
+
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.DEBUG)
+    main()
+    print("Done!")
