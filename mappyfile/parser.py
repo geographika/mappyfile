@@ -15,7 +15,7 @@ class Parser(object):
             self.ply_g = Grammar(grammar_text, engine='ply')
 
     def parse_file(self, fn):
-        text = open(fn, "r", encoding="utf-8").read() # specify utf for Python 2.7
+        text = open(fn, "r", encoding="utf-8").read() # specify unicode for Python 2.7
         return self.parse(text)
 
     def parse(self, text):
