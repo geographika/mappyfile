@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_pprint2.py</StartupFile>
+    <StartupFile>tests\test_transformer.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -109,6 +109,9 @@
     <Content Include="requirements-dev.txt" />
     <Content Include="requirements.txt" />
     <Content Include="tests\new_c_comments.map" />
+    <Content Include="tests\sample_dict.py">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tests\sample_maps\256color_overdose.map" />
     <Content Include="tests\sample_maps\256color_overdose_cmt.map" />
     <Content Include="tests\sample_maps\256color_overdose_res.map" />
@@ -420,11 +423,12 @@
     <Compile Include="docs\examples\accessing_values.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="mappyfile\pprint.py" />
     <Compile Include="mappyfile\parser.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="mappyfile\pprint.py" />
     <Compile Include="mappyfile\test.py" />
+    <Compile Include="mappyfile\tokens.py" />
     <Compile Include="mappyfile\transformer.py">
       <SubType>Code</SubType>
     </Compile>
@@ -446,9 +450,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\sample_maps_downloader.py" />
+    <Compile Include="tests\test_pprint3.py" />
     <Compile Include="tests\test_pprint2.py" />
     <Compile Include="tests\test_pprint.py" />
-    <Compile Include="tests\test_transformer.py">
+    <Compile Include="tests\test_transformer.py" />
+    <Compile Include="tests\utils.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\__init__.py">
