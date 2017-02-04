@@ -3,18 +3,28 @@ Module to transform an AST (Abstract Syntax Tree) to a
 Python dict structure
 """
 
-from collections import defaultdict
+from collections import defaultdict # OrderedDict
 
 from plyplus import STransformer, is_stree
 
-from tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES
+from tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
 
 def plural(s):
+
     if s == 'points':
         return s
     elif s.endswith('s'):
-        return s+'es'
-    return s+'s'
+        return s +'es'
+    else:
+        return s +'s'
+
+def dict_from_tail(t):
+    d = {} # OrderedDict()
+
+    for v in t.tail:
+        d[v[0]] = v[1]
+
+    return d
 
 class MapFile2Dict__Transformer(STransformer):
     def start(self, t):
@@ -30,13 +40,15 @@ class MapFile2Dict__Transformer(STransformer):
         else:
             type_, body = t.tail
             attr = None
+
         if isinstance(body, tuple):
             assert body[0] == 'attr' or body[1] == 'points', body  # Parser artefacts
             body = [body]
         else:
             body = body.tail
+
         type_ = type_.tail[0].lower()
-        assert type_ in COMPOSITE_NAMES
+        assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES)
 
         if attr:
             body = [attr] + body
@@ -47,24 +59,34 @@ class MapFile2Dict__Transformer(STransformer):
         composites = defaultdict(list)
 
         d = {}
-        for itemtype, k, v in body:             
+
+        for itemtype, k, v in body:          
+            
             if itemtype == 'attr':
 
                 if k == 'processing':
-                    # HACK as PROCESSING can be repeated
+                    # PROCESSING can be repeated
                     if 'processing' not in d.keys():
                         d[k] = [v]
                     else:
                         d[k].append(v)
                 else:
                     d[k] = v
+
+            elif itemtype == 'composite' and k in SINGLETON_COMPOSITE_NAMES:
+                composites[k] = v # defaultdict using list
             elif itemtype == 'composite':
                 composites[k].append(v)
-            else:
-                assert False, item
 
-        for k, v in composites.items():
-            d[plural(k)] = v
+            else:
+                raise ValueError("Itemtype '%s' unknown", itemtype)
+        
+        for k, v in composites.items(): # collection of all items e.g. at the map level this is status, metadata etc. 
+
+            if k not in SINGLETON_COMPOSITE_NAMES:
+                d[plural(k)] = v
+            else:
+                d[k] = v
 
         d['__type__'] = type_
         return ('composite', type_, d)
@@ -83,15 +105,54 @@ class MapFile2Dict__Transformer(STransformer):
     def projection(self, t):
         return ('composite', 'projection', t.tail)
     def metadata(self, t):
-        return ('composite', 'metadata', t.tail)
+        """
+        Create a dict for the metadata items
+        """
+        d = dict_from_tail(t)
+        return ('composite', 'metadata', d)
+
     def points(self, t):
         return ('composite', 'points', t.tail)
     def pattern(self, t):
-        return ('composite', 'pattern', t.tail)
+        # http://www.mapserver.org/mapfile/style.html
+        return ('composite', 'pattern', t.tail[0])
     def values(self, t):
-        return ('attr', 'values', t.tail)
+        d = dict_from_tail(t)
+        return ('composite', 'values', d)
+
     def validation(self, t):
         return ('attr', 'validation', t.tail)
+
+    # for expressions
+    def comparison(self, t):
+        parts = [str(p) for p in list(t.tail)]
+        x = " ".join(parts)
+        return "( %s )" % x
+    def and_test(self, t):
+        x = " and ".join(t.tail)
+        return "( %s )" % x
+    def or_test(self, t):
+        x = " or ".join(t.tail)
+        return "( %s )" % x
+    def compare_op(self, t):
+        x ,= t.tail
+        return x
+
+    # for functions
+
+    def func_call(self, t):
+        func, param = t.tail
+        func = func.tail[0] # this is an attr_name, not sure why it is not transformed already
+        return "(%s(%s))" % (func, param)
+    def func_params(self, t):
+        x ,= t.tail
+        return x
+
+    def attr_bind(self, t):
+        x ,= t.tail
+        return "[%s]" % x
+
+
 
     def int(self, t):
         x ,= t.tail
@@ -114,6 +175,9 @@ class MapFile2Dict__Transformer(STransformer):
     def int_pair(self, t):
         a, b = t.tail
         return [a, b]
+    def list(self, t):
+        # http://www.mapserver.org/mapfile/expressions.html#list-expressions
+        return "{%s}" % ",".join([str(v) for v in t.tail])
 
 
 
