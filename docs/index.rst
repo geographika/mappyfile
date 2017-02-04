@@ -134,6 +134,9 @@ These have been downloaded and added to the ``/tests`` folder. This folder also 
 
 https://tox.readthedocs.io/en/latest/
 
+..
+    http://stackoverflow.com/questions/600079/how-do-i-clone-a-subdirectory-only-of-a-git-repository
+
 Future Development
 ------------------
 
