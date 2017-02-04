@@ -102,7 +102,7 @@ COMPOSITE_NAMES = frozenset("""
     maxsubdivide
     maxtemplate
     maxwidth
-    metadata
+    
     mimetype
     minarcs
     minboxsize
@@ -185,13 +185,18 @@ COMPOSITE_NAMES = frozenset("""
     utfdata
     utfitem
     validation
-    values
-    web
+    
+    
     width
     wkt
     wrap
 """.split())
 
+SINGLETON_COMPOSITE_NAMES = frozenset("""
+    metadata
+    values
+    web
+""".split())
 
 ATTRIBUTE_NAMES = frozenset("""
 area
