@@ -6,7 +6,7 @@ from mappyfile.transformer import MapFile2Dict__Transformer
 import glob
 import json
 import pprint
-
+import mappyfile
 from tests import utils
 
 parser = Parser(try_ply=False)
@@ -26,9 +26,6 @@ d = (m.transform(ast))
 def main():
     DIR = './tests/sample_maps/'
     pp = PrettyPrinter()
-
-    #utils.setup()
-
     fld = r"C:\Temp\msautotest"
 
 
@@ -54,7 +51,7 @@ def main():
 
         output_file = fn.replace(".map", ".tmp.map")
 
-        map_file = utils.write_map_to_file(map_string, output_file)
+        map_file = mappyfile.utils.write_map_to_file(map_string, output_file)
 
         utils.create_image_from_map(map_file) # fn for original map
 

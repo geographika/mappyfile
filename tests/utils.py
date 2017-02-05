@@ -26,12 +26,7 @@ def setup():
 
     return tempdir
     
-def write_map_to_file(map_string, output_file):
 
-    with codecs.open(output_file, "w", encoding="utf-8") as f:
-        f.write(map_string)
-
-    return output_file
 
 def create_image_from_map(map_file):
 
