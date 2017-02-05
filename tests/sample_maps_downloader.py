@@ -19,11 +19,6 @@ import logging
 
 AUTH_KEY = 'AUTH_KEY'
 
-
-AUTH_KEY = "62b1b97fa067a6b08e0cd8f3a33e96c2920a2fde"
-
-
-
 def get_repo():
     gh = Github(AUTH_KEY)
     org = gh.get_organization('mapserver')

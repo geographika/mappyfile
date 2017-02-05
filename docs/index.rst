@@ -31,6 +31,12 @@ program the MapServer object API in many languages.
 
 http://mapserver.org/el/glossary.html
 
+Example use cases:
+
+* Easily generate development, staging, and production Mapfiles from the same source
+* Create Mapfiles for different datasets from the same source
+* Create, manipulate, and test Mapfiles from within Python
+
 Why mappyfile?
 --------------
 
@@ -58,7 +64,7 @@ The concept of the Mapfile as a DSL has been implemented a few times. A Python
 `Mapfile builder`_ written by Norman Vine used an XML approach.
 
 More recently the Node module `node-mapserv`_ provides support for declarative mapfile programming. 
-As the author XX notes: 
+As the author notes: 
 
 	*node-mapserv is not MapScript for Node. Instead it provides a simple declarative API for 
 	rendering mapserver mapfiles..most of what can be accomplished imperatively 

@@ -9,14 +9,17 @@ setup(name='mappyfile',
       description='The funniest joke in the world',
       long_description=readme(),
       classifiers=[
+        # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2.7',
+        'Intended Audience :: Developers',
         'Topic :: Text Processing :: Linguistic',
+        'Topic :: Software Development :: Build Tools'
       ],
       url='http://github.com/geographika/mappyfile',
       author='Seth Girvin',
-      author_email='sgirvin@geographika.co.uk',
+      author_email='sethg@geographika.co.uk',
       license='MIT',
       packages=['mappyfile'],
       zip_safe=False)

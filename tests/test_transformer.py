@@ -35,14 +35,21 @@ def main():
     mapfiles = glob.glob(fld + '/**/*.map')
     mapfiles = [f for f in mapfiles if '.tmp.' not in f]
 
-    mapfiles = [f for f in mapfiles if f.endswith('indx_q100kpy4_ogr.map')] 
+    mapfiles = [f for f in mapfiles if os.path.basename(f) == 'filters.map'] 
 
     for fn in mapfiles:
         print fn
 
         ast = parser.parse_file(fn)
 
+        r = ast.select('composite_type *') #ast.select('attr_name')
+        #print ast.__dict__
+        ast.remove_kids_by_head("INCLUDE")
+        print type(ast)
+        print list(r)
+        continue
         d = m.transform(ast)
+        
 
         dpp = pprint.PrettyPrinter()
         print dpp.pprint(d)
