@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_transformer.py</StartupFile>
+    <StartupFile>docs\examples\modifying_values.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -435,15 +435,15 @@
     <Compile Include="mappyfile\types.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="mappyfile\utils.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyfile\__init__.py" />
     <Compile Include="setup.py" />
     <Compile Include="tests\helper.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\point_vector.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="tests\symbolset">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_parser.py">

@@ -103,7 +103,8 @@ class PrettyPrinter(object):
 
     def in_quotes(self, val):
 
-        if val.startswith('"') and val.endswith('"'):
+        if (val.startswith('"') and val.endswith('"')) \
+            or  (val.startswith("'") and val.endswith("'")):
             return True
         else:
             return False

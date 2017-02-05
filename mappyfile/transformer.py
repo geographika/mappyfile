@@ -19,7 +19,7 @@ def plural(s):
         return s +'s'
 
 def dict_from_tail(t):
-    d = {} # OrderedDict()
+    d = defaultdict() # OrderedDict()
 
     for v in t.tail:
         d[v[0]] = v[1]
@@ -30,7 +30,7 @@ class MapFile2Dict__Transformer(STransformer):
     def start(self, t):
         t ,= t.tail
         assert t[0] == 'composite'
-        assert t[1].lower() == 'map'
+        #assert t[1].lower() == 'map' # we can also parse partial map files
         return t[2]
 
     def composite(self, t):
@@ -58,7 +58,7 @@ class MapFile2Dict__Transformer(STransformer):
 
         composites = defaultdict(list)
 
-        d = {}
+        d = defaultdict()
 
         for itemtype, k, v in body:          
             
@@ -124,11 +124,13 @@ class MapFile2Dict__Transformer(STransformer):
         return ('attr', 'validation', t.tail)
 
     # for expressions
+
     def comparison(self, t):
         parts = [str(p) for p in list(t.tail)]
         x = " ".join(parts)
         return "( %s )" % x
     def and_test(self, t):
+        #print t.tail
         x = " and ".join(t.tail)
         return "( %s )" % x
     def or_test(self, t):
