@@ -29,7 +29,7 @@ def dict_from_tail(t):
     """
     VALIDATION blocks can also have attributes such as qstring
     Values then have 3 parts - [('attr', u'qstring', u"'.'")]
-    METDATA blocks have a simple 2 part form
+    METADATA blocks have a simple 2 part form - [[u'"ows_enable_request"', u'"*"']]
     """
     d = OrderedDict()
 
@@ -143,7 +143,7 @@ class MapFile2Dict__Transformer(STransformer):
 
     def pattern(self, t):
         # http://www.mapserver.org/mapfile/style.html
-        return ('composite', 'pattern', t.tail[0])
+        return ('composite', 'pattern', t.tail)
 
     def values(self, t):
         d = dict_from_tail(t)
