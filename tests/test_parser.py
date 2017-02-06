@@ -1,6 +1,8 @@
 import os
 import pytest
 from mappyfile.parser import Parser
+import mappyfile
+from mappyfile.transformer import MapFile2Dict__Transformer
 
 def graphviz_setup():
 
@@ -32,6 +34,16 @@ def test_all_maps():
         ast = p.parse_file(os.path.join(sample_dir, fn))
         ast.to_png_with_pydot(r'C:\Temp\Trees\%s.png' % os.path.basename(fn))
 
+def test_includes():
+    p = Parser()
+   
+    ast = p.parse_file('./tests/samples/include1.map')
+    m = MapFile2Dict__Transformer()
+
+    d = (m.transform(ast)) # works
+    print(mappyfile.dumps(d))
+     
+
 def run_tests():        
     pytest.main(["tests/test_parser.py::test_parse_style"])
     #pytest.main(["tests/test_parser.py::test_all_maps"])
@@ -41,4 +53,5 @@ if __name__ == '__main__':
     graphviz_setup()
     #run_tests()
     #test_parse_style()
-    test_all_maps()
+    #test_all_maps()
+    test_includes()
