@@ -49,8 +49,7 @@ class Parser(object):
 
     def parse_file(self, fn):
 
-        if not self.cwd:
-            self.cwd = os.path.dirname(fn)
+        self.cwd = os.path.dirname(fn)
 
         text = self.open_file(fn)
         return self.parse(text)
@@ -66,7 +65,7 @@ class Parser(object):
             try:
                 return self.ply_g.parse(text)
             except ParseError as ex:
-                logging.exception(ex)
+                #logging.exception(ex)
                 pass
 
         return self.g.parse(text)
