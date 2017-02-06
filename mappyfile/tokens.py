@@ -184,7 +184,7 @@ COMPOSITE_NAMES = frozenset("""
     units
     utfdata
     utfitem
-    validation
+    
     
     
     width
@@ -194,6 +194,7 @@ COMPOSITE_NAMES = frozenset("""
 
 SINGLETON_COMPOSITE_NAMES = frozenset("""
     metadata
+    validation
     values
     web
 """.split())

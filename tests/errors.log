@@ -1,0 +1,409 @@
+C:\Temp\msautotest\gdal\256color_overdose.map
+C:\Temp\msautotest\gdal\256color_overdose_cmt.map
+C:\Temp\msautotest\gdal\256color_overdose_res.map
+C:\Temp\msautotest\gdal\256_overlay_res.map
+C:\Temp\msautotest\gdal\alpha_on_alpha_overlay.map
+C:\Temp\msautotest\gdal\average_rgb.map
+C:\Temp\msautotest\gdal\average_rgb_plug.map
+C:\Temp\msautotest\gdal\bilinear_float.map
+C:\Temp\msautotest\gdal\bilinear_src_transp.map
+C:\Temp\msautotest\gdal\bilinear_src_transp2.map
+C:\Temp\msautotest\gdal\class16.map
+C:\Temp\msautotest\gdal\class16_intoddscale.map
+C:\Temp\msautotest\gdal\class16_ndmap.map
+C:\Temp\msautotest\gdal\class16_oddscale.map
+C:\Temp\msautotest\gdal\class16_range.map
+C:\Temp\msautotest\gdal\class8_range.map
+C:\Temp\msautotest\gdal\classtest1.map
+C:\Temp\msautotest\gdal\classtest2.map
+C:\Temp\msautotest\gdal\classtest2_plugin.map
+C:\Temp\msautotest\gdal\deferred.map
+C:\Temp\msautotest\gdal\gdal_png_256_res.map
+C:\Temp\msautotest\gdal\gdal_png_tr_256.map
+C:\Temp\msautotest\gdal\gdal_png_tr_256_res.map
+C:\Temp\msautotest\gdal\gd_png_256_res.map
+C:\Temp\msautotest\gdal\gd_png_tr_256.map
+C:\Temp\msautotest\gdal\gd_png_tr_256_res.map
+C:\Temp\msautotest\gdal\grayalpha.map
+C:\Temp\msautotest\gdal\grayalpha_8bit.map
+C:\Temp\msautotest\gdal\grayalpha_plug.map
+C:\Temp\msautotest\gdal\heat.map
+C:\Temp\msautotest\gdal\lut_1_crv.map
+C:\Temp\msautotest\gdal\lut_float.map
+C:\Temp\msautotest\gdal\lut_inline.map
+C:\Temp\msautotest\gdal\lut_rgb_crv.map
+C:\Temp\msautotest\gdal\mask_1.map
+C:\Temp\msautotest\gdal\mask_3.map
+C:\Temp\msautotest\gdal\nodata_8bit.map
+C:\Temp\msautotest\gdal\nodata_rgb.map
+C:\Temp\msautotest\gdal\nodata_scaled.map
+C:\Temp\msautotest\gdal\nonsquare.map
+C:\Temp\msautotest\gdal\nonsquare_multiraw.map
+C:\Temp\msautotest\gdal\offsite_8bitgrey.map
+C:\Temp\msautotest\gdal\offsite_pct_rgb.map
+C:\Temp\msautotest\gdal\offsite_pct_rgb_torgb.map
+C:\Temp\msautotest\gdal\processing_bands.map
+C:\Temp\msautotest\gdal\processing_scale_auto.map
+C:\Temp\msautotest\gdal\rawmode_multiband.map
+C:\Temp\msautotest\gdal\rawmode_nodata.map
+C:\Temp\msautotest\gdal\rawmode_nodata_resample.map
+C:\Temp\msautotest\gdal\reproj.map
+C:\Temp\msautotest\gdal\rgba_overlay_res.map
+C:\Temp\msautotest\gdal\rgb_16bit.map
+C:\Temp\msautotest\gdal\rgb_overlay.map
+C:\Temp\msautotest\gdal\rgb_overlay_plug.map
+C:\Temp\msautotest\gdal\rgb_overlay_res.map
+C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit.map
+C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit_dithered.map
+C:\Temp\msautotest\gdal\rot_out.map
+C:\Temp\msautotest\gdal\simplealpha.map
+C:\Temp\msautotest\gdal\simplealpha_bg.map
+C:\Temp\msautotest\gdal\simplealpha_plug.map
+C:\Temp\msautotest\gdal\ticket_5032_optim_1.map
+C:\Temp\msautotest\gdal\ticket_5032_optim_2.map
+C:\Temp\msautotest\gdal\tileindex.map
+C:\Temp\msautotest\gdal\tileindexmixedsrs.map
+C:\Temp\msautotest\gdal\tileindexmixedsrs2.map
+C:\Temp\msautotest\gdal\tileindexmixedsrs3.mapmsDrawMap(): Image handling error. Failed to draw layer named 'grey'. <br>
+msDrawRasterLayer(): OGR error. Ingestion of WKT string 'EPSG:26711' failed.
+PROJECTION 'EPSG:26711' cannot be used for this GDAL raster (`utmsmall_topleft_26711.tif'). <br>
+
+msOGCWKT2ProjectionObj(): OGR error. Ingestion of WKT string 'EPSG:26711' failed. <br>
+C:\Temp\msautotest\gdal\tileindexmixedsrs4.map
+C:\Temp\msautotest\gdal\tileindex_mi.map
+C:\Temp\msautotest\gdal\trlay1.map
+C:\Temp\msautotest\gdal\trlay2.map
+C:\Temp\msautotest\gdal\trlay3.map
+C:\Temp\msautotest\gdal\unclassified.map
+C:\Temp\msautotest\gdal\wld_override.map
+C:\Temp\msautotest\gdal\wld_rotate.map
+C:\Temp\msautotest\gdal\wld_upsidedown.map
+C:\Temp\msautotest\gdal\wmsclient.map
+C:\Temp\msautotest\gdal\wmsclient_3543.map
+C:\Temp\msautotest\misc\attrbind.map
+C:\Temp\msautotest\misc\autostyle.map
+C:\Temp\msautotest\misc\autostyle_quoted.map
+C:\Temp\msautotest\misc\bug1526.map
+C:\Temp\msautotest\misc\contour.map
+loadMapInternal(): General error message. Given map extent is invalid. Check that it is in the form: minx, miny, maxx, maxy <br>
+C:\Temp\msautotest\misc\dateline.map
+C:\Temp\msautotest\misc\encoding.map
+C:\Temp\msautotest\misc\geopdf.map
+C:\Temp\msautotest\misc\listexpression.map
+C:\Temp\msautotest\misc\maxfeatures.map
+C:\Temp\msautotest\misc\multipoint.map
+C:\Temp\msautotest\misc\ogrbrush.map
+C:\Temp\msautotest\misc\ogrmultitool.map
+C:\Temp\msautotest\misc\ogrpen.map
+C:\Temp\msautotest\misc\ogr_attrfilter.map
+C:\Temp\msautotest\misc\ogr_direct.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+C:\Temp\msautotest\misc\ogr_empty_geojson.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+C:\Temp\msautotest\misc\ogr_join.map
+C:\Temp\msautotest\misc\ogr_multi_defer.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+C:\Temp\msautotest\misc\ogr_select.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly2'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly2'.  File not found or unsupported format. <br>
+C:\Temp\msautotest\misc\ogr_vrtconnect.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+C:\Temp\msautotest\misc\ogr_wkt.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRLayerInitItemInfo(): OGR error. Invalid Field name: AREA <br>
+C:\Temp\msautotest\misc\ortho.map
+C:\Temp\msautotest\misc\quantized.map
+C:\Temp\msautotest\misc\quoted_data.map
+C:\Temp\msautotest\misc\quoting.map
+C:\Temp\msautotest\misc\rfc14.map
+C:\Temp\msautotest\misc\rfc36.map
+C:\Temp\msautotest\misc\rfc36_ogr.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
+C:\Temp\msautotest\misc\rot_out.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
+C:\Temp\msautotest\misc\runtime_sub.map
+C:\Temp\msautotest\misc\scaletoken.map
+loadHashTable(): Unknown identifier. Parsing error near (METADATA):(line 10) <br>
+msDrawMap(): Image handling error. Failed to draw layer named 'road'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\misc\sde_bug2072.map
+C:\Temp\msautotest\misc\sde_join.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 10) <br>
+C:\Temp\msautotest\misc\sde_utf.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 18) <br>
+C:\Temp\msautotest\misc\sde_utf2.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 20) <br>
+C:\Temp\msautotest\misc\sde_view.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 19) <br>
+C:\Temp\msautotest\misc\sde_wms.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 10) <br>
+C:\Temp\msautotest\misc\shp2img-size.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 18) <br>
+C:\Temp\msautotest\misc\style_opacity.map
+C:\Temp\msautotest\misc\testuppercase.map
+C:\Temp\msautotest\mspython\ogr_query.map
+C:\Temp\msautotest\mspython\test_xmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+C:\Temp\msautotest\query\context.map
+C:\Temp\msautotest\query\filters.map
+C:\Temp\msautotest\query\query.map
+loadLayer(): Unknown identifier. Parsing error near (i):(line 15) <br>
+C:\Temp\msautotest\query\querymap.map
+loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 16) <br>
+C:\Temp\msautotest\query\query_ogr.map
+loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 10) <br>
+C:\Temp\msautotest\query\query_postgis.map
+loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 16) <br>
+C:\Temp\msautotest\query\rfc62.map
+loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 16) <br>
+C:\Temp\msautotest\query\template.map
+loadHashTable(): Unknown identifier. Parsing error near ('attr', u'base', u"'^[a-z]{1,16}$'") ('attr', u'default_base', u"'some_default_value'"):(line 7) <br>
+C:\Temp\msautotest\query\text.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\renderers\average_rgb.map
+getSymbol(): Symbol definition error. Parsing error near (area):(line 38) <br>
+C:\Temp\msautotest\renderers\baseline_text.map
+C:\Temp\msautotest\renderers\chartlayer_bar.map
+C:\Temp\msautotest\renderers\chartlayer_pie.map
+C:\Temp\msautotest\renderers\chartlayer_pie2.map
+C:\Temp\msautotest\renderers\chartlayer_pie_expressions.map
+C:\Temp\msautotest\renderers\chartlayer_vbar.map
+loadClass(): Unknown identifier. Parsing error near (u'/(^|,)type1($|,)/'):(line 20) <br>
+C:\Temp\msautotest\renderers\circle_layer.map
+C:\Temp\msautotest\renderers\compositing.map
+C:\Temp\msautotest\renderers\embed_legend.map
+C:\Temp\msautotest\renderers\embed_legend_rgba.map
+C:\Temp\msautotest\renderers\embed_legend_rgba_tr.map
+C:\Temp\msautotest\renderers\embed_legend_tr.map
+C:\Temp\msautotest\renderers\embed_sb_rgb.map
+C:\Temp\msautotest\renderers\embed_sb_rgba.map
+C:\Temp\msautotest\renderers\embed_sb_rgba_tr.map
+C:\Temp\msautotest\renderers\embed_sb_rgb_tr.map
+C:\Temp\msautotest\renderers\empty.map
+C:\Temp\msautotest\renderers\entity_encoded_follow_text.map
+C:\Temp\msautotest\renderers\font-fail.map
+C:\Temp\msautotest\renderers\force_palette.map
+msGetFontFace(): General error message. Freetype was unable to load font file "C:\Temp\msautotest\renderers\../misc//path/to/inexistant/file.ttf" for key "bogus" <br>
+C:\Temp\msautotest\renderers\force_palette_rgba.map
+C:\Temp\msautotest\renderers\force_pc256.map
+C:\Temp\msautotest\renderers\force_pc256_rgba.map
+C:\Temp\msautotest\renderers\geomtransform-vertex.map
+C:\Temp\msautotest\renderers\grid.map
+C:\Temp\msautotest\renderers\label-multifont.map
+C:\Temp\msautotest\renderers\labelcacheoff.map
+C:\Temp\msautotest\renderers\labelpnt.map
+C:\Temp\msautotest\renderers\labelrot.map
+C:\Temp\msautotest\renderers\labels-alignment.map
+C:\Temp\msautotest\renderers\labels-anno.map
+C:\Temp\msautotest\renderers\labels-bitmap-multiline.map
+C:\Temp\msautotest\renderers\labels-bitmap.map
+C:\Temp\msautotest\renderers\labels-leader.map
+C:\Temp\msautotest\renderers\labels.map
+C:\Temp\msautotest\renderers\label_noclip.map
+C:\Temp\msautotest\renderers\legend.map
+C:\Temp\msautotest\renderers\legend_label_offset.map
+C:\Temp\msautotest\renderers\legend_sizeunits_meters.map
+C:\Temp\msautotest\renderers\line_anchorpoint.map
+C:\Temp\msautotest\renderers\line_label_auto.map
+C:\Temp\msautotest\renderers\line_label_auto2.map
+C:\Temp\msautotest\renderers\line_label_follow.map
+C:\Temp\msautotest\renderers\line_label_follow_offsetted.map
+C:\Temp\msautotest\renderers\line_marker_pixmap.map
+C:\Temp\msautotest\renderers\line_marker_svg.map
+C:\Temp\msautotest\renderers\line_marker_truetype.map
+C:\Temp\msautotest\renderers\line_marker_vector.map
+C:\Temp\msautotest\renderers\line_offset.map
+C:\Temp\msautotest\renderers\line_pattern.map
+loadFeaturePoints(): Unknown identifier. Parsing error near (0, 10):(line 50) <br>
+C:\Temp\msautotest\renderers\line_pattern_offset.map
+C:\Temp\msautotest\renderers\line_short_gap.map
+C:\Temp\msautotest\renderers\line_simple.map
+C:\Temp\msautotest\renderers\lots_of_text.map
+C:\Temp\msautotest\renderers\marker_anchorpoint.map
+C:\Temp\msautotest\renderers\marker_pixmap.map
+C:\Temp\msautotest\renderers\mask.map
+C:\Temp\msautotest\renderers\mask_opacity.map
+C:\Temp\msautotest\renderers\multilabel-leader.map
+C:\Temp\msautotest\renderers\multilabel.map
+C:\Temp\msautotest\renderers\nodata_8bit.map
+C:\Temp\msautotest\renderers\plb_embed_legend.map
+C:\Temp\msautotest\renderers\plb_embed_legend_rgba.map
+C:\Temp\msautotest\renderers\plb_embed_legend_rgba_tr.map
+C:\Temp\msautotest\renderers\plb_embed_legend_tr.map
+C:\Temp\msautotest\renderers\point-polaroffset.map
+C:\Temp\msautotest\renderers\point_ellipse.map
+C:\Temp\msautotest\renderers\point_pixmap.map
+C:\Temp\msautotest\renderers\point_pixmap_gif.map
+C:\Temp\msautotest\renderers\point_svg.map
+C:\Temp\msautotest\renderers\point_truetype.map
+C:\Temp\msautotest\renderers\point_vector.map
+C:\Temp\msautotest\renderers\poly-label-multiline-pos-auto.map
+msHTTPExecuteRequests(): HTTP request error. HTTP: request failed with curl error code 7 (Failed to connect to localhost port 8000: Connection refused) for http://localhost:8000/misc/data/gdalicon.png
+C:\Temp\msautotest\renderers\poly-label-pos-auto.map
+C:\Temp\msautotest\renderers\polygon-as-line-offset.map
+C:\Temp\msautotest\renderers\polygon-as-line.map
+C:\Temp\msautotest\renderers\polygon-hatch-dashed.map
+C:\Temp\msautotest\renderers\polygon-hatch.map
+C:\Temp\msautotest\renderers\polygon-pixmap.map
+C:\Temp\msautotest\renderers\polygon-simple.map
+C:\Temp\msautotest\renderers\polygon-ttf.map
+C:\Temp\msautotest\renderers\polygon-vector.map
+C:\Temp\msautotest\renderers\polyline_no_clip.map
+C:\Temp\msautotest\renderers\poly_geomtransform_anchor.map
+C:\Temp\msautotest\renderers\raster_simple.map
+C:\Temp\msautotest\renderers\raster_simple_opacity.map
+C:\Temp\msautotest\renderers\reproj.map
+C:\Temp\msautotest\renderers\resolution.map
+C:\Temp\msautotest\renderers\rgba_overlay_res.map
+C:\Temp\msautotest\renderers\rgb_overlay.map
+C:\Temp\msautotest\renderers\rgb_overlay_res.map
+C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit.map
+C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit_dithered.map
+C:\Temp\msautotest\renderers\text-shaping.map
+C:\Temp\msautotest\renderers\transparent_layer.map
+C:\Temp\msautotest\renderers\utfgrid-escaping.map
+C:\Temp\msautotest\renderers\uvraster.map
+C:\Temp\msautotest\renderers\uvraster_reproj.map
+C:\Temp\msautotest\renderers\wld_rotate.map
+C:\Temp\msautotest\renderers\wld_upsidedown.map
+C:\Temp\msautotest\renderers\wmsclient.map
+C:\Temp\msautotest\wxs\contour_tileindex.map
+C:\Temp\msautotest\wxs\ows_all.map
+C:\Temp\msautotest\wxs\ows_disable.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\ows_empty.map
+C:\Temp\msautotest\wxs\ows_sos.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\wxs\ows_test_xml_escaping.map
+C:\Temp\msautotest\wxs\ows_wcs.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\ows_wfs.map
+C:\Temp\msautotest\wxs\ows_wms.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\sos.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\tomk_workshop.map
+C:\Temp\msautotest\wxs\wcs_mask.map
+C:\Temp\msautotest\wxs\wcs_multi.map
+C:\Temp\msautotest\wxs\wcs_post.map
+C:\Temp\msautotest\wxs\wcs_simple.map
+C:\Temp\msautotest\wxs\wcs_tileindexmixedsrs.map
+C:\Temp\msautotest\wxs\wfs_200.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msCalculateScale(): General error message. Invalid image extent, minx=-1.000000, miny=-1.000000, maxx=-1.000000, maxy=-1.000000. <br>
+C:\Temp\msautotest\wxs\wfs_200_allgeoms.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_200_cite.map
+C:\Temp\msautotest\wxs\wfs_200_cite_postgis.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_200_inspire.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_200_inspire_missing_md.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_200_inspire_scenario1.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures_no_compute_number_matched.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_alltypes.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_default_version_110.map
+C:\Temp\msautotest\wxs\wfs_filter.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_filter_ogr.map
+msDrawMap(): Image handling error. Failed to draw layer named 'park'. <br>
+msShapefileOpen(): Unable to access file. (C:\Temp\msautotest\wxs\park) <br>
+msShapefileOpen(): Unable to access file. (C:\Temp\msautotest\wxs\./data/park) <br>
+C:\Temp\msautotest\wxs\wfs_filter_postgis.map
+C:\Temp\msautotest\wxs\wfs_filter_projmeter.map
+C:\Temp\msautotest\wxs\wfs_group.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_misc.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_multi_geom_elements.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_ogr.map
+C:\Temp\msautotest\wxs\wfs_ogr_25d.map
+C:\Temp\msautotest\wxs\wfs_ogr_drv_nocreatedatasource.map
+C:\Temp\msautotest\wxs\wfs_ogr_geojson.map
+loadOutputFormat(): General error message. OUTPUTFORMAT (nocreatedatasource) clause references driver (OGR/SDTS), but this driver isn't configured. <br>
+msInitDefaultOGROutputFormat(): General error message. OGR `SDTS' driver does not support output. <br>
+C:\Temp\msautotest\wxs\wfs_ogr_invalid_filename.map
+msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wfs_ogr_native_sql.map
+C:\Temp\msautotest\wxs\wfs_ogr_nonexistingdrv.map
+C:\Temp\msautotest\wxs\wfs_ogr_no_native_sql.map
+loadOutputFormat(): General error message. OUTPUTFORMAT (nonexistingdrv) clause references driver (OGR/nonexistingdrv), but this driver isn't configured. <br>
+msInitDefaultOGROutputFormat(): General error message. No OGR driver named `nonexistingdrv' available. <br>
+C:\Temp\msautotest\wxs\wfs_optional_items.map
+C:\Temp\msautotest\wxs\wfs_postgis_25d.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_shp_tileindex_of_shp.map
+C:\Temp\msautotest\wxs\wfs_simple.map
+C:\Temp\msautotest\wxs\wfs_simple_ogr.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_test5299.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_time.map
+C:\Temp\msautotest\wxs\wfs_time_ogr.map
+C:\Temp\msautotest\wxs\wfs_time_postgis.map
+C:\Temp\msautotest\wxs\wms_dimensions.map
+C:\Temp\msautotest\wxs\wms_inspire.map
+msDrawMap(): Image handling error. Failed to draw layer named 'point3d'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wms_legend.map
+msDrawMap(): Image handling error. Failed to draw layer named 'time'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wms_nosld.map
+C:\Temp\msautotest\wxs\wms_nosld_postgis.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wms_ogr_native_sql.map
+C:\Temp\msautotest\wxs\wms_raster.map
+C:\Temp\msautotest\wxs\wms_simple.map
+C:\Temp\msautotest\wxs\wms_simple_kml.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wms_simple_postgis.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wms_sld.map
+C:\Temp\msautotest\wxs\wms_sld2.map
+loadHashTable(): Unknown identifier. Parsing error near (METADATA):(line 15) <br>
+C:\Temp\msautotest\wxs\wms_sld_postgis.map
+msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wms_sld_proj.map
+C:\Temp\msautotest\wxs\wms_sld_validation.map
+C:\Temp\msautotest\wxs\wms_tileindexmixedsrs.map
+C:\Temp\msautotest\wxs\wms_time1.map
+msDrawMap(): Image handling error. Failed to draw layer named 'road'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wms_time1_postgis.map
+C:\Temp\msautotest\wxs\wms_time2.map
+C:\Temp\msautotest\wxs\wms_time2_postgis.map
+C:\Temp\msautotest\wxs\wms_time_pattern.map
+msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test.map
+C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test_postgis.map
+C:\Temp\msautotest\wxs\wms_time_pattern_fail.map
+C:\Temp\msautotest\wxs\wms_time_pattern_postgis.map
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern4'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern4'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+Done!
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern12'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern1'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+>>> 

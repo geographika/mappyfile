@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>docs\examples\modifying_values.py</StartupFile>
+    <StartupFile>tests\test_transformer.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -108,6 +108,7 @@
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
     <Content Include="requirements.txt" />
+    <Content Include="tests\errors.log" />
     <Content Include="tests\new_c_comments.map" />
     <Content Include="tests\sample_dict.py">
       <SubType>Code</SubType>
@@ -421,6 +422,9 @@
     <Compile Include="docs\examples\adding_values.py" />
     <Compile Include="docs\examples\modifying_values.py" />
     <Compile Include="docs\examples\accessing_values.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="mappyfile\ordereddict.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\pprint.py" />

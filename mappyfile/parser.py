@@ -1,11 +1,13 @@
-import os
+import os, logging
 from io import open
 from plyplus import Grammar, ParseError
 
 class Parser(object):
 
-    def __init__(self, try_ply=True):
+    def __init__(self, try_ply=True, cwd=None, expand_includes=True):
         self.try_ply = try_ply
+        self.cwd = cwd
+        self.expand_includes = True
 
         gf = os.path.join(os.path.dirname(__file__), "mapfile.g")
         grammar_text = open(gf).read()
@@ -14,15 +16,51 @@ class Parser(object):
         if self.try_ply:
             self.ply_g = Grammar(grammar_text, engine='ply')
 
+    def strip_quotes(self, s):
+        return s.strip("'").strip('"')
+
+    def load_includes(self, text):
+
+        lines = text.split('\n')
+        includes = {}
+
+        for idx, l in enumerate(lines):
+            if l.strip().lower().startswith('include'):
+                if '#' in l:
+                    l = l[:l.index('#')]
+
+                parts = [p for p in l.split()]
+                assert (len(parts) == 2)
+                assert (parts[0].lower() == 'include')
+                fn = os.path.join(self.cwd, self.strip_quotes(parts[1]))
+                include_text = self.open_file(fn) + '\n'
+                # recursively load any further includes
+                include_text += self.load_includes(include_text)
+                includes[idx] = include_text
+    
+        for idx, txt in includes.items():
+            lines.pop(idx) # remove the original include
+            lines.insert(idx, txt)
+
+        return '\n'.join(lines)
+
+    def open_file(self, fn):
+        return open(fn, "r", encoding="utf-8").read() # specify unicode for Python 2.7
+
     def parse_file(self, fn):
-        text = open(fn, "r", encoding="utf-8").read() # specify unicode for Python 2.7
+        text = self.open_file(fn)
         return self.parse(text)
 
     def parse(self, text):
+
+        if self.expand_includes:
+            text = self.load_includes(text)
+
         if self.try_ply:
             try:
                 return self.ply_g.parse(text+'\n')
-            except ParseError:
+            except ParseError as ex:
+                logging.exception(ex)
                 pass
 
         return self.g.parse(text+'\n')

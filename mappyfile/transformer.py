@@ -26,50 +26,21 @@ def plural(s):
         return s +'s'
 
 def dict_from_tail(t):
+    """
+    VALIDATION blocks can also have attributes such as qstring
+    Values then have 3 parts - [('attr', u'qstring', u"'.'")]
+    METDATA blocks have a simple 2 part form
+    """
     d = OrderedDict()
 
     for v in t.tail:
-        d[v[0]] = v[1]
-
+        if len(v) == 2:
+            d[v[0]] = v[1]
+        elif len(v) == 3:
+            d[v[1]] = v[2]
+        else:
+            raise ValueError("Unsupported block '%s'", str(v))
     return d
-
-def load_include(transformer, fn):
-
-    fn = fn.strip("'")
-    fn = fn.strip('"')
-
-    cwd = transformer.cwd
-
-    if cwd:
-        fn = os.path.join(cwd, fn)
-    else:
-        fn = fn
-
-    p = Parser()
-    #print fn
-    ast = p.parse_file(fn, is_subcomponent=True)
-    #m = MapFile2Dict__Transformer()
-    d = transformer.transform(ast)
- 
-    for k, v in d.items():
-        print k, v
-    return d
-
-class IncludeTransformer(STransformer):
-   
-    def attr(self, t):
-        """
-        [attr_name(composite_type(u'INCLUDE')), string(u"'include/bdry_counpy2_shapefile.map'")]
-        """
-        print len(t.tail)
-        if len(t.tail) == 2:
-            body = [t.tail]
-            print t.tail
-            #print t.tail[0], t.tail[1][0]
-            for k, v in body:  
-                print k, v
-        return t.tail
-
 
 class MapFile2Dict__Transformer(STransformer):
 
@@ -121,9 +92,8 @@ class MapFile2Dict__Transformer(STransformer):
                         d[k] = [v]
                     else:
                         d[k].append(v)
-                elif k == 'include':
-                    #return load_include(self, v)
-                    pass
+                #elif k == 'include':
+                #    pass
                 else:
                     d[k] = v
 
@@ -153,12 +123,14 @@ class MapFile2Dict__Transformer(STransformer):
         name = name.lower()
         assert name in ATTRIBUTE_NAMES, name
         value = t.tail[1:]
+
         if len(value) == 1:
             value ,= value
         return 'attr', name, value
 
     def projection(self, t):
         return ('composite', 'projection', t.tail)
+
     def metadata(self, t):
         """
         Create a dict for the metadata items
@@ -168,15 +140,21 @@ class MapFile2Dict__Transformer(STransformer):
 
     def points(self, t):
         return ('composite', 'points', t.tail)
+
     def pattern(self, t):
         # http://www.mapserver.org/mapfile/style.html
         return ('composite', 'pattern', t.tail[0])
+
     def values(self, t):
         d = dict_from_tail(t)
         return ('composite', 'values', d)
 
     def validation(self, t):
-        return ('attr', 'validation', t.tail)
+        """
+        Create a dict for the validation items
+        """
+        d = dict_from_tail(t)
+        return ('composite', 'validation', d)
 
     # for expressions
 

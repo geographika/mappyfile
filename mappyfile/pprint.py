@@ -114,6 +114,9 @@ class PrettyPrinter(object):
         All non-quoted keys should be un uppercase
         Otherwise do not modify input
         """
+
+        #key = str(key)
+
         if self.in_quotes(key): # QuotedString
             key = self.format_value(key) 
         else:
