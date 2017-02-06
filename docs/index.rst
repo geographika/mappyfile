@@ -18,6 +18,7 @@ A Python library to create and modify `MapServer <http://mapserver.org/documenta
     parser.rst
     transformer.rst
     pretty_printing.rst
+    mapfile.rst
 
 What is mappyfile?
 ------------------
