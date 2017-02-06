@@ -3,7 +3,7 @@ Module to transform an AST (Abstract Syntax Tree) to a
 Python dict structure
 """
 
-from collections import defaultdict, OrderedDict
+from collections import OrderedDict
 from plyplus import STransformer, is_stree
 from mappyfile.tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
 from mappyfile.ordereddict import DefaultOrderedDict

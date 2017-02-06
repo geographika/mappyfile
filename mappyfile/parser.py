@@ -39,7 +39,7 @@ class Parser(object):
                 includes[idx] = self.load_includes(include_text)
     
         for idx, txt in includes.items():
-            rm = lines.pop(idx) # remove the original include
+            lines.pop(idx) # remove the original include
             lines.insert(idx, txt)
 
         return '\n'.join(lines)

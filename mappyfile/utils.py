@@ -1,8 +1,6 @@
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
-
-import os
 import codecs
 
 def load(fn, cwd=None):

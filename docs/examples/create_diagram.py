@@ -1,4 +1,5 @@
 from mappyfile.parser import Parser
+import os
 
 GVIZ_PATH = r"C:\Program Files (x86)\Graphviz2.38\bin"
 
