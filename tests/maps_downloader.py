@@ -27,15 +27,6 @@ def get_repo():
 
     return repo
 
-#def mkdir(path):
-#    try:
-#        os.makedirs(path)
-#    except OSError as exc:  # Python >2.5
-#        if exc.errno == errno.EEXIST and os.path.isdir(path):
-#            pass
-#        else:
-#            raise
-
 def get_all_files(fld, repo):
 
     all_files = []

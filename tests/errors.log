@@ -1,409 +1,675 @@
-C:\Temp\msautotest\gdal\256color_overdose.map
-C:\Temp\msautotest\gdal\256color_overdose_cmt.map
-C:\Temp\msautotest\gdal\256color_overdose_res.map
-C:\Temp\msautotest\gdal\256_overlay_res.map
-C:\Temp\msautotest\gdal\alpha_on_alpha_overlay.map
-C:\Temp\msautotest\gdal\average_rgb.map
-C:\Temp\msautotest\gdal\average_rgb_plug.map
-C:\Temp\msautotest\gdal\bilinear_float.map
-C:\Temp\msautotest\gdal\bilinear_src_transp.map
-C:\Temp\msautotest\gdal\bilinear_src_transp2.map
-C:\Temp\msautotest\gdal\class16.map
-C:\Temp\msautotest\gdal\class16_intoddscale.map
-C:\Temp\msautotest\gdal\class16_ndmap.map
-C:\Temp\msautotest\gdal\class16_oddscale.map
-C:\Temp\msautotest\gdal\class16_range.map
-C:\Temp\msautotest\gdal\class8_range.map
-C:\Temp\msautotest\gdal\classtest1.map
-C:\Temp\msautotest\gdal\classtest2.map
-C:\Temp\msautotest\gdal\classtest2_plugin.map
-C:\Temp\msautotest\gdal\deferred.map
-C:\Temp\msautotest\gdal\gdal_png_256_res.map
-C:\Temp\msautotest\gdal\gdal_png_tr_256.map
-C:\Temp\msautotest\gdal\gdal_png_tr_256_res.map
-C:\Temp\msautotest\gdal\gd_png_256_res.map
-C:\Temp\msautotest\gdal\gd_png_tr_256.map
-C:\Temp\msautotest\gdal\gd_png_tr_256_res.map
-C:\Temp\msautotest\gdal\grayalpha.map
-C:\Temp\msautotest\gdal\grayalpha_8bit.map
-C:\Temp\msautotest\gdal\grayalpha_plug.map
-C:\Temp\msautotest\gdal\heat.map
-C:\Temp\msautotest\gdal\lut_1_crv.map
-C:\Temp\msautotest\gdal\lut_float.map
-C:\Temp\msautotest\gdal\lut_inline.map
-C:\Temp\msautotest\gdal\lut_rgb_crv.map
-C:\Temp\msautotest\gdal\mask_1.map
-C:\Temp\msautotest\gdal\mask_3.map
-C:\Temp\msautotest\gdal\nodata_8bit.map
-C:\Temp\msautotest\gdal\nodata_rgb.map
-C:\Temp\msautotest\gdal\nodata_scaled.map
-C:\Temp\msautotest\gdal\nonsquare.map
-C:\Temp\msautotest\gdal\nonsquare_multiraw.map
-C:\Temp\msautotest\gdal\offsite_8bitgrey.map
-C:\Temp\msautotest\gdal\offsite_pct_rgb.map
-C:\Temp\msautotest\gdal\offsite_pct_rgb_torgb.map
-C:\Temp\msautotest\gdal\processing_bands.map
-C:\Temp\msautotest\gdal\processing_scale_auto.map
-C:\Temp\msautotest\gdal\rawmode_multiband.map
-C:\Temp\msautotest\gdal\rawmode_nodata.map
-C:\Temp\msautotest\gdal\rawmode_nodata_resample.map
-C:\Temp\msautotest\gdal\reproj.map
-C:\Temp\msautotest\gdal\rgba_overlay_res.map
-C:\Temp\msautotest\gdal\rgb_16bit.map
-C:\Temp\msautotest\gdal\rgb_overlay.map
-C:\Temp\msautotest\gdal\rgb_overlay_plug.map
-C:\Temp\msautotest\gdal\rgb_overlay_res.map
-C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit.map
-C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit_dithered.map
-C:\Temp\msautotest\gdal\rot_out.map
-C:\Temp\msautotest\gdal\simplealpha.map
-C:\Temp\msautotest\gdal\simplealpha_bg.map
-C:\Temp\msautotest\gdal\simplealpha_plug.map
-C:\Temp\msautotest\gdal\ticket_5032_optim_1.map
-C:\Temp\msautotest\gdal\ticket_5032_optim_2.map
-C:\Temp\msautotest\gdal\tileindex.map
-C:\Temp\msautotest\gdal\tileindexmixedsrs.map
-C:\Temp\msautotest\gdal\tileindexmixedsrs2.map
-C:\Temp\msautotest\gdal\tileindexmixedsrs3.mapmsDrawMap(): Image handling error. Failed to draw layer named 'grey'. <br>
+C:\Temp\msautotest\gdal\256color_overdose.tmp.map
+C:\Temp\msautotest\gdal\256color_overdose_cmt.tmp.map
+C:\Temp\msautotest\gdal\256color_overdose_res.tmp.map
+C:\Temp\msautotest\gdal\256_overlay_res.tmp.map
+C:\Temp\msautotest\gdal\alpha_on_alpha_overlay.tmp.map
+C:\Temp\msautotest\gdal\average_rgb.tmp.map
+C:\Temp\msautotest\gdal\average_rgb_plug.tmp.map
+C:\Temp\msautotest\gdal\bilinear_float.tmp.map
+C:\Temp\msautotest\gdal\bilinear_src_transp.tmp.map
+C:\Temp\msautotest\gdal\bilinear_src_transp2.tmp.map
+C:\Temp\msautotest\gdal\class16.tmp.map
+C:\Temp\msautotest\gdal\class16_intoddscale.tmp.map
+C:\Temp\msautotest\gdal\class16_ndmap.tmp.map
+C:\Temp\msautotest\gdal\class16_oddscale.tmp.map
+C:\Temp\msautotest\gdal\class16_range.tmp.map
+C:\Temp\msautotest\gdal\class8_range.tmp.map
+C:\Temp\msautotest\gdal\classtest1.tmp.map
+C:\Temp\msautotest\gdal\classtest2.tmp.map
+C:\Temp\msautotest\gdal\classtest2_plugin.tmp.map
+C:\Temp\msautotest\gdal\deferred.tmp.map
+C:\Temp\msautotest\gdal\gdal_png_256_res.tmp.map
+C:\Temp\msautotest\gdal\gdal_png_tr_256.tmp.map
+C:\Temp\msautotest\gdal\gdal_png_tr_256_res.tmp.map
+C:\Temp\msautotest\gdal\gd_png_256_res.tmp.map
+C:\Temp\msautotest\gdal\gd_png_tr_256.tmp.map
+C:\Temp\msautotest\gdal\gd_png_tr_256_res.tmp.map
+C:\Temp\msautotest\gdal\grayalpha.tmp.map
+C:\Temp\msautotest\gdal\grayalpha_8bit.tmp.map
+C:\Temp\msautotest\gdal\grayalpha_plug.tmp.map
+C:\Temp\msautotest\gdal\heat.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawRasterLayerLow(heatmap): entering.
+msDrawRasterLayerGDAL(): Entering transform.
+msDrawRasterLayerGDAL(): src=0,0,1000,500, dst=0,0,1000,500
+msDrawRasterLayerGDAL(): source raster PL (0.000,-0.000) for dst PL (0,0).
+msDrawRasterLayerGDAL(): red,green,blue,alpha bands = 1,0,0,0
+msDrawMap(): Layer 0 (heatmap), 0.082s
+msDrawMap(): Layer 1 (points), 0.007s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.090s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_asvbjf.png) total time: 0.058s
+msFreeMap(): freeing map at 000000000036A0E0.
+freeLayer(): freeing layer at 0000000000371C40.
+freeLayer(): freeing layer at 0000000000374010.
+shp2img total time: 1486424205.959s
+C:\Temp\msautotest\gdal\lut_1_crv.tmp.map
+C:\Temp\msautotest\gdal\lut_float.tmp.map
+C:\Temp\msautotest\gdal\lut_inline.tmp.map
+C:\Temp\msautotest\gdal\lut_rgb_crv.tmp.map
+C:\Temp\msautotest\gdal\mask_1.tmp.map
+C:\Temp\msautotest\gdal\mask_3.tmp.map
+C:\Temp\msautotest\gdal\nodata_8bit.tmp.map
+C:\Temp\msautotest\gdal\nodata_rgb.tmp.map
+C:\Temp\msautotest\gdal\nodata_scaled.tmp.map
+C:\Temp\msautotest\gdal\nonsquare.tmp.map
+C:\Temp\msautotest\gdal\nonsquare_multiraw.tmp.map
+C:\Temp\msautotest\gdal\offsite_8bitgrey.tmp.map
+C:\Temp\msautotest\gdal\offsite_pct_rgb.tmp.map
+C:\Temp\msautotest\gdal\offsite_pct_rgb_torgb.tmp.map
+C:\Temp\msautotest\gdal\processing_bands.tmp.map
+C:\Temp\msautotest\gdal\processing_scale_auto.tmp.map
+C:\Temp\msautotest\gdal\rawmode_multiband.tmp.map
+C:\Temp\msautotest\gdal\rawmode_nodata.tmp.map
+C:\Temp\msautotest\gdal\rawmode_nodata_resample.tmp.map
+C:\Temp\msautotest\gdal\reproj.tmp.map
+C:\Temp\msautotest\gdal\rgba_overlay_res.tmp.map
+C:\Temp\msautotest\gdal\rgb_16bit.tmp.map
+C:\Temp\msautotest\gdal\rgb_overlay.tmp.map
+C:\Temp\msautotest\gdal\rgb_overlay_plug.tmp.map
+C:\Temp\msautotest\gdal\rgb_overlay_res.tmp.map
+C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit.tmp.map
+C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit_dithered.tmp.map
+C:\Temp\msautotest\gdal\rot_out.tmp.map
+C:\Temp\msautotest\gdal\simplealpha.tmp.map
+C:\Temp\msautotest\gdal\simplealpha_bg.tmp.map
+C:\Temp\msautotest\gdal\simplealpha_plug.tmp.map
+C:\Temp\msautotest\gdal\ticket_5032_optim_1.tmp.map
+C:\Temp\msautotest\gdal\ticket_5032_optim_2.tmp.map
+C:\Temp\msautotest\gdal\tileindex.tmp.map
+C:\Temp\msautotest\gdal\tileindexmixedsrs.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'grey'. <br>
 msDrawRasterLayer(): OGR error. Ingestion of WKT string 'EPSG:26711' failed.
 PROJECTION 'EPSG:26711' cannot be used for this GDAL raster (`utmsmall_topleft_26711.tif'). <br>
-
 msOGCWKT2ProjectionObj(): OGR error. Ingestion of WKT string 'EPSG:26711' failed. <br>
-C:\Temp\msautotest\gdal\tileindexmixedsrs4.map
-C:\Temp\msautotest\gdal\tileindex_mi.map
-C:\Temp\msautotest\gdal\trlay1.map
-C:\Temp\msautotest\gdal\trlay2.map
-C:\Temp\msautotest\gdal\trlay3.map
-C:\Temp\msautotest\gdal\unclassified.map
-C:\Temp\msautotest\gdal\wld_override.map
-C:\Temp\msautotest\gdal\wld_rotate.map
-C:\Temp\msautotest\gdal\wld_upsidedown.map
-C:\Temp\msautotest\gdal\wmsclient.map
-C:\Temp\msautotest\gdal\wmsclient_3543.map
-C:\Temp\msautotest\misc\attrbind.map
-C:\Temp\msautotest\misc\autostyle.map
-C:\Temp\msautotest\misc\autostyle_quoted.map
-C:\Temp\msautotest\misc\bug1526.map
-C:\Temp\msautotest\misc\contour.map
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\gdal\data/tile_index_mixed_srs.qix. In most cases you can safely ignore this message, otherwise check file names and permissions. <br>
+C:\Temp\msautotest\gdal\tileindexmixedsrs2.tmp.map
+C:\Temp\msautotest\gdal\tileindexmixedsrs3.tmp.map
+C:\Temp\msautotest\gdal\tileindexmixedsrs4.tmp.map
+C:\Temp\msautotest\gdal\tileindex_mi.tmp.map
+C:\Temp\msautotest\gdal\trlay1.tmp.map
+C:\Temp\msautotest\gdal\trlay2.tmp.map
+C:\Temp\msautotest\gdal\trlay3.tmp.map
+C:\Temp\msautotest\gdal\unclassified.tmp.map
+C:\Temp\msautotest\gdal\wld_override.tmp.map
+C:\Temp\msautotest\gdal\wld_rotate.tmp.map
+C:\Temp\msautotest\gdal\wld_upsidedown.tmp.map
+C:\Temp\msautotest\gdal\wmsclient.tmp.map
+C:\Temp\msautotest\gdal\wmsclient_3543.tmp.map
+C:\Temp\msautotest\misc\attrbind.tmp.map
+C:\Temp\msautotest\misc\autostyle.tmp.map
+C:\Temp\msautotest\misc\autostyle_quoted.tmp.map
+C:\Temp\msautotest\misc\bug1526.tmp.map
 loadMapInternal(): General error message. Given map extent is invalid. Check that it is in the form: minx, miny, maxx, maxy <br>
-C:\Temp\msautotest\misc\dateline.map
-C:\Temp\msautotest\misc\encoding.map
-C:\Temp\msautotest\misc\geopdf.map
-C:\Temp\msautotest\misc\listexpression.map
-C:\Temp\msautotest\misc\maxfeatures.map
-C:\Temp\msautotest\misc\multipoint.map
-C:\Temp\msautotest\misc\ogrbrush.map
-C:\Temp\msautotest\misc\ogrmultitool.map
-C:\Temp\msautotest\misc\ogrpen.map
-C:\Temp\msautotest\misc\ogr_attrfilter.map
-C:\Temp\msautotest\misc\ogr_direct.map
+C:\Temp\msautotest\misc\contour.tmp.map
+C:\Temp\msautotest\misc\dateline.tmp.map
+C:\Temp\msautotest\misc\encoding.tmp.map
+C:\Temp\msautotest\misc\geopdf.tmp.map
+C:\Temp\msautotest\misc\listexpression.tmp.map
+C:\Temp\msautotest\misc\maxfeatures.tmp.map
+C:\Temp\msautotest\misc\multipoint.tmp.map
+C:\Temp\msautotest\misc\ogrbrush.tmp.map
+C:\Temp\msautotest\misc\ogrmultitool.tmp.map
+C:\Temp\msautotest\misc\ogrpen.tmp.map
+C:\Temp\msautotest\misc\ogr_attrfilter.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
 msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
-C:\Temp\msautotest\misc\ogr_empty_geojson.map
+C:\Temp\msautotest\misc\ogr_direct.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
 msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
-C:\Temp\msautotest\misc\ogr_join.map
-C:\Temp\msautotest\misc\ogr_multi_defer.map
+C:\Temp\msautotest\misc\ogr_empty_geojson.tmp.map
+C:\Temp\msautotest\misc\ogr_join.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
 msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
-C:\Temp\msautotest\misc\ogr_select.map
+C:\Temp\msautotest\misc\ogr_multi_defer.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'shppoly2'. <br>
 msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly2'.  File not found or unsupported format. <br>
-C:\Temp\msautotest\misc\ogr_vrtconnect.map
+C:\Temp\msautotest\misc\ogr_select.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
 msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
-C:\Temp\msautotest\misc\ogr_wkt.map
+C:\Temp\msautotest\misc\ogr_vrtconnect.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
 msOGRLayerInitItemInfo(): OGR error. Invalid Field name: AREA <br>
-C:\Temp\msautotest\misc\ortho.map
-C:\Temp\msautotest\misc\quantized.map
-C:\Temp\msautotest\misc\quoted_data.map
-C:\Temp\msautotest\misc\quoting.map
-C:\Temp\msautotest\misc\rfc14.map
-C:\Temp\msautotest\misc\rfc36.map
-C:\Temp\msautotest\misc\rfc36_ogr.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
-C:\Temp\msautotest\misc\rot_out.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
-C:\Temp\msautotest\misc\runtime_sub.map
-C:\Temp\msautotest\misc\scaletoken.map
-loadHashTable(): Unknown identifier. Parsing error near (METADATA):(line 10) <br>
+C:\Temp\msautotest\misc\ogr_wkt.tmp.map
+C:\Temp\msautotest\misc\ortho.tmp.map
+C:\Temp\msautotest\misc\quantized.tmp.map
+C:\Temp\msautotest\misc\quoted_data.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'road'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-C:\Temp\msautotest\misc\sde_bug2072.map
-C:\Temp\msautotest\misc\sde_join.map
-getSymbol(): Symbol definition error. Parsing error near (SDE):(line 10) <br>
-C:\Temp\msautotest\misc\sde_utf.map
-getSymbol(): Symbol definition error. Parsing error near (SDE):(line 18) <br>
-C:\Temp\msautotest\misc\sde_utf2.map
+C:\Temp\msautotest\misc\quoting.tmp.map
+C:\Temp\msautotest\misc\rfc14.tmp.map
+C:\Temp\msautotest\misc\rfc36.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
+C:\Temp\msautotest\misc\rfc36_ogr.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
+C:\Temp\msautotest\misc\rot_out.tmp.map
+C:\Temp\msautotest\misc\runtime_sub.tmp.map
+C:\Temp\msautotest\misc\scaletoken.tmp.map
+C:\Temp\msautotest\misc\sde_bug2072.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 13) <br>
+C:\Temp\msautotest\misc\sde_join.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 21) <br>
+C:\Temp\msautotest\misc\sde_utf.tmp.map
 getSymbol(): Symbol definition error. Parsing error near (SDE):(line 20) <br>
-C:\Temp\msautotest\misc\sde_view.map
+C:\Temp\msautotest\misc\sde_utf2.tmp.map
 getSymbol(): Symbol definition error. Parsing error near (SDE):(line 19) <br>
-C:\Temp\msautotest\misc\sde_wms.map
+C:\Temp\msautotest\misc\sde_view.tmp.map
 getSymbol(): Symbol definition error. Parsing error near (SDE):(line 10) <br>
-C:\Temp\msautotest\misc\shp2img-size.map
-getSymbol(): Symbol definition error. Parsing error near (SDE):(line 18) <br>
-C:\Temp\msautotest\misc\style_opacity.map
-C:\Temp\msautotest\misc\testuppercase.map
-C:\Temp\msautotest\mspython\ogr_query.map
-C:\Temp\msautotest\mspython\test_xmp.map
+C:\Temp\msautotest\misc\sde_wms.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 21) <br>
+C:\Temp\msautotest\misc\shp2img-size.tmp.map
+C:\Temp\msautotest\misc\style_opacity.tmp.map
+C:\Temp\msautotest\misc\testuppercase.tmp.map
+C:\Temp\msautotest\mspython\ogr_query.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
 msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
-C:\Temp\msautotest\query\context.map
-C:\Temp\msautotest\query\filters.map
-C:\Temp\msautotest\query\query.map
-loadLayer(): Unknown identifier. Parsing error near (i):(line 15) <br>
-C:\Temp\msautotest\query\querymap.map
-loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 16) <br>
-C:\Temp\msautotest\query\query_ogr.map
-loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 10) <br>
-C:\Temp\msautotest\query\query_postgis.map
-loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 16) <br>
-C:\Temp\msautotest\query\rfc62.map
-loadHashTable(): Unknown identifier. Parsing error near ('attr', u'qstring', u"'.'"):(line 16) <br>
-C:\Temp\msautotest\query\template.map
-loadHashTable(): Unknown identifier. Parsing error near ('attr', u'base', u"'^[a-z]{1,16}$'") ('attr', u'default_base', u"'some_default_value'"):(line 7) <br>
-C:\Temp\msautotest\query\text.map
+C:\Temp\msautotest\mspython\test_xmp.tmp.map
+C:\Temp\msautotest\query\context.tmp.map
+C:\Temp\msautotest\query\filters.tmp.map
+loadLayer(): Unknown identifier. Parsing error near (i):(line 24) <br>
+C:\Temp\msautotest\query\query.tmp.map
 msDrawMap(): Image handling error. Unable to initialize image. <br>
 msPrepareImage(): General error message. Image dimensions not specified. <br>
-C:\Temp\msautotest\renderers\average_rgb.map
+C:\Temp\msautotest\query\querymap.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\query\query_ogr.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\query\query_postgis.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\query\rfc62.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\query\template.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\query\text.tmp.map
 getSymbol(): Symbol definition error. Parsing error near (area):(line 38) <br>
-C:\Temp\msautotest\renderers\baseline_text.map
-C:\Temp\msautotest\renderers\chartlayer_bar.map
-C:\Temp\msautotest\renderers\chartlayer_pie.map
-C:\Temp\msautotest\renderers\chartlayer_pie2.map
-C:\Temp\msautotest\renderers\chartlayer_pie_expressions.map
-C:\Temp\msautotest\renderers\chartlayer_vbar.map
+C:\Temp\msautotest\renderers\average_rgb.tmp.map
+C:\Temp\msautotest\renderers\baseline_text.tmp.map
+C:\Temp\msautotest\renderers\chartlayer_bar.tmp.map
+C:\Temp\msautotest\renderers\chartlayer_pie.tmp.map
+C:\Temp\msautotest\renderers\chartlayer_pie2.tmp.map
+C:\Temp\msautotest\renderers\chartlayer_pie_expressions.tmp.map
 loadClass(): Unknown identifier. Parsing error near (u'/(^|,)type1($|,)/'):(line 20) <br>
-C:\Temp\msautotest\renderers\circle_layer.map
-C:\Temp\msautotest\renderers\compositing.map
-C:\Temp\msautotest\renderers\embed_legend.map
-C:\Temp\msautotest\renderers\embed_legend_rgba.map
-C:\Temp\msautotest\renderers\embed_legend_rgba_tr.map
-C:\Temp\msautotest\renderers\embed_legend_tr.map
-C:\Temp\msautotest\renderers\embed_sb_rgb.map
-C:\Temp\msautotest\renderers\embed_sb_rgba.map
-C:\Temp\msautotest\renderers\embed_sb_rgba_tr.map
-C:\Temp\msautotest\renderers\embed_sb_rgb_tr.map
-C:\Temp\msautotest\renderers\empty.map
-C:\Temp\msautotest\renderers\entity_encoded_follow_text.map
-C:\Temp\msautotest\renderers\font-fail.map
-C:\Temp\msautotest\renderers\force_palette.map
+C:\Temp\msautotest\renderers\chartlayer_vbar.tmp.map
+C:\Temp\msautotest\renderers\circle_layer.tmp.map
+C:\Temp\msautotest\renderers\compositing.tmp.map
+C:\Temp\msautotest\renderers\embed_legend.tmp.map
+C:\Temp\msautotest\renderers\embed_legend_rgba.tmp.map
+C:\Temp\msautotest\renderers\embed_legend_rgba_tr.tmp.map
+C:\Temp\msautotest\renderers\embed_legend_tr.tmp.map
+C:\Temp\msautotest\renderers\embed_sb_rgb.tmp.map
+C:\Temp\msautotest\renderers\embed_sb_rgba.tmp.map
+C:\Temp\msautotest\renderers\embed_sb_rgba_tr.tmp.map
+C:\Temp\msautotest\renderers\embed_sb_rgb_tr.tmp.map
+C:\Temp\msautotest\renderers\empty.tmp.map
+C:\Temp\msautotest\renderers\entity_encoded_follow_text.tmp.map
+C:\Temp\msautotest\renderers\font-fail.tmp.map
 msGetFontFace(): General error message. Freetype was unable to load font file "C:\Temp\msautotest\renderers\../misc//path/to/inexistant/file.ttf" for key "bogus" <br>
-C:\Temp\msautotest\renderers\force_palette_rgba.map
-C:\Temp\msautotest\renderers\force_pc256.map
-C:\Temp\msautotest\renderers\force_pc256_rgba.map
-C:\Temp\msautotest\renderers\geomtransform-vertex.map
-C:\Temp\msautotest\renderers\grid.map
-C:\Temp\msautotest\renderers\label-multifont.map
-C:\Temp\msautotest\renderers\labelcacheoff.map
-C:\Temp\msautotest\renderers\labelpnt.map
-C:\Temp\msautotest\renderers\labelrot.map
-C:\Temp\msautotest\renderers\labels-alignment.map
-C:\Temp\msautotest\renderers\labels-anno.map
-C:\Temp\msautotest\renderers\labels-bitmap-multiline.map
-C:\Temp\msautotest\renderers\labels-bitmap.map
-C:\Temp\msautotest\renderers\labels-leader.map
-C:\Temp\msautotest\renderers\labels.map
-C:\Temp\msautotest\renderers\label_noclip.map
-C:\Temp\msautotest\renderers\legend.map
-C:\Temp\msautotest\renderers\legend_label_offset.map
-C:\Temp\msautotest\renderers\legend_sizeunits_meters.map
-C:\Temp\msautotest\renderers\line_anchorpoint.map
-C:\Temp\msautotest\renderers\line_label_auto.map
-C:\Temp\msautotest\renderers\line_label_auto2.map
-C:\Temp\msautotest\renderers\line_label_follow.map
-C:\Temp\msautotest\renderers\line_label_follow_offsetted.map
-C:\Temp\msautotest\renderers\line_marker_pixmap.map
-C:\Temp\msautotest\renderers\line_marker_svg.map
-C:\Temp\msautotest\renderers\line_marker_truetype.map
-C:\Temp\msautotest\renderers\line_marker_vector.map
-C:\Temp\msautotest\renderers\line_offset.map
-C:\Temp\msautotest\renderers\line_pattern.map
+C:\Temp\msautotest\renderers\force_palette.tmp.map
+C:\Temp\msautotest\renderers\force_palette_rgba.tmp.map
+C:\Temp\msautotest\renderers\force_pc256.tmp.map
+C:\Temp\msautotest\renderers\force_pc256_rgba.tmp.map
+C:\Temp\msautotest\renderers\geomtransform-vertex.tmp.map
+C:\Temp\msautotest\renderers\grid.tmp.map
+C:\Temp\msautotest\renderers\label-multifont.tmp.map
+C:\Temp\msautotest\renderers\labelcacheoff.tmp.map
+C:\Temp\msautotest\renderers\labelpnt.tmp.map
+C:\Temp\msautotest\renderers\labelrot.tmp.map
+C:\Temp\msautotest\renderers\labels-alignment.tmp.map
+C:\Temp\msautotest\renderers\labels-anno.tmp.map
+C:\Temp\msautotest\renderers\labels-bitmap-multiline.tmp.map
+C:\Temp\msautotest\renderers\labels-bitmap.tmp.map
+C:\Temp\msautotest\renderers\labels-leader.tmp.map
+C:\Temp\msautotest\renderers\labels.tmp.map
+C:\Temp\msautotest\renderers\label_noclip.tmp.map
+C:\Temp\msautotest\renderers\legend.tmp.map
+C:\Temp\msautotest\renderers\legend_label_offset.tmp.map
+C:\Temp\msautotest\renderers\legend_sizeunits_meters.tmp.map
+C:\Temp\msautotest\renderers\line_anchorpoint.tmp.map
+C:\Temp\msautotest\renderers\line_label_auto.tmp.map
+C:\Temp\msautotest\renderers\line_label_auto2.tmp.map
+C:\Temp\msautotest\renderers\line_label_follow.tmp.map
+C:\Temp\msautotest\renderers\line_label_follow_offsetted.tmp.map
+C:\Temp\msautotest\renderers\line_marker_pixmap.tmp.map
+C:\Temp\msautotest\renderers\line_marker_svg.tmp.map
+C:\Temp\msautotest\renderers\line_marker_truetype.tmp.map
+C:\Temp\msautotest\renderers\line_marker_vector.tmp.map
+C:\Temp\msautotest\renderers\line_offset.tmp.map
 loadFeaturePoints(): Unknown identifier. Parsing error near (0, 10):(line 50) <br>
-C:\Temp\msautotest\renderers\line_pattern_offset.map
-C:\Temp\msautotest\renderers\line_short_gap.map
-C:\Temp\msautotest\renderers\line_simple.map
-C:\Temp\msautotest\renderers\lots_of_text.map
-C:\Temp\msautotest\renderers\marker_anchorpoint.map
-C:\Temp\msautotest\renderers\marker_pixmap.map
-C:\Temp\msautotest\renderers\mask.map
-C:\Temp\msautotest\renderers\mask_opacity.map
-C:\Temp\msautotest\renderers\multilabel-leader.map
-C:\Temp\msautotest\renderers\multilabel.map
-C:\Temp\msautotest\renderers\nodata_8bit.map
-C:\Temp\msautotest\renderers\plb_embed_legend.map
-C:\Temp\msautotest\renderers\plb_embed_legend_rgba.map
-C:\Temp\msautotest\renderers\plb_embed_legend_rgba_tr.map
-C:\Temp\msautotest\renderers\plb_embed_legend_tr.map
-C:\Temp\msautotest\renderers\point-polaroffset.map
-C:\Temp\msautotest\renderers\point_ellipse.map
-C:\Temp\msautotest\renderers\point_pixmap.map
-C:\Temp\msautotest\renderers\point_pixmap_gif.map
-C:\Temp\msautotest\renderers\point_svg.map
-C:\Temp\msautotest\renderers\point_truetype.map
-C:\Temp\msautotest\renderers\point_vector.map
-C:\Temp\msautotest\renderers\poly-label-multiline-pos-auto.map
+C:\Temp\msautotest\renderers\line_pattern.tmp.map
+C:\Temp\msautotest\renderers\line_pattern_offset.tmp.map
+C:\Temp\msautotest\renderers\line_short_gap.tmp.map
+C:\Temp\msautotest\renderers\line_simple.tmp.map
+C:\Temp\msautotest\renderers\lots_of_text.tmp.map
+C:\Temp\msautotest\renderers\marker_anchorpoint.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (anchortest), 0.018s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.018s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_uvxnxj.png) total time: 0.005s
+msFreeMap(): freeing map at 00000000003632C0.
+freeLayer(): freeing layer at 000000000036DF70.
+shp2img total time: 1486424228.706s
+C:\Temp\msautotest\renderers\marker_pixmap.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.000s
+msDrawMap(): Layer 1 (symbol rotated), 0.000s
+msDrawMap(): Layer 2 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.001s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_y4gubu.png) total time: 0.002s
+msFreeMap(): freeing map at 00000000004C5360.
+freeLayer(): freeing layer at 00000000004CCE30.
+freeLayer(): freeing layer at 00000000004CE8D0.
+freeLayer(): freeing layer at 00000000004D05F0.
+shp2img total time: 1486424228.841s
+C:\Temp\msautotest\renderers\mask.tmp.map
+msLoadMap(): 0.000s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawRasterLayerLow(world): entering.
+msDrawRasterLayerGDAL(): Entering transform.
+msDrawRasterLayerGDAL(): src=0,0,400,300, dst=0,50,400,200
+msDrawRasterLayerGDAL(): source raster PL (-0.501,-0.376) for dst PL (0,50).
+msDrawRasterLayerGDAL(): red,green,blue,alpha bands = 1,2,3,4
+msDrawMap(): Layer 1 (world), 0.068s
+msDrawMap(): Layer 2 (lines), 0.011s
+msDrawMap(): Layer 3 (countours), 0.000s
+msDrawMap(): Drawing Label Cache, 0.001s
+msDrawMap() total time: 0.080s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_gufexe.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000365450.
+freeLayer(): freeing layer at 000000000036CED0.
+freeLayer(): freeing layer at 000000000036E6F0.
+freeLayer(): freeing layer at 000000000036F8D0.
+freeLayer(): freeing layer at 0000000000372F00.
+shp2img total time: 1486424229.041s
+C:\Temp\msautotest\renderers\mask_opacity.tmp.map
+msLoadMap(): 0.000s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawRasterLayerLow(world): entering.
+msDrawRasterLayerGDAL(): Entering transform.
+msDrawRasterLayerGDAL(): src=0,0,400,300, dst=0,50,400,200
+msDrawRasterLayerGDAL(): source raster PL (-0.501,-0.376) for dst PL (0,50).
+msDrawRasterLayerGDAL(): red,green,blue,alpha bands = 1,2,3,4
+msDrawMap(): Layer 1 (world), 0.006s
+msDrawMap(): Layer 2 (lines), 0.001s
+msDrawMap(): Layer 3 (countours), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.008s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_xf3kf2.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000435610.
+freeLayer(): freeing layer at 000000000043CFE0.
+freeLayer(): freeing layer at 000000000043E800.
+freeLayer(): freeing layer at 000000000043F9F0.
+freeLayer(): freeing layer at 0000000000443020.
+shp2img total time: 1486424229.170s
+C:\Temp\msautotest\renderers\multilabel-leader.tmp.map
+C:\Temp\msautotest\renderers\multilabel.tmp.map
+C:\Temp\msautotest\renderers\nodata_8bit.tmp.map
+C:\Temp\msautotest\renderers\plb_embed_legend.tmp.map
+C:\Temp\msautotest\renderers\plb_embed_legend_rgba.tmp.map
+C:\Temp\msautotest\renderers\plb_embed_legend_rgba_tr.tmp.map
+C:\Temp\msautotest\renderers\plb_embed_legend_tr.tmp.map
+C:\Temp\msautotest\renderers\point-polaroffset.tmp.map
+C:\Temp\msautotest\renderers\point_ellipse.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.000s
+msDrawMap(): Layer 1 (symbol rotated), 0.000s
+msDrawMap(): Layer 2 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.000s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_ryefo4.png) total time: 0.002s
+msFreeMap(): freeing map at 00000000001F3F90.
+freeLayer(): freeing layer at 00000000001FB850.
+freeLayer(): freeing layer at 00000000001FD070.
+freeLayer(): freeing layer at 00000000001FE950.
+shp2img total time: 1486424230.901s
+C:\Temp\msautotest\renderers\point_pixmap.tmp.map
 msHTTPExecuteRequests(): HTTP request error. HTTP: request failed with curl error code 7 (Failed to connect to localhost port 8000: Connection refused) for http://localhost:8000/misc/data/gdalicon.png
-C:\Temp\msautotest\renderers\poly-label-pos-auto.map
-C:\Temp\msautotest\renderers\polygon-as-line-offset.map
-C:\Temp\msautotest\renderers\polygon-as-line.map
-C:\Temp\msautotest\renderers\polygon-hatch-dashed.map
-C:\Temp\msautotest\renderers\polygon-hatch.map
-C:\Temp\msautotest\renderers\polygon-pixmap.map
-C:\Temp\msautotest\renderers\polygon-simple.map
-C:\Temp\msautotest\renderers\polygon-ttf.map
-C:\Temp\msautotest\renderers\polygon-vector.map
-C:\Temp\msautotest\renderers\polyline_no_clip.map
-C:\Temp\msautotest\renderers\poly_geomtransform_anchor.map
-C:\Temp\msautotest\renderers\raster_simple.map
-C:\Temp\msautotest\renderers\raster_simple_opacity.map
-C:\Temp\msautotest\renderers\reproj.map
-C:\Temp\msautotest\renderers\resolution.map
-C:\Temp\msautotest\renderers\rgba_overlay_res.map
-C:\Temp\msautotest\renderers\rgb_overlay.map
-C:\Temp\msautotest\renderers\rgb_overlay_res.map
-C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit.map
-C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit_dithered.map
-C:\Temp\msautotest\renderers\text-shaping.map
-C:\Temp\msautotest\renderers\transparent_layer.map
-C:\Temp\msautotest\renderers\utfgrid-escaping.map
-C:\Temp\msautotest\renderers\uvraster.map
-C:\Temp\msautotest\renderers\uvraster_reproj.map
-C:\Temp\msautotest\renderers\wld_rotate.map
-C:\Temp\msautotest\renderers\wld_upsidedown.map
-C:\Temp\msautotest\renderers\wmsclient.map
-C:\Temp\msautotest\wxs\contour_tileindex.map
-C:\Temp\msautotest\wxs\ows_all.map
-C:\Temp\msautotest\wxs\ows_disable.map
+msLoadMap(): 1.110s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.000s
+msDrawMap(): Layer 1 (symbol rotated), 0.001s
+msDrawMap(): Layer 2 (symbol filename), 0.001s
+msDrawMap(): Layer 3 (symbol url), 0.000s
+msDrawMap(): Layer 4 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.003s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp__twzpr.png) total time: 0.009s
+msFreeMap(): freeing map at 0000000000364050.
+freeLayer(): freeing layer at 000000000036B920.
+freeLayer(): freeing layer at 000000000036D1C0.
+freeLayer(): freeing layer at 000000000036EA60.
+freeLayer(): freeing layer at 0000000000372500.
+freeLayer(): freeing layer at 00000000003736D0.
+shp2img total time: 1486424232.163s
+C:\Temp\msautotest\renderers\point_pixmap_gif.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.001s
+msDrawMap(): Layer 1 (symbol rotated), 0.001s
+msDrawMap(): Layer 2 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.002s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_lrsk_l.png) total time: 0.002s
+msFreeMap(): freeing map at 0000000000314100.
+freeLayer(): freeing layer at 000000000031BB20.
+freeLayer(): freeing layer at 000000000031D380.
+freeLayer(): freeing layer at 000000000031ECA0.
+shp2img total time: 1486424232.301s
+C:\Temp\msautotest\renderers\point_svg.tmp.map
+C:\Temp\msautotest\renderers\point_truetype.tmp.map
+C:\Temp\msautotest\renderers\point_vector.tmp.map
+C:\Temp\msautotest\renderers\poly-label-multiline-pos-auto.tmp.map
+C:\Temp\msautotest\renderers\poly-label-pos-auto.tmp.map
+C:\Temp\msautotest\renderers\polygon-as-line-offset.tmp.map
+msLoadMap(): 0.000s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.001s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.002s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_tv_4la.png) total time: 0.003s
+msFreeMap(): freeing map at 00000000003E4740.
+freeLayer(): freeing layer at 00000000003EC7C0.
+shp2img total time: 1486424233.377s
+C:\Temp\msautotest\renderers\polygon-as-line.tmp.map
+msLoadMap(): 0.000s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.001s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_xkyv5j.png) total time: 0.002s
+msFreeMap(): freeing map at 0000000000314750.
+freeLayer(): freeing layer at 000000000031C7D0.
+shp2img total time: 1486424233.453s
+C:\Temp\msautotest\renderers\polygon-hatch-dashed.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.001s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_hjfrdn.png) total time: 0.002s
+msFreeMap(): freeing map at 00000000003F4810.
+freeLayer(): freeing layer at 00000000003FC890.
+shp2img total time: 1486424233.528s
+C:\Temp\msautotest\renderers\polygon-hatch.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.001s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_pqxhyu.png) total time: 0.003s
+msFreeMap(): freeing map at 0000000000384F70.
+freeLayer(): freeing layer at 000000000038C7F0.
+shp2img total time: 1486424233.640s
+C:\Temp\msautotest\renderers\polygon-pixmap.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.001s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_kflmi_.png) total time: 0.002s
+msFreeMap(): freeing map at 0000000000334A30.
+freeLayer(): freeing layer at 000000000033C3B0.
+shp2img total time: 1486424233.723s
+C:\Temp\msautotest\renderers\polygon-simple.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.000s
+msDrawMap(): Drawing Label Cache, 0.001s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_h4kwpo.png) total time: 0.003s
+msFreeMap(): freeing map at 0000000000544B50.
+freeLayer(): freeing layer at 000000000054C4D0.
+shp2img total time: 1486424233.804s
+C:\Temp\msautotest\renderers\polygon-ttf.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.001s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_lucezz.png) total time: 0.002s
+msFreeMap(): freeing map at 00000000003A5080.
+freeLayer(): freeing layer at 00000000003AC350.
+shp2img total time: 1486424233.890s
+C:\Temp\msautotest\renderers\polygon-vector.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.001s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_80vjg4.png) total time: 0.002s
+msFreeMap(): freeing map at 0000000000354D70.
+freeLayer(): freeing layer at 000000000035C640.
+shp2img total time: 1486424233.978s
+C:\Temp\msautotest\renderers\polyline_no_clip.tmp.map
+C:\Temp\msautotest\renderers\poly_geomtransform_anchor.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (anchortest), 0.002s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.002s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_suo0uj.png) total time: 0.004s
+msFreeMap(): freeing map at 00000000004B4FB0.
+freeLayer(): freeing layer at 00000000004BD070.
+shp2img total time: 1486424234.211s
+C:\Temp\msautotest\renderers\raster_simple.tmp.map
+C:\Temp\msautotest\renderers\raster_simple_opacity.tmp.map
+C:\Temp\msautotest\renderers\reproj.tmp.map
+C:\Temp\msautotest\renderers\resolution.tmp.map
+C:\Temp\msautotest\renderers\rgba_overlay_res.tmp.map
+C:\Temp\msautotest\renderers\rgb_overlay.tmp.map
+C:\Temp\msautotest\renderers\rgb_overlay_res.tmp.map
+C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit.tmp.map
+C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit_dithered.tmp.map
+C:\Temp\msautotest\renderers\text-shaping.tmp.map
+C:\Temp\msautotest\renderers\transparent_layer.tmp.map
+msLoadMap(): 0.000s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.001s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 1 (world2), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.001s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_bk7g8z.png) total time: 0.003s
+msFreeMap(): freeing map at 00000000005358F0.
+freeLayer(): freeing layer at 000000000053DA10.
+freeLayer(): freeing layer at 000000000053F270.
+shp2img total time: 1486424235.272s
+C:\Temp\msautotest\renderers\utfgrid-escaping.tmp.map
+msLoadMap(): 0.001s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msOGRFileOpen(data/testutfgrid.csv)...
+OGROPen(C:\Temp\msautotest\renderers\data/testutfgrid.csv)
+msConnPoolRegister(testutfgrid,data/testutfgrid.csv,0000000001F7D190)
+msOGRFileWhichShapes: Setting spatial filter to 0.500000 47.000000 3.500000 50.000000
+msOGRFileNextShape: Returning shape=1, tile=0
+msOGRFileNextShape: Returning shape=2, tile=0
+msOGRFileNextShape: Returning shape=3, tile=0
+msOGRFileNextShape: Returning shape=4, tile=0
+msOGRFileNextShape: Returning shape=5, tile=0
+msOGRFileNextShape: Returning MS_DONE (no more shapes)
+msOGRLayerClose(data/testutfgrid.csv).
+msOGRFileClose(C:\Temp\msautotest\renderers\data/testutfgrid.csv,0).
+msConnPoolRelease(testutfgrid,data/testutfgrid.csv,0000000001F7D190)
+msConnPoolClose(data/testutfgrid.csv,0000000001F7D190)
+msDrawMap(): Layer 0 (testutfgrid), 0.007s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.007s
+msSaveImage(c:\users\sg\appdata\local\temp\tmp_ri5pzo.png) total time: 0.002s
+msFreeMap(): freeing map at 0000000000265CC0.
+freeLayer(): freeing layer at 000000000026D440.
+shp2img total time: 1486424235.343s
+C:\Temp\msautotest\renderers\uvraster.tmp.map
+C:\Temp\msautotest\renderers\uvraster_reproj.tmp.map
+C:\Temp\msautotest\renderers\wld_rotate.tmp.map
+C:\Temp\msautotest\renderers\wld_upsidedown.tmp.map
+C:\Temp\msautotest\renderers\wmsclient.tmp.map
+C:\Temp\msautotest\wxs\contour_tileindex.tmp.map
+C:\Temp\msautotest\wxs\ows_all.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\ows_empty.map
-C:\Temp\msautotest\wxs\ows_sos.map
+C:\Temp\msautotest\wxs\ows_disable.tmp.map
 msDrawMap(): Image handling error. Unable to initialize image. <br>
 msPrepareImage(): General error message. Image dimensions not specified. <br>
+C:\Temp\msautotest\wxs\ows_empty.tmp.map
 msDrawMap(): Image handling error. Unable to initialize image. <br>
 msPrepareImage(): General error message. Image dimensions not specified. <br>
-C:\Temp\msautotest\wxs\ows_test_xml_escaping.map
-C:\Temp\msautotest\wxs\ows_wcs.map
+C:\Temp\msautotest\wxs\ows_sos.tmp.map
+C:\Temp\msautotest\wxs\ows_test_xml_escaping.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\ows_wfs.map
-C:\Temp\msautotest\wxs\ows_wms.map
+C:\Temp\msautotest\wxs\ows_wcs.tmp.map
+C:\Temp\msautotest\wxs\ows_wfs.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\sos.map
+C:\Temp\msautotest\wxs\ows_wms.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\tomk_workshop.map
-C:\Temp\msautotest\wxs\wcs_mask.map
-C:\Temp\msautotest\wxs\wcs_multi.map
-C:\Temp\msautotest\wxs\wcs_post.map
-C:\Temp\msautotest\wxs\wcs_simple.map
-C:\Temp\msautotest\wxs\wcs_tileindexmixedsrs.map
-C:\Temp\msautotest\wxs\wfs_200.map
+C:\Temp\msautotest\wxs\sos.tmp.map
+C:\Temp\msautotest\wxs\tomk_workshop.tmp.map
+loadHashTable(): Unknown identifier. Parsing error near (Resolution):(line 96) <br>
+C:\Temp\msautotest\wxs\wcs_mask.tmp.map
+C:\Temp\msautotest\wxs\wcs_multi.tmp.map
+C:\Temp\msautotest\wxs\wcs_post.tmp.map
+C:\Temp\msautotest\wxs\wcs_simple.tmp.map
+C:\Temp\msautotest\wxs\wcs_tileindexmixedsrs.tmp.map
 msDrawMap(): Image handling error. Unable to initialize image. <br>
 msCalculateScale(): General error message. Invalid image extent, minx=-1.000000, miny=-1.000000, maxx=-1.000000, maxy=-1.000000. <br>
-C:\Temp\msautotest\wxs\wfs_200_allgeoms.map
+C:\Temp\msautotest\wxs\wfs_200.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_200_cite.map
-C:\Temp\msautotest\wxs\wfs_200_cite_postgis.map
+C:\Temp\msautotest\wxs\wfs_200_allgeoms.tmp.map
+C:\Temp\msautotest\wxs\wfs_200_cite.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_200_inspire.map
+C:\Temp\msautotest\wxs\wfs_200_cite_postgis.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_200_inspire_missing_md.map
+C:\Temp\msautotest\wxs\wfs_200_inspire.tmp.map
+getString(): Symbol definition error. Parsing error near (WFS):(line 30) <br>
+C:\Temp\msautotest\wxs\wfs_200_inspire_missing_md.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_200_inspire_scenario1.map
+C:\Temp\msautotest\wxs\wfs_200_inspire_scenario1.tmp.map
+getString(): Symbol definition error. Parsing error near (WFS):(line 24) <br>
+C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures.map
+C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures_no_compute_number_matched.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures_no_compute_number_matched.map
+C:\Temp\msautotest\wxs\wfs_alltypes.tmp.map
+C:\Temp\msautotest\wxs\wfs_default_version_110.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_alltypes.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_default_version_110.map
-C:\Temp\msautotest\wxs\wfs_filter.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_filter_ogr.map
+C:\Temp\msautotest\wxs\wfs_filter.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'park'. <br>
 msShapefileOpen(): Unable to access file. (C:\Temp\msautotest\wxs\park) <br>
 msShapefileOpen(): Unable to access file. (C:\Temp\msautotest\wxs\./data/park) <br>
-C:\Temp\msautotest\wxs\wfs_filter_postgis.map
-C:\Temp\msautotest\wxs\wfs_filter_projmeter.map
-C:\Temp\msautotest\wxs\wfs_group.map
+C:\Temp\msautotest\wxs\wfs_filter_ogr.tmp.map
+C:\Temp\msautotest\wxs\wfs_filter_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wfs_filter_projmeter.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_misc.map
+C:\Temp\msautotest\wxs\wfs_group.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_multi_geom_elements.map
+C:\Temp\msautotest\wxs\wfs_misc.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_ogr.map
-C:\Temp\msautotest\wxs\wfs_ogr_25d.map
-C:\Temp\msautotest\wxs\wfs_ogr_drv_nocreatedatasource.map
-C:\Temp\msautotest\wxs\wfs_ogr_geojson.map
+C:\Temp\msautotest\wxs\wfs_multi_geom_elements.tmp.map
+C:\Temp\msautotest\wxs\wfs_ogr.tmp.map
+C:\Temp\msautotest\wxs\wfs_ogr_25d.tmp.map
+C:\Temp\msautotest\wxs\wfs_ogr_drv_nocreatedatasource.tmp.map
 loadOutputFormat(): General error message. OUTPUTFORMAT (nocreatedatasource) clause references driver (OGR/SDTS), but this driver isn't configured. <br>
 msInitDefaultOGROutputFormat(): General error message. OGR `SDTS' driver does not support output. <br>
-C:\Temp\msautotest\wxs\wfs_ogr_invalid_filename.map
-msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
-msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-C:\Temp\msautotest\wxs\wfs_ogr_native_sql.map
-C:\Temp\msautotest\wxs\wfs_ogr_nonexistingdrv.map
-C:\Temp\msautotest\wxs\wfs_ogr_no_native_sql.map
+C:\Temp\msautotest\wxs\wfs_ogr_geojson.tmp.map
+C:\Temp\msautotest\wxs\wfs_ogr_invalid_filename.tmp.map
+C:\Temp\msautotest\wxs\wfs_ogr_native_sql.tmp.map
+C:\Temp\msautotest\wxs\wfs_ogr_nonexistingdrv.tmp.map
 loadOutputFormat(): General error message. OUTPUTFORMAT (nonexistingdrv) clause references driver (OGR/nonexistingdrv), but this driver isn't configured. <br>
 msInitDefaultOGROutputFormat(): General error message. No OGR driver named `nonexistingdrv' available. <br>
-C:\Temp\msautotest\wxs\wfs_optional_items.map
-C:\Temp\msautotest\wxs\wfs_postgis_25d.map
+C:\Temp\msautotest\wxs\wfs_ogr_no_native_sql.tmp.map
+C:\Temp\msautotest\wxs\wfs_optional_items.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_shp_tileindex_of_shp.map
-C:\Temp\msautotest\wxs\wfs_simple.map
-C:\Temp\msautotest\wxs\wfs_simple_ogr.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_test5299.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wfs_time.map
-C:\Temp\msautotest\wxs\wfs_time_ogr.map
-C:\Temp\msautotest\wxs\wfs_time_postgis.map
-C:\Temp\msautotest\wxs\wms_dimensions.map
-C:\Temp\msautotest\wxs\wms_inspire.map
+C:\Temp\msautotest\wxs\wfs_postgis_25d.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'point3d'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-C:\Temp\msautotest\wxs\wms_legend.map
+C:\Temp\msautotest\wxs\wfs_shp_tileindex_of_shp.tmp.map
+C:\Temp\msautotest\wxs\wfs_simple.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_simple_ogr.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wfs_test5299.tmp.map
+C:\Temp\msautotest\wxs\wfs_time.tmp.map
+C:\Temp\msautotest\wxs\wfs_time_ogr.tmp.map
+C:\Temp\msautotest\wxs\wfs_time_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'time'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-C:\Temp\msautotest\wxs\wms_nosld.map
-C:\Temp\msautotest\wxs\wms_nosld_postgis.map
+C:\Temp\msautotest\wxs\wms_dimensions.tmp.map
+C:\Temp\msautotest\wxs\wms_inspire.tmp.map
+C:\Temp\msautotest\wxs\wms_legend.tmp.map
+C:\Temp\msautotest\wxs\wms_nosld.tmp.map
 msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wms_ogr_native_sql.map
-C:\Temp\msautotest\wxs\wms_raster.map
-C:\Temp\msautotest\wxs\wms_simple.map
-C:\Temp\msautotest\wxs\wms_simple_kml.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wms_simple_postgis.map
-msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
-C:\Temp\msautotest\wxs\wms_sld.map
-C:\Temp\msautotest\wxs\wms_sld2.map
-loadHashTable(): Unknown identifier. Parsing error near (METADATA):(line 15) <br>
-C:\Temp\msautotest\wxs\wms_sld_postgis.map
+C:\Temp\msautotest\wxs\wms_nosld_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-C:\Temp\msautotest\wxs\wms_sld_proj.map
-C:\Temp\msautotest\wxs\wms_sld_validation.map
-C:\Temp\msautotest\wxs\wms_tileindexmixedsrs.map
-C:\Temp\msautotest\wxs\wms_time1.map
+C:\Temp\msautotest\wxs\wms_ogr_native_sql.tmp.map
+C:\Temp\msautotest\wxs\wms_raster.tmp.map
+C:\Temp\msautotest\wxs\wms_simple.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wms_simple_kml.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+C:\Temp\msautotest\wxs\wms_simple_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'road'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-C:\Temp\msautotest\wxs\wms_time1_postgis.map
-C:\Temp\msautotest\wxs\wms_time2.map
-C:\Temp\msautotest\wxs\wms_time2_postgis.map
-C:\Temp\msautotest\wxs\wms_time_pattern.map
+C:\Temp\msautotest\wxs\wms_sld.tmp.map
+C:\Temp\msautotest\wxs\wms_sld2.tmp.map
+C:\Temp\msautotest\wxs\wms_sld_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test.map
-C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test_postgis.map
-C:\Temp\msautotest\wxs\wms_time_pattern_fail.map
-C:\Temp\msautotest\wxs\wms_time_pattern_postgis.map
+C:\Temp\msautotest\wxs\wms_sld_proj.tmp.map
+C:\Temp\msautotest\wxs\wms_sld_validation.tmp.map
+C:\Temp\msautotest\wxs\wms_tileindexmixedsrs.tmp.map
+C:\Temp\msautotest\wxs\wms_time1.tmp.map
+C:\Temp\msautotest\wxs\wms_time1_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'pattern4'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wms_time2.tmp.map
+C:\Temp\msautotest\wxs\wms_time2_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'pattern4'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
-Done!
+C:\Temp\msautotest\wxs\wms_time_pattern.tmp.map
+C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test.tmp.map
+C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'pattern12'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+C:\Temp\msautotest\wxs\wms_time_pattern_fail.tmp.map
+C:\Temp\msautotest\wxs\wms_time_pattern_postgis.tmp.map
 msDrawMap(): Image handling error. Failed to draw layer named 'pattern1'. <br>
 msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
->>> 

@@ -1,23 +1,10 @@
-        STYLE
-            COLOR {{colour}}
-            WIDTH 5
-            LINECAP BUTT
-            PATTERN 5.0 5.0 END
-        END
-
-  File "C:\VirtualEnvs\pmsmapserverdev\lib\site-packages\plyplus\pearley.py", line 133, in feed
-    raise Exception('Error at line {t.line}:{t.column}'.format(t=chunk[chunk_pos]))
-
-5.0 raising errors
-
+# filters.map loadLayer(): Unknown identifier. Parsing error near (i):(line 15) <br>
+# wms_inspire_scenario1.map UnicodeDecodeError: 'utf8' codec can't decode byte 0xdf in position 7851: invalid continuation byte
 
 
 IMAGEMODE [PC256/RGB/RGBA/INT16/FLOAT32/FEATURE]
 
 FEATURE a duplicated keyword
-
-
-
 
 VALIDATION block can have an attr or string
 
@@ -28,3 +15,17 @@ validation: VALIDATION NL+ ((attr NL+)+|(string NL*)+) END;
 NEW
 
 validation: VALIDATION NL+ ((string_pair|attr) NL+)+ END;
+
+Maps with problems:
+
+
+#parser = Parser(try_ply=True)
+#ast = parser.parse_file('./tests/sample_maps/256_overlay_res.map')
+#ast = parser.parse_file('./tests/sample_maps/class16_oddscale.map')
+#ast = parser.parse_file('./tests/sample_maps/class16_range.map')
+#ast = parser.parse_file('./tests/sample_maps/wmsclient_3543.map')
+#ast = parser.parse_file('./tests/sample_maps/heat.map')
+
+#ast = parser.parse_file('./tests/sample_maps/labelpnt.map')
+#ast = parser.parse_file('./tests/sample_maps/maxfeatures.map')
+#ast = parser.parse_file('./tests/sample_maps/query.map')
