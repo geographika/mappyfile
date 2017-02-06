@@ -3,11 +3,18 @@ Module to transform an AST (Abstract Syntax Tree) to a
 Python dict structure
 """
 
-from collections import defaultdict # OrderedDict
+from collections import defaultdict, OrderedDict
 
 from plyplus import STransformer, is_stree
 
 from tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
+
+from collections import OrderedDict, defaultdict
+
+import mappyfile
+from mappyfile.parser import Parser
+from mappyfile.ordereddict import DefaultOrderedDict
+import os
 
 def plural(s):
 
@@ -19,14 +26,56 @@ def plural(s):
         return s +'s'
 
 def dict_from_tail(t):
-    d = defaultdict() # OrderedDict()
+    d = OrderedDict()
 
     for v in t.tail:
         d[v[0]] = v[1]
 
     return d
 
+def load_include(transformer, fn):
+
+    fn = fn.strip("'")
+    fn = fn.strip('"')
+
+    cwd = transformer.cwd
+
+    if cwd:
+        fn = os.path.join(cwd, fn)
+    else:
+        fn = fn
+
+    p = Parser()
+    #print fn
+    ast = p.parse_file(fn, is_subcomponent=True)
+    #m = MapFile2Dict__Transformer()
+    d = transformer.transform(ast)
+ 
+    for k, v in d.items():
+        print k, v
+    return d
+
+class IncludeTransformer(STransformer):
+   
+    def attr(self, t):
+        """
+        [attr_name(composite_type(u'INCLUDE')), string(u"'include/bdry_counpy2_shapefile.map'")]
+        """
+        print len(t.tail)
+        if len(t.tail) == 2:
+            body = [t.tail]
+            print t.tail
+            #print t.tail[0], t.tail[1][0]
+            for k, v in body:  
+                print k, v
+        return t.tail
+
+
 class MapFile2Dict__Transformer(STransformer):
+
+    def __init__(self, cwd=None):
+        self.cwd = cwd
+
     def start(self, t):
         t ,= t.tail
         assert t[0] == 'composite'
@@ -56,9 +105,10 @@ class MapFile2Dict__Transformer(STransformer):
         for x in body:
             assert isinstance(x, tuple), x
 
-        composites = defaultdict(list)
+        composites = DefaultOrderedDict(list)
+        #composites = defaultdict(list)
 
-        d = defaultdict()
+        d = OrderedDict()
 
         for itemtype, k, v in body:          
             
@@ -66,14 +116,19 @@ class MapFile2Dict__Transformer(STransformer):
 
                 if k == 'processing':
                     # PROCESSING can be repeated
+                    # maybe should be a composite?
                     if 'processing' not in d.keys():
                         d[k] = [v]
                     else:
                         d[k].append(v)
+                elif k == 'include':
+                    #return load_include(self, v)
+                    pass
                 else:
                     d[k] = v
 
             elif itemtype == 'composite' and k in SINGLETON_COMPOSITE_NAMES:
+                # there can only ever be one instance of these
                 composites[k] = v # defaultdict using list
             elif itemtype == 'composite':
                 composites[k].append(v)
@@ -143,12 +198,13 @@ class MapFile2Dict__Transformer(STransformer):
     # for functions
 
     def func_call(self, t):
-        func, param = t.tail
+        func, params = t.tail
         func = func.tail[0] # this is an attr_name, not sure why it is not transformed already
-        return "(%s(%s))" % (func, param)
+        return "(%s(%s))" % (func, params)
+
     def func_params(self, t):
-        x ,= t.tail
-        return x
+        params = ",".join(str(x) for x in t.tail)
+        return params
 
     def attr_bind(self, t):
         x ,= t.tail
