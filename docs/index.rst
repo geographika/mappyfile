@@ -1,14 +1,10 @@
 ﻿mappyfile
 =========
 
-:Author: S. Girvin
-:Version: 0.1
-   
-A Python library to create and modify `MapServer <http://mapserver.org/documentation.html>`_ Mapfiles. 
+A Python library to create, parse, and modify `MapServer <http://mapserver.org/documentation.html>`_ Mapfiles. 
 
 + Python 2 and Python 3 compatible
-+ Windows and Linux
-+ Pure Python - no issues with mixing C-runtimes for MapServer and other Python libraries
++ Pure Python - no MapServer dependencies
 
 .. toctree::
     :maxdepth: 2
@@ -19,6 +15,9 @@ A Python library to create and modify `MapServer <http://mapserver.org/documenta
     transformer.rst
     pretty_printing.rst
     mapfile.rst
+
+
+.. image:: images/class_parsed.png    
 
 What is mappyfile?
 ------------------
@@ -38,8 +37,8 @@ Example use cases:
 * Create Mapfiles for different datasets from the same source
 * Create, manipulate, and test Mapfiles from within Python
 
-Why mappyfile?
---------------
+Why?
+----
 
 MapScript "bindings" are available in several different languages thanks to SWIG - which creates wrapper 
 code for C. 
@@ -123,7 +122,6 @@ Hierarchy
 
 Once a Mapfile can be parsed a nice diagram showing the full structure of a Mapfile can be generated similar to the one at https://github.com/erezsh/plyplus#working-with-the-python-ast-using-the-builtin-python-grammar:
 
-.. image:: images/calling_popen.png    
 
 .. _testing:
 
