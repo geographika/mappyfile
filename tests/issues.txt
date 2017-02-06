@@ -1,0 +1,30 @@
+        STYLE
+            COLOR {{colour}}
+            WIDTH 5
+            LINECAP BUTT
+            PATTERN 5.0 5.0 END
+        END
+
+  File "C:\VirtualEnvs\pmsmapserverdev\lib\site-packages\plyplus\pearley.py", line 133, in feed
+    raise Exception('Error at line {t.line}:{t.column}'.format(t=chunk[chunk_pos]))
+
+5.0 raising errors
+
+
+
+IMAGEMODE [PC256/RGB/RGBA/INT16/FLOAT32/FEATURE]
+
+FEATURE a duplicated keyword
+
+
+
+
+VALIDATION block can have an attr or string
+
+OLD
+
+validation: VALIDATION NL+ ((attr NL+)+|(string NL*)+) END;
+
+NEW
+
+validation: VALIDATION NL+ ((string_pair|attr) NL+)+ END;
