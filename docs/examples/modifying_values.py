@@ -12,7 +12,7 @@ mapfile["name"] = "MyNewMap"
 mapfile["config"]["ms_errorfile"] = "/ms4w/tmp/ms_error.txt"
 mapfile["config"]["ON_MISSING_DATA"] = "IGNORE"
 
-# currently will need to double quote non-keyword properties
+# currently will need to double-quote non-keyword properties
 mapfile["web"]["metadata"]["wms_format"] = "'image/png'"
 
 layers = mapfile["layers"]
@@ -21,7 +21,33 @@ layer["name"] = "MyLayer"
 
 print(mappyfile.dumps(mapfile))
 
-# alternatively use Mapfile syntax
+# alternatively we can use the Mapfile syntax
+# not currently working for CONFIG or METADATA
+
+web = """WEB
+        METADATA
+            'wms_enable_request' '*'
+            'wms_feature_info_mime_type' 'text/html'
+            'wms_format' 'image/jpg'
+        END
+    END"""
+
+web = mappyfile.loads(web)
+
+mapfile["web"] = web
+print(mappyfile.dumps(mapfile))
+
+# END OF API EXAMPLE
+
+'''
+cfg = """
+  CONFIG "PROJ_LIB" "../../bin/proj/SHARE"
+  CONFIG "PROJ_DEBUG" "OFF"
+  CONFIG "ON_MISSING_DATA" "IGNORE"
+"""
+
+cfg = mappyfile.loads(cfg)
+
 
 md = """METADATA
             'wms_enable_request' '*'
@@ -30,8 +56,6 @@ md = """METADATA
         END"""
 
 md = mappyfile.loads(md)
-mapfile["web"]["metadata"] = md
-print(mappyfile.dumps(mapfile))
+'''
 
 
-# END OF API EXAMPLE
