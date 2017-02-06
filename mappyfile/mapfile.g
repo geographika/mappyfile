@@ -10,7 +10,7 @@ composite_body: composite_item* ;
 points: POINTS NL+ (num_pair NL*)* END
       | POINTS num_pair* END
       ;
-pattern: PATTERN int_pair* END;
+pattern: PATTERN num_pair* END;
 
 projection: PROJECTION NL+ ((string NL*)+|AUTO NL+) END;
 metadata: METADATA NL+ ((string_pair|attr) NL+)+ END;
