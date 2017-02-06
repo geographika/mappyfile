@@ -40,6 +40,14 @@ Mapfile Notes
       PROCESSING "CONTOUR_ITEM=elevation"
       PROCESSING "CONTOUR_INTERVAL=20"
 
+* Key-double-value lists. As above but there are two strings for each directive. 
+
+  .. code-block:: mapfile
+  
+        CONFIG MS_ERRORFILE "stderr"
+        CONFIG "PROJ_DEBUG" "OFF"
+        CONFIG "ON_MISSING_DATA" "IGNORE"
+
 * Composite types- container declarations which finish with the
   keyword END. Examples:
     
