@@ -5,11 +5,19 @@ class PrettyPrinter(object):
         """
         Option use "\t" for spacer with an indent of 1
         """
+
+        assert (quote == "'" or quote == '"')
+
         self.indent = indent
         self.spacer = spacer * self.indent
         self.newlinechar = newlinechar
         self.quote = quote
         self.end = u"END"
+
+        if self.quote == "'":
+            self.altquote = '"'
+        else:
+            self.altquote = "'"
 
     def whitespace(self, level, indent):
 
@@ -28,6 +36,10 @@ class PrettyPrinter(object):
             return True
         else:
             return False
+
+    def all_keywords(self):
+
+        return COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
 
     def process_dict(self, key, d, level):
 
@@ -85,13 +97,23 @@ class PrettyPrinter(object):
 
         return s
 
+    def format_attribute(self, val):
+
+        if self.in_quotes(val):
+            val = self.standardise_quotes(val)
+        else:
+            val = self.add_quotes(val)
+
+        return self.format_value(val)
+
     def format_value(self, val):
         """
         Print out a string
         """
-        
-        #val = str(val)
 
+        if isinstance(val, (unicode, str)):
+            val = self.standardise_quotes(val)
+        
         try:
             val = unicode(val)
         except UnicodeDecodeError:
@@ -101,13 +123,23 @@ class PrettyPrinter(object):
 
         return val
 
+    def add_quotes(self, val):
+        return "%s%s%s" % (self.quote, val, self.quote)
+
     def in_quotes(self, val):
 
-        if (val.startswith('"') and val.endswith('"')) \
-            or  (val.startswith("'") and val.endswith("'")):
+        if (val.startswith(self.quote) and val.endswith(self.quote)) \
+            or  (val.startswith(self.altquote) and val.endswith(self.altquote)):
             return True
         else:
             return False
+
+    def standardise_quotes(self, val):
+
+        if val.startswith(self.altquote) and val.endswith(self.altquote):
+            val = "%s%s%s"  % (self.quote, val[1:-1], self.quote)
+
+        return val
 
     def format_key(self, key):
         """
@@ -115,12 +147,13 @@ class PrettyPrinter(object):
         Otherwise do not modify input
         """
 
-        #key = str(key)
-
-        if self.in_quotes(key): # QuotedString
+        if self.in_quotes(key):
             key = self.format_value(key) 
         else:
-            key = self.format_value(key.upper())
+            if key in self.all_keywords():
+                key = self.format_value(key.upper())
+            else:
+                key = self.format_value(self.add_quotes(key.lower()))
 
         return key
 
@@ -147,9 +180,7 @@ class PrettyPrinter(object):
         values are a list
         """
 
-        keywords = COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
-
-        if key not in keywords and isinstance(val, list):
+        if key not in self.all_keywords() and isinstance(val, list):
             return True
         else:
             return False
@@ -162,7 +193,9 @@ class PrettyPrinter(object):
         return self.newlinechar.join(lines)
 
     def _format(self, composite, level=0):
-
+        """
+        TODO Refactor this and create functions for each unique type
+        """
         lines = []
         if isinstance(composite, dict) and  '__type__' in composite.keys():
             type_ = composite['__type__']
@@ -195,7 +228,10 @@ class PrettyPrinter(object):
                 if key in SINGLETON_COMPOSITE_NAMES:
                     lines += self.process_dict(key, value, level)
                 elif isinstance(value, dict): 
-                    for v in value:
+                    if key == "config":
+                        # config declaration allows for pairs of values
+                        value = ["%s %s" % (self.format_key(k), self.format_attribute(v)) for k,v in value.items()]
+                    for v in value:                        
                         lines.append(self.format_line(self.whitespace(level, 1), key, v))
                 elif isinstance(value, list):
                     lines += self.process_list(key, value, level)
