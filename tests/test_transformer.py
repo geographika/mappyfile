@@ -70,7 +70,7 @@ def main():
 
         output_file = fn.replace(".map", ".tmp.map")
 
-        map_file = mappyfile.utils.save(map_string, output_file)
+        map_file = mappyfile.utils.dump(d, output_file)
 
         utils.create_image_from_map(map_file) # fn for original map
 

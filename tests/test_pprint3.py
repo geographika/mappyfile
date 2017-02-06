@@ -41,7 +41,7 @@ def test():
     pp = PrettyPrinter()
     print pp.pprint(d)
 
-    d = sample_dict.d4
+    #d = sample_dict.d4
 
 
 
