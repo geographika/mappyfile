@@ -2,6 +2,7 @@ start: NL* composite NL*;
 
 composite: composite_type attr? NL+ composite_body END
        | composite_type points END
+       | composite_type pattern END
        | composite_type attr END
        ;
 composite_body: composite_item* ;
@@ -17,8 +18,8 @@ pattern: PATTERN NL+ (num_pair NL*)* END
 projection: PROJECTION NL+ ((string NL*)+|AUTO NL+) END;
 metadata: METADATA NL+ ((string_pair|attr) NL+)+ END;
 values: VALUES NL+ ((string_pair) NL+)+ END;
-validation: VALIDATION NL+ ((attr NL+)+|(string NL*)+) END;
 
+validation: VALIDATION NL+ ((string_pair|attr) NL+)+ END;
 
 attr: attr_name value+;
 
