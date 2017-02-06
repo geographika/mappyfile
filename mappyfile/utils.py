@@ -2,18 +2,22 @@ from mappyfile.parser import Parser
 from mappyfile.transformer import MapFile2Dict__Transformer
 from mappyfile.pprint import PrettyPrinter
 
+import os
 import codecs
 
 def load(fn):
-    p = Parser()
+
+    cwd = os.path.dirname(fn)
+
+    p = Parser(cwd=cwd)
     ast = p.parse_file(fn)
     m = MapFile2Dict__Transformer()
     d = m.transform(ast)
 
     return d    
 
-def loads(s):
-    p = Parser()
+def loads(s, cwd=None):
+    p = Parser(cwd=cwd)
     ast = p.parse(s)
     m = MapFile2Dict__Transformer()
     d = m.transform(ast)
