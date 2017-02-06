@@ -1,5 +1,5 @@
 from mappyfile.parser import Parser
-from mappyfile.transformer import MapFile2Dict__Transformer
+from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 
 import os
@@ -9,7 +9,7 @@ def load(fn, cwd=None):
 
     p = Parser(cwd=cwd)
     ast = p.parse_file(fn)
-    m = MapFile2Dict__Transformer()
+    m = MapfileToDict()
     d = m.transform(ast)
 
     return d    
@@ -17,12 +17,12 @@ def load(fn, cwd=None):
 def loads(s, cwd=None):
     p = Parser(cwd=cwd)
     ast = p.parse(s)
-    m = MapFile2Dict__Transformer()
+    m = MapfileToDict()
     d = m.transform(ast)
 
     return d   
 
-def dump(d, output_file):
+def write(d, output_file):
 
     map_string = _pprint(d)
     _save(output_file, map_string)
