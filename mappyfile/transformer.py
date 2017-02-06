@@ -4,17 +4,9 @@ Python dict structure
 """
 
 from collections import defaultdict, OrderedDict
-
 from plyplus import STransformer, is_stree
-
-from tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
-
-from collections import OrderedDict, defaultdict
-
-import mappyfile
-from mappyfile.parser import Parser
+from mappyfile.tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
 from mappyfile.ordereddict import DefaultOrderedDict
-import os
 
 def plural(s):
 
@@ -42,7 +34,7 @@ def dict_from_tail(t):
             raise ValueError("Unsupported block '%s'", str(v))
     return d
 
-class MapFile2Dict__Transformer(STransformer):
+class MapfileToDict(STransformer):
 
     def __init__(self, cwd=None):
         self.cwd = cwd
@@ -79,21 +71,25 @@ class MapFile2Dict__Transformer(STransformer):
         composites = DefaultOrderedDict(list)
         #composites = defaultdict(list)
 
-        d = OrderedDict()
+        d = DefaultOrderedDict(OrderedDict)
+        #d = OrderedDict()
 
         for itemtype, k, v in body:          
             
             if itemtype == 'attr':
 
+                # TODO tidy-up the code below
                 if k == 'processing':
                     # PROCESSING can be repeated
-                    # maybe should be a composite?
                     if 'processing' not in d.keys():
                         d[k] = [v]
                     else:
                         d[k].append(v)
-                #elif k == 'include':
-                #    pass
+                elif k == 'config':
+                    # CONFIG can be repeated, but with pairs of strings as a value
+                    if 'config' not in d.keys():
+                        d[k] = OrderedDict()
+                    d[k][v[0]] = v[1]
                 else:
                     d[k] = v
 
@@ -188,7 +184,7 @@ class MapFile2Dict__Transformer(STransformer):
         x ,= t.tail
         return "[%s]" % x
 
-
+    # basic types
 
     def int(self, t):
         x ,= t.tail
