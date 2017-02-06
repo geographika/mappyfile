@@ -30,16 +30,16 @@ class Parser(object):
                     l = l[:l.index('#')]
 
                 parts = [p for p in l.split()]
+
                 assert (len(parts) == 2)
                 assert (parts[0].lower() == 'include')
                 fn = os.path.join(self.cwd, self.strip_quotes(parts[1]))
-                include_text = self.open_file(fn) + '\n'
+                include_text = self.open_file(fn)
                 # recursively load any further includes
-                include_text += self.load_includes(include_text)
-                includes[idx] = include_text
+                includes[idx] = self.load_includes(include_text)
     
         for idx, txt in includes.items():
-            lines.pop(idx) # remove the original include
+            rm = lines.pop(idx) # remove the original include
             lines.insert(idx, txt)
 
         return '\n'.join(lines)
@@ -48,6 +48,10 @@ class Parser(object):
         return open(fn, "r", encoding="utf-8").read() # specify unicode for Python 2.7
 
     def parse_file(self, fn):
+
+        if not self.cwd:
+            self.cwd = os.path.dirname(fn)
+
         text = self.open_file(fn)
         return self.parse(text)
 
@@ -56,11 +60,13 @@ class Parser(object):
         if self.expand_includes:
             text = self.load_includes(text)
 
+        text += '\n'
+
         if self.try_ply:
             try:
-                return self.ply_g.parse(text+'\n')
+                return self.ply_g.parse(text)
             except ParseError as ex:
                 logging.exception(ex)
                 pass
 
-        return self.g.parse(text+'\n')
+        return self.g.parse(text)
