@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_parser.py</StartupFile>
+    <StartupFile>tests\test_integration.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -47,14 +47,14 @@
     <Content Include="docs\.gitignore" />
     <Content Include="docs\examples\raster.map" />
     <Content Include="docs\images\banner.png" />
-    <Content Include="docs\images\calling_popen.png" />
+    <Content Include="docs\images\class_parsed.png" />
+    <Content Include="docs\images\layer_parsed.png" />
     <Content Include="docs\images\roll-36697_1280.png" />
     <Content Include="docs\images\roll-36697_640.png" />
     <Content Include="docs\index.rst" />
     <Content Include="docs\make.bat" />
     <Content Include="docs\Makefile" />
     <Content Include="docs\mapfile.rst" />
-    <Content Include="docs\maplexer.l" />
     <Content Include="docs\parser.rst" />
     <Content Include="docs\pretty_printing.rst" />
     <Content Include="docs\sample_dict.json">
@@ -112,13 +112,10 @@
     <Content Include="requirements.txt" />
     <Content Include="tests\errors.log" />
     <Content Include="tests\issues.txt" />
-    <Content Include="tests\new_c_comments.map" />
+    <Content Include="tests\samples\new_c_comments.map" />
     <Content Include="tests\samples\include3.map" />
     <Content Include="tests\samples\include2.map" />
     <Content Include="tests\samples\include1.map" />
-    <Content Include="tests\sample_dict.py">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="tests\sample_maps\256color_overdose.map" />
     <Content Include="tests\sample_maps\256color_overdose_cmt.map" />
     <Content Include="tests\sample_maps\256color_overdose_res.map" />
@@ -424,8 +421,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="docs\conf.py" />
-    <Compile Include="docs\dict_example.py" />
     <Compile Include="docs\examples\adding_values.py" />
+    <Compile Include="docs\examples\create_diagram.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="docs\examples\modifying_values.py" />
     <Compile Include="docs\examples\accessing_values.py">
       <SubType>Code</SubType>
@@ -437,7 +436,6 @@
     <Compile Include="mappyfile\parser.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="mappyfile\test.py" />
     <Compile Include="mappyfile\tokens.py" />
     <Compile Include="mappyfile\transformer.py">
       <SubType>Code</SubType>
@@ -447,23 +445,16 @@
     </Compile>
     <Compile Include="mappyfile\__init__.py" />
     <Compile Include="setup.py" />
-    <Compile Include="tests\helper.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="tests\point_vector.py">
+    <Compile Include="tests\test_integration.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_parser.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="tests\sample_maps_downloader.py" />
-    <Compile Include="tests\test_pprint3.py" />
-    <Compile Include="tests\test_pprint2.py" />
+    <Compile Include="tests\maps_downloader.py" />
     <Compile Include="tests\test_pprint.py" />
+    <Compile Include="tests\test_end_to_end.py" />
     <Compile Include="tests\test_transformer.py" />
-    <Compile Include="tests\utils.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
