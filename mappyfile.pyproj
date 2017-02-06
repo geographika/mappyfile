@@ -109,6 +109,7 @@
     <Content Include="requirements-dev.txt" />
     <Content Include="requirements.txt" />
     <Content Include="tests\errors.log" />
+    <Content Include="tests\issues.txt" />
     <Content Include="tests\new_c_comments.map" />
     <Content Include="tests\sample_dict.py">
       <SubType>Code</SubType>
