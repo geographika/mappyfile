@@ -5,7 +5,7 @@ MAP
     # START WEB METADATA
     WEB
         METADATA
-            "wms_enable_request"  "*"
+            'wms_enable_request'  '*'
             'wms_feature_info_mime_type' 'text/html' # this is required to return the content-type for GetFeatureInfo requests       
         END
     END
