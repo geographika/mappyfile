@@ -28,10 +28,10 @@ def create_image_from_map(map_file):
 
     p = Popen(params, stdout=PIPE, bufsize=1)
     with p.stdout:
-        print map_file
+        print(map_file)
         #logging.info("Messages for %s", map_file)
         for line in iter(p.stdout.readline, b''):
-            print line,
+            print(line,)
 
     p.wait() # wait for the subprocess to exit
 
@@ -69,10 +69,10 @@ def main():
             raise
         
         #dpp = pprint.PrettyPrinter()
-        #print dpp.pprint(d)
+        #print(dpp.pprint(d))
 
         map_string = pp.pprint(d)
-        #print map_string
+        #print(map_string)
 
         output_file = fn.replace(".map", ".tmp.map")
         mf = mappyfile.utils.write(d, output_file)
