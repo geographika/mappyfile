@@ -32,11 +32,11 @@ mappyfile assumes knowledge of the Mapfile format - a `domain specific language 
 by MapServer to generate map images. mappyfile is a possible alternative to using MapScript. The definitions of these from the 
 `MapServer glossary <http://mapserver.org/el/glossary.html>`_ are shown below:
 
-**Mapfile** Mapfile is the declarative language that MapServer uses to define data connections, 
+**Mapfile** is the declarative language that MapServer uses to define data connections, 
 map styling, templating, and server directives. Its format is xml-like and hierarchical, 
 with closing END tags, but the format is not xml.
 
-**MapScript** - MapScript is an alternative the the CGI application of mapserv that allows you to 
+**MapScript** is an alternative to the CGI application of mapserv that allows you to 
 program the MapServer object API in many languages.
 
 Why?
