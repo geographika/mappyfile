@@ -1,3 +1,8 @@
+import sys
+is_python3 = sys.version_info.major == 3
+if is_python3:
+    unicode = str
+    
 from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES
 
 class PrettyPrinter(object):
