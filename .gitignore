@@ -4,4 +4,8 @@
 *.pyc
 cache
 /Notes.ignore.txt
-.pypirc
+/.pypirc
+/build/*
+/dist/*
+/mappyfile.egg-info/*
+/prospector.log
