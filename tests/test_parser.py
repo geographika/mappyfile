@@ -1,9 +1,19 @@
 import os
 import pytest
 from mappyfile.parser import Parser
+from mappyfile.pprint import PrettyPrinter
 import mappyfile
 from mappyfile.transformer import MapfileToDict
 
+def output(s):
+    p = Parser()
+    m = MapfileToDict()
+    
+    ast = p.parse(s)
+    print(ast)
+    d = m.transform(ast)
+    pp = PrettyPrinter(indent=0, newlinechar=" ")
+    return pp.pprint(d)
 
 def test_all_maps():
 
@@ -24,15 +34,35 @@ def test_includes():
     d = (m.transform(ast)) # works
     print(mappyfile.dumps(d))
      
+def test_layer():
 
+    s = """LAYER NAME 'Test' END"""
+
+    assert(output(s) == s)
+
+def test_class():
+
+    s = """CLASS NAME 'Test' END"""
+
+    assert(output(s) == s)
+
+def xtest_metadata():
+    """
+    Cannot parse metadata directly
+    """
+    s = """METADATA 'wms_title' 'Test simple wms' END"""
+
+    assert(output(s) == s)
+  
 def run_tests():        
-    pytest.main(["tests/test_parser.py::test_parse_style"])
-    #pytest.main(["tests/test_parser.py::test_all_maps"])
+    #pytest.main(["tests/test_parser.py::test_parse_style"])
+    pytest.main(["tests/test_parser.py::test_metadata"])
     #pytest.main(["tests/test_parser.py"])
 
 if __name__ == '__main__':
 
-    #run_tests()
+    run_tests()
     #test_parse_style()
     #test_all_maps()
-    test_includes()
+    #test_includes()
+    #test_metadata()
