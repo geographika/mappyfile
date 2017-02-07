@@ -1,6 +1,8 @@
 Parsing
 =======
 
+mappyfile uses plyplus as the parsing engine. 
+
 #. A new ``mapfile.g`` plyplus grammar file will be created.
 #. This should be tested to work with all the available test case sample maps (see :ref:`testing` section below).
 

@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_integration.py</StartupFile>
+    <StartupFile>docs\examples\sample_json.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -45,7 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="docs\.gitignore" />
+    <Content Include="docs\examples\after.map" />
+    <Content Include="docs\examples\before.map" />
     <Content Include="docs\examples\raster.map" />
+    <Content Include="docs\examples\sample.json" />
     <Content Include="docs\images\banner.png" />
     <Content Include="docs\images\class_parsed.png" />
     <Content Include="docs\images\layer_parsed.png" />
@@ -427,6 +430,12 @@
     </Compile>
     <Compile Include="docs\examples\modifying_values.py" />
     <Compile Include="docs\examples\accessing_values.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="docs\examples\pretty_printing.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="docs\examples\sample_json.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\ordereddict.py">

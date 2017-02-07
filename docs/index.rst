@@ -109,20 +109,7 @@ Adding a new class to a layer:
    :language: python
    :start-after: # START OF ADD CLASS EXAMPLE
    :end-before: # END OF ADD CLASS EXAMPLE
-
-Multiple objects can also be parsed and inserted: 
-
-.. literalinclude:: examples/adding_values.py
-   :language: python
-   :start-after: # START OF MULTIPLE ADD EXAMPLE
-   :end-before: # END OF MULTIPLE ADD EXAMPLE
-    
-Hierarchy
-+++++++++
-
-Once a Mapfile can be parsed a nice diagram showing the full structure of a Mapfile can be generated similar to the one at https://github.com/erezsh/plyplus#working-with-the-python-ast-using-the-builtin-python-grammar:
-
-
+   
 .. _testing:
 
 Testing
@@ -137,7 +124,8 @@ Testing - there are many sample Mapfiles available in the testing suite of MapSe
 
 These have been downloaded and added to the ``/tests`` folder. This folder also contains a script to download these files again in the future.
 
-https://tox.readthedocs.io/en/latest/
+..
+    https://tox.readthedocs.io/en/latest/
 
 ..
     http://stackoverflow.com/questions/600079/how-do-i-clone-a-subdirectory-only-of-a-git-repository

@@ -1,6 +1,8 @@
 Mapfile Notes
 =============
 
+This page details the various types of declaration found in a Mapfile. 
+
 * Quoted strings. Used for quoted property values e.g.
 
   .. code-block:: mapfile
