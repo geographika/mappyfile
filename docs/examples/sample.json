@@ -1,0 +1,42 @@
+{
+    "extent": [
+        -180, 
+        -90, 
+        180, 
+        90
+    ], 
+    "name": "'MyMap'", 
+    "web": {
+        "metadata": {
+            "'wms_enable_request'": "'*'", 
+            "'wms_feature_info_mime_type'": "'text/html'"
+        }, 
+        "__type__": "web"
+    }, 
+    "projections": [
+        [
+            "\"init=epsg:4326\""
+        ]
+    ], 
+    "layers": [
+        {
+            "processing": [
+                "'BANDS=1'", 
+                "'CONTOUR_ITEM=elevation'", 
+                "'CONTOUR_INTERVAL=20'"
+            ], 
+            "extent": [
+                -180, 
+                -90, 
+                180, 
+                90
+            ], 
+            "name": "'rgb'", 
+            "type": "RASTER", 
+            "data": "'../data/raster/bluemarble.tif'", 
+            "template": "'raster.template.html'", 
+            "__type__": "layer"
+        }
+    ], 
+    "__type__": "map"
+}

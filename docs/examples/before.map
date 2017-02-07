@@ -1,0 +1,28 @@
+map
+/**
+Some comments
+*/
+            EXTENT -180 -90 180 90    
+    NAME "MyMap"
+    WEB
+metadata
+'wms_enable_request'  '*'
+'wms_feature_info_mime_type' 'text/html' # this is required to return the content-type for GetFeatureInfo requests       
+END
+    END
+
+PROJECTION
+"init=epsg:4326"
+END
+ # START OF THE LAYER DEFINITION
+    LAYER
+    PROCESSING 'BANDS=1'
+        PROCESSING 'CONTOUR_ITEM=elevation'
+    PROCESSING 'CONTOUR_INTERVAL=20'
+     EXTENT -180 -90 180 90 # set this here as it is not stored in the image
+     NAME "rgb"
+        TYPE RASTER
+     DATA '../data/raster/bluemarble.tif' 
+     TEMPLATE 'raster.template.html'    
+    END    
+END
