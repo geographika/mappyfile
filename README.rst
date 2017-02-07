@@ -1,7 +1,7 @@
 mappyfile
 =========
 
-A pure Python MapFile parser for working with MapServer, built using 'plyplus <https://github.com/erezsh/plyplus>_ and 'PLY <http://www.dabeaz.com/ply/>_
+A pure Python MapFile parser for working with MapServer, built using `plyplus <https://github.com/erezsh/plyplus>_ and `PLY <http://www.dabeaz.com/ply/>_
 
 .. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/class_parsed.png   
 
