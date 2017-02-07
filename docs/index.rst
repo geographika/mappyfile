@@ -3,7 +3,7 @@
 
 A Python library to create, parse, and modify `MapServer <http://mapserver.org/documentation.html>`_ Mapfiles. 
 
-+ Python 2 and Python 3 compatible
++ Python 2 and 3 compatible
 + Pure Python - no MapServer dependencies
 
 .. toctree::
@@ -43,7 +43,7 @@ Why?
 MapScript "bindings" are available in several different languages thanks to SWIG - which creates wrapper 
 code for C. 
 
-Sean Gillies was the MapScript maintaner for several years (until 2006). A couple of his last blog
+Sean Gillies was the MapScript maintainer for several years (until 2006). A couple of his last blog
 posts on MapScript make a strong case for working with Mapfiles rather than MapScript. 
 
 	*"Cease, or at the very least, minimize your use of MapServer's various language bindings. 
