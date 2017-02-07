@@ -22,6 +22,16 @@ A Python library to create, parse, and modify `MapServer <http://mapserver.org/d
 What is mappyfile?
 ------------------
 
+mappyfile takes a Mapfile as input and parses it into an `Abstract syntax tree (AST) <https://en.wikipedia.org/wiki/Abstract_syntax_tree>`_ 
+using `plyplus <https://github.com/erezsh/plyplus>`_ which in turn is built on `PLY <http://www.dabeaz.com/ply/>`_. 
+mappyfile can then transform the AST into a dictionary structure, containing keys, values, dicts, and lists familiar to
+Python programmers. This structure can be edited directly. Alternatively new objects can be added by parsing further Mapfile text and inserting into the 
+dictionary structure. mappyfile also includes a "pretty printer" to export this dictionary structure back to a Mapfile. 
+
+mappyfile assumes knowledge of the Mapfile format - a `domain specific language (DSL) <https://en.wikipedia.org/wiki/Domain-specific_language>`_ used
+by MapServer to generate map images. mappyfile is a possible alternative to using MapScript. The definitions of these from the 
+`MapServer glossary <http://mapserver.org/el/glossary.html>`_ are shown below:
+
 **Mapfile** Mapfile is the declarative language that MapServer uses to define data connections, 
 map styling, templating, and server directives. Its format is xml-like and hierarchical, 
 with closing END tags, but the format is not xml.
@@ -29,22 +39,29 @@ with closing END tags, but the format is not xml.
 **MapScript** - MapScript is an alternative the the CGI application of mapserv that allows you to 
 program the MapServer object API in many languages.
 
-http://mapserver.org/el/glossary.html
+Why?
+----
 
-Example use cases:
+Some example use cases are:
 
 * Easily generate development, staging, and production Mapfiles from the same source
 * Create Mapfiles for different datasets from the same source
 * Create, manipulate, and test Mapfiles from within Python
 
-Why?
-----
+The current alternative to building applications with MapServer is to use MapScript. This approach has a
+number of issues that resulted in the development of mappyfile:
 
-MapScript "bindings" are available in several different languages thanks to SWIG - which creates wrapper 
-code for C. 
++ When running on Windows any Python libraries using C/C++ require them to be built with the MS C/C++ VS2008 compiler, this means no applications using MapScript
+  can take advantage of performance improvements in the MS C/C++ 2015 compiler
++ You need to create an empty log file or MapServer won't open the map
++ MapScript is not available through PyPI - the last version was uploaded in 2010 - https://pypi.python.org/pypi/mapscript/5.6.3.0
++ It is necessary to set the working directory so that MapServer includes are found (this also applies to mappyfile, but there is no need to os.chdir
+  and change the working directory for your script or application)
++ The MapScript API is not particularly "Pythonic"
 
-Sean Gillies was the MapScript maintainer for several years (until 2006). A couple of his last blog
-posts on MapScript make a strong case for working with Mapfiles rather than MapScript. 
+One key difference is that mappyfile only deals with text, so you cannot retrieve features or connect to databases through layers as you can with MapScript. 
+mappyfile's approach is to build a Mapfile that then uses the mapserv program to handle these requirements. This design was influenced by Sean Gillies,
+the MapScript maintainer for several years (until 2006). A couple of his last blog posts on MapScript make a strong case for working with Mapfiles rather than MapScript:  
 
 	*"Cease, or at the very least, minimize your use of MapServer's various language bindings. 
 	Instead, embrace MapServer's domain-specific language (DSL) and write more of the declarative 
@@ -53,15 +70,14 @@ posts on MapScript make a strong case for working with Mapfiles rather than MapS
 
 	Sean Gillies - `Stop using MapScript`_
 
-A later post listed the benefits of this approach. 
+A later post listed the benefits of this approach:
 
 	*"the instructions encoded in a MapServer mapfile comprise a domain-specific language..
 	to embrace the map language is to benefit from simplicity, usability, and portability."*
 
 	Sean Gillies - `Declarative Maps`_
 
-The concept of the Mapfile as a DSL has been implemented a few times. A Python
-`Mapfile builder`_ written by Norman Vine used an XML approach.
+The concept of the Mapfile as a DSL has been implemented a few times. A Python `Mapfile builder`_ written by Norman Vine used an XML approach.
 
 More recently the Node module `node-mapserv`_ provides support for declarative mapfile programming. 
 As the author notes: 
@@ -71,13 +87,14 @@ As the author notes:
 	using mapscript can be done declaratively by custom generating new mapfiles and tweaking 
 	existing mapfiles*
 
+As an interesting footnote the MapScript "bindings" are available in several different languages thanks to `SWIG <https://en.wikipedia.org/wiki/SWIG>`_ which creates wrapper 
+code for C. SWIG was developed by `David Beazley <http://www.dabeaz.com/>`_, who then later built `PLY <http://www.dabeaz.com/ply/>`_ on which mappyfile is based. 
+PLY is an implementation of lex and yacc parsing tools for Python - the tools MapServer itself uses to parse Mapfiles in C. 
+
 API Examples
 ------------
 
-This section details the proposed use of the ``mappyfile`` library. The API will be similar to Python's `configparser API <https://docs.python.org/3/library/configparser.html#mapping-protocol-access>`_. 
-
-+ all keys will be lower case
-+ all values will be returned as strings by default from the parsing (assume this is the case, or could convert integers etc.)
+This section details the basic use of the ``mappyfile`` library. 
 
 Accessing Values
 ++++++++++++++++
