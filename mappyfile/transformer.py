@@ -169,6 +169,13 @@ class MapfileToDict(STransformer):
         x ,= t.tail
         return x
 
+    def regexp(self, t):
+        """
+        E.g. regexp(u'/^[0-9]*$/')
+        """
+        x ,= t.tail
+        return x
+
     # for functions
 
     def func_call(self, t):
