@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='mappyfile',
-      version='0.1.0',
+      version='0.1.2',
       description='A pure Python MapFile parser for working with MapServer',
       long_description=readme(),
       classifiers=[
