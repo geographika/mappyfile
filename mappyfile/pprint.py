@@ -4,6 +4,10 @@ if is_python3:
     unicode = str
     
 from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES
+from itertools import izip
+
+ALL_KEYWORDS = COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
+
 
 class PrettyPrinter(object):
     def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n"):
@@ -35,16 +39,22 @@ class PrettyPrinter(object):
             return s[:-2]
         return s[:-1]
 
+    def is_paired_list(self, key):
+        """
+        Temporary workaround for POINT and PATTERNS which currently must have
+        pairs on the same line
+        """
+        if key in ('pattern','points'):
+            return True
+        else:
+            return False
+
     def is_block_list(self, lst):
 
         if len(lst) == 1 and isinstance(lst[0], list):
             return True
         else:
             return False
-
-    def all_keywords(self):
-
-        return COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
 
     def process_dict(self, key, d, level):
 
@@ -72,10 +82,10 @@ class PrettyPrinter(object):
             # add KEYWORD to signify start of block
             lines.append(spacer + self.format_key(key))
             list_spacer = self.spacer * (level + 2)
-            s = self.format_list(lst[0], list_spacer)
+            s = self.format_list(key, lst[0], list_spacer)
             lines.append(s)
         else:
-            # put all values on same line
+            # put all parts on same line
             if key == 'processing':
                 for v in lst:
                     lines.append(self.format_line(spacer, key, v))
@@ -92,12 +102,17 @@ class PrettyPrinter(object):
         return lines
 
 
-    def format_list(self, val, spacer):
+    def format_list(self, key, val, spacer):
         """
         Print out a list of values
         """
+        vals = map(str, val)
 
-        vals = map(str, val)  
+        if self.is_paired_list(key):
+            # join the values together so each line has a pair
+            vals = zip(vals[::2], vals[1::2])
+            vals = ["%s %s" % (v[0], v[1]) for v in vals]
+        
         s = self.newlinechar.join([spacer + v for v in vals])
 
         return s
@@ -155,7 +170,7 @@ class PrettyPrinter(object):
         if self.in_quotes(key):
             key = self.format_value(key) 
         else:
-            if key in self.all_keywords():
+            if key in ALL_KEYWORDS:
                 key = self.format_value(key.upper())
             else:
                 key = self.format_value(self.add_quotes(key.lower()))
@@ -185,7 +200,7 @@ class PrettyPrinter(object):
         values are a list
         """
 
-        if key not in self.all_keywords() and isinstance(val, list):
+        if key not in ALL_KEYWORDS and isinstance(val, list):
             return True
         else:
             return False
