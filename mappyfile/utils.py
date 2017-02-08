@@ -20,9 +20,9 @@ def loads(s, cwd=None):
 
     return d   
 
-def write(d, output_file):
+def write(d, output_file, indent=4):
 
-    map_string = _pprint(d)
+    map_string = _pprint(d, indent)
     _save(output_file, map_string)
 
     return output_file
@@ -31,7 +31,10 @@ def dumps(d):
     return _pprint(d)
 
 def find(lst, key, value):
-
+    """
+    When looking for an item by value also check for the value 
+    surrounded by apostrophes
+    """
     obj = __find__(lst, key, value)
 
     if not obj:
@@ -52,6 +55,6 @@ def _save(output_file, map_string):
     with codecs.open(output_file, "w", encoding="utf-8") as f:
         f.write(map_string)
 
-def _pprint(d):
-    pp = PrettyPrinter()
+def _pprint(d, indent):
+    pp = PrettyPrinter(indent=indent)
     return pp.pprint(d)
