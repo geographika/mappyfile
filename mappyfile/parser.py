@@ -4,7 +4,7 @@ from plyplus import Grammar, ParseError
 
 class Parser(object):
 
-    def __init__(self, try_ply=True, cwd=None, expand_includes=True):
+    def __init__(self, try_ply=False, cwd=None, expand_includes=True):
         self.try_ply = try_ply
         self.cwd = cwd
         self.expand_includes = True
