@@ -6,7 +6,7 @@ if is_python3:
 from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES
 
 class PrettyPrinter(object):
-    def __init__(self, indent=4, spacer=" ", quote="'", newlinechar="\n"):
+    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         """
         Option use "\t" for spacer with an indent of 1
         """
