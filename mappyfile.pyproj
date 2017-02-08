@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_parser.py</StartupFile>
+    <StartupFile>tests\test_pprint.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -47,12 +47,14 @@
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
     <Content Include="docs\.gitignore" />
+    <Content Include="docs\converting_from_mapscript.rst" />
     <Content Include="docs\examples\after.map" />
     <Content Include="docs\examples\before.map" />
     <Content Include="docs\examples\raster.map" />
     <Content Include="docs\examples\sample.json" />
     <Content Include="docs\images\banner.png" />
     <Content Include="docs\images\class_parsed.png" />
+    <Content Include="docs\images\class_parsed_small.png" />
     <Content Include="docs\images\layer_parsed.png" />
     <Content Include="docs\images\roll-36697_1280.png" />
     <Content Include="docs\images\roll-36697_640.png" />
@@ -61,6 +63,7 @@
     <Content Include="docs\Makefile" />
     <Content Include="docs\mapfile.rst" />
     <Content Include="docs\parser.rst" />
+    <Content Include="docs\performance.rst" />
     <Content Include="docs\pretty_printing.rst" />
     <Content Include="docs\sample_dict.json">
       <SubType>Code</SubType>
