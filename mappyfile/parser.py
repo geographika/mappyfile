@@ -1,6 +1,7 @@
 import os, logging
 from io import open
-from plyplus import Grammar, ParseError
+# from plyplus import Grammar, ParseError
+from lark import Lark
 
 class Parser(object):
 
@@ -9,12 +10,10 @@ class Parser(object):
         self.cwd = cwd
         self.expand_includes = True
 
-        gf = os.path.join(os.path.dirname(__file__), "mapfile.g")
+        gf = os.path.join(os.path.dirname(__file__), "mapfile_lark.g")
         grammar_text = open(gf).read()
 
-        self.g = Grammar(grammar_text, engine='pearley')
-        if self.try_ply:
-            self.ply_g = Grammar(grammar_text, engine='ply')
+        self.g = Lark(grammar_text, parser='earley', lexer='standard')
 
     def strip_quotes(self, s):
         return s.strip("'").strip('"')
@@ -56,16 +55,17 @@ class Parser(object):
 
     def parse(self, text):
 
-        if self.expand_includes:
-            text = self.load_includes(text)
+#         if self.expand_includes:
+#             text = self.load_includes(text)
 
-        text += '\n'
+#         text += '\n'
 
-        if self.try_ply:
-            try:
-                return self.ply_g.parse(text)
-            except ParseError as ex:
-                #logging.exception(ex)
-                pass
+#         if self.try_ply:
+#             try:
+#                 return self.ply_g.parse(text)
+#             except ParseError as ex:
+#                 #logging.exception(ex)
+#                 pass
 
-        return self.g.parse(text)
+#         return self.g.parse(text)
+        return self.g.parse(text+'\n')
