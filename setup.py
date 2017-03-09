@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='mappyfile',
-      version='0.1.2',
+      version='0.1.3',
       description='A pure Python MapFile parser for working with MapServer',
       long_description=readme(),
       classifiers=[
@@ -21,6 +21,9 @@ setup(name='mappyfile',
         'Topic :: Text Processing :: Linguistic',
         'Topic :: Software Development :: Build Tools'
       ],
+      package_data = {
+        '': ['*.g']
+      },
       url='http://github.com/geographika/mappyfile',
       author='Seth Girvin',
       author_email='sethg@geographika.co.uk',
