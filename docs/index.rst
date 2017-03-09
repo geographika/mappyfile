@@ -53,7 +53,7 @@ number of issues that resulted in the development of mappyfile:
 
 + When running on Windows any Python libraries using C/C++ require them to be built with the MS C/C++ VS2008 compiler, this means no applications using MapScript
   can take advantage of performance improvements in the MS C/C++ 2015 compiler
-+ You need to create an empty log file or MapServer won't open the map
++ You need to create an empty log file or MapServer won't open the map (or get "msSetErrorFile(): General error message. Failed to open MS_ERRORFILE" errors)
 + MapScript is not available through PyPI - the last version was uploaded in 2010 - https://pypi.python.org/pypi/mapscript/5.6.3.0
 + It is necessary to set the working directory so that MapServer includes are found (this also applies to mappyfile, but there is no need to os.chdir
   and change the working directory for your script or application)
@@ -150,6 +150,7 @@ These have been downloaded and added to the ``/tests`` folder. This folder also 
 Future Development
 ------------------
 
++ Normalise apostrophes on input to make searching for values easier
 + Enable MapServer to accept a "Mapfile" as a stream: https://github.com/mapserver/mapserver/issues/4031
 + Read MapFiles from URLs
 
