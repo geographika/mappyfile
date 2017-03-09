@@ -36,9 +36,6 @@ def dict_from_tail(t):
 
 class MapfileToDict(STransformer):
 
-    def __init__(self, cwd=None):
-        self.cwd = cwd
-
     def start(self, t):
         t ,= t.tail
         assert t[0] == 'composite'
