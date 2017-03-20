@@ -170,7 +170,7 @@ class PrettyPrinter(object):
         if self.in_quotes(key):
             key = self.format_value(key) 
         else:
-            if key in ALL_KEYWORDS:
+            if key.lower() in ALL_KEYWORDS:
                 key = self.format_value(key.upper())
             else:
                 key = self.format_value(self.add_quotes(key.lower()))
