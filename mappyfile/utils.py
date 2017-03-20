@@ -55,6 +55,6 @@ def _save(output_file, map_string):
     with codecs.open(output_file, "w", encoding="utf-8") as f:
         f.write(map_string)
 
-def _pprint(d, indent):
+def _pprint(d, indent=4):
     pp = PrettyPrinter(indent=indent)
     return pp.pprint(d)
