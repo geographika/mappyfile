@@ -1,14 +1,12 @@
 import os, logging
 from io import open
-# from plyplus import Grammar, ParseError
 from lark import Lark
 
 class Parser(object):
 
-    def __init__(self, try_ply=False, cwd=None, expand_includes=True):
-        self.try_ply = try_ply
+    def __init__(self, cwd=None, expand_includes=True):
         self.cwd = cwd
-        self.expand_includes = True
+        self.expand_includes = expand_includes
 
         gf = os.path.join(os.path.dirname(__file__), "mapfile_lark.g")
         grammar_text = open(gf).read()
@@ -33,7 +31,11 @@ class Parser(object):
                 assert (len(parts) == 2)
                 assert (parts[0].lower() == 'include')
                 fn = os.path.join(self.cwd, self.strip_quotes(parts[1]))
-                include_text = self.open_file(fn)
+                try:
+                    include_text = self.open_file(fn)
+                except IOError as ex:
+                    logging.warning("Include file '%s' not found", fn)
+                    raise ex
                 # recursively load any further includes
                 includes[idx] = self.load_includes(include_text)
     
@@ -55,17 +57,8 @@ class Parser(object):
 
     def parse(self, text):
 
-#         if self.expand_includes:
-#             text = self.load_includes(text)
+        if self.expand_includes == True:
+            text = self.load_includes(text)
 
-#         text += '\n'
-
-#         if self.try_ply:
-#             try:
-#                 return self.ply_g.parse(text)
-#             except ParseError as ex:
-#                 #logging.exception(ex)
-#                 pass
-
-#         return self.g.parse(text)
+        text += '\n'
         return self.g.parse(text+'\n')
