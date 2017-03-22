@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='mappyfile',
-      version='0.1.3',
+      version='0.2.0',
       description='A pure Python MapFile parser for working with MapServer',
       long_description=readme(),
       classifiers=[
@@ -29,5 +29,5 @@ setup(name='mappyfile',
       author_email='sethg@geographika.co.uk',
       license='MIT',
       packages=['mappyfile'],
-      install_requires=['plyplus'],
+      install_requires=['lark-parser'],
       zip_safe=False)
