@@ -4,7 +4,7 @@ Python dict structure
 """
 
 from collections import OrderedDict
-from plyplus import STransformer, is_stree
+from lark import Transformer, Tree
 from mappyfile.tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
 from mappyfile.ordereddict import DefaultOrderedDict
 
@@ -25,7 +25,7 @@ def dict_from_tail(t):
     """
     d = OrderedDict()
 
-    for v in t.tail:
+    for v in t:
         if len(v) == 2:
             d[v[0]] = v[1]
         elif len(v) == 3:
@@ -34,29 +34,31 @@ def dict_from_tail(t):
             raise ValueError("Unsupported block '%s'", str(v))
     return d
 
-class MapfileToDict(STransformer):
+class MapfileToDict(Transformer):
 
-    def start(self, t):
-        t ,= t.tail
+    def start(self, children):
+        t,= children
         assert t[0] == 'composite'
         #assert t[1].lower() == 'map' # we can also parse partial map files
         return t[2]
 
     def composite(self, t):
-        if len(t.tail) == 3:
+        if len(t) == 3:
             # Parser artefact. See LINE-BREAK FLUIDITY in parsing_decisions.txt
-            type_, attr, body = t.tail
+            type_, attr, body = t
         else:
-            type_, body = t.tail
+            type_, body = t
             attr = None
 
         if isinstance(body, tuple):
             assert body[0] == 'attr' or body[1] == 'points', body  # Parser artefacts
             body = [body]
         else:
-            body = body.tail
+            body = body.children
 
-        type_ = type_.tail[0].lower()
+        #type_ = type_.tail[0].lower()
+        type_ = type_.children[0].lower()
+
         assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES)
 
         if attr:
@@ -66,10 +68,7 @@ class MapfileToDict(STransformer):
             assert isinstance(x, tuple), x
 
         composites = DefaultOrderedDict(list)
-        #composites = defaultdict(list)
-
         d = DefaultOrderedDict(OrderedDict)
-        #d = OrderedDict()
 
         for itemtype, k, v in body:          
             
@@ -109,20 +108,22 @@ class MapfileToDict(STransformer):
         d['__type__'] = type_
         return ('composite', type_, d)
 
-    def attr(self, t):
-        name = t.tail[0].tail[0]
-        if is_stree(name):
-            name = name.tail[0] # Solve a parser artefact for composite names
+    def attr(self, children):
+        name = children[0].children[0]
+        
+        if isinstance(name, Tree):
+            name = name.children[0] # Solve a parser artefact for composite names
+
         name = name.lower()
         assert name in ATTRIBUTE_NAMES, name
-        value = t.tail[1:]
 
+        value = children[1:]
         if len(value) == 1:
-            value ,= value
+            value = value[0]
         return 'attr', name, value
 
     def projection(self, t):
-        return ('composite', 'projection', t.tail)
+        return ('composite', 'projection', t)
 
     def metadata(self, t):
         """
@@ -132,11 +133,11 @@ class MapfileToDict(STransformer):
         return ('composite', 'metadata', d)
 
     def points(self, t):
-        return ('composite', 'points', t.tail)
+        return ('composite', 'points', t)
 
     def pattern(self, t):
         # http://www.mapserver.org/mapfile/style.html
-        return ('composite', 'pattern', t.tail)
+        return ('composite', 'pattern', t)
 
     def values(self, t):
         d = dict_from_tail(t)
@@ -152,68 +153,74 @@ class MapfileToDict(STransformer):
     # for expressions
 
     def comparison(self, t):
-        parts = [str(p) for p in list(t.tail)]
-        x = " ".join(parts)
-        return "( %s )" % x
+        parts = [str(p) for p in list(t)]
+        v = " ".join(parts)
+        return "( %s )" % v
     def and_test(self, t):
-        #print t.tail
-        x = " and ".join(t.tail)
-        return "( %s )" % x
+        v = " and ".join(t)
+        return "( %s )" % v
     def or_test(self, t):
-        x = " or ".join(t.tail)
-        return "( %s )" % x
+        v = " or ".join(t)
+        return "( %s )" % v
     def compare_op(self, t):
-        x ,= t.tail
-        return x
+        v = t[0]
+        return v
 
     def regexp(self, t):
         """
         E.g. regexp(u'/^[0-9]*$/')
         """
-        x ,= t.tail
-        return x
+        v = t[0]
+        return v
 
     # for functions
 
     def func_call(self, t):
-        func, params = t.tail
-        func = func.tail[0] # this is an attr_name, not sure why it is not transformed already
-        return "(%s(%s))" % (func, params)
+        """
+        For function calls e.g. TEXT (tostring([area],"%.2f"))
+        """
+        func, params = t
+        func_name = func.children[0]
+        v = "(%s(%s))" % (func_name, params)
+        return v
 
     def func_params(self, t):
-        params = ",".join(str(x) for x in t.tail)
+        params = ",".join(str(v) for v in t)
         return params
 
     def attr_bind(self, t):
-        x ,= t.tail
-        return "[%s]" % x
+        v = t[0]
+        return "[%s]" % v
 
     # basic types
 
     def int(self, t):
-        x ,= t.tail
-        return int(x)
+        v = t[0]
+        return int(v)
     def float(self, t):
-        x ,= t.tail
-        return float(x)
+        v = t[0]
+        return float(v)
     def bare_string(self, t):
-        x ,= t.tail
-        return x
+        if t:
+            v = t[0]
+        else:
+            v = t            
+        return v
     def string(self, t):
-        x ,= t.tail
-        return x
+        v = t[0].value
+        return v
     def path(self, t):
-        x ,= t.tail
-        return x
+        v = t[0]
+        return v
     def string_pair(self, t):
-        a, b = t.tail
+        a, b = t
         return [a, b]
     def int_pair(self, t):
-        a, b = t.tail
+        a, b = t
         return [a, b]
     def list(self, t):
         # http://www.mapserver.org/mapfile/expressions.html#list-expressions
-        return "{%s}" % ",".join([str(v) for v in t.tail])
+        return "{%s}" % ",".join([str(v) for v in t])
 
 
 
