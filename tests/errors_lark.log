@@ -1,0 +1,1276 @@
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dtcwrn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\256color_overdose.tmp.map -i png -o c:\appdata\local\temp\tmp_dtcwrn.png
+C:\Temp\msautotest\gdal\256color_overdose.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jzpceg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\256color_overdose_cmt.tmp.map -i png -o c:\appdata\local\temp\tmp_jzpceg.png
+C:\Temp\msautotest\gdal\256color_overdose_cmt.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wcmqkp.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\256color_overdose_res.tmp.map -i png -o c:\appdata\local\temp\tmp_wcmqkp.png
+C:\Temp\msautotest\gdal\256color_overdose_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_yisyhi.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\256_overlay_res.tmp.map -i png -o c:\appdata\local\temp\tmp_yisyhi.png
+C:\Temp\msautotest\gdal\256_overlay_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__4x2ru.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\alpha_on_alpha_overlay.tmp.map -i png -o c:\appdata\local\temp\tmp__4x2ru.png
+C:\Temp\msautotest\gdal\alpha_on_alpha_overlay.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_5qhhbb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\average_rgb.tmp.map -i png -o c:\appdata\local\temp\tmp_5qhhbb.png
+C:\Temp\msautotest\gdal\average_rgb.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_g3kh2o.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\average_rgb_plug.tmp.map -i png -o c:\appdata\local\temp\tmp_g3kh2o.png
+C:\Temp\msautotest\gdal\average_rgb_plug.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_eskqiv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\bilinear_float.tmp.map -i png -o c:\appdata\local\temp\tmp_eskqiv.png
+C:\Temp\msautotest\gdal\bilinear_float.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_lbmox2.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\bilinear_src_transp.tmp.map -i png -o c:\appdata\local\temp\tmp_lbmox2.png
+C:\Temp\msautotest\gdal\bilinear_src_transp.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_8sgres.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\bilinear_src_transp2.tmp.map -i png -o c:\appdata\local\temp\tmp_8sgres.png
+C:\Temp\msautotest\gdal\bilinear_src_transp2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_are6t5.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\class16.tmp.map -i png -o c:\appdata\local\temp\tmp_are6t5.png
+C:\Temp\msautotest\gdal\class16.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_w_lhmf.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\class16_intoddscale.tmp.map -i png -o c:\appdata\local\temp\tmp_w_lhmf.png
+C:\Temp\msautotest\gdal\class16_intoddscale.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_eh6spt.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\class16_ndmap.tmp.map -i png -o c:\appdata\local\temp\tmp_eh6spt.png
+C:\Temp\msautotest\gdal\class16_ndmap.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_1petn0.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\class16_oddscale.tmp.map -i png -o c:\appdata\local\temp\tmp_1petn0.png
+C:\Temp\msautotest\gdal\class16_oddscale.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ogyrpn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\class16_range.tmp.map -i png -o c:\appdata\local\temp\tmp_ogyrpn.png
+C:\Temp\msautotest\gdal\class16_range.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dz6v3c.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\class8_range.tmp.map -i png -o c:\appdata\local\temp\tmp_dz6v3c.png
+C:\Temp\msautotest\gdal\class8_range.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nammwo.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\classtest1.tmp.map -i png -o c:\appdata\local\temp\tmp_nammwo.png
+C:\Temp\msautotest\gdal\classtest1.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_8vmxdc.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\classtest2.tmp.map -i png -o c:\appdata\local\temp\tmp_8vmxdc.png
+C:\Temp\msautotest\gdal\classtest2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zfmdfl.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\classtest2_plugin.tmp.map -i png -o c:\appdata\local\temp\tmp_zfmdfl.png
+C:\Temp\msautotest\gdal\classtest2_plugin.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_aakypw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\deferred.tmp.map -i png -o c:\appdata\local\temp\tmp_aakypw.png
+C:\Temp\msautotest\gdal\deferred.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_3zsb3s.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\gdal_png_256_res.tmp.map -i png -o c:\appdata\local\temp\tmp_3zsb3s.png
+C:\Temp\msautotest\gdal\gdal_png_256_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wkvhn0.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\gdal_png_tr_256.tmp.map -i png -o c:\appdata\local\temp\tmp_wkvhn0.png
+C:\Temp\msautotest\gdal\gdal_png_tr_256.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_pubeva.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\gdal_png_tr_256_res.tmp.map -i png -o c:\appdata\local\temp\tmp_pubeva.png
+C:\Temp\msautotest\gdal\gdal_png_tr_256_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ve53pv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\gd_png_256_res.tmp.map -i png -o c:\appdata\local\temp\tmp_ve53pv.png
+C:\Temp\msautotest\gdal\gd_png_256_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_2sarix.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\gd_png_tr_256.tmp.map -i png -o c:\appdata\local\temp\tmp_2sarix.png
+C:\Temp\msautotest\gdal\gd_png_tr_256.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_rux9hw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\gd_png_tr_256_res.tmp.map -i png -o c:\appdata\local\temp\tmp_rux9hw.png
+C:\Temp\msautotest\gdal\gd_png_tr_256_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_rg4bql.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\grayalpha.tmp.map -i png -o c:\appdata\local\temp\tmp_rg4bql.png
+C:\Temp\msautotest\gdal\grayalpha.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jhgmhs.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\grayalpha_8bit.tmp.map -i png -o c:\appdata\local\temp\tmp_jhgmhs.png
+C:\Temp\msautotest\gdal\grayalpha_8bit.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_pmj6uy.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\grayalpha_plug.tmp.map -i png -o c:\appdata\local\temp\tmp_pmj6uy.png
+C:\Temp\msautotest\gdal\grayalpha_plug.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__wuqeh.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\heat.tmp.map -i png -o c:\appdata\local\temp\tmp__wuqeh.png
+C:\Temp\msautotest\gdal\heat.tmp.map
+loadColor(): Symbol definition error. Invalid hex color (#0000ff00" "#0000ffff):(line 58)
+msFreeMap(): freeing map at 000000000043D2B0.
+freeLayer(): freeing layer at 0000000000444C20.
+loadColor(): Symbol definition error. Invalid hex color (#0000ff00" "#0000ffff):(line 58) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mlmhei.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\lut_1_crv.tmp.map -i png -o c:\appdata\local\temp\tmp_mlmhei.png
+C:\Temp\msautotest\gdal\lut_1_crv.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nqiqxe.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\lut_float.tmp.map -i png -o c:\appdata\local\temp\tmp_nqiqxe.png
+C:\Temp\msautotest\gdal\lut_float.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_fz8dja.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\lut_inline.tmp.map -i png -o c:\appdata\local\temp\tmp_fz8dja.png
+C:\Temp\msautotest\gdal\lut_inline.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wvdri7.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\lut_rgb_crv.tmp.map -i png -o c:\appdata\local\temp\tmp_wvdri7.png
+C:\Temp\msautotest\gdal\lut_rgb_crv.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zcesxq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\mask_1.tmp.map -i png -o c:\appdata\local\temp\tmp_zcesxq.png
+C:\Temp\msautotest\gdal\mask_1.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_pqwxd2.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\mask_3.tmp.map -i png -o c:\appdata\local\temp\tmp_pqwxd2.png
+C:\Temp\msautotest\gdal\mask_3.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ejt0ld.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\nodata_8bit.tmp.map -i png -o c:\appdata\local\temp\tmp_ejt0ld.png
+C:\Temp\msautotest\gdal\nodata_8bit.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_drv81t.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\nodata_rgb.tmp.map -i png -o c:\appdata\local\temp\tmp_drv81t.png
+C:\Temp\msautotest\gdal\nodata_rgb.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_oc_bri.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\nodata_scaled.tmp.map -i png -o c:\appdata\local\temp\tmp_oc_bri.png
+C:\Temp\msautotest\gdal\nodata_scaled.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sgsdrn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\nonsquare.tmp.map -i png -o c:\appdata\local\temp\tmp_sgsdrn.png
+C:\Temp\msautotest\gdal\nonsquare.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_0u9m4d.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\nonsquare_multiraw.tmp.map -i png -o c:\appdata\local\temp\tmp_0u9m4d.png
+C:\Temp\msautotest\gdal\nonsquare_multiraw.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_s8vbtx.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\offsite_8bitgrey.tmp.map -i png -o c:\appdata\local\temp\tmp_s8vbtx.png
+C:\Temp\msautotest\gdal\offsite_8bitgrey.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_lftoyv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\offsite_pct_rgb.tmp.map -i png -o c:\appdata\local\temp\tmp_lftoyv.png
+C:\Temp\msautotest\gdal\offsite_pct_rgb.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sf4owb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\offsite_pct_rgb_torgb.tmp.map -i png -o c:\appdata\local\temp\tmp_sf4owb.png
+C:\Temp\msautotest\gdal\offsite_pct_rgb_torgb.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_l_iaeo.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\processing_bands.tmp.map -i png -o c:\appdata\local\temp\tmp_l_iaeo.png
+C:\Temp\msautotest\gdal\processing_bands.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_s8s03f.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\processing_scale_auto.tmp.map -i png -o c:\appdata\local\temp\tmp_s8s03f.png
+C:\Temp\msautotest\gdal\processing_scale_auto.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__0xdnj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rawmode_multiband.tmp.map -i png -o c:\appdata\local\temp\tmp__0xdnj.png
+C:\Temp\msautotest\gdal\rawmode_multiband.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_1gaw9r.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rawmode_nodata.tmp.map -i png -o c:\appdata\local\temp\tmp_1gaw9r.png
+C:\Temp\msautotest\gdal\rawmode_nodata.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_h6unbt.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rawmode_nodata_resample.tmp.map -i png -o c:\appdata\local\temp\tmp_h6unbt.png
+C:\Temp\msautotest\gdal\rawmode_nodata_resample.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_czelqk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\reproj.tmp.map -i png -o c:\appdata\local\temp\tmp_czelqk.png
+C:\Temp\msautotest\gdal\reproj.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_2rnjzj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rgba_overlay_res.tmp.map -i png -o c:\appdata\local\temp\tmp_2rnjzj.png
+C:\Temp\msautotest\gdal\rgba_overlay_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_aglvyy.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rgb_16bit.tmp.map -i png -o c:\appdata\local\temp\tmp_aglvyy.png
+C:\Temp\msautotest\gdal\rgb_16bit.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gzpnmd.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rgb_overlay.tmp.map -i png -o c:\appdata\local\temp\tmp_gzpnmd.png
+C:\Temp\msautotest\gdal\rgb_overlay.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_tvet9f.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rgb_overlay_plug.tmp.map -i png -o c:\appdata\local\temp\tmp_tvet9f.png
+C:\Temp\msautotest\gdal\rgb_overlay_plug.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_rmbeg5.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rgb_overlay_res.tmp.map -i png -o c:\appdata\local\temp\tmp_rmbeg5.png
+C:\Temp\msautotest\gdal\rgb_overlay_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_9hlxhq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit.tmp.map -i png -o c:\appdata\local\temp\tmp_9hlxhq.png
+C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jl5nr8.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit_dithered.tmp.map -i png -o c:\appdata\local\temp\tmp_jl5nr8.png
+C:\Temp\msautotest\gdal\rgb_overlay_res_to8bit_dithered.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gutwiv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\rot_out.tmp.map -i png -o c:\appdata\local\temp\tmp_gutwiv.png
+C:\Temp\msautotest\gdal\rot_out.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_5d3msh.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\simplealpha.tmp.map -i png -o c:\appdata\local\temp\tmp_5d3msh.png
+C:\Temp\msautotest\gdal\simplealpha.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xq5wjg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\simplealpha_bg.tmp.map -i png -o c:\appdata\local\temp\tmp_xq5wjg.png
+C:\Temp\msautotest\gdal\simplealpha_bg.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nohutm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\simplealpha_plug.tmp.map -i png -o c:\appdata\local\temp\tmp_nohutm.png
+C:\Temp\msautotest\gdal\simplealpha_plug.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_srzxxv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\ticket_5032_optim_1.tmp.map -i png -o c:\appdata\local\temp\tmp_srzxxv.png
+C:\Temp\msautotest\gdal\ticket_5032_optim_1.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_l2htwx.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\ticket_5032_optim_2.tmp.map -i png -o c:\appdata\local\temp\tmp_l2htwx.png
+C:\Temp\msautotest\gdal\ticket_5032_optim_2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_2g89rv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\tileindex.tmp.map -i png -o c:\appdata\local\temp\tmp_2g89rv.png
+C:\Temp\msautotest\gdal\tileindex.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jrmgs8.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\tileindexmixedsrs.tmp.map -i png -o c:\appdata\local\temp\tmp_jrmgs8.png
+C:\Temp\msautotest\gdal\tileindexmixedsrs.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'grey'. <br>
+msDrawRasterLayer(): OGR error. Ingestion of WKT string 'EPSG:26711' failed.
+PROJECTION 'EPSG:26711' cannot be used for this GDAL raster (`utmsmall_topleft_26711.tif'). <br>
+msOGCWKT2ProjectionObj(): OGR error. Ingestion of WKT string 'EPSG:26711' failed. <br>
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\gdal\data/tile_index_mixed_srs.qix. In most cases you can safely ignore this message, otherwise check file names and permissions. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_aifntg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\tileindexmixedsrs2.tmp.map -i png -o c:\appdata\local\temp\tmp_aifntg.png
+C:\Temp\msautotest\gdal\tileindexmixedsrs2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nworsw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\tileindexmixedsrs3.tmp.map -i png -o c:\appdata\local\temp\tmp_nworsw.png
+C:\Temp\msautotest\gdal\tileindexmixedsrs3.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_pii5ow.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\tileindexmixedsrs4.tmp.map -i png -o c:\appdata\local\temp\tmp_pii5ow.png
+C:\Temp\msautotest\gdal\tileindexmixedsrs4.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_deqysh.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\tileindex_mi.tmp.map -i png -o c:\appdata\local\temp\tmp_deqysh.png
+C:\Temp\msautotest\gdal\tileindex_mi.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dnjebu.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\trlay1.tmp.map -i png -o c:\appdata\local\temp\tmp_dnjebu.png
+C:\Temp\msautotest\gdal\trlay1.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vvyjac.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\trlay2.tmp.map -i png -o c:\appdata\local\temp\tmp_vvyjac.png
+C:\Temp\msautotest\gdal\trlay2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gnlgye.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\trlay3.tmp.map -i png -o c:\appdata\local\temp\tmp_gnlgye.png
+C:\Temp\msautotest\gdal\trlay3.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_9qxbe8.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\unclassified.tmp.map -i png -o c:\appdata\local\temp\tmp_9qxbe8.png
+C:\Temp\msautotest\gdal\unclassified.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_n8aydh.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\wld_override.tmp.map -i png -o c:\appdata\local\temp\tmp_n8aydh.png
+C:\Temp\msautotest\gdal\wld_override.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__y6kvz.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\wld_rotate.tmp.map -i png -o c:\appdata\local\temp\tmp__y6kvz.png
+C:\Temp\msautotest\gdal\wld_rotate.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mxbhfw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\wld_upsidedown.tmp.map -i png -o c:\appdata\local\temp\tmp_mxbhfw.png
+C:\Temp\msautotest\gdal\wld_upsidedown.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_oofwks.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\wmsclient.tmp.map -i png -o c:\appdata\local\temp\tmp_oofwks.png
+C:\Temp\msautotest\gdal\wmsclient.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_uc1vea.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\gdal\wmsclient_3543.tmp.map -i png -o c:\appdata\local\temp\tmp_uc1vea.png
+C:\Temp\msautotest\gdal\wmsclient_3543.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_kz3tak.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\attrbind.tmp.map -i png -o c:\appdata\local\temp\tmp_kz3tak.png
+C:\Temp\msautotest\misc\attrbind.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_y4mmlj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\autostyle.tmp.map -i png -o c:\appdata\local\temp\tmp_y4mmlj.png
+C:\Temp\msautotest\misc\autostyle.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jlnvxl.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\autostyle_quoted.tmp.map -i png -o c:\appdata\local\temp\tmp_jlnvxl.png
+C:\Temp\msautotest\misc\autostyle_quoted.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zmli0v.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\bug1526.tmp.map -i png -o c:\appdata\local\temp\tmp_zmli0v.png
+C:\Temp\msautotest\misc\bug1526.tmp.map
+loadMapInternal(): General error message. Given map extent is invalid. Check that it is in the form: minx, miny, maxx, maxy <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_fcr5_f.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\contour.tmp.map -i png -o c:\appdata\local\temp\tmp_fcr5_f.png
+C:\Temp\msautotest\misc\contour.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_bjd8d9.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\dateline.tmp.map -i png -o c:\appdata\local\temp\tmp_bjd8d9.png
+C:\Temp\msautotest\misc\dateline.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_de27tf.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\encoding.tmp.map -i png -o c:\appdata\local\temp\tmp_de27tf.png
+C:\Temp\msautotest\misc\encoding.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_kgwm5u.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\geopdf.tmp.map -i png -o c:\appdata\local\temp\tmp_kgwm5u.png
+C:\Temp\msautotest\misc\geopdf.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ngfn9p.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\listexpression.tmp.map -i png -o c:\appdata\local\temp\tmp_ngfn9p.png
+C:\Temp\msautotest\misc\listexpression.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_uwfali.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\maxfeatures.tmp.map -i png -o c:\appdata\local\temp\tmp_uwfali.png
+C:\Temp\msautotest\misc\maxfeatures.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_6qwyku.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\multipoint.tmp.map -i png -o c:\appdata\local\temp\tmp_6qwyku.png
+C:\Temp\msautotest\misc\multipoint.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zjxoij.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogrbrush.tmp.map -i png -o c:\appdata\local\temp\tmp_zjxoij.png
+C:\Temp\msautotest\misc\ogrbrush.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__5kv0a.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogrmultitool.tmp.map -i png -o c:\appdata\local\temp\tmp__5kv0a.png
+C:\Temp\msautotest\misc\ogrmultitool.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_2u5u3y.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogrpen.tmp.map -i png -o c:\appdata\local\temp\tmp_2u5u3y.png
+C:\Temp\msautotest\misc\ogrpen.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xkkmhm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_attrfilter.tmp.map -i png -o c:\appdata\local\temp\tmp_xkkmhm.png
+C:\Temp\msautotest\misc\ogr_attrfilter.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_e4wtyn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_direct.tmp.map -i png -o c:\appdata\local\temp\tmp_e4wtyn.png
+C:\Temp\msautotest\misc\ogr_direct.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ra_i1v.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_empty_geojson.tmp.map -i png -o c:\appdata\local\temp\tmp_ra_i1v.png
+C:\Temp\msautotest\misc\ogr_empty_geojson.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_v8vdit.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_join.tmp.map -i png -o c:\appdata\local\temp\tmp_v8vdit.png
+C:\Temp\msautotest\misc\ogr_join.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zxaucx.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_multi_defer.tmp.map -i png -o c:\appdata\local\temp\tmp_zxaucx.png
+C:\Temp\msautotest\misc\ogr_multi_defer.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly2'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly2'.  File not found or unsupported format. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sxeg08.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_select.tmp.map -i png -o c:\appdata\local\temp\tmp_sxeg08.png
+C:\Temp\msautotest\misc\ogr_select.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_axfxwy.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_vrtconnect.tmp.map -i png -o c:\appdata\local\temp\tmp_axfxwy.png
+C:\Temp\msautotest\misc\ogr_vrtconnect.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRLayerInitItemInfo(): OGR error. Invalid Field name: AREA <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xwjlu9.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ogr_wkt.tmp.map -i png -o c:\appdata\local\temp\tmp_xwjlu9.png
+C:\Temp\msautotest\misc\ogr_wkt.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vrkzxk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\ortho.tmp.map -i png -o c:\appdata\local\temp\tmp_vrkzxk.png
+C:\Temp\msautotest\misc\ortho.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ehwgrb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\quantized.tmp.map -i png -o c:\appdata\local\temp\tmp_ehwgrb.png
+C:\Temp\msautotest\misc\quantized.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sfmvj3.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\quoted_data.tmp.map -i png -o c:\appdata\local\temp\tmp_sfmvj3.png
+C:\Temp\msautotest\misc\quoted_data.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'road'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_c2ywah.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\quoting.tmp.map -i png -o c:\appdata\local\temp\tmp_c2ywah.png
+C:\Temp\msautotest\misc\quoting.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_exb0oj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\rfc14.tmp.map -i png -o c:\appdata\local\temp\tmp_exb0oj.png
+C:\Temp\msautotest\misc\rfc14.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_agwu_b.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\rfc36.tmp.map -i png -o c:\appdata\local\temp\tmp_agwu_b.png
+C:\Temp\msautotest\misc\rfc36.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_m6w9jt.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\rfc36_ogr.tmp.map -i png -o c:\appdata\local\temp\tmp_m6w9jt.png
+C:\Temp\msautotest\misc\rfc36_ogr.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=../wxs/data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_bfmgjg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\rot_out.tmp.map -i png -o c:\appdata\local\temp\tmp_bfmgjg.png
+C:\Temp\msautotest\misc\rot_out.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zpglpj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\runtime_sub.tmp.map -i png -o c:\appdata\local\temp\tmp_zpglpj.png
+C:\Temp\msautotest\misc\runtime_sub.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_6mdvxi.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\scaletoken.tmp.map -i png -o c:\appdata\local\temp\tmp_6mdvxi.png
+C:\Temp\msautotest\misc\scaletoken.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dclu1c.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\sde_bug2072.tmp.map -i png -o c:\appdata\local\temp\tmp_dclu1c.png
+C:\Temp\msautotest\misc\sde_bug2072.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 13) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nw8bta.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\sde_join.tmp.map -i png -o c:\appdata\local\temp\tmp_nw8bta.png
+C:\Temp\msautotest\misc\sde_join.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 21) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zx1ida.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\sde_utf.tmp.map -i png -o c:\appdata\local\temp\tmp_zx1ida.png
+C:\Temp\msautotest\misc\sde_utf.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 19) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gbdxuk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\sde_utf2.tmp.map -i png -o c:\appdata\local\temp\tmp_gbdxuk.png
+C:\Temp\msautotest\misc\sde_utf2.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 18) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_o1sebb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\sde_view.tmp.map -i png -o c:\appdata\local\temp\tmp_o1sebb.png
+C:\Temp\msautotest\misc\sde_view.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 10) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_aqorov.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\sde_wms.tmp.map -i png -o c:\appdata\local\temp\tmp_aqorov.png
+C:\Temp\msautotest\misc\sde_wms.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (SDE):(line 21) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_h6t4si.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\shp2img-size.tmp.map -i png -o c:\appdata\local\temp\tmp_h6t4si.png
+C:\Temp\msautotest\misc\shp2img-size.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_t5amjx.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\style_opacity.tmp.map -i png -o c:\appdata\local\temp\tmp_t5amjx.png
+C:\Temp\msautotest\misc\style_opacity.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_yrauqr.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\misc\testuppercase.tmp.map -i png -o c:\appdata\local\temp\tmp_yrauqr.png
+C:\Temp\msautotest\misc\testuppercase.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_alnbmw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\mspython\ogr_query.tmp.map -i png -o c:\appdata\local\temp\tmp_alnbmw.png
+C:\Temp\msautotest\mspython\ogr_query.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'shppoly'. <br>
+msOGRFileOpen(): OGR error. Open failed for OGR connection in layer `shppoly'.  File not found or unsupported format. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_estwzu.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\mspython\test_xmp.tmp.map -i png -o c:\appdata\local\temp\tmp_estwzu.png
+C:\Temp\msautotest\mspython\test_xmp.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mjuwxi.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\context.tmp.map -i png -o c:\appdata\local\temp\tmp_mjuwxi.png
+C:\Temp\msautotest\query\context.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vwcpyy.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\filters.tmp.map -i png -o c:\appdata\local\temp\tmp_vwcpyy.png
+C:\Temp\msautotest\query\filters.tmp.map
+loadLayer(): Unknown identifier. Parsing error near (i):(line 24) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_5ypsci.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\query.tmp.map -i png -o c:\appdata\local\temp\tmp_5ypsci.png
+C:\Temp\msautotest\query\query.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_f6xo4f.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\querymap.tmp.map -i png -o c:\appdata\local\temp\tmp_f6xo4f.png
+C:\Temp\msautotest\query\querymap.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_b93cj2.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\query_ogr.tmp.map -i png -o c:\appdata\local\temp\tmp_b93cj2.png
+C:\Temp\msautotest\query\query_ogr.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ommy2j.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\query_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_ommy2j.png
+C:\Temp\msautotest\query\query_postgis.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_8tagmm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\rfc62.tmp.map -i png -o c:\appdata\local\temp\tmp_8tagmm.png
+C:\Temp\msautotest\query\rfc62.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_bijifj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\template.tmp.map -i png -o c:\appdata\local\temp\tmp_bijifj.png
+C:\Temp\msautotest\query\template.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jlvyny.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\query\text.tmp.map -i png -o c:\appdata\local\temp\tmp_jlvyny.png
+C:\Temp\msautotest\query\text.tmp.map
+getSymbol(): Symbol definition error. Parsing error near (area):(line 38) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_d2hyps.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\average_rgb.tmp.map -i png -o c:\appdata\local\temp\tmp_d2hyps.png
+C:\Temp\msautotest\renderers\average_rgb.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_klc2gb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\baseline_text.tmp.map -i png -o c:\appdata\local\temp\tmp_klc2gb.png
+C:\Temp\msautotest\renderers\baseline_text.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ahagpg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\chartlayer_bar.tmp.map -i png -o c:\appdata\local\temp\tmp_ahagpg.png
+C:\Temp\msautotest\renderers\chartlayer_bar.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xdvphs.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\chartlayer_pie.tmp.map -i png -o c:\appdata\local\temp\tmp_xdvphs.png
+C:\Temp\msautotest\renderers\chartlayer_pie.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_bb2jtf.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\chartlayer_pie2.tmp.map -i png -o c:\appdata\local\temp\tmp_bb2jtf.png
+C:\Temp\msautotest\renderers\chartlayer_pie2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ahtmfz.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\chartlayer_pie_expressions.tmp.map -i png -o c:\appdata\local\temp\tmp_ahtmfz.png
+C:\Temp\msautotest\renderers\chartlayer_pie_expressions.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_conizm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\chartlayer_vbar.tmp.map -i png -o c:\appdata\local\temp\tmp_conizm.png
+C:\Temp\msautotest\renderers\chartlayer_vbar.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ejfms8.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\circle_layer.tmp.map -i png -o c:\appdata\local\temp\tmp_ejfms8.png
+C:\Temp\msautotest\renderers\circle_layer.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_uveqcz.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\compositing.tmp.map -i png -o c:\appdata\local\temp\tmp_uveqcz.png
+C:\Temp\msautotest\renderers\compositing.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xk_yst.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_legend.tmp.map -i png -o c:\appdata\local\temp\tmp_xk_yst.png
+C:\Temp\msautotest\renderers\embed_legend.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zombmm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_legend_rgba.tmp.map -i png -o c:\appdata\local\temp\tmp_zombmm.png
+C:\Temp\msautotest\renderers\embed_legend_rgba.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_qn88e9.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_legend_rgba_tr.tmp.map -i png -o c:\appdata\local\temp\tmp_qn88e9.png
+C:\Temp\msautotest\renderers\embed_legend_rgba_tr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_kuhzn3.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_legend_tr.tmp.map -i png -o c:\appdata\local\temp\tmp_kuhzn3.png
+C:\Temp\msautotest\renderers\embed_legend_tr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nwgmtj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_sb_rgb.tmp.map -i png -o c:\appdata\local\temp\tmp_nwgmtj.png
+C:\Temp\msautotest\renderers\embed_sb_rgb.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hujtll.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_sb_rgba.tmp.map -i png -o c:\appdata\local\temp\tmp_hujtll.png
+C:\Temp\msautotest\renderers\embed_sb_rgba.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_9lbuph.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_sb_rgba_tr.tmp.map -i png -o c:\appdata\local\temp\tmp_9lbuph.png
+C:\Temp\msautotest\renderers\embed_sb_rgba_tr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gvmlnz.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\embed_sb_rgb_tr.tmp.map -i png -o c:\appdata\local\temp\tmp_gvmlnz.png
+C:\Temp\msautotest\renderers\embed_sb_rgb_tr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_pag7dg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\empty.tmp.map -i png -o c:\appdata\local\temp\tmp_pag7dg.png
+C:\Temp\msautotest\renderers\empty.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xieyak.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\entity_encoded_follow_text.tmp.map -i png -o c:\appdata\local\temp\tmp_xieyak.png
+C:\Temp\msautotest\renderers\entity_encoded_follow_text.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xrhyfg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\font-fail.tmp.map -i png -o c:\appdata\local\temp\tmp_xrhyfg.png
+C:\Temp\msautotest\renderers\font-fail.tmp.map
+msGetFontFace(): General error message. Freetype was unable to load font file "C:\Temp\msautotest\renderers\../misc//path/to/inexistant/file.ttf" for key "bogus" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wggpt4.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\force_palette.tmp.map -i png -o c:\appdata\local\temp\tmp_wggpt4.png
+C:\Temp\msautotest\renderers\force_palette.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_4avs4d.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\force_palette_rgba.tmp.map -i png -o c:\appdata\local\temp\tmp_4avs4d.png
+C:\Temp\msautotest\renderers\force_palette_rgba.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_p4ednq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\force_pc256.tmp.map -i png -o c:\appdata\local\temp\tmp_p4ednq.png
+C:\Temp\msautotest\renderers\force_pc256.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_7nbixn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\force_pc256_rgba.tmp.map -i png -o c:\appdata\local\temp\tmp_7nbixn.png
+C:\Temp\msautotest\renderers\force_pc256_rgba.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wdgzjx.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\geomtransform-vertex.tmp.map -i png -o c:\appdata\local\temp\tmp_wdgzjx.png
+C:\Temp\msautotest\renderers\geomtransform-vertex.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_3stvts.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\grid.tmp.map -i png -o c:\appdata\local\temp\tmp_3stvts.png
+C:\Temp\msautotest\renderers\grid.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_yycvhr.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\label-multifont.tmp.map -i png -o c:\appdata\local\temp\tmp_yycvhr.png
+C:\Temp\msautotest\renderers\label-multifont.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_qdjjpb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labelcacheoff.tmp.map -i png -o c:\appdata\local\temp\tmp_qdjjpb.png
+C:\Temp\msautotest\renderers\labelcacheoff.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_b5gwcl.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labelpnt.tmp.map -i png -o c:\appdata\local\temp\tmp_b5gwcl.png
+C:\Temp\msautotest\renderers\labelpnt.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_6zzx2e.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labelrot.tmp.map -i png -o c:\appdata\local\temp\tmp_6zzx2e.png
+C:\Temp\msautotest\renderers\labelrot.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_szithv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labels-alignment.tmp.map -i png -o c:\appdata\local\temp\tmp_szithv.png
+C:\Temp\msautotest\renderers\labels-alignment.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__9uc08.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labels-anno.tmp.map -i png -o c:\appdata\local\temp\tmp__9uc08.png
+C:\Temp\msautotest\renderers\labels-anno.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ju16jk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labels-bitmap-multiline.tmp.map -i png -o c:\appdata\local\temp\tmp_ju16jk.png
+C:\Temp\msautotest\renderers\labels-bitmap-multiline.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_fpzgcr.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labels-bitmap.tmp.map -i png -o c:\appdata\local\temp\tmp_fpzgcr.png
+C:\Temp\msautotest\renderers\labels-bitmap.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_6kuc_4.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labels-leader.tmp.map -i png -o c:\appdata\local\temp\tmp_6kuc_4.png
+C:\Temp\msautotest\renderers\labels-leader.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_eldaln.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\labels.tmp.map -i png -o c:\appdata\local\temp\tmp_eldaln.png
+C:\Temp\msautotest\renderers\labels.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_qowpit.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\label_noclip.tmp.map -i png -o c:\appdata\local\temp\tmp_qowpit.png
+C:\Temp\msautotest\renderers\label_noclip.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gal1b1.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\legend.tmp.map -i png -o c:\appdata\local\temp\tmp_gal1b1.png
+C:\Temp\msautotest\renderers\legend.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mw8cve.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\legend_label_offset.tmp.map -i png -o c:\appdata\local\temp\tmp_mw8cve.png
+C:\Temp\msautotest\renderers\legend_label_offset.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_qrpkqv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\legend_sizeunits_meters.tmp.map -i png -o c:\appdata\local\temp\tmp_qrpkqv.png
+C:\Temp\msautotest\renderers\legend_sizeunits_meters.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dj3qlo.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_anchorpoint.tmp.map -i png -o c:\appdata\local\temp\tmp_dj3qlo.png
+C:\Temp\msautotest\renderers\line_anchorpoint.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vx8cah.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_label_auto.tmp.map -i png -o c:\appdata\local\temp\tmp_vx8cah.png
+C:\Temp\msautotest\renderers\line_label_auto.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_8vbtpe.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_label_auto2.tmp.map -i png -o c:\appdata\local\temp\tmp_8vbtpe.png
+C:\Temp\msautotest\renderers\line_label_auto2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_021n4h.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_label_follow.tmp.map -i png -o c:\appdata\local\temp\tmp_021n4h.png
+C:\Temp\msautotest\renderers\line_label_follow.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hvom2r.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_label_follow_offsetted.tmp.map -i png -o c:\appdata\local\temp\tmp_hvom2r.png
+C:\Temp\msautotest\renderers\line_label_follow_offsetted.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_2sfdzk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_marker_pixmap.tmp.map -i png -o c:\appdata\local\temp\tmp_2sfdzk.png
+C:\Temp\msautotest\renderers\line_marker_pixmap.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jxv0u1.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_marker_svg.tmp.map -i png -o c:\appdata\local\temp\tmp_jxv0u1.png
+C:\Temp\msautotest\renderers\line_marker_svg.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_44xfp3.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_marker_truetype.tmp.map -i png -o c:\appdata\local\temp\tmp_44xfp3.png
+C:\Temp\msautotest\renderers\line_marker_truetype.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_lrmgzl.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_marker_vector.tmp.map -i png -o c:\appdata\local\temp\tmp_lrmgzl.png
+C:\Temp\msautotest\renderers\line_marker_vector.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_8lvdd2.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_offset.tmp.map -i png -o c:\appdata\local\temp\tmp_8lvdd2.png
+C:\Temp\msautotest\renderers\line_offset.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_m1muct.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_pattern.tmp.map -i png -o c:\appdata\local\temp\tmp_m1muct.png
+C:\Temp\msautotest\renderers\line_pattern.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_tazfqy.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_pattern_offset.tmp.map -i png -o c:\appdata\local\temp\tmp_tazfqy.png
+C:\Temp\msautotest\renderers\line_pattern_offset.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__z5db0.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_short_gap.tmp.map -i png -o c:\appdata\local\temp\tmp__z5db0.png
+C:\Temp\msautotest\renderers\line_short_gap.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_1fiq38.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\line_simple.tmp.map -i png -o c:\appdata\local\temp\tmp_1fiq38.png
+C:\Temp\msautotest\renderers\line_simple.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mglzss.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\lots_of_text.tmp.map -i png -o c:\appdata\local\temp\tmp_mglzss.png
+C:\Temp\msautotest\renderers\lots_of_text.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_f74qpe.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\marker_anchorpoint.tmp.map -i png -o c:\appdata\local\temp\tmp_f74qpe.png
+C:\Temp\msautotest\renderers\marker_anchorpoint.tmp.map
+msLoadMap(): 0.005s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (anchortest), 0.020s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.020s
+msSaveImage(c:\appdata\local\temp\tmp_f74qpe.png) total time: 0.005s
+msFreeMap(): freeing map at 00000000003065B0.
+freeLayer(): freeing layer at 00000000003107C0.
+shp2img total time: 1490208463.220s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_fiozzq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\marker_pixmap.tmp.map -i png -o c:\appdata\local\temp\tmp_fiozzq.png
+C:\Temp\msautotest\renderers\marker_pixmap.tmp.map
+msLoadMap(): 0.020s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.005s
+msDrawMap(): Layer 1 (symbol rotated), 0.000s
+msDrawMap(): Layer 2 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.005s
+msSaveImage(c:\appdata\local\temp\tmp_fiozzq.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000426650.
+freeLayer(): freeing layer at 000000000042D680.
+freeLayer(): freeing layer at 000000000042F160.
+freeLayer(): freeing layer at 0000000000430F80.
+shp2img total time: 1490208463.500s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_if4hab.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\mask.tmp.map -i png -o c:\appdata\local\temp\tmp_if4hab.png
+C:\Temp\msautotest\renderers\mask.tmp.map
+msLoadMap(): 0.025s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawRasterLayerLow(world): entering.
+msDrawRasterLayerGDAL(): Entering transform.
+msDrawRasterLayerGDAL(): src=0,0,400,300, dst=0,50,400,200
+msDrawRasterLayerGDAL(): source raster PL (-0.501,-0.376) for dst PL (0,50).
+msDrawRasterLayerGDAL(): red,green,blue,alpha bands = 1,2,3,4
+msDrawMap(): Layer 1 (world), 0.125s
+msDrawMap(): Layer 2 (lines), 0.005s
+msDrawMap(): Layer 3 (countours), 0.000s
+msDrawMap(): Drawing Label Cache, 0.005s
+msDrawMap() total time: 0.135s
+msSaveImage(c:\appdata\local\temp\tmp_if4hab.png) total time: 0.015s
+msFreeMap(): freeing map at 00000000005066D0.
+freeLayer(): freeing layer at 000000000050D700.
+freeLayer(): freeing layer at 000000000050EF60.
+freeLayer(): freeing layer at 0000000000510180.
+freeLayer(): freeing layer at 0000000000513800.
+shp2img total time: 1490208463.930s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xhkgvj.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\mask_opacity.tmp.map -i png -o c:\appdata\local\temp\tmp_xhkgvj.png
+C:\Temp\msautotest\renderers\mask_opacity.tmp.map
+msLoadMap(): 0.000s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawRasterLayerLow(world): entering.
+msDrawRasterLayerGDAL(): Entering transform.
+msDrawRasterLayerGDAL(): src=0,0,400,300, dst=0,50,400,200
+msDrawRasterLayerGDAL(): source raster PL (-0.501,-0.376) for dst PL (0,50).
+msDrawRasterLayerGDAL(): red,green,blue,alpha bands = 1,2,3,4
+msDrawMap(): Layer 1 (world), 0.080s
+msDrawMap(): Layer 2 (lines), 0.005s
+msDrawMap(): Layer 3 (countours), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.085s
+msSaveImage(c:\appdata\local\temp\tmp_xhkgvj.png) total time: 0.020s
+msFreeMap(): freeing map at 0000000000265F90.
+freeLayer(): freeing layer at 000000000026D0C0.
+freeLayer(): freeing layer at 000000000026E8E0.
+freeLayer(): freeing layer at 000000000026FAC0.
+freeLayer(): freeing layer at 00000000002730F0.
+shp2img total time: 1490208464.220s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_req2so.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\multilabel-leader.tmp.map -i png -o c:\appdata\local\temp\tmp_req2so.png
+C:\Temp\msautotest\renderers\multilabel-leader.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_6is0ug.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\multilabel.tmp.map -i png -o c:\appdata\local\temp\tmp_6is0ug.png
+C:\Temp\msautotest\renderers\multilabel.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_88z21l.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\nodata_8bit.tmp.map -i png -o c:\appdata\local\temp\tmp_88z21l.png
+C:\Temp\msautotest\renderers\nodata_8bit.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vareus.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\plb_embed_legend.tmp.map -i png -o c:\appdata\local\temp\tmp_vareus.png
+C:\Temp\msautotest\renderers\plb_embed_legend.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_uw3knn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\plb_embed_legend_rgba.tmp.map -i png -o c:\appdata\local\temp\tmp_uw3knn.png
+C:\Temp\msautotest\renderers\plb_embed_legend_rgba.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_b4k9ln.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\plb_embed_legend_rgba_tr.tmp.map -i png -o c:\appdata\local\temp\tmp_b4k9ln.png
+C:\Temp\msautotest\renderers\plb_embed_legend_rgba_tr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hlncq6.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\plb_embed_legend_tr.tmp.map -i png -o c:\appdata\local\temp\tmp_hlncq6.png
+C:\Temp\msautotest\renderers\plb_embed_legend_tr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nitclm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\point-polaroffset.tmp.map -i png -o c:\appdata\local\temp\tmp_nitclm.png
+C:\Temp\msautotest\renderers\point-polaroffset.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_qeuj4b.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\point_ellipse.tmp.map -i png -o c:\appdata\local\temp\tmp_qeuj4b.png
+C:\Temp\msautotest\renderers\point_ellipse.tmp.map
+msLoadMap(): 0.005s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.000s
+msDrawMap(): Layer 1 (symbol rotated), 0.000s
+msDrawMap(): Layer 2 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.000s
+msSaveImage(c:\appdata\local\temp\tmp_qeuj4b.png) total time: 0.000s
+msFreeMap(): freeing map at 00000000003E6900.
+freeLayer(): freeing layer at 00000000003EDFF0.
+freeLayer(): freeing layer at 00000000003EF810.
+freeLayer(): freeing layer at 00000000003F10F0.
+shp2img total time: 1490208467.837s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wexgce.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\point_pixmap.tmp.map -i png -o c:\appdata\local\temp\tmp_wexgce.png
+C:\Temp\msautotest\renderers\point_pixmap.tmp.map
+msHTTPExecuteRequests(): HTTP request error. HTTP: request failed with curl error code 7 (Failed to connect to localhost port 8000: Connection refused) for http://localhost:8000/misc/data/gdalicon.png
+msLoadMap(): 1.175s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.005s
+msDrawMap(): Layer 1 (symbol rotated), 0.005s
+msDrawMap(): Layer 2 (symbol filename), 0.000s
+msDrawMap(): Layer 3 (symbol url), 0.000s
+msDrawMap(): Layer 4 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.010s
+msSaveImage(c:\appdata\local\temp\tmp_wexgce.png) total time: 0.010s
+msFreeMap(): freeing map at 00000000002C7360.
+freeLayer(): freeing layer at 00000000002CE240.
+freeLayer(): freeing layer at 00000000002CFA60.
+freeLayer(): freeing layer at 00000000002D1300.
+freeLayer(): freeing layer at 00000000002D44D0.
+freeLayer(): freeing layer at 00000000002D6010.
+shp2img total time: 1490208469.332s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_g7qbok.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\point_pixmap_gif.tmp.map -i png -o c:\appdata\local\temp\tmp_g7qbok.png
+C:\Temp\msautotest\renderers\point_pixmap_gif.tmp.map
+msLoadMap(): 0.010s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (symbol), 0.000s
+msDrawMap(): Layer 1 (symbol rotated), 0.000s
+msDrawMap(): Layer 2 (anchors), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.000s
+msSaveImage(c:\appdata\local\temp\tmp_g7qbok.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000317450.
+freeLayer(): freeing layer at 000000000031E330.
+freeLayer(): freeing layer at 000000000031FB90.
+freeLayer(): freeing layer at 00000000003214B0.
+shp2img total time: 1490208469.582s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dgvwec.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\point_svg.tmp.map -i png -o c:\appdata\local\temp\tmp_dgvwec.png
+C:\Temp\msautotest\renderers\point_svg.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ov8t73.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\point_truetype.tmp.map -i png -o c:\appdata\local\temp\tmp_ov8t73.png
+C:\Temp\msautotest\renderers\point_truetype.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vprd3e.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\point_vector.tmp.map -i png -o c:\appdata\local\temp\tmp_vprd3e.png
+C:\Temp\msautotest\renderers\point_vector.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jvy60d.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\poly-label-multiline-pos-auto.tmp.map -i png -o c:\appdata\local\temp\tmp_jvy60d.png
+C:\Temp\msautotest\renderers\poly-label-multiline-pos-auto.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vnqqqq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\poly-label-pos-auto.tmp.map -i png -o c:\appdata\local\temp\tmp_vnqqqq.png
+C:\Temp\msautotest\renderers\poly-label-pos-auto.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ux4iei.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-as-line-offset.tmp.map -i png -o c:\appdata\local\temp\tmp_ux4iei.png
+C:\Temp\msautotest\renderers\polygon-as-line-offset.tmp.map
+msLoadMap(): 0.020s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.020s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.020s
+msSaveImage(c:\appdata\local\temp\tmp_ux4iei.png) total time: 0.010s
+msFreeMap(): freeing map at 00000000003571B0.
+freeLayer(): freeing layer at 0000000000363160.
+shp2img total time: 1490208471.348s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gwsua5.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-as-line.tmp.map -i png -o c:\appdata\local\temp\tmp_gwsua5.png
+C:\Temp\msautotest\renderers\polygon-as-line.tmp.map
+msLoadMap(): 0.025s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.010s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.010s
+msSaveImage(c:\appdata\local\temp\tmp_gwsua5.png) total time: 0.000s
+msFreeMap(): freeing map at 00000000002B7810.
+freeLayer(): freeing layer at 00000000002BF090.
+shp2img total time: 1490208471.618s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jv4er0.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-hatch-dashed.tmp.map -i png -o c:\appdata\local\temp\tmp_jv4er0.png
+C:\Temp\msautotest\renderers\polygon-hatch-dashed.tmp.map
+msLoadMap(): 0.020s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.010s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.010s
+msSaveImage(c:\appdata\local\temp\tmp_jv4er0.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000427800.
+freeLayer(): freeing layer at 000000000042F120.
+shp2img total time: 1490208472.153s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dki6y6.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-hatch.tmp.map -i png -o c:\appdata\local\temp\tmp_dki6y6.png
+C:\Temp\msautotest\renderers\polygon-hatch.tmp.map
+msLoadMap(): 0.005s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.005s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.005s
+msSaveImage(c:\appdata\local\temp\tmp_dki6y6.png) total time: 0.000s
+msFreeMap(): freeing map at 0000000000127910.
+freeLayer(): freeing layer at 000000000012F230.
+shp2img total time: 1490208472.398s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mwvxu8.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-pixmap.tmp.map -i png -o c:\appdata\local\temp\tmp_mwvxu8.png
+C:\Temp\msautotest\renderers\polygon-pixmap.tmp.map
+msLoadMap(): 0.015s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.005s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.010s
+msSaveImage(c:\appdata\local\temp\tmp_mwvxu8.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000387570.
+freeLayer(): freeing layer at 000000000038EC60.
+shp2img total time: 1490208472.678s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_b6ps99.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-simple.tmp.map -i png -o c:\appdata\local\temp\tmp_b6ps99.png
+C:\Temp\msautotest\renderers\polygon-simple.tmp.map
+msLoadMap(): 0.000s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.000s
+msDrawMap(): Drawing Label Cache, 0.005s
+msDrawMap() total time: 0.010s
+msSaveImage(c:\appdata\local\temp\tmp_b6ps99.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000357610.
+freeLayer(): freeing layer at 000000000035ECA0.
+shp2img total time: 1490208473.096s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_whozni.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-ttf.tmp.map -i png -o c:\appdata\local\temp\tmp_whozni.png
+C:\Temp\msautotest\renderers\polygon-ttf.tmp.map
+msLoadMap(): 0.030s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.015s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.015s
+msSaveImage(c:\appdata\local\temp\tmp_whozni.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000357700.
+freeLayer(): freeing layer at 000000000035EE50.
+shp2img total time: 1490208473.378s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_6dzyzn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polygon-vector.tmp.map -i png -o c:\appdata\local\temp\tmp_6dzyzn.png
+C:\Temp\msautotest\renderers\polygon-vector.tmp.map
+msLoadMap(): 0.020s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.010s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.010s
+msSaveImage(c:\appdata\local\temp\tmp_6dzyzn.png) total time: 0.010s
+msFreeMap(): freeing map at 00000000003C77E0.
+freeLayer(): freeing layer at 00000000003CEEE0.
+shp2img total time: 1490208473.643s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wfbhma.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\polyline_no_clip.tmp.map -i png -o c:\appdata\local\temp\tmp_wfbhma.png
+C:\Temp\msautotest\renderers\polyline_no_clip.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_qo_cjc.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\poly_geomtransform_anchor.tmp.map -i png -o c:\appdata\local\temp\tmp_qo_cjc.png
+C:\Temp\msautotest\renderers\poly_geomtransform_anchor.tmp.map
+msLoadMap(): 0.005s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msDrawMap(): Layer 0 (anchortest), 0.005s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.005s
+msSaveImage(c:\appdata\local\temp\tmp_qo_cjc.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000457CF0.
+freeLayer(): freeing layer at 000000000045F890.
+shp2img total time: 1490208474.088s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_onl0lk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\raster_simple.tmp.map -i png -o c:\appdata\local\temp\tmp_onl0lk.png
+C:\Temp\msautotest\renderers\raster_simple.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_bpdl2q.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\raster_simple_opacity.tmp.map -i png -o c:\appdata\local\temp\tmp_bpdl2q.png
+C:\Temp\msautotest\renderers\raster_simple_opacity.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ypga4s.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\reproj.tmp.map -i png -o c:\appdata\local\temp\tmp_ypga4s.png
+C:\Temp\msautotest\renderers\reproj.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xiedwn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\resolution.tmp.map -i png -o c:\appdata\local\temp\tmp_xiedwn.png
+C:\Temp\msautotest\renderers\resolution.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_9udooa.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\rgba_overlay_res.tmp.map -i png -o c:\appdata\local\temp\tmp_9udooa.png
+C:\Temp\msautotest\renderers\rgba_overlay_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_yj6y8c.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\rgb_overlay.tmp.map -i png -o c:\appdata\local\temp\tmp_yj6y8c.png
+C:\Temp\msautotest\renderers\rgb_overlay.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_8teqyw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\rgb_overlay_res.tmp.map -i png -o c:\appdata\local\temp\tmp_8teqyw.png
+C:\Temp\msautotest\renderers\rgb_overlay_res.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_lqyyqv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit.tmp.map -i png -o c:\appdata\local\temp\tmp_lqyyqv.png
+C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hpecb3.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit_dithered.tmp.map -i png -o c:\appdata\local\temp\tmp_hpecb3.png
+C:\Temp\msautotest\renderers\rgb_overlay_res_to8bit_dithered.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_cdwjcs.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\text-shaping.tmp.map -i png -o c:\appdata\local\temp\tmp_cdwjcs.png
+C:\Temp\msautotest\renderers\text-shaping.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ks6oyf.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\transparent_layer.tmp.map -i png -o c:\appdata\local\temp\tmp_ks6oyf.png
+C:\Temp\msautotest\renderers\transparent_layer.tmp.map
+msLoadMap(): 0.020s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 0 (world), 0.010s
+msSearchDiskTree(): Search returned no results. Unable to open spatial index for C:\Temp\msautotest\renderers\../misc/data/world_testpoly.qix. In most cases you can safely ignore this message, otherwise check file names and permissions.
+msDrawMap(): Layer 1 (world2), 0.000s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.010s
+msSaveImage(c:\appdata\local\temp\tmp_ks6oyf.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000528FD0.
+freeLayer(): freeing layer at 00000000005302F0.
+freeLayer(): freeing layer at 0000000000531B50.
+shp2img total time: 1490208477.307s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_vep91o.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\utfgrid-escaping.tmp.map -i png -o c:\appdata\local\temp\tmp_vep91o.png
+C:\Temp\msautotest\renderers\utfgrid-escaping.tmp.map
+msLoadMap(): 0.015s
+msDrawMap(): rendering using outputformat named png (AGG/PNG).
+msDrawMap(): WMS/WFS set-up and query, 0.000s
+msOGRFileOpen(data/testutfgrid.csv)...
+OGROPen(C:\Temp\msautotest\renderers\data/testutfgrid.csv)
+msConnPoolRegister(testutfgrid,data/testutfgrid.csv,0000000001C5B6C0)
+msOGRFileWhichShapes: Setting spatial filter to 0.500000 47.000000 3.500000 50.000000
+msOGRFileNextShape: Returning shape=1, tile=0
+msOGRFileNextShape: Returning shape=2, tile=0
+msOGRFileNextShape: Returning shape=3, tile=0
+msOGRFileNextShape: Returning shape=4, tile=0
+msOGRFileNextShape: Returning shape=5, tile=0
+msOGRFileNextShape: Returning MS_DONE (no more shapes)
+msOGRLayerClose(data/testutfgrid.csv).
+msOGRFileClose(C:\Temp\msautotest\renderers\data/testutfgrid.csv,0).
+msConnPoolRelease(testutfgrid,data/testutfgrid.csv,0000000001C5B6C0)
+msConnPoolClose(data/testutfgrid.csv,0000000001C5B6C0)
+msDrawMap(): Layer 0 (testutfgrid), 0.085s
+msDrawMap(): Drawing Label Cache, 0.000s
+msDrawMap() total time: 0.085s
+msSaveImage(c:\appdata\local\temp\tmp_vep91o.png) total time: 0.005s
+msFreeMap(): freeing map at 0000000000229F40.
+freeLayer(): freeing layer at 000000000022FEA0.
+shp2img total time: 1490208477.602s
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_7dtl9f.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\uvraster.tmp.map -i png -o c:\appdata\local\temp\tmp_7dtl9f.png
+C:\Temp\msautotest\renderers\uvraster.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mwjmki.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\uvraster_reproj.tmp.map -i png -o c:\appdata\local\temp\tmp_mwjmki.png
+C:\Temp\msautotest\renderers\uvraster_reproj.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_9zr2vb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\wld_rotate.tmp.map -i png -o c:\appdata\local\temp\tmp_9zr2vb.png
+C:\Temp\msautotest\renderers\wld_rotate.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jyzbdc.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\wld_upsidedown.tmp.map -i png -o c:\appdata\local\temp\tmp_jyzbdc.png
+C:\Temp\msautotest\renderers\wld_upsidedown.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nxjw4y.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\renderers\wmsclient.tmp.map -i png -o c:\appdata\local\temp\tmp_nxjw4y.png
+C:\Temp\msautotest\renderers\wmsclient.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ufnxlk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\contour_tileindex.tmp.map -i png -o c:\appdata\local\temp\tmp_ufnxlk.png
+C:\Temp\msautotest\wxs\contour_tileindex.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_tkgz5e.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_all.tmp.map -i png -o c:\appdata\local\temp\tmp_tkgz5e.png
+C:\Temp\msautotest\wxs\ows_all.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_z1rt45.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_disable.tmp.map -i png -o c:\appdata\local\temp\tmp_z1rt45.png
+C:\Temp\msautotest\wxs\ows_disable.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jtu5yg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_empty.tmp.map -i png -o c:\appdata\local\temp\tmp_jtu5yg.png
+C:\Temp\msautotest\wxs\ows_empty.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msPrepareImage(): General error message. Image dimensions not specified. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_cjt6mm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_sos.tmp.map -i png -o c:\appdata\local\temp\tmp_cjt6mm.png
+C:\Temp\msautotest\wxs\ows_sos.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_dd0coh.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_test_xml_escaping.tmp.map -i png -o c:\appdata\local\temp\tmp_dd0coh.png
+C:\Temp\msautotest\wxs\ows_test_xml_escaping.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_qchazd.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_wcs.tmp.map -i png -o c:\appdata\local\temp\tmp_qchazd.png
+C:\Temp\msautotest\wxs\ows_wcs.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_mntbfg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_wfs.tmp.map -i png -o c:\appdata\local\temp\tmp_mntbfg.png
+C:\Temp\msautotest\wxs\ows_wfs.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_3eoqnk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\ows_wms.tmp.map -i png -o c:\appdata\local\temp\tmp_3eoqnk.png
+C:\Temp\msautotest\wxs\ows_wms.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__2en67.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\sos.tmp.map -i png -o c:\appdata\local\temp\tmp__2en67.png
+C:\Temp\msautotest\wxs\sos.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sez4kq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\tomk_workshop.tmp.map -i png -o c:\appdata\local\temp\tmp_sez4kq.png
+C:\Temp\msautotest\wxs\tomk_workshop.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xpikyq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wcs_mask.tmp.map -i png -o c:\appdata\local\temp\tmp_xpikyq.png
+C:\Temp\msautotest\wxs\wcs_mask.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_xf9tt9.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wcs_multi.tmp.map -i png -o c:\appdata\local\temp\tmp_xf9tt9.png
+C:\Temp\msautotest\wxs\wcs_multi.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wbuopv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wcs_post.tmp.map -i png -o c:\appdata\local\temp\tmp_wbuopv.png
+C:\Temp\msautotest\wxs\wcs_post.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__4ytpk.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wcs_simple.tmp.map -i png -o c:\appdata\local\temp\tmp__4ytpk.png
+C:\Temp\msautotest\wxs\wcs_simple.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_bsriki.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wcs_tileindexmixedsrs.tmp.map -i png -o c:\appdata\local\temp\tmp_bsriki.png
+C:\Temp\msautotest\wxs\wcs_tileindexmixedsrs.tmp.map
+msDrawMap(): Image handling error. Unable to initialize image. <br>
+msCalculateScale(): General error message. Invalid image extent, minx=-1.000000, miny=-1.000000, maxx=-1.000000, maxy=-1.000000. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_utbxqm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200.tmp.map -i png -o c:\appdata\local\temp\tmp_utbxqm.png
+C:\Temp\msautotest\wxs\wfs_200.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_7rxhia.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_allgeoms.tmp.map -i png -o c:\appdata\local\temp\tmp_7rxhia.png
+C:\Temp\msautotest\wxs\wfs_200_allgeoms.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_7cgu0x.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_cite.tmp.map -i png -o c:\appdata\local\temp\tmp_7cgu0x.png
+C:\Temp\msautotest\wxs\wfs_200_cite.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_d7vxje.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_cite_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_d7vxje.png
+C:\Temp\msautotest\wxs\wfs_200_cite_postgis.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_0okbfq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_inspire.tmp.map -i png -o c:\appdata\local\temp\tmp_0okbfq.png
+C:\Temp\msautotest\wxs\wfs_200_inspire.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_d0l4sc.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_inspire_missing_md.tmp.map -i png -o c:\appdata\local\temp\tmp_d0l4sc.png
+C:\Temp\msautotest\wxs\wfs_200_inspire_missing_md.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_evxkck.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_inspire_scenario1.tmp.map -i png -o c:\appdata\local\temp\tmp_evxkck.png
+C:\Temp\msautotest\wxs\wfs_200_inspire_scenario1.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_tw_ril.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures.tmp.map -i png -o c:\appdata\local\temp\tmp_tw_ril.png
+C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_gnskg0.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures_no_compute_number_matched.tmp.map -i png -o c:\appdata\local\temp\tmp_gnskg0.png
+C:\Temp\msautotest\wxs\wfs_200_low_wfsmaxfeatures_no_compute_number_matched.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_arn9lg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_alltypes.tmp.map -i png -o c:\appdata\local\temp\tmp_arn9lg.png
+C:\Temp\msautotest\wxs\wfs_alltypes.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp__5o56n.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_default_version_110.tmp.map -i png -o c:\appdata\local\temp\tmp__5o56n.png
+C:\Temp\msautotest\wxs\wfs_default_version_110.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hlu5r0.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_filter.tmp.map -i png -o c:\appdata\local\temp\tmp_hlu5r0.png
+C:\Temp\msautotest\wxs\wfs_filter.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'park'. <br>
+msShapefileOpen(): Unable to access file. (C:\Temp\msautotest\wxs\park) <br>
+msShapefileOpen(): Unable to access file. (C:\Temp\msautotest\wxs\./data/park) <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ytifam.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_filter_ogr.tmp.map -i png -o c:\appdata\local\temp\tmp_ytifam.png
+C:\Temp\msautotest\wxs\wfs_filter_ogr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_kbabgm.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_filter_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_kbabgm.png
+C:\Temp\msautotest\wxs\wfs_filter_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jag2zg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_filter_projmeter.tmp.map -i png -o c:\appdata\local\temp\tmp_jag2zg.png
+C:\Temp\msautotest\wxs\wfs_filter_projmeter.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hbctfw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_group.tmp.map -i png -o c:\appdata\local\temp\tmp_hbctfw.png
+C:\Temp\msautotest\wxs\wfs_group.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_nme0oh.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_misc.tmp.map -i png -o c:\appdata\local\temp\tmp_nme0oh.png
+C:\Temp\msautotest\wxs\wfs_misc.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sbxacv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_multi_geom_elements.tmp.map -i png -o c:\appdata\local\temp\tmp_sbxacv.png
+C:\Temp\msautotest\wxs\wfs_multi_geom_elements.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sqysyx.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr.tmp.map -i png -o c:\appdata\local\temp\tmp_sqysyx.png
+C:\Temp\msautotest\wxs\wfs_ogr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jjcksz.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr_25d.tmp.map -i png -o c:\appdata\local\temp\tmp_jjcksz.png
+C:\Temp\msautotest\wxs\wfs_ogr_25d.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ia0pfy.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr_drv_nocreatedatasource.tmp.map -i png -o c:\appdata\local\temp\tmp_ia0pfy.png
+C:\Temp\msautotest\wxs\wfs_ogr_drv_nocreatedatasource.tmp.map
+loadOutputFormat(): General error message. OUTPUTFORMAT (nocreatedatasource) clause references driver (OGR/SDTS), but this driver isn't configured. <br>
+msInitDefaultOGROutputFormat(): General error message. OGR `SDTS' driver does not support output. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_sqwln0.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr_geojson.tmp.map -i png -o c:\appdata\local\temp\tmp_sqwln0.png
+C:\Temp\msautotest\wxs\wfs_ogr_geojson.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_3qbeet.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr_invalid_filename.tmp.map -i png -o c:\appdata\local\temp\tmp_3qbeet.png
+C:\Temp\msautotest\wxs\wfs_ogr_invalid_filename.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wusnua.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr_native_sql.tmp.map -i png -o c:\appdata\local\temp\tmp_wusnua.png
+C:\Temp\msautotest\wxs\wfs_ogr_native_sql.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wd2kr9.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr_nonexistingdrv.tmp.map -i png -o c:\appdata\local\temp\tmp_wd2kr9.png
+C:\Temp\msautotest\wxs\wfs_ogr_nonexistingdrv.tmp.map
+loadOutputFormat(): General error message. OUTPUTFORMAT (nonexistingdrv) clause references driver (OGR/nonexistingdrv), but this driver isn't configured. <br>
+msInitDefaultOGROutputFormat(): General error message. No OGR driver named `nonexistingdrv' available. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ress3d.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_ogr_no_native_sql.tmp.map -i png -o c:\appdata\local\temp\tmp_ress3d.png
+C:\Temp\msautotest\wxs\wfs_ogr_no_native_sql.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_u4v1gv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_optional_items.tmp.map -i png -o c:\appdata\local\temp\tmp_u4v1gv.png
+C:\Temp\msautotest\wxs\wfs_optional_items.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_igsnbb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_postgis_25d.tmp.map -i png -o c:\appdata\local\temp\tmp_igsnbb.png
+C:\Temp\msautotest\wxs\wfs_postgis_25d.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'point3d'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_uylnvl.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_shp_tileindex_of_shp.tmp.map -i png -o c:\appdata\local\temp\tmp_uylnvl.png
+C:\Temp\msautotest\wxs\wfs_shp_tileindex_of_shp.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_oozyiz.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_simple.tmp.map -i png -o c:\appdata\local\temp\tmp_oozyiz.png
+C:\Temp\msautotest\wxs\wfs_simple.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_iqwyeg.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_simple_ogr.tmp.map -i png -o c:\appdata\local\temp\tmp_iqwyeg.png
+C:\Temp\msautotest\wxs\wfs_simple_ogr.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_p0ymex.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_test5299.tmp.map -i png -o c:\appdata\local\temp\tmp_p0ymex.png
+C:\Temp\msautotest\wxs\wfs_test5299.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_k3svpu.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_time.tmp.map -i png -o c:\appdata\local\temp\tmp_k3svpu.png
+C:\Temp\msautotest\wxs\wfs_time.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_fehobd.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_time_ogr.tmp.map -i png -o c:\appdata\local\temp\tmp_fehobd.png
+C:\Temp\msautotest\wxs\wfs_time_ogr.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_agm9ik.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wfs_time_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_agm9ik.png
+C:\Temp\msautotest\wxs\wfs_time_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'time'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_1zjnze.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_dimensions.tmp.map -i png -o c:\appdata\local\temp\tmp_1zjnze.png
+C:\Temp\msautotest\wxs\wms_dimensions.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ukfbhf.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_inspire.tmp.map -i png -o c:\appdata\local\temp\tmp_ukfbhf.png
+C:\Temp\msautotest\wxs\wms_inspire.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hv8bh9.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_legend.tmp.map -i png -o c:\appdata\local\temp\tmp_hv8bh9.png
+C:\Temp\msautotest\wxs\wms_legend.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zfytoe.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_nosld.tmp.map -i png -o c:\appdata\local\temp\tmp_zfytoe.png
+C:\Temp\msautotest\wxs\wms_nosld.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_wass0l.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_nosld_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_wass0l.png
+C:\Temp\msautotest\wxs\wms_nosld_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_f36gsh.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_ogr_native_sql.tmp.map -i png -o c:\appdata\local\temp\tmp_f36gsh.png
+C:\Temp\msautotest\wxs\wms_ogr_native_sql.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_tvs5_z.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_raster.tmp.map -i png -o c:\appdata\local\temp\tmp_tvs5_z.png
+C:\Temp\msautotest\wxs\wms_raster.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_pye71d.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_simple.tmp.map -i png -o c:\appdata\local\temp\tmp_pye71d.png
+C:\Temp\msautotest\wxs\wms_simple.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_epzgiv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_simple_kml.tmp.map -i png -o c:\appdata\local\temp\tmp_epzgiv.png
+C:\Temp\msautotest\wxs\wms_simple_kml.tmp.map
+msProcessProjection(): Projection library error. proj error "No such file or directory" for "init=./data/epsg2:42304" <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_h8txod.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_simple_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_h8txod.png
+C:\Temp\msautotest\wxs\wms_simple_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'road'. <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_lgajmq.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_sld.tmp.map -i png -o c:\appdata\local\temp\tmp_lgajmq.png
+C:\Temp\msautotest\wxs\wms_sld.tmp.mapmsPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_oduk_z.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_sld2.tmp.map -i png -o c:\appdata\local\temp\tmp_oduk_z.png
+C:\Temp\msautotest\wxs\wms_sld2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_9rr7pb.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_sld_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_9rr7pb.png
+C:\Temp\msautotest\wxs\wms_sld_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'province'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_rgtzaf.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_sld_proj.tmp.map -i png -o c:\appdata\local\temp\tmp_rgtzaf.png
+C:\Temp\msautotest\wxs\wms_sld_proj.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_zvm7tr.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_sld_validation.tmp.map -i png -o c:\appdata\local\temp\tmp_zvm7tr.png
+C:\Temp\msautotest\wxs\wms_sld_validation.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_fejxsw.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_tileindexmixedsrs.tmp.map -i png -o c:\appdata\local\temp\tmp_fejxsw.png
+C:\Temp\msautotest\wxs\wms_tileindexmixedsrs.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_hw0erp.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time1.tmp.map -i png -o c:\appdata\local\temp\tmp_hw0erp.png
+C:\Temp\msautotest\wxs\wms_time1.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_ngij84.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time1_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_ngij84.png
+C:\Temp\msautotest\wxs\wms_time1_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern4'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_deznag.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time2.tmp.map -i png -o c:\appdata\local\temp\tmp_deznag.png
+C:\Temp\msautotest\wxs\wms_time2.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_jelner.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time2_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_jelner.png
+C:\Temp\msautotest\wxs\wms_time2_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern4'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_l_vxlv.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time_pattern.tmp.map -i png -o c:\appdata\local\temp\tmp_l_vxlv.png
+C:\Temp\msautotest\wxs\wms_time_pattern.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_s3q1fn.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test.tmp.map -i png -o c:\appdata\local\temp\tmp_s3q1fn.png
+C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_7cifhl.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_7cifhl.png
+C:\Temp\msautotest\wxs\wms_time_pattern_12_13_test_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern12'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_j1q2ke.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time_pattern_fail.tmp.map -i png -o c:\appdata\local\temp\tmp_j1q2ke.png
+C:\Temp\msautotest\wxs\wms_time_pattern_fail.tmp.map
+DEBUG:root:Creating file c:\appdata\local\temp\tmp_k8pw0r.png
+DEBUG:root:shp2img -m C:\Temp\msautotest\wxs\wms_time_pattern_postgis.tmp.map -i png -o c:\appdata\local\temp\tmp_k8pw0r.png
+C:\Temp\msautotest\wxs\wms_time_pattern_postgis.tmp.map
+msDrawMap(): Image handling error. Failed to draw layer named 'pattern1'. <br>
+msPostGISLayerOpen(): Query error. Database connection failed. Check server logs for more details.Is the database running? Is it allowing connections? Does the specified user exist? Is the password valid? Is the database on the standard port? <br>
+Done!
