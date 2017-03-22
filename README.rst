@@ -1,7 +1,7 @@
 mappyfile
 =========
 
-A pure Python MapFile parser for working with MapServer, built using `plyplus <https://github.com/erezsh/plyplus>`_ and `PLY <http://www.dabeaz.com/ply/>`_
+A pure Python MapFile parser for working with MapServer, built using `Lark <https://github.com/erezsh/lark>`_
 
 .. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/class_parsed_small.png   
 
@@ -19,7 +19,7 @@ mappyfile is available on PyPI (Python Package Index), and can be installed usin
 
     pip install mappyfile
 
-This will also install its required dependencies plyplus and PLY. 
+This will also install its required dependency Lark. 
 
 Documentation
 -------------
