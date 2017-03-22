@@ -1,0 +1,373 @@
+import os, logging
+import pytest
+from mappyfile.parser import Parser
+from mappyfile.pprint import PrettyPrinter
+import mappyfile
+from mappyfile.transformer import MapfileToDict
+
+def output(s):
+    """
+    Parse, transform, and pretty print 
+    the result
+    """
+    p = Parser()
+    m = MapfileToDict()
+    
+    ast = p.parse(s)
+    #print(ast)
+    d = m.transform(ast)
+    #print(d)
+    pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
+    return pp.pprint(d)
+
+def check_result(s):
+    try:
+        s2 = output(s)
+        assert(s == s2)
+    except AssertionError:
+        logging.info(s)
+        logging.info(s2)
+        raise
+    
+def test_layer():
+    s = "LAYER NAME 'Test' END"
+    check_result(s)
+
+def test_class():
+
+    s = "CLASS NAME 'Test' END"
+    check_result(s)
+
+def test_style():
+
+    s = "STYLE COLOR 0 0 255 WIDTH 5 LINECAP BUTT END"
+    check_result(s)
+
+def test_style_pattern():
+
+    s = """
+    STYLE
+        PATTERN 5 5 END 
+    END
+    """
+
+    exp = "STYLE PATTERN 5 5 END END"
+    assert(output(s) == exp)
+
+def test_style_pattern2():
+
+    s = """
+    STYLE 
+        PATTERN 
+            5 5
+        END 
+    END
+    """
+
+    exp = "STYLE PATTERN 5 5 END END"
+    assert(output(s) == exp)
+
+def test_style_pattern3():
+    """
+    This type of string fails
+    """
+    s = "STYLE PATTERN 5 5 END END"
+    exp = "STYLE PATTERN 5 5 END END"
+    assert(output(s) == exp)
+
+def test_style_pattern4():
+    """
+    Fails
+    A single value on each line
+    Need new part to grammar?
+    | PATTERN NL+ ((int|float) NL*)* END
+
+    However this causes:
+    ParseError: Ambiguous parsing results (1024)
+
+    """
+    s = """
+    STYLE 
+        PATTERN 
+            5
+            5 
+        END 
+    END
+    """
+    exp = "STYLE PATTERN 5.0 5.0 END END"
+    assert(output(s) == exp)
+
+def test_metadata():
+    """
+    Cannot parse metadata directly
+    """
+    s = """METADATA 'wms_title' 'Test simple wms' END"""
+
+    assert(output(s) == s)
+  
+def test_layer_text_query():
+    s = """
+    CLASS
+        TEXT (tostring([area],"%.2f"))
+    END
+    """
+    exp = """CLASS TEXT (tostring([area],"%.2f")) END"""
+    assert(output(s) == exp)
+
+def test_label():
+    """
+    Currently AUTO is not retu
+    """
+    s = """
+    LABEL
+      COLOR  0 0 0
+      FONT Vera
+      TYPE truetype
+      SIZE 8
+      POSITION AUTO
+      PARTIALS FALSE
+      OUTLINECOLOR 255 255 255			
+    END 
+    """
+    exp = "LABEL COLOR 0 0 0 FONT Vera TYPE truetype SIZE 8 POSITION AUTO PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
+    assert(output(s) == exp)
+
+def test_output_format():
+    """
+    grid is not as the name for the IMAGETYPE or OUTPUTFORMAT
+    """
+    s = """
+    MAP
+        IMAGETYPE grid
+        OUTPUTFORMAT
+          NAME grid2
+          DRIVER "GDAL/AAIGRID"
+          IMAGEMODE INT16
+          FORMATOPTION 'NULLVALUE=-99'
+        END
+    END
+    """
+    exp = "MAP IMAGETYPE grid OUTPUTFORMAT NAME grid2 DRIVER 'GDAL/AAIGRID' IMAGEMODE INT16 FORMATOPTION 'NULLVALUE=-99' END END"
+    #print(output(s))
+    #print exp
+    assert(output(s) == exp)
+
+def test_class_symbol():
+    s = """
+    CLASS
+        STYLE # a shadow
+            COLOR 151 151 151
+            SYMBOL [symbol]
+            OFFSET 2 2
+            SIZE [size]
+        END
+    END
+    """
+    exp = "CLASS STYLE COLOR 151 151 151 SYMBOL [symbol] OFFSET 2 2 SIZE [size] END END"
+    assert(output(s) == exp)
+
+def test_filter():
+    s = """
+    LAYER
+        NAME 'filters_test002'
+        FILTER 'aitkin'i
+    END
+    """
+
+    exp = "LAYER NAME 'filters_test002' FILTER 'aitkin'i END"
+    assert(output(s) == exp)
+
+def test_regex():
+    s = r"""
+    LAYER
+        NAME 'regexp-example'
+        FILTERITEM 'placename'
+        FILTER \hotel\
+    END
+    """
+    exp = r"LAYER NAME 'regexp-example' FILTERITEM 'placename' FILTER \hotel\ END"
+    assert(output(s) == exp)
+
+def test_feature():
+    """
+    With multiple points
+    """
+
+    s = """
+        LAYER        
+            FEATURE
+                POINTS
+                    0 10
+                END
+                POINTS
+                    -20 20
+                    20 20
+                    -20 -20
+                    0 -30
+                    20 -20
+                    -20 20
+                    -20 20
+                    30 30
+                END
+            END
+        END
+    """
+
+    exp = "LAYER FEATURE POINTS 0 10 END POINTS -20 20 20 20 -20 -20 0 -30 20 -20 -20 20 -20 20 30 30 END END END"
+    assert(output(s) == exp)
+
+def test_symbol():
+
+    s = '''
+    SYMBOL
+        NAME 'triangle'
+        TYPE VECTOR
+        POINTS
+            0 4
+            2 0
+            4 4
+            0 4
+        END
+        FILLED TRUE
+    END
+    '''
+    exp = "SYMBOL NAME 'triangle' TYPE VECTOR FILLED TRUE POINTS 0 4 2 0 4 4 0 4 END END"
+    assert(output(s) == exp)
+
+def test_class_expression1():
+    s = '''
+    CLASS
+      TEXT ([area])
+    END
+    '''
+    exp = "CLASS TEXT ([area]) END"
+    print(output(s))
+    print exp
+    assert(output(s) == exp)
+
+def test_class_expression2():
+    s = '''
+    CLASS
+      TEXT ("[area]")
+    END
+    '''
+    exp = 'CLASS TEXT ("[area]") END'
+    print(output(s))
+    print exp
+    assert(output(s) == exp)
+
+def test_complex_class_expression():
+    s = '''
+    CLASS
+      TEXT ("Area is: " + tostring([area],"%.2f"))
+    END
+    '''         
+    print(output(s))
+    exp = '''CLASS TEXT ("Area is: " + tostring([area],"%.2f")) END'''
+    assert(output(s) == exp)
+
+def test_or_expressions():
+    """
+    See http://www.mapserver.org/mapfile/expressions.html#expressions
+    """
+
+    s = '''
+    CLASS
+        EXPRESSION ("[style_class]" = "10" OR "[style_class]" = "20")
+    END
+    '''
+
+    print(output(s))
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
+    assert(output(s) == exp)
+
+    s = '''
+    CLASS
+        EXPRESSION ("[style_class]" = "10" || "[style_class]" = "20")
+    END
+    '''
+
+    print(output(s))
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) || ( "[style_class]" = "20" ) ) END'
+    assert(output(s) == exp)
+
+def test_and_expressions():
+    s = '''
+    CLASS
+        EXPRESSION ("[style_class]" = "10" AND "[style_class]" = "20")
+    END
+    '''
+
+    print(output(s))
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
+    assert(output(s) == exp)
+
+    s = '''
+    CLASS
+        EXPRESSION ("[style_class]" = "10" && "[style_class]" = "20")
+    END
+    '''
+
+    print(output(s))
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) && ( "[style_class]" = "20" ) ) END'
+    assert(output(s) == exp)
+
+def test_not_expressions():
+    s = '''
+    CLASS
+        EXPRESSION NOT("[style_class]" = "20")
+    END
+    '''
+
+    print(output(s))
+    exp = 'CLASS EXPRESSION NOT ( "[style_class]" = "20" ) END'
+    assert(output(s) == exp)
+
+    s = '''
+    CLASS
+        EXPRESSION !("[style_class]" = "20")
+    END
+    '''
+
+    print(output(s))
+    exp = 'CLASS EXPRESSION ! ( "[style_class]" = "20" ) END'
+    assert(output(s) == exp)
+
+def test_processing_directive():
+
+    s = """
+    LAYER
+        NAME 'ProcessingLayer'
+        PROCESSING 'BANDS=1'
+        PROCESSING 'CONTOUR_ITEM=elevation'
+        PROCESSING 'CONTOUR_INTERVAL=20'
+    END
+    """
+
+    #print(output(s))
+    exp = "LAYER NAME 'ProcessingLayer' PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' END"
+    assert(output(s) == exp)
+
+def test_config_directive():
+
+    s = """
+    MAP
+        NAME 'ConfigMap'
+        CONFIG MS_ERRORFILE 'stderr'
+        CONFIG 'PROJ_DEBUG' 'OFF'
+        CONFIG 'ON_MISSING_DATA' 'IGNORE'
+    END
+    """
+
+    #print(output(s))
+    exp = "MAP NAME 'ConfigMap' config MS_ERRORFILE 'stderr' config 'PROJ_DEBUG' 'OFF' config 'ON_MISSING_DATA' 'IGNORE' END"
+    assert(output(s) == exp)
+
+def run_tests():        
+    #pytest.main(["tests/test_snippets.py::test_style_pattern"])
+    pytest.main(["tests/test_snippets.py"])
+
+if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
+    #test_config_directive()
+    run_tests()
