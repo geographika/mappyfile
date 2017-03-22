@@ -50,11 +50,13 @@ class PrettyPrinter(object):
             return False
 
     def is_block_list(self, lst):
-
         if len(lst) == 1 and isinstance(lst[0], list):
             return True
         else:
             return False
+
+    def is_list_of_lists(self, lst):
+        return all(isinstance(l, list) for l in lst)
 
     def process_dict(self, key, d, level):
 
@@ -72,8 +74,6 @@ class PrettyPrinter(object):
         
         lines = []
         spacer = self.spacer * (level + 1)
-
-
         block_list = self.is_block_list(lst)
 
         # add the items in the list
@@ -118,7 +118,6 @@ class PrettyPrinter(object):
         return s
 
     def format_attribute(self, val):
-
         if self.in_quotes(val):
             val = self.standardise_quotes(val)
         else:
@@ -154,10 +153,28 @@ class PrettyPrinter(object):
         else:
             return False
 
-    def standardise_quotes(self, val):
+    def escape_quotes(self, val):
+        """
+        Escape any quotes in a value
+        """
+        if val.startswith(self.quote) and val.endswith(self.quote):
+            # make sure any previously escaped quotes are not re-escaped
+            middle = val[1:-1].replace("\\" + self.quote, self.quote)
+            middle = middle.replace(self.quote, "\\" + self.quote)
+            val = "%s%s%s" % (self.quote, middle, self.quote)
 
+        return val
+
+    def standardise_quotes(self, val):
+        """
+        Change the quotes used to wrap a value to the pprint default
+        E.g. "val" to 'val' or 'val' to "val"
+        """
         if val.startswith(self.altquote) and val.endswith(self.altquote):
-            val = "%s%s%s"  % (self.quote, val[1:-1], self.quote)
+            middle = val[1:-1]
+            val = "%s%s%s" % (self.quote, middle, self.quote)
+
+        val = self.escape_quotes(val)
 
         return val
 
@@ -166,7 +183,6 @@ class PrettyPrinter(object):
         All non-quoted keys should be un uppercase
         Otherwise do not modify input
         """
-
         if self.in_quotes(key):
             key = self.format_value(key) 
         else:
@@ -178,12 +194,15 @@ class PrettyPrinter(object):
         return key
 
     def format_line(self, spacer, key, value):
+        return self.__format_line(spacer, self.format_key(key), self.format_value(value))
+
+    def __format_line(self, spacer, key, value):
 
         tmpl = u"{spacer}{key} {value}"
         d = {
             "spacer": spacer,
-            "key": self.format_key(key),
-            "value": self.format_value(value)
+            "key": key,
+            "value": value
             }
         return tmpl.format(**d)
 
@@ -251,10 +270,16 @@ class PrettyPrinter(object):
                     if key == "config":
                         # config declaration allows for pairs of values
                         value = ["%s %s" % (self.format_key(k), self.format_attribute(v)) for k,v in value.items()]
-                    for v in value:                        
-                        lines.append(self.format_line(self.whitespace(level, 1), key, v))
+                    for v in value:
+                        # keys and values are already formatted so do not format them again                 
+                        lines.append(self.__format_line(self.whitespace(level, 1), key, v))
                 elif isinstance(value, list):
-                    lines += self.process_list(key, value, level)
+                    if self.is_list_of_lists(value):
+                        # value is list of lists, so create composite type for each list e.g. several POINTS in a FEATURE
+                        for l in value:
+                            lines += self.process_list(key, [l], level)
+                    else:
+                        lines += self.process_list(key, value, level)
                 else:
                     lines.append(self.format_line(self.whitespace(level, 1), key, value))
 
