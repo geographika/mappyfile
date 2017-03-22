@@ -1,142 +1,102 @@
-start: NL* composite NL*;
+start: _NL* composite _NL*
 
-composite: composite_type attr? NL+ composite_body END
-       | composite_type points END
-       | composite_type pattern END
-       | composite_type attr END
-       ;
-composite_body: composite_item* ;
-@composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) NL+;
+composite: composite_type attr? _NL+ composite_body _END
+       | composite_type points _END
+       | composite_type pattern _END
+       | composite_type attr _END
 
-points: POINTS NL+ (num_pair NL*)* END
-      | POINTS num_pair* END
-      ;
-pattern: PATTERN NL+ (num_pair NL*)* END
-      | PATTERN num_pair* END
-      ;
+composite_body: _composite_item*
+_composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) _NL+
 
-projection: PROJECTION NL+ ((string NL*)+|AUTO NL+) END;
-metadata: METADATA NL+ ((string_pair|attr) NL+)+ END;
-values: VALUES NL+ ((string_pair) NL+)+ END;
+points: "POINTS" _NL+ (_num_pair _NL*)* _END
+      | "POINTS" _num_pair* _END
 
-validation: VALIDATION NL+ ((string_pair|attr) NL+)+ END;
+pattern: "PATTERN" _NL+ (_num_pair _NL*)* _END
+       | "PATTERN" _num_pair* _END
 
-attr: attr_name value+;
+projection: "PROJECTION" _NL+ ((string _NL*)+|"AUTO"i _NL+) _END
+metadata: "METADATA" _NL+ ((string_pair|attr) _NL+)+ _END
+values: "VALUES" _NL+ ((string_pair) _NL+)+ _END
+validation: "VALIDATION" _NL+ ((string_pair|attr) _NL+)+ _END
 
-attr_name: NAME | composite_type;
-@value: bare_string | string | int | float | expression | attr_bind | path | regexp | runtime_var | list;
 
-int: INT;
-int_pair: int int;
-bare_string: NAME | SYMBOL | AUTO | GRID | CLASS;
-string: STRING1 | STRING2 | STRING3 ;
-string_pair: string string;
-float: FLOAT;
-float_pair: float float;
-path: PATH;
-regexp: REGEXP;
-runtime_var: RUNTIME_VAR;
-list: '{' value (',' value)* '}';
+attr: attr_name value+
 
-@num_pair: (int|float) (int|float);
+attr_name: NAME | composite_type
+?value: bare_string | string | int | float | expression | attr_bind | path | regexp | runtime_var | list
 
-attr_bind: '\[' bare_string '\]';
+int: SIGNED_INT
+int_pair: int int
+!bare_string: NAME | "SYMBOL"i | "AUTO"i | "GRID"i | "CLASS"i
+string: STRING1 | STRING2 | STRING3 
+string_pair: string string
+float: SIGNED_FLOAT
+float_pair: float float
+path: PATH
+regexp: REGEXP
+runtime_var: RUNTIME_VAR
+list: "{" value ("," value)* "}"
 
-@expression: '\(' or_test '\)';
-?or_test : (or_test OR)? and_test;
-?and_test : (and_test AND)? comparison;
-?comparison: (comparison compare_op)? add;
-compare_op: '>=' | '<' | '=[*]' | '==' | '=' | '~' | '~[*]' | '>' | '<=' | IN;
+_num_pair: (int|float) (int|float)
 
-?add: (add '\+')? (func_call | value);
-func_call: attr_name '\(' func_params '\)';
-func_params: value (',' value)*;
+attr_bind: "[" bare_string "]"
 
-composite_type: CLASS
-            | CLUSTER
-            | COMPOSITE
-            | CONFIG
-            | FEATURE
-            | FONTSET
-            | GRID
-            | INCLUDE
-            | JOIN
-            | LABEL
-            | LAYER
-            | LEADER
-            | LEGEND
-            | MAP
-            | OUTPUTFORMAT
-            | QUERYMAP
-            | REFERENCE
-            | SCALEBAR
-            | SCALETOKEN
-            | STYLE
-            | SYMBOL
-            | WEB
-            ;
+?expression: "(" or_test ")"
+?or_test : (or_test "OR")? and_test
+?and_test : (and_test "AND")? comparison
+?comparison: (comparison compare_op)? add
+!compare_op: ">=" | "<" | "=*" | "==" | "=" | "~" | "~*" | ">" | "<=" | "IN"
 
-%fragment I: '(?i)';    // Case Insensitive
-%fragment S: '(?s)';    // Dot Matches Newline
+?add: (add "+")? (func_call | value)
+func_call: attr_name "(" func_params ")"
+func_params: value ("," value)*
 
-NAME: I '[a-z_][a-z0-9_]*(?=([\s(]|\]))' (%unless
-    END: I 'END';
-    AND: I 'AND';
-    OR: I 'OR';
-    AUTO: I 'AUTO';
-    IN: I 'IN';
+!composite_type: "CLASS"i
+            | "CLUSTER"i
+            | "COMPOSITE"i
+            | "CONFIG"i
+            | "FEATURE"i
+            | "FONTSET"i
+            | "GRID"i
+            | "INCLUDE"i
+            | "JOIN"i
+            | "LABEL"i
+            | "LAYER"i
+            | "LEADER"i
+            | "LEGEND"i
+            | "MAP"i
+            | "OUTPUTFORMAT"i
+            | "QUERYMAP"i
+            | "REFERENCE"i
+            | "SCALEBAR"i
+            | "SCALETOKEN"i
+            | "STYLE"i
+            | "SYMBOL"i
+            | "WEB"i
 
-    // Valid composites
-    CLASS: I 'CLASS';
-    CLUSTER: I 'CLUSTER';
-    COMPOSITE: I 'COMPOSITE';
-    CONFIG: I 'CONFIG';
-    FEATURE: I 'FEATURE';
-    FONTSET: I 'FONTSET';
-    GRID: I 'GRID';
-    INCLUDE: I 'INCLUDE';
-    JOIN: I 'JOIN';
-    LABEL: I 'LABEL';
-    LAYER: I 'LAYER';
-    LEADER: I 'LEADER';
-    LEGEND: I 'LEGEND';
-    MAP: I 'MAP';
-    OUTPUTFORMAT: I 'OUTPUTFORMAT';
-    QUERYMAP: I 'QUERYMAP';
-    REFERENCE: I 'REFERENCE';
-    SCALEBAR: I 'SCALEBAR';
-    SCALETOKEN: I 'SCALETOKEN';
-    STYLE: I 'STYLE';
-    SYMBOL: I 'SYMBOL';
-    VALUES: I 'VALUES';
-    WEB: I 'WEB';
+PATH: /[a-z_]*[.\/][a-z0-9_\/.]+/i
+NAME: /[a-z_][a-z0-9_]*/i
 
-    // Special composites
-    POINTS: I 'POINTS';
-    PATTERN: I 'PATTERN';
-    PROJECTION: I 'PROJECTION';
-    METADATA: I 'METADATA';
-    VALIDATION: I 'VALIDATION';
- ); // Match names and paths
+SIGNED_FLOAT: ["-"|"+"] FLOAT
+SIGNED_INT: ["-"|"+"] INT
 
-%fragment EXP_POSTFIX: I 'e[-+]?\d+';
+%import common.FLOAT
+%import common.INT
 
-PATH: I '[a-z_]*[./][a-z0-9_/.]+' ;
+STRING1: /".*?(?<!\\\\)(\\\\\\\\)*?"/
+STRING2: /'.*?(?<!\\\\)(\\\\\\\\)*?'/
+STRING3: /`.*?`/   // XXX TODO
+REGEXP: /\/.*?\//
+RUNTIME_VAR: /%.*?%/
 
-INT: I '-?\d+';
-FLOAT: '-?(\d+\.\d*|\.\d+)(' EXP_POSTFIX ')?'
-       '|\d+' EXP_POSTFIX;
+COMMENT: /\#[^\n]*/
+CCOMMENT: /\/(?s)[*].*?[*]\//
 
-%fragment STRING_INTERNAL: '.*?(?<!\\)(\\\\)*?' ;
+_END: "END"i
 
-STRING1: '"' STRING_INTERNAL '"' ;
-STRING2: '\'' STRING_INTERNAL '\'' ;
-STRING3: '`.*?`' ;  // XXX TODO
-REGEXP: '/.*?/' ;
-RUNTIME_VAR: '%.*?%' ;
+WS: /[ \t\f]+/
+_NL: /[\r\n]+/
 
-COMMENT: '\#[^\n]*'(%ignore);
-CCOMMENT: S '/[*].*?[*]/' (%ignore) (%newline);
-
-WS: '[ \t\f]+' (%ignore);
-NL: '[\r\n]+' (%newline);
+%ignore COMMENT
+%ignore CCOMMENT
+%ignore WS
