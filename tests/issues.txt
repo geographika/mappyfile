@@ -19,7 +19,7 @@ validation: VALIDATION NL+ ((string_pair|attr) NL+)+ END;
 Maps with problems:
 
 
-#parser = Parser(try_ply=True)
+#parser = Parser()
 #ast = parser.parse_file('./tests/sample_maps/256_overlay_res.map')
 #ast = parser.parse_file('./tests/sample_maps/class16_oddscale.map')
 #ast = parser.parse_file('./tests/sample_maps/class16_range.map')
