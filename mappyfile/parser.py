@@ -8,7 +8,7 @@ class Parser(object):
         self.cwd = cwd
         self.expand_includes = expand_includes
 
-        gf = os.path.join(os.path.dirname(__file__), "mapfile_lark.g")
+        gf = os.path.join(os.path.dirname(__file__), "mapfile.g")
         grammar_text = open(gf).read()
 
         self.g = Lark(grammar_text, parser='earley', lexer='standard')
