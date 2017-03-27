@@ -246,6 +246,9 @@ def test_class_expression1():
     assert(output(s) == exp)
 
 def test_class_expression2():
+    """
+    shp2img -m C:\Temp\msautotest\query\text.tmp.map  -l text_test002 -o c:\temp\tmp_onl0lk.png
+    """
     s = '''
     CLASS
       TEXT ("[area]")
@@ -363,11 +366,29 @@ def test_config_directive():
     exp = "MAP NAME 'ConfigMap' config MS_ERRORFILE 'stderr' config 'PROJ_DEBUG' 'OFF' config 'ON_MISSING_DATA' 'IGNORE' END"
     assert(output(s) == exp)
 
+def test_multiple_composites():
+    """
+    UnexpectedToken: Unexpected token Token(__CLASS9, 'CLASS') at line 5, column 5.
+    Expected: set([u'_NL'])
+    Context: 'CLASS'(__CLASS9) '\n'(_NL) 'Name'(NAME) '"Name2"'(STRING1) '\n'(_NL)
+    """
+
+    s = """
+    CLASS
+        Name "Name1"
+    END
+    CLASS
+        Name "Name2"
+    END
+    """
+    exp = "CLASS Name 'Name1' END CLASS Name 'Name2' END"
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_config_directive()
+    #test_multiple_composites()
     run_tests()
