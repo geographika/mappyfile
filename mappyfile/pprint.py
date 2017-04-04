@@ -105,7 +105,7 @@ class PrettyPrinter(object):
         """
         Print out a list of values
         """
-        vals = map(str, val)
+        vals = list(map(str, val))
 
         if self.is_paired_list(key):
             # join the values together so each line has a pair
