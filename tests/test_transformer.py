@@ -18,7 +18,7 @@ def test_processing_directive():
     t = MapfileToDict()
     d = t.transform(ast)
 
-    print d
+    print(d)
 
     assert(len(d["processing"]) == 3)
 
@@ -39,7 +39,7 @@ def test_config_directive():
     t = MapfileToDict()
     d = t.transform(ast)
 
-    print d
+    print(d)
 
     assert(len(d["config"]) == 3)
 

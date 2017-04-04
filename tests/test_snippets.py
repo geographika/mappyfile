@@ -242,7 +242,7 @@ def test_class_expression1():
     '''
     exp = "CLASS TEXT ([area]) END"
     print(output(s))
-    print exp
+    print(exp)
     assert(output(s) == exp)
 
 def test_class_expression2():
@@ -256,7 +256,7 @@ def test_class_expression2():
     '''
     exp = 'CLASS TEXT ("[area]") END'
     print(output(s))
-    print exp
+    print(exp)
     assert(output(s) == exp)
 
 def test_complex_class_expression():

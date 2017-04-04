@@ -11,7 +11,7 @@ def test_all_maps():
     p = Parser(expand_includes=False)
 
     for fn in os.listdir(sample_dir):
-        print fn
+        print(fn)
         try:
             ast = p.parse_file(os.path.join(sample_dir, fn))
             #ast.to_png_with_pydot(r'C:\Temp\Trees\%s.png' % os.path.basename(fn))

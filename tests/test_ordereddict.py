@@ -7,7 +7,7 @@ def test_dict():
     d = DefaultOrderedDict()
     d["key"] = ["value"]
 
-    print d["key"]
+    print(d["key"])
 
 def run_tests():        
     #pytest.main(["tests/test_ordereddict.py::test_dict"])

@@ -4,7 +4,6 @@ if is_python3:
     unicode = str
     
 from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES
-from itertools import izip
 
 ALL_KEYWORDS = COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
 
