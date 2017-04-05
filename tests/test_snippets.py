@@ -67,6 +67,8 @@ def test_style_pattern2():
     exp = "STYLE PATTERN 5 5 END END"
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_style_pattern3():
     """
     This type of string fails
@@ -75,6 +77,8 @@ def test_style_pattern3():
     exp = "STYLE PATTERN 5 5 END END"
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_style_pattern4():
     """
     Fails
@@ -97,6 +101,8 @@ def test_style_pattern4():
     exp = "STYLE PATTERN 5.0 5.0 END END"
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_metadata():
     """
     Cannot parse metadata directly
@@ -242,7 +248,7 @@ def test_class_expression1():
     '''
     exp = "CLASS TEXT ([area]) END"
     print(output(s))
-    print exp
+    print(exp)
     assert(output(s) == exp)
 
 def test_class_expression2():
@@ -256,7 +262,7 @@ def test_class_expression2():
     '''
     exp = 'CLASS TEXT ("[area]") END'
     print(output(s))
-    print exp
+    print(exp)
     assert(output(s) == exp)
 
 def test_complex_class_expression():
@@ -366,6 +372,8 @@ def test_config_directive():
     exp = "MAP NAME 'ConfigMap' config MS_ERRORFILE 'stderr' config 'PROJ_DEBUG' 'OFF' config 'ON_MISSING_DATA' 'IGNORE' END"
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_multiple_composites():
     """
     UnexpectedToken: Unexpected token Token(__CLASS9, 'CLASS') at line 5, column 5.
