@@ -47,6 +47,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
+    <Content Include="LICENSE" />
     <Content Include="misc\maplayer.xml">
       <SubType>Code</SubType>
     </Content>
@@ -122,6 +123,9 @@
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
     <Content Include="requirements.txt" />
+    <Content Include="setup.cfg">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tests\errors_lark.log" />
     <Content Include="tests\issues.txt" />
     <Content Include="tests\samples\new_c_comments.map" />
