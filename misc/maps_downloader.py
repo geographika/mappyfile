@@ -10,7 +10,7 @@ for generating an AUTH_KEY
 """
 
 
-activate_this = r'C:\VirtualEnvs\pmsmapserverdev\Scripts\activate_this.py'
+activate_this = r'C:\VirtualEnvs\mappyfile-dev\Scripts\activate_this.py'
 execfile(activate_this, dict(__file__=activate_this))
 
 from github import Github
