@@ -153,6 +153,13 @@ These have been downloaded and added to the ``/tests`` folder. This folder also 
 ..
     http://stackoverflow.com/questions/600079/how-do-i-clone-a-subdirectory-only-of-a-git-repository
 
+Releases
+--------
+
++ 0.2.1 - new ``findall`` function https://github.com/geographika/mappyfile/pull/12
++ 0.2.0 - switch to Lark parser
++ 0.1.0 - initial release
+
 Future Development
 ------------------
 
