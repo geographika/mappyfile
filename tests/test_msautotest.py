@@ -25,7 +25,7 @@ def create_image_from_map(map_file, dll_location):
     with p.stdout:
         print(map_file)
         for line in iter(p.stdout.readline, b''):
-            print(line,)
+            print(line)
 
     p.wait() # wait for the subprocess to exit
 

@@ -4,7 +4,6 @@ if is_python3:
     unicode = str
     
 from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES
-from itertools import izip
 
 ALL_KEYWORDS = COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
 
@@ -106,7 +105,7 @@ class PrettyPrinter(object):
         """
         Print out a list of values
         """
-        vals = map(str, val)
+        vals = list(map(str, val))
 
         if self.is_paired_list(key):
             # join the values together so each line has a pair

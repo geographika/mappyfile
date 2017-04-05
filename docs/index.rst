@@ -101,6 +101,12 @@ Accessing Values
 
 .. literalinclude:: examples/accessing_values.py
    :language: python
+
+Query
++++++
+
+.. literalinclude:: examples/search.py
+   :language: python
   
 Modifying Values
 ++++++++++++++++
