@@ -384,11 +384,25 @@ def test_multiple_composites():
     exp = "CLASS Name 'Name1' END CLASS Name 'Name2' END"
     assert(output(s) == exp)
 
+def test_map():
+    s = """
+    MAP
+        LAYER
+            NAME 'test'
+        END
+    END
+    """
+
+    #output(s)
+    exp = "MAP LAYER NAME 'test' END END"
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_multiple_composites()
+    #test_map()
     run_tests()
+    #print("Done!")
