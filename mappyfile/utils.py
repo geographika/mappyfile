@@ -50,6 +50,11 @@ def find(lst, key, value):
 def __find__(lst, key, value):
     return next((item for item in lst if item[key.lower()] == value), None)
 
+def findall(lst, key, value):
+    possible_values = ("'%s'" % value, '"%s"' % value)
+
+    return (item for item in lst if item[key.lower()] in possible_values)
+
 def _save(output_file, map_string):
 
     with codecs.open(output_file, "w", encoding="utf-8") as f:
