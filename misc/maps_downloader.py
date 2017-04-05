@@ -11,7 +11,7 @@ for generating an AUTH_KEY
 
 
 activate_this = r'C:\VirtualEnvs\pmsmapserverdev\Scripts\activate_this.py'
-exec(compile(open(activate_this).read(), activate_this, 'exec'), dict(__file__=activate_this))
+execfile(activate_this, dict(__file__=activate_this))
 
 from github import Github
 import os
@@ -30,9 +30,9 @@ def get_repo():
 def get_all_files(fld, repo):
 
     all_files = []
-    print(fld)
+    print fld
     contents = repo.get_contents(fld)
-    print(contents)
+    print contents
 
     for c in contents:
 

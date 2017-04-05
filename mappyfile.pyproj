@@ -39,6 +39,7 @@
     <Folder Include="docs\_static\" />
     <Folder Include="docs\_templates\" />
     <Folder Include="mappyfile\" />
+    <Folder Include="misc\" />
     <Folder Include="tests\" />
     <Folder Include="tests\samples\" />
     <Folder Include="tests\sample_maps\" />
@@ -46,6 +47,9 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
+    <Content Include="misc\maplayer.xml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\.gitignore" />
     <Content Include="docs\converting_from_mapscript.rst" />
     <Content Include="docs\examples\after.map" />
@@ -428,6 +432,12 @@
     <Content Include="tox.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bottle_app.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="misc\qgis.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="docs\conf.py" />
     <Compile Include="docs\examples\adding_values.py" />
     <Compile Include="docs\examples\create_diagram.py">
@@ -460,7 +470,7 @@
     <Compile Include="mappyfile\__init__.py" />
     <Compile Include="setup.py" />
     <Compile Include="tests\test_msautotest.py" />
-    <Compile Include="tests\maps_downloader.py" />
+    <Compile Include="misc\maps_downloader.py" />
     <Compile Include="tests\test_pprint.py" />
     <Compile Include="tests\test_ordereddict.py" />
     <Compile Include="tests\test_sample_maps.py" />

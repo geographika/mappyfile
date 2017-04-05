@@ -9,3 +9,5 @@ cache
 /dist/*
 /mappyfile.egg-info/*
 /prospector.log
+/docs/_build/*
+.pypirc
