@@ -5,6 +5,7 @@ from mappyfile.pprint import PrettyPrinter
 import mappyfile
 from mappyfile.transformer import MapfileToDict
 
+
 def output(s):
     """
     Parse, transform, and pretty print 
@@ -20,6 +21,7 @@ def output(s):
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     return pp.pprint(d)
 
+
 def check_result(s):
     try:
         s2 = output(s)
@@ -28,20 +30,24 @@ def check_result(s):
         logging.info(s)
         logging.info(s2)
         raise
-    
+
+
 def test_layer():
     s = "LAYER NAME 'Test' END"
     check_result(s)
+
 
 def test_class():
 
     s = "CLASS NAME 'Test' END"
     check_result(s)
 
+
 def test_style():
 
     s = "STYLE COLOR 0 0 255 WIDTH 5 LINECAP BUTT END"
     check_result(s)
+
 
 def test_style_pattern():
 
@@ -53,6 +59,7 @@ def test_style_pattern():
 
     exp = "STYLE PATTERN 5 5 END END"
     assert(output(s) == exp)
+
 
 def test_style_pattern2():
 
@@ -110,7 +117,8 @@ def test_metadata():
     s = """METADATA 'wms_title' 'Test simple wms' END"""
 
     assert(output(s) == s)
-  
+
+
 def test_layer_text_query():
     s = """
     CLASS
@@ -119,6 +127,7 @@ def test_layer_text_query():
     """
     exp = """CLASS TEXT (tostring([area],"%.2f")) END"""
     assert(output(s) == exp)
+
 
 def test_label():
     """
@@ -137,6 +146,7 @@ def test_label():
     """
     exp = "LABEL COLOR 0 0 0 FONT Vera TYPE truetype SIZE 8 POSITION AUTO PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
     assert(output(s) == exp)
+
 
 def test_output_format():
     """
@@ -158,6 +168,7 @@ def test_output_format():
     #print exp
     assert(output(s) == exp)
 
+
 def test_class_symbol():
     s = """
     CLASS
@@ -172,6 +183,8 @@ def test_class_symbol():
     exp = "CLASS STYLE COLOR 151 151 151 SYMBOL [symbol] OFFSET 2 2 SIZE [size] END END"
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_filter():
     s = """
     LAYER
@@ -183,6 +196,8 @@ def test_filter():
     exp = "LAYER NAME 'filters_test002' FILTER 'aitkin'i END"
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_regex():
     s = r"""
     LAYER
@@ -193,6 +208,7 @@ def test_regex():
     """
     exp = r"LAYER NAME 'regexp-example' FILTERITEM 'placename' FILTER \hotel\ END"
     assert(output(s) == exp)
+
 
 def test_feature():
     """
@@ -222,6 +238,7 @@ def test_feature():
     exp = "LAYER FEATURE POINTS 0 10 END POINTS -20 20 20 20 -20 -20 0 -30 20 -20 -20 20 -20 20 30 30 END END END"
     assert(output(s) == exp)
 
+
 def test_symbol():
 
     s = '''
@@ -240,6 +257,8 @@ def test_symbol():
     exp = "SYMBOL NAME 'triangle' TYPE VECTOR FILLED TRUE POINTS 0 4 2 0 4 4 0 4 END END"
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_class_expression1():
     s = '''
     CLASS
@@ -251,6 +270,8 @@ def test_class_expression1():
     print(exp)
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_class_expression2():
     """
     shp2img -m C:\Temp\msautotest\query\text.tmp.map  -l text_test002 -o c:\temp\tmp_onl0lk.png
@@ -265,6 +286,8 @@ def test_class_expression2():
     print(exp)
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_complex_class_expression():
     s = '''
     CLASS
@@ -275,6 +298,8 @@ def test_complex_class_expression():
     exp = '''CLASS TEXT ("Area is: " + tostring([area],"%.2f")) END'''
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_or_expressions():
     """
     See http://www.mapserver.org/mapfile/expressions.html#expressions
@@ -300,6 +325,8 @@ def test_or_expressions():
     exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) || ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_and_expressions():
     s = '''
     CLASS
@@ -321,6 +348,8 @@ def test_and_expressions():
     exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) && ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
+
+@pytest.mark.xfail
 def test_not_expressions():
     s = '''
     CLASS
@@ -342,6 +371,7 @@ def test_not_expressions():
     exp = 'CLASS EXPRESSION ! ( "[style_class]" = "20" ) END'
     assert(output(s) == exp)
 
+
 def test_processing_directive():
 
     s = """
@@ -356,6 +386,7 @@ def test_processing_directive():
     #print(output(s))
     exp = "LAYER NAME 'ProcessingLayer' PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' END"
     assert(output(s) == exp)
+
 
 def test_config_directive():
 
@@ -392,6 +423,7 @@ def test_multiple_composites():
     exp = "CLASS Name 'Name1' END CLASS Name 'Name2' END"
     assert(output(s) == exp)
 
+
 def test_map():
     s = """
     MAP
@@ -405,9 +437,11 @@ def test_map():
     exp = "MAP LAYER NAME 'test' END END"
     assert(output(s) == exp)
 
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
