@@ -1,6 +1,8 @@
 mappyfile
 =========
 
+| |Version| |Build Status| |Docs|
+
 A pure Python MapFile parser for working with MapServer, built using `Lark <https://github.com/erezsh/lark>`_
 
 .. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/class_parsed_small.png   
@@ -63,3 +65,14 @@ Authors
 
 * Seth Girvin `@geographika <https://github.com/geographika>`_
 * Erez Shinan `@erezsh <https://github.com/erezsh>`_
+
+
+
+.. |Version| image:: https://img.shields.io/pypi/v/mappyfile.svg
+   :target: https://pypi.python.org/pypi/mappyfile
+
+.. |Build Status| image:: https://travis-ci.org/geographika/mappyfile.svg?branch=master
+   :target: https://travis-ci.org/geographika/mappyfile
+
+.. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
+   :target: http://mappyfile.readthedocs.io/en/latest/
