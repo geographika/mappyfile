@@ -182,7 +182,6 @@ def test_class_symbol():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_filter():
     s = """
     LAYER

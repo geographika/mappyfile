@@ -81,11 +81,11 @@ SIGNED_INT: ["-"|"+"] INT
 %import common.FLOAT
 %import common.INT
 
-STRING1: /".*?(?<!\\\\)(\\\\\\\\)*?"/
-STRING2: /'.*?(?<!\\\\)(\\\\\\\\)*?'/
-STRING3: /`.*?`/   // XXX TODO
-REGEXP1: /\/.*?\//
-REGEXP2: /\\\\.*?\\\\/
+STRING1: /".*?(?<!\\\\)(\\\\\\\\)*?"i?/
+STRING2: /'.*?(?<!\\\\)(\\\\\\\\)*?'i?/
+STRING3: /`.*?`i?/   // XXX TODO
+REGEXP1: /\/.*?\/i?/
+REGEXP2: /\\\\.*?\\\\i?/
 RUNTIME_VAR: /%.*?%/
 
 COMMENT: /\#[^\n]*/
