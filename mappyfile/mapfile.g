@@ -20,7 +20,7 @@ validation: "VALIDATION" _NL+ ((string_pair|attr) _NL+)+ _END
 attr: attr_name value+
 
 attr_name: NAME | composite_type
-?value: bare_string | string | int | float | expression | attr_bind | path | regexp | runtime_var | list
+?value: bare_string | string | int | float | expression | not_expression | attr_bind | path | regexp | runtime_var | list
 
 int: SIGNED_INT
 int_pair: int int
@@ -38,9 +38,10 @@ _num_pair: (int|float) _NL* (int|float)
 
 attr_bind: "[" bare_string "]"
 
+not_expression: ("!"|"NOT"i) expression
 ?expression: "(" or_test ")"
-?or_test : (or_test "OR")? and_test
-?and_test : (and_test "AND")? comparison
+?or_test : (or_test ("OR"i|"||"))? and_test
+?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? add
 !compare_op: ">=" | "<" | "=*" | "==" | "=" | "~" | "~*" | ">" | "<=" | "IN"
 

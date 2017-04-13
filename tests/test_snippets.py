@@ -297,7 +297,6 @@ def test_complex_class_expression():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_or_expressions():
     """
     See http://www.mapserver.org/mapfile/expressions.html#expressions
@@ -320,11 +319,10 @@ def test_or_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) || ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_and_expressions():
     s = '''
     CLASS
@@ -343,11 +341,10 @@ def test_and_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) && ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_not_expressions():
     s = '''
     CLASS
@@ -356,7 +353,7 @@ def test_not_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION NOT ( "[style_class]" = "20" ) END'
+    exp = 'CLASS EXPRESSION not ( "[style_class]" = "20" ) END'
     assert(output(s) == exp)
 
     s = '''
@@ -366,7 +363,7 @@ def test_not_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION ! ( "[style_class]" = "20" ) END'
+    exp = 'CLASS EXPRESSION not ( "[style_class]" = "20" ) END'
     assert(output(s) == exp)
 
 

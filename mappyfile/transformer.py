@@ -166,6 +166,9 @@ class MapfileToDict(Transformer):
         v = t[0]
         return v
 
+    def not_expression(self, t):
+        return "not %s" % t[0]
+
     def regexp(self, t):
         """
         E.g. regexp(u'/^[0-9]*$/')
