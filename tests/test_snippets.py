@@ -428,6 +428,17 @@ def test_map():
     assert(output(s) == exp)
 
 
+def test_oneline_composites():
+    s = """
+    CLASS
+    PROJECTION "init=epsg:2056"
+    END
+    END
+    """
+
+    exp = ' '.join(s.split())
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
