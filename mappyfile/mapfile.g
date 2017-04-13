@@ -39,7 +39,7 @@ _num_pair: (int|float) _NL* (int|float)
 attr_bind: "[" bare_string "]"
 
 not_expression: ("!"|"NOT"i) expression
-?expression: "(" or_test ")"
+expression: "(" or_test ")"
 ?or_test : (or_test ("OR"i|"||"))? and_test
 ?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? add

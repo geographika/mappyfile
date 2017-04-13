@@ -123,7 +123,7 @@ def test_layer_text_query():
         TEXT (tostring([area],"%.2f"))
     END
     """
-    exp = """CLASS TEXT (tostring([area],"%.2f")) END"""
+    exp = """CLASS TEXT ((tostring([area],"%.2f"))) END"""
     assert(output(s) == exp)
 
 
@@ -254,7 +254,6 @@ def test_symbol():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_class_expression1():
     s = '''
     CLASS
@@ -267,7 +266,6 @@ def test_class_expression1():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_class_expression2():
     """
     shp2img -m C:\Temp\msautotest\query\text.tmp.map  -l text_test002 -o c:\temp\tmp_onl0lk.png
@@ -283,7 +281,6 @@ def test_class_expression2():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_complex_class_expression():
     s = '''
     CLASS
@@ -291,7 +288,7 @@ def test_complex_class_expression():
     END
     '''         
     print(output(s))
-    exp = '''CLASS TEXT ("Area is: " + tostring([area],"%.2f")) END'''
+    exp = '''CLASS TEXT ("Area is: " + (tostring([area],"%.2f"))) END'''
     assert(output(s) == exp)
 
 
@@ -307,7 +304,7 @@ def test_or_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
     s = '''
@@ -317,7 +314,7 @@ def test_or_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
 
@@ -329,7 +326,7 @@ def test_and_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
     s = '''
@@ -339,7 +336,7 @@ def test_and_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
 
@@ -351,7 +348,7 @@ def test_not_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION not ( "[style_class]" = "20" ) END'
+    exp = 'CLASS EXPRESSION not (( "[style_class]" = "20" )) END'
     assert(output(s) == exp)
 
     s = '''
@@ -361,7 +358,7 @@ def test_not_expressions():
     '''
 
     print(output(s))
-    exp = 'CLASS EXPRESSION not ( "[style_class]" = "20" ) END'
+    exp = 'CLASS EXPRESSION not (( "[style_class]" = "20" )) END'
     assert(output(s) == exp)
 
 

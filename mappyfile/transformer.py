@@ -168,6 +168,8 @@ class MapfileToDict(Transformer):
 
     def not_expression(self, t):
         return "not %s" % t[0]
+    def expression(self, t):
+        return "(%s)" % t[0]
     def add(self, t):
         return "%s + %s" % tuple(t)
 
