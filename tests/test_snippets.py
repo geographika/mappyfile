@@ -195,7 +195,6 @@ def test_filter():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_regex():
     s = r"""
     LAYER

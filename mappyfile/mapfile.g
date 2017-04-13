@@ -30,7 +30,7 @@ string_pair: string string
 float: SIGNED_FLOAT
 float_pair: float float
 path: PATH
-regexp: REGEXP
+regexp: REGEXP1 | REGEXP2
 runtime_var: RUNTIME_VAR
 list: "{" value ("," value)* "}"
 
@@ -84,7 +84,8 @@ SIGNED_INT: ["-"|"+"] INT
 STRING1: /".*?(?<!\\\\)(\\\\\\\\)*?"/
 STRING2: /'.*?(?<!\\\\)(\\\\\\\\)*?'/
 STRING3: /`.*?`/   // XXX TODO
-REGEXP: /\/.*?\//
+REGEXP1: /\/.*?\//
+REGEXP2: /\\\\.*?\\\\/
 RUNTIME_VAR: /%.*?%/
 
 COMMENT: /\#[^\n]*/
