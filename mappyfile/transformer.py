@@ -51,7 +51,7 @@ class MapfileToDict(Transformer):
             attr = None
 
         if isinstance(body, tuple):
-            assert body[0] == 'attr' or body[1] == 'points', body  # Parser artefacts
+            assert body[0] == 'attr' or body[1] == 'points' or body[1] == 'pattern', body  # Parser artefacts
             body = [body]
         else:
             body = body.children

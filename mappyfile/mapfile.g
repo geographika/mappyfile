@@ -8,11 +8,8 @@ composite: composite_type attr? _NL+ composite_body _END
 composite_body: _composite_item*
 _composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) _NL+
 
-points: "POINTS" _NL+ (_num_pair _NL*)* _END
-      | "POINTS" _num_pair* _END
-
-pattern: "PATTERN" _NL+ (_num_pair _NL*)* _END
-       | "PATTERN" _num_pair* _END
+points: "POINTS" _NL* (_num_pair _NL*)* _END
+pattern: "PATTERN" _NL* (_num_pair _NL*)* _END
 
 projection: "PROJECTION" _NL+ ((string _NL*)+|"AUTO"i _NL+) _END
 metadata: "METADATA" _NL+ ((string_pair|attr) _NL+)+ _END
@@ -37,7 +34,7 @@ regexp: REGEXP
 runtime_var: RUNTIME_VAR
 list: "{" value ("," value)* "}"
 
-_num_pair: (int|float) (int|float)
+_num_pair: (int|float) _NL* (int|float)
 
 attr_bind: "[" bare_string "]"
 

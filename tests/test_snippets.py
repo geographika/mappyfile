@@ -75,7 +75,6 @@ def test_style_pattern2():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_style_pattern3():
     """
     This type of string fails
@@ -85,7 +84,6 @@ def test_style_pattern3():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_style_pattern4():
     """
     Fails
@@ -105,7 +103,7 @@ def test_style_pattern4():
         END 
     END
     """
-    exp = "STYLE PATTERN 5.0 5.0 END END"
+    exp = "STYLE PATTERN 5 5 END END"
     assert(output(s) == exp)
 
 
