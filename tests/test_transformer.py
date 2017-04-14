@@ -44,8 +44,8 @@ def test_config_directive():
     assert(len(d["config"]) == 3)
 
 def run_tests():        
-    pytest.main(["tests/test_transformer.py::test_config_directive"])
-    #pytest.main(["tests/test_parser.py"])
+    #pytest.main(["tests/test_transformer.py::test_config_directive"])
+    pytest.main(["tests/test_transformer.py"])
 
 if __name__ == '__main__':
 

@@ -77,7 +77,7 @@ def test_style_pattern2():
 
 def test_style_pattern3():
     """
-    This type of string fails
+    Test a STYLE on one line can be parsed
     """
     s = "STYLE PATTERN 5 5 END END"
     exp = "STYLE PATTERN 5 5 END END"
@@ -86,14 +86,7 @@ def test_style_pattern3():
 
 def test_style_pattern4():
     """
-    Fails
-    A single value on each line
-    Need new part to grammar?
-    | PATTERN NL+ ((int|float) NL*)* END
-
-    However this causes:
-    ParseError: Ambiguous parsing results (1024)
-
+    Test pattern values on separate lines are valid
     """
     s = """
     STYLE 
@@ -105,7 +98,6 @@ def test_style_pattern4():
     """
     exp = "STYLE PATTERN 5 5 END END"
     assert(output(s) == exp)
-
 
 @pytest.mark.xfail
 def test_metadata():
@@ -128,9 +120,6 @@ def test_layer_text_query():
 
 
 def test_label():
-    """
-    Currently AUTO is not retu
-    """
     s = """
     LABEL
       COLOR  0 0 0
@@ -147,9 +136,7 @@ def test_label():
 
 
 def test_output_format():
-    """
-    grid is not as the name for the IMAGETYPE or OUTPUTFORMAT
-    """
+
     s = """
     MAP
         IMAGETYPE grid
@@ -162,8 +149,6 @@ def test_output_format():
     END
     """
     exp = "MAP IMAGETYPE grid OUTPUTFORMAT NAME grid2 DRIVER 'GDAL/AAIGRID' IMAGEMODE INT16 FORMATOPTION 'NULLVALUE=-99' END END"
-    #print(output(s))
-    #print exp
     assert(output(s) == exp)
 
 
@@ -261,8 +246,6 @@ def test_class_expression1():
     END
     '''
     exp = "CLASS TEXT ([area]) END"
-    print(output(s))
-    print(exp)
     assert(output(s) == exp)
 
 
@@ -276,8 +259,6 @@ def test_class_expression2():
     END
     '''
     exp = 'CLASS TEXT ("[area]") END'
-    print(output(s))
-    print(exp)
     assert(output(s) == exp)
 
 
@@ -287,7 +268,6 @@ def test_complex_class_expression():
       TEXT ("Area is: " + tostring([area],"%.2f"))
     END
     '''         
-    print(output(s))
     exp = '''CLASS TEXT ("Area is: " + (tostring([area],"%.2f"))) END'''
     assert(output(s) == exp)
 
@@ -303,7 +283,6 @@ def test_or_expressions():
     END
     '''
 
-    print(output(s))
     exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
@@ -313,7 +292,6 @@ def test_or_expressions():
     END
     '''
 
-    print(output(s))
     exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
@@ -325,7 +303,6 @@ def test_and_expressions():
     END
     '''
 
-    print(output(s))
     exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
@@ -335,7 +312,6 @@ def test_and_expressions():
     END
     '''
 
-    print(output(s))
     exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) )) END'
     assert(output(s) == exp)
 
@@ -347,7 +323,6 @@ def test_not_expressions():
     END
     '''
 
-    print(output(s))
     exp = 'CLASS EXPRESSION not (( "[style_class]" = "20" )) END'
     assert(output(s) == exp)
 
@@ -357,7 +332,6 @@ def test_not_expressions():
     END
     '''
 
-    print(output(s))
     exp = 'CLASS EXPRESSION not (( "[style_class]" = "20" )) END'
     assert(output(s) == exp)
 
@@ -389,7 +363,6 @@ def test_config_directive():
     END
     """
 
-    #print(output(s))
     exp = "MAP NAME 'ConfigMap' config MS_ERRORFILE 'stderr' config 'PROJ_DEBUG' 'OFF' config 'ON_MISSING_DATA' 'IGNORE' END"
     assert(output(s) == exp)
 
@@ -423,12 +396,15 @@ def test_map():
     END
     """
 
-    #output(s)
     exp = "MAP LAYER NAME 'test' END END"
     assert(output(s) == exp)
 
 
 def test_oneline_composites():
+    """
+    Test a composite on one line is parsed correctly
+    """
+
     s = """
     CLASS
     PROJECTION "init=epsg:2056"
@@ -436,6 +412,7 @@ def test_oneline_composites():
     END
     """
 
+    # put on one line
     exp = ' '.join(s.split())
     assert(output(s) == exp)
 
@@ -446,6 +423,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_map()
+    #test_complex_class_expression()
     run_tests()
-    #print("Done!")
+    print("Done!")
