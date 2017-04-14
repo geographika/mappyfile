@@ -156,6 +156,7 @@ These have been downloaded and added to the ``/tests`` folder. This folder also 
 Releases
 --------
 
++ 0.2.2 - various fixes to grammar, and allow for alternate comparison operators
 + 0.2.1 - new ``findall`` function https://github.com/geographika/mappyfile/pull/12
 + 0.2.0 - switch to Lark parser
 + 0.1.0 - initial release

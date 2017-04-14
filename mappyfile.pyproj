@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_snippets.py</StartupFile>
+    <StartupFile>tests\test_msautotest.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -48,9 +48,6 @@
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
     <Content Include="LICENSE" />
-    <Content Include="misc\maplayer.xml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="docs\.gitignore" />
     <Content Include="docs\converting_from_mapscript.rst" />
     <Content Include="docs\examples\after.map" />
@@ -437,9 +434,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bottle_app.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="misc\qgis.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\conf.py" />
