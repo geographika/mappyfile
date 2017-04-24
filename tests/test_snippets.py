@@ -363,7 +363,7 @@ def test_config_directive():
     END
     """
 
-    exp = "MAP NAME 'ConfigMap' config MS_ERRORFILE 'stderr' config 'PROJ_DEBUG' 'OFF' config 'ON_MISSING_DATA' 'IGNORE' END"
+    exp = "MAP NAME 'ConfigMap' CONFIG MS_ERRORFILE 'stderr' CONFIG 'PROJ_DEBUG' 'OFF' CONFIG 'ON_MISSING_DATA' 'IGNORE' END"
     assert(output(s) == exp)
 
 
