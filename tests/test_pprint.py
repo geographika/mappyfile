@@ -43,13 +43,13 @@ def test_double_attributes():
     ast = mappyfile.loads(s)
     pp = PrettyPrinter(indent=0, quote='"', newlinechar=" ")
     res = pp.pprint(ast)
-    assert(res == 'MAP config "MS_ERRORFILE" "stderr" END')
+    assert(res == 'MAP CONFIG "MS_ERRORFILE" "stderr" END')
 
     s = 'MAP CONFIG "MS_ERRORFILE" "stderr" END'
     ast = mappyfile.loads(s)
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ") # expected
     res = pp.pprint(ast)
-    assert(res == "MAP config 'MS_ERRORFILE' 'stderr' END")
+    assert(res == "MAP CONFIG 'MS_ERRORFILE' 'stderr' END")
         
 def test_already_escaped():
     """
