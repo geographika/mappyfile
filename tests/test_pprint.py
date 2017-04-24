@@ -98,11 +98,40 @@ def test_format_list():
     exp = [u'PATTERN', '5 5\n10 10', u'END']
     assert(r == exp)
 
+def test_unicode():
+
+    s = u"""
+    MAP
+        METADATA
+          "ows_title" "éúáí"
+        END
+    END
+    """
+    ast = mappyfile.loads(s)
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
+    res = pp.pprint(ast)
+    exp = u"MAP METADATA 'ows_title' 'éúáí' END END"
+    assert(res == exp)
+
+def test_config():
+
+    s = """
+    MAP
+        config "MS_ERRORFILE" "my.log"
+    END
+    """
+    ast = mappyfile.loads(s)
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
+    res = pp.pprint(ast)
+    print res
+    exp = u"MAP CONFIG 'MS_ERRORFILE' 'my.log' END"
+    assert(res == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_pprint.py::test_format_list"])
     pytest.main(["tests/test_pprint.py"])
 
 if __name__ == "__main__":
     run_tests()
-    #test_already_escaped()
+    #test_config()
     print("Done!")

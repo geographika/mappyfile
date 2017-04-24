@@ -263,12 +263,13 @@ class PrettyPrinter(object):
             elif self.is_composite(value): # Container
                 lines += self._format(value, level + 1)
             else:
-                if key in SINGLETON_COMPOSITE_NAMES:
+                if key in SINGLETON_COMPOSITE_NAMES:                    
                     lines += self.process_dict(key, value, level)
                 elif isinstance(value, dict): 
                     if key == "config":
                         # config declaration allows for pairs of values
                         value = ["%s %s" % (self.format_key(k), self.format_attribute(v)) for k,v in value.items()]
+                    key = self.format_key(key) # format the "parent" key
                     for v in value:
                         # keys and values are already formatted so do not format them again                 
                         lines.append(self.__format_line(self.whitespace(level, 1), key, v))
