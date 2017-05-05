@@ -124,7 +124,7 @@ def test_config():
     ast = mappyfile.loads(s)
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     res = pp.pprint(ast)
-    print res
+    #print(res)
     exp = u"MAP CONFIG 'MS_ERRORFILE' 'my.log' END"
     assert(res == exp)
 
