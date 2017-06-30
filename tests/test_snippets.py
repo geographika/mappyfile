@@ -100,6 +100,21 @@ def test_style_pattern4():
     assert(output(s) == exp)
 
 @pytest.mark.xfail
+def test_style_pattern5():
+    """
+    Test pattern with odd number of values
+    This should fail with the following error message
+    UnexpectedToken: Unexpected token Token(_END, 'END') at line 3, column 27.
+    """
+    s = """
+    STYLE 
+        PATTERN 6 4 2 4 6 END
+    END
+    """
+    exp = "STYLE PATTERN 6 4 2 4 6 END END"
+    assert(output(s) == exp)
+
+@pytest.mark.xfail
 def test_metadata():
     """
     Cannot parse metadata directly
@@ -439,6 +454,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_querymap()
+    #test_style_pattern5()
     run_tests()
     print("Done!")
