@@ -416,6 +416,22 @@ def test_oneline_composites():
     exp = ' '.join(s.split())
     assert(output(s) == exp)
 
+def test_querymap():
+
+    s = """
+    MAP
+        QUERYMAP
+           COLOR 255 255 0
+           SIZE -1 -1
+           STATUS OFF
+           STYLE HILITE
+         END
+    END
+    """
+    #print output(s)
+    exp = "MAP QUERYMAP COLOR 255 255 0 SIZE -1 -1 STATUS OFF STYLE HILITE END END"
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
@@ -423,6 +439,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_complex_class_expression()
+    #test_querymap()
     run_tests()
     print("Done!")
