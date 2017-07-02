@@ -12,8 +12,8 @@ def load(fn, cwd=None):
 
     return d    
 
-def loads(s, cwd=None):
-    p = Parser(cwd=cwd)
+def loads(s, cwd="", expand_includes=True):
+    p = Parser(cwd=cwd, expand_includes=expand_includes)
     ast = p.parse(s)
     m = MapfileToDict()
     d = m.transform(ast)

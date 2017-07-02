@@ -4,7 +4,7 @@ from lark import Lark
 
 class Parser(object):
 
-    def __init__(self, cwd=None, expand_includes=True):
+    def __init__(self, cwd="", expand_includes=True):
         self.cwd = cwd
         self.expand_includes = expand_includes
 
