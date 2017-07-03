@@ -447,6 +447,19 @@ def test_querymap():
     exp = "MAP QUERYMAP COLOR 255 255 0 SIZE -1 -1 STATUS OFF STYLE HILITE END END"
     assert(output(s) == exp)
 
+def test_output_format():
+
+    s = """
+    OUTPUTFORMAT
+        NAME "shapezip"
+        DRIVER "OGR/ESRI Shapefile"
+        TRANSPARENT FALSE
+        IMAGEMODE FEATURE
+    END
+    """
+    exp = "OUTPUTFORMAT NAME 'shapezip' DRIVER 'OGR/ESRI Shapefile' TRANSPARENT FALSE IMAGEMODE FEATURE END"
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
@@ -454,6 +467,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_style_pattern5()
+    #test_output_format()
     run_tests()
     print("Done!")

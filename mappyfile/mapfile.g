@@ -24,7 +24,7 @@ attr_name: NAME | composite_type
 
 int: SIGNED_INT
 int_pair: int int
-!bare_string: NAME | "SYMBOL"i | "AUTO"i | "GRID"i | "CLASS"i
+!bare_string: NAME | "SYMBOL"i | "AUTO"i | "GRID"i | "CLASS"i | "FEATURE"i
 string: STRING1 | STRING2 | STRING3 
 string_pair: string string
 float: SIGNED_FLOAT
