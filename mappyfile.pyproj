@@ -5,13 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_pprint.py</StartupFile>
+    <StartupFile>docs\examples\grammar.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>{5c4076db-883e-4df1-9c9e-e3721d8b1774}</InterpreterId>
+    <InterpreterId>{8bbe1bbf-dc1f-4cd8-98c6-b1e4f320b06d}</InterpreterId>
     <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -47,6 +47,11 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
+    <Content Include="docs\grammar.rst" />
+    <Content Include="docs\images\tree.png" />
+    <Content Include="docs\images\tree_inlining.png" />
+    <Content Include="docs\images\tree_noinlining.png" />
+    <Content Include="docs\images\tree_no_terminals.png" />
     <Content Include="LICENSE" />
     <Content Include="docs\.gitignore" />
     <Content Include="docs\converting_from_mapscript.rst" />
@@ -433,14 +438,12 @@
     <Content Include="tox.ini" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bottle_app.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="docs\conf.py" />
     <Compile Include="docs\examples\adding_values.py" />
     <Compile Include="docs\examples\create_diagram.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="docs\examples\grammar.py" />
     <Compile Include="docs\examples\modifying_values.py" />
     <Compile Include="docs\examples\accessing_values.py">
       <SubType>Code</SubType>
@@ -451,6 +454,7 @@
     <Compile Include="docs\examples\sample_json.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="docs\examples\search.py" />
     <Compile Include="mappyfile\ordereddict.py">
       <SubType>Code</SubType>
     </Compile>
@@ -479,6 +483,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="..\..\..\VirtualEnvs\mappyfile\">
+      <Id>{8bbe1bbf-dc1f-4cd8-98c6-b1e4f320b06d}</Id>
+      <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>mappyfile (Python 2.7 x64)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>
+      </PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
     <Interpreter Include="..\..\VirtualEnvs\mappyfile-pypi\">
       <Id>{dd9154a9-ff16-4d3a-8879-e6f16abd7add}</Id>
       <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
