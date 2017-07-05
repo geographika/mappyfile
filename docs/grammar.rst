@@ -22,7 +22,6 @@ below to parse and turn into an AST (Abstract Syntax Tree).
 This produces the following tree (click for the full-size version). 
 
 .. image:: images/tree.png
-    :scale: 60%
 
 The tree is stored as a Python object, shown below:
 
@@ -74,7 +73,6 @@ The ``composite_type`` rule again has a list of options, but in this case consis
 rule will keep all their terminals. Without the **!** the tree would look as below - note the ``MAP`` value is missing from the ``composite_type`` branch. 
 
 .. image:: images/tree_no_terminals.png
-    :scale: 70%
 
 Next we look at the ``attr`` rule:
 

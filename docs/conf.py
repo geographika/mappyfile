@@ -183,6 +183,7 @@ html_logo = 'images/roll-36697_640.png'
 
 html_theme_options = {
     # 'logo': 'images/roll-36697_640.png',
+    'page_width': '70%',
     'github_user': 'geographika',
     'github_repo': 'mappyfile',
     'github_button': True,
