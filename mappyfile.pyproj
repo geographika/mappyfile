@@ -5,13 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_pprint.py</StartupFile>
+    <StartupFile>docs\examples\animated_buffer.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>{5c4076db-883e-4df1-9c9e-e3721d8b1774}</InterpreterId>
+    <InterpreterId>{36da22a5-36c9-4768-9bcd-7f554a0cdb09}</InterpreterId>
     <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -47,6 +47,8 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
+    <Content Include="docs\examples\animated_buffer.map" />
+    <Content Include="docs\examples\workflow.map" />
     <Content Include="LICENSE" />
     <Content Include="docs\.gitignore" />
     <Content Include="docs\converting_from_mapscript.rst" />
@@ -441,6 +443,9 @@
     <Compile Include="docs\examples\create_diagram.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="docs\examples\helper.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="docs\examples\modifying_values.py" />
     <Compile Include="docs\examples\accessing_values.py">
       <SubType>Code</SubType>
@@ -449,6 +454,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\examples\sample_json.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="docs\examples\animated_buffer.py" />
+    <Compile Include="docs\examples\workflow.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\ordereddict.py">
@@ -479,6 +488,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="..\..\..\VirtualEnvs\mappyfile\">
+      <Id>{36da22a5-36c9-4768-9bcd-7f554a0cdb09}</Id>
+      <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>mappyfile (Python 2.7 x64)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>
+      </PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
     <Interpreter Include="..\..\VirtualEnvs\mappyfile-pypi\">
       <Id>{dd9154a9-ff16-4d3a-8879-e6f16abd7add}</Id>
       <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
