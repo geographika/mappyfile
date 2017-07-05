@@ -119,10 +119,27 @@ def test_metadata():
     """
     Cannot parse metadata directly
     """
-    s = """METADATA 'wms_title' 'Test simple wms' END"""
+    s = """
+    METADATA 
+        'wms_title' 'Test simple wms'
+    END
+    """
+    exp = """METADATA 'wms_title' 'Test simple wms' END"""
+    assert(output(s) == exp)
 
-    assert(output(s) == s)
-
+def test_metadata_unquoted():
+    """
+    The METADATA block doesn't need quotes 
+    (as long as values don't have spaces)
+    """
+    s = """
+    METADATA 
+        wms_title my_title
+    END
+    """
+    exp = """METADATA wms_title my_title END"""
+    print output(s)
+    assert(output(s) == exp)
 
 def test_layer_text_query():
     s = """
@@ -467,6 +484,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_output_format()
-    run_tests()
+    test_metadata_unquoted()
+    #run_tests()
     print("Done!")

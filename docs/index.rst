@@ -15,6 +15,7 @@ A Python library to create, parse, and modify `MapServer <http://mapserver.org/d
     transformer.rst
     pretty_printing.rst
     mapfile.rst
+    grammar.rst
 
 
 .. image:: images/class_parsed.png    

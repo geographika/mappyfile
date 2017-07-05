@@ -115,7 +115,8 @@ class MapfileToDict(Transformer):
             name = name.children[0] # Solve a parser artefact for composite names
 
         name = name.lower()
-        assert name in ATTRIBUTE_NAMES, name
+        # VALIDATION and METADATA blocks can take any unquoted string as a key
+        #assert name in ATTRIBUTE_NAMES, name 
 
         value = children[1:]
         if len(value) == 1:

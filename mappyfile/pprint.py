@@ -250,7 +250,8 @@ class PrettyPrinter(object):
             is_hidden = True
             items = enumerate(composite.values()[0])
 
-        for key, value in items:             
+        for key, value in items:
+       
             if self.is_hidden_container(key, value): # HiddenContainer
                 # now recursively print all the items in the container
                 if self.is_block_list(value):
@@ -266,6 +267,7 @@ class PrettyPrinter(object):
                 if key in SINGLETON_COMPOSITE_NAMES:                    
                     lines += self.process_dict(key, value, level)
                 elif isinstance(value, dict): 
+
                     if key == "config":
                         # config declaration allows for pairs of values
                         value = ["%s %s" % (self.format_key(k), self.format_attribute(v)) for k,v in value.items()]
@@ -273,7 +275,7 @@ class PrettyPrinter(object):
                     for v in value:
                         # keys and values are already formatted so do not format them again                 
                         lines.append(self.__format_line(self.whitespace(level, 1), key, v))
-                elif isinstance(value, list):
+                elif isinstance(value, list):                    
                     if self.is_list_of_lists(value):
                         # value is list of lists, so create composite type for each list e.g. several POINTS in a FEATURE
                         for l in value:
@@ -281,7 +283,12 @@ class PrettyPrinter(object):
                     else:
                         lines += self.process_list(key, value, level)
                 else:
-                    lines.append(self.format_line(self.whitespace(level, 1), key, value))
+                    comp_type = composite.get("__type__", "")
+                    if comp_type == "metadata":
+                        # don't add quotes to key or value
+                        lines.append(self.__format_line(self.whitespace(level, 1), key, value))
+                    else:
+                        lines.append(self.format_line(self.whitespace(level, 1), key, value))
 
         if not is_hidden: # Container
             # close the container block with an END            
