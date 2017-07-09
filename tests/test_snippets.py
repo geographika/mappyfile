@@ -15,7 +15,7 @@ def output(s):
     m = MapfileToDict()
     
     ast = p.parse(s)
-    #print(ast)
+    print(ast)
     d = m.transform(ast)
     #print(d)
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
@@ -478,6 +478,23 @@ def test_output_format():
     exp = "OUTPUTFORMAT NAME 'shapezip' DRIVER 'OGR/ESRI Shapefile' TRANSPARENT FALSE IMAGEMODE FEATURE END"
     assert(output(s) == exp)
 
+@pytest.mark.xfail
+def test_auto_projection():
+    """
+    Test an AUTO projection
+    """
+
+    s = """
+    MAP
+        PROJECTION
+            AUTO
+        END
+    END
+    """
+    exp = "MAP PROJECTION AUTO END END"
+    #print(output(s))
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
@@ -485,6 +502,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    test_metadata_unquoted()
-    #run_tests()
+    #test_auto_projection()
+    run_tests()
     print("Done!")
