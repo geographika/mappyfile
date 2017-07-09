@@ -11,3 +11,4 @@ cache
 /prospector.log
 /docs/_build/*
 .pypirc
+/.vs/mappyfile/v15/.suo

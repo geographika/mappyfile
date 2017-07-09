@@ -5,14 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>docs\examples\animated_buffer.py</StartupFile>
+    <StartupFile>tests\test_msautotest.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>{36da22a5-36c9-4768-9bcd-7f554a0cdb09}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +23,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="docs\" />
@@ -50,10 +48,12 @@
     <Content Include="docs\examples\animated_buffer.map" />
     <Content Include="docs\examples\workflow.map" />
     <Content Include="docs\grammar.rst" />
+    <Content Include="docs\images\mapserver_git_switch.png" />
     <Content Include="docs\images\tree.png" />
     <Content Include="docs\images\tree_inlining.png" />
     <Content Include="docs\images\tree_noinlining.png" />
     <Content Include="docs\images\tree_no_terminals.png" />
+    <Content Include="docs\testing.rst" />
     <Content Include="LICENSE" />
     <Content Include="docs\.gitignore" />
     <Content Include="docs\converting_from_mapscript.rst" />
@@ -494,7 +494,6 @@
   <ItemGroup>
     <Interpreter Include="..\..\..\VirtualEnvs\mappyfile\">
       <Id>{36da22a5-36c9-4768-9bcd-7f554a0cdb09}</Id>
-      <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
       <Version>2.7</Version>
       <Description>mappyfile (Python 2.7 x64)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
@@ -506,7 +505,6 @@
     </Interpreter>
     <Interpreter Include="..\..\VirtualEnvs\mappyfile-pypi\">
       <Id>{dd9154a9-ff16-4d3a-8879-e6f16abd7add}</Id>
-      <BaseInterpreter>{99230fca-3a60-49d8-b249-7c7dd9437274}</BaseInterpreter>
       <Version>2.7</Version>
       <Description>mappyfile-pypi (Python 2.7 x64)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
@@ -518,7 +516,6 @@
     </Interpreter>
     <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
       <Id>{5c4076db-883e-4df1-9c9e-e3721d8b1774}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
       <Version>2.7</Version>
       <Description>mappyfile (Python 64-bit 2.7)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
@@ -527,9 +524,16 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>Amd64</Architecture>
     </Interpreter>
+    <Interpreter Include="C:\VirtualEnvs\mappyfile\">
+      <Id>mappyfile</Id>
+      <Version>2.7</Version>
+      <Description>mappyfile (Python 2.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
-  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
-  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in
        the BeforeBuild and AfterBuild targets below. -->
@@ -538,4 +542,5 @@
   </Target>
   <Target Name="AfterBuild">
   </Target>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>

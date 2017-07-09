@@ -1,4 +1,5 @@
-import os, logging, glob, json
+import os, logging, glob, json, shutil
+
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
@@ -31,7 +32,24 @@ def create_image_from_map(map_file, dll_location):
 
     #os.startfile(of.name)
 
+def create_copy(msautotest_fld):
+
+    # first make a backup copy of msautotest
+    msautotest_copy = os.path.join(os.path.dirname(msautotest_fld), "msautotest_mappyfile")
+
+    if os.path.isdir(msautotest_copy):
+        shutil.rmtree(msautotest_copy)
+        logging.info("Removing %s...", msautotest_copy)
+
+    logging.info("Copying %s to %s...", msautotest_fld, msautotest_copy)
+    shutil.copytree(msautotest_fld, msautotest_copy)
+    logging.info("Copying complete!")
+
+    return msautotest_copy
+
 def main(msautotest_fld, dll_location):
+
+    msautotest_copy = create_copy(msautotest_fld)
 
     parser = Parser()
     transformer = MapfileToDict()
@@ -41,11 +59,11 @@ def main(msautotest_fld, dll_location):
     #ignore_list = []
 
     mapfiles = glob.glob(msautotest_fld + '/**/*.map')
-    mapfiles = [f for f in mapfiles if '.tmp.' not in f]
+    #mapfiles = [f for f in mapfiles if '.tmp.' not in f]
     mapfiles = [f for f in mapfiles if os.path.basename(f) not in ignore_list]
     
     for fn in mapfiles:
-        #print fn
+        logging.debug("Parsing %s", fn)
         ast = parser.parse_file(fn)
         #print ast
         #r = ast.select('composite_type *') #ast.select('attr_name')
@@ -64,13 +82,13 @@ def main(msautotest_fld, dll_location):
         map_string = pp.pprint(d)
         #print(map_string)
 
-        output_file = fn.replace(".map", ".tmp.map")
+        output_file = fn.replace(msautotest_fld, msautotest_copy)
         mf = mappyfile.utils.write(d, output_file)
-        create_image_from_map(mf, dll_location) # fn for original map
+        #create_image_from_map(mf, dll_location) # fn for original map
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    fld = r"C:\Temp\msautotest"
+    fld = r"D:\GitHub\mapserver\msautotest"
     dll_location = r"C:\MapServer\bin"
     main(fld, dll_location)
     print("Done!")

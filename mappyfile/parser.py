@@ -46,7 +46,13 @@ class Parser(object):
         return '\n'.join(lines)
 
     def open_file(self, fn):
-        return open(fn, "r", encoding="utf-8").read() # specify unicode for Python 2.7
+
+        try:
+            return open(fn, "r", encoding="utf-8").read() # specify unicode for Python 2.7
+        except UnicodeDecodeError as ex:
+            logging.debug(ex)
+            logging.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format. ", fn)
+            raise
 
     def parse_file(self, fn):
 
