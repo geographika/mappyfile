@@ -495,6 +495,16 @@ def test_auto_projection():
     #print(output(s))
     assert(output(s) == exp)
 
+def test_runtime_expression():
+    s = """
+    CLASS
+      EXPRESSION ( [EPPL_Q100_] = %eppl% )		   
+    END
+    """
+    exp = "CLASS EXPRESSION (( [EPPL_Q100_] = %eppl% )) END"
+    #print(output(s))
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
@@ -502,6 +512,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_auto_projection()
+    #test_runtime_expression()
     run_tests()
     print("Done!")

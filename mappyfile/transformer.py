@@ -174,6 +174,10 @@ class MapfileToDict(Transformer):
     def add(self, t):
         return "%s + %s" % tuple(t)
 
+    def runtime_var(self, t):
+        v = t[0]
+        return v
+
     def regexp(self, t):
         """
         E.g. regexp(u'/^[0-9]*$/')
