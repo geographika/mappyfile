@@ -54,7 +54,7 @@ Next we'll look at the ``composite`` rule:
 This rule is matched by a list of options - each on its own line starting with the **|** (pipe) character. When writing or debugging a grammar
 you can comment out options to see which one matches for a particular input. 
 
-In our example the Mapfile matches the last option ``composite_type attr _END``, which cab ne broken down as follows:
+In our example the Mapfile matches the last option ``composite_type attr _END``, which can be broken down as follows:
 
 + a ``composite_type`` rule (in this case ``MAP``)
 + an ``attr`` rule
@@ -89,10 +89,7 @@ The ``attr_name`` rule is as follows:
 
     attr_name: NAME | composite_type
     
-Rules can be matched recursively so one of the ``attr`` of a ``composite_type`` can be another ``composite_type``. This allows us to parse
-nested composite types such as a ``CLASS`` in a ``LAYER`` in a ``MAP``. 
-
-In our example however the rule is matched by the ``NAME`` terminal. This is defined using a regular expression to for a matching string:
+In our example the rule is matched by the ``NAME`` terminal (the alternative is a ``composite_type``). This is defined using a regular expression to match a string:
 
 .. code-block:: javascript
 
@@ -149,6 +146,17 @@ Some further explanations are below:
 
     // check for path names e.g. /root/logs
     PATH: /[a-z_]*[.\/][a-z0-9_\/.]+/i
+
+Miscellaneous Notes
+-------------------
+
++ Rules can be matched recursively so one of the ``composite_body`` can contain a ``_composite_item`` which can in turn be another ``composite``. This allows us to parse
+  nested composite types such as a ``CLASS`` in a ``LAYER`` in a ``MAP``.
+
+.. code-block:: javascript
+
+	composite_body: _composite_item*
+	_composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) _NL+
 
 Grammar File
 ------------

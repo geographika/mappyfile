@@ -223,11 +223,17 @@ class PrettyPrinter(object):
         else:
             return False
 
-    def pprint(self, composite):
+    def pprint(self, composites):
         """
         Print out a nicely indented Mapfile
         """
-        lines = self._format(composite)
+
+        lines = []
+
+        # allow for multiple root composites
+        for composite in composites:
+            lines += self._format(composite)
+
         return self.newlinechar.join(lines)
 
     def _format(self, composite, level=0):

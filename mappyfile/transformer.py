@@ -37,10 +37,18 @@ def dict_from_tail(t):
 class MapfileToDict(Transformer):
   
     def start(self, children):
-        t,= children
-        assert t[0] == 'composite'
-        #assert t[1].lower() == 'map' # we can also parse partial map files
-        return t[2]
+        """
+        Not limited to MAP..END parsing of partial files or composites is 
+        also possible
+        """
+
+        composites = []
+
+        for child in children:
+            assert(child[0] == 'composite')
+            composites.append(child[2])
+
+        return composites
 
     def repeated_key(self, d, k, v):
         """
@@ -54,12 +62,20 @@ class MapfileToDict(Transformer):
         return d
 
     def composite(self, t):
+        """
+        Handle the composite types e.g. CLASS..END
+        [Tree(composite_type, [Token(__CLASS8, 'CLASS')]), Tree(composite_body, [('attr', u'name', "'test'")])]
+        """
         if len(t) == 3:
             # Parser artefact. See LINE-BREAK FLUIDITY in parsing_decisions.txt
             type_, attr, body = t
-        else:
+        elif len(t) == 2:
             type_, body = t
             attr = None
+        else:
+            assert(len(t) == 1)
+            # metadata class
+
 
         if isinstance(body, tuple):
             assert body[0] == 'attr' or body[1] == 'points' or body[1] == 'pattern', body  # Parser artefacts
@@ -67,7 +83,6 @@ class MapfileToDict(Transformer):
         else:
             body = body.children
 
-        #type_ = type_.tail[0].lower()
         type_ = type_.children[0].lower()
 
         assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES)

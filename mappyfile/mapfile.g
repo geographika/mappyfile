@@ -1,4 +1,4 @@
-start: _NL* composite _NL*
+start: (_NL* composite _NL*)+
 
 composite: composite_type attr? _NL+ composite_body _END
        | composite_type points _END

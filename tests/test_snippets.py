@@ -117,10 +117,16 @@ def test_style_pattern5():
 def test_metadata():
     """
     Cannot parse metadata directly
+
+    Produces the following AST
+    [('composite', 'metadata', OrderedDict([("'wms_title'", "'Test simple wms'")]))]
+
     """
     s = """
+    MAP
     METADATA 
         'wms_title' 'Test simple wms'
+    END
     END
     """
     exp = """METADATA 'wms_title' 'Test simple wms' END"""
@@ -398,12 +404,10 @@ def test_config_directive():
     exp = "MAP NAME 'ConfigMap' CONFIG MS_ERRORFILE 'stderr' CONFIG 'PROJ_DEBUG' 'OFF' CONFIG 'ON_MISSING_DATA' 'IGNORE' END"
     assert(output(s) == exp)
 
-
-@pytest.mark.xfail
 def test_multiple_composites():
     """
-    UnexpectedToken: Unexpected token Token(__CLASS8, 'CLASS') at line 5, column 5.
-    Expected: set([u'_NL'])
+    Allow for multiple root composites
+    This allows for easier addition of CLASSES and STYLES
     """
 
     s = """
@@ -414,9 +418,8 @@ def test_multiple_composites():
         Name "Name2"
     END
     """
-    exp = "CLASS Name 'Name1' END CLASS Name 'Name2' END"
+    exp = "CLASS NAME 'Name1' END CLASS NAME 'Name2' END"
     assert(output(s) == exp)
-
 
 def test_map():
     s = """
@@ -536,6 +539,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_config_case()
+    #test_multiple_composites()
     run_tests()
     print("Done!")
