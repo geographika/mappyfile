@@ -5,7 +5,6 @@ from mappyfile.pprint import PrettyPrinter
 import mappyfile
 from mappyfile.transformer import MapfileToDict
 
-
 def output(s):
     """
     Parse, transform, and pretty print 
@@ -15,7 +14,7 @@ def output(s):
     m = MapfileToDict()
     
     ast = p.parse(s)
-    print(ast)
+    #print(ast)
     d = m.transform(ast)
     #print(d)
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
@@ -403,9 +402,8 @@ def test_config_directive():
 @pytest.mark.xfail
 def test_multiple_composites():
     """
-    UnexpectedToken: Unexpected token Token(__CLASS9, 'CLASS') at line 5, column 5.
+    UnexpectedToken: Unexpected token Token(__CLASS8, 'CLASS') at line 5, column 5.
     Expected: set([u'_NL'])
-    Context: 'CLASS'(__CLASS9) '\n'(_NL) 'Name'(NAME) '"Name2"'(STRING1) '\n'(_NL)
     """
 
     s = """
@@ -505,6 +503,19 @@ def test_runtime_expression():
     #print(output(s))
     assert(output(s) == exp)
 
+def test_mutliple_output_formats():
+    """
+    https://github.com/geographika/mappyfile/issues/20
+    """
+    s = """
+    OUTPUTFORMAT
+        FORMATOPTION "FORM=zip"
+        FORMATOPTION "SPATIAL_INDEX=YES"
+    END
+    """
+    exp = "OUTPUTFORMAT FORMATOPTION 'FORM=zip' FORMATOPTION 'SPATIAL_INDEX=YES' END"
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
@@ -512,6 +523,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_runtime_expression()
+    #test_mutliple_output_formats()
     run_tests()
     print("Done!")

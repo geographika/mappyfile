@@ -3,7 +3,7 @@ is_python3 = sys.version_info.major == 3
 if is_python3:
     unicode = str
     
-from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES
+from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 
 ALL_KEYWORDS = COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
 
@@ -85,7 +85,7 @@ class PrettyPrinter(object):
             lines.append(s)
         else:
             # put all parts on same line
-            if key == 'processing':
+            if key in REPEATED_KEYS:
                 for v in lst:
                     lines.append(self.format_line(spacer, key, v))
             else:

@@ -5,7 +5,7 @@ Python dict structure
 
 from collections import OrderedDict
 from lark import Transformer, Tree
-from mappyfile.tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
+from mappyfile.tokens import ATTRIBUTE_NAMES, COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 from mappyfile.ordereddict import DefaultOrderedDict
 
 def plural(s):
@@ -35,12 +35,23 @@ def dict_from_tail(t):
     return d
 
 class MapfileToDict(Transformer):
-
+  
     def start(self, children):
         t,= children
         assert t[0] == 'composite'
         #assert t[1].lower() == 'map' # we can also parse partial map files
         return t[2]
+
+    def repeated_key(self, d, k, v):
+        """
+        Allow the key to be added multiple times to its parent
+        """
+        if k not in d.keys():
+            d[k] = [v]
+        else:
+            d[k].append(v)
+
+        return d
 
     def composite(self, t):
         if len(t) == 3:
@@ -71,16 +82,12 @@ class MapfileToDict(Transformer):
         d = DefaultOrderedDict(OrderedDict)
 
         for itemtype, k, v in body:          
-            
+
             if itemtype == 'attr':
 
                 # TODO tidy-up the code below
-                if k == 'processing':
-                    # PROCESSING can be repeated
-                    if 'processing' not in d.keys():
-                        d[k] = [v]
-                    else:
-                        d[k].append(v)
+                if k in REPEATED_KEYS:
+                    d = self.repeated_key(d, k, v)
                 elif k == 'config':
                     # CONFIG can be repeated, but with pairs of strings as a value
                     if 'config' not in d.keys():
