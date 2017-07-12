@@ -5,6 +5,7 @@ from misc.docs_parser import clean_term, get_values
 def check_key_values(s, exp_key, exp_v):
 
     key, values = clean_term(s)
+
     try:    
         assert(key == exp_key)
     except AssertionError:
@@ -41,6 +42,7 @@ def test_atts3():
     s = '[r] [g] [b] | [hexadecimal string] | [attribute]'
     check_values(s, ['r', 'g', 'b', 'hexadecimal string', 'attribute'])
 
+@pytest.mark.xfail
 def test_template():
     s = ':ref:`TEMPLATE <template>` [filename]'
     check_key_values(s, 'template', ['filename'])
