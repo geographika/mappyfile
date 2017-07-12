@@ -516,6 +516,19 @@ def test_mutliple_output_formats():
     exp = "OUTPUTFORMAT FORMATOPTION 'FORM=zip' FORMATOPTION 'SPATIAL_INDEX=YES' END"
     assert(output(s) == exp)
 
+def test_config_case():
+    """
+    https://github.com/geographika/mappyfile/issues/18
+    """
+
+    s = """
+    MAP
+	    CONFIG "PROJ_LIB" "projections"
+    END
+    """
+    exp = "MAP CONFIG 'PROJ_LIB' 'projections' END"
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
@@ -523,6 +536,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_mutliple_output_formats()
+    #test_config_case()
     run_tests()
     print("Done!")
