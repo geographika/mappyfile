@@ -8,7 +8,7 @@ composite: composite_type attr? _NL+ composite_body _END
 	   | validation
 
 composite_body: _composite_item*
-_composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) _NL+
+_composite_item: (composite|attr|points|projection|pattern|values) _NL+
 
 points: "POINTS"i _NL* (_num_pair _NL*)* _END
 pattern: "PATTERN"i _NL* (_num_pair _NL*)* _END

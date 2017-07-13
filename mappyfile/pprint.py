@@ -294,11 +294,13 @@ class PrettyPrinter(object):
                         lines += self.process_list(key, value, level)
                 else:
                     comp_type = composite.get("__type__", "")
-                    if comp_type == "metadata":
-                        # don't add quotes to key or value
-                        lines.append(self.__format_line(self.whitespace(level, 1), key, value))
-                    else:
-                        lines.append(self.format_line(self.whitespace(level, 1), key, value))
+                    lines.append(self.format_line(self.whitespace(level, 1), key, value))
+
+                    #if comp_type == "metadata":
+                    #    # don't add quotes to key or value
+                    #    lines.append(self.format_line(self.whitespace(level, 1), key, value))
+                    #else:
+                    #    lines.append(self.format_line(self.whitespace(level, 1), key, value))
 
         if not is_hidden: # Container
             # close the container block with an END            
