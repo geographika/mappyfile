@@ -17,9 +17,6 @@ def test_processing_directive():
     ast = p.parse(s)
     t = MapfileToDict()
     d = t.transform(ast)
-
-    print(d)
-
     assert(len(d["processing"]) == 3)
 
 def test_config_directive():
@@ -35,12 +32,8 @@ def test_config_directive():
 
     p = Parser()
     ast = p.parse(s)
-    print(ast)
     t = MapfileToDict()
     d = t.transform(ast)
-
-    print(d)
-
     assert(len(d["config"]) == 3)
 
 def run_tests():        
@@ -48,6 +41,6 @@ def run_tests():
     pytest.main(["tests/test_transformer.py"])
 
 if __name__ == '__main__':
-
     run_tests()
-    #test_processing_directive()
+    #test_config_directive()
+    print("Done!")

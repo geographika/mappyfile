@@ -48,7 +48,10 @@ class MapfileToDict(Transformer):
             assert(child[0] == 'composite')
             composites.append(child[2])
 
-        return composites
+        if len(composites) == 1:
+            return composites[0]
+        else:
+            return composites
 
     def repeated_key(self, d, k, v):
         """
