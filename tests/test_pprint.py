@@ -134,5 +134,5 @@ def run_tests():
 
 if __name__ == "__main__":
     run_tests()
-    #test_config()
+    #test_double_attributes()
     print("Done!")

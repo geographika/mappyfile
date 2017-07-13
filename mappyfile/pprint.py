@@ -230,6 +230,10 @@ class PrettyPrinter(object):
 
         lines = []
 
+        # if only a single composite is used then cast to list
+        if not isinstance(composites, list):
+            composites = [composites]
+
         # allow for multiple root composites
         for composite in composites:
             lines += self._format(composite)

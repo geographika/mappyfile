@@ -48,6 +48,7 @@ class MapfileToDict(Transformer):
             assert(child[0] == 'composite')
             composites.append(child[2])
 
+        # only return a list when there are multiple root composites (e.g. several CLASSes)
         if len(composites) == 1:
             return composites[0]
         else:
