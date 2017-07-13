@@ -179,7 +179,7 @@ class PrettyPrinter(object):
 
     def format_key(self, key):
         """
-        All non-quoted keys should be un uppercase
+        All non-quoted keys should be in uppercase
         Otherwise do not modify input
         """
         if self.in_quotes(key):
@@ -293,14 +293,14 @@ class PrettyPrinter(object):
                     else:
                         lines += self.process_list(key, value, level)
                 else:
-                    comp_type = composite.get("__type__", "")
-                    lines.append(self.format_line(self.whitespace(level, 1), key, value))
-
-                    #if comp_type == "metadata":
-                    #    # don't add quotes to key or value
-                    #    lines.append(self.format_line(self.whitespace(level, 1), key, value))
-                    #else:
-                    #    lines.append(self.format_line(self.whitespace(level, 1), key, value))
+                    comp_type = composite.get("__type__", "")                   
+                    if comp_type == "metadata":
+                        # don't add quotes to key or value, but standardise them if present
+                        key = self.standardise_quotes(key)
+                        value = self.standardise_quotes(value)
+                        lines.append(self.__format_line(self.whitespace(level, 1), key, value))
+                    else:
+                        lines.append(self.format_line(self.whitespace(level, 1), key, value))
 
         if not is_hidden: # Container
             # close the container block with an END            

@@ -14,10 +14,10 @@ points: "POINTS"i _NL* (_num_pair _NL*)* _END
 pattern: "PATTERN"i _NL* (_num_pair _NL*)* _END
 
 projection: "PROJECTION"i _NL* ((string _NL*)+|AUTO _NL+) _END
-metadata: "METADATA"i _NL* ((string_pair|attr) _NL+)+ _END
 values: "VALUES"i _NL* ((string_pair) _NL+)+ _END
-validation: "VALIDATION"i _NL* ((string_pair|attr) _NL+)+ _END
 
+metadata: "METADATA"i _NL* ((string_pair|attr) _NL+)+ _END
+validation: "VALIDATION"i _NL* ((string_pair|attr) _NL+)+ _END
 
 attr: attr_name value+
 

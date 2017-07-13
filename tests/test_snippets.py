@@ -544,5 +544,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
+    test_metadata_unquoted()
     run_tests()
     print("Done!")
