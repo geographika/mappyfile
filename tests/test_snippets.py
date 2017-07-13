@@ -113,26 +113,18 @@ def test_style_pattern5():
     exp = "STYLE PATTERN 6 4 2 4 6 END END"
     assert(output(s) == exp)
 
-@pytest.mark.xfail
 def test_metadata():
     """
-    Cannot parse metadata directly
-
-    Produces the following AST
-    [('composite', 'metadata', OrderedDict([("'wms_title'", "'Test simple wms'")]))]
-
+    Parse metadata directly
     """
     s = """
-    MAP
     METADATA 
         'wms_title' 'Test simple wms'
-    END
     END
     """
     exp = """METADATA 'wms_title' 'Test simple wms' END"""
     assert(output(s) == exp)
 
-@pytest.mark.xfail
 def test_metadata_unquoted():
     """
     The METADATA block doesn't need quotes 
@@ -145,6 +137,20 @@ def test_metadata_unquoted():
     """
     exp = """METADATA wms_title my_title END"""
     #print output(s)
+    assert(output(s) == exp)
+
+def test_validation():
+    """
+    Parse validation block directly
+    """
+    s = """
+    VALIDATION
+        "field1" "^[0-9,]+$"
+        "field2" "-1"
+    END
+    """
+    #print output(s)
+    exp = """VALIDATION 'field1' '^[0-9,]+$' 'field2' '-1' END"""
     assert(output(s) == exp)
 
 def test_layer_text_query():
@@ -479,7 +485,6 @@ def test_output_format():
     exp = "OUTPUTFORMAT NAME 'shapezip' DRIVER 'OGR/ESRI Shapefile' TRANSPARENT FALSE IMAGEMODE FEATURE END"
     assert(output(s) == exp)
 
-@pytest.mark.xfail
 def test_auto_projection():
     """
     Test an AUTO projection
@@ -539,6 +544,5 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_multiple_composites()
     run_tests()
     print("Done!")

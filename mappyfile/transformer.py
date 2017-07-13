@@ -67,15 +67,18 @@ class MapfileToDict(Transformer):
         [Tree(composite_type, [Token(__CLASS8, 'CLASS')]), Tree(composite_body, [('attr', u'name', "'test'")])]
         """
         if len(t) == 3:
-            # Parser artefact. See LINE-BREAK FLUIDITY in parsing_decisions.txt
+            # Parser artifact. See LINE-BREAK FLUIDITY in parsing_decisions.txt
             type_, attr, body = t
         elif len(t) == 2:
             type_, body = t
             attr = None
         else:
             assert(len(t) == 1)
-            # metadata class
-
+            type_, attr, body = t[0]
+            #print type_, attr, body
+            if attr in ("metadata","validation"):
+                body['__type__'] = attr
+                return ('composite', type_, body)
 
         if isinstance(body, tuple):
             assert body[0] == 'attr' or body[1] == 'points' or body[1] == 'pattern', body  # Parser artefacts
