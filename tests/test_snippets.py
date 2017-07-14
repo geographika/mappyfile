@@ -537,13 +537,39 @@ def test_config_case():
     exp = "MAP CONFIG 'PROJ_LIB' 'projections' END"
     assert(output(s) == exp)
 
+def test_ne_comparison():
+    """
+    IS NOT is not valid
+    NE (Not Equals) should be used instead 
+    """
+    s = """
+    CLASS
+        # EXPRESSION ( "[building]" IS NOT NULL) # incorrect syntax
+        EXPRESSION ( "[building]" NE NULL)
+    END
+    """
+    exp = 'CLASS EXPRESSION (( "[building]" NE NULL )) END'
+    assert(output(s) == exp)
+
+def test_eq_comparison():
+    """
+    Case is not changed for comparison (EQ/eq stay the same)
+    """
+    s = """
+    CLASS
+        EXPRESSION ( "[building]" eq NULL)
+    END
+    """
+    exp = 'CLASS EXPRESSION (( "[building]" eq NULL )) END'
+    print output(s)
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
 
-
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    test_metadata_unquoted()
+    #test_eq_comparison()
     run_tests()
     print("Done!")
