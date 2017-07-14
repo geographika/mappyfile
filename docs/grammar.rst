@@ -115,7 +115,7 @@ child is added directly to the branch. The tree with "inlining" results in:
 
 .. image:: images/tree_inlining.png
 
-And without inlining (the **?** character), the ``value`` branch is missing:
+And without inlining (the **?** character), the ``value`` branch appears:
 
 .. image:: images/tree_noinlining.png
 
