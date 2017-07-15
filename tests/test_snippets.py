@@ -561,7 +561,7 @@ def test_eq_comparison():
     END
     """
     exp = 'CLASS EXPRESSION (( "[building]" eq NULL )) END'
-    print output(s)
+    #print(output(s))
     assert(output(s) == exp)
 
 def run_tests():        
