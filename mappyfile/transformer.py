@@ -82,7 +82,7 @@ class MapfileToDict(Transformer):
             #print type_, attr, body
             if attr in ("metadata","validation"):
                 body['__type__'] = attr
-                return ('composite', type_, body)
+                return ('composite', attr, body)
 
         if isinstance(body, tuple):
             assert body[0] == 'attr' or body[1] == 'points' or body[1] == 'pattern', body  # Parser artefacts
@@ -123,17 +123,16 @@ class MapfileToDict(Transformer):
                 composites[k] = v # defaultdict using list
             elif itemtype == 'composite':
                 composites[k].append(v)
-
             else:
                 raise ValueError("Itemtype '%s' unknown", itemtype)
         
         for k, v in composites.items(): # collection of all items e.g. at the map level this is status, metadata etc. 
 
-            if k not in SINGLETON_COMPOSITE_NAMES:
-                d[plural(k)] = v
-            else:
+            if k in SINGLETON_COMPOSITE_NAMES:
                 d[k] = v
-
+            else:
+                d[plural(k)] = v
+                
         d['__type__'] = type_
         return ('composite', type_, d)
 
