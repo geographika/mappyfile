@@ -564,12 +564,21 @@ def test_eq_comparison():
     #print(output(s))
     assert(output(s) == exp)
 
+@pytest.mark.xfail
+def test_no_linebreaks():
+    """
+    Check that classes can be nested on a single line
+    """
+    s = """CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"""
+    exp = "CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"
+    assert(output(s) == exp)
+
 def run_tests():        
     #pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_eq_comparison()
+    #test_no_linebreaks()
     run_tests()
     print("Done!")
