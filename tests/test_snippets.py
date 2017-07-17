@@ -564,7 +564,6 @@ def test_eq_comparison():
     #print(output(s))
     assert(output(s) == exp)
 
-@pytest.mark.xfail
 def test_no_linebreaks():
     """
     Check that classes can be nested on a single line
