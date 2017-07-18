@@ -13,3 +13,5 @@ cache
 .pypirc
 /.vs/mappyfile/v15/.suo
 /.tox
+/.eggs
+/.vs/config
