@@ -8,25 +8,34 @@ from helper import create_image
 
 def create_frame(mapfile, line, dist):
 
+    # get the polygon layer
     pl = mappyfile.find(mapfile["layers"], "name", "polygon")
+    # buffer the line
     dilated = line.buffer(dist, cap_style=3)
+    # now set the FEATURES in the Mapfile to be the WKT from Shapely
     pl["features"][0]["wkt"] = "'%s'" % dilated.wkt
+    # create an image from this Mapfile
     return create_image("animation_%s" % str(dist), mapfile, format="gif")
 
 def create_frames(mapfile):
 
+    # increment in steps of 3 units from 1 to 35
     min_buffer = 1
     max_buffer = 35
-    step = 3
+    step = 3 
 
+    # create a line
     line = LineString([(0, 0), (100, 100), (0, 200), (200, 200), (300, 100), (100, 0)])
+    # set the map extent to this line
     mapfile["extent"] = " ".join(map(str, line.buffer(max_buffer*2).bounds))
 
     all_images = []
 
+    # create expanding buffers
     for dist in range(min_buffer, max_buffer, step):
         all_images.append(create_frame(mapfile, line, dist))
 
+    # create shrinking buffers
     for dist in range(max_buffer, min_buffer, -step):
         all_images.append(create_frame(mapfile, line, dist))
 
@@ -34,13 +43,13 @@ def create_frames(mapfile):
 
 def create_animation(img_files):
     """
-    http://pillow.readthedocs.io/en/4.2.x/handbook/image-file-formats.html?highlight=append_images#saving
+    See http://pillow.readthedocs.io/en/4.2.x/handbook/image-file-formats.html?highlight=append_images#saving
     """
 
     open_images = []
 
     for fn in img_files:
-        print fn
+        print(fn)
         im = Image.open(fn)
         open_images.append(im)
 
@@ -48,11 +57,12 @@ def create_animation(img_files):
     im.save(r"C:\temp\animation.gif", save_all=True, append_images=open_images[1:], duration=120, loop=100, optimize=True)
 
 
-bn = "animated_buffer.map"
-mf = "./docs/examples/%s" % bn
+def main():
+    mf = "./docs/examples/animation/animated_buffer.map"
+    mapfile = mappyfile.load(mf)
+    img_files = create_frames(mapfile)
+    create_animation(img_files)
 
-mapfile = mappyfile.load(mf)
-img_files = create_frames(mapfile)
-create_animation(img_files)
-
-print("Done!")
+if __name__ == "__main__":
+    main()
+    print("Done!")

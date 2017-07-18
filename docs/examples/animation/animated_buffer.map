@@ -1,0 +1,49 @@
+MAP
+    SIZE 256 256
+    EXTENT 0 0 10 10
+    OUTPUTFORMAT
+        NAME "gif"
+        DRIVER GD/GIF
+        MIMETYPE "image/gif"
+        IMAGEMODE PC256
+        EXTENSION "gif"
+    END
+    LAYER
+        NAME "polygon"
+        STATUS ON
+        TYPE POLYGON
+        FEATURE
+        END
+        CLASS
+            STYLE
+                COLOR "#339933"
+                OPACITY 50
+            END
+        END
+    END
+    LAYER
+        STATUS ON
+        NAME "grid"
+        TYPE LINE
+        CLASS
+            NAME "Graticule"
+            STYLE
+                COLOR 0 0 0
+                WIDTH 0.1
+            END
+            LABEL
+                COLOR 50 50 50
+                TYPE truetype
+                SIZE 8
+                POSITION AUTO
+                PARTIALS FALSE
+                BUFFER 2
+                OUTLINECOLOR 255 255 255
+            END
+        END
+        GRID
+            LABELFORMAT "DD"
+            MININTERVAL 80
+        END
+    END
+END

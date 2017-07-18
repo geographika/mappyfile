@@ -17,8 +17,9 @@ MAP
     
     # START OF THE LAYER DEFINITION
     LAYER
+		GROUP "my_group"
         EXTENT -180 -90 180 90 # set this here as it is not stored in the image
-        NAME "rgb"
+        NAME "bluemarble"
         TYPE RASTER
         DATA '../data/raster/bluemarble.tif' 
         TEMPLATE 'raster.template.html'    
@@ -26,8 +27,9 @@ MAP
     # END OF THE LAYER DEFINITION 
     
     LAYER
+		GROUP "my_group"
         EXTENT -180 -90 180 90
-        NAME "highlighted"
+        NAME "sea"
         TYPE RASTER
         DATA '../data/raster/bluemarble.tif' 
         TEMPLATE 'raster.template.html'

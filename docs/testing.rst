@@ -1,3 +1,5 @@
+.. _testing:
+
 Testing mappyfile
 =================
 
@@ -9,7 +11,14 @@ There are two main objectives:
 
 The Mapfiles won't be identical as comments will be stripped, and whitespace will change. They should however produce the same results. 
 
-Straﬂenfl‰che
+Testing - there are many sample Mapfiles available in the testing suite of MapServer:
+
++ https://github.com/mapserver/mapserver/tree/master/msautotest/misc
++ https://github.com/mapserver/mapserver/tree/master/msautotest/wxs
++ https://github.com/mapserver/mapserver/tree/master/msautotest/renderers
++ https://github.com/mapserver/mapserver/tree/master/msautotest/gdal
+
+These have been downloaded and added to the ``/tests`` folder. This folder also contains a script to download these files again in the future.
 
 Running the Test Suite
 ----------------------

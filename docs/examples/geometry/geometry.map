@@ -1,0 +1,58 @@
+MAP
+    SIZE 400 400
+    EXTENT 0 0 10 10
+    LAYER
+        NAME "polygon"
+        STATUS ON
+        TYPE POLYGON
+        FEATURE
+        END
+        CLASS
+            STYLE
+                COLOR "#6699cc"
+                OUTLINECOLOR "#96aed0"
+                WIDTH 3
+                OPACITY 50
+            END
+        END
+    END
+    LAYER
+        NAME "line"
+        STATUS ON
+        TYPE LINE
+        FEATURE
+        END
+        CLASS
+            STYLE
+                COLOR "#7e98b1"
+                WIDTH 5
+            END
+        END
+    END
+    LAYER
+        STATUS ON
+        NAME "grid"
+        TYPE LINE
+        CLASS
+            NAME "Graticule"
+            STYLE
+                COLOR 0 0 0
+                WIDTH 0.1
+            END
+            LABEL
+                COLOR 50 50 50
+                TYPE truetype
+                SIZE 8
+                POSITION AUTO
+                PARTIALS FALSE
+                BUFFER 2
+                OUTLINECOLOR 255 255 255
+            END
+        END
+        GRID
+            LABELFORMAT "DDMM"
+            MAXARCS 5
+            MININTERVAL 2
+        END
+    END
+END

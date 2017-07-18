@@ -43,6 +43,13 @@ Notes on the above:
         "'CONTOUR_INTERVAL=20'"
     ], 
   
+
+Mappyfile Additions
+-------------------
+
+Hidden containers - these containers are not outputted as part of the pprint. They are used to store objects of the same type 
+e.g. LAYERs, CLASSes, STYLEs
+
 ..
     + Could make use of https://github.com/bcj/AttrDict to allow property-like access to dictionary objects (see proposed API examples below)?
 	

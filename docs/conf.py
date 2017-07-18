@@ -581,3 +581,10 @@ def setup(app):
     lexers['wkt'] = WKTLexer()
     lexers['mapfile'] = MapFileLexer()
 
+    app.add_stylesheet('https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.css')
+    app.add_javascript('https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL')
+    app.add_javascript('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    app.add_javascript('https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.js')
+    app.add_javascript('widget.js')
+
+

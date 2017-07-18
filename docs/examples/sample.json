@@ -9,7 +9,8 @@
     "web": {
         "metadata": {
             "'wms_enable_request'": "'*'", 
-            "'wms_feature_info_mime_type'": "'text/html'"
+            "'wms_feature_info_mime_type'": "'text/html'", 
+            "__type__": "metadata"
         }, 
         "__type__": "web"
     }, 

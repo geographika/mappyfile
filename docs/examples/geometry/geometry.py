@@ -2,7 +2,7 @@ import os
 from copy import deepcopy
 from shapely.geometry import LineString
 import mappyfile
-import sys
+import sys, os
 sys.path.append(os.path.abspath("./docs/examples"))
 
 from helper import create_image
@@ -40,18 +40,23 @@ def erosion(mapfile, dilated):
     dilated = dilated.buffer(-0.3)
     pl2["features"][0]["wkt"] = "'%s'" % dilated.wkt
 
-    pl["classes"][0]["styles"][0]["color"] = "'#999999'"
+    style = pl["classes"][0]["styles"][0]
+    style["color"] = "'#999999'"
+    style["outlinecolor"] = "'#b2b2b2'"
 
+def main():
+    mf = "./docs/examples/geometry/geometry.map"
+    mapfile = mappyfile.load(mf)
 
-bn = "workflow.map"
-mf = "./docs/examples/%s" % bn
+    mapfile["size"] = [600, 600]
+    output_folder = os.path.join(os.getcwd(), "docs/images")
 
-mapfile = mappyfile.load(mf)
+    dilated = dilation(mapfile)
+    create_image("dilated", mapfile, output_folder=output_folder)
 
-dilated = dilation(mapfile)
-create_image("dilated", mapfile)
+    erosion(mapfile, dilated)
+    create_image("erosion", mapfile, output_folder=output_folder)
 
-erosion(mapfile, dilated)
-create_image("erosion", mapfile)
-
-print("Done!")
+if __name__ == "__main__":
+    main()
+    print("Done!")
