@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_pprint.py</StartupFile>
+    <StartupFile>docs\examples\sample_json.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -26,14 +26,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="docs\" />
+    <Folder Include="docs\examples\animation\" />
+    <Folder Include="docs\examples\api\" />
+    <Folder Include="docs\examples\geometry\" />
     <Folder Include="docs\images\" />
     <Folder Include="docs\examples\" />
-    <Folder Include="docs\_build\" />
-    <Folder Include="docs\_build\doctrees\" />
-    <Folder Include="docs\_build\html\" />
-    <Folder Include="docs\_build\html\_images\" />
-    <Folder Include="docs\_build\html\_sources\" />
-    <Folder Include="docs\_build\html\_static\" />
+    <Folder Include="docs\scripts\" />
     <Folder Include="docs\_static\" />
     <Folder Include="docs\_templates\" />
     <Folder Include="mappyfile\" />
@@ -45,9 +43,14 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
-    <Content Include="docs\examples\animated_buffer.map" />
-    <Content Include="docs\examples\workflow.map" />
+    <Content Include="docs\examples\animation\animated_buffer.map" />
+    <Content Include="docs\examples\geometry\geometry.map" />
     <Content Include="docs\grammar.rst" />
+    <Content Include="docs\images\layer_classes.dot" />
+    <Content Include="docs\images\layer_classes.png" />
+    <Content Include="docs\images\map_classes.dot" />
+    <Content Include="docs\images\map_classes.png" />
+    <Content Include="HISTORY.rst" />
     <Content Include="docs\images\mapserver_git_switch.png" />
     <Content Include="docs\images\tree.png" />
     <Content Include="docs\images\tree_inlining.png" />
@@ -70,7 +73,6 @@
     <Content Include="docs\index.rst" />
     <Content Include="docs\make.bat" />
     <Content Include="docs\Makefile" />
-    <Content Include="docs\mapfile.rst" />
     <Content Include="docs\parser.rst" />
     <Content Include="docs\performance.rst" />
     <Content Include="docs\pretty_printing.rst" />
@@ -81,48 +83,10 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="docs\transformer.rst" />
-    <Content Include="docs\_build\doctrees\environment.pickle" />
-    <Content Include="docs\_build\doctrees\index.doctree" />
-    <Content Include="docs\_build\html\.buildinfo" />
-    <Content Include="docs\_build\html\genindex.html" />
-    <Content Include="docs\_build\html\index.html" />
-    <Content Include="docs\_build\html\objects.inv" />
-    <Content Include="docs\_build\html\search.html" />
-    <Content Include="docs\_build\html\searchindex.js" />
-    <Content Include="docs\_build\html\_images\banner.png" />
-    <Content Include="docs\_build\html\_images\calling_popen.png" />
-    <Content Include="docs\_build\html\_images\roll-36697_1280.png" />
-    <Content Include="docs\_build\html\_images\roll-36697_640.png" />
-    <Content Include="docs\_build\html\_sources\index.rst.txt" />
-    <Content Include="docs\_build\html\_sources\index.txt" />
-    <Content Include="docs\_build\html\_static\ajax-loader.gif" />
-    <Content Include="docs\_build\html\_static\alabaster.css" />
-    <Content Include="docs\_build\html\_static\basic.css" />
-    <Content Include="docs\_build\html\_static\comment-bright.png" />
-    <Content Include="docs\_build\html\_static\comment-close.png" />
-    <Content Include="docs\_build\html\_static\comment.png" />
-    <Content Include="docs\_build\html\_static\custom.css" />
-    <Content Include="docs\_build\html\_static\doctools.js" />
-    <Content Include="docs\_build\html\_static\down-pressed.png" />
-    <Content Include="docs\_build\html\_static\down.png" />
-    <Content Include="docs\_build\html\_static\file.png" />
-    <Content Include="docs\_build\html\_static\jquery-1.11.1.js" />
-    <Content Include="docs\_build\html\_static\jquery-3.1.0.js" />
-    <Content Include="docs\_build\html\_static\jquery.js" />
-    <Content Include="docs\_build\html\_static\minus.png" />
-    <Content Include="docs\_build\html\_static\plus.png" />
-    <Content Include="docs\_build\html\_static\pygments.css" />
-    <Content Include="docs\_build\html\_static\searchtools.js" />
-    <Content Include="docs\_build\html\_static\underscore-1.3.1.js" />
-    <Content Include="docs\_build\html\_static\underscore.js" />
-    <Content Include="docs\_build\html\_static\up-pressed.png" />
-    <Content Include="docs\_build\html\_static\up.png" />
-    <Content Include="docs\_build\html\_static\websupport.js" />
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
     <Content Include="mappyfile\mapfile.g" />
-    <Content Include="Notes.ignore.txt" />
     <Content Include="notes.private.txt" />
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
@@ -441,8 +405,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="docs\conf.py" />
-    <Compile Include="docs\examples\adding_values.py" />
-    <Compile Include="docs\examples\create_diagram.py">
+    <Compile Include="docs\examples\animation\animated_buffer.py" />
+    <Compile Include="docs\examples\api\adding_values_test.py" />
+    <Compile Include="docs\examples\geometry\geometry.py" />
+    <Compile Include="docs\scripts\class_diagrams.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="docs\scripts\create_diagram.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\examples\helper.py">
@@ -452,8 +421,8 @@
     <Compile Include="docs\examples\image_from_mapfile.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="docs\examples\modifying_values.py" />
-    <Compile Include="docs\examples\accessing_values.py">
+    <Compile Include="docs\examples\api\modifying_values_test.py" />
+    <Compile Include="docs\examples\api\accessing_values_test.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\examples\pretty_printing.py">
@@ -462,11 +431,7 @@
     <Compile Include="docs\examples\sample_json.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="docs\examples\animated_buffer.py" />
-    <Compile Include="docs\examples\workflow.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="docs\examples\search.py" />
+    <Compile Include="docs\examples\api\search_test.py" />
     <Compile Include="mappyfile\ordereddict.py">
       <SubType>Code</SubType>
     </Compile>
@@ -498,38 +463,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="..\..\..\VirtualEnvs\mappyfile\">
-      <Id>{36da22a5-36c9-4768-9bcd-7f554a0cdb09}</Id>
-      <Version>2.7</Version>
-      <Description>mappyfile (Python 2.7 x64)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>
-      </PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
-    <Interpreter Include="..\..\VirtualEnvs\mappyfile-pypi\">
-      <Id>{dd9154a9-ff16-4d3a-8879-e6f16abd7add}</Id>
-      <Version>2.7</Version>
-      <Description>mappyfile-pypi (Python 2.7 x64)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>
-      </PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
-    <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
-      <Id>{5c4076db-883e-4df1-9c9e-e3721d8b1774}</Id>
-      <Version>2.7</Version>
-      <Description>mappyfile (Python 64-bit 2.7)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
     <Interpreter Include="C:\VirtualEnvs\mappyfile\">
       <Id>mappyfile</Id>
       <Version>2.7</Version>
