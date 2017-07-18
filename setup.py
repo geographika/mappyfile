@@ -1,11 +1,14 @@
+import re
 from setuptools import setup
+
+__version__,= re.findall('__version__ = "(.*)"', open('mappyfile/__init__.py').read())
 
 def readme():
     with open('README.rst') as f:
         return f.read()
 
 setup(name='mappyfile',
-      version='0.2.2',
+      version=__version__,
       description='A pure Python MapFile parser for working with MapServer',
       long_description=readme(),
       classifiers=[
