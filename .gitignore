@@ -12,3 +12,4 @@ cache
 /docs/_build/*
 .pypirc
 /.vs/mappyfile/v15/.suo
+/.tox
