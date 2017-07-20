@@ -7,6 +7,8 @@ A Python library to create, parse, modify, and format `MapServer <http://mapserv
 + Pure Python - no MapServer dependencies
 + Open Source License (MIT)
 
+An on-line formatter demonstrating the libraries capabilities can be found at: http://mappyfile.geographika.net/
+
 .. toctree::
     :maxdepth: 2
     :numbered:

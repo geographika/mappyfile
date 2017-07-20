@@ -5,6 +5,8 @@ mappyfile
 
 A pure Python MapFile parser for working with MapServer, built using `Lark <https://github.com/erezsh/lark>`_
 
+An on-line formatter demonstrating the libraries capabilities can be found at: http://mappyfile.geographika.net/
+
 .. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/class_parsed_small.png   
 
 Requirements
