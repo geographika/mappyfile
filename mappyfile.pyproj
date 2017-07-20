@@ -50,7 +50,7 @@
     <Content Include="docs\images\layer_classes.png" />
     <Content Include="docs\images\map_classes.dot" />
     <Content Include="docs\images\map_classes.png" />
-    <Content Include="HISTORY.rst" />
+    <Content Include="docs\HISTORY.rst" />
     <Content Include="docs\images\mapserver_git_switch.png" />
     <Content Include="docs\images\tree.png" />
     <Content Include="docs\images\tree_inlining.png" />

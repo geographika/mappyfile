@@ -66,7 +66,7 @@ Authors
 * Seth Girvin `@geographika <https://github.com/geographika>`_
 * Erez Shinan `@erezsh <https://github.com/erezsh>`_
 
-
+.. include:: docs/HISTORY.rst
 
 .. |Version| image:: https://img.shields.io/pypi/v/mappyfile.svg
    :target: https://pypi.python.org/pypi/mappyfile

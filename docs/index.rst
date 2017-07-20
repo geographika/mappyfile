@@ -147,7 +147,7 @@ Future Development
 + Enable MapServer to accept a "Mapfile" as a stream: https://github.com/mapserver/mapserver/issues/4031
 + Read MapFiles from URLs
 
-.. include:: ../HISTORY.rst
+.. include:: HISTORY.rst
 
 
 
