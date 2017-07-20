@@ -1,6 +1,12 @@
 Releases
 --------
 
+0.3.1
++++++
+
++ Add in alternative grammar that allows for no line breaks between composites, and fall back to this
+  if parsing fails (otherwise most use cases suffer a 3x performance hit)
+
 0.3.0
 +++++
 
