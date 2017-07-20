@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>docs\examples\sample_json.py</StartupFile>
+    <StartupFile>tests\test_snippets.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -86,6 +86,7 @@
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
+    <Content Include="mappyfile\mapfile.nobreaks.g" />
     <Content Include="mappyfile\mapfile.g" />
     <Content Include="notes.private.txt" />
     <Content Include="README.rst" />

@@ -1,17 +1,21 @@
 import os, logging
 from io import open
-from lark import Lark
+from lark import Lark, ParseError
 
 class Parser(object):
 
     def __init__(self, cwd="", expand_includes=True):
         self.cwd = cwd
         self.expand_includes = expand_includes
+        self.g = self.load_grammar("mapfile.g")
 
-        gf = os.path.join(os.path.dirname(__file__), "mapfile.g")
+        
+    def load_grammar(self, grammar_file):
+
+        gf = os.path.join(os.path.dirname(__file__), grammar_file)
         grammar_text = open(gf).read()
 
-        self.g = Lark(grammar_text, parser='earley', lexer='standard')
+        return Lark(grammar_text, parser='earley', lexer='standard')
 
     def strip_quotes(self, s):
         return s.strip("'").strip('"')
@@ -46,9 +50,8 @@ class Parser(object):
         return '\n'.join(lines)
 
     def open_file(self, fn):
-
         try:
-            return open(fn, "r", encoding="utf-8").read() # specify unicode for Python 2.7
+            return open(fn, "r", encoding="utf-8").read() # specify Unicode for Python 2.7
         except UnicodeDecodeError as ex:
             logging.debug(ex)
             logging.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format. ", fn)
@@ -66,5 +69,13 @@ class Parser(object):
         if self.expand_includes == True:
             text = self.load_includes(text)
 
-        text += '\n'
-        return self.g.parse(text+'\n')
+        text += '\n\n'
+
+        try:
+            return self.g.parse(text)
+        except ParseError:
+            # try with the grammar that ignores new lines
+            # this is 3x slower than with new lines
+            self.g = self.load_grammar("mapfile.nobreaks.g")
+            return self.g.parse(text)
+
