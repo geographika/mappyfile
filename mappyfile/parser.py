@@ -76,6 +76,7 @@ class Parser(object):
         except ParseError:
             # try with the grammar that ignores new lines
             # this is 3x slower than with new lines
-            self.g = self.load_grammar("mapfile.nobreaks.g")
-            return self.g.parse(text)
+            #self.g = self.load_grammar("mapfile.nobreaks.g")
+            #return self.g.parse(text)
+            raise
 
