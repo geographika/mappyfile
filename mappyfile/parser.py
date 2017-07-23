@@ -74,9 +74,9 @@ class Parser(object):
         text = StringIO.StringIO(text)
         new_lines = []
         for line in text:
-            if not line.lstrip().startswith('#'):
-                l = pattern.sub('\nEND', line)
-                new_lines.append(l)
+            parts = line.split('#')
+            parts[0] = pattern.sub('\nEND', parts[0])
+            new_lines.append('#'.join(parts))
 
         return "\n".join(new_lines)
 
