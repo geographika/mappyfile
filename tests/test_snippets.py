@@ -568,7 +568,7 @@ def test_no_linebreaks():
     """
     Check that classes can be nested on a single line
     """
-    s = """CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"""
+    s = "CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"
     exp = "CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"
     assert(output(s) == exp)
 
@@ -578,6 +578,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_style_pattern3()
+    test_no_linebreaks()
     run_tests()
     print("Done!")

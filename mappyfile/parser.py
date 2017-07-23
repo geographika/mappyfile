@@ -72,11 +72,13 @@ class Parser(object):
         pattern = re.compile(r'\bEND\b', re.IGNORECASE)
 
         text = StringIO.StringIO(text)
+        new_lines = []
         for line in text:
             if not line.lstrip().startswith('#'):
-                pattern.sub('\nEND', line)
+                l = pattern.sub('\nEND', line)
+                new_lines.append(l)
 
-        return text.getvalue()
+        return "\n".join(new_lines)
 
     def parse(self, text):
 
