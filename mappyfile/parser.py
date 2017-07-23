@@ -1,7 +1,13 @@
 import os, logging
 from io import open
 from lark import Lark, ParseError
-import re, StringIO
+import re
+
+try:
+    from StringIO import StringIO
+except ImportError:
+    # Python3
+    from io import StringIO
 
 class Parser(object):
 
