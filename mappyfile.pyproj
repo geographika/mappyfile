@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_large_file.py</StartupFile>
+    <StartupFile>tests\test_snippets.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -57,6 +57,7 @@
     <Content Include="docs\images\tree_noinlining.png" />
     <Content Include="docs\images\tree_no_terminals.png" />
     <Content Include="docs\testing.rst" />
+    <Content Include="docs\_static\foss4ge2017_mappyfile_sgirvin.pdf" />
     <Content Include="LICENSE" />
     <Content Include="docs\.gitignore" />
     <Content Include="docs\converting_from_mapscript.rst" />
@@ -86,7 +87,6 @@
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
-    <Content Include="mappyfile\mapfile.nobreaks.g" />
     <Content Include="mappyfile\mapfile.g" />
     <Content Include="notes.private.txt" />
     <Content Include="README.rst" />

@@ -1,6 +1,7 @@
 import os, logging
 from io import open
 from lark import Lark, ParseError
+import re
 
 class Parser(object):
 
@@ -64,19 +65,17 @@ class Parser(object):
         text = self.open_file(fn)
         return self.parse(text)
 
+    def add_linebreaks(self, text):
+        """
+        Add a line-break before each END keyword to speed-up parsing
+        """
+        pattern = re.compile(r'\bEND\b', re.IGNORECASE)
+        return pattern.sub('\nEND', text)
+
     def parse(self, text):
 
         if self.expand_includes == True:
             text = self.load_includes(text)
 
-        text += '\n\n'
-
-        try:
-            return self.g.parse(text)
-        except ParseError:
-            # try with the grammar that ignores new lines
-            # this is 3x slower than with new lines
-            #self.g = self.load_grammar("mapfile.nobreaks.g")
-            #return self.g.parse(text)
-            raise
-
+        text = self.add_linebreaks(text)
+        return self.g.parse(text)
