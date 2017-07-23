@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_sample_maps.py</StartupFile>
+    <StartupFile>tests\test_large_file.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -56,6 +56,7 @@
     <Content Include="docs\images\tree_inlining.png" />
     <Content Include="docs\images\tree_noinlining.png" />
     <Content Include="docs\images\tree_no_terminals.png" />
+    <Content Include="docs\python_integration.rst" />
     <Content Include="docs\testing.rst" />
     <Content Include="docs\_static\foss4ge2017_mappyfile_sgirvin.pdf" />
     <Content Include="LICENSE" />

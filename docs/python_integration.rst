@@ -70,4 +70,4 @@ Animated Buffers
 
 .. image:: images/animation.gif
 
-See :download:`animated_buffer.py <examples/animation/animated_buffer.py>` and :download:`animated_buffer.py <examples/animation/animated_buffer.map>`. 
+See :download:`animated_buffer.py <examples/animation/animated_buffer.py>` and :download:`animated_buffer.map <examples/animation/animated_buffer.map>`. 
