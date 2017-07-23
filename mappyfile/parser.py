@@ -77,7 +77,7 @@ class Parser(object):
         """
         pattern = re.compile(r'\bEND\b', re.IGNORECASE)
 
-        text = StringIO.StringIO(text)
+        text = StringIO(text)
         new_lines = []
         for line in text:
             parts = line.split('#')
