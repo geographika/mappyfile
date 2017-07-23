@@ -4,7 +4,7 @@ composite: composite_type attr? _NL* composite_body _END
        | composite_type points _END
        | composite_type pattern _END
        | composite_type attr _END
-       | meta data
+       | metadata
        | validation
 
 composite_body: _composite_item*
