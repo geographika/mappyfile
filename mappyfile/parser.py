@@ -1,7 +1,7 @@
 import os, logging
 from io import open
 from lark import Lark, ParseError
-import re
+import re, StringIO
 
 class Parser(object):
 
@@ -70,7 +70,13 @@ class Parser(object):
         Add a line-break before each END keyword to speed-up parsing
         """
         pattern = re.compile(r'\bEND\b', re.IGNORECASE)
-        return pattern.sub('\nEND', text)
+
+        text = StringIO.StringIO(text)
+        for line in text:
+            if not line.lstrip().startswith('#'):
+                pattern.sub('\nEND', line)
+
+        return text.getvalue()
 
     def parse(self, text):
 
