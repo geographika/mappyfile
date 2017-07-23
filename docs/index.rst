@@ -7,7 +7,9 @@ A Python library to create, parse, modify, and format `MapServer <http://mapserv
 + Pure Python - no MapServer dependencies
 + Open Source License (MIT)
 
-An on-line formatter demonstrating the libraries capabilities can be found at: http://mappyfile.geographika.net/
+An online formatter demonstrating the libraries capabilities can be found at: http://mappyfile.geographika.net/
+
+A presentation on mappyfile was given at `FOSS4G Europe 2017<https://europe.foss4g.org/2017/Home>`_ - slides are available :download:`to download here</docs/_static/foss4ge2017_mappyfile_sgirvin.pdf>`.
 
 .. toctree::
     :maxdepth: 2
