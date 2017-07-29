@@ -21,6 +21,7 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     transformer.rst
     pretty_printing.rst
     validation.rst
+    schemas.rst
     grammar.rst
     python_integration.rst
 

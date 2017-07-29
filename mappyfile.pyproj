@@ -31,6 +31,7 @@
     <Folder Include="docs\examples\geometry\" />
     <Folder Include="docs\images\" />
     <Folder Include="docs\examples\" />
+    <Folder Include="docs\schemas\" />
     <Folder Include="docs\scripts\" />
     <Folder Include="docs\_static\" />
     <Folder Include="docs\_templates\" />
@@ -58,6 +59,9 @@
     <Content Include="docs\images\tree_noinlining.png" />
     <Content Include="docs\images\tree_no_terminals.png" />
     <Content Include="docs\python_integration.rst" />
+    <Content Include="docs\schemas.rst" />
+    <Content Include="docs\schemas\layer.rst" />
+    <Content Include="docs\schemas\map.rst" />
     <Content Include="docs\testing.rst" />
     <Content Include="docs\validation.rst" />
     <Content Include="docs\_static\foss4ge2017_mappyfile_sgirvin.pdf" />

@@ -1,6 +1,11 @@
 Releases
 --------
 
+0.3.2
++++++
+
++ Revert back to a single grammar, but add linebreaks before all ``END`` keywords to keep acceptable performance
+
 0.3.1
 +++++
 
