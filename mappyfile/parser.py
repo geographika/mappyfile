@@ -11,9 +11,10 @@ except ImportError:
 
 class Parser(object):
 
-    def __init__(self, cwd="", expand_includes=True):
+    def __init__(self, cwd="", expand_includes=True, add_linebreaks=False):
         self.cwd = cwd
         self.expand_includes = expand_includes
+        self.add_linebreaks = add_linebreaks
         self.g = self.load_grammar("mapfile.g")
 
         
@@ -91,5 +92,7 @@ class Parser(object):
         if self.expand_includes == True:
             text = self.load_includes(text)
 
-        text = self.add_linebreaks(text)
+        if add_linebreaks:
+            text = self.add_linebreaks(text)
+
         return self.g.parse(text)
