@@ -72,7 +72,7 @@ class Parser(object):
         text = self.open_file(fn)
         return self.parse(text)
 
-    def add_linebreaks(self, text):
+    def _add_linebreaks(self, text):
         """
         Add a line-break before each END keyword to speed-up parsing
         """
@@ -93,6 +93,6 @@ class Parser(object):
             text = self.load_includes(text)
 
         if self.add_linebreaks:
-            text = self.add_linebreaks(text)
+            text = self._add_linebreaks(text)
 
         return self.g.parse(text)
