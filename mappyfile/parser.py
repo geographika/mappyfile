@@ -92,7 +92,7 @@ class Parser(object):
         if self.expand_includes == True:
             text = self.load_includes(text)
 
-        if add_linebreaks:
+        if self.add_linebreaks:
             text = self.add_linebreaks(text)
 
         return self.g.parse(text)
