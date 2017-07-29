@@ -118,3 +118,9 @@ directive can be found at http://mapserver.org/mapfile/include.html:
         INCLUDE "test_include_symbols.map"
         INCLUDE "C:\Includes\test_include_layer.map"
     END
+
+..
+    https://news.ycombinator.com/item?id=10222681
+    http://loup-vaillant.fr/tutorials/earley-parsing/what-and-why
+    http://loup-vaillant.fr/tutorials/earley-parsing/right-recursion
+    https://www.reddit.com/r/programming/comments/3j0zfu/fast_handy_languages_an_article_about_fast_marpa/
