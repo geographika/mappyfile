@@ -11,7 +11,7 @@ except ImportError:
 
 class Parser(object):
 
-    def __init__(self, cwd="", expand_includes=True, add_linebreaks=False):
+    def __init__(self, cwd="", expand_includes=True, add_linebreaks=True):
         self.cwd = cwd
         self.expand_includes = expand_includes
         self.add_linebreaks = add_linebreaks
