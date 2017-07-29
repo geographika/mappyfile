@@ -6,8 +6,8 @@ Validation
 Approach
 --------
 
-Using `jsonschema <https://pypi.python.org/pypi/jsonschema>`_ to validate the library. See the excellent
-documentation `here <https://spacetelescope.github.io/understanding-json-schema/>_ for details on creating schemas. 
+`jsonschema <https://pypi.python.org/pypi/jsonschema>`_ is used to validate the library, by converting the dictionary to JSON. 
+For details on creating schemas see the excellent documentation `here <https://spacetelescope.github.io/understanding-json-schema/>`_. 
 
 What to Validate?
 -----------------
