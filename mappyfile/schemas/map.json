@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "angle": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
+    "extent": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "status": {
+      "type": "string",
+      "enum": [ "ON", "OFF" ]
+    },
+    "debug": {
+      "enum": [ "ON", "OFF", 0, 1, 2, 3, 4, 5 ]
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "layer.json"
+      }
+    },
+    "__type__": {
+      "type": "string"
+    }
+  }
+}

@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_large_file.py</StartupFile>
+    <StartupFile>tests\test_validation.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -35,6 +35,7 @@
     <Folder Include="docs\_static\" />
     <Folder Include="docs\_templates\" />
     <Folder Include="mappyfile\" />
+    <Folder Include="mappyfile\schemas\" />
     <Folder Include="misc\" />
     <Folder Include="tests\" />
     <Folder Include="tests\samples\" />
@@ -58,7 +59,9 @@
     <Content Include="docs\images\tree_no_terminals.png" />
     <Content Include="docs\python_integration.rst" />
     <Content Include="docs\testing.rst" />
+    <Content Include="docs\validation.rst" />
     <Content Include="docs\_static\foss4ge2017_mappyfile_sgirvin.pdf" />
+    <Content Include="docs\_static\widget.js" />
     <Content Include="LICENSE" />
     <Content Include="docs\.gitignore" />
     <Content Include="docs\converting_from_mapscript.rst" />
@@ -89,6 +92,8 @@
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
     <Content Include="mappyfile\mapfile.g" />
+    <Content Include="mappyfile\schemas\layer.json" />
+    <Content Include="mappyfile\schemas\map.json" />
     <Content Include="notes.private.txt" />
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
@@ -448,6 +453,9 @@
     <Compile Include="mappyfile\utils.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="mappyfile\validator.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyfile\__init__.py" />
     <Compile Include="misc\docs_parser.py" />
     <Compile Include="misc\test_docs_parser.py" />
@@ -463,6 +471,9 @@
     <Compile Include="tests\test_sample_maps.py" />
     <Compile Include="tests\test_snippets.py" />
     <Compile Include="tests\test_transformer.py" />
+    <Compile Include="tests\test_validation.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>

@@ -20,6 +20,7 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     parser.rst
     transformer.rst
     pretty_printing.rst
+    validation.rst
     grammar.rst
     python_integration.rst
 
