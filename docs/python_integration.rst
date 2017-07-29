@@ -61,7 +61,7 @@ Shadows and Shading
 
     <div id='map' class='map'></div>
     <script>
-        var corridorsMap = MapWidget();
+        MapWidget();
     </script>
 
 
