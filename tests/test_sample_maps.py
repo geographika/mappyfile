@@ -21,14 +21,25 @@ def test_all_maps():
 
 def test_includes():
     p = Parser()
-   
+
     ast = p.parse_file('./tests/samples/include1.map')
     m = MapfileToDict()
 
     d = (m.transform(ast)) # works
     print(mappyfile.dumps(d))
 
-def run_tests():        
+
+def test_includes_nested_path():
+    p = Parser()
+
+    ast = p.parse_file('./tests/samples/include1_nested_path.map')
+    m = MapfileToDict()
+
+    d = (m.transform(ast)) # works
+    print(mappyfile.dumps(d))
+
+
+def run_tests():
     pytest.main(["tests/test_sample_maps.py"])
 
 if __name__ == '__main__':
