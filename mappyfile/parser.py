@@ -1,6 +1,7 @@
-import os, logging
+import os
+import logging
 from io import open
-from lark import Lark, ParseError
+from lark import Lark
 import re
 
 try:
@@ -8,6 +9,7 @@ try:
 except ImportError:
     # Python3
     from io import StringIO
+
 
 class Parser(object):
 
@@ -17,7 +19,6 @@ class Parser(object):
         self.add_linebreaks = add_linebreaks
         self.g = self.load_grammar("mapfile.g")
 
-        
     def load_grammar(self, grammar_file):
 
         gf = os.path.join(os.path.dirname(__file__), grammar_file)
@@ -50,19 +51,23 @@ class Parser(object):
                     raise ex
                 # recursively load any further includes
                 includes[idx] = self.load_includes(include_text)
-    
+
         for idx, txt in includes.items():
-            lines.pop(idx) # remove the original include
+            lines.pop(idx)  # remove the original include
             lines.insert(idx, txt)
 
         return '\n'.join(lines)
 
     def open_file(self, fn):
         try:
-            return open(fn, "r", encoding="utf-8").read() # specify Unicode for Python 2.7
+            # specify Unicode for Python 2.7
+            return open(fn, "r", encoding="utf-8").read()
         except UnicodeDecodeError as ex:
             logging.debug(ex)
-            logging.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format. ", fn)
+            logging.error(
+                "Please check the encoding for %s. " +
+                "All Mapfiles should be in utf-8 format.",
+                fn)
             raise
 
     def parse_file(self, fn):
@@ -89,7 +94,7 @@ class Parser(object):
 
     def parse(self, text):
 
-        if self.expand_includes == True:
+        if self.expand_includes:
             text = self.load_includes(text)
 
         if self.add_linebreaks:

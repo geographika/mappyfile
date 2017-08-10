@@ -1,11 +1,15 @@
 import sys
+from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
+from mappyfile.tokens import REPEATED_KEYS, ATTRIBUTE_NAMES
+
+
 is_python3 = sys.version_info.major == 3
 if is_python3:
     unicode = str
-    
-from mappyfile.tokens import COMPOSITE_NAMES, ATTRIBUTE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 
-ALL_KEYWORDS = COMPOSITE_NAMES.union(ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
+
+ALL_KEYWORDS = COMPOSITE_NAMES.union(
+    ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
 
 
 class PrettyPrinter(object):
@@ -43,7 +47,7 @@ class PrettyPrinter(object):
         Temporary workaround for POINT and PATTERNS which currently must have
         pairs on the same line
         """
-        if key in ('pattern','points'):
+        if key in ('pattern', 'points'):
             return True
         else:
             return False
@@ -70,7 +74,7 @@ class PrettyPrinter(object):
         return lines
 
     def process_list(self, key, lst, level):
-        
+
         lines = []
         spacer = self.spacer * (level + 1)
         block_list = self.is_block_list(lst)
@@ -92,14 +96,13 @@ class PrettyPrinter(object):
                 s = " ".join(map(self.format_value, lst))
                 s = self.format_line(spacer, key, s)
                 lines.append(s)
-       
+
         if block_list:
             # add END to close the block
             s = self.spacer * (level + 1) + self.end
             lines.append(s)
 
         return lines
-
 
     def format_list(self, key, val, spacer):
         """
@@ -111,7 +114,7 @@ class PrettyPrinter(object):
             # join the values together so each line has a pair
             vals = zip(vals[::2], vals[1::2])
             vals = ["%s %s" % (v[0], v[1]) for v in vals]
-        
+
         s = self.newlinechar.join([spacer + v for v in vals])
 
         return s
@@ -131,7 +134,7 @@ class PrettyPrinter(object):
 
         if isinstance(val, (unicode, str)):
             val = self.standardise_quotes(val)
-        
+
         try:
             val = unicode(val)
         except UnicodeDecodeError:
@@ -146,8 +149,8 @@ class PrettyPrinter(object):
 
     def in_quotes(self, val):
 
-        if (val.startswith(self.quote) and val.endswith(self.quote)) \
-            or  (val.startswith(self.altquote) and val.endswith(self.altquote)):
+        if (val.startswith(self.quote) and val.endswith(self.quote)) or (
+                val.startswith(self.altquote) and val.endswith(self.altquote)):
             return True
         else:
             return False
@@ -183,7 +186,7 @@ class PrettyPrinter(object):
         Otherwise do not modify input
         """
         if self.in_quotes(key):
-            key = self.format_value(key) 
+            key = self.format_value(key)
         else:
             if key.lower() in ALL_KEYWORDS:
                 key = self.format_value(key.upper())
@@ -193,7 +196,10 @@ class PrettyPrinter(object):
         return key
 
     def format_line(self, spacer, key, value):
-        return self.__format_line(spacer, self.format_key(key), self.format_value(value))
+        return self.__format_line(
+            spacer,
+            self.format_key(key),
+            self.format_value(value))
 
     def __format_line(self, spacer, key, value):
 
@@ -202,7 +208,7 @@ class PrettyPrinter(object):
             "spacer": spacer,
             "key": key,
             "value": value
-            }
+        }
         return tmpl.format(**d)
 
     def is_composite(self, val):
@@ -214,7 +220,7 @@ class PrettyPrinter(object):
 
     def is_hidden_container(self, key, val):
         """
-        The key is not one of the Mapfile keywords, and its 
+        The key is not one of the Mapfile keywords, and its
         values are a list
         """
 
@@ -245,13 +251,13 @@ class PrettyPrinter(object):
         TODO Refactor this and create functions for each unique type
         """
         lines = []
-        if isinstance(composite, dict) and  '__type__' in composite.keys():
+        if isinstance(composite, dict) and '__type__' in composite.keys():
             type_ = composite['__type__']
             assert(type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES))
             is_hidden = False
-            s = self.whitespace(level, 0) + type_ .upper()                          
+            s = self.whitespace(level, 0) + type_ .upper()
             lines.append(s)
-            # we can now filter out the type property so the rest of the 
+            # we can now filter out the type property so the rest of the
             # values are displayed
             items = ((k, v) for k, v in composite.items() if k != '__type__')
         else:
@@ -261,8 +267,8 @@ class PrettyPrinter(object):
             items = enumerate(composite.values()[0])
 
         for key, value in items:
-       
-            if self.is_hidden_container(key, value): # HiddenContainer
+
+            if self.is_hidden_container(key, value):  # HiddenContainer
                 # now recursively print all the items in the container
                 if self.is_block_list(value):
                     k = self.singular(key)
@@ -271,39 +277,55 @@ class PrettyPrinter(object):
                     for v in value:
                         lines += self._format(v, level + 1)
 
-            elif self.is_composite(value): # Container
+            elif self.is_composite(value):  # Container
                 lines += self._format(value, level + 1)
             else:
-                if key in SINGLETON_COMPOSITE_NAMES:                    
+                if key in SINGLETON_COMPOSITE_NAMES:
                     lines += self.process_dict(key, value, level)
-                elif isinstance(value, dict): 
+                elif isinstance(value, dict):
 
                     if key == "config":
                         # config declaration allows for pairs of values
-                        value = ["%s %s" % (self.format_key(k), self.format_attribute(v)) for k,v in value.items()]
-                    key = self.format_key(key) # format the "parent" key
+                        value = [
+                            "%s %s" %
+                            (self.format_key(k),
+                             self.format_attribute(v)) for k,
+                            v in value.items()]
+                    key = self.format_key(key)  # format the "parent" key
                     for v in value:
-                        # keys and values are already formatted so do not format them again                 
-                        lines.append(self.__format_line(self.whitespace(level, 1), key, v))
-                elif isinstance(value, list):                    
+                        # keys and values are already formatted so do not
+                        # format them again
+                        lines.append(
+                            self.__format_line(
+                                self.whitespace(
+                                    level, 1), key, v))
+                elif isinstance(value, list):
                     if self.is_list_of_lists(value):
-                        # value is list of lists, so create composite type for each list e.g. several POINTS in a FEATURE
+                        # value is list of lists, so create composite type for
+                        # each list e.g. several POINTS in a FEATURE
                         for l in value:
                             lines += self.process_list(key, [l], level)
                     else:
                         lines += self.process_list(key, value, level)
                 else:
-                    comp_type = composite.get("__type__", "")                   
+                    comp_type = composite.get("__type__", "")
                     if comp_type == "metadata":
-                        # don't add quotes to key or value, but standardise them if present
+                        # don't add quotes to key or value, but standardise
+                        # them if present
                         key = self.standardise_quotes(key)
                         value = self.standardise_quotes(value)
-                        lines.append(self.__format_line(self.whitespace(level, 1), key, value))
+                        lines.append(
+                            self.__format_line(
+                                self.whitespace(
+                                    level, 1), key, value))
                     else:
-                        lines.append(self.format_line(self.whitespace(level, 1), key, value))
+                        lines.append(
+                            self.format_line(
+                                self.whitespace(
+                                    level, 1), key, value))
 
-        if not is_hidden: # Container
-            # close the container block with an END            
+        if not is_hidden:  # Container
+            # close the container block with an END
             s = self.whitespace(level, 0) + self.end
             lines.append(s)
 
