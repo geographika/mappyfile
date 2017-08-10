@@ -1,9 +1,9 @@
 import os
 import logging
 import mappyfile
+# from mappyfile import validator
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
-from mappyfile import validator
 from subprocess import Popen, PIPE, STDOUT
 
 DLL_LOCATION = r"C:\MapServer\bin"
@@ -111,9 +111,12 @@ def main():
     print(d)
     # s = schema["definitions"]["map"]["properties"]["status"]
 
-    # if validator.validate(d):
-        # name = "test"
-        # create_image(name, d, output_folder=output_folder)
+    """
+    if validator.validate(d):
+        name = "test"
+        output_folder = r"D:\Temp"
+        create_image(name, d, output_folder=output_folder)
+    """
 
 
 if __name__ == "__main__":
