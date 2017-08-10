@@ -2,6 +2,7 @@ import pytest
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 
+
 def test_processing_directive():
 
     s = """
@@ -18,6 +19,7 @@ def test_processing_directive():
     t = MapfileToDict()
     d = t.transform(ast)
     assert(len(d["processing"]) == 3)
+
 
 def test_config_directive():
 
@@ -36,12 +38,13 @@ def test_config_directive():
     d = t.transform(ast)
     assert(len(d["config"]) == 3)
 
+
 def test_metadata():
 
     s = """
     MAP
         METADATA
-            'wms_enable_request'  '*'     
+            'wms_enable_request'  '*'
         END
     END
     """
@@ -50,14 +53,16 @@ def test_metadata():
     ast = p.parse(s)
     t = MapfileToDict()
     d = t.transform(ast)
-    #print(dict(d["metadata"]))
+    # print(dict(d["metadata"]))
     assert(d["metadata"]["'wms_enable_request'"] == "'*'")
 
-def run_tests():        
-    #pytest.main(["tests/test_transformer.py::test_config_directive"])
+
+def run_tests():
+    # pytest.main(["tests/test_transformer.py::test_config_directive"])
     pytest.main(["tests/test_transformer.py"])
 
+
 if __name__ == '__main__':
-    #run_tests()
+    # run_tests()
     test_metadata()
     print("Done!")
