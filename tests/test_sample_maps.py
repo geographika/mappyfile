@@ -27,7 +27,17 @@ def test_includes():
     ast = p.parse_file('./tests/samples/include1.map')
     m = MapfileToDict()
 
-    d = (m.transform(ast))  # works
+    d = (m.transform(ast))  #  works
+    print(mappyfile.dumps(d))
+
+
+def test_includes_nested_path():
+    p = Parser()
+
+    ast = p.parse_file('./tests/samples/include1_nested_path.map')
+    m = MapfileToDict()
+
+    d = (m.transform(ast)) #  works
     print(mappyfile.dumps(d))
 
 
@@ -38,5 +48,5 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     test_all_maps()
-    # run_tests()
     print("Done!")
+    

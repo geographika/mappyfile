@@ -1,0 +1,4 @@
+MAP
+    NAME 'include_test'
+    INCLUDE 'mapfile_include/include2_nested_path.map'
+END

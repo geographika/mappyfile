@@ -4,30 +4,25 @@ from mappyfile.pprint import PrettyPrinter
 import codecs
 
 
-def load(fn, cwd=None):
-
-    p = Parser(cwd=cwd)
+def load(fn, expand_includes=True, add_linebreaks=True):
+    p = Parser(expand_includes=expand_includes, add_linebreaks=add_linebreaks)
     ast = p.parse_file(fn)
     m = MapfileToDict()
     d = m.transform(ast)
-
     return d
 
 
-def loads(s, cwd="", expand_includes=True):
-    p = Parser(cwd=cwd, expand_includes=expand_includes)
+def loads(s, expand_includes=True, add_linebreaks=True):
+    p = Parser(expand_includes=expand_includes, add_linebreaks=add_linebreaks)
     ast = p.parse(s)
     m = MapfileToDict()
     d = m.transform(ast)
-
     return d
 
 
 def write(d, output_file, indent=4):
-
     map_string = _pprint(d, indent)
     _save(output_file, map_string)
-
     return output_file
 
 
@@ -59,12 +54,10 @@ def __find__(lst, key, value):
 
 def findall(lst, key, value):
     possible_values = ("'%s'" % value, '"%s"' % value)
-
     return (item for item in lst if item[key.lower()] in possible_values)
 
 
 def _save(output_file, map_string):
-
     with codecs.open(output_file, "w", encoding="utf-8") as f:
         f.write(map_string)
 
