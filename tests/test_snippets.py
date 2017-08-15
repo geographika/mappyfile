@@ -602,7 +602,6 @@ def test_colorrange():
     END
     """
     exp = "STYLE COLORRANGE '#0000ffff' '#ff0000ff' DATARANGE 32 255 END"
-    print(output(s))
     assert(output(s) == exp)
 
 
