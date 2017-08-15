@@ -94,7 +94,7 @@ class PrettyPrinter(object):
                     lines.append(self.format_line(spacer, key, v))
             else:
                 s = " ".join(map(self.format_value, lst))
-                s = self.format_line(spacer, key, s)
+                s = self.__format_line(spacer, key, s)
                 lines.append(s)
 
         if block_list:
@@ -196,10 +196,7 @@ class PrettyPrinter(object):
         return key
 
     def format_line(self, spacer, key, value):
-        return self.__format_line(
-            spacer,
-            self.format_key(key),
-            self.format_value(value))
+        return self.__format_line(spacer, self.format_key(key), self.format_value(value))
 
     def __format_line(self, spacer, key, value):
 
@@ -283,22 +280,14 @@ class PrettyPrinter(object):
                 if key in SINGLETON_COMPOSITE_NAMES:
                     lines += self.process_dict(key, value, level)
                 elif isinstance(value, dict):
-
                     if key == "config":
                         # config declaration allows for pairs of values
-                        value = [
-                            "%s %s" %
-                            (self.format_key(k),
-                             self.format_attribute(v)) for k,
-                            v in value.items()]
+                        value = ["%s %s" % (self.format_key(k), self.format_attribute(v)) for k, v in value.items()]
                     key = self.format_key(key)  # format the "parent" key
                     for v in value:
                         # keys and values are already formatted so do not
                         # format them again
-                        lines.append(
-                            self.__format_line(
-                                self.whitespace(
-                                    level, 1), key, v))
+                        lines.append(self.__format_line(self.whitespace(level, 1), key, v))
                 elif isinstance(value, list):
                     if self.is_list_of_lists(value):
                         # value is list of lists, so create composite type for
@@ -306,6 +295,7 @@ class PrettyPrinter(object):
                         for l in value:
                             lines += self.process_list(key, [l], level)
                     else:
+                        key = self.format_key(key)  # format the "parent" key
                         lines += self.process_list(key, value, level)
                 else:
                     comp_type = composite.get("__type__", "")
@@ -314,15 +304,9 @@ class PrettyPrinter(object):
                         # them if present
                         key = self.standardise_quotes(key)
                         value = self.standardise_quotes(value)
-                        lines.append(
-                            self.__format_line(
-                                self.whitespace(
-                                    level, 1), key, value))
+                        lines.append(self.__format_line(self.whitespace(level, 1), key, value))
                     else:
-                        lines.append(
-                            self.format_line(
-                                self.whitespace(
-                                    level, 1), key, value))
+                        lines.append(self.format_line(self.whitespace(level, 1), key, value))
 
         if not is_hidden:  # Container
             # close the container block with an END

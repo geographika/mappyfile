@@ -1,4 +1,5 @@
 import logging
+import json
 import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
@@ -14,9 +15,10 @@ def output(s):
     m = MapfileToDict()
 
     ast = p.parse(s)
-    # print(ast)
+    print(ast)
     d = m.transform(ast)
-    # print(d)
+    print(d)
+    print(json.dumps(d))
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     return pp.pprint(d)
 
@@ -589,6 +591,21 @@ def test_no_linebreaks():
     assert(output(s) == exp)
 
 
+def test_colorrange():
+    """
+    {"colorrange": ["\"#0000ffff\"", "\"#ff0000ff\""], "datarange": [32, 255], "__type__": "style"}
+    """
+    s = """
+    STYLE
+        COLORRANGE "#0000ffff" "#ff0000ff"
+        DATARANGE 32 255
+    END
+    """
+    exp = "STYLE COLORRANGE '#0000ffff' '#ff0000ff' DATARANGE 32 255 END"
+    print(output(s))
+    assert(output(s) == exp)
+
+
 def run_tests():
     # pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
@@ -596,6 +613,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    # test_no_linebreaks()
-    run_tests()
+    test_colorrange()
+    # run_tests()
     print("Done!")
