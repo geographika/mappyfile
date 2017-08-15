@@ -1,22 +1,22 @@
-import os, logging
+import logging
 import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
-import mappyfile
 from mappyfile.transformer import MapfileToDict
+
 
 def output(s):
     """
-    Parse, transform, and pretty print 
+    Parse, transform, and pretty print
     the result
     """
     p = Parser()
     m = MapfileToDict()
-    
+
     ast = p.parse(s)
-    #print(ast)
+    # print(ast)
     d = m.transform(ast)
-    #print(d)
+    # print(d)
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     return pp.pprint(d)
 
@@ -52,7 +52,7 @@ def test_style_pattern():
 
     s = """
     STYLE
-        PATTERN 5 5 END 
+        PATTERN 5 5 END
     END
     """
 
@@ -63,10 +63,10 @@ def test_style_pattern():
 def test_style_pattern2():
 
     s = """
-    STYLE 
-        PATTERN 
+    STYLE
+        PATTERN
             5 5
-        END 
+        END
     END
     """
 
@@ -88,15 +88,16 @@ def test_style_pattern4():
     Test pattern values on separate lines are valid
     """
     s = """
-    STYLE 
-        PATTERN 
+    STYLE
+        PATTERN
             5
-            5 
-        END 
+            5
+        END
     END
     """
     exp = "STYLE PATTERN 5 5 END END"
     assert(output(s) == exp)
+
 
 @pytest.mark.xfail
 def test_style_pattern5():
@@ -106,38 +107,41 @@ def test_style_pattern5():
     UnexpectedToken: Unexpected token Token(_END, 'END') at line 3, column 27.
     """
     s = """
-    STYLE 
+    STYLE
         PATTERN 6 4 2 4 6 END
     END
     """
     exp = "STYLE PATTERN 6 4 2 4 6 END END"
     assert(output(s) == exp)
 
+
 def test_metadata():
     """
     Parse metadata directly
     """
     s = """
-    METADATA 
+    METADATA
         'wms_title' 'Test simple wms'
     END
     """
     exp = """METADATA 'wms_title' 'Test simple wms' END"""
     assert(output(s) == exp)
 
+
 def test_metadata_unquoted():
     """
-    The METADATA block doesn't need quotes 
+    The METADATA block doesn't need quotes
     (as long as values don't have spaces)
     """
     s = """
-    METADATA 
+    METADATA
         wms_title my_title
     END
     """
     exp = """METADATA wms_title my_title END"""
-    #print output(s)
+    # print output(s)
     assert(output(s) == exp)
+
 
 def test_validation():
     """
@@ -149,9 +153,10 @@ def test_validation():
         "field2" "-1"
     END
     """
-    #print output(s)
+    # print output(s)
     exp = """VALIDATION 'field1' '^[0-9,]+$' 'field2' '-1' END"""
     assert(output(s) == exp)
+
 
 def test_layer_text_query():
     s = """
@@ -172,8 +177,8 @@ def test_label():
       SIZE 8
       POSITION AUTO
       PARTIALS FALSE
-      OUTLINECOLOR 255 255 255			
-    END 
+      OUTLINECOLOR 255 255 255
+    END
     """
     exp = "LABEL COLOR 0 0 0 FONT Vera TYPE truetype SIZE 8 POSITION AUTO PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
     assert(output(s) == exp)
@@ -241,7 +246,7 @@ def test_feature():
     """
 
     s = """
-        LAYER        
+        LAYER
             FEATURE
                 POINTS
                     0 10
@@ -311,7 +316,7 @@ def test_complex_class_expression():
     CLASS
       TEXT ("Area is: " + tostring([area],"%.2f"))
     END
-    '''         
+    '''
     exp = '''CLASS TEXT ("Area is: " + (tostring([area],"%.2f"))) END'''
     assert(output(s) == exp)
 
@@ -391,7 +396,7 @@ def test_processing_directive():
     END
     """
 
-    #print(output(s))
+    # print(output(s))
     exp = "LAYER NAME 'ProcessingLayer' PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' END"
     assert(output(s) == exp)
 
@@ -410,6 +415,7 @@ def test_config_directive():
     exp = "MAP NAME 'ConfigMap' CONFIG MS_ERRORFILE 'stderr' CONFIG 'PROJ_DEBUG' 'OFF' CONFIG 'ON_MISSING_DATA' 'IGNORE' END"
     assert(output(s) == exp)
 
+
 def test_multiple_composites():
     """
     Allow for multiple root composites
@@ -426,6 +432,7 @@ def test_multiple_composites():
     """
     exp = "CLASS NAME 'Name1' END CLASS NAME 'Name2' END"
     assert(output(s) == exp)
+
 
 def test_map():
     s = """
@@ -456,6 +463,7 @@ def test_oneline_composites():
     exp = ' '.join(s.split())
     assert(output(s) == exp)
 
+
 def test_querymap():
 
     s = """
@@ -468,11 +476,12 @@ def test_querymap():
          END
     END
     """
-    #print output(s)
+    # print output(s)
     exp = "MAP QUERYMAP COLOR 255 255 0 SIZE -1 -1 STATUS OFF STYLE HILITE END END"
     assert(output(s) == exp)
 
-def test_output_format():
+
+def test_output_format_esri():
 
     s = """
     OUTPUTFORMAT
@@ -484,6 +493,7 @@ def test_output_format():
     """
     exp = "OUTPUTFORMAT NAME 'shapezip' DRIVER 'OGR/ESRI Shapefile' TRANSPARENT FALSE IMAGEMODE FEATURE END"
     assert(output(s) == exp)
+
 
 def test_auto_projection():
     """
@@ -498,18 +508,20 @@ def test_auto_projection():
     END
     """
     exp = "MAP PROJECTION AUTO END END"
-    #print(output(s))
+    # print(output(s))
     assert(output(s) == exp)
+
 
 def test_runtime_expression():
     s = """
     CLASS
-      EXPRESSION ( [EPPL_Q100_] = %eppl% )		   
+      EXPRESSION ( [EPPL_Q100_] = %eppl% )
     END
     """
     exp = "CLASS EXPRESSION (( [EPPL_Q100_] = %eppl% )) END"
-    #print(output(s))
+    # print(output(s))
     assert(output(s) == exp)
+
 
 def test_mutliple_output_formats():
     """
@@ -524,6 +536,7 @@ def test_mutliple_output_formats():
     exp = "OUTPUTFORMAT FORMATOPTION 'FORM=zip' FORMATOPTION 'SPATIAL_INDEX=YES' END"
     assert(output(s) == exp)
 
+
 def test_config_case():
     """
     https://github.com/geographika/mappyfile/issues/18
@@ -531,16 +544,17 @@ def test_config_case():
 
     s = """
     MAP
-	    CONFIG "PROJ_LIB" "projections"
+        CONFIG "PROJ_LIB" "projections"
     END
     """
     exp = "MAP CONFIG 'PROJ_LIB' 'projections' END"
     assert(output(s) == exp)
 
+
 def test_ne_comparison():
     """
     IS NOT is not valid
-    NE (Not Equals) should be used instead 
+    NE (Not Equals) should be used instead
     """
     s = """
     CLASS
@@ -550,6 +564,7 @@ def test_ne_comparison():
     """
     exp = 'CLASS EXPRESSION (( "[building]" NE NULL )) END'
     assert(output(s) == exp)
+
 
 def test_eq_comparison():
     """
@@ -561,8 +576,9 @@ def test_eq_comparison():
     END
     """
     exp = 'CLASS EXPRESSION (( "[building]" eq NULL )) END'
-    #print(output(s))
+    # print(output(s))
     assert(output(s) == exp)
+
 
 def test_no_linebreaks():
     """
@@ -572,12 +588,14 @@ def test_no_linebreaks():
     exp = "CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"
     assert(output(s) == exp)
 
-def run_tests():        
-    #pytest.main(["tests/test_snippets.py::test_style_pattern"])
+
+def run_tests():
+    # pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_no_linebreaks()
+    # test_no_linebreaks()
     run_tests()
     print("Done!")

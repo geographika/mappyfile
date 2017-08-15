@@ -3,10 +3,11 @@ import pytest
 from mappyfile.pprint import PrettyPrinter
 import mappyfile
 
+
 def test_nested_quotes():
     """
     If values contain quotes then make sure they are escaped
-    shp2img -m C:\Temp\msautotest\misc\ogr_vrtconnect.tmp.map    
+    shp2img -m C:\Temp\msautotest\misc\ogr_vrtconnect.tmp.map
     """
     s = """
     LAYER
@@ -17,25 +18,27 @@ def test_nested_quotes():
     END"""
 
     ast = mappyfile.loads(s)
-    pp = PrettyPrinter(indent=0, quote='"', newlinechar=" ") # expected
+    pp = PrettyPrinter(indent=0, quote='"', newlinechar=" ")  # expected
     res = pp.pprint(ast)
     exp = r'LAYER NAME shppoly TYPE polygon CONNECTIONTYPE OGR CONNECTION "<OGRVRTDataSource><OGRVRTLayer name=\"poly\">' \
         r'<SrcDataSource relativeToVRT=\"0\">data/shppoly</SrcDataSource><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>" END'
     assert(res == exp)
 
+
 def test_standardise_quotes():
 
     v = '"the_geom from (select * from road where "name_e"=\'Trans-Canada Highway\' order by gid) as foo using unique gid using srid=3978"'
 
-    pp = PrettyPrinter(indent=0, quote='"', newlinechar=" ") # expected
+    pp = PrettyPrinter(indent=0, quote='"', newlinechar=" ")  # expected
     v2 = pp.standardise_quotes(v)
     exp = r'''"the_geom from (select * from road where \"name_e\"='Trans-Canada Highway' order by gid) as foo using unique gid using srid=3978"'''
     assert(v2 == exp)
 
-    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ") # expected
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")  # expected
     v2 = pp.standardise_quotes(v)
     exp = r"""'the_geom from (select * from road where "name_e"=\'Trans-Canada Highway\' order by gid) as foo using unique gid using srid=3978'"""
     assert(v2 == exp)
+
 
 def test_double_attributes():
 
@@ -47,10 +50,11 @@ def test_double_attributes():
 
     s = 'MAP CONFIG "MS_ERRORFILE" "stderr" END'
     ast = mappyfile.loads(s)
-    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ") # expected
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")  # expected
     res = pp.pprint(ast)
     assert(res == "MAP CONFIG 'MS_ERRORFILE' 'stderr' END")
-        
+
+
 def test_already_escaped():
     """
     Don't escape an already escaped quote
@@ -68,6 +72,7 @@ def test_already_escaped():
     res = pp.pprint(ast)
     exp = r"CLASS EXPRESSION '\'Tignish' END"
     assert(res == exp)
+
 
 def test_format_list():
 
@@ -88,8 +93,8 @@ def test_format_list():
         END
     """
 
-    ast = mappyfile.loads(s)
-    pp = PrettyPrinter(indent=0) # expected
+    mappyfile.loads(s)
+    pp = PrettyPrinter(indent=0)  # expected
 
     k = "pattern"
     lst = [[5, 5, 10, 10]]
@@ -98,6 +103,7 @@ def test_format_list():
     r = pp.process_list(k, lst, 0)
     exp = [u'PATTERN', '5 5\n10 10', u'END']
     assert(r == exp)
+
 
 def test_unicode():
 
@@ -114,6 +120,7 @@ def test_unicode():
     exp = u"MAP METADATA 'ows_title' 'éúáí' END END"
     assert(res == exp)
 
+
 def test_config():
 
     s = """
@@ -124,15 +131,17 @@ def test_config():
     ast = mappyfile.loads(s)
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     res = pp.pprint(ast)
-    #print(res)
+    # print(res)
     exp = u"MAP CONFIG 'MS_ERRORFILE' 'my.log' END"
     assert(res == exp)
 
-def run_tests():        
-    #pytest.main(["tests/test_pprint.py::test_format_list"])
+
+def run_tests():
+    # pytest.main(["tests/test_pprint.py::test_format_list"])
     pytest.main(["tests/test_pprint.py"])
+
 
 if __name__ == "__main__":
     run_tests()
-    #test_double_attributes()
+    # test_double_attributes()
     print("Done!")

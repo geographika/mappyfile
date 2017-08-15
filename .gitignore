@@ -16,3 +16,4 @@ cache
 /.eggs
 /.vs/config
 /.venv
+/.coverage

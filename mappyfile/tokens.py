@@ -102,7 +102,7 @@ COMPOSITE_NAMES = frozenset("""
     maxsubdivide
     maxtemplate
     maxwidth
-    
+
     mimetype
     minarcs
     minboxsize
@@ -184,9 +184,9 @@ COMPOSITE_NAMES = frozenset("""
     units
     utfdata
     utfitem
-    
-    
-    
+
+
+
     width
     wkt
     wrap

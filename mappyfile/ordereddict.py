@@ -1,11 +1,12 @@
 from collections import OrderedDict, Callable
 
+
 class DefaultOrderedDict(OrderedDict):
     # Source: http://stackoverflow.com/a/6190500/562769
     # http://code.activestate.com/recipes/523034-emulate-collectionsdefaultdict/
     def __init__(self, default_factory=None, *a, **kw):
         if (default_factory is not None and
-           not isinstance(default_factory, Callable)):
+                not isinstance(default_factory, Callable)):
             raise TypeError('first argument must be callable')
         OrderedDict.__init__(self, *a, **kw)
         self.default_factory = default_factory

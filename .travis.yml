@@ -4,5 +4,9 @@ python:
     - "2.7"
     - "3.5"
     - "3.6"
-install: pip install tox-travis
-script: tox
+install:
+    - pip install tox-travis flake8
+script:
+    - tox
+    - flake8 mappyfile
+    - flake8 --ignore=E501 tests
