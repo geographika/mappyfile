@@ -13,9 +13,8 @@ except ImportError:
 
 class Parser(object):
 
-    def __init__(self, expand_includes=True, add_linebreaks=True):
+    def __init__(self, expand_includes=True):
         self.expand_includes = expand_includes
-        self.add_linebreaks = add_linebreaks
         self.g = self.load_grammar("mapfile.g")
         self._nested_include = 0
 
@@ -66,10 +65,7 @@ class Parser(object):
             return open(fn, "r", encoding="utf-8").read()
         except UnicodeDecodeError as ex:
             logging.debug(ex)
-            logging.error(
-                "Please check the encoding for %s. " +
-                "All Mapfiles should be in utf-8 format.",
-                fn)
+            logging.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format.", fn)
             raise
 
     def parse_file(self, fn):
@@ -77,27 +73,9 @@ class Parser(object):
         text = self.open_file(fn)
         return self.parse(text, fn=fn)
 
-    def _add_linebreaks(self, text):
-        """
-        Add a line-break before each END keyword to speed-up parsing
-        """
-        pattern = re.compile(r'\bEND\b', re.IGNORECASE)
-
-        text = StringIO(text)
-        new_lines = []
-        for line in text:
-            parts = line.split('#')
-            parts[0] = pattern.sub('\nEND', parts[0])
-            new_lines.append('#'.join(parts))
-
-        return "\n".join(new_lines)
-
     def parse(self, text, fn=None):
         self._nested_include = 0
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
-
-        if self.add_linebreaks:
-            text = self._add_linebreaks(text)
 
         return self.g.parse(text)
