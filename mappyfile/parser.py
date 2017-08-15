@@ -94,7 +94,7 @@ class Parser(object):
 
     def parse(self, text, fn=None):
         self._nested_include = 0
-        if self.expand_includes == True:
+        if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 
         if self.add_linebreaks:
