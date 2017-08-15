@@ -2,3 +2,5 @@
 from mappyfile.utils import load, loads, find, findall, dumps, write
 
 __version__ = "0.3.2"
+
+__all__ = ['load', 'loads', 'find', 'findall', 'dumps', 'write']

@@ -27,7 +27,7 @@ attr_name: NAME | composite_type
 int: SIGNED_INT
 int_pair: int int
 !bare_string: NAME | "SYMBOL"i | "AUTO"i | "GRID"i | "CLASS"i | "FEATURE"i
-string: STRING1 | STRING2 | STRING3 
+string: STRING1 | STRING2 | STRING3
 string_pair: string string
 float: SIGNED_FLOAT
 float_pair: float float
@@ -45,7 +45,7 @@ expression: "(" or_test ")"
 ?or_test : (or_test ("OR"i|"||"))? and_test
 ?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? add
-!compare_op: ">=" | "<" | "=*" | "==" | "=" | "~" | "~*" | ">" | "<=" | "IN" | "NE" | "EQ"
+!compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" | "<=" | "IN" | "NE" | "EQ"
 
 ?add: (add "+")? (func_call | value)
 func_call: attr_name "(" func_params ")"

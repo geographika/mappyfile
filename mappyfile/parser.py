@@ -1,4 +1,5 @@
-import os, logging
+import os
+import logging
 from io import open
 from lark import Lark
 import re
@@ -55,16 +56,20 @@ class Parser(object):
                 includes[idx] = self.load_includes(include_text, fn=inc_file_path)
 
         for idx, txt in includes.items():
-            lines.pop(idx) # remove the original include
+            lines.pop(idx)  # remove the original include
             lines.insert(idx, txt)
         return '\n'.join(lines)
 
     def open_file(self, fn):
         try:
-            return open(fn, "r", encoding="utf-8").read() # specify Unicode for Python 2.7
+            # specify Unicode for Python 2.7
+            return open(fn, "r", encoding="utf-8").read()
         except UnicodeDecodeError as ex:
             logging.debug(ex)
-            logging.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format. ", fn)
+            logging.error(
+                "Please check the encoding for %s. " +
+                "All Mapfiles should be in utf-8 format.",
+                fn)
             raise
 
     def parse_file(self, fn):

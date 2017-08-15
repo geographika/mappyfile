@@ -15,3 +15,5 @@ cache
 /.tox
 /.eggs
 /.vs/config
+/.venv
+/.coverage

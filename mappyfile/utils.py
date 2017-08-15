@@ -3,7 +3,6 @@ from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 import codecs
 
-
 def load(fn, expand_includes=True, add_linebreaks=True):
     p = Parser(expand_includes=expand_includes, add_linebreaks=add_linebreaks)
     ast = p.parse_file(fn)
@@ -11,14 +10,12 @@ def load(fn, expand_includes=True, add_linebreaks=True):
     d = m.transform(ast)
     return d
 
-
 def loads(s, expand_includes=True, add_linebreaks=True):
     p = Parser(expand_includes=expand_includes, add_linebreaks=add_linebreaks)
     ast = p.parse(s)
     m = MapfileToDict()
     d = m.transform(ast)
     return d
-
 
 def write(d, output_file, indent=4):
     map_string = _pprint(d, indent)
