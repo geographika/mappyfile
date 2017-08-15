@@ -49,4 +49,3 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     test_all_maps()
     print("Done!")
-    
