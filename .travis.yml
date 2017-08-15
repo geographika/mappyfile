@@ -8,5 +8,5 @@ install:
     - pip install tox-travis flake8
 script:
     - tox
-    - flake8 mappyfile
+    - flake8 mappyfile --max-line-length=120
     - flake8 --ignore=E501 tests

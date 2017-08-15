@@ -45,6 +45,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
+    <Content Include=".travis.yml" />
     <Content Include="docs\examples\animation\animated_buffer.map" />
     <Content Include="docs\examples\geometry\geometry.map" />
     <Content Include="docs\grammar.rst" />
