@@ -665,6 +665,7 @@ def test_extent():
     exp = "MAP EXTENT -903661.3649 6426848.5209 201564.4067 8586384.8116 END"
     assert(output(s) == exp)
 
+
 def test_expression():
     """
     See issue #27
@@ -676,6 +677,7 @@ def test_expression():
     """
     exp = "CLASS EXPRESSION (( '[construct]' ~* /^Br.*/ )) END"
     assert(output(s) == exp)
+
 
 def run_tests():
     # pytest.main(["tests/test_snippets.py::test_style_pattern"])

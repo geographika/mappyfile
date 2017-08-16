@@ -1,10 +1,9 @@
 import logging
+import cProfile
 
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
-
-import cProfile
 
 
 def output(fn):
