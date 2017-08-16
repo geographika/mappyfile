@@ -105,7 +105,7 @@ class Parser(object):
             logging.debug("Parsing with Earley (breaks) successful!")
             return ast
         except (ParseError, UnexpectedInput) as ex:
-            logging.debug(ex)        
+            logging.debug(ex)
 
         logging.debug("Attempting to parse with Earley (no line breaks)")
 
