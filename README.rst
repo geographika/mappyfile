@@ -75,7 +75,7 @@ Contributors
 ------------
 
 * Julien Enselme `@jenselme <https://github.com/jenselme>`_
-* Loïc Gasser `@loicgasser <https://github.com/loicgasser>`_
+* LoÃ¯c Gasser `@loicgasser <https://github.com/loicgasser>`_
 
 .. include:: docs/HISTORY.rst
 

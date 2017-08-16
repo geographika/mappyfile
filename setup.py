@@ -1,12 +1,12 @@
 import re
 from setuptools import setup
+from io import open
 
 __version__, = re.findall('__version__ = "(.*)"',
                           open('mappyfile/__init__.py').read())
 
-
 def readme():
-    with open('README.rst') as f:
+    with open('README.rst', "r", encoding="utf-8") as f:
         return f.read()
 
 
