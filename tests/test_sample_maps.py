@@ -46,6 +46,6 @@ def run_tests():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
     test_all_maps()
     print("Done!")

@@ -96,7 +96,11 @@
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
-    <Content Include="mappyfile\mapfile.g" />
+    <Content Include="mappyfile\mapfile.earley.breaks.g">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="mappyfile\mapfile.earley.g" />
+    <Content Include="mappyfile\mapfile.lalr.g" />
     <Content Include="mappyfile\schemas\layer.json" />
     <Content Include="mappyfile\schemas\map.json" />
     <Content Include="notes.private.txt" />

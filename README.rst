@@ -71,6 +71,12 @@ Authors
 * Seth Girvin `@geographika <https://github.com/geographika>`_
 * Erez Shinan `@erezsh <https://github.com/erezsh>`_
 
+Contributors
+------------
+
+* Julien Enselme `@jenselme <https://github.com/jenselme>`_
+* Loïc Gasser `@loicgasser <https://github.com/loicgasser>`_
+
 .. include:: docs/HISTORY.rst
 
 .. |Version| image:: https://img.shields.io/pypi/v/mappyfile.svg

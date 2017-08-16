@@ -15,12 +15,12 @@ def output(s):
     m = MapfileToDict()
 
     ast = p.parse(s)
-    # print(ast)
+    print(ast)
     d = m.transform(ast)
-    # print(json.dumps(d))
+    logging.debug(json.dumps(d, indent=4))
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     s = pp.pprint(d)
-    # print(s)
+    print(s)
     return s
 
 
@@ -102,8 +102,23 @@ def test_style_pattern4():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_style_pattern5():
+    """
+    Test pattern with decimal places
+    """
+    s = """
+    STYLE
+        PATTERN
+            5.0 5.0
+        END
+    END
+    """
+    exp = "STYLE PATTERN 5.0 5.0 END END"
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_style_pattern_fail():
     """
     Test pattern with odd number of values
     This should fail with the following error message
@@ -605,13 +620,71 @@ def test_colorrange():
     assert(output(s) == exp)
 
 
+def test_path_numeric():
+    """
+    Make sure any folder ending with a number is not
+    split into a NAME and PATH token
+    """
+    s = """
+    LAYER
+        DATA folder123/file
+    END
+    """
+    exp = "LAYER DATA folder123/file END"
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_symbol_style():
+    """
+    This works if barb_warm is in quotes
+    """
+    s = """
+    CLASS
+        STYLE
+            INITIALGAP 15
+            SYMBOL barb_warm
+            GAP -45
+        END
+    END
+    """
+    exp = "CLASS STYLE INITIALGAP 15 SYMBOL barb_warm GAP -45 END END"
+    assert(output(s) == exp)
+
+
+def test_extent():
+    """
+    Make sure any folder ending with a number is not
+    split into a NAME and PATH token
+    """
+    s = """
+    MAP
+        EXTENT -903661.3649 6426848.5209 201564.4067 8586384.8116
+    END
+    """
+    exp = "MAP EXTENT -903661.3649 6426848.5209 201564.4067 8586384.8116 END"
+    assert(output(s) == exp)
+
+def test_expression():
+    """
+    See issue #27
+    """
+    s = """
+    CLASS
+        EXPRESSION ('[construct]' ~* /^Br.*/)
+    END
+    """
+    exp = "CLASS EXPRESSION (( '[construct]' ~* /^Br.*/ )) END"
+    assert(output(s) == exp)
+
 def run_tests():
     # pytest.main(["tests/test_snippets.py::test_style_pattern"])
     pytest.main(["tests/test_snippets.py"])
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    test_processing_directive()
+    logging.basicConfig(level=logging.DEBUG)
+    test_expression()
+    # test_style_pattern5()
     # run_tests()
     print("Done!")

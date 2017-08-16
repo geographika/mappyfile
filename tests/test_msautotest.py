@@ -6,6 +6,7 @@ import os
 import logging
 import glob
 import shutil
+import json
 
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.parser import Parser
@@ -54,9 +55,7 @@ def parse_mapfile(parser, transformer, pp, fn):
 
 def main(msautotest_fld, create_new_copy=True):
 
-    msautotest_copy = os.path.join(
-        os.path.dirname(msautotest_fld),
-        "msautotest_mappyfile")
+    msautotest_copy = os.path.join(os.path.dirname(msautotest_fld), "msautotest_mappyfile")
 
     if create_new_copy:
         create_copy(msautotest_fld, msautotest_copy)
@@ -77,7 +76,11 @@ def main(msautotest_fld, create_new_copy=True):
 
         d = parse_mapfile(parser, transformer, pp, fn)
         output_file = fn.replace(msautotest_fld, msautotest_copy)
-        mappyfile.utils.write(d, output_file)
+        try:
+            mappyfile.utils.write(d, output_file)
+        except Exception:
+            logging.info(json.dumps(d, indent=4))
+            logging.warning("%s could not be successfully re-written", fn)
 
         # now try reading it again
         d = parse_mapfile(parser, transformer, pp, output_file)
@@ -86,5 +89,5 @@ def main(msautotest_fld, create_new_copy=True):
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     fld = r"D:\GitHub\mapserver\msautotest"
-    main(fld, True)
+    main(fld, False)
     print("Done!")

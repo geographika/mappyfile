@@ -267,6 +267,13 @@ class MapfileToDict(Transformer):
             v = t
         return v
 
+    def bare_string2(self, t):
+        if t:
+            v = t[0]
+        else:
+            v = t
+        return v
+
     def string(self, t):
         v = t[0].value
         return v
