@@ -15,12 +15,13 @@ def output(s):
     m = MapfileToDict()
 
     ast = p.parse(s)
-    print(ast)
+    # print(ast)
     d = m.transform(ast)
-    print(d)
-    print(json.dumps(d))
+    # print(json.dumps(d))
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
-    return pp.pprint(d)
+    s = pp.pprint(d)
+    # print(s)
+    return s
 
 
 def check_result(s):
@@ -398,7 +399,6 @@ def test_processing_directive():
     END
     """
 
-    # print(output(s))
     exp = "LAYER NAME 'ProcessingLayer' PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' END"
     assert(output(s) == exp)
 
@@ -612,6 +612,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    test_colorrange()
+    test_processing_directive()
     # run_tests()
     print("Done!")

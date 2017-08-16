@@ -89,7 +89,7 @@ class PrettyPrinter(object):
             lines.append(s)
         else:
             # put all parts on same line
-            if key in REPEATED_KEYS:
+            if key.lower() in REPEATED_KEYS:
                 for v in lst:
                     lines.append(self.format_line(spacer, key, v))
             else:
