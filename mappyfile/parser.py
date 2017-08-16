@@ -94,7 +94,7 @@ class Parser(object):
             return self.lalr.parse(text)
         except (ParseError, UnexpectedInput) as ex:
             logging.debug(ex)
-            
+
         logging.debug("Attempting to parse with Earley (assuming line breaks)")
 
         if self.earley_breaks is None:
@@ -106,7 +106,7 @@ class Parser(object):
             return ast
         except (ParseError, UnexpectedInput) as ex:
             logging.debug(ex)        
-          
+
         logging.debug("Attempting to parse with Earley (no line breaks)")
 
         if self.earley is None:
@@ -115,5 +115,3 @@ class Parser(object):
         ast = self.earley.parse(text)
         logging.debug("Parsing with Earley successful!")
         return ast
-        
-        
