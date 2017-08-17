@@ -686,7 +686,23 @@ def test_list_expression():
         EXPRESSION /NS_Bahn|NS_BahnAuto/
     END
     """
-    exp = "CLASS EXPRESSION (( '[construct]' ~* /^Br.*/ )) END"
+    exp = "CLASS EXPRESSION /NS_Bahn|NS_BahnAuto/ END"
+    assert(output(s) == exp)
+
+@pytest.mark.xfail
+def test_escaped_string():
+    """
+    http://mapserver.org/mapfile/expressions.html#quotes-escaping-in-strings
+    Extra spaces currently added
+    Starting with MapServer 6.0 you don’t need to escape single quotes within double quoted strings 
+    and you don’t need to escape double quotes within single quoted strings
+    """
+    s = """
+    CLASS
+        EXPRESSION "National \"hero\" statue"
+    END
+    """
+    exp = "CLASS EXPRESSION 'National 'hero' statue' END"
     assert(output(s) == exp)
 
 
@@ -697,7 +713,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_list_expression()
+    test_escaped_string()
     # test_style_pattern5()
     # run_tests()
     print("Done!")
