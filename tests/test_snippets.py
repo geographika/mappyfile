@@ -667,12 +667,23 @@ def test_extent():
 
 
 def test_expression():
+    s = """
+    CLASS
+        EXPRESSION ('[construct]' ~* /^Br.*/)
+    END
+    """
+    exp = "CLASS EXPRESSION (( '[construct]' ~* /^Br.*/ )) END"
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_list_expression():
     """
     See issue #27
     """
     s = """
     CLASS
-        EXPRESSION ('[construct]' ~* /^Br.*/)
+        EXPRESSION /NS_Bahn|NS_BahnAuto/
     END
     """
     exp = "CLASS EXPRESSION (( '[construct]' ~* /^Br.*/ )) END"
@@ -686,7 +697,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_expression()
+    test_list_expression()
     # test_style_pattern5()
     # run_tests()
     print("Done!")
