@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_snippets.py</StartupFile>
+    <StartupFile>tests\test_large_file.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -96,9 +96,6 @@
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
-    <Content Include="mappyfile\mapfile.earley.breaks.g">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="mappyfile\mapfile.earley.g" />
     <Content Include="mappyfile\mapfile.lalr.g" />
     <Content Include="mappyfile\schemas\layer.json" />

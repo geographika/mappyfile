@@ -10,17 +10,12 @@ class Parser(object):
     def __init__(self, expand_includes=True):
         self.expand_includes = expand_includes
         self.lalr = self._create_lalr_parser()
-        self.earley_breaks = None  # only load this grammar as required
         self.earley = None  # only load this grammar as required
         self._nested_include = 0
 
     def load_grammar(self, grammar_file):
         gf = os.path.join(os.path.dirname(__file__), grammar_file)
         return open(gf).read()
-
-    def _create_earley_breaks_parser(self):
-        grammar_text = self.load_grammar("mapfile.earley.breaks.g")
-        return Lark(grammar_text, parser="earley", lexer="standard")
 
     def _create_earley_parser(self):
         grammar_text = self.load_grammar("mapfile.earley.g")
@@ -93,25 +88,18 @@ class Parser(object):
         try:
             return self.lalr.parse(text)
         except (ParseError, UnexpectedInput) as ex:
-            logging.debug(ex)
+            logging.info(ex)
 
-        logging.debug("Attempting to parse with Earley (assuming line breaks)")
-
-        if self.earley_breaks is None:
-            self.earley_breaks = self._create_earley_breaks_parser()
-
-        try:
-            ast = self.earley_breaks.parse(text)
-            logging.debug("Parsing with Earley (breaks) successful!")
-            return ast
-        except (ParseError, UnexpectedInput) as ex:
-            logging.debug(ex)
-
-        logging.debug("Attempting to parse with Earley (no line breaks)")
+        logging.info("Attempting to parse with Earley")
 
         if self.earley is None:
             self.earley = self._create_earley_parser()
 
-        ast = self.earley.parse(text)
-        logging.debug("Parsing with Earley successful!")
-        return ast
+        try:
+            ast = self.earley.parse(text)
+            logging.info("Parsing with Earley successful")
+            return ast
+        except (ParseError, UnexpectedInput) as ex:
+            logging.exception(ex)
+            logging.error("Parsing with LALR and Earley unsuccessful")
+            raise
