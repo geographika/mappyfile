@@ -1,6 +1,19 @@
 Releases
 --------
 
+0.4.0 (18/08/2017)
+++++++++++++++++++
+
++ Add a LALR grammar and parser, now a 8k line Mapfile is now parsed 12x faster
++ Add a experimental validator module using jsonschema
++ `#30 <https://github.com/geographika/mappyfile/pull/30>`_ Flake8 support` - thanks @loicgrasser
++ `#28 <https://github.com/geographika/mappyfile/pull/28>`_ Add support for relative path for nested include` - thanks @loicgrasser
+
+Resolved Issues
+***************
+
+* `#25 <https://github.com/geographika/mappyfile/issues/25>`_ Expression grammar not allowing !`
+ 
 0.3.2
 +++++
 
@@ -33,6 +46,6 @@ Older Releases
 ++++++++++++++
 
 + 0.2.2 - various fixes to grammar, and allow for alternate comparison operators
-+ 0.2.1 - new ``findall`` function, see https://github.com/geographika/mappyfile/pull/12
++ 0.2.1 - new ``findall`` function, see https://github.com/geographika/mappyfile/pull/12 - thanks @Jenselme
 + 0.2.0 - switch to Lark parser
 + 0.1.0 - initial release
