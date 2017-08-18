@@ -680,10 +680,17 @@ def test_extent():
     assert(output(s) == exp)
 
 
+@pytest.mark.xfail
 def test_expression():
+    """
+    See issue #27
+    """
     s = """
     CLASS
-        EXPRESSION ('[construct]' ~* /^Br.*/)
+        EXPRESSION ('[construct]' ~* /Br.*$/)
+        STYLE
+            ANGLE 360
+        END
     END
     """
     exp = "CLASS EXPRESSION (( '[construct]' ~* /^Br.*/ )) END"
@@ -733,7 +740,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    # test_symbol_style()
+    test_expression()
     # test_style_pattern5()
     run_tests()
     print("Done!")
