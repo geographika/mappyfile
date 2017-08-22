@@ -21,14 +21,17 @@ def output(fn):
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     pp.pprint(d)
 
+def main():
+    fns = [r"D:\Temp\large_map1.txt", r"D:\Temp\large_map2.txt"]
+
+    for fn in fns:
+        pr = cProfile.Profile()
+        pr.enable()
+        output(fn)
+        pr.disable()
+        pr.print_stats(sort='time')
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    fn = r"D:\Temp\large_map1.txt"
-    # fn = r"D:\Temp\large_map2.txt"
-    pr = cProfile.Profile()
-    pr.enable()
-    output(fn)
-    pr.disable()
-    pr.print_stats(sort='time')
+    main()
     print("Done!")

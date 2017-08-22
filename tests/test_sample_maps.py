@@ -4,7 +4,7 @@ import pytest
 import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
-
+from lark.common import UnexpectedToken
 
 def test_all_maps():
 
@@ -12,14 +12,18 @@ def test_all_maps():
 
     p = Parser(expand_includes=False)
 
+    failing_maps = []
+
     for fn in os.listdir(sample_dir):
         print(fn)
         try:
             p.parse_file(os.path.join(sample_dir, fn))
-        except BaseException:
+        except (BaseException, UnexpectedToken) as ex:
             logging.warning("Cannot process %s ", fn)
-            raise
+            failing_maps.append(fn)
+            #raise
 
+    logging.warning(failing_maps)
 
 def test_includes():
     p = Parser()

@@ -740,7 +740,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    test_expression()
+    #test_expression()
     # test_style_pattern5()
     run_tests()
     print("Done!")
