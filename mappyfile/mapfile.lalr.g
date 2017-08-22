@@ -22,7 +22,7 @@ validation: "VALIDATION"i _NL* ((string_pair|attr) _NL+)+ _END
 attr: attr_name (value | NAME)+
 
 attr_name: NAME | composite_type
-?value: string | int | float | expression | not_expression | attr_bind | path | regexp | runtime_var | list | bare_string2
+?value: string | int | float | expression | not_expression | attr_bind | path | regexp | runtime_var | list | bare_string2 | NULL
 
 int: SIGNED_INT
 int_pair: int int
@@ -77,6 +77,7 @@ func_params: value ("," value)*
 AUTO: "AUTO"i
 PATH: /([a-z0-9_]*\.*\/|[a-z_]+[.\/])[a-z0-9_\/\.]+/i
 NAME: /[a-z_][a-z0-9_]*/i
+NULL: "NULL"i
 
 SIGNED_FLOAT: ["-"|"+"] FLOAT
 SIGNED_INT: ["-"|"+"] INT
