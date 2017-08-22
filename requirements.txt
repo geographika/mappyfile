@@ -1,7 +1,7 @@
-colorama==0.3.9
-py==1.4.32
-pydot==1.2.3
-pyparsing==2.1.10
-lark-parser==0.2.8
-pip==6.1.1
-setuptools==15.0
+colorama
+py
+pydot
+pyparsing
+lark-parser
+pip
+setuptools
