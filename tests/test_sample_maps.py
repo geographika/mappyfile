@@ -6,6 +6,7 @@ from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from lark.common import UnexpectedToken
 
+
 def test_all_maps():
 
     sample_dir = os.path.join(os.path.dirname(__file__), "sample_maps")
@@ -18,12 +19,12 @@ def test_all_maps():
         print(fn)
         try:
             p.parse_file(os.path.join(sample_dir, fn))
-        except (BaseException, UnexpectedToken) as ex:
+        except (BaseException, UnexpectedToken):
             logging.warning("Cannot process %s ", fn)
             failing_maps.append(fn)
-            #raise
 
     logging.warning(failing_maps)
+
 
 def test_includes():
     p = Parser()
