@@ -678,11 +678,9 @@ def test_extent():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_expression():
     """
     Addressed in issue #27, now parses successfully.
-    Fails because the expected output is incorrect.
     """
     s = """
     CLASS
@@ -692,7 +690,7 @@ def test_expression():
         END
     END
     """
-    exp = "CLASS EXPRESSION (( '[construct]' ~* /^Br.*/ )) END"
+    exp = "CLASS EXPRESSION (( '[construct]' ~* /Br.*$/ )) STYLE ANGLE 360 END END"
     assert(output(s) == exp)
 
 
@@ -738,7 +736,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    #test_expression()
+    # test_escaped_string()
     # test_style_pattern5()
     run_tests()
     print("Done!")
