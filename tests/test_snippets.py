@@ -106,7 +106,6 @@ def test_style_pattern4():
     assert(output(s) == exp)
 
 
-@pytest.mark.skip(reason="bug in lexer means this sometimes fails")
 def test_style_pattern5():
     """
     Test pattern with decimal places
@@ -665,7 +664,6 @@ def test_symbol_style():
     assert(output(s) == exp)
 
 
-@pytest.mark.skip(reason="bug in lexer means this sometimes fails")
 def test_extent():
     """
     Make sure any folder ending with a number is not
@@ -683,7 +681,8 @@ def test_extent():
 @pytest.mark.xfail
 def test_expression():
     """
-    See issue #27
+    Addressed in issue #27, now parses successfully.
+    Fails because the expected output is incorrect.
     """
     s = """
     CLASS
@@ -697,7 +696,6 @@ def test_expression():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_list_expression():
     """
     See issue #27

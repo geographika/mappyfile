@@ -87,7 +87,7 @@ SIGNED_INT: ["-"|"+"] INT
 STRING1: /".*?(?<!\\\\)(\\\\\\\\)*?"i?/
 STRING2: /'.*?(?<!\\\\)(\\\\\\\\)*?'i?/
 STRING3: /`.*?`i?/   // XXX TODO
-REGEXP1: /\/.*?\/i?/
+REGEXP1.2: /\/.*?\/i?/
 REGEXP2: /\\\\.*?\\\\i?/
 RUNTIME_VAR: /%.*?%/
 

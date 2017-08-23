@@ -19,7 +19,7 @@ class Parser(object):
 
     def _create_earley_parser(self):
         grammar_text = self.load_grammar("mapfile.earley.g")
-        return Lark(grammar_text, parser="earley", lexer="standard")
+        return Lark(grammar_text, parser="earley", lexer="standard", earley__all_derivations=False)
 
     def _create_lalr_parser(self):
         grammar_text = self.load_grammar("mapfile.lalr.g")
