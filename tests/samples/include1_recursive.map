@@ -1,0 +1,4 @@
+MAP
+    NAME 'include_test'
+    INCLUDE 'include2_recursive.map'
+END

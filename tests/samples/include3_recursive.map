@@ -1,0 +1,4 @@
+CLASS
+  NAME 'test_class'
+  INCLUDE 'include4_recursive.map'
+END

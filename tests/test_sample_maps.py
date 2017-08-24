@@ -46,6 +46,15 @@ def test_includes_nested_path():
     print(mappyfile.dumps(d))
 
 
+def test_includes_max_recursion():
+    p = Parser()
+
+    with pytest.raises(Exception) as excinfo:
+        p.parse_file('./tests/samples/include1_recursive.map')
+
+    assert 'Maximum nested include exceeded' in str(excinfo.value)
+
+
 def run_tests():
     pytest.main(["tests/test_sample_maps.py"])
 
