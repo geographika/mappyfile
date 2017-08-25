@@ -72,7 +72,7 @@ func_params: value ("," value)*
             | "WEB"i
 
 AUTO: "AUTO"i
-PATH: /[a-z_]*[.\/][a-z0-9_\/.]+/i
+PATH: /[a-z_]*[.\/][a-z0-9_\/.-]+/i
 NAME: /[a-z_][a-z0-9_]*/i
 
 SIGNED_FLOAT: ["-"|"+"] FLOAT
