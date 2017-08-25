@@ -46,7 +46,7 @@ expression: "(" or_test ")"
 ?or_test : (or_test ("OR"i|"||"))? and_test
 ?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? add
-!compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" | "<=" | "IN" | "NE" | "EQ"
+!compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" | "<=" | "IN" | "NE" | "EQ" | "LE" | "LT" | "GE" | "GT"
 
 ?add: (add "+")? (func_call | value)
 func_call: attr_name "(" func_params ")"
@@ -75,7 +75,7 @@ func_params: value ("," value)*
             | "WEB"i
 
 AUTO: "AUTO"i
-PATH: /([a-z0-9_]*\.*\/|[a-z_]+[.\/])[a-z0-9_\/\.]+/i
+PATH: /([a-z0-9_]*\.*\/|[a-z_]+[.\/])[a-z0-9_\/\.-]+/i
 NAME: /[a-z_][a-z0-9_]*/i
 NULL: "NULL"i
 
