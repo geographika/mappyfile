@@ -1,3 +1,4 @@
+# Move projection to singleton list?
 
 COMPOSITE_NAMES = frozenset("""
     align
@@ -79,7 +80,6 @@ COMPOSITE_NAMES = frozenset("""
     latlon
     layer
     leader
-    legend
     legendformat
     linecap
     linejoin
@@ -193,6 +193,7 @@ COMPOSITE_NAMES = frozenset("""
 """.split())
 
 SINGLETON_COMPOSITE_NAMES = frozenset("""
+    legend
     metadata
     validation
     values
