@@ -46,7 +46,7 @@ expression: "(" or_test ")"
 ?or_test : (or_test ("OR"i|"||"))? and_test
 ?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? add
-!compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" | "<=" | "IN" | "NE" | "EQ"
+!compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" | "<=" | "IN" | "NE" | "EQ" | "LE" | "LT" | "GE" | "GT"
 
 ?add: (add "+")? (func_call | value)
 func_call: attr_name "(" func_params ")"

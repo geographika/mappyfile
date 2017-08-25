@@ -707,6 +707,46 @@ def test_list_expression():
     assert(output(s) == exp)
 
 
+def test_numerical_operator_ge_expression():
+    s = """
+    CLASS
+        EXPRESSION ([power] ge 10000)
+    END
+    """
+    exp = "CLASS EXPRESSION (( [power] ge 10000 )) END"
+    assert(output(s) == exp)
+
+
+def test_numerical_operator_gt_expression():
+    s = """
+    CLASS
+        EXPRESSION ([power] gt 10000)
+    END
+    """
+    exp = "CLASS EXPRESSION (( [power] gt 10000 )) END"
+    assert(output(s) == exp)
+
+
+def test_numerical_operator_le_expression():
+    s = """
+    CLASS
+        EXPRESSION ([power] le 100)
+    END
+    """
+    exp = "CLASS EXPRESSION (( [power] le 100 )) END"
+    assert(output(s) == exp)
+
+
+def test_numerical_operator_lt_expression():
+    s = """
+    CLASS
+        EXPRESSION ([power] lt 100)
+    END
+    """
+    exp = "CLASS EXPRESSION (( [power] lt 100 )) END"
+    assert(output(s) == exp)
+
+
 @pytest.mark.xfail
 def test_escaped_string():
     """
