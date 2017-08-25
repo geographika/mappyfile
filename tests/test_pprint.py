@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from mappyfile.pprint import PrettyPrinter
+from mappyfile.pprint import PrettyPrinter, Quoter
 import mappyfile
 
 
@@ -29,13 +29,13 @@ def test_standardise_quotes():
 
     v = '"the_geom from (select * from road where "name_e"=\'Trans-Canada Highway\' order by gid) as foo using unique gid using srid=3978"'
 
-    pp = PrettyPrinter(indent=0, quote='"', newlinechar=" ")  # expected
-    v2 = pp.standardise_quotes(v)
+    q = Quoter(quote='"')
+    v2 = q.standardise_quotes(v)
     exp = r'''"the_geom from (select * from road where \"name_e\"='Trans-Canada Highway' order by gid) as foo using unique gid using srid=3978"'''
     assert(v2 == exp)
 
-    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")  # expected
-    v2 = pp.standardise_quotes(v)
+    q = Quoter(quote="'")
+    v2 = q.standardise_quotes(v)
     exp = r"""'the_geom from (select * from road where "name_e"=\'Trans-Canada Highway\' order by gid) as foo using unique gid using srid=3978'"""
     assert(v2 == exp)
 

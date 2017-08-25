@@ -12,6 +12,58 @@ ALL_KEYWORDS = COMPOSITE_NAMES.union(
     ATTRIBUTE_NAMES).union(SINGLETON_COMPOSITE_NAMES)
 
 
+class Quoter(object):
+    """
+    A class to handle adding and standardising quotes around strings
+    """
+    def __init__(self, quote='"'):
+
+        assert (quote == "'" or quote == '"')
+
+        self.quote = quote
+
+        if self.quote == "'":
+            self.altquote = '"'
+        else:
+            self.altquote = "'"
+
+    def add_quotes(self, val):
+        return "%s%s%s" % (self.quote, val, self.quote)
+
+    def in_quotes(self, val):
+
+        if (val.startswith(self.quote) and val.endswith(self.quote)) or (
+                val.startswith(self.altquote) and val.endswith(self.altquote)):
+            return True
+        else:
+            return False
+
+    def escape_quotes(self, val):
+        """
+        Escape any quotes in a value
+        """
+        if val.startswith(self.quote) and val.endswith(self.quote):
+            # make sure any previously escaped quotes are not re-escaped
+            middle = val[1:-1].replace("\\" + self.quote, self.quote)
+            middle = middle.replace(self.quote, "\\" + self.quote)
+            val = "%s%s%s" % (self.quote, middle, self.quote)
+
+        return val
+
+    def standardise_quotes(self, val):
+        """
+        Change the quotes used to wrap a value to the pprint default
+        E.g. "val" to 'val' or 'val' to "val"
+        """
+        if val.startswith(self.altquote) and val.endswith(self.altquote):
+            middle = val[1:-1]
+            val = "%s%s%s" % (self.quote, middle, self.quote)
+
+        val = self.escape_quotes(val)
+
+        return val
+
+
 class PrettyPrinter(object):
     def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         """
@@ -23,13 +75,8 @@ class PrettyPrinter(object):
         self.indent = indent
         self.spacer = spacer * self.indent
         self.newlinechar = newlinechar
-        self.quote = quote
+        self.quoter = Quoter(quote)
         self.end = u"END"
-
-        if self.quote == "'":
-            self.altquote = '"'
-        else:
-            self.altquote = "'"
 
     def whitespace(self, level, indent):
 
@@ -120,10 +167,10 @@ class PrettyPrinter(object):
         return s
 
     def format_attribute(self, val):
-        if self.in_quotes(val):
-            val = self.standardise_quotes(val)
+        if self.quoter.in_quotes(val):
+            val = self.quoter.standardise_quotes(val)
         else:
-            val = self.add_quotes(val)
+            val = self.quoter.add_quotes(val)
 
         return self.format_value(val)
 
@@ -133,7 +180,7 @@ class PrettyPrinter(object):
         """
 
         if isinstance(val, (unicode, str)):
-            val = self.standardise_quotes(val)
+            val = self.quoter.standardise_quotes(val)
 
         try:
             val = unicode(val)
@@ -144,54 +191,18 @@ class PrettyPrinter(object):
 
         return val
 
-    def add_quotes(self, val):
-        return "%s%s%s" % (self.quote, val, self.quote)
-
-    def in_quotes(self, val):
-
-        if (val.startswith(self.quote) and val.endswith(self.quote)) or (
-                val.startswith(self.altquote) and val.endswith(self.altquote)):
-            return True
-        else:
-            return False
-
-    def escape_quotes(self, val):
-        """
-        Escape any quotes in a value
-        """
-        if val.startswith(self.quote) and val.endswith(self.quote):
-            # make sure any previously escaped quotes are not re-escaped
-            middle = val[1:-1].replace("\\" + self.quote, self.quote)
-            middle = middle.replace(self.quote, "\\" + self.quote)
-            val = "%s%s%s" % (self.quote, middle, self.quote)
-
-        return val
-
-    def standardise_quotes(self, val):
-        """
-        Change the quotes used to wrap a value to the pprint default
-        E.g. "val" to 'val' or 'val' to "val"
-        """
-        if val.startswith(self.altquote) and val.endswith(self.altquote):
-            middle = val[1:-1]
-            val = "%s%s%s" % (self.quote, middle, self.quote)
-
-        val = self.escape_quotes(val)
-
-        return val
-
     def format_key(self, key):
         """
         All non-quoted keys should be in uppercase
         Otherwise do not modify input
         """
-        if self.in_quotes(key):
+        if self.quoter.in_quotes(key):
             key = self.format_value(key)
         else:
             if key.lower() in ALL_KEYWORDS:
                 key = self.format_value(key.upper())
             else:
-                key = self.format_value(self.add_quotes(key.lower()))
+                key = self.format_value(self.quoter.add_quotes(key.lower()))
 
         return key
 
@@ -302,8 +313,8 @@ class PrettyPrinter(object):
                     if comp_type == "metadata":
                         # don't add quotes to key or value, but standardise
                         # them if present
-                        key = self.standardise_quotes(key)
-                        value = self.standardise_quotes(value)
+                        key = self.quoter.standardise_quotes(key)
+                        value = self.quoter.standardise_quotes(value)
                         lines.append(self.__format_line(self.whitespace(level, 1), key, value))
                     else:
                         lines.append(self.format_line(self.whitespace(level, 1), key, value))
