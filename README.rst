@@ -26,7 +26,7 @@ mappyfile is available on PyPI (Python Package Index), and can be installed usin
 
     pip install mappyfile
 
-This will also install its required dependency Lark. 
+This will also install its required dependences Lark (lark-parser), and jsonschema. 
 
 Documentation
 -------------
