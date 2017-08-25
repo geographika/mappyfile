@@ -3,6 +3,8 @@ import os
 import jsonschema
 import logging
 
+log = logging.getLogger("mappyfile")
+
 
 def get_schema(schema_name):
     """
@@ -29,7 +31,7 @@ def validate(d, schema_name="map.json"):
     try:
         jsonschema.validate(jsn, schema, resolver=resolver)
     except jsonschema.ValidationError as ex:
-        logging.error(ex)
+        log.error(ex)
         return False
 
     return True

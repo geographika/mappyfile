@@ -61,5 +61,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
+    logging.getLogger('mappyfile').setLevel(logging.INFO)
+
     test_all_maps()
     print("Done!")

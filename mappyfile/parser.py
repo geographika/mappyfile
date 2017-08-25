@@ -4,6 +4,8 @@ from io import open
 from lark import Lark, ParseError
 from lark.lexer import UnexpectedInput
 
+log = logging.getLogger("mappyfile")
+
 
 class Parser(object):
 
@@ -46,7 +48,7 @@ class Parser(object):
                 try:
                     include_text = self.open_file(inc_file_path)
                 except IOError as ex:
-                    logging.warning("Include file '%s' not found", inc_file_path)
+                    log.warning("Include file '%s' not found", inc_file_path)
                     raise ex
                 # recursively load any further includes
                 includes[idx] = self.load_includes(include_text, fn=inc_file_path, _nested_includes=_nested_includes+1)
@@ -61,8 +63,8 @@ class Parser(object):
             # specify Unicode for Python 2.7
             return open(fn, "r", encoding="utf-8").read()
         except UnicodeDecodeError as ex:
-            logging.debug(ex)
-            logging.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format.", fn)
+            log.debug(ex)
+            log.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format.", fn)
             raise
 
     def parse_file(self, fn):
@@ -81,18 +83,18 @@ class Parser(object):
         try:
             return self.lalr.parse(text)
         except (ParseError, UnexpectedInput) as ex:
-            logging.info(ex)
+            log.info(ex)
 
-        logging.info("Attempting to parse with Earley")
+        log.info("Attempting to parse with Earley")
 
         if self.earley is None:
             self.earley = self._create_earley_parser()
 
         try:
             ast = self.earley.parse(text)
-            logging.info("Parsing with Earley successful")
+            log.info("Parsing with Earley successful")
             return ast
         except (ParseError, UnexpectedInput) as ex:
-            logging.exception(ex)
-            logging.error("Parsing with LALR and Earley unsuccessful")
+            log.exception(ex)
+            log.error("Parsing with LALR and Earley unsuccessful")
             raise
