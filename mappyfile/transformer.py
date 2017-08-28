@@ -282,7 +282,7 @@ class MapfileToDict(Transformer):
 
     def string(self, t):
         v = t[0].value
-        #if self.quoter.in_quotes(v):
+        # if self.quoter.in_quotes(v):
         #    v = self.quoter.remove_quotes(v)
         return v
 

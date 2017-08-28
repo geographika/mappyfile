@@ -56,7 +56,7 @@ class DefaultOrderedDict(OrderedDict):
 
     def __setitem__(self, key, v):
         if "__type__" in self.keys():
-            #validator.validate(self, self["__type__"])
+            # validator.validate(self, self["__type__"])
             pass
         super(self.__class__, self).__setitem__(key, v)
 
