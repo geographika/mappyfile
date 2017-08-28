@@ -5,7 +5,6 @@ Releases
 ++++++++++++++++++
 
 + `#36 <https://github.com/geographika/mappyfile/pull/36>`_ Create a unique logger for mappyfile logger` 
-  - thanks @loicgrasser
 + `#35 <https://github.com/geographika/mappyfile/pull/35>`_ Add support for missing arithmetic expressions and run flake8 within tox` 
   - thanks @loicgrasser
 + `#33 <https://github.com/geographika/mappyfile/pull/33>`_ Fix max recursion limit count` - thanks @loicgrasser
