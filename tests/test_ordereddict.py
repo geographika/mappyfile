@@ -58,7 +58,12 @@ def test_config_directive():
     assert(d["name"] == "NewName")  # "'ConfigMap'")
 
     print(d["CONFIG"])  # even though this key is now lowercase it will correctly return (DefaultOrderedDict only)
-    assert(d["config"]["PROJ_DEBUg"] == "'OFF'")
+    try:
+        assert(d["config"]["PROJ_DEBUg"] == "'OFF'")
+    except Exception as ex:
+        exp = u"Key 'PROJ_DEBUg' not found. Did you mean 'PROJ_DEBUG'?"
+        assert exp in str(ex)
+
     output(d)
 
 

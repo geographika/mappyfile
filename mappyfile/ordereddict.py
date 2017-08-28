@@ -26,10 +26,9 @@ class CaseInsensitveOrderedDict(OrderedDict):
             for k in self.keys():
                 if k.lower().replace("'", "") == key.lower():
                     possible_matches.append(k)
-
-            msg = ex.message
+            msg = str(ex)
             if possible_matches:
-                msg = "Key '{}' not found. Did you mean {}?".format(msg, ",".join(possible_matches))
+                msg = u'Key {} not found. Did you mean {}?'.format(msg, ",".join(possible_matches))
 
             raise CaseSensitiveKeyError(msg)
 

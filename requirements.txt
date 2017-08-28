@@ -1,4 +1,5 @@
 colorama
+jsonschema
 py
 pydot
 pyparsing
