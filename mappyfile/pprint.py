@@ -28,7 +28,7 @@ class Quoter(object):
             self.altquote = "'"
 
     def add_quotes(self, val):
-        return "{}{}{}".format(self.quote, val, self.quote)
+        return u"{}{}{}".format(self.quote, val, self.quote)
 
     def in_quotes(self, val):
         return self._in_quotes(val, self.quote) or self._in_quotes(val, self.altquote)
