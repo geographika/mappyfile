@@ -6,32 +6,41 @@ import logging
 log = logging.getLogger("mappyfile")
 
 
-def get_schema(schema_name):
-    """
-    Had to remove the id property from map.json or it uses URLs for validation
-    See various issues at https://github.com/Julian/jsonschema/pull/306
-    """
-    schema_path = os.path.join(os.path.dirname(__file__), "schemas")
-    schema = os.path.join(schema_path, schema_name)
-    assert(os.path.isfile(schema))
+class Validator(object):
 
-    # need to set a full file URI to the base schema
-    schema_path = "file:///{}".format(os.path.abspath(schema)
-                                      ).replace("\\", "/")
-    return schema_path, json.load(open(schema))
+    def __init__(self):
+        self.schemas = {}
 
+    def get_schema(self, schema_name):
+        """
+        Had to remove the id property from map.json or it uses URLs for validation
+        See various issues at https://github.com/Julian/jsonschema/pull/306
+        """
+        schema_path = os.path.join(os.path.dirname(__file__), "schemas")
+        schema = os.path.join(schema_path, schema_name)
+        assert(os.path.isfile(schema))
 
-def validate(d, schema_name="map.json"):
+        # need to set a full file URI to the base schema
+        schema_path = "file:///{}".format(os.path.abspath(schema)
+                                          ).replace("\\", "/")
+        return schema_path, json.load(open(schema))
 
-    jsn = json.loads(json.dumps(d))
-    schema_path, schema = get_schema(schema_name)
+    def validate(self, d, schema_name="map"):
 
-    resolver = jsonschema.RefResolver(schema_path, None)
+        schema_name += ".json"
 
-    try:
-        jsonschema.validate(jsn, schema, resolver=resolver)
-    except jsonschema.ValidationError as ex:
-        log.error(ex)
-        return False
+        if schema_name in self.schemas.keys():
+            schema, resolver = self.schemas[schema_name]
+        else:
+            jsn = json.loads(json.dumps(d))
+            schema_path, schema = self.get_schema(schema_name)
+            resolver = jsonschema.RefResolver(schema_path, None)
+            self.schemas[schema_name] = (schema, resolver)
 
-    return True
+        try:
+            jsonschema.validate(jsn, schema, resolver=resolver)
+        except jsonschema.ValidationError as ex:
+            log.error(ex)
+            return False
+
+        return True

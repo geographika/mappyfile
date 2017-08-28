@@ -7,7 +7,8 @@ from collections import OrderedDict
 from lark import Transformer, Tree
 from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
 from mappyfile.tokens import REPEATED_KEYS
-from mappyfile.ordereddict import DefaultOrderedDict
+from mappyfile.ordereddict import DefaultOrderedDict, CaseInsensitveOrderedDict
+from mappyfile.pprint import Quoter
 
 
 def plural(s):
@@ -26,6 +27,8 @@ def dict_from_tail(t):
     Values then have 3 parts - [('attr', u'qstring', u"'.'")]
     METADATA blocks have a simple 2 part form -
     [[u'"ows_enable_request"', u'"*"']]
+
+    As these values are case-sensitive use a standard OrderedDict
     """
     d = OrderedDict()
 
@@ -40,6 +43,9 @@ def dict_from_tail(t):
 
 
 class MapfileToDict(Transformer):
+
+    def __init__(self):
+        self.quoter = Quoter()
 
     def start(self, children):
         """
@@ -110,7 +116,7 @@ class MapfileToDict(Transformer):
             assert isinstance(x, tuple), x
 
         composites = DefaultOrderedDict(list)
-        d = DefaultOrderedDict(OrderedDict)
+        d = DefaultOrderedDict(CaseInsensitveOrderedDict)
 
         for itemtype, k, v in body:
 
@@ -123,7 +129,7 @@ class MapfileToDict(Transformer):
                     # CONFIG can be repeated, but with pairs of strings as a
                     # value
                     if 'config' not in d.keys():
-                        d[k] = OrderedDict()
+                        d[k] = CaseInsensitveOrderedDict()
                     d[k][v[0]] = v[1]
                 else:
                     d[k] = v
@@ -276,6 +282,8 @@ class MapfileToDict(Transformer):
 
     def string(self, t):
         v = t[0].value
+        if self.quoter.in_quotes(v):
+            v = self.quoter.remove_quotes(v)
         return v
 
     def path(self, t):

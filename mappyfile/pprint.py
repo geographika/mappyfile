@@ -28,40 +28,39 @@ class Quoter(object):
             self.altquote = "'"
 
     def add_quotes(self, val):
-        return "%s%s%s" % (self.quote, val, self.quote)
+        return "{}{}{}".format(self.quote, val, self.quote)
 
     def in_quotes(self, val):
+        return self._in_quotes(val, self.quote) or self._in_quotes(val, self.altquote)
 
-        if (val.startswith(self.quote) and val.endswith(self.quote)) or (
-                val.startswith(self.altquote) and val.endswith(self.altquote)):
-            return True
-        else:
-            return False
+    def _in_quotes(self, val, quote):
+        return val.startswith(quote) and val.endswith(quote)
 
     def escape_quotes(self, val):
         """
         Escape any quotes in a value
         """
-        if val.startswith(self.quote) and val.endswith(self.quote):
+        if self._in_quotes(val, self.quote):
             # make sure any previously escaped quotes are not re-escaped
-            middle = val[1:-1].replace("\\" + self.quote, self.quote)
+            middle = self.remove_quotes(val).replace("\\" + self.quote, self.quote)
             middle = middle.replace(self.quote, "\\" + self.quote)
-            val = "%s%s%s" % (self.quote, middle, self.quote)
+            val = self.add_quotes(middle)
 
         return val
+
+    def remove_quotes(self, val):
+        return val[1:-1]
 
     def standardise_quotes(self, val):
         """
         Change the quotes used to wrap a value to the pprint default
         E.g. "val" to 'val' or 'val' to "val"
         """
-        if val.startswith(self.altquote) and val.endswith(self.altquote):
-            middle = val[1:-1]
-            val = "%s%s%s" % (self.quote, middle, self.quote)
+        if self._in_quotes(val, self.altquote):
+            middle = self.remove_quotes(val)
+            val = self.add_quotes(middle)
 
-        val = self.escape_quotes(val)
-
-        return val
+        return self.escape_quotes(val)
 
 
 class PrettyPrinter(object):
