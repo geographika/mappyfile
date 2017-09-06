@@ -158,6 +158,18 @@ Miscellaneous Notes
 	composite_body: _composite_item*
 	_composite_item: (composite|attr|points|projection|metadata|pattern|validation|values) _NL+
 
++ There are some common imported rules. These can be found at https://github.com/erezsh/lark/blob/master/lark/grammars/common.g.
+  For example:
+
+.. code-block:: javascript
+
+    %import common.INT
+
+    // this is defined in common.g as follows
+
+    DIGIT: "0".."9"
+    INT: DIGIT+
+
 Grammar File
 ------------
 
