@@ -206,6 +206,25 @@ def test_list_expression():
     assert(output(s) == exp)
 
 
+@pytest.mark.xfail
+def test_list_expression2():
+    """
+    See issue #38
+    http://mapserver.org/mapfile/expressions.html#list-expressions
+    These expressions are much more preformant in MapServer
+    List expressions do not support quote escaping, or attribute values that contain a comma in them.
+
+    To activate them enclose a comma separated list of values between {}, without adding quotes or extra spaces.
+    """
+    s = """
+    CLASS
+        EXPRESSION {2_Klass,Rte2etr}
+    END
+    """
+    exp = "CLASS EXPRESSION {2_Klass,Rte2etr} END"
+    assert(output(s) == exp)
+
+
 def test_numerical_operator_ge_expression():
     s = """
     CLASS
@@ -274,6 +293,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_escaped_string()
+    test_list_expression2()
     # run_tests()
     print("Done!")

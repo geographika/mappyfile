@@ -4,6 +4,7 @@ import pytest
 import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
+from mappyfile.pprint import PrettyPrinter
 from lark.common import UnexpectedToken
 
 
@@ -52,7 +53,25 @@ def test_includes_max_recursion():
     with pytest.raises(Exception) as excinfo:
         p.parse_file('./tests/samples/include1_recursive.map')
 
-    assert 'Maximum nested include exceeded' in str(excinfo.value)
+    assert('Maximum nested include exceeded' in str(excinfo.value))
+
+
+def test_includes_no_expand():
+    """
+    https://github.com/geographika/mappyfile/issues/39
+    """
+    s = """
+    MAP
+        INCLUDE "includes/mymapfile.map"
+    END
+    """
+
+    d = mappyfile.loads(s, expand_includes=False)
+    pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
+    output = pp.pprint(d)
+
+    expected = "MAP INCLUDE 'includes/mymapfile.map' END"
+    assert(output == expected)
 
 
 def run_tests():
@@ -63,5 +82,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
 
-    test_all_maps()
+    test_includes_no_expand()
     print("Done!")
