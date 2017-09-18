@@ -330,4 +330,4 @@ ms_errorfile
 """.split()) | COMPOSITE_NAMES
 
 # processing and formatoption can be added mutliple times to a composite type
-REPEATED_KEYS = ('processing', 'formatoption')
+REPEATED_KEYS = ('processing', 'formatoption', 'include')

@@ -74,6 +74,22 @@ def test_includes_no_expand():
     assert(output == expected)
 
 
+def test_two_includes():
+    s = """
+    MAP
+        INCLUDE "include1.txt"
+        INCLUDE "include2.txt"
+    END
+    """
+
+    d = mappyfile.loads(s, expand_includes=False)
+    pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
+    output = pp.pprint(d)
+    print(output)
+    expected = "MAP INCLUDE 'include1.txt' INCLUDE 'include2.txt' END"
+    assert(output == expected)
+
+
 def run_tests():
     pytest.main(["tests/test_sample_maps.py"])
 
@@ -82,5 +98,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
 
-    test_includes_no_expand()
+    test_two_includes()
     print("Done!")
