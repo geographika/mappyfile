@@ -5,8 +5,34 @@
     "angle": {
       "type": "number"
     },
-    "name": {
+    "config": {
+      "type": "object",
+      "properties": {
+        "CGI_CONTEXT_URL": { "type": "string" },
+        "MS_ENCRYPTION_KEY": { "type": "string" },
+        "MS_ERRORFILE": { "type": "string" },
+        "MS_NONSQUARE": {
+          "type": "string",
+          "enum": [ "YES", "NO" ],
+          "additionalProperties": false
+        },
+        "ON_MISSING_DATA": {
+          "type": "string",
+          "enum": [ "FAIL", "LOG", "IGNORE" ],
+          "additionalProperties": false
+        },
+        "PROJ_LIB": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "datapattern": {
       "type": "string"
+    },
+    "debug": {
+      "enum": [ "ON", "OFF", 0, 1, 2, 3, 4, 5 ]
+    },
+    "defresolution": {
+      "type": "number"
     },
     "extent": {
       "type": "array",
@@ -16,15 +42,24 @@
       "minItems": 4,
       "maxItems": 4
     },
+    "fontset": {
+      "type": "string"
+    },
+    "imagecolor": {
+      "oneOf": [
+        { "$ref": "rgb.json" },
+        { "$ref": "hex.json" }
+      ]
+    },
+    "imagequality": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
     "status": {
       "type": "string",
       "enum": [ "ON", "OFF" ]
-    },
-    "debug": {
-      "enum": [ "ON", "OFF", 0, 1, 2, 3, 4, 5 ]
-    },
-    "defresolution": {
-      "type": "number"
     },
     "layers": {
       "type": "array",

@@ -23,7 +23,10 @@ class Validator(object):
         # need to set a full file URI to the base schema
         schema_path = "file:///{}".format(os.path.abspath(schema)
                                           ).replace("\\", "/")
-        return schema_path, json.load(open(schema))
+
+        with open(schema) as f:
+            jsn = json.loads(f.read())
+        return schema_path, jsn
 
     def validate(self, d, schema_name="map"):
 
