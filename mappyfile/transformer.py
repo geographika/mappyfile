@@ -3,12 +3,18 @@ Module to transform an AST (Abstract Syntax Tree) to a
 Python dict structure
 """
 
+import sys
 from collections import OrderedDict
 from lark import Transformer, Tree
 from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
 from mappyfile.tokens import REPEATED_KEYS
 from mappyfile.ordereddict import DefaultOrderedDict, CaseInsensitveOrderedDict
 from mappyfile.pprint import Quoter
+
+
+PY3 = sys.version_info[0] == 3
+if not PY3:
+    str = unicode # NOQA
 
 
 def plural(s):
