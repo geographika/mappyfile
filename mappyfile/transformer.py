@@ -12,8 +12,8 @@ from mappyfile.ordereddict import DefaultOrderedDict, CaseInsensitveOrderedDict
 from mappyfile.pprint import Quoter
 
 
-PY3 = sys.version_info[0] == 3
-if not PY3:
+PY2 = sys.version_info[0] < 3
+if PY2:
     str = unicode # NOQA
 
 
