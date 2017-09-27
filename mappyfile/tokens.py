@@ -142,8 +142,7 @@ COMPOSITE_NAMES = frozenset("""
     priority
     processing
     projection
-    queryformat
-    querymap
+    queryformat    
     reference
     region
     relativeto
@@ -152,7 +151,6 @@ COMPOSITE_NAMES = frozenset("""
     defresolution
     scale
     scaledenom
-    scalebar
     scaletoken
     shadowcolor
     shadowsize
@@ -195,6 +193,10 @@ COMPOSITE_NAMES = frozenset("""
 SINGLETON_COMPOSITE_NAMES = frozenset("""
     legend
     metadata
+    pattern
+    projection
+    querymap
+    scalebar
     validation
     values
     web
