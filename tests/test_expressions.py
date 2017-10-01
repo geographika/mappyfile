@@ -304,6 +304,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_divide_expression()  # test_list_expression
-    #run_tests()
+    # test_divide_expression()  # test_list_expression
+    run_tests()
     print("Done!")

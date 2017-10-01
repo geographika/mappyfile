@@ -5,7 +5,6 @@ import glob
 import json
 import mappyfile
 from mappyfile.parser import Parser
-from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
 from mappyfile.validator import Validator
 

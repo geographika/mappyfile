@@ -2,7 +2,6 @@ import sys
 import logging
 import numbers
 from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
-from mappyfile.tokens import ATTRIBUTE_NAMES
 from mappyfile.validator import Validator
 
 log = logging.getLogger("mappyfile")
@@ -57,7 +56,7 @@ class Quoter(object):
     def is_string(self, val):
         # check for bytes as str is aliased to unicode in Python2
         return isinstance(val, (bytes, unicode))
-    
+
     def remove_quotes(self, val):
 
         if isinstance(val, list):
