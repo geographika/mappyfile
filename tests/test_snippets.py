@@ -177,7 +177,7 @@ def test_metadata_unquoted():
     END
     """
     exp = "METADATA 'wms_title' 'my_title' END"
-    print output(s)
+    print(output(s))
     assert(output(s) == exp)
 
 
