@@ -90,7 +90,7 @@ class MapfileToDict(Transformer):
         d = OrderedDict()
 
         for v in vals:
-            v = map(self.quoter.remove_quotes, v)
+            v = list(map(self.quoter.remove_quotes, v))
             if len(v) == 2:
                 k = v[0]
                 d[k] = v[1]
@@ -234,15 +234,15 @@ class MapfileToDict(Transformer):
         return ('composite', 'validation', d)
 
     def projection(self, t):
-        v = map(self.quoter.remove_quotes, t)
+        v = list(map(self.quoter.remove_quotes, t))
         return ('composite', 'projection', v)
 
     def points(self, t):
-        pairs = zip(t[::2], t[1::2])
+        pairs = list(zip(t[::2], t[1::2]))
         return ('composite', 'points', pairs)
 
     def pattern(self, t):
-        pairs = zip(t[::2], t[1::2])
+        pairs = list(zip(t[::2], t[1::2]))
         return ('composite', 'pattern', pairs)
 
     # for expressions

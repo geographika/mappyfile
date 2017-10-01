@@ -55,12 +55,12 @@ class Quoter(object):
 
     def is_string(self, val):
         # check for bytes as str is aliased to unicode in Python2
-        return isinstance(val, (bytes, unicode))
+        return isinstance(val, (bytes, str))
 
     def remove_quotes(self, val):
 
         if isinstance(val, list):
-            return map(self.remove_quotes, val)
+            return list(map(self.remove_quotes, val))
 
         if not self.is_string(val):
             return val
@@ -330,7 +330,7 @@ class PrettyPrinter(object):
                 options_list = attr_props["oneOf"]
             else:
                 options_list = attr_props["anyOf"]
-            if isinstance(value, (str, unicode)):
+            if isinstance(value, (str)):
                 if self.quoter.in_parenthesis(value):
                     pass
                 elif self.quoter.in_brackets(value) and attr != "text":
@@ -349,7 +349,7 @@ class PrettyPrinter(object):
                     v = self.quoter.add_quotes(v)
                 new_values.append(v)
 
-            value = " ".join(map(str, new_values))
+            value = " ".join(list(map(str, new_values)))
         else:
             value = self.quoter.escape_quotes(value)
 

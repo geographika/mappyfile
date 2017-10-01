@@ -191,7 +191,7 @@ def test_validation():
         "field2" "-1"
     END
     """
-    print output(s)
+    print(output(s))
     exp = """VALIDATION 'field1' '^[0-9,]+$' 'field2' '-1' END"""
     assert(output(s) == exp)
 
@@ -420,7 +420,7 @@ def test_querymap():
          END
     END
     """
-    # print output(s)
+    # print(output(s))
     exp = "MAP QUERYMAP COLOR 255 255 0 SIZE -1 -1 STATUS OFF STYLE HILITE END END"
     assert(output(s) == exp)
 
@@ -626,5 +626,5 @@ if __name__ == '__main__':
     # test_filter()
     # test_style_oneline()
     # test_no_linebreaks()
-    test_multiline_metadata()
+    run_tests()
     print("Done!")
