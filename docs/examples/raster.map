@@ -17,7 +17,7 @@ MAP
     
     # START OF THE LAYER DEFINITION
     LAYER
-		GROUP "my_group"
+        GROUP "my_group"
         EXTENT -180 -90 180 90 # set this here as it is not stored in the image
         NAME "bluemarble"
         TYPE RASTER
@@ -27,7 +27,7 @@ MAP
     # END OF THE LAYER DEFINITION 
     
     LAYER
-		GROUP "my_group"
+        GROUP "my_group"
         EXTENT -180 -90 180 90
         NAME "sea"
         TYPE RASTER
