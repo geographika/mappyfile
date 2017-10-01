@@ -7,12 +7,13 @@ from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
 
 
-def output(s):
+def output(s, use_lalr=True):
     """
     Parse, transform, and pretty print
     the result
+    Can check both grammars by changing the use_lalr setting
     """
-    p = Parser()
+    p = Parser(use_lalr=use_lalr)
     m = MapfileToDict()
 
     # https://stackoverflow.com/questions/900392/getting-the-caller-function-name-inside-another-function-in-python
@@ -50,6 +51,20 @@ def test_class():
 
 
 def test_style():
+
+    s = """
+    STYLE
+    COLOR 0 0 255
+    WIDTH 5
+    LINECAP BUTT
+    END"""
+
+    exp = "STYLE COLOR 0 0 255 WIDTH 5 LINECAP BUTT END"
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_style_oneline():
 
     s = "STYLE COLOR 0 0 255 WIDTH 5 LINECAP BUTT END"
     check_result(s)
@@ -154,14 +169,15 @@ def test_metadata_unquoted():
     """
     The METADATA block doesn't need quotes
     (as long as values don't have spaces)
+    The printer will add quotes automatically
     """
     s = """
     METADATA
         wms_title my_title
     END
     """
-    exp = """METADATA wms_title my_title END"""
-    # print output(s)
+    exp = "METADATA 'wms_title' 'my_title' END"
+    print output(s)
     assert(output(s) == exp)
 
 
@@ -175,7 +191,7 @@ def test_validation():
         "field2" "-1"
     END
     """
-    # print output(s)
+    print output(s)
     exp = """VALIDATION 'field1' '^[0-9,]+$' 'field2' '-1' END"""
     assert(output(s) == exp)
 
@@ -186,7 +202,7 @@ def test_layer_text_query():
         TEXT (tostring([area],"%.2f"))
     END
     """
-    exp = """CLASS TEXT ((tostring([area],"%.2f"))) END"""
+    exp = """CLASS TEXT (tostring([area],"%.2f")) END"""
     assert(output(s) == exp)
 
 
@@ -202,7 +218,8 @@ def test_label():
       OUTLINECOLOR 255 255 255
     END
     """
-    exp = "LABEL COLOR 0 0 0 FONT Vera TYPE truetype SIZE 8 POSITION AUTO PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
+    exp = "LABEL COLOR 0 0 0 FONT 'Vera' TYPE TRUETYPE SIZE 8 POSITION AUTO PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
+    print(output(s))
     assert(output(s) == exp)
 
 
@@ -212,14 +229,15 @@ def test_output_format():
     MAP
         IMAGETYPE grid
         OUTPUTFORMAT
-          NAME grid2
-          DRIVER "GDAL/AAIGRID"
-          IMAGEMODE INT16
-          FORMATOPTION 'NULLVALUE=-99'
+            NAME grid2
+            DRIVER "GDAL/AAIGRID"
+            IMAGEMODE INT16
+            FORMATOPTION 'NULLVALUE=-99'
         END
     END
     """
-    exp = "MAP IMAGETYPE grid OUTPUTFORMAT NAME grid2 DRIVER 'GDAL/AAIGRID' IMAGEMODE INT16 FORMATOPTION 'NULLVALUE=-99' END END"
+    exp = "MAP IMAGETYPE 'grid' OUTPUTFORMAT NAME 'grid2' DRIVER 'GDAL/AAIGRID' IMAGEMODE INT16 FORMATOPTION 'NULLVALUE=-99' END END"
+    # print(output(s))
     assert(output(s) == exp)
 
 
@@ -234,6 +252,7 @@ def test_class_symbol():
         END
     END
     """
+    print(output(s))
     exp = "CLASS STYLE COLOR 151 151 151 SYMBOL [symbol] OFFSET 2 2 SIZE [size] END END"
     assert(output(s) == exp)
 
@@ -247,6 +266,7 @@ def test_filter():
     """
 
     exp = "LAYER NAME 'filters_test002' FILTER 'aitkin'i END"
+    print(output(s))
     assert(output(s) == exp)
 
 
@@ -255,10 +275,10 @@ def test_regex():
     LAYER
         NAME 'regexp-example'
         FILTERITEM 'placename'
-        FILTER \hotel\
+        FILTER /hotel/
     END
     """
-    exp = r"LAYER NAME 'regexp-example' FILTERITEM 'placename' FILTER \hotel\ END"
+    exp = r"LAYER NAME 'regexp-example' FILTERITEM 'placename' FILTER /hotel/ END"
     assert(output(s) == exp)
 
 
@@ -336,7 +356,7 @@ def test_config_directive():
     END
     """
 
-    exp = "MAP NAME 'ConfigMap' CONFIG MS_ERRORFILE 'stderr' CONFIG 'PROJ_DEBUG' 'OFF' CONFIG 'ON_MISSING_DATA' 'IGNORE' END"
+    exp = "MAP NAME 'ConfigMap' CONFIG 'MS_ERRORFILE' 'stderr' CONFIG 'PROJ_DEBUG' 'OFF' CONFIG 'ON_MISSING_DATA' 'IGNORE' END"
     assert(output(s) == exp)
 
 
@@ -384,7 +404,7 @@ def test_oneline_composites():
     """
 
     # put on one line
-    exp = ' '.join(s.split())
+    exp = "CLASS PROJECTION 'init=epsg:2056' END END"
     assert(output(s) == exp)
 
 
@@ -436,7 +456,7 @@ def test_auto_projection():
     assert(output(s) == exp)
 
 
-def test_mutliple_output_formats():
+def test_multiple_output_formats():
     """
     https://github.com/geographika/mappyfile/issues/20
     """
@@ -488,6 +508,7 @@ def test_colorrange():
     assert(output(s) == exp)
 
 
+# failes with Earley parser
 def test_path_numeric():
     """
     Make sure any folder ending with a number is not
@@ -498,7 +519,7 @@ def test_path_numeric():
         DATA folder123/file
     END
     """
-    exp = "LAYER DATA folder123/file END"
+    exp = "LAYER DATA 'folder123/file' END"
     assert(output(s) == exp)
 
 
@@ -506,11 +527,7 @@ def test_path_numeric():
 def test_symbol_style():
     """
     This works if barb_warm is in quotes
-    It parses successfully but raisesan error in:
-
-    .\mappyfile\pprint.py", line 262, in _format
-    assert(len(composite.keys()) == 1)
-    AttributeError: 'Token' object has no attribute 'keys'
+    It parses successfully but the transform is incorrect
     """
     s = """
     CLASS
@@ -539,6 +556,61 @@ def test_extent():
     assert(output(s) == exp)
 
 
+@pytest.mark.xfail
+def test_ogr_connection():
+
+    s = """
+    LAYER
+        CONNECTION "<OGRVRTDataSource><OGRVRTLayer name="poly"><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>"
+    END
+    """
+    exp = """LAYER CONNECTION '<OGRVRTDataSource><OGRVRTLayer name="poly"><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>' END"""
+    print(output(s))
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_quoted_data():
+
+    s = """
+    LAYER
+        DATA "the_geom from (select * from road where \"lpoly_\"=3 order by gid) as foo using unique gid using srid=3978"
+    END
+    """
+    exp = """LAYER DATA 'the_geom from (select * from road where \"lpoly_\"=3 order by gid) as foo using unique gid using srid=3978' END"""
+    print(output(s))
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_name_hypens():
+
+    s = """
+    MAP
+        NAME ms-ogc-workshop
+    END
+    """
+    exp = "MAP NAME 'ms-ogc-workshop' END"
+    print(output(s))
+    assert(output(s) == exp)
+
+
+def test_multiline_metadata():
+    """
+    Uses Earley
+    """
+    s = """
+    METADATA
+    "ows_title" "layer_0"
+    "gml_include_items"
+    "all"
+    END
+    """
+    exp = "METADATA 'ows_title' 'layer_0' 'gml_include_items' 'all' END"
+    print(output(s))
+    assert(output(s) == exp)
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -551,7 +623,8 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    # test_escaped_string()
-    # test_style_pattern5()
-    run_tests()
+    # test_filter()
+    # test_style_oneline()
+    # test_no_linebreaks()
+    test_multiline_metadata()
     print("Done!")
