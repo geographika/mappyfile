@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "backgroundcolor": {
+      "$ref": "color.json"
+    },
+    "color": {
+      "$ref": "color.json"
+    },
+    "debug": {
+      "$ref": "onoff.json"
+    },
+    "expression": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\((.*?)\\)$",
+          "description": "expression"
+        },
+        {
+          "type": "string",
+          "pattern": "^/(.*?)/$",
+          "description": "regex"
+        }
+      ]
+    },
+    "group": {
+      "type": "string"
+    },
+    "keyimage": {
+      "type": "string",
+      "description": "filename"
+    },
+    "label": {
+      "$ref": "label.json"
+    },
+    "leader": {
+      "$ref": "leader.json"
+    },
+    "maxscale": {
+      "type": "number",
+      "deprecated": true
+    },
+    "maxscaledenom": {
+      "type": "number"
+    },
+    "maxsize": {
+      "type": "integer"
+    },
+    "minscale": {
+      "type": "number",
+      "deprecated": true
+    },
+    "minscaledenom": {
+      "type": "number"
+    },
+    "minsize": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "outlinecolor": {
+      "$ref": "color.json"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "status": {
+      "$ref": "onoff.json"
+    },
+    "style": {
+      "$ref": "style.json"
+    },
+    "symbol": {
+      "$ref": "symbol.json"
+    },
+    "template": {
+      "type": "string",
+      "description": "filename"
+    },
+    "text": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\((.*?)\\)$",
+          "description": "expression"
+        }
+      ]
+    },
+    "validation": {
+      "$ref": "validation.json"
+    }
+  }
+}

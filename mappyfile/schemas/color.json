@@ -1,0 +1,24 @@
+{
+  "oneOf": [
+    {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 255
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    {
+      "pattern": "^'#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})'$",
+      "example": "'#aa33cc'",
+      "type": "string"
+    },
+    {
+      "pattern": "^\"#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})\"$",
+      "example": "'#aa33cc'",
+      "type": "string"
+    }
+  ]
+}

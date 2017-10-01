@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "properties": {
+    "color": {
+      "$ref": "color.json"
+    },
+    "extent": {
+      "$ref": "extent.json"
+    },
+    "image": {
+      "type": "string",
+      "description": "filename"
+    },
+    "marker": {
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "markersize": {
+      "type": "integer"
+    },
+    "minboxsize": {
+      "type": "integer"
+    },
+    "maxboxsize": {
+      "type": "integer"
+    },
+    "outlinecolor": {
+      "$ref": "color.json"
+    },
+    "size": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "status": {
+      "$ref": "onoff.json"
+    }
+  }
+}

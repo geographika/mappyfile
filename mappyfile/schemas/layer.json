@@ -1,16 +1,219 @@
 {
   "type": "object",
   "properties": {
+    "class": {
+      "$ref": "class.json"
+    },
+    "classgroup": {
+      "type": "string"
+    },
+    "classitem": {
+      "type": "string"
+    },
+    "cluster": {
+      "type": "object"
+    },
+    "composite": {
+      "type": "object"
+    },
+    "connection": {
+      "type": "string"
+    },
+    "connectiontype": {
+      "enum": [ "contour", "kerneldensity", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
+    },
+    "data": {
+      "type": "string"
+    },
+    "dump": {
+      "type": "boolean"
+    },
+    "encoding": {
+      "type": "string"
+    },
+    "extent": {
+      "$ref": "extent.json"
+    },
+    "feature": {
+      "type": "object"
+    },
+    "filter": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\((.*?)\\)$",
+          "description": "expression"
+        },
+        {
+          "type": "string",
+          "pattern": "^/(.*?)/$",
+          "description": "regex"
+        }
+      ]
+    },
+    "filteritem": {
+      "type": "string"
+    },
+    "footer": {
+      "type": "string"
+    },
+    "geotransform": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\((.*?)\\)$"
+        }
+      ]
+    },
+    "grid": {
+      "type": "object"
+    },
+    "group": {
+      "type": "string"
+    },
+    "header": {
+      "type": "string"
+    },
+    "join": {
+      "type": "object"
+    },
+    "labelangleitem": {
+      "type": "string"
+    },
+    "labelcache": {
+      "$ref": "onoff.json"
+    },
+    "labelitem": {
+      "type": "string"
+    },
+    "labelmaxscaledenom": {
+      "type": "number"
+    },
+    "labelminscaledenom": {
+      "type": "number"
+    },
+    "labelrequires": {
+      "type": "string"
+    },
+    "labelsizeitem": {
+      "type": "string"
+    },
+    "mask": {
+      "type": "string"
+    },
+    "maxfeatures": {
+      "type": "integer"
+    },
+    "maxgeowidth": {
+      "type": "number"
+    },
+    "maxscaledenom": {
+      "type": "number"
+    },
+    "metadata": {
+      "$ref": "metadata.json"
+    },
+    "mingeowidth": {
+      "type": "number"
+    },
+    "minscaledenom": {
+      "type": "number"
+    },
     "name": {
       "type": "string"
     },
+    "offsite": {
+      "$ref": "color.json"
+    },
+    "opacity": {
+      "type": "integer"
+    },
+    "plugin": {
+      "type": "string"
+    },
+    "postlabelcache": {
+      "type": "boolean"
+    },
+    "processing": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "projection": {
+      "$ref": "projection.json"
+    },
+    "requires": {
+      "type": "string"
+    },
+    "scaletoken": {
+      "$ref": "scaletoken.json"
+    },
+    "sizeunits": {
+      "$ref": "units.json"
+    },
     "status": {
       "type": "string",
-      "enum": [ "ON", "OFF", "DEFAULT" ]
+      "enum": [ "on", "off", "default" ]
+    },
+    "styleitem": {
+      "type": "string"
+    },
+    "symbolscaledenom": {
+      "type": "number"
+    },
+    "template": {
+      "type": "string"
+    },
+    "tileindex": {
+      "type": "string"
+    },
+    "tileitem": {
+      "type": "string"
+    },
+    "tilesrs": {
+      "type": "string"
+    },
+    "tolerance": {
+      "type": "number"
+    },
+    "toleranceunits": {
+      "$ref": "units.json"
+    },
+    "transparency": {
+      "type": "integer"
+    },
+    "transform": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "position.json"
+        }
+      ]
     },
     "type": {
-      "enum": [ "POLYGON", "POINT" ]
-    }
-  },
-  "required": [ "type" ]
+      "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query" ]
+    },
+    "units": {
+      "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentage", "pixels" ]
+    },
+    "utfdata": {
+      "type": "string"
+    },
+    "utfitem": {
+      "type": "string"
+    },
+    "validation": {
+      "$ref": "validation.json"
+    },
+    "required": [ "type" ]
+  }
 }

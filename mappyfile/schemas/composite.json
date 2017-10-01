@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "opacity": {
+      "type": "integer"
+    },
+    "compop": {
+      "type": "string"
+    }
+  }
+}

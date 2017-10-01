@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "labelformat": {
+      "type": "string",
+      "enum": [ "dd", "ddmm", "ddmmss" ],
+      "additionalProperties": true
+    },
+    "minarcs": {
+      "type": "number"
+    },
+    "maxarcs": {
+      "type": "number"
+    },
+    "mininterval": {
+      "type": "number"
+    },
+    "maxinterval": {
+      "type": "number"
+    },
+    "minsubdivide": {
+      "type": "number"
+    },
+    "maxsubdivide": {
+      "type": "number"
+    }
+  }
+}

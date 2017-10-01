@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "anchorpoint": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "antialias": {
+      "type": "boolean"
+    },
+    "backgroundcolor": {
+      "$ref": "color.json"
+    },
+    "character": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1
+    },
+    "filled": {
+      "type": "boolean"
+    },
+    "font": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "transparent": {
+      "type": "integer"
+    },
+    "type": {
+      "enum": [ "ellipse", "hatch", "pixmap", "svg", "truetype", "vector" ]
+    }
+  }
+}

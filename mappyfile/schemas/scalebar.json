@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "properties": {
+    "align": {
+      "type": "string",
+      "enum": [ "left", "center", "right" ],
+      "additionalProperties": false
+    },
+    "backgroundcolor": {
+      "$ref": "color.json"
+    },
+    "color": {
+      "$ref": "color.json"
+    },
+    "imagecolor": {
+      "$ref": "color.json"
+    },
+    "interlace": {
+      "type": "boolean"
+    },
+    "intervals": {
+      "type": "integer"
+    },
+    "label": {
+      "$ref": "label.json"
+    },
+    "outlinecolor": {
+      "$ref": "color.json"
+    },
+    "position": {
+      "$ref": "position.json"
+    },
+    "postlabelcache": {
+      "type": "boolean"
+    },
+    "size": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "status": {
+      "type": "string",
+      "enum": [ "on", "off", "embed" ]
+    },
+    "style": {
+      "type": "integer"
+    },
+    "transpaarent": {
+      "$ref": "onoff.json"
+    },
+    "units": {
+      "$ref": "sizeunits.json"
+    },
+
+    "extent": {
+      "$ref": "extent.json"
+    },
+    "image": {
+      "type": "string",
+      "description": "filename"
+    },
+    "marker": {
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "markersize": {
+      "type": "integer"
+    },
+    "minboxsize": {
+      "type": "integer"
+    },
+    "maxboxsize": {
+      "type": "integer"
+    },
+    "outlinecolor": {
+      "$ref": "color.json"
+    }
+
+  }
+}

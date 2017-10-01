@@ -12,9 +12,7 @@
         "MS_ENCRYPTION_KEY": { "type": "string" },
         "MS_ERRORFILE": { "type": "string" },
         "MS_NONSQUARE": {
-          "type": "string",
-          "enum": [ "YES", "NO" ],
-          "additionalProperties": false
+          "$ref": "yesno.json"
         },
         "ON_MISSING_DATA": {
           "type": "string",
@@ -29,37 +27,28 @@
       "type": "string"
     },
     "debug": {
-      "enum": [ "ON", "OFF", 0, 1, 2, 3, 4, 5 ]
+      "$ref": "debug.json"
     },
     "defresolution": {
-      "type": "number"
+      "type": "integer"
     },
     "extent": {
-      "type": "array",
-      "items": {
-        "type": "number"
-      },
-      "minItems": 4,
-      "maxItems": 4
+      "$ref": "extent.json"
     },
     "fontset": {
       "type": "string"
     },
     "imagecolor": {
-      "oneOf": [
-        { "$ref": "rgb.json" },
-        { "$ref": "hex.json" }
-      ]
+      "$ref": "color.json"
     },
     "imagequality": {
-      "type": "number"
+      "type": "integer"
     },
-    "name": {
+    "imagetype": {
       "type": "string"
     },
-    "status": {
-      "type": "string",
-      "enum": [ "ON", "OFF" ]
+    "interlace": {
+      "$ref": "onoff.json"
     },
     "layers": {
       "type": "array",
@@ -68,8 +57,77 @@
         "$ref": "layer.json"
       }
     },
+    "legend": {
+      "type": "object"
+    },
+    "maxsize": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "outputformats": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "projection": {
+      "$ref": "projection.json"
+    },
+    "querymap": {
+      "$ref": "querymap.json"
+    },
+    "reference": {
+      "type": "object"
+    },
+    "resolution": {
+      "type": "integer"
+    },
+    "scaledenom": {
+      "type": "number"
+    },
+    "scalebar": {
+      "type": "object"
+    },
+    "shapepath": {
+      "type": "string"
+    },
+    "size": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "status": {
+      "$ref": "onoff.json"
+    },
+    "symbolset": {
+      "type": "string"
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "templatepattern": {
+      "type": "string"
+    },
+    "transparent": {
+      "$ref": "onoff.json"
+    },
+    "units": {
+      "$ref": "units.json"
+    },
+    "web": {
+      "type": "object"
+    },
     "__type__": {
       "type": "string"
     }
-  }
+  },
+  "additionalProperties": false
 }

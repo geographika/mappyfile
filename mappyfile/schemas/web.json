@@ -1,0 +1,76 @@
+{
+  "type": "object",
+  "properties": {
+    "browseformat": {
+      "type": "string",
+      "description": "mime-type"
+    },
+    "empty": {
+      "type": "string"
+    },
+    "error": {
+      "type": "string"
+    },
+    "footer": {
+      "type": "string",
+      "description": "filename"
+    },
+    "header": {
+      "type": "string",
+      "description": "filename"
+    },
+    "imagepath": {
+      "type": "string",
+      "description": "path"
+    },
+    "imageurl": {
+      "type": "string",
+      "description": "url"
+    },
+    "legendformat": {
+      "type": "string",
+      "description": "mime-type"
+    },
+    "log": {
+      "type": "string",
+      "description": "filename"
+    },
+    "maxscaledenom": {
+      "type": "number"
+    },
+    "maxscale": {
+      "type": "number",
+      "deprecated": true
+    },
+    "maxtemplate": {
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "metadata.json"
+    },
+    "minscaledenom": {
+      "type": "number"
+    },
+    "minscale": {
+      "type": "number",
+      "deprecated": true
+    },
+    "mintemplate": {
+      "type": "string"
+    },
+    "queryformat": {
+      "type": "string",
+      "description": "mime-type"
+    },
+    "template": {
+      "type": "string"
+    },
+    "temppath": {
+      "type": "url",
+      "description": "path"
+    },
+    "validation": {
+      "$ref": "validation.json"
+    }
+  }
+}

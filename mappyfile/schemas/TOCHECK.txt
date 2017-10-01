@@ -1,0 +1,36 @@
+http://mapserver.org/mapfile/cluster.html
+Should be expression only
+FILTER [string]
+
+Also CLUSTER not in alphabetical order
+
+http://mapserver.org/mapfile/label.html
+PRIORITY [integer]|[item_name]|[attribute]
+What is item_name? Same as attribute?
+[Attribute] was introduced in version 5.6 to specfify the font alias.
+
+http://mapserver.org/mapfile/legend.html
+
+POSITION [ul|uc|ur|ll|lc|lr]
+missing cc cr cl
+
+
+http://mapserver.org/mapfile/scalebar.html
+POSITION [ul|uc|ur|ll|lc|lr]
+missing cc cr cl
+
+UNITS
+[feet|inches|kilometers|meters|miles|nauticalmiles]
+Not pixels
+Note that decimal degrees are not valid scalebar units.
+
+http://mapserver.org/mapfile/style.html
+MAXSIZE is double. In label it is int. Probably ok
+
+COLORRANGE 255 0 0  0 0 255
+DATARANGE 0 255
+
+Both missing?
+
+http://mapserver.org/mapfile/layer.html
+FILTER should also have expression as an option

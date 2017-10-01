@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "properties": {
+
+    "imagecolor": {
+      "$ref": "color.json"
+    },
+    "interlace": {
+      "$ref": "onoff.json"
+    },
+    "keysize": {
+
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "keyspacing": {
+
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "label": {
+      "$ref": "label.json"
+    },
+    "outlinecolor": {
+      "$ref": "color.json"
+    },
+    "position": {
+      "$ref": "position.json"
+    },
+    "postlabelcache": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string",
+      "enum": [ "on", "off", "embed" ]
+    },
+    "template": {
+      "type": "string",
+      "description": "filename"
+    },
+    "transparent": {
+      "$ref": "onoff.json"
+    }
+  }
+}

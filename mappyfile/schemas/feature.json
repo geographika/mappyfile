@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "items": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "wkt": {
+      "type": "string"
+    }
+  }
+}

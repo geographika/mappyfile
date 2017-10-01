@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "maxdistance": {
+      "type": "number"
+    },
+    "region": {
+      "type": "string"
+    },
+    "buffer": {
+      "type": "number"
+    },
+    "group": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\((.*?)\\)$",
+          "description": "expression"
+        }
+      ]
+    },
+    "filter": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\((.*?)\\)$",
+          "description": "expression"
+        }
+      ]
+    }
+  }
+}

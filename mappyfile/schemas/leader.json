@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "gridstep": {
+      "type": "integer"
+    },
+    "maxdistance": {
+      "type": "integer"
+    },
+    "style": {
+      "$ref": "style.json"
+    }
+  }
+}
