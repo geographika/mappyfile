@@ -48,3 +48,12 @@ msautotest\wxs\wms_legend.map
     NAME "Roads 2 74"   
     TITLE "Roads 2 74"   
     EXPRESSION "74"
+
+
+For expressions, is this valid?
+
+EXPRESSION (true)
+
+http://mapserver.org/mapfile/map.html
+TRANSPARENT [on|off]
+But lots of examples of TRUE

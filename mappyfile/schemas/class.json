@@ -62,7 +62,14 @@
       "$ref": "style.json"
     },
     "symbol": {
-      "$ref": "symbol.json"
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "symbol.json"
+        }
+      ]
     },
     "template": {
       "type": "string",

@@ -112,6 +112,14 @@
     "maxscaledenom": {
       "type": "number"
     },
+    "maxscale": {
+      "type": "number",
+      "metadata": {
+        "deprecated": true,
+        "minVersion": 0,
+        "maxVersion": 5.0
+      }
+    },
     "metadata": {
       "$ref": "metadata.json"
     },
@@ -120,6 +128,14 @@
     },
     "minscaledenom": {
       "type": "number"
+    },
+    "minscale": {
+      "type": "number",
+      "metadata": {
+        "deprecated": true,
+        "minVersion": 0,
+        "maxVersion": 5.0
+      }
     },
     "name": {
       "type": "string"
@@ -180,10 +196,17 @@
       "type": "number"
     },
     "toleranceunits": {
-      "$ref": "units.json"
+      "enum": [ "pixels", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "dd" ]
     },
     "transparency": {
-      "type": "integer"
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "enum": [ "alpha" ]
+        }
+      ]
     },
     "transform": {
       "oneOf": [
