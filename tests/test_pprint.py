@@ -7,6 +7,7 @@ To check
 """
 import logging
 import json
+import collections
 import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter, Quoter
@@ -165,17 +166,20 @@ def test_style_pattern():
 def test_scaletoken():
 
     d = {
+    "name": "%border%",
     "values": {
         "0": "ON",
         "255000000": "OFF"
     },
-    "name": "%border%",
     "__type__": "scaletoken"
     }
+
+    d = collections.OrderedDict(sorted(d.items()))
+
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     s = pp.pprint(d)
     print(s)
-    assert(s == "SCALETOKEN VALUES '0' 'ON' '255000000' 'OFF' END NAME '%border%' END")
+    assert(s == "SCALETOKEN NAME '%border%' VALUES '0' 'ON' '255000000' 'OFF' END END")
 
 
 def test_metadata():
@@ -186,6 +190,8 @@ def test_metadata():
         },
         "__type__": "map"
     }
+
+    d = collections.OrderedDict(sorted(d.items()))
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     s = pp.pprint(d)
@@ -202,6 +208,8 @@ def test_config():
         "__type__": "map"
     }
 
+    d = collections.OrderedDict(sorted(d.items()))
+
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     s = pp.pprint(d)
     print(s)
@@ -210,17 +218,19 @@ def test_config():
 
 def test_processing():
     d = {
+    "name": "ProcessingLayer",
     "processing": ["BANDS=1",
         "CONTOUR_ITEM=elevation",
         "CONTOUR_INTERVAL=20"],
-    "name": "ProcessingLayer",
     "__type__": "layer"
     }
+
+    d = collections.OrderedDict(sorted(d.items()))
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     s = pp.pprint(d)
     print(s)
-    assert(s == "LAYER PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' NAME 'ProcessingLayer' END")
+    assert(s == "LAYER NAME 'ProcessingLayer' PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' END")
 
 
 def test_multiple_layers():
