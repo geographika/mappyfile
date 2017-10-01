@@ -3,43 +3,17 @@ Module to transform an AST (Abstract Syntax Tree) to a
 Python dict structure
 """
 
+import sys
 from collections import OrderedDict
 from lark import Transformer, Tree
 from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
-from mappyfile.tokens import REPEATED_KEYS
-from mappyfile.ordereddict import DefaultOrderedDict, CaseInsensitveOrderedDict
+from mappyfile.ordereddict import DefaultOrderedDict
 from mappyfile.pprint import Quoter
 
 
-def plural(s):
-
-    if s == 'points':
-        return s
-    elif s.endswith('s'):
-        return s + 'es'
-    else:
-        return s + 's'
-
-
-def dict_from_tail(t):
-    """
-    VALIDATION blocks can also have attributes such as qstring
-    Values then have 3 parts - [('attr', u'qstring', u"'.'")]
-    METADATA blocks have a simple 2 part form -
-    [[u'"ows_enable_request"', u'"*"']]
-
-    As these values are case-sensitive use a standard OrderedDict
-    """
-    d = OrderedDict()
-
-    for v in t:
-        if len(v) == 2:
-            d[v[0]] = v[1]
-        elif len(v) == 3:
-            d[v[1]] = v[2]
-        else:
-            raise ValueError("Unsupported block '%s'", str(v))
-    return d
+PY2 = sys.version_info[0] < 3
+if PY2:
+    str = unicode # NOQA
 
 
 class MapfileToDict(Transformer):
@@ -49,8 +23,8 @@ class MapfileToDict(Transformer):
 
     def start(self, children):
         """
-        Not limited to MAP..END parsing of partial files or composites is
-        also possible
+        Parses a MapServer Mapfile
+        Parsing of partial Mapfiles or lists of composites is also possible
         """
 
         composites = []
@@ -66,16 +40,98 @@ class MapfileToDict(Transformer):
         else:
             return composites
 
+    def plural(self, s):
+
+        if s == 'points':
+            return s
+        elif s.endswith('s'):
+            return s + 'es'
+        else:
+            return s + 's'
+
     def repeated_key(self, d, k, v):
         """
         Allow the key to be added multiple times to its parent
+        Examples are INCLUDE, PROCESSING
         """
+
+        k = self.quoter.remove_quotes(k)
+        v = self.quoter.remove_quotes(v)
+
         if k not in d.keys():
             d[k] = [v]
         else:
             d[k].append(v)
 
         return d
+
+    def config_settings(self, d, k, v):
+        """
+        CONFIG settings can be repeated, but with pairs of strings as a
+        value
+        E.g CONFIG "MS_ERRORFILE" "filename"
+        CONFIG "MS_NONSQUARE" "YES"
+        """
+
+        assert(k == 'config')
+        subkey = self.quoter.remove_quotes(v[0].lower())
+        d['config'][subkey] = self.quoter.remove_quotes(v[1])
+        return d
+
+    def dict_from_tail(self, vals):
+        """
+        VALIDATION blocks can also have attributes such as qstring
+        Values then have 3 parts - [('attr', u'qstring', u"'.'")]
+        METADATA blocks have a simple 2 part form -
+        [[u'"ows_enable_request"', u'"*"']]
+
+        As these values are case-sensitive use a standard OrderedDict
+        """
+        d = OrderedDict()
+
+        for v in vals:
+            v = map(self.quoter.remove_quotes, v)
+            if len(v) == 2:
+                k = v[0]
+                d[k] = v[1]
+            elif len(v) == 3:
+                k = v[1]
+                d[k] = v[2]
+            else:
+                raise ValueError("Unsupported block '%s'", str(v))
+        return d
+
+    def process_composite_body(self, body):
+        """
+        Process all the attributes and child objects of a COMPOSITE..END block
+        """
+
+        # create an ordered dict to contain lists of layers, classes etc.
+        composites = DefaultOrderedDict(list)
+
+        # create a dict to store standard attribute values
+        attr_dict = DefaultOrderedDict(DefaultOrderedDict)
+
+        # loop through all the attributes in the composite body
+        for itemtype, k, v in body:
+
+            if itemtype == 'attr':
+                if k in ("processing", "formatoption", "include"):
+                    self.repeated_key(attr_dict, k, v)
+                elif k == 'config':
+                    self.config_settings(attr_dict, k, v)
+                else:
+                    attr_dict[k] = self.quoter.remove_quotes(v)
+
+            elif itemtype == 'composite' and k in SINGLETON_COMPOSITE_NAMES:
+                # there can only ever be one child instance of these
+                composites[k] = v  # defaultdict using list
+            elif itemtype == 'composite':
+                composites[k].append(v)
+            else:
+                raise ValueError("Item type '%s' unknown", itemtype)
+
+        return composites, attr_dict
 
     def composite(self, t):
         """
@@ -85,18 +141,21 @@ class MapfileToDict(Transformer):
          Tree(composite_body, [('attr', u'name', "'test'")])]
         """
         if len(t) == 3:
-            # Parser artifact. See LINE-BREAK FLUIDITY in parsing_decisions.txt
+            # unprocessed composite type
             type_, attr, body = t
         elif len(t) == 2:
+            # process composite_type, composite_body
             type_, body = t
             attr = None
         else:
+            # already processed by a separate function
+            # e.g. metadata
             assert(len(t) == 1)
             type_, attr, body = t[0]
-            # print type_, attr, body
-            if attr in ("metadata", "validation"):
-                body['__type__'] = attr
-                return ('composite', attr, body)
+            types = ("metadata", "validation", "values")
+            assert(attr in types)
+            body['__type__'] = attr
+            return ('composite', attr, body)
 
         if isinstance(body, tuple):
             # Parser artefacts
@@ -108,95 +167,83 @@ class MapfileToDict(Transformer):
         type_ = type_.children[0].lower()
 
         assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES)
-
-        if attr:
-            body = [attr] + body
-
-        for x in body:
-            assert isinstance(x, tuple), x
-
-        composites = DefaultOrderedDict(list)
-        d = DefaultOrderedDict(CaseInsensitveOrderedDict)
-
-        for itemtype, k, v in body:
-
-            if itemtype == 'attr':
-
-                # TODO tidy-up the code below
-                if k in REPEATED_KEYS:
-                    d = self.repeated_key(d, k, v)
-                elif k == 'config':
-                    # CONFIG can be repeated, but with pairs of strings as a
-                    # value
-                    if 'config' not in d.keys():
-                        d[k] = CaseInsensitveOrderedDict()
-                    d[k][v[0]] = v[1]
-                else:
-                    d[k] = v
-
-            elif itemtype == 'composite' and k in SINGLETON_COMPOSITE_NAMES:
-                # there can only ever be one instance of these
-                composites[k] = v  # defaultdict using list
-            elif itemtype == 'composite':
-                composites[k].append(v)
-            else:
-                raise ValueError("Itemtype '%s' unknown", itemtype)
+        composites, attr_dict = self.process_composite_body(body)
 
         # collection of all items e.g. at the map level this is status,
         # metadata etc.
         for k, v in composites.items():
 
             if k in SINGLETON_COMPOSITE_NAMES:
-                d[k] = v
+                attr_dict[k] = v
             else:
-                d[plural(k)] = v
+                attr_dict[self.plural(k)] = v
 
-        d['__type__'] = type_
-        return ('composite', type_, d)
+        attr_dict['__type__'] = type_
+        return ('composite', type_, attr_dict)
+
+    def convert_value(self, value):
+
+        if str(value).lower() == "true":
+            return True
+        if str(value).lower() == "false":
+            return False
+
+        try:
+            value = int(value)
+        except ValueError:
+            value = str(value)
+
+        return value
 
     def attr(self, children):
-        name = children[0].children[0]
 
-        if isinstance(name, Tree):
-            # Solve a parser artefact for composite names
-            name = name.children[0]
+        key = children[0].children[0]
 
-        name = name.lower()
-        # VALIDATION and METADATA blocks can take any unquoted string as a key
-        # assert name in ATTRIBUTE_NAMES, name
+        if isinstance(key, Tree):
+            # solve a parser artefact for composite names
+            key = key.children[0]
 
-        value = children[1:]
-        if len(value) == 1:
-            value = value[0]
-        return 'attr', name, value
+        key = key.lower()  # make all keys lower-case
 
-    def projection(self, t):
-        return ('composite', 'projection', t)
+        # TODO one line Mapfiles can place several attributes on the same line
+        values = children[1:]
+
+        if len(values) == 1:
+            value = self.convert_value(values[0])
+        else:
+            value = values  # "".join(map(str, values))
+
+        return ('attr', key, value)
 
     def metadata(self, t):
         """
         Create a dict for the metadata items
         """
-        d = dict_from_tail(t)
+        d = self.dict_from_tail(t)
         return ('composite', 'metadata', d)
 
-    def points(self, t):
-        return ('composite', 'points', t)
-
-    def pattern(self, t):
-        # http://www.mapserver.org/mapfile/style.html
-        return ('composite', 'pattern', t)
-
     def values(self, t):
-        d = dict_from_tail(t)
+        d = self.dict_from_tail(t)
         return ('composite', 'values', d)
 
     def validation(self, t):
         """
         Create a dict for the validation items
         """
-        d = dict_from_tail(t)
+        d = self.dict_from_tail(t)
         return ('composite', 'validation', d)
+
+    def projection(self, t):
+        v = map(self.quoter.remove_quotes, t)
+        return ('composite', 'projection', v)
+
+    def points(self, t):
+        pairs = zip(t[::2], t[1::2])
+        return ('composite', 'points', pairs)
+
+    def pattern(self, t):
+        pairs = zip(t[::2], t[1::2])
+        return ('composite', 'pattern', pairs)
 
     # for expressions
 
@@ -221,7 +268,11 @@ class MapfileToDict(Transformer):
         return "not %s" % t[0]
 
     def expression(self, t):
-        return "(%s)" % t[0]
+        v = t[0]
+        if self.quoter.in_parenthesis(v):
+            return v
+        else:
+            return "({})".format(v)
 
     def add(self, t):
         return "%s + %s" % tuple(t)
@@ -282,8 +333,6 @@ class MapfileToDict(Transformer):
 
     def string(self, t):
         v = t[0].value
-        # if self.quoter.in_quotes(v):
-        #    v = self.quoter.remove_quotes(v)
         return v
 
     def path(self, t):
