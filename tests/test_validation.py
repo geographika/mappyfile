@@ -1,10 +1,12 @@
 import os
 import logging
+import json
 import mappyfile
-# from mappyfile import validator
+from mappyfile.validator import Validator
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from subprocess import Popen, PIPE, STDOUT
+import pytest
 
 DLL_LOCATION = r"C:\MapServer\bin"
 
@@ -119,7 +121,130 @@ def main():
     """
 
 
+def validate(s):
+    p = Parser()
+    m = MapfileToDict()
+
+    ast = p.parse(s)
+    d = m.transform(ast)
+    v = Validator()
+    return v.validate(d)
+
+
+def test_config_validation():
+    """
+    Any key are allowed, but the ones in the docs can be validated
+    These need to be made lower-case as JSON is case sensitive
+    """
+
+    s = """
+    MAP
+        NAME 'ConfigMap'
+        CONFIG MS_ERRORFILE 'stderr'
+        CONFIG 'PROJ_DEBUG' 'OFF'
+        CONFIG ON_MISSING_DATA IGNORE
+    END
+    """
+    assert(validate(s))
+
+
+def test_color_validation():
+    s = """
+    MAP
+        IMAGECOLOR 255 255 255
+    END
+    """
+    assert(validate(s))
+
+
+def test_color_validation_fail():
+    s = """
+    MAP
+        IMAGECOLOR 255 255 256
+    END
+    """
+    assert(not validate(s))
+
+
+def test_hexcolor_validation():
+    s = """
+    MAP
+        IMAGECOLOR '#FF00FF'
+    END
+    """
+    assert(validate(s))
+
+
+def test_hexcolor_validation_fail():
+    s = """
+    MAP
+        IMAGECOLOR 'FF00FF'
+    END
+    """
+    assert(not validate(s))
+
+
+def test_lowercase():
+
+    s = """
+    MAP
+        NAME 'blah'
+        ANGLE 100
+        DEBUG on
+        CONFIG "ON_MISSING_DATA" FAIL # can be quoted or non-quoted
+        STATUS on # need to enforce lowercase
+        EXTENT -100 -100 100 100
+        SIZE 400 400
+        PROJECTION
+            AUTO
+        END
+        LAYER
+            PROJECTION
+                AUTO
+            END
+            STATUS ON
+            NAME "hi"
+            TYPE polygon
+
+            FEATURE
+              POINTS 1 1 50 50 1 50 1 1 END
+            END
+            CLASS
+                STYLE
+                    COLOR 255 0 0
+                END
+            END
+
+        END
+        #LAYER
+        #    NAME "hi2"
+        #    TYPE point
+        #END
+    END
+    """
+
+    p = Parser()
+    m = MapfileToDict()
+
+    ast = p.parse(s)
+    d = m.transform(ast)
+
+    print(json.dumps(d, indent=4))
+    # deepcopy crashes on (u'config', OrderedDict([('ON_MISSING_DATA', Token(NAME, 'FAIL'))]))
+
+
+def run_tests():
+    """
+    Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
+    #stdin_get_value = sys.stdin.read
+    Or get AttributeError: '_ReplInput' object has no attribute 'read'
+    """
+    pytest.main(["tests/test_validation.py"])
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    main()
+    # main()
+    # test_lowercase()
+    run_tests()
     print("Done!")
