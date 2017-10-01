@@ -5,13 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_sample_maps.py</StartupFile>
+    <StartupFile>tests\test_large_file.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +39,7 @@
     <Folder Include="mappyfile\schemas\" />
     <Folder Include="misc\" />
     <Folder Include="tests\" />
+    <Folder Include="tests\mapfiles\" />
     <Folder Include="tests\samples\" />
     <Folder Include="tests\sample_maps\" />
   </ItemGroup>
@@ -65,6 +66,9 @@
     <Content Include="docs\schemas\map.rst" />
     <Content Include="docs\testing.rst" />
     <Content Include="docs\validation.rst" />
+    <Content Include="docs\xml.rst">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\_static\foss4ge2017_mappyfile_sgirvin.pdf" />
     <Content Include="docs\_static\widget.js" />
     <Content Include="LICENSE" />
@@ -98,6 +102,49 @@
     <Content Include="MANIFEST.in" />
     <Content Include="mappyfile\mapfile.earley.g" />
     <Content Include="mappyfile\mapfile.lalr.g" />
+    <Content Include="mappyfile\schemas\expression.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="mappyfile\schemas\web.json" />
+    <Content Include="mappyfile\schemas\validation.json" />
+    <Content Include="mappyfile\schemas\metadata.json" />
+    <Content Include="mappyfile\schemas\scaletoken.json" />
+    <Content Include="mappyfile\schemas\scalebar.json" />
+    <Content Include="mappyfile\schemas\reference.json" />
+    <Content Include="mappyfile\schemas\querymap.json" />
+    <Content Include="mappyfile\schemas\projection.json" />
+    <Content Include="mappyfile\schemas\outputformat.json" />
+    <Content Include="mappyfile\schemas\legend.json" />
+    <Content Include="mappyfile\schemas\leader.json" />
+    <Content Include="mappyfile\schemas\label.json" />
+    <Content Include="mappyfile\schemas\join.json" />
+    <Content Include="mappyfile\schemas\grid.json" />
+    <Content Include="mappyfile\schemas\feature.json" />
+    <Content Include="mappyfile\schemas\composite.json" />
+    <Content Include="mappyfile\schemas\cluster.json" />
+    <Content Include="mappyfile\schemas\symbol.json" />
+    <Content Include="mappyfile\schemas\style.json" />
+    <Content Include="mappyfile\schemas\color.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="mappyfile\schemas\debug.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="mappyfile\schemas\extent.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="mappyfile\schemas\class.json" />
+    <Content Include="mappyfile\schemas\position.json" />
+    <Content Include="mappyfile\schemas\hex2.json" />
+    <Content Include="mappyfile\schemas\hex.json" />
+    <Content Include="mappyfile\schemas\sizeunits.json" />
+    <Content Include="mappyfile\schemas\TOCHECK.txt" />
+    <Content Include="mappyfile\schemas\units.json">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="mappyfile\schemas\yesno.json" />
+    <Content Include="mappyfile\schemas\onoff.json" />
+    <Content Include="mappyfile\schemas\rgb.json" />
     <Content Include="mappyfile\schemas\layer.json" />
     <Content Include="mappyfile\schemas\map.json" />
     <Content Include="notes.private.txt" />
@@ -109,6 +156,19 @@
     </Content>
     <Content Include="tests\errors_lark.log" />
     <Content Include="tests\issues.txt" />
+    <Content Include="tests\mapfiles\large_map1.txt" />
+    <Content Include="tests\mapfiles\large_map2.txt" />
+    <Content Include="tests\mapfiles\large_map3.txt">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tests\mapfiles\map4.txt">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tests\mapfiles\map5.txt">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tests\mapfiles\map7.txt" />
+    <Content Include="tests\mapfiles\map6.txt" />
     <Content Include="tests\samples\new_c_comments.map" />
     <Content Include="tests\samples\include3.map" />
     <Content Include="tests\samples\include2.map" />
@@ -421,6 +481,10 @@
     <Compile Include="docs\examples\animation\animated_buffer.py" />
     <Compile Include="docs\examples\api\adding_values_test.py" />
     <Compile Include="docs\examples\geometry\geometry.py" />
+    <Compile Include="docs\examples\update_datasource.py" />
+    <Compile Include="docs\examples\split_mapfile.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="docs\scripts\class_diagrams.py">
       <SubType>Code</SubType>
     </Compile>
@@ -445,6 +509,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\examples\api\search_test.py" />
+    <Compile Include="docs\scripts\xsdschema.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyfile\ordereddict.py">
       <SubType>Code</SubType>
     </Compile>
