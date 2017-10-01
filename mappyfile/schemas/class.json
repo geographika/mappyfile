@@ -11,21 +11,7 @@
       "$ref": "onoff.json"
     },
     "expression": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$",
-          "description": "expression"
-        },
-        {
-          "type": "string",
-          "pattern": "^/(.*?)/$",
-          "description": "regex"
-        }
-      ]
+      "$ref": "expression.json"
     },
     "group": {
       "type": "string"
@@ -83,16 +69,11 @@
       "description": "filename"
     },
     "text": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$",
-          "description": "expression"
-        }
-      ]
+      "$ref": "expression.json"
+    },
+    "title": {
+      "type": "string",
+      "description":  "missing"
     },
     "validation": {
       "$ref": "validation.json"

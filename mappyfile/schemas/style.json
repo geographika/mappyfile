@@ -67,7 +67,7 @@
     "gap": {
       "type": "number"
     },
-    "geotransform": {
+    "geomtransform": {
       "oneOf": [
         {
           "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "start", "vertices" ]

@@ -23,9 +23,11 @@
         }
       ]
     },
-
     "antialias": {
       "type": "boolean"
+    },
+    "backgroundcolor": {
+      "$ref": "color.json"
     },
     "buffer": {
       "type": "integer"
@@ -42,6 +44,9 @@
     },
     "encoding": {
       "type": "string"
+    },
+    "expression": {
+      "$ref": "expression.json"
     },
     "font": {
       "oneOf": [
@@ -188,16 +193,7 @@
       "$ref": "style.json"
     },
     "text": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$",
-          "description": "expression"
-        }
-      ]
+      "$ref": "expression.json"
     },
     "type": {
       "type": "string",

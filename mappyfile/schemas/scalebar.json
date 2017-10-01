@@ -48,7 +48,7 @@
     "style": {
       "type": "integer"
     },
-    "transpaarent": {
+    "transparent": {
       "$ref": "onoff.json"
     },
     "units": {

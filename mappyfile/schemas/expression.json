@@ -1,0 +1,17 @@
+{
+  "anyOf": [
+    {
+      "type": "string"
+    },
+    {
+      "type": "string",
+      "pattern": "^\\((.*?)\\)$",
+      "description": "expression"
+    },
+    {
+      "type": "string",
+      "pattern": "^/(.*?)/$",
+      "description": "regex"
+    }
+  ]
+}

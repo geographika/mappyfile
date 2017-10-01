@@ -25,8 +25,18 @@
     "data": {
       "type": "string"
     },
+    "debug": {
+      "$ref": "debug.json"
+    },
     "dump": {
-      "type": "boolean"
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "onoff.json"
+        }
+      ]
     },
     "encoding": {
       "type": "string"
@@ -38,21 +48,7 @@
       "type": "object"
     },
     "filter": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$",
-          "description": "expression"
-        },
-        {
-          "type": "string",
-          "pattern": "^/(.*?)/$",
-          "description": "regex"
-        }
-      ]
+      "$ref": "expression.json"
     },
     "filteritem": {
       "type": "string"
@@ -60,8 +56,8 @@
     "footer": {
       "type": "string"
     },
-    "geotransform": {
-      "oneOf": [
+    "geomtransform": {
+      "anyOf": [
         {
           "type": "string"
         },
@@ -72,7 +68,7 @@
       ]
     },
     "grid": {
-      "type": "object"
+      "$ref": "grid.json"
     },
     "group": {
       "type": "string"
@@ -156,7 +152,7 @@
       "$ref": "scaletoken.json"
     },
     "sizeunits": {
-      "$ref": "units.json"
+      "enum": [ "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "pixels" ]
     },
     "status": {
       "type": "string",
@@ -200,10 +196,10 @@
       ]
     },
     "type": {
-      "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query" ]
+      "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query", "annotation" ]
     },
     "units": {
-      "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentage", "pixels" ]
+      "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentages", "pixels" ]
     },
     "utfdata": {
       "type": "string"

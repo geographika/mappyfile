@@ -11,28 +11,10 @@
       "type": "number"
     },
     "group": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$",
-          "description": "expression"
-        }
-      ]
+      "$ref": "expression.json"
     },
     "filter": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$",
-          "description": "expression"
-        }
-      ]
+      "$ref": "expression.json"
     }
   }
 }

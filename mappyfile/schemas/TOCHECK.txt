@@ -34,3 +34,17 @@ Both missing?
 
 http://mapserver.org/mapfile/layer.html
 FILTER should also have expression as an option
+
+DUMP [true|false] but also ON OFF in tests. 
+msautotest\gdal\tileindexmixedsrs4.map
+
+
+http://mapserver.org/mapfile/class.html
+No TITLE keyword
+
+msautotest\wxs\wms_legend.map
+
+  CLASS
+    NAME "Roads 2 74"   
+    TITLE "Roads 2 74"   
+    EXPRESSION "74"
