@@ -1,36 +1,8 @@
 from collections import OrderedDict, Callable
 import copy
 
-from mappyfile.validator import Validator
-
-
-validator = Validator()
-
-
-class CaseSensitiveKeyError(KeyError):
-    pass
-
-
-class CaseInsensitveOrderedDict(OrderedDict):
-    """
-    Used for storing components properties
-    """
-    def __init__(self):
-        super(CaseInsensitveOrderedDict, self).__init__()
-
-    def __getitem__(self, key):
-        try:
-            return OrderedDict.__getitem__(self, key)
-        except KeyError as ex:
-            possible_matches = []
-            for k in self.keys():
-                if k.lower().replace("'", "") == key.lower():
-                    possible_matches.append(k)
-            msg = str(ex)
-            if possible_matches:
-                msg = u'Key {} not found. Did you mean {}?'.format(msg, ",".join(possible_matches))
-
-            raise CaseSensitiveKeyError(msg)
+# from mappyfile.validator import Validator
+# validator = Validator()
 
 
 class DefaultOrderedDict(OrderedDict):
@@ -48,7 +20,10 @@ class DefaultOrderedDict(OrderedDict):
         self.default_factory = default_factory
 
     def __getitem__(self, key):
-        key = key.lower()  # all keys should be lowercase to make editing easier
+        try:
+            key = key.lower()  # all keys should be lower-case to make editing easier
+        except AttributeError:
+            return self.__missing__(key)
         try:
             return OrderedDict.__getitem__(self, key)
         except KeyError:
