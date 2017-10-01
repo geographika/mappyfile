@@ -1,10 +1,15 @@
 import json
 import os
+import sys
 from collections import OrderedDict
 import logging
 import jsonschema
 
 log = logging.getLogger("mappyfile")
+
+PY2 = sys.version_info[0] < 3
+if PY2:
+    str = unicode # NOQA
 
 
 class Validator(object):
@@ -51,7 +56,7 @@ class Validator(object):
         elif isinstance(x, dict):
             return OrderedDict((k.lower(), self.convert_lowercase(v)) for k, v in x.items())
         else:
-            if isinstance(x, (str, unicode)):
+            if isinstance(x, (str, bytes)):
                 x = x.lower()
 
         return x
