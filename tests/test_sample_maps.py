@@ -1,4 +1,5 @@
 import os
+import json
 import logging
 import pytest
 import mappyfile
@@ -83,6 +84,7 @@ def test_two_includes():
     """
 
     d = mappyfile.loads(s, expand_includes=False)
+    logging.debug(json.dumps(d, indent=4))
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     output = pp.pprint(d)
     print(output)
@@ -98,5 +100,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
 
-    test_two_includes()
+    run_tests()
     print("Done!")
