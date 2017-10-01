@@ -165,11 +165,11 @@ def test_style_pattern():
 def test_scaletoken():
 
     d = {
-    "name": "%border%",
     "values": {
         "0": "ON",
         "255000000": "OFF"
     },
+    "name": "%border%",
     "__type__": "scaletoken"
     }
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
@@ -181,8 +181,8 @@ def test_scaletoken():
 def test_metadata():
     d = {
         "metadata": {
-            "WMS_ENABLE_REQUEST": "*",
-            "MS_ENABLE_MODES": "!*"
+            "MS_ENABLE_MODES": "!*",
+            "WMS_ENABLE_REQUEST": "*"
         },
         "__type__": "map"
     }
@@ -210,10 +210,10 @@ def test_config():
 
 def test_processing():
     d = {
-    "name": "ProcessingLayer",
     "processing": ["BANDS=1",
         "CONTOUR_ITEM=elevation",
         "CONTOUR_INTERVAL=20"],
+    "name": "ProcessingLayer",
     "__type__": "layer"
     }
 
