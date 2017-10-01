@@ -9,10 +9,15 @@ log = logging.getLogger("mappyfile")
 
 class Parser(object):
 
-    def __init__(self, expand_includes=True):
+    def __init__(self, expand_includes=True, use_lalr=True):
         self.expand_includes = expand_includes
-        self.lalr = self._create_lalr_parser()
-        self.earley = None  # only load this grammar as required
+        self.use_lalr = use_lalr
+
+        if self.use_lalr:
+            self.lalr = self._create_lalr_parser()
+            self.earley = None  # only load this grammar as required
+        else:
+            self.earley = self._create_earley_parser()
 
     def load_grammar(self, grammar_file):
         gf = os.path.join(os.path.dirname(__file__), grammar_file)
@@ -80,10 +85,12 @@ class Parser(object):
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 
-        try:
-            return self.lalr.parse(text)
-        except (ParseError, UnexpectedInput) as ex:
-            log.info(ex)
+        if self.use_lalr:
+            try:
+                return self.lalr.parse(text)
+            except (ParseError, UnexpectedInput) as ex:
+                log.error("Parsing with LALR unsuccessful")
+                log.info(ex)
 
         log.info("Attempting to parse with Earley")
 
@@ -96,5 +103,5 @@ class Parser(object):
             return ast
         except (ParseError, UnexpectedInput) as ex:
             log.exception(ex)
-            log.error("Parsing with LALR and Earley unsuccessful")
+            log.error("Parsing with Earley unsuccessful")
             raise
