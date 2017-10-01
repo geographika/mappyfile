@@ -49,7 +49,7 @@ class Validator(object):
         if isinstance(x, list):
             return [self.convert_lowercase(v) for v in x]
         elif isinstance(x, dict):
-            return OrderedDict((k.lower(), self.convert_lowercase(v)) for k, v in x.iteritems())
+            return OrderedDict((k.lower(), self.convert_lowercase(v)) for k, v in x.items())
         else:
             if isinstance(x, (str, unicode)):
                 x = x.lower()
