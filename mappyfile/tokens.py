@@ -142,7 +142,7 @@ COMPOSITE_NAMES = frozenset("""
     priority
     processing
     projection
-    queryformat    
+    queryformat
     reference
     region
     relativeto
@@ -191,11 +191,14 @@ COMPOSITE_NAMES = frozenset("""
 """.split())
 
 SINGLETON_COMPOSITE_NAMES = frozenset("""
+    grid
+    leader
     legend
     metadata
     pattern
     projection
     querymap
+    reference
     scalebar
     validation
     values
