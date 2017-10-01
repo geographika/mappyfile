@@ -28,7 +28,8 @@ setup(name='mappyfile',
           'Topic :: Software Development :: Build Tools'
       ],
       package_data={
-          '': ['*.g', 'schemas/*.json']
+          '': ['*.g'],
+          'schemas', ['schemas/*.json']
       },
       url='http://github.com/geographika/mappyfile',
       author='Seth Girvin',
