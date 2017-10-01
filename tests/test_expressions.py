@@ -82,7 +82,7 @@ def test_or_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) )) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
     s = '''
@@ -91,7 +91,7 @@ def test_or_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) )) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
 
@@ -102,7 +102,7 @@ def test_and_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) )) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
     s = '''
@@ -111,7 +111,7 @@ def test_and_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION (( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) )) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
 
@@ -122,7 +122,7 @@ def test_not_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION not (( "[style_class]" = "20" )) END'
+    exp = 'CLASS EXPRESSION NOT ( "[style_class]" = "20" ) END'
     assert(output(s) == exp)
 
     s = '''
@@ -131,7 +131,7 @@ def test_not_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION not (( "[style_class]" = "20" )) END'
+    exp = 'CLASS EXPRESSION NOT ( "[style_class]" = "20" ) END'
     assert(output(s) == exp)
 
 
@@ -141,7 +141,7 @@ def test_runtime_expression():
       EXPRESSION ( [EPPL_Q100_] = %eppl% )
     END
     """
-    exp = "CLASS EXPRESSION (( [EPPL_Q100_] = %eppl% )) END"
+    exp = "CLASS EXPRESSION ( [EPPL_Q100_] = %eppl% ) END"
     # print(output(s))
     assert(output(s) == exp)
 
@@ -158,7 +158,7 @@ def test_ne_comparison():
         EXPRESSION ( "[building]" NE NULL)
     END
     """
-    exp = 'CLASS EXPRESSION (( "[building]" NE NULL )) END'
+    exp = 'CLASS EXPRESSION ( "[building]" NE NULL ) END'
     assert(output(s) == exp)
 
 
@@ -172,7 +172,7 @@ def test_eq_comparison():
         EXPRESSION ( "[building]" eq NULL)
     END
     """
-    exp = 'CLASS EXPRESSION (( "[building]" eq NULL )) END'
+    exp = 'CLASS EXPRESSION ( "[building]" eq NULL ) END'
     # print(output(s))
     assert(output(s) == exp)
 
@@ -189,7 +189,7 @@ def test_expression():
         END
     END
     """
-    exp = "CLASS EXPRESSION (( '[construct]' ~* /Br.*$/ )) STYLE ANGLE 360 END END"
+    exp = "CLASS EXPRESSION ( '[construct]' ~* /Br.*$/ ) STYLE ANGLE 360 END END"
     assert(output(s) == exp)
 
 
@@ -231,7 +231,7 @@ def test_numerical_operator_ge_expression():
         EXPRESSION ([power] ge 10000)
     END
     """
-    exp = "CLASS EXPRESSION (( [power] ge 10000 )) END"
+    exp = "CLASS EXPRESSION ( [power] ge 10000 ) END"
     assert(output(s) == exp)
 
 
@@ -241,7 +241,7 @@ def test_numerical_operator_gt_expression():
         EXPRESSION ([power] gt 10000)
     END
     """
-    exp = "CLASS EXPRESSION (( [power] gt 10000 )) END"
+    exp = "CLASS EXPRESSION ( [power] gt 10000 ) END"
     assert(output(s) == exp)
 
 
@@ -251,7 +251,7 @@ def test_numerical_operator_le_expression():
         EXPRESSION ([power] le 100)
     END
     """
-    exp = "CLASS EXPRESSION (( [power] le 100 )) END"
+    exp = "CLASS EXPRESSION ( [power] le 100 ) END"
     assert(output(s) == exp)
 
 
@@ -261,7 +261,18 @@ def test_numerical_operator_lt_expression():
         EXPRESSION ([power] lt 100)
     END
     """
-    exp = "CLASS EXPRESSION (( [power] lt 100 )) END"
+    exp = "CLASS EXPRESSION ( [power] lt 100 ) END"
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_divide_expression():
+    s = """
+    CLASS
+        EXPRESSION ([field1] / [field2] > 0.1)
+    END
+    """
+    exp = "CLASS EXPRESSION ( [field1] / [field2] > 0.1 ) END"
     assert(output(s) == exp)
 
 
@@ -293,6 +304,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_list_expression2()
-    # run_tests()
+    test_divide_expression()  # test_list_expression
+    #run_tests()
     print("Done!")
