@@ -14,7 +14,7 @@ def test():
         print(layer['name'])
 
     # END OF API EXAMPLE
-    assert(layer['name'] == '"sea"')
+    assert(layer['name'] == 'sea')
 
 if __name__ == "__main__":
     test()

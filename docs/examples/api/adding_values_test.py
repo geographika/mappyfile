@@ -24,7 +24,7 @@ def test_layer():
     new_layer = mappyfile.loads(new_layer_string)
     layers.insert(0, new_layer) # can insert the new layer at any index
     # END OF ADD LAYER EXAMPLE
-    assert(layers[0]['name'] == "'land'")
+    assert(layers[0]['name'] == "land")
 
 def test_class():
     # START OF ADD CLASS EXAMPLE
@@ -47,7 +47,7 @@ def test_class():
     print(mappyfile.dumps(mapfile))
 
     # END OF ADD CLASS EXAMPLE
-    assert(layer['classes'][1]['name'] == "'highlights'")
+    assert(layer['classes'][1]['name'] == "highlights")
 
     # multiple classes
 	# define all classes in a single string TODO - allow on single line

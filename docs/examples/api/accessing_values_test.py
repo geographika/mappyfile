@@ -18,7 +18,7 @@ def test():
     for c in classes:
         print(c["name"])
     # END OF API EXAMPLE
-    assert(mapfile["name"] == '"MyMap"')
+    assert(mapfile["name"] == 'MyMap')
 
 if __name__ == "__main__":
     test()
