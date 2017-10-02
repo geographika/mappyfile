@@ -200,11 +200,16 @@ def test_metadata():
 
 
 def test_config():
-    d = {
-        "config": {
+
+    cd =  {
             "ms_nonsquare": "YES",
             "on_missing_data": "FAIL"
-        },
+          }
+
+    cd = collections.OrderedDict(sorted(cd.items()))
+
+    d = {
+        "config": cd,
         "__type__": "map"
     }
 
@@ -296,21 +301,26 @@ def test_print_boolean():
 
 def test_class_list():
 
-    l = [{
+    d1 = {
             "text": "([area])",
             "expression": "([area])",
             "__type__": "class"
-        },
-        {
+         }
+    d2 = {
             "text": "(\"[area]\")",
             "expression": "(\"[area]\")",
             "__type__": "class"
-        }]
+         }
+
+    d1 = collections.OrderedDict(sorted(d1.items()))
+    d2 = collections.OrderedDict(sorted(d2.items()))
+
+    l = [d1, d2]
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     s = pp.pprint(l)
     print(s)
-    assert(s == 'CLASS TEXT ([area]) EXPRESSION ([area]) END CLASS TEXT ("[area]") EXPRESSION ("[area]") END')
+    assert(s == 'CLASS EXPRESSION ([area]) TEXT ([area]) END CLASS EXPRESSION ("[area]") TEXT ("[area]") END')
 
 
 def test_get_attribute_properties():
