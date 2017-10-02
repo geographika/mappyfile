@@ -1,1 +1,2 @@
 include README.rst LICENSE docs/* tests/*.py
+include mappyfile/schemas/*.json
