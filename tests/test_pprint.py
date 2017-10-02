@@ -165,12 +165,16 @@ def test_style_pattern():
 
 def test_scaletoken():
 
-    d = {
-    "name": "%border%",
-    "values": {
+    sd = {
         "0": "ON",
         "255000000": "OFF"
-    },
+    }
+
+    sd = collections.OrderedDict(sorted(sd.items()))
+
+    d = {
+    "name": "%border%",
+    "values": sd,
     "__type__": "scaletoken"
     }
 
@@ -183,11 +187,16 @@ def test_scaletoken():
 
 
 def test_metadata():
-    d = {
-        "metadata": {
+
+    md = {
             "MS_ENABLE_MODES": "!*",
             "WMS_ENABLE_REQUEST": "*"
-        },
+        }
+
+    md = collections.OrderedDict(sorted(md.items()))
+
+    d = {
+        "metadata": md,
         "__type__": "map"
     }
 
@@ -201,7 +210,7 @@ def test_metadata():
 
 def test_config():
 
-    cd =  {
+    cd = {
             "ms_nonsquare": "YES",
             "on_missing_data": "FAIL"
           }
