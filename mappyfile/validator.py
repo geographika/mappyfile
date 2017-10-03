@@ -32,7 +32,7 @@ class Validator(object):
             schemas_folder = "/" + schemas_folder
 
         host = ""
-        root_schema_path = "file://{}/{}".format(host, schemas_folder)  + "/"
+        root_schema_path = "file://{}/{}".format(host, schemas_folder) + "/"
 
         return root_schema_path
 
@@ -51,7 +51,6 @@ class Validator(object):
 
             if not os.path.isfile(schema_file):
                 raise IOError("The file %s does not exist" % schema_file)
-
 
             with open(schema_file) as f:
                 try:
