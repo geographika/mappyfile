@@ -233,6 +233,20 @@ def test_lowercase():
     # deepcopy crashes on (u'config', OrderedDict([('ON_MISSING_DATA', Token(NAME, 'FAIL'))]))
 
 
+def test_ref_path():
+    from jsonschema.compat import urlsplit
+    url = "file:////home/user/mappyfile/mappyfile/schemas/"
+    scheme, netloc, path, query, fragment = urlsplit(url)
+    print(scheme, netloc, path, query, fragment)
+    assert(scheme == "file")
+
+    url = "file:///D:/GitHub/mappyfile/mappyfile/schemas/"
+
+    scheme, netloc, path, query, fragment = urlsplit(url)
+    print(scheme, netloc, path, query, fragment)
+    assert(scheme == "file")
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py

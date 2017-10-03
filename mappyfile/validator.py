@@ -17,6 +17,25 @@ class Validator(object):
     def __init__(self):
         self.schemas = {}
 
+    def get_schema_path(self, schemas_folder):
+        """
+        Return a file protocol URI e.g. file:///D:/mappyfile/mappyfile/schemas/ on Windows
+        and file:////home/user/mappyfile/mappyfile/schemas/ on Linux
+        """
+
+        # replace any Windows path back slashes with forward slashes
+        schemas_folder = schemas_folder.replace("\\", "/")
+
+        # HACK Python 2.7 on Linux seems to remove the root slash
+        # add this back in
+        if schemas_folder.startswith("/"):
+            schemas_folder = "/" + schemas_folder
+
+        host = ""
+        root_schema_path = "file://{}/{}".format(host, schemas_folder)  + "/"
+
+        return root_schema_path
+
     def get_schema(self, schema_name):
         """
         Had to remove the id property from map.json or it uses URLs for validation
@@ -26,21 +45,22 @@ class Validator(object):
         schema_name += ".json"
 
         if schema_name not in self.schemas.keys():
-            schemas_folder = os.path.join(os.path.dirname(__file__), "schemas")
-            schema = os.path.join(schemas_folder, schema_name)
-            if not os.path.isfile(schema):
-                raise IOError("The file %s does not exist" % schema)
 
-            # need to set a full file URI to the base schema
-            root_schema_path = "file:///{}".format(os.path.abspath(schema)).replace("\\", "/")
+            schemas_folder = os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
+            schema_file = os.path.join(schemas_folder, schema_name)
 
-            with open(schema) as f:
+            if not os.path.isfile(schema_file):
+                raise IOError("The file %s does not exist" % schema_file)
+
+
+            with open(schema_file) as f:
                 try:
                     jsn_schema = json.loads(f.read())
                 except ValueError as ex:
-                    log.error("Could not load %s", schema)
+                    log.error("Could not load %s", schema_file)
                     raise ex
 
+            root_schema_path = self.get_schema_path(schemas_folder)
             resolver = jsonschema.RefResolver(root_schema_path, None)
             # cache the schema for future use
             self.schemas[schema_name] = (jsn_schema, resolver)
