@@ -98,6 +98,9 @@
     "maxsize": {
       "type": "number"
     },
+    "maxwidth": {
+      "type": "number"
+    },
     "minscaledenom": {
       "type": "number"
     },
