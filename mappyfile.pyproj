@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_validation.py</StartupFile>
+    <StartupFile>tests\test_transformer.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -41,6 +41,9 @@
     <Folder Include="tests\" />
     <Folder Include="tests\mapfiles\" />
     <Folder Include="tests\samples\" />
+    <Folder Include="tests\samples\layers\" />
+    <Folder Include="tests\samples\mapfile_include\" />
+    <Folder Include="tests\samples\mapfile_include\include\" />
     <Folder Include="tests\sample_maps\" />
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +172,19 @@
     </Content>
     <Content Include="tests\mapfiles\map7.txt" />
     <Content Include="tests\mapfiles\map6.txt" />
+    <Content Include="tests\samples\connection.map" />
+    <Content Include="tests\samples\include1_nested_path.map" />
+    <Content Include="tests\samples\include1_recursive.map" />
+    <Content Include="tests\samples\include2_recursive.map" />
+    <Content Include="tests\samples\include3_recursive.map" />
+    <Content Include="tests\samples\include4.map" />
+    <Content Include="tests\samples\include4_recursive.map" />
+    <Content Include="tests\samples\include5_recursive.map" />
+    <Content Include="tests\samples\include6_recursive.map" />
+    <Content Include="tests\samples\include7_recursive.map" />
+    <Content Include="tests\samples\layers\layer1.map" />
+    <Content Include="tests\samples\mapfile_include\include2_nested_path.map" />
+    <Content Include="tests\samples\mapfile_include\include\include3_nested_path.map" />
     <Content Include="tests\samples\new_c_comments.map" />
     <Content Include="tests\samples\include3.map" />
     <Content Include="tests\samples\include2.map" />
@@ -535,6 +551,9 @@
     <Compile Include="misc\__init__.py" />
     <Compile Include="setup.py" />
     <Compile Include="tests\test_expressions.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_includes.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_large_file.py">
