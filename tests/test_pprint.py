@@ -324,10 +324,10 @@ def test_class_list():
     d1 = collections.OrderedDict(sorted(d1.items()))
     d2 = collections.OrderedDict(sorted(d2.items()))
 
-    l = [d1, d2]
+    classes = [d1, d2]
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
-    s = pp.pprint(l)
+    s = pp.pprint(classes)
     print(s)
     assert(s == 'CLASS EXPRESSION ([area]) TEXT ([area]) END CLASS EXPRESSION ("[area]") TEXT ("[area]") END')
 
