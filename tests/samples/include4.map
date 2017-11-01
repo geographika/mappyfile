@@ -1,0 +1,4 @@
+MAP
+    NAME 'include_test'
+    INCLUDE 'layers/layer1.map'
+END

@@ -1,4 +1,4 @@
 LAYER
     NAME 'include_test'
-    INCLUDE 'include/include3_nested_path.map'
+    INCLUDE 'mapfile_include/include/include3_nested_path.map'
 END

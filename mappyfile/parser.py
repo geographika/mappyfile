@@ -56,7 +56,7 @@ class Parser(object):
                     log.warning("Include file '%s' not found", inc_file_path)
                     raise ex
                 # recursively load any further includes
-                includes[idx] = self.load_includes(include_text, fn=inc_file_path, _nested_includes=_nested_includes+1)
+                includes[idx] = self.load_includes(include_text, fn=fn, _nested_includes=_nested_includes+1)
 
         for idx, txt in includes.items():
             lines.pop(idx)  # remove the original include
