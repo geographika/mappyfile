@@ -1,4 +1,3 @@
-import os
 import json
 import logging
 import pytest
@@ -6,7 +5,6 @@ import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
-from lark.common import UnexpectedToken
 
 
 def test_includes():
@@ -31,7 +29,7 @@ def test_includes_nested_path():
 
 def test_includes_relative_path():
     """
-    File location can be given as a full path to the file, or (in MapServer >= 4.10.1) as a 
+    File location can be given as a full path to the file, or (in MapServer >= 4.10.1) as a
     path relative to the mapfile.
     http://mapserver.org/mapfile/include.html
     """
