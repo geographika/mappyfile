@@ -281,6 +281,46 @@ def test_boolean():
     assert(d["transform"])
 
 
+@pytest.mark.xfail
+def test_multiple_layer_projection():
+    """
+    TODO add validation for this case
+    """
+
+    s = """
+    MAP
+    LAYER
+        PROJECTION
+            "init=epsg:4326"
+            "init=epsg:4326"
+        END
+        PROJECTION
+            "init=epsg:4326"
+            "init=epsg:4326"
+        END
+    END
+    END
+    """
+    p = Parser()
+    ast = p.parse(s)
+    t = MapfileToDict()
+    d = t.transform(ast)
+    print(json.dumps(d, indent=4))
+    assert(len(d["projection"]) == 1)
+
+    p = Parser()
+    m = MapfileToDict()
+
+    ast = p.parse(s)
+    d = m.transform(ast)
+
+    print(json.dumps(d, indent=4))
+
+    from mappyfile.validator import Validator
+    v = Validator()
+    return v.validate(d)
+
+
 def run_tests():
     # pytest.main(["tests/test_transformer.py::test_config_directive"])
     pytest.main(["tests/test_transformer.py"])
@@ -288,5 +328,5 @@ def run_tests():
 
 if __name__ == '__main__':
     run_tests()
-    # test_boolean()
+    # test_multiple_layer_projection()
     print("Done!")
