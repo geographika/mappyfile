@@ -336,7 +336,7 @@ class PrettyPrinter(object):
                 elif self.quoter.in_brackets(value) and attr != "text":
                     # TEXT expressions are often "[field1]-[field2]" so need to leave quotes for these
                     pass
-                elif value.startswith("not ") and self.quoter.in_parenthesis(value[4:]):
+                elif value.startswith("NOT ") and self.quoter.in_parenthesis(value[4:]):
                     value = "NOT {}".format(value[4:])
                 else:
                     value = self.check_options_list(options_list, value)

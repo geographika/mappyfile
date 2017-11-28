@@ -253,11 +253,11 @@ class MapfileToDict(Transformer):
         return "( %s )" % v
 
     def and_test(self, t):
-        v = " and ".join(t)
+        v = " AND ".join(t)
         return "( %s )" % v
 
     def or_test(self, t):
-        v = " or ".join(t)
+        v = " OR ".join(t)
         return "( %s )" % v
 
     def compare_op(self, t):
@@ -265,7 +265,7 @@ class MapfileToDict(Transformer):
         return v
 
     def not_expression(self, t):
-        return "not %s" % t[0]
+        return "NOT %s" % t[0]
 
     def expression(self, t):
         v = t[0]

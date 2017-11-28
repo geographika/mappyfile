@@ -82,7 +82,7 @@ def test_or_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) OR ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
     s = '''
@@ -91,7 +91,7 @@ def test_or_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) or ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) OR ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
 
@@ -102,7 +102,7 @@ def test_and_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) AND ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
     s = '''
@@ -111,7 +111,7 @@ def test_and_expressions():
     END
     '''
 
-    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) and ( "[style_class]" = "20" ) ) END'
+    exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) AND ( "[style_class]" = "20" ) ) END'
     assert(output(s) == exp)
 
 
