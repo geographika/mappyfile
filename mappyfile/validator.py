@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from collections import OrderedDict
+from collections import OrderedDict, deque
 import logging
 import jsonschema
 
@@ -80,17 +80,45 @@ class Validator(object):
 
         return x
 
-    def validate(self, d, schema_name="map"):
+    def set_comment(self, d, path, error):
+        """
+        Add a validation comment to the dictionary
+        """
+
+        print(json.dumps(d, indent=4))
+
+        key = path[-1]
+        #comment = error.message
+        comment = "ERROR: Invalid value for {}".format(key.upper())
+
+        for p in path[:-1]:
+            if isinstance(p, int):
+                d = d[p]
+            else:
+                d = d.setdefault(p, {})
+        d["__comments__"][key] = comment
+
+    def add_messages(self, d, errors):
+
+        for error in errors:
+            #print(error.schema_path)
+            pth = error.absolute_path        
+            pth = list(pth) # convert deque to list
+            self.set_comment(d, pth, error)
+
+        return d
+
+    def validate(self, d, schema_name="map", add_messages=False):
 
         jsn_schema, resolver = self.get_schema(schema_name)
         lowercase_dict = self.convert_lowercase(d)
 
         jsn = json.loads(json.dumps(lowercase_dict), object_pairs_hook=OrderedDict)
+        v = jsonschema.Draft4Validator(schema=jsn_schema, resolver=resolver)
 
-        try:
-            jsonschema.validate(jsn, jsn_schema, resolver=resolver)
-        except jsonschema.ValidationError as ex:
-            log.error(ex)
-            return False
+        errors = list(v.iter_errors(jsn))
 
-        return True
+        if add_messages:
+            self.add_messages(d, errors)
+
+        return errors
