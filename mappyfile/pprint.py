@@ -152,7 +152,9 @@ class PrettyPrinter(object):
         lines = []
 
         for k, v in d.items():
-            if k != "__type__":
+            if k == "__comments__":
+                pass
+            elif k != "__type__":
                 k = self.quoter.add_quotes(k)
                 v = self.quoter.add_quotes(v)
                 lines.append(self.__format_line(self.whitespace(level, 2), k, v))
@@ -265,7 +267,8 @@ class PrettyPrinter(object):
             else:
                 lines += self._format(composite)
 
-        return self.newlinechar.join(lines)
+        result = self.newlinechar.join(lines) # no comments
+        return result
 
     def get_attribute_properties(self, type_, attr):
 
@@ -366,20 +369,51 @@ class PrettyPrinter(object):
 
         return line
 
+    def format_comment(self, spacer, value):
+        return "{}# {}".format(spacer, value)
+
+    def process_comment(self, comments, key):
+        
+        if key not in comments:
+            comment = ""
+        else:
+            value = comments[key]
+            if key == "__type__":
+                spacer = ""
+            else:
+                spacer = " "
+
+            if isinstance(value, list):
+                comments = [self.format_comment(spacer, v) for v in value]
+                comment = self.newlinechar.join(comments)
+            else:
+                comment = self.format_comment(spacer, value)
+
+        return comment
+
     def _format(self, composite, level=0):
 
         lines = []
+
+        # get any comments associated with the composite
+        comments = composite.get("__comments__", {})
 
         if isinstance(composite, dict) and '__type__' in composite.keys():
             type_ = composite['__type__']
             assert(type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES))
             is_hidden = False
+
+            comment = self.process_comment(comments, '__type__')
+
+            if comment:
+                lines.append(comment)
+
             s = self.whitespace(level, 0) + type_.upper()
             lines.append(s)
 
         for attr, value in composite.items():
-            if attr == "__type__":
-                # skip this hidden attribute
+            if attr in ("__type__", "__comments__"):
+                # skip hidden attributes
                 continue
             elif self.is_hidden_container(attr, value):
                 # now recursively print all the items in the container
@@ -388,7 +422,8 @@ class PrettyPrinter(object):
             elif attr == "pattern":
                 lines += self.format_pair_list(attr, value, level)
             elif attr in ("metadata", "validation", "values"):
-                # as metadata and values are also composites, process them before calling self._format
+                # metadata and values are also composites
+                # but will be processed here
                 lines += self.process_key_dict(attr, value, level)
             elif attr == "projection":
                 lines += self.process_projection(attr, value, level)
@@ -402,7 +437,9 @@ class PrettyPrinter(object):
                 lines += self._format(value, level + 1)  # recursively add the child class
             else:
                 # standard key value pair
-                lines.append(self.process_attribute(type_, attr, value, level))
+                line = self.process_attribute(type_, attr, value, level)
+                line += self.process_comment(comments, attr)
+                lines.append(line)
 
         if not is_hidden:
             # close the container block with an END
