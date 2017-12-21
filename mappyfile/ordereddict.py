@@ -1,9 +1,6 @@
 from collections import OrderedDict, Callable
 import copy
 
-# from mappyfile.validator import Validator
-# validator = Validator()
-
 
 class DefaultOrderedDict(OrderedDict):
     """
@@ -28,12 +25,6 @@ class DefaultOrderedDict(OrderedDict):
             return OrderedDict.__getitem__(self, key)
         except KeyError:
             return self.__missing__(key)
-
-    def __setitem__(self, key, v):
-        if "__type__" in self.keys():
-            # validator.validate(self, self["__type__"])
-            pass
-        super(self.__class__, self).__setitem__(key, v)
 
     def __missing__(self, key):
         if self.default_factory is None:
