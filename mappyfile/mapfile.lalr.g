@@ -1,56 +1,72 @@
-start: (_NL* composite _NL*)+
+start: composite+
 
-composite: composite_type attr? _NL+ composite_body _END
-       | composite_type points _END
-       | composite_type pattern _END
-       | composite_type attr _END
+composite: composite_type composite_body _END
        | metadata
        | validation
 
 composite_body: _composite_item*
-_composite_item: (composite|attr|points|projection|pattern|values) _NL+
+_composite_item: (composite|attr|points|projection|pattern|values|config)
 
-points: "POINTS"i _NL* (_num_pair _NL*)* _END
-pattern: "PATTERN"i _NL* (_num_pair _NL*)* _END
+!projection: "PROJECTION"i (string*|AUTO) _END
+!config: "CONFIG"i (string | UNQUOTED_STRING) (string | UNQUOTED_STRING)
 
-projection: "PROJECTION"i _NL* ((string _NL*)+|AUTO _NL+) _END
-values: "VALUES"i _NL* ((string_pair) _NL+)+ _END
+!points: "POINTS"i num_pair* _END
+!pattern: "PATTERN"i num_pair* _END
 
-metadata: "METADATA"i _NL* ((string_pair|attr) _NL+)+ _END
-validation: "VALIDATION"i _NL* ((string_pair|attr) _NL+)+ _END
+!values: "VALUES"i string_pair* _END
+!metadata: "METADATA"i string_pair* _END
+!validation: "VALIDATION"i string_pair* _END
 
-attr: attr_name (value | NAME)+
+attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING)
+//attr: (UNQUOTED_STRING | SYMBOL | STYLE) (value | UNQUOTED_STRING)
+// STYLE and SYMBOL are listed in composite_type but also attribute names
 
-attr_name: NAME | composite_type
-?value: string | int | float | expression | not_expression | attr_bind | path | regexp | runtime_var | list | bare_string2 | NULL
+?value: string | int | float | expression | not_expression | attr_bind | path
+| regexp | runtime_var | list | NULL | true | false | extent | rgb | hexcolor
+| colorrange | hexcolorrange | num_pair | attr_bind_pair | _attr_keyword
 
 int: SIGNED_INT
 int_pair: int int
-!bare_string: NAME | "CLASS"i | "GRID"i | "SYMBOL"i |  "FEATURE"i  | bare_string2
-!bare_string2: "AUTO"i | "HILITE"i | "SELECTED"i
-string: STRING1 | STRING2 | STRING3
-string_pair: string string
+rgb: int int int
+colorrange: int int int int int int
+hexcolorrange: hexcolor hexcolor
+hexcolor: DOUBLE_QUOTED_HEXCOLOR | SINGLE_QUOTED_HEXCOLOR
+
+extent: (int|float) (int|float) (int|float) (int|float) 
+
+!_attr_keyword: "AUTO"i | "HILITE"i | "SELECTED"i 
+
+string: DOUBLE_QUOTED_STRING | SINGLE_QUOTED_STRING | ESCAPED_STRING
+string_pair: (string|UNQUOTED_STRING) (string|UNQUOTED_STRING)
+
+attr_bind_pair: attr_bind attr_bind
 float: SIGNED_FLOAT
 float_pair: float float
 path: PATH
 regexp: REGEXP1 | REGEXP2
 runtime_var: RUNTIME_VAR
-list: "{" value ("," value)* "}"
+list: "{" (value | UNQUOTED_STRING) ("," (value | UNQUOTED_STRING))* "}"
 
-_num_pair: (int|float) _NL* (int|float)
+num_pair: (int|float) (int|float)
 
-attr_bind: "[" bare_string "]"
+attr_bind: "[" UNQUOTED_STRING "]"
 
 not_expression: ("!"|"NOT"i) expression
 expression: "(" or_test ")"
 ?or_test : (or_test ("OR"i|"||"))? and_test
 ?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? add
-!compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" | "<=" | "IN" | "NE" | "EQ" | "LE" | "LT" | "GE" | "GT"
+!compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" 
+| "<=" | "IN" | "NE" | "EQ" | "LE" | "LT" | "GE" | "GT"
 
 ?add: (add "+")? (func_call | value)
-func_call: attr_name "(" func_params ")"
+// ?multiply: (multiply "*")? (func_call | value)
+
+func_call: UNQUOTED_STRING "(" func_params ")"
 func_params: value ("," value)*
+
+!true: "TRUE"i
+!false: "FALSE"i
 
 !composite_type: "CLASS"i
             | "CLUSTER"i
@@ -58,7 +74,6 @@ func_params: value ("," value)*
             | "FEATURE"i
             | "FONTSET"i
             | "GRID"i
-            | "INCLUDE"i
             | "JOIN"i
             | "LABEL"i
             | "LAYER"i
@@ -70,13 +85,20 @@ func_params: value ("," value)*
             | "REFERENCE"i
             | "SCALEBAR"i
             | "SCALETOKEN"i
-            | "STYLE"i
-            | "SYMBOL"i
             | "WEB"i
+            | STYLE
+			| SYMBOL
+
+SYMBOL: "SYMBOL"i
+STYLE: "STYLE"i
 
 AUTO: "AUTO"i
 PATH: /([a-z0-9_]*\.*\/|[a-z_]+[.\/])[a-z0-9_\/\.-]+/i
-NAME: /[a-z_][a-z0-9_]*/i
+
+// rules allow optional alphachannel
+DOUBLE_QUOTED_HEXCOLOR.2: /\"#(?:[0-9a-fA-F]{3}){1,2}([0-9a-fA-F]{2})?\"/ 
+SINGLE_QUOTED_HEXCOLOR.2: /'#(?:[0-9a-fA-F]{3}){1,2}([0-9a-fA-F]{2})?'/ 
+
 NULL: "NULL"i
 
 SIGNED_FLOAT: ["-"|"+"] FLOAT
@@ -85,11 +107,18 @@ SIGNED_INT: ["-"|"+"] INT
 %import common.FLOAT
 %import common.INT
 
-STRING1: /".*?(?<!\\\\)(\\\\\\\\)*?"i?/
-STRING2: /'.*?(?<!\\\\)(\\\\\\\\)*?'i?/
-STRING3: /`.*?`i?/   // XXX TODO
+// UNQUOTED_STRING: /[a-z_][a-z0-9_\-]*/i
+UNQUOTED_STRING: /[a-z0-9_\-]+/i
+DOUBLE_QUOTED_STRING: /".*?(?<!\\\\)(\\\\\\\\)*?"i?/
+SINGLE_QUOTED_STRING: /'.*?(?<!\\\\)(\\\\\\\\)*?'i?/
+ESCAPED_STRING: /`.*?`i?/
+//KEYWORD: /[a-z]+/i
+
+//UNQUOTED_NUMERIC_STRING: /[a-z_][a-z0-9_\-]*/i
+
 REGEXP1.2: /\/.*?\/i?/
 REGEXP2: /\\\\.*?\\\\i?/
+
 RUNTIME_VAR: /%.*?%/
 
 COMMENT: /\#[^\n]*/
@@ -103,3 +132,4 @@ _NL: /[\r\n]+/
 %ignore COMMENT
 %ignore CCOMMENT
 %ignore WS
+%ignore _NL
