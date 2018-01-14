@@ -18,6 +18,7 @@ def get_dict(s):
     logging.info(inspect.stack()[1][3])
 
     ast = p.parse(s)
+    logging.debug(ast.pretty())
     d = m.transform(ast)
     logging.debug(json.dumps(d, indent=4))
 
@@ -84,7 +85,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_config_directive()
-    # test_debug()
-    # test_dict()
+    run_tests()
+    # test_config_directive()
     print("Done!")
