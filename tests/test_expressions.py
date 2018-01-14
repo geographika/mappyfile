@@ -13,13 +13,13 @@ def output(s):
     the result
     """
     p = Parser()
-    m = MapfileToDict()
+    m = MapfileToDict(include_position=True)
 
     # https://stackoverflow.com/questions/900392/getting-the-caller-function-name-inside-another-function-in-python
     logging.info(inspect.stack()[1][3])
 
     ast = p.parse(s)
-    logging.debug(ast)
+    logging.debug(ast.pretty())
     d = m.transform(ast)
     logging.debug(json.dumps(d, indent=4))
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
@@ -150,7 +150,6 @@ def test_ne_comparison():
     """
     IS NOT is not valid
     NE (Not Equals) should be used instead
-    Uses Earley
     """
     s = """
     CLASS
@@ -247,7 +246,39 @@ def test_numerical_operator_lt_expression():
 
 
 @pytest.mark.xfail
+def test_divide():
+    """
+    Not sure if these should be in brackets or not
+    http://mapserver.org/mapfile/expressions.html
+    Implies with brackets will return a boolean value
+    and without will return a numeric value
+    """
+    s = """
+    CLASS
+        EXPRESSION ([field1] / [field2])
+    END
+    """
+    exp = "CLASS EXPRESSION ([field1] / [field2]) END"
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_multiply():
+    s = """
+    CLASS
+        EXPRESSION ([field1] * [field2])
+    END
+    """
+    exp = "CLASS EXPRESSION ([field1] * [field2]) END"
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
 def test_divide_expression():
+    """
+    http://mapserver.org/mapfile/expressions.html
+    Also - * and ^
+    """
     s = """
     CLASS
         EXPRESSION ([field1] / [field2] > 0.1)
@@ -257,7 +288,6 @@ def test_divide_expression():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_escaped_string():
     """
     http://mapserver.org/mapfile/expressions.html#quotes-escaping-in-strings
@@ -267,10 +297,10 @@ def test_escaped_string():
     """
     s = """
     CLASS
-        EXPRESSION "National \"hero\" statue"
+        EXPRESSION "National \\"hero\\" statue"
     END
     """
-    exp = "CLASS EXPRESSION 'National 'hero' statue' END"
+    exp = """CLASS EXPRESSION 'National \\"hero\\" statue' END"""
     assert(output(s) == exp)
 
 
@@ -282,7 +312,10 @@ def test_list_expression_alt():
     These expressions are much more performant in MapServer
     List expressions do not support quote escaping, or attribute values that contain a comma in them.
 
-    To activate them enclose a comma separated list of values between {}, without adding quotes or extra spaces.
+    To activate them enclose a comma separated list of values between {}, without adding quotes 
+    or extra spaces.
+
+    Fields starting with numbers are allowed - this is the reason for the failing test
     """
     s = """
     CLASS
@@ -304,6 +337,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # test_divide_expression()  # test_list_expression
+    # test_multiply()
     run_tests()
     print("Done!")
