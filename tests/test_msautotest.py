@@ -66,14 +66,16 @@ def main(msautotest_fld, create_new_copy=True):
     # ignore_list = ["wms_inspire_scenario1.map","wms_inspire_scenario2.map"]
 
     # transparent_layer.map has an extra END, see https://github.com/mapserver/mapserver/pull/5468
-    # polyline_no_clip.map needs symbol names in quotes
+    # polyline_no_clip.map needs symbol names in quotes, and SYMBOL is ambiguous
 
-    ignore_list = ["poly-label-multiline-pos-auto.map", "poly-label-pos-auto.map"]  # has attributes all on the same line
+    ignore_list = ["polyline_no_clip.map", 
+                   "poly-label-multiline-pos-auto.map", "poly-label-pos-auto.map", 
+                   "embed_sb_rgba.map", "embed_sb_rgba_offset.map"]  # has attributes all on the same line
 
     mapfiles = glob.glob(msautotest_fld + '/**/*.map')
     mapfiles = [f for f in mapfiles if os.path.basename(f) not in ignore_list]
 
-    # target_map = "wms_grid_reproj_to_3857.map" # "polyline_no_clip.map"
+    # target_map = "polyline_no_clip.map"
     # mapfiles = [f for f in mapfiles if os.path.basename(f) in (target_map)]
 
     v = Validator()
@@ -81,13 +83,12 @@ def main(msautotest_fld, create_new_copy=True):
     for fn in mapfiles:
 
         d = parse_mapfile(parser, transformer, pp, fn)
-        if not v.validate(d):
-            logging.warning(json.dumps(d, indent=4))
-            # raise
+        errors = v.validate(d, add_messages=True)
+        if errors:
+            logging.warning("{} failed validation".format(fn))
 
         output_file = fn.replace(msautotest_fld, msautotest_copy)
         try:
-            print(mappyfile.dumps(d))
             mappyfile.utils.write(d, output_file)
         except Exception:
             logging.warning(json.dumps(d, indent=4))
@@ -95,16 +96,16 @@ def main(msautotest_fld, create_new_copy=True):
             raise
 
         # now try reading it again
-        print(d)
         print(json.dumps(d, indent=4))
         d = parse_mapfile(parser, transformer, pp, output_file)
 
-        if not v.validate(d):
-            logging.warning(json.dumps(d, indent=4))
+        errors = v.validate(d, add_messages=True)
+        if errors:
+            logging.warning("{} failed validation".format(fn))
 
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    fld = r"D:\GitHub\mapserver\msautotest"
+    fld = r"C:\Temp\mapserver\msautotest"
     main(fld, False)
     print("Done!")
