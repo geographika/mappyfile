@@ -9,23 +9,13 @@ log = logging.getLogger("mappyfile")
 
 class Parser(object):
 
-    def __init__(self, expand_includes=True, use_lalr=True):
+    def __init__(self, expand_includes=True):
         self.expand_includes = expand_includes
-        self.use_lalr = use_lalr
-
-        if self.use_lalr:
-            self.lalr = self._create_lalr_parser()
-            self.earley = None  # only load this grammar as required
-        else:
-            self.earley = self._create_earley_parser()
+        self.lalr = self._create_lalr_parser()
 
     def load_grammar(self, grammar_file):
         gf = os.path.join(os.path.dirname(__file__), grammar_file)
         return open(gf).read()
-
-    def _create_earley_parser(self):
-        grammar_text = self.load_grammar("mapfile.earley.g")
-        return Lark(grammar_text, parser="earley", lexer="standard", earley__all_derivations=False)
 
     def _create_lalr_parser(self):
         grammar_text = self.load_grammar("mapfile.lalr.g")
@@ -78,8 +68,7 @@ class Parser(object):
 
     def parse(self, text, fn=None):
         """
-        Parse the Mapfile, using one of three options, from the quickest (LALR)
-        to slowest, but handles all cases
+        Parse the Mapfile
         """
 
         if self.expand_includes:
@@ -91,17 +80,4 @@ class Parser(object):
             except (ParseError, UnexpectedInput) as ex:
                 log.error("Parsing with LALR unsuccessful")
                 log.info(ex)
-
-        log.info("Attempting to parse with Earley")
-
-        if self.earley is None:
-            self.earley = self._create_earley_parser()
-
-        try:
-            ast = self.earley.parse(text)
-            log.info("Parsing with Earley successful")
-            return ast
-        except (ParseError, UnexpectedInput) as ex:
-            log.exception(ex)
-            log.error("Parsing with Earley unsuccessful")
-            raise
+                raise
