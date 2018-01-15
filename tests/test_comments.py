@@ -5,7 +5,7 @@ from mappyfile.pprint import PrettyPrinter
 
 
 def test_comment():
-    d = collections.Order/edDict()
+    d = collections.OrderedDict()
     d["name"] = "Test"
     d["__type__"] = "layer"
     d["__comments__"] = {"name": "Test comment"}
@@ -71,8 +71,10 @@ NAME 'Test'
 END"""
     assert(s == exp)
 
+
 def run_tests():
     pytest.main(["tests/test_comments.py"])
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
