@@ -74,10 +74,9 @@ class Parser(object):
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 
-        if self.use_lalr:
-            try:
-                return self.lalr.parse(text)
-            except (ParseError, UnexpectedInput) as ex:
-                log.error("Parsing with LALR unsuccessful")
-                log.info(ex)
-                raise
+        try:
+            return self.lalr.parse(text)
+        except (ParseError, UnexpectedInput) as ex:
+            log.error("Parsing of Mapfile unsuccessful")
+            log.info(ex)
+            raise
