@@ -21,8 +21,9 @@ def test_all_maps():
         print(fn)
         try:
             p.parse_file(os.path.join(sample_dir, fn))
-        except (BaseException, UnexpectedToken):
+        except (BaseException, UnexpectedToken) as ex:
             logging.warning("Cannot process %s ", fn)
+            logging.error(ex)
             failing_maps.append(fn)
 
     logging.warning(failing_maps)
@@ -99,6 +100,5 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
-
     run_tests()
     print("Done!")
