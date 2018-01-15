@@ -312,7 +312,7 @@ def test_list_expression_alt():
     These expressions are much more performant in MapServer
     List expressions do not support quote escaping, or attribute values that contain a comma in them.
 
-    To activate them enclose a comma separated list of values between {}, without adding quotes 
+    To activate them enclose a comma separated list of values between {}, without adding quotes
     or extra spaces.
 
     Fields starting with numbers are allowed - this is the reason for the failing test
