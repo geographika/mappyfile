@@ -5,6 +5,7 @@ import mappyfile
 from mappyfile.validator import Validator
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
+from mappyfile.pprint import PrettyPrinter
 from subprocess import Popen, PIPE, STDOUT
 import pytest
 
@@ -121,12 +122,17 @@ def main():
     """
 
 
-def validate(s):
+def to_dict(s):
     p = Parser()
     m = MapfileToDict()
-
     ast = p.parse(s)
     d = m.transform(ast)
+    print(json.dumps(d, indent=4))
+    return d
+
+
+def validate(s):
+    d = to_dict(s)
     v = Validator()
     return v.validate(d)
 
@@ -247,6 +253,29 @@ def test_ref_path():
     assert(scheme == "file")
 
 
+def test_add_messages():
+    s = """
+    MAP
+        IMAGECOLOR 'FF00FF'
+        LAYER
+            EXTENT 0 0 0
+        END
+    END
+    """
+    d = to_dict(s)
+    v = Validator()
+    errors = v.validate(d, add_messages=True)
+
+    print(len(errors))
+
+    for error in errors:
+        print(error.__dict__)
+
+    pp = PrettyPrinter(indent=4, quote='"')  # expected
+    res = pp.pprint(d)
+    print(res)
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -260,5 +289,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # main()
     # test_lowercase()
-    run_tests()
+    # run_tests()
+    test_add_messages()
     print("Done!")
