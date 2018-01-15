@@ -68,8 +68,8 @@ def main(msautotest_fld, create_new_copy=True):
     # transparent_layer.map has an extra END, see https://github.com/mapserver/mapserver/pull/5468
     # polyline_no_clip.map needs symbol names in quotes, and SYMBOL is ambiguous
 
-    ignore_list = ["polyline_no_clip.map", 
-                   "poly-label-multiline-pos-auto.map", "poly-label-pos-auto.map", 
+    ignore_list = ["polyline_no_clip.map",
+                   "poly-label-multiline-pos-auto.map", "poly-label-pos-auto.map",
                    "embed_sb_rgba.map", "embed_sb_rgba_offset.map"]  # has attributes all on the same line
 
     mapfiles = glob.glob(msautotest_fld + '/**/*.map')
