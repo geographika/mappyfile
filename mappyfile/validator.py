@@ -85,8 +85,6 @@ class Validator(object):
         Add a validation comment to the dictionary
         """
 
-        print(json.dumps(d, indent=4))
-
         key = path[-1]
         #comment = error.message
         comment = "ERROR: Invalid value for {}".format(key.upper())
@@ -108,17 +106,28 @@ class Validator(object):
 
         return d
 
-    def validate(self, d, schema_name="map", add_messages=False):
-
-        jsn_schema, resolver = self.get_schema(schema_name)
+    def _validate(self, d, validator, add_messages, schema_name):
         lowercase_dict = self.convert_lowercase(d)
-
         jsn = json.loads(json.dumps(lowercase_dict), object_pairs_hook=OrderedDict)
-        v = jsonschema.Draft4Validator(schema=jsn_schema, resolver=resolver)
 
-        errors = list(v.iter_errors(jsn))
+        errors = list(validator.iter_errors(jsn))
 
         if add_messages:
             self.add_messages(d, errors)
+
+        return errors
+
+    def validate(self, value, add_messages=False, schema_name="map"):
+
+        jsn_schema, resolver = self.get_schema(schema_name)        
+        validator = jsonschema.Draft4Validator(schema=jsn_schema, resolver=resolver)
+
+        errors = []
+
+        if isinstance(value, list):
+            for d in value:
+                errors += self._validate(d, validator, add_messages, schema_name)
+        else:
+            errors = self._validate(value, validator, add_messages, schema_name)
 
         return errors
