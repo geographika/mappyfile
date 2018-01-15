@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from collections import OrderedDict, deque
+from collections import OrderedDict
 import logging
 import jsonschema
 
@@ -86,7 +86,7 @@ class Validator(object):
         """
 
         key = path[-1]
-        #comment = error.message
+        #  comment = error.message
         comment = "ERROR: Invalid value for {}".format(key.upper())
 
         for p in path[:-1]:
@@ -99,9 +99,9 @@ class Validator(object):
     def add_messages(self, d, errors):
 
         for error in errors:
-            #print(error.schema_path)
-            pth = error.absolute_path        
-            pth = list(pth) # convert deque to list
+            #  print(error.schema_path)
+            pth = error.absolute_path
+            pth = list(pth)  # convert deque to list
             self.set_comment(d, pth, error)
 
         return d
@@ -119,7 +119,7 @@ class Validator(object):
 
     def validate(self, value, add_messages=False, schema_name="map"):
 
-        jsn_schema, resolver = self.get_schema(schema_name)        
+        jsn_schema, resolver = self.get_schema(schema_name)
         validator = jsonschema.Draft4Validator(schema=jsn_schema, resolver=resolver)
 
         errors = []
