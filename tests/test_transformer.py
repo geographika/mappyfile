@@ -147,7 +147,7 @@ def test_or_expression():
     d = t.transform(ast)
     print(d)
     print(json.dumps(d, indent=4))
-    assert(d["expression"] == "( ( [val] = 'A' ) or ( [val] = 'B' ) )")
+    assert(d["expression"] == "( ( [val] = 'A' ) OR ( [val] = 'B' ) )")
 
 
 def test_projection():

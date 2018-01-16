@@ -1,6 +1,11 @@
 Releases
 --------
 
+0.5.1 (05/01/2018)
+++++++++++++++++++
+
+* `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Remove unnessesary parser keyword`
+
 0.5.0 (01/11/2017)
 ++++++++++++++++++
 
@@ -9,7 +14,7 @@ Releases
 Resolved Issues
 ***************
 
-* `#44 <https://github.com/geographika/mappyfile/issues/44>`_ Includes should be relative to Mapfile !`
+* `#44 <https://github.com/geographika/mappyfile/issues/44>`_ Includes should be relative to Mapfile`
 
 0.4.3 (28/08/2017)
 ++++++++++++++++++
