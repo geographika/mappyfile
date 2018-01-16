@@ -1,204 +1,214 @@
 {
-  "type": "object",
-  "properties": {
-    "angle": {
-      "oneOf": [
-        {
-          "type": "number"
+    "type": "object",
+    "properties": {
+        "angle": {
+            "oneOf": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^auto$"
+                }
+            ]
         },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        },
-        {
-          "type": "string",
-          "pattern": "^auto$"
-        }
-      ]
-    },
-    "angleitem": {
-      "type": "string"
-    },
-    "antialias": {
-      "type": "boolean"
-    },
-    "backgroundcolor": {
-      "$ref": "color.json"
-    },
-    "color": {
-      "oneOf": [
-        { "$ref": "color.json" },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "colorrange": {
-      "oneOf": [
-        {
-          "type": "array",
-          "items": {
-            "type": "integer"
-          },
-          "minItems": 6,
-          "maxItems": 6
-        },
-        {
-          "type": "array",
-          "items": {
+        "angleitem": {
             "type": "string"
-          },
-          "minItems": 2,
-          "maxItems": 2
-        }
-      ]
-    },
-    "datarange": {
-      "type": "array",
-      "items": {
-        "type": "integer"
-      },
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "gap": {
-      "type": "number"
-    },
-    "geomtransform": {
-      "oneOf": [
-        {
-          "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "start", "vertices" ]
         },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$",
-          "description": "expression"
-        }
-      ]
-    },
-    "initialgap": {
-      "type": "number"
-    },
-    "linecap": {
-      "enum": [ "butt", "round", "square" ]
-    },
-    "linejoin": {
-      "enum": [ "round", "miter", "bevel", "none" ]
-    },
-    "linejoinmaxsize": {
-      "type": "integer"
-    },
+        "antialias": {
+            "type": "boolean"
+        },
+        "backgroundcolor": {
+            "$ref": "color.json"
+        },
+        "color": {
+            "oneOf": [
+                { "$ref": "color.json" },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "colorrange": {
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "minItems": 6,
+                    "maxItems": 6
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                }
+            ]
+        },
+        "datarange": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+        },
+        "gap": {
+            "type": "number"
+        },
+        "geomtransform": {
+            "oneOf": [
+                {
+                    "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "start", "vertices" ]
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\((.*?)\\)$",
+                    "description": "expression"
+                }
+            ]
+        },
+        "initialgap": {
+            "type": "number"
+        },
+        "linecap": {
+            "enum": [ "butt", "round", "square" ]
+        },
+        "linejoin": {
+            "enum": [ "round", "miter", "bevel", "none" ]
+        },
+        "linejoinmaxsize": {
+            "type": "integer"
+        },
 
-    "maxscaledenom": {
-      "type": "number"
-    },
-    "maxsize": {
-      "type": "number"
-    },
-    "maxwidth": {
-      "type": "number"
-    },
-    "minscaledenom": {
-      "type": "number"
-    },
-    "minsize": {
-      "type": "number"
-    },
-    "minwidth": {
-      "type": "number"
-    },
-    "offset": {
-      "type": "array",
-      "items": {
-        "type": "number"
-      },
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "opacity": {
-      "oneOf": [
-        { "type": "integer" },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "outlinecolor": {
-      "oneOf": [
-        { "$ref": "color.json" },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "outlinewidth": {
-      "oneOf": [
-        { "type": "number" },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "pattern": {
-      "type": "object"
-    },
-    "polaroffset": {
-      "type": "array",
-      "items": [
-        {
-          "type": "number"
+        "maxscaledenom": {
+            "type": "number"
         },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ],
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "size": {
-      "oneOf": [
-        {
-          "type": "number"
+        "maxsize": {
+            "type": "number"
         },
-        {
-          "type": "string",
-          "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "symbol": {
-      "oneOf": [
-        {
-          "type": "number"
+        "maxwidth": {
+            "type": "number"
         },
-        {
-          "$ref": "symbol.json"
-        }
-      ]
-    },
-    "width": {
-      "oneOf": [
-        {
-          "type": "number"
+        "minscaledenom": {
+            "type": "number"
         },
-        {
-          "type": "string",
-          "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
+        "minsize": {
+            "type": "number"
+        },
+        "minwidth": {
+            "type": "number"
+        },
+        "offset": {
+            "type": "array",
+            "items": {
+                "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+        },
+        "opacity": {
+            "oneOf": [
+                { "type": "integer" },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "outlinecolor": {
+            "oneOf": [
+                { "$ref": "color.json" },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "outlinewidth": {
+            "oneOf": [
+                { "type": "number" },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "pattern": {
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "number",
+                    "minItems": 2,
+                    "maxItems": 2
+                }
+            }
+        },
+        "polaroffset": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "number"
+                    },
+                    {
+                        "type": "string",
+                        "pattern": "^\\[(.*?)\\]$",
+                        "description": "attribute"
+                    }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+            }
+        },
+        "size": {
+            "oneOf": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "symbol": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "$ref": "symbol.json"
+                }
+            ]
+        },
+        "width": {
+            "oneOf": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
         }
-      ]
     }
-  }
 }

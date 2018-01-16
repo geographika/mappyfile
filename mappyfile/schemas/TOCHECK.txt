@@ -57,3 +57,13 @@ EXPRESSION (true)
 http://mapserver.org/mapfile/map.html
 TRANSPARENT [on|off]
 But lots of examples of TRUE
+
+Same for
+TRANSPARENT - http://mapserver.org/mapfile/outputformat.html
+
+    OUTPUTFORMAT
+        NAME "shapezip"
+        DRIVER "OGR/ESRI Shapefile"
+        TRANSPARENT FALSE
+        IMAGEMODE FEATURE
+    END

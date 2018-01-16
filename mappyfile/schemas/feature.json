@@ -1,20 +1,28 @@
 {
-  "type": "object",
-  "properties": {
-    "points": {
-      "type": "array",
-      "items": {
-        "type": "number"
-      }
-    },
-    "items": {
-      "type": "string"
-    },
-    "text": {
-      "type": "string"
-    },
-    "wkt": {
-      "type": "string"
+    "type": "object",
+    "properties": {
+        "points": {
+            "type": "array",
+            "items": {
+                "type": "array",
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "minItems": 2,
+                        "maxItems": 2
+                    }
+                }
+            }
+        },
+        "items": {
+            "type": "string"
+        },
+        "text": {
+            "type": "string"
+        },
+        "wkt": {
+            "type": "string"
+        }
     }
-  }
-}
+    }

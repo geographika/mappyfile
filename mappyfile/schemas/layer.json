@@ -1,237 +1,240 @@
 {
-  "type": "object",
-  "properties": {
-    "class": {
-      "$ref": "class.json"
-    },
-    "classgroup": {
-      "type": "string"
-    },
-    "classitem": {
-      "type": "string"
-    },
-    "cluster": {
-      "type": "object"
-    },
-    "composite": {
-      "type": "object"
-    },
-    "connection": {
-      "type": "string"
-    },
-    "connectiontype": {
-      "enum": [ "contour", "kerneldensity", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
-    },
-    "data": {
-      "type": "string"
-    },
-    "debug": {
-      "$ref": "debug.json"
-    },
-    "dump": {
-      "oneOf": [
-        {
-          "type": "boolean"
+    "type": "object",
+    "required": [ "type" ],
+    "properties": {
+        "class": {
+            "$ref": "class.json"
         },
-        {
-          "$ref": "onoff.json"
-        }
-      ]
-    },
-    "encoding": {
-      "type": "string"
-    },
-    "extent": {
-      "$ref": "extent.json"
-    },
-    "feature": {
-      "type": "object"
-    },
-    "filter": {
-      "$ref": "expression.json"
-    },
-    "filteritem": {
-      "type": "string"
-    },
-    "footer": {
-      "type": "string"
-    },
-    "geomtransform": {
-      "anyOf": [
-        {
-          "type": "string"
+        "classgroup": {
+            "type": "string"
         },
-        {
-          "type": "string",
-          "pattern": "^\\((.*?)\\)$"
-        }
-      ]
-    },
-    "grid": {
-      "$ref": "grid.json"
-    },
-    "group": {
-      "type": "string"
-    },
-    "header": {
-      "type": "string"
-    },
-    "join": {
-      "type": "object"
-    },
-    "labelangleitem": {
-      "type": "string"
-    },
-    "labelcache": {
-      "$ref": "onoff.json"
-    },
-    "labelitem": {
-      "type": "string"
-    },
-    "labelmaxscaledenom": {
-      "type": "number"
-    },
-    "labelminscaledenom": {
-      "type": "number"
-    },
-    "labelrequires": {
-      "type": "string"
-    },
-    "labelsizeitem": {
-      "type": "string"
-    },
-    "mask": {
-      "type": "string"
-    },
-    "maxfeatures": {
-      "type": "integer"
-    },
-    "maxgeowidth": {
-      "type": "number"
-    },
-    "maxscaledenom": {
-      "type": "number"
-    },
-    "maxscale": {
-      "type": "number",
-      "metadata": {
-        "deprecated": true,
-        "maxVersion": 5.0
-      }
-    },
-    "metadata": {
-      "$ref": "metadata.json"
-    },
-    "mingeowidth": {
-      "type": "number"
-    },
-    "minscaledenom": {
-      "type": "number"
-    },
-    "minscale": {
-      "type": "number",
-      "metadata": {
-        "deprecated": true,
-        "minVersion": 0,
-        "maxVersion": 5.0
-      }
-    },
-    "name": {
-      "type": "string"
-    },
-    "offsite": {
-      "$ref": "color.json"
-    },
-    "opacity": {
-      "type": "integer"
-    },
-    "plugin": {
-      "type": "string"
-    },
-    "postlabelcache": {
-      "type": "boolean"
-    },
-    "processing": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "projection": {
-      "$ref": "projection.json"
-    },
-    "requires": {
-      "type": "string"
-    },
-    "scaletoken": {
-      "$ref": "scaletoken.json"
-    },
-    "sizeunits": {
-      "enum": [ "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "pixels" ]
-    },
-    "status": {
-      "type": "string",
-      "enum": [ "on", "off", "default" ]
-    },
-    "styleitem": {
-      "type": "string"
-    },
-    "symbolscaledenom": {
-      "type": "number"
-    },
-    "template": {
-      "type": "string"
-    },
-    "tileindex": {
-      "type": "string"
-    },
-    "tileitem": {
-      "type": "string"
-    },
-    "tilesrs": {
-      "type": "string"
-    },
-    "tolerance": {
-      "type": "number"
-    },
-    "toleranceunits": {
-      "enum": [ "pixels", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "dd" ]
-    },
-    "transparency": {
-      "oneOf": [
-        {
-          "type": "integer"
+        "classitem": {
+            "type": "string"
         },
-        {
-          "enum": [ "alpha" ]
-        }
-      ]
-    },
-    "transform": {
-      "oneOf": [
-        {
-          "type": "boolean"
+        "cluster": {
+            "type": "object"
         },
-        {
-          "$ref": "position.json"
+        "composite": {
+            "type": "object"
+        },
+        "connection": {
+            "type": "string"
+        },
+        "connectiontype": {
+            "enum": [ "contour", "kerneldensity", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
+        },
+        "data": {
+            "type": "string"
+        },
+        "debug": {
+            "$ref": "debug.json"
+        },
+        "dump": {
+            "oneOf": [
+                {
+                    "type": "boolean"
+                },
+                {
+                    "$ref": "onoff.json"
+                }
+            ]
+        },
+        "encoding": {
+            "type": "string"
+        },
+        "extent": {
+            "$ref": "extent.json"
+        },
+        "features": {
+            "type": "array",
+            "items": {
+                "$ref": "feature.json"
+            }            
+        },
+        "filter": {
+            "$ref": "expression.json"
+        },
+        "filteritem": {
+            "type": "string"
+        },
+        "footer": {
+            "type": "string"
+        },
+        "geomtransform": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\((.*?)\\)$"
+                }
+            ]
+        },
+        "grid": {
+            "$ref": "grid.json"
+        },
+        "group": {
+            "type": "string"
+        },
+        "header": {
+            "type": "string"
+        },
+        "join": {
+            "type": "object"
+        },
+        "labelangleitem": {
+            "type": "string"
+        },
+        "labelcache": {
+            "$ref": "onoff.json"
+        },
+        "labelitem": {
+            "type": "string"
+        },
+        "labelmaxscaledenom": {
+            "type": "number"
+        },
+        "labelminscaledenom": {
+            "type": "number"
+        },
+        "labelrequires": {
+            "type": "string"
+        },
+        "labelsizeitem": {
+            "type": "string"
+        },
+        "mask": {
+            "type": "string"
+        },
+        "maxfeatures": {
+            "type": "integer"
+        },
+        "maxgeowidth": {
+            "type": "number"
+        },
+        "maxscaledenom": {
+            "type": "number"
+        },
+        "maxscale": {
+            "type": "number",
+            "metadata": {
+                "deprecated": true,
+                "maxVersion": 5.0
+            }
+        },
+        "metadata": {
+            "$ref": "metadata.json"
+        },
+        "mingeowidth": {
+            "type": "number"
+        },
+        "minscaledenom": {
+            "type": "number"
+        },
+        "minscale": {
+            "type": "number",
+            "metadata": {
+                "deprecated": true,
+                "minVersion": 0,
+                "maxVersion": 5.0
+            }
+        },
+        "name": {
+            "type": "string"
+        },
+        "offsite": {
+            "$ref": "color.json"
+        },
+        "opacity": {
+            "type": "integer"
+        },
+        "plugin": {
+            "type": "string"
+        },
+        "postlabelcache": {
+            "type": "boolean"
+        },
+        "processing": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "projection": {
+            "$ref": "projection.json"
+        },
+        "requires": {
+            "type": "string"
+        },
+        "scaletoken": {
+            "$ref": "scaletoken.json"
+        },
+        "sizeunits": {
+            "enum": [ "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "pixels" ]
+        },
+        "status": {
+            "type": "string",
+            "enum": [ "on", "off", "default" ]
+        },
+        "styleitem": {
+            "type": "string"
+        },
+        "symbolscaledenom": {
+            "type": "number"
+        },
+        "template": {
+            "type": "string"
+        },
+        "tileindex": {
+            "type": "string"
+        },
+        "tileitem": {
+            "type": "string"
+        },
+        "tilesrs": {
+            "type": "string"
+        },
+        "tolerance": {
+            "type": "number"
+        },
+        "toleranceunits": {
+            "enum": [ "pixels", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "dd" ]
+        },
+        "transparency": {
+            "oneOf": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "enum": [ "alpha" ]
+                }
+            ]
+        },
+        "transform": {
+            "oneOf": [
+                {
+                    "type": "boolean"
+                },
+                {
+                    "$ref": "position.json"
+                }
+            ]
+        },
+        "type": {
+            "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query", "annotation" ]
+        },
+        "units": {
+            "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentages", "pixels" ]
+        },
+        "utfdata": {
+            "type": "string"
+        },
+        "utfitem": {
+            "type": "string"
+        },
+        "validation": {
+            "$ref": "validation.json"
         }
-      ]
-    },
-    "type": {
-      "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query", "annotation" ]
-    },
-    "units": {
-      "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentages", "pixels" ]
-    },
-    "utfdata": {
-      "type": "string"
-    },
-    "utfitem": {
-      "type": "string"
-    },
-    "validation": {
-      "$ref": "validation.json"
-    },
-    "required": [ "type" ]
-  }
+    }
 }
