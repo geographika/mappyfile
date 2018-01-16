@@ -2,18 +2,17 @@
     "type": "object",
     "properties": {
         "points": {
-            "type": "array",
-            "items": {
-                "type": "array",
-                "items": {
+            "oneOf": [
+                {
                     "type": "array",
                     "items": {
-                        "type": "number",
-                        "minItems": 2,
-                        "maxItems": 2
+                        "$ref": "points.json"
                     }
+                },
+                {
+                    "$ref": "points.json"
                 }
-            }
+            ]
         },
         "items": {
             "type": "string"
@@ -25,4 +24,4 @@
             "type": "string"
         }
     }
-    }
+}
