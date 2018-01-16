@@ -5,33 +5,37 @@ import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
+from mappyfile.validator import Validator
 
 
-def output(s, use_lalr=True):
+def output(s, include_position=True, schema_name="map"):
     """
-    Parse, transform, and pretty print
+    Parse, transform, validate, and pretty print
     the result
-    Can check both grammars by changing the use_lalr setting
     """
-    p = Parser(use_lalr=use_lalr)
-    m = MapfileToDict()
+    p = Parser()
+    m = MapfileToDict(include_position=include_position)
 
     # https://stackoverflow.com/questions/900392/getting-the-caller-function-name-inside-another-function-in-python
     logging.info(inspect.stack()[1][3])
 
     ast = p.parse(s)
-    logging.debug(ast)
+    logging.debug(ast.pretty())
     d = m.transform(ast)
     logging.debug(json.dumps(d, indent=4))
+    v = Validator()
+    errors = v.validate(d, schema_name=schema_name)
+    logging.error(errors)
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     s = pp.pprint(d)
     logging.debug(s)
+    assert(len(errors) == 0)
     return s
 
 
-def check_result(s):
+def check_result(s, schema_name="map"):
+    s2 = output(s, schema_name=schema_name)
     try:
-        s2 = output(s)
         assert(s == s2)
     except AssertionError:
         logging.info(s)
@@ -40,14 +44,36 @@ def check_result(s):
 
 
 def test_layer():
-    s = "LAYER NAME 'Test' END"
-    check_result(s)
+    s = "LAYER NAME 'Test' TYPE POINT END"
+    check_result(s, schema_name="layer")
 
 
 def test_class():
 
     s = "CLASS NAME 'Test' END"
-    check_result(s)
+    check_result(s, schema_name="class")
+
+
+def test_map_size():
+
+    s = """
+    MAP
+    SIZE 256 256
+    END"""
+
+    exp = "MAP SIZE 256 256 END"
+    assert(output(s) == exp)
+
+
+def test_style_color():
+
+    s = """
+    STYLE
+    COLOR 0 0 255
+    END"""
+
+    exp = "STYLE COLOR 0 0 255 END"
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_style():
@@ -60,14 +86,13 @@ def test_style():
     END"""
 
     exp = "STYLE COLOR 0 0 255 WIDTH 5 LINECAP BUTT END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
-@pytest.mark.xfail
 def test_style_oneline():
 
     s = "STYLE COLOR 0 0 255 WIDTH 5 LINECAP BUTT END"
-    check_result(s)
+    check_result(s, schema_name="style")
 
 
 def test_style_pattern():
@@ -79,7 +104,7 @@ def test_style_pattern():
     """
 
     exp = "STYLE PATTERN 5 5 END END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_style_pattern2():
@@ -93,7 +118,7 @@ def test_style_pattern2():
     """
 
     exp = "STYLE PATTERN 5 5 END END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_style_pattern3():
@@ -102,7 +127,7 @@ def test_style_pattern3():
     """
     s = "STYLE PATTERN 5 5 END END"
     exp = "STYLE PATTERN 5 5 END END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_style_pattern4():
@@ -118,7 +143,7 @@ def test_style_pattern4():
     END
     """
     exp = "STYLE PATTERN 5 5 END END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_style_pattern5():
@@ -133,23 +158,7 @@ def test_style_pattern5():
     END
     """
     exp = "STYLE PATTERN 5.0 5.0 END END"
-    assert(output(s) == exp)
-
-
-@pytest.mark.xfail
-def test_style_pattern_fail():
-    """
-    Test pattern with odd number of values
-    This should fail with the following error message
-    UnexpectedToken: Unexpected token Token(_END, 'END') at line 3, column 27.
-    """
-    s = """
-    STYLE
-        PATTERN 6 4 2 4 6 END
-    END
-    """
-    exp = "STYLE PATTERN 6 4 2 4 6 END END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_metadata():
@@ -162,7 +171,7 @@ def test_metadata():
     END
     """
     exp = """METADATA 'wms_title' 'Test simple wms' END"""
-    assert(output(s) == exp)
+    assert(output(s, schema_name="metadata") == exp)
 
 
 def test_metadata_unquoted():
@@ -177,8 +186,7 @@ def test_metadata_unquoted():
     END
     """
     exp = "METADATA 'wms_title' 'my_title' END"
-    print(output(s))
-    assert(output(s) == exp)
+    assert(output(s, schema_name="metadata") == exp)
 
 
 def test_validation():
@@ -189,11 +197,11 @@ def test_validation():
     VALIDATION
         "field1" "^[0-9,]+$"
         "field2" "-1"
+        qstring '.'
     END
     """
-    print(output(s))
-    exp = """VALIDATION 'field1' '^[0-9,]+$' 'field2' '-1' END"""
-    assert(output(s) == exp)
+    exp = """VALIDATION 'field1' '^[0-9,]+$' 'field2' '-1' 'qstring' '.' END"""
+    assert(output(s, schema_name="validation") == exp)
 
 
 def test_layer_text_query():
@@ -203,7 +211,7 @@ def test_layer_text_query():
     END
     """
     exp = """CLASS TEXT (tostring([area],"%.2f")) END"""
-    assert(output(s) == exp)
+    assert(output(s, schema_name="class") == exp)
 
 
 def test_label():
@@ -219,8 +227,7 @@ def test_label():
     END
     """
     exp = "LABEL COLOR 0 0 0 FONT 'Vera' TYPE TRUETYPE SIZE 8 POSITION AUTO PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
-    print(output(s))
-    assert(output(s) == exp)
+    assert(output(s, schema_name="label") == exp)
 
 
 def test_output_format():
@@ -237,7 +244,6 @@ def test_output_format():
     END
     """
     exp = "MAP IMAGETYPE 'grid' OUTPUTFORMAT NAME 'grid2' DRIVER 'GDAL/AAIGRID' IMAGEMODE INT16 FORMATOPTION 'NULLVALUE=-99' END END"
-    # print(output(s))
     assert(output(s) == exp)
 
 
@@ -252,34 +258,34 @@ def test_class_symbol():
         END
     END
     """
-    print(output(s))
     exp = "CLASS STYLE COLOR 151 151 151 SYMBOL [symbol] OFFSET 2 2 SIZE [size] END END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="class") == exp)
 
 
 def test_filter():
     s = """
     LAYER
+        TYPE POINT
         NAME 'filters_test002'
         FILTER 'aitkin'i
     END
     """
 
-    exp = "LAYER NAME 'filters_test002' FILTER 'aitkin'i END"
-    print(output(s))
-    assert(output(s) == exp)
+    exp = "LAYER TYPE POINT NAME 'filters_test002' FILTER 'aitkin'i END"
+    assert(output(s, schema_name="layer") == exp)
 
 
 def test_regex():
     s = r"""
     LAYER
+        TYPE POINT
         NAME 'regexp-example'
         FILTERITEM 'placename'
         FILTER /hotel/
     END
     """
-    exp = r"LAYER NAME 'regexp-example' FILTERITEM 'placename' FILTER /hotel/ END"
-    assert(output(s) == exp)
+    exp = r"LAYER TYPE POINT NAME 'regexp-example' FILTERITEM 'placename' FILTER /hotel/ END"
+    assert(output(s, schema_name="layer") == exp)
 
 
 def test_feature():
@@ -288,7 +294,25 @@ def test_feature():
     """
 
     s = """
+    FEATURE
+        POINTS
+            0 10
+        END
+    END
+    """
+
+    exp = "FEATURE POINTS 0 10 END END"
+    assert(output(s, schema_name="feature") == exp)
+
+
+def test_multi_feature():
+    """
+    With multiple points
+    """
+
+    s = """
         LAYER
+            TYPE LINE
             FEATURE
                 POINTS
                     0 10
@@ -307,8 +331,34 @@ def test_feature():
         END
     """
 
-    exp = "LAYER FEATURE POINTS 0 10 END POINTS -20 20 20 20 -20 -20 0 -30 20 -20 -20 20 -20 20 30 30 END END END"
-    assert(output(s) == exp)
+    exp = "LAYER TYPE LINE FEATURE POINTS 0 10 END POINTS -20 20 20 20 -20 -20 0 -30 20 -20 -20 20 -20 20 30 30 END END END"
+    assert(output(s, schema_name="layer") == exp)
+
+
+def test_triple_feature():
+    """
+    With multiple points
+    """
+
+    s = """
+    FEATURE
+        POINTS
+            0 10
+            5 2
+        END
+        POINTS
+            0 10
+            3 3
+        END
+        POINTS
+            0 10
+            7 7
+        END
+    END
+    """
+
+    exp = "FEATURE POINTS 0 10 5 2 END POINTS 0 10 3 3 END POINTS 0 10 7 7 END END"
+    assert(output(s, schema_name="feature") == exp)
 
 
 def test_symbol():
@@ -326,8 +376,8 @@ def test_symbol():
         FILLED TRUE
     END
     '''
-    exp = "SYMBOL NAME 'triangle' TYPE VECTOR FILLED TRUE POINTS 0 4 2 0 4 4 0 4 END END"
-    assert(output(s) == exp)
+    exp = "SYMBOL NAME 'triangle' TYPE VECTOR POINTS 0 4 2 0 4 4 0 4 END FILLED TRUE END"
+    assert(output(s, schema_name="symbol") == exp)
 
 
 def test_processing_directive():
@@ -335,14 +385,15 @@ def test_processing_directive():
     s = """
     LAYER
         NAME 'ProcessingLayer'
+        TYPE RASTER
         PROCESSING 'BANDS=1'
         PROCESSING 'CONTOUR_ITEM=elevation'
         PROCESSING 'CONTOUR_INTERVAL=20'
     END
     """
 
-    exp = "LAYER NAME 'ProcessingLayer' PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' END"
-    assert(output(s) == exp)
+    exp = "LAYER NAME 'ProcessingLayer' TYPE RASTER PROCESSING 'BANDS=1' PROCESSING 'CONTOUR_ITEM=elevation' PROCESSING 'CONTOUR_INTERVAL=20' END"
+    assert(output(s, schema_name="layer") == exp)
 
 
 def test_config_directive():
@@ -375,19 +426,20 @@ def test_multiple_composites():
     END
     """
     exp = "CLASS NAME 'Name1' END CLASS NAME 'Name2' END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="class") == exp)
 
 
 def test_map():
     s = """
     MAP
         LAYER
+            TYPE POINT
             NAME 'test'
         END
     END
     """
 
-    exp = "MAP LAYER NAME 'test' END END"
+    exp = "MAP LAYER TYPE POINT NAME 'test' END END"
     assert(output(s) == exp)
 
 
@@ -397,15 +449,16 @@ def test_oneline_composites():
     """
 
     s = """
-    CLASS
+    LAYER
+    TYPE POINT
     PROJECTION "init=epsg:2056"
     END
     END
     """
 
     # put on one line
-    exp = "CLASS PROJECTION 'init=epsg:2056' END END"
-    assert(output(s) == exp)
+    exp = "LAYER TYPE POINT PROJECTION 'init=epsg:2056' END END"
+    assert(output(s, schema_name="class") == exp)
 
 
 def test_querymap():
@@ -431,12 +484,12 @@ def test_output_format_esri():
     OUTPUTFORMAT
         NAME "shapezip"
         DRIVER "OGR/ESRI Shapefile"
-        TRANSPARENT FALSE
+        TRANSPARENT ON
         IMAGEMODE FEATURE
     END
     """
-    exp = "OUTPUTFORMAT NAME 'shapezip' DRIVER 'OGR/ESRI Shapefile' TRANSPARENT FALSE IMAGEMODE FEATURE END"
-    assert(output(s) == exp)
+    exp = "OUTPUTFORMAT NAME 'shapezip' DRIVER 'OGR/ESRI Shapefile' TRANSPARENT ON IMAGEMODE FEATURE END"
+    assert(output(s, schema_name="outputformat") == exp)
 
 
 def test_auto_projection():
@@ -467,7 +520,7 @@ def test_multiple_output_formats():
     END
     """
     exp = "OUTPUTFORMAT FORMATOPTION 'FORM=zip' FORMATOPTION 'SPATIAL_INDEX=YES' END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="outputformat") == exp)
 
 
 def test_config_case():
@@ -491,12 +544,14 @@ def test_no_linebreaks():
     """
     s = "CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"
     exp = "CLASS NAME 'Test' STYLE OUTLINECOLOR 0 0 0 END END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="class") == exp)
 
 
-def test_colorrange():
+def test_hexcolorrange():
     """
     {"colorrange": ["\"#0000ffff\"", "\"#ff0000ff\""], "datarange": [32, 255], "__type__": "style"}
+    heat.map(77) - extra hex characters to account for optional alpha values
+    COLORRANGE "#0000ffff" "#ff0000ff"
     """
     s = """
     STYLE
@@ -505,10 +560,37 @@ def test_colorrange():
     END
     """
     exp = "STYLE COLORRANGE '#0000ffff' '#ff0000ff' DATARANGE 32 255 END"
-    assert(output(s) == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
-# failes with Earley parser
+def test_hexcolorrange2():
+    """
+    Check different hex color formats and results are in lower-case
+    """
+
+    s = """
+    STYLE
+        DATARANGE 32 255
+        COLORRANGE '#FfF' '#Aaa'
+    END
+    """
+    exp = "STYLE DATARANGE 32 255 COLORRANGE '#fff' '#aaa' END"
+    assert(output(s, schema_name="style") == exp)
+
+
+def test_colorrange():
+
+    s = """
+    STYLE
+      COLORRANGE 255 0 0  0 255 0
+      DATARANGE 0.01 0.05
+    END"""
+
+    exp = "STYLE COLORRANGE 255 0 0 0 255 0 DATARANGE 0.01 0.05 END"
+    print(output(s, schema_name="style"))
+    assert(output(s, schema_name="style") == exp)
+
+
 def test_path_numeric():
     """
     Make sure any folder ending with a number is not
@@ -517,29 +599,58 @@ def test_path_numeric():
     s = """
     LAYER
         DATA folder123/file
+        TYPE POINT
     END
     """
-    exp = "LAYER DATA 'folder123/file' END"
-    assert(output(s) == exp)
+    exp = "LAYER DATA 'folder123/file' TYPE POINT END"
+    assert(output(s, schema_name="layer") == exp)
 
 
-@pytest.mark.xfail
-def test_symbol_style():
+def test_class_symbol_style():
     """
-    This works if barb_warm is in quotes
-    It parses successfully but the transform is incorrect
+    barb_warm is not in quotes
     """
     s = """
     CLASS
         STYLE
             INITIALGAP 15
-            SYMBOL barb_warm
+            SYMBOL "barb_warm"
             GAP -45
         END
     END
     """
-    exp = "CLASS STYLE INITIALGAP 15 SYMBOL barb_warm GAP -45 END END"
-    assert(output(s) == exp)
+    exp = "CLASS STYLE INITIALGAP 15 SYMBOL 'barb_warm' GAP -45 END END"
+    assert(output(s, schema_name="class") == exp)
+
+
+def test_symbol_style():
+    """
+    barb_warm is not in quotes
+    """
+    s = """
+    STYLE
+        SYMBOL barb_warm
+    END
+    """
+    exp = "STYLE SYMBOL 'barb_warm' END"
+    assert(output(s, schema_name="class") == exp)
+
+
+@pytest.mark.xfail
+def test_symbol_style2():
+    """
+    barb_warm is not in quotes
+    any attributes after this cause the parser to fail
+    """
+    s = """
+    STYLE
+        SYMBOL barb_warm
+        GAP -45
+        SIZE 8
+    END
+    """
+    exp = "STYLE SYMBOL 'barb_warm' END"
+    assert(output(s, schema_name="class") == exp)
 
 
 def test_extent():
@@ -556,33 +667,33 @@ def test_extent():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_ogr_connection():
 
-    s = """
+    s = r'''
     LAYER
-        CONNECTION "<OGRVRTDataSource><OGRVRTLayer name="poly"><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>"
+        CONNECTION '<OGRVRTDataSource><OGRVRTLayer name="poly"><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>'
+        TYPE POLYGON
     END
-    """
-    exp = """LAYER CONNECTION '<OGRVRTDataSource><OGRVRTLayer name="poly"><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>' END"""
-    print(output(s))
-    assert(output(s) == exp)
+    '''
+    exp = r"""LAYER CONNECTION '<OGRVRTDataSource><OGRVRTLayer name="poly"><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>' TYPE POLYGON END"""
+    assert(output(s, schema_name="layer") == exp)
 
 
-@pytest.mark.xfail
 def test_quoted_data():
+    """
+    Make sure a raw string is used
+    """
 
-    s = """
+    s = r"""
     LAYER
         DATA "the_geom from (select * from road where \"lpoly_\"=3 order by gid) as foo using unique gid using srid=3978"
+        TYPE POLYGON
     END
     """
-    exp = """LAYER DATA 'the_geom from (select * from road where \"lpoly_\"=3 order by gid) as foo using unique gid using srid=3978' END"""
-    print(output(s))
-    assert(output(s) == exp)
+    exp = r"""LAYER DATA 'the_geom from (select * from road where \"lpoly_\"=3 order by gid) as foo using unique gid using srid=3978' TYPE POLYGON END"""
+    assert(output(s, schema_name="layer") == exp)
 
 
-@pytest.mark.xfail
 def test_name_hypens():
 
     s = """
@@ -591,14 +702,11 @@ def test_name_hypens():
     END
     """
     exp = "MAP NAME 'ms-ogc-workshop' END"
-    print(output(s))
     assert(output(s) == exp)
 
 
 def test_multiline_metadata():
-    """
-    Uses Earley
-    """
+
     s = """
     METADATA
     "ows_title" "layer_0"
@@ -607,8 +715,50 @@ def test_multiline_metadata():
     END
     """
     exp = "METADATA 'ows_title' 'layer_0' 'gml_include_items' 'all' END"
-    print(output(s))
-    assert(output(s) == exp)
+    print(output(s, schema_name="metadata"))
+    assert(output(s, schema_name="metadata") == exp)
+
+
+def test_polaroffset():
+
+    s = """
+    STYLE  # polaroffset
+        SYMBOL "arrowhead"
+        COLOR 0 0 0
+        ANGLE [rotation]
+        POLAROFFSET [length_2] [rotation]
+    END"""
+
+    exp = "STYLE SYMBOL 'arrowhead' COLOR 0 0 0 ANGLE [rotation] POLAROFFSET '[length_2]' '[rotation]' END"
+    print(output(s, schema_name="style"))
+    assert(output(s, schema_name="style") == exp)
+
+
+def test_style_hexcolor():
+
+    s = """
+    style
+      color "#888888"
+      outlinecolor "#000000"
+    end
+    """
+
+    exp = "STYLE COLOR '#888888' OUTLINECOLOR '#000000' END"
+    print(output(s, schema_name="style"))
+    assert(output(s, schema_name="style") == exp)
+
+
+def test_escaped_string():
+
+    s = """
+    LAYER
+        FILTER (`[LASTMOD]` > `2010-12-01`)
+        TYPE POINT
+    END
+    """
+    exp = "LAYER FILTER ( `[LASTMOD]` > `2010-12-01` ) TYPE POINT END"
+    print(output(s, schema_name="layer"))
+    assert(output(s, schema_name="layer") == exp)
 
 
 def run_tests():
@@ -622,9 +772,6 @@ def run_tests():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    # test_filter()
-    # test_style_oneline()
-    # test_no_linebreaks()
+    logging.basicConfig(level=logging.DEBUG)
     run_tests()
     print("Done!")

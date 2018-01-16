@@ -58,7 +58,7 @@ END"""
     except UnexpectedToken as ex:
         print(ex.__dict__)
         assert(ex.line == 4)
-        assert(ex.column == 1)
+        assert(ex.column == 0)
         assert(str(ex.token) == 'END')
 
 
@@ -81,8 +81,24 @@ END"""
     except UnexpectedToken as ex:
         print(ex.__dict__)
         assert(ex.line == 7)
-        assert(ex.column == 4)
+        assert(ex.column == 0)
         assert(str(ex.token) == 'END')
+
+
+@pytest.mark.xfail
+def test_style_pattern_fail():
+    """
+    Test pattern with odd number of values
+    This should fail with the following error message
+    UnexpectedToken: Unexpected token Token(_END, 'END') at line 3, column 27.
+    """
+    s = """
+    STYLE
+        PATTERN 6 4 2 4 6 END
+    END
+    """
+    exp = "STYLE PATTERN 6 4 2 4 6 END END"
+    assert(output(s, schema_name="style") == exp)
 
 
 def run_tests():
@@ -97,6 +113,5 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-    test_missing_end()
-    # run_tests()
+    run_tests()
     print("Done!")

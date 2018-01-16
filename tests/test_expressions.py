@@ -291,13 +291,13 @@ def test_divide_expression():
 def test_escaped_string():
     """
     http://mapserver.org/mapfile/expressions.html#quotes-escaping-in-strings
-    Extra spaces currently added
     Starting with MapServer 6.0 you don't need to escape single quotes within double quoted strings
     and you don't need to escape double quotes within single quoted strings
     """
-    s = """
+
+    s = r"""
     CLASS
-        EXPRESSION "National \\"hero\\" statue"
+        EXPRESSION "National \"hero\" statue"
     END
     """
     exp = """CLASS EXPRESSION 'National \\"hero\\" statue' END"""
@@ -337,6 +337,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # test_multiply()
-    run_tests()
+    test_escaped_string()
+    # run_tests()
     print("Done!")

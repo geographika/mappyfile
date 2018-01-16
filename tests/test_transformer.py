@@ -2,9 +2,6 @@ import json
 import pytest
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
-from mappyfile.ordereddict import DefaultOrderedDict
-# from lark.lexer import Token
-# from lark.tree import Tree
 
 
 def test_processing_directive():
@@ -63,16 +60,6 @@ def test_metadata():
     assert(d["metadata"]["wms_enable_request"] == "*")
 
 
-def test_metadata_dict():
-
-    vals = [['wms_enable_request', '*'], ['ms_enable_modes', '!*']]
-    t = MapfileToDict()
-    res = t.metadata(vals)
-    assert(res[0] == 'composite')
-    assert(res[1] == 'metadata')
-    assert(len(res[2].items()) == 2)
-
-
 def test_scaletoken():
 
     s = """
@@ -87,6 +74,7 @@ def test_scaletoken():
 
     p = Parser()
     ast = p.parse(s)
+    print(ast.pretty())
     t = MapfileToDict()
     d = t.transform(ast)
     print(d)
@@ -102,9 +90,11 @@ def test_layerlist():
     MAP
         LAYER
             NAME "Layer1"
+            TYPE LINE
         END
         LAYER
             NAME "Layer2"
+            TYPE LINE
         END
     END
     """
@@ -118,17 +108,6 @@ def test_layerlist():
     # print(dict(d["metadata"]))
     assert(len(d["layers"]) == 2)
     assert(d["layers"][0]["name"] == "Layer1")
-
-
-def test_config_settings():
-
-    d = DefaultOrderedDict(DefaultOrderedDict)
-    t = MapfileToDict()
-    t.config_settings(d, "config", ["MS_NONSQUARE", "YES"])
-    t.config_settings(d, "config", ["ON_MISSING_DATA", "FAIL"])
-    print(json.dumps(d, indent=4))
-    assert(len(d["config"].items()) == 2)
-    assert(d["config"]["on_missing_data"] == "FAIL")
 
 
 def test_expression():
@@ -221,7 +200,7 @@ def test_points():
     """
     p = Parser()
     ast = p.parse(s)
-    t = MapfileToDict()
+    t = MapfileToDict(include_position=True)
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
     assert(len(d["points"]) == 2)
@@ -247,7 +226,6 @@ def test_pattern():
     assert(d["pattern"][0][0] == 10)
 
 
-@pytest.mark.xfail
 def test_oneline_label():
 
     s = """
@@ -255,7 +233,7 @@ def test_oneline_label():
       type truetype size 8 font "default"
     end
     """
-    p = Parser(use_lalr=True)
+    p = Parser()
     ast = p.parse(s)
     t = MapfileToDict()
     d = t.transform(ast)
@@ -271,6 +249,7 @@ def test_boolean():
     s = """
     LAYER
         TRANSFORM TRUE
+        TYPE POINT
     END
     """
     p = Parser()
@@ -303,7 +282,7 @@ def test_multiple_layer_projection():
     """
     p = Parser()
     ast = p.parse(s)
-    t = MapfileToDict()
+    t = MapfileToDict(include_position=True)
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
     assert(len(d["projection"]) == 1)
@@ -321,12 +300,38 @@ def test_multiple_layer_projection():
     return v.validate(d)
 
 
+def test_token_positions():
+
+    s = """
+    MAP
+        SIZE 600 600
+        LAYER
+            NAME "Test"
+            TYPE POLYGON
+        END
+    END
+    """
+    p = Parser()
+    ast = p.parse(s)
+    t = MapfileToDict()
+    d = t.transform(ast)
+    print(json.dumps(d, indent=4))
+
+    p = Parser()
+    m = MapfileToDict()
+
+    ast = p.parse(s)
+    d = m.transform(ast)
+
+    print(json.dumps(d, indent=4))
+
+
 def run_tests():
     # pytest.main(["tests/test_transformer.py::test_config_directive"])
     pytest.main(["tests/test_transformer.py"])
 
 
 if __name__ == '__main__':
-    run_tests()
     # test_multiple_layer_projection()
+    run_tests()
     print("Done!")

@@ -151,7 +151,8 @@ def test_config_validation():
         CONFIG ON_MISSING_DATA IGNORE
     END
     """
-    assert(validate(s))
+    errors = validate(s)
+    assert(len(errors) == 0)
 
 
 def test_color_validation():
@@ -160,7 +161,8 @@ def test_color_validation():
         IMAGECOLOR 255 255 255
     END
     """
-    assert(validate(s))
+    errors = validate(s)
+    assert(len(errors) == 0)
 
 
 def test_color_validation_fail():
@@ -169,7 +171,8 @@ def test_color_validation_fail():
         IMAGECOLOR 255 255 256
     END
     """
-    assert(not validate(s))
+    errors = validate(s)
+    assert(len(errors) == 1)
 
 
 def test_hexcolor_validation():
@@ -178,7 +181,8 @@ def test_hexcolor_validation():
         IMAGECOLOR '#FF00FF'
     END
     """
-    assert(validate(s))
+    errors = validate(s)
+    assert(len(errors) == 0)
 
 
 def test_hexcolor_validation_fail():
@@ -187,7 +191,8 @@ def test_hexcolor_validation_fail():
         IMAGECOLOR 'FF00FF'
     END
     """
-    assert(not validate(s))
+    errors = validate(s)
+    assert(len(errors) == 1)
 
 
 def test_lowercase():
@@ -259,6 +264,7 @@ def test_add_messages():
         IMAGECOLOR 'FF00FF'
         LAYER
             EXTENT 0 0 0
+            TYPE POLYGON
         END
     END
     """
@@ -267,11 +273,13 @@ def test_add_messages():
     errors = v.validate(d, add_messages=True)
 
     print(len(errors))
+    print(json.dumps(d, indent=4))
 
     for error in errors:
         print(error.__dict__)
 
     pp = PrettyPrinter(indent=4, quote='"')  # expected
+
     res = pp.pprint(d)
     print(res)
 
@@ -287,8 +295,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    # main()
-    # test_lowercase()
-    # run_tests()
-    test_add_messages()
+    run_tests()
+    # test_add_messages()
     print("Done!")
