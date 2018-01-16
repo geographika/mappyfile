@@ -387,12 +387,12 @@ class MapfileToDict(Transformer):
 
     def and_test(self, t):
         assert(len(t) == 2)
-        t[0].value = "( {} and {} )".format(t[0].value, t[1].value)
+        t[0].value = "( {} AND {} )".format(t[0].value, t[1].value)
         return t[0]
 
     def or_test(self, t):
         assert(len(t) == 2)
-        t[0].value = "( {} or {} )".format(t[0].value, t[1].value)
+        t[0].value = "( {} OR {} )".format(t[0].value, t[1].value)
         return t[0]
 
     def compare_op(self, t):
@@ -401,7 +401,7 @@ class MapfileToDict(Transformer):
 
     def not_expression(self, t):
         v = t[0]
-        v.value = "not {}".format(v.value)
+        v.value = "NOT {}".format(v.value)
         return v
 
     def expression(self, t):
