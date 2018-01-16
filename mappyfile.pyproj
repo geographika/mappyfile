@@ -5,13 +5,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_transformer.py</StartupFile>
+    <StartupFile>tests\test_snippets.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>{fad84a32-0226-4532-a164-c8103b59a949}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,7 @@
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
     <Content Include=".travis.yml" />
+    <Content Include="docs\comments.rst" />
     <Content Include="docs\examples\animation\animated_buffer.map" />
     <Content Include="docs\examples\geometry\geometry.map" />
     <Content Include="docs\grammar.rst" />
@@ -103,11 +105,11 @@
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
-    <Content Include="mappyfile\mapfile.earley.g" />
     <Content Include="mappyfile\mapfile.lalr.g" />
     <Content Include="mappyfile\schemas\expression.json">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="mappyfile\schemas\points.json" />
     <Content Include="mappyfile\schemas\web.json" />
     <Content Include="mappyfile\schemas\validation.json" />
     <Content Include="mappyfile\schemas\metadata.json" />
@@ -528,6 +530,9 @@
     <Compile Include="docs\scripts\xsdschema.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="mappyfile\linter.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyfile\ordereddict.py">
       <SubType>Code</SubType>
     </Compile>
@@ -550,6 +555,10 @@
     <Compile Include="misc\test_docs_parser.py" />
     <Compile Include="misc\__init__.py" />
     <Compile Include="setup.py" />
+    <Compile Include="tests\test_comments.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_errors.py" />
     <Compile Include="tests\test_expressions.py">
       <SubType>Code</SubType>
     </Compile>
@@ -566,6 +575,7 @@
     <Compile Include="tests\test_sample_maps.py" />
     <Compile Include="tests\test_snippets.py" />
     <Compile Include="tests\test_transformer.py" />
+    <Compile Include="tests\test_linter.py" />
     <Compile Include="tests\test_validation.py">
       <SubType>Code</SubType>
     </Compile>
@@ -574,6 +584,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
+      <Id>{fad84a32-0226-4532-a164-c8103b59a949}</Id>
+      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
+      <Version>2.7</Version>
+      <Description>mappyfile (Python 64-bit 2.7)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <LibraryPath>Lib\</LibraryPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>Amd64</Architecture>
+    </Interpreter>
     <Interpreter Include="C:\VirtualEnvs\mappyfile3\">
       <Id>mappyfile3</Id>
       <Version>3.6</Version>
