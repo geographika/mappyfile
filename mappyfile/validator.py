@@ -94,6 +94,10 @@ class Validator(object):
                 d = d[p]
             else:
                 d = d.setdefault(p, {})
+
+        if "__comments__" not in d.keys():
+            d["__comments__"] = OrderedDict()
+
         d["__comments__"][key] = comment
 
     def add_messages(self, d, errors):
