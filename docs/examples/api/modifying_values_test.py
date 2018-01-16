@@ -15,7 +15,6 @@ def test():
     # note key names can be lower or upper case
 
     mapfile["config"]["ms_errorfile"] = "/ms4w/tmp/ms_error.txt"
-    mapfile["config"]["in_missing_data"] = "IGNORE"
 
     # update the web metadata settings
 

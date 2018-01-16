@@ -44,3 +44,8 @@ For non-case-sensitive attributes may need to enforce lower case on all keywords
 ``CONFIG`` keywords (see http://mapserver.org/mapfile/map.html) have many MapServer and GDAL options, so won't validate these. 
 
 Alert deprecated keywords? This appears to be a suggested feature of JSON Schema, see https://github.com/json-schema-org/json-schema-spec/pull/173. 
+
+..
+	Examples of snippets and validating against sub-schemas
+
+	additionalProperties true to allow for metadata such as __position__

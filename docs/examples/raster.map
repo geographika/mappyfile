@@ -2,6 +2,7 @@ MAP
     MAXSIZE 4096 # allow for images greater than 2048x2048 pixels to be generated
     EXTENT -180 -90 180 90    
     NAME "MyMap"
+    CONFIG ON_MISSING_DATA LOG
     # START WEB METADATA
     WEB
         METADATA

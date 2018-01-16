@@ -52,4 +52,8 @@ e.g. LAYERs, CLASSes, STYLEs
 
 ..
     + Could make use of https://github.com/bcj/AttrDict to allow property-like access to dictionary objects (see proposed API examples below)?
-	
+
+..
+    To viiew output
+    import json
+    print(json.dumps(mapfile, indent=4))	

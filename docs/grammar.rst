@@ -177,3 +177,16 @@ The full Mapfile grammar is shown below.
 
 .. literalinclude:: ../mappyfile/mapfile.g
    :language: javascript
+
+..
+	Questions: Why bare_string and bare_string2?
+	_rule - means no function in transformer??
+
+	Ambiguities:
+
+	SYMBOL "Name" 
+
+	QUERYMAP
+		STYLE HILIYE
+
+	Style is also a composite
