@@ -1,7 +1,7 @@
 colorama
 docutils
 flake8
-lark-parser
+lark-parser>=0.5.2
 pluggy
 py
 pydot
