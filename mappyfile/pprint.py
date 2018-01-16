@@ -6,6 +6,7 @@ from mappyfile.validator import Validator
 
 log = logging.getLogger("mappyfile")
 
+
 PY2 = sys.version_info[0] < 3
 if PY2:
     str = unicode # NOQA
@@ -152,7 +153,7 @@ class PrettyPrinter(object):
         lines = []
 
         for k, v in d.items():
-            if k == "__comments__":
+            if k in ("__comments__", "__position__"):
                 pass
             elif k != "__type__":
                 k = self.quoter.add_quotes(k)
@@ -267,7 +268,7 @@ class PrettyPrinter(object):
             else:
                 lines += self._format(composite)
 
-        result = self.newlinechar.join(lines) # no comments
+        result = self.newlinechar.join(lines)
         return result
 
     def get_attribute_properties(self, type_, attr):
@@ -333,7 +334,7 @@ class PrettyPrinter(object):
                 options_list = attr_props["oneOf"]
             else:
                 options_list = attr_props["anyOf"]
-            if isinstance(value, (str)):
+            if self.quoter.is_string(value):
                 if self.quoter.in_parenthesis(value):
                     pass
                 elif self.quoter.in_brackets(value) and attr != "text":
@@ -373,7 +374,7 @@ class PrettyPrinter(object):
         return "{}# {}".format(spacer, value)
 
     def process_comment(self, comments, key):
-        
+
         if key not in comments:
             comment = ""
         else:
@@ -412,7 +413,7 @@ class PrettyPrinter(object):
             lines.append(s)
 
         for attr, value in composite.items():
-            if attr in ("__type__", "__comments__"):
+            if attr in ("__type__", "__comments__", "__position__"):
                 # skip hidden attributes
                 continue
             elif self.is_hidden_container(attr, value):
