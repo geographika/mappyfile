@@ -72,7 +72,6 @@ func_params: value ("," value)*
             | "CLUSTER"i
             | "COMPOSITE"i
             | "FEATURE"i
-            | "FONTSET"i
             | "GRID"i
             | "JOIN"i
             | "LABEL"i
