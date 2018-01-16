@@ -1,209 +1,209 @@
 {
-  "type": "object",
-  "properties": {
-    "align": {
-      "type": "string",
-      "enum": [ "left", "center", "right" ],
-      "additionalProperties": false
-    },
-    "angle": {
-      "oneOf": [
-        {
-          "type": "string",
-          "enum": [ "auto", "auto2", "follow" ],
-          "additionalProperties": false
+    "type": "object",
+    "properties": {
+        "align": {
+            "type": "string",
+            "enum": [ "left", "center", "right" ],
+            "additionalProperties": false
         },
-        {
-          "type": "number"
+        "angle": {
+            "oneOf": [
+                {
+                    "type": "string",
+                    "enum": [ "auto", "auto2", "follow" ],
+                    "additionalProperties": false
+                },
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
         },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "antialias": {
-      "type": "boolean"
-    },
-    "backgroundcolor": {
-      "$ref": "color.json"
-    },
-    "buffer": {
-      "type": "integer"
-    },
-    "color": {
-      "oneOf": [
-        { "$ref": "color.json" },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "encoding": {
-      "type": "string"
-    },
-    "expression": {
-      "$ref": "expression.json"
-    },
-    "font": {
-      "oneOf": [
-        {
-          "type": "string"
+        "antialias": {
+            "type": "boolean"
         },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "force": {
-      "type": "boolean"
-    },
-    "maxlength": {
-      "type": "integer"
-    },
-    "maxoverlapangle": {
-      "type": "number"
-    },
-    "maxscaledenom": {
-      "type": "number"
-    },
-    "maxsize": {
-      "type": "integer"
-    },
-    "mindistance": {
-      "type": "integer"
-    },
-    "minfeaturesize": {
-      "oneOf": [
-        {
-          "type": "string",
-          "pattern": "^auto$"
+        "backgroundcolor": {
+            "$ref": "color.json"
         },
-        {
-          "type": "integer"
-        }
-      ]
-    },
-    "minscaledenom": {
-      "type": "number"
-    },
-    "minsize": {
-      "type": "integer"
-    },
-    "offset": {
-      "type": "array",
-      "items": {
-        "type": "number"
-      },
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "outlinecolor": {
-      "oneOf": [
-        { "$ref": "color.json" },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "outlinewidth": {
-      "type": "integer"
-    },
-    "partials": {
-      "type": "boolean"
-    },
-    "position": {
-      "oneOf": [
-        { "enum": [ "auto" ] },
-        {
-          "$ref": "position.json"
-        }
-      ]
-    },
-    "priority": {
-      "oneOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
-        }
-      ]
-    },
-    "repeatdistance": {
-      "type": "integer"
-    },
-    "shadowcolor": {
-      "$ref": "color.json"
-    },
-    "shadowsize": {
-      "oneOf": [
-        {
-          "type": "array",
-          "items": {
+        "buffer": {
             "type": "integer"
-          },
-          "minItems": 2,
-          "maxItems": 2
         },
-        {
-          "type": "array",
-          "items": [
-            {
-              "type": "integer"
+        "color": {
+            "oneOf": [
+                { "$ref": "color.json" },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "encoding": {
+            "type": "string"
+        },
+        "expression": {
+            "$ref": "expression.json"
+        },
+        "font": {
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "force": {
+            "type": "boolean"
+        },
+        "maxlength": {
+            "type": "integer"
+        },
+        "maxoverlapangle": {
+            "type": "number"
+        },
+        "maxscaledenom": {
+            "type": "number"
+        },
+        "maxsize": {
+            "type": "integer"
+        },
+        "mindistance": {
+            "type": "integer"
+        },
+        "minfeaturesize": {
+            "oneOf": [
+                {
+                    "type": "string",
+                    "pattern": "^auto$"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        },
+        "minscaledenom": {
+            "type": "number"
+        },
+        "minsize": {
+            "type": "integer"
+        },
+        "offset": {
+            "type": "array",
+            "items": {
+                "type": "number"
             },
-            {
-              "type": "string",
-              "pattern": "^[(.*?)]$",
-              "description": "attribute"
-            }
-          ],
-          "minItems": 2,
-          "maxItems": 2
-        }
-      ]
-    },
-    "size": {
-      "oneOf": [
-        {
-          "type": "integer"
+            "minItems": 2,
+            "maxItems": 2
         },
-        {
-          "type": "string",
-          "enum": [ "tiny", "small", "medium", "large", "giant" ],
-          "additionalProperties": false
+        "outlinecolor": {
+            "oneOf": [
+                { "$ref": "color.json" },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
         },
-        {
-          "type": "string",
-          "pattern": "^[(.*?)]$",
-          "description": "attribute"
+        "outlinewidth": {
+            "type": "integer"
+        },
+        "partials": {
+            "type": "boolean"
+        },
+        "position": {
+            "oneOf": [
+                { "enum": [ "auto" ] },
+                {
+                    "$ref": "position.json"
+                }
+            ]
+        },
+        "priority": {
+            "oneOf": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "repeatdistance": {
+            "type": "integer"
+        },
+        "shadowcolor": {
+            "$ref": "color.json"
+        },
+        "shadowsize": {
+            "oneOf": [
+                {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                {
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string",
+                            "pattern": "^\\[(.*?)\\]$",
+                            "description": "attribute"
+                        }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                }
+            ]
+        },
+        "size": {
+            "oneOf": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "string",
+                    "enum": [ "tiny", "small", "medium", "large", "giant" ],
+                    "additionalProperties": false
+                },
+                {
+                    "type": "string",
+                    "pattern": "^\\[(.*?)\\]$",
+                    "description": "attribute"
+                }
+            ]
+        },
+        "style": {
+            "$ref": "style.json"
+        },
+        "text": {
+            "$ref": "expression.json"
+        },
+        "type": {
+            "type": "string",
+            "enum": [ "bitmap", "truetype" ],
+            "additionalProperties": false
+        },
+        "wrap": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1
         }
-      ]
-    },
-    "style": {
-      "$ref": "style.json"
-    },
-    "text": {
-      "$ref": "expression.json"
-    },
-    "type": {
-      "type": "string",
-      "enum": [ "bitmap", "truetype" ],
-      "additionalProperties": false
-    },
-    "wrap": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 1
     }
-  }
 }
