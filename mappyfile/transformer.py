@@ -100,7 +100,7 @@ class MapfileToDict(Transformer):
         return d
 
     def get_single_key(self, d):
-        keys = d.keys()
+        keys = list(d.keys())  # convert to list for py3
         assert(len(keys) == 1)
         return keys[0]
 
@@ -381,7 +381,7 @@ class MapfileToDict(Transformer):
         parts = [str(p.value) for p in t]
         v = " ".join(parts)
 
-        v = "( %s )" % v
+        v = "( {} )".format(v)
         t[0].value = v
         return t[0]
 
@@ -401,11 +401,12 @@ class MapfileToDict(Transformer):
 
     def not_expression(self, t):
         v = t[0]
-        v.value = "not %s" % v.value
+        v.value = "not {}".format(v.value)
         return v
 
     def expression(self, t):
-        exp = " ".join([v.value for v in t])
+
+        exp = " ".join([str(v.value) for v in t])  # convert to string for boolean expressions e.g. (true)
 
         if not self.quoter.in_parenthesis(exp):
             t[0].value = "({})".format(exp)
@@ -446,7 +447,7 @@ class MapfileToDict(Transformer):
     def attr_bind(self, t):
         assert(len(t) == 1)
         t = t[0]
-        t.value = "[%s]" % t.value
+        t.value = "[{}]".format(t.value)
         return t
 
     def extent(self, t):
