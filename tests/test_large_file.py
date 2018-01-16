@@ -21,7 +21,9 @@ def output(fn):
     ast = p.parse_file(fn)
     # print(ast)
     d = m.transform(ast)
-    assert(v.validate(d))
+
+    errors = v.validate(d)
+    assert(len(errors) == 0)
 
     output_file = fn + ".map"
 
@@ -36,7 +38,8 @@ def output(fn):
     ast = p.parse_file(output_file)
     d = m.transform(ast)
 
-    assert(v.validate(d))
+    errors = v.validate(d)
+    assert(len(errors) == 0)
 
 
 def main():
