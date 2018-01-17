@@ -215,7 +215,6 @@ class PrettyPrinter(object):
 
         return lines
 
-    
     def format_repeated_pair_list(self, key, root_list, level):
         """
         Process (possibly) repeated lists of pairs e.g. POINTs blocks
