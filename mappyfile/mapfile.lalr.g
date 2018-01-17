@@ -57,7 +57,7 @@ expression: "(" or_test ")"
 ?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? add
 !compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" 
-| "<=" | "IN" | "NE" | "EQ" | "LE" | "LT" | "GE" | "GT"
+| "<=" | "IN"i | "NE"i | "EQ"i | "LE"i | "LT"i | "GE"i | "GT"i
 
 ?add: (add "+")? (func_call | value)
 // ?multiply: (multiply "*")? (func_call | value)

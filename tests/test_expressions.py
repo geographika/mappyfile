@@ -338,6 +338,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_escaped_string()
-    # run_tests()
+    # test_escaped_string()
+    run_tests()
     print("Done!")
