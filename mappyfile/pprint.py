@@ -215,13 +215,17 @@ class PrettyPrinter(object):
 
         return lines
 
+    
     def format_repeated_pair_list(self, key, root_list, level):
         """
         Process (possibly) repeated lists of pairs e.g. POINTs blocks
         """
 
         lines = []
-        depth = lambda L: isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+
+        def depth(L):
+            return isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+
         if depth(root_list) == 2:
             # single set of points only
             root_list = [root_list]

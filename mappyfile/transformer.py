@@ -169,7 +169,10 @@ class MapfileToDict(Transformer):
                         # if points are already in a feature then
                         # allow for multipart features in a nested list
                         existing_points = composite_dict[key_name]
-                        depth = lambda L: isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+
+                        def depth(L):
+                            return isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+
                         if depth(existing_points) == 2:
                             composite_dict[key_name] = [existing_points]
                         composite_dict[key_name].append(d[key_name])
