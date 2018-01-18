@@ -11,3 +11,4 @@ pytest-cov
 tox
 virtualenv
 jsonschema
+glob2

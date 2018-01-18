@@ -1,12 +1,13 @@
 import logging
 import os
 import cProfile
-import glob
+import glob2
 import json
 import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.validator import Validator
+import pytest
 
 
 def output(fn):
@@ -21,6 +22,7 @@ def output(fn):
     ast = p.parse_file(fn)
     # print(ast)
     d = m.transform(ast)
+    logging.debug("Number of layers: {}".format(len(d["layers"])))
 
     errors = v.validate(d)
     assert(len(errors) == 0)
@@ -28,27 +30,29 @@ def output(fn):
     output_file = fn + ".map"
 
     try:
-        mappyfile.utils.write(d, output_file)
+        s = mappyfile.utils.dumps(d)
     except Exception:
         logging.warning(json.dumps(d, indent=4))
         logging.warning("%s could not be successfully re-written", fn)
         raise
 
     # now try reading it again
-    ast = p.parse_file(output_file)
+    ast = p.parse(s)
     d = m.transform(ast)
 
     errors = v.validate(d)
     assert(len(errors) == 0)
 
 
-def main():
+def test_maps():
     sample_dir = os.path.join(os.path.dirname(__file__), "mapfiles")
-    mapfiles = glob.glob(sample_dir + '/*.txt')
+    pth = sample_dir + '/**/*.map'
+    mapfiles = glob2.glob(pth)
+    print(pth)
     # mapfiles = ["map4.txt"]
 
     for fn in mapfiles:
-        print("Processing {}".format(fn))
+        logging.info("Processing {}".format(fn))
         fn = os.path.join(sample_dir, fn)
         pr = cProfile.Profile()
         pr.enable()
@@ -57,7 +61,11 @@ def main():
         # pr.print_stats(sort='time')
 
 
+def run_tests():
+    pytest.main(["tests/test_map_collection.py"])
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    main()
+    run_tests()
     print("Done!")

@@ -1,0 +1,3 @@
+[submodule "tests/mapfiles/ms-ogc-workshop"]
+	path = tests/mapfiles/ms-ogc-workshop
+	url = https://github.com/mapserver/ms-ogc-workshop
