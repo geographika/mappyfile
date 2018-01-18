@@ -27,8 +27,6 @@ def output(fn):
     errors = v.validate(d)
     assert(len(errors) == 0)
 
-    output_file = fn + ".map"
-
     try:
         s = mappyfile.utils.dumps(d)
     except Exception:
