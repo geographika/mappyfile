@@ -8,7 +8,7 @@ class CaseInsensitiveOrderedDict(OrderedDict):
     """
     @classmethod
     def _k(cls, key):
-        return key.lower() if isinstance(key, basestring) else key
+        return key.lower() if isinstance(key, (bytes, str)) else key
 
     def __init__(self, *args, **kwargs):
         super(CaseInsensitiveOrderedDict, self).__init__(*args, **kwargs)
