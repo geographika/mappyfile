@@ -58,9 +58,9 @@ def test_empty_config_directive():
     ast = p.parse(s)
     t = MapfileToDict()
     d = t.transform(ast)
-    d["config"]["MS_ERRORFILE"] = "stderr"
+    d["config"]["ms_errorfile"] = "stderr"
     print(json.dumps(d, indent=4))
-    # assert(d["config"]["MS_ERRORFILE"] == "stderr") # will be a missing key
+    assert(d["config"]["ms_errorfile"] == "stderr")
 
 
 def test_metadata():
