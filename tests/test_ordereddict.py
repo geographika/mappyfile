@@ -83,7 +83,7 @@ def test_false_value():
     d = DefaultOrderedDict(DefaultOrderedDict)
     d["key"] = False
     print(json.dumps(d, indent=4))
-    assert(d["key"] == False)
+    assert(d["key"] is False)
 
 
 def test_case_sensitive_ordered_dict():
