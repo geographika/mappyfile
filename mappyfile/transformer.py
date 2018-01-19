@@ -127,7 +127,7 @@ class MapfileToDict(Transformer):
             attribute_dicts = [attribute_dicts]
 
         key_name = self.key_name(key_token)
-        composite_dict = DefaultOrderedDict(list)
+        composite_dict = DefaultOrderedDict(DefaultOrderedDict)
         composite_dict["__type__"] = key_name
 
         if self.include_position:
@@ -141,8 +141,11 @@ class MapfileToDict(Transformer):
                 if k in SINGLETON_COMPOSITE_NAMES:
                     composite_dict[k] = d
                 else:
-                    k = self.plural(k)
-                    composite_dict[k].append(d)  # by default a list is created
+                    plural_key = self.plural(k)
+                    if plural_key not in composite_dict.keys():
+                        composite_dict[plural_key] = [d]
+                    else:
+                        composite_dict[plural_key].append(d)
             else:
                 #  simple attribute
                 pos = d.pop("__position__")
@@ -150,10 +153,14 @@ class MapfileToDict(Transformer):
                 key_name = self.get_single_key(d)
 
                 if key_name == "config":
+                    # there may be several config dicts - one for each setting
                     if key_name not in composite_dict.keys():
-                        composite_dict[key_name] = DefaultOrderedDict()
-
-                    composite_dict[key_name].update(d[key_name])
+                        # create an initial OrderedDict
+                        composite_dict[key_name] = OrderedDict(list(d[key_name].items()))
+                    else:
+                        # populate the existing config dict
+                        cfg_dict = composite_dict[key_name]
+                        cfg_dict.update(d[key_name])
 
                     if self.include_position:
                         if key_name not in pd.keys():
@@ -175,7 +182,11 @@ class MapfileToDict(Transformer):
 
                         if depth(existing_points) == 2:
                             composite_dict[key_name] = [existing_points]
-                        composite_dict[key_name].append(d[key_name])
+
+                        if key_name not in composite_dict.keys():
+                            composite_dict[key_name] = [d[key_name]]
+                        else:
+                            composite_dict[key_name].append(d[key_name])
 
                     if self.include_position:
                         if key_name not in pd.keys():
@@ -188,9 +199,9 @@ class MapfileToDict(Transformer):
 
                 elif key_name in ("processing", "formatoption", "include"):
                     if key_name not in composite_dict.keys():
-                        composite_dict[key_name] = []
-                    # add a list of values
-                    composite_dict[key_name].append(d[key_name])
+                        composite_dict[key_name] = [d[key_name]]
+                    else:
+                        composite_dict[key_name].append(d[key_name])
 
                     if self.include_position:
                         if key_name not in pd.keys():
@@ -241,14 +252,8 @@ class MapfileToDict(Transformer):
 
         if len(value_tokens) > 1:
             if key_name == "config":
-                config_dict = DefaultOrderedDict()
-                pairs = list(zip(value_tokens[::2], value_tokens[1::2]))
-                pairs = [(v[0].value, v[1].value) for v in pairs]
-                # TODO dict comprehension
-                for p in pairs:
-                    config_dict[p[0]] = p[1]
-
-                values = config_dict
+                assert(len(value_tokens) == 2)
+                values = {value_tokens[0].value: value_tokens[1].value}
             else:
                 # list of values
                 values = [v.value for v in value_tokens]

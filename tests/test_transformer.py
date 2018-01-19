@@ -42,6 +42,27 @@ def test_config_directive():
     assert(len(d["config"]) == 3)
 
 
+def test_empty_config_directive():
+    """
+    Check that a config dict can be added directly without
+    needing to create a new dict separately
+    """
+
+    s = """
+    MAP
+        NAME 'ConfigMap'
+    END
+    """
+
+    p = Parser()
+    ast = p.parse(s)
+    t = MapfileToDict()
+    d = t.transform(ast)
+    d["config"]["MS_ERRORFILE"] = "stderr"
+    print(json.dumps(d, indent=4))
+    assert(d["config"]["MS_ERRORFILE"] == "stderr")
+    assert(d["config"]["ms_errorfile"] == "stderr")
+
 def test_metadata():
 
     s = """
@@ -332,6 +353,6 @@ def run_tests():
 
 
 if __name__ == '__main__':
-    # test_multiple_layer_projection()
-    run_tests()
+    test_empty_config_directive()
+    # run_tests()
     print("Done!")

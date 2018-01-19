@@ -774,5 +774,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
+    # test_config_directive()
     run_tests()
     print("Done!")
