@@ -9,7 +9,7 @@ from lark import Transformer
 from lark.lexer import Token
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES
-from mappyfile.ordereddict import DefaultOrderedDict
+from mappyfile.ordereddict import DefaultOrderedDict, CaseInsensitiveOrderedDict
 from mappyfile.pprint import Quoter
 
 
@@ -127,7 +127,7 @@ class MapfileToDict(Transformer):
             attribute_dicts = [attribute_dicts]
 
         key_name = self.key_name(key_token)
-        composite_dict = DefaultOrderedDict(DefaultOrderedDict)
+        composite_dict = DefaultOrderedDict(CaseInsensitiveOrderedDict)
         composite_dict["__type__"] = key_name
 
         if self.include_position:
@@ -156,7 +156,7 @@ class MapfileToDict(Transformer):
                     # there may be several config dicts - one for each setting
                     if key_name not in composite_dict.keys():
                         # create an initial OrderedDict
-                        composite_dict[key_name] = DefaultOrderedDict(DefaultOrderedDict)
+                        composite_dict[key_name] = CaseInsensitiveOrderedDict()
                     # populate the existing config dict
                     cfg_dict = composite_dict[key_name]
                     cfg_dict.update(d[key_name])
@@ -310,7 +310,7 @@ class MapfileToDict(Transformer):
 
         # d = OrderedDict(zip(keys, vals))
 
-        d = OrderedDict(((self.clean_string(t[0].value), self.clean_string(t[1].value))
+        d = CaseInsensitiveOrderedDict(((self.clean_string(t[0].value), self.clean_string(t[1].value))
                          for t in body))
 
         if self.include_position:

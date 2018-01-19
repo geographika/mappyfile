@@ -5,7 +5,7 @@ import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
-from mappyfile.ordereddict import DefaultOrderedDict
+from mappyfile.ordereddict import DefaultOrderedDict, CaseInsensitiveOrderedDict
 
 
 def get_dict(s):
@@ -86,6 +86,18 @@ def test_false_value():
     assert(d["key"] == False)
 
 
+def test_case_sensitive_ordered_dict():
+
+    d = CaseInsensitiveOrderedDict()
+    d["KeY1"] = 1
+    d["KEY2"] = 2
+    d["key3"] = 3
+
+    print(json.dumps(d, indent=4))
+    assert(d["kEy2"] == 2)
+
+
+
 def run_tests():
     # pytest.main(["tests/test_ordereddict.py::test_dict"])
     pytest.main(["tests/test_ordereddict.py"])
@@ -94,5 +106,5 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     # run_tests()
-    test_false_value()
+    test_case_sensitive_ordered_dict()
     print("Done!")

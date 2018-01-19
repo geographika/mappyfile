@@ -61,6 +61,7 @@ def test_empty_config_directive():
     d["config"]["ms_errorfile"] = "stderr"
     print(json.dumps(d, indent=4))
     assert(d["config"]["ms_errorfile"] == "stderr")
+    assert(d["config"]["MS_ERRORFILE"] == "stderr")
 
 
 def test_metadata():
@@ -69,7 +70,7 @@ def test_metadata():
     MAP
         METADATA
             "wms_enable_request" "*"
-            "ms_enable_modes" "!*"
+            "MS_ENABLE_MODES" "!*"
         END
     END
     """
@@ -79,6 +80,9 @@ def test_metadata():
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
     assert(d["metadata"]["wms_enable_request"] == "*")
+    assert(d["metadata"]["MS_ENABLE_MODES"] == "!*")
+    assert(d["metadata"]["wms_ENABLE_request"] == "*")
+    assert(d["metadata"]["MS_enable_MODES"] == "!*")
 
 
 def test_scaletoken():
@@ -353,6 +357,6 @@ def run_tests():
 
 
 if __name__ == '__main__':
-    test_empty_config_directive()
-    # run_tests()
+    # test_empty_config_directive()
+    run_tests()
     print("Done!")
