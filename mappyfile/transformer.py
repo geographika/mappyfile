@@ -311,7 +311,7 @@ class MapfileToDict(Transformer):
         # d = OrderedDict(zip(keys, vals))
 
         d = CaseInsensitiveOrderedDict(((self.clean_string(t[0].value), self.clean_string(t[1].value))
-                         for t in body))
+                                       for t in body))
 
         if self.include_position:
             pd = self.create_position_dict(key, body)

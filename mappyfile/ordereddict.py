@@ -27,7 +27,7 @@ class CaseInsensitiveOrderedDict(OrderedDict):
         return super(CaseInsensitiveOrderedDict, self).__contains__(self.__class__._k(key))
 
     def has_key(self, key):
-        return super(CaseInsensitiveOrderedDict, self).has_key(self.__class__._k(key))
+        return self.__class__._k(key) in super(CaseInsensitiveOrderedDict, self)
 
     def pop(self, key, *args, **kwargs):
         return super(CaseInsensitiveOrderedDict, self).pop(self.__class__._k(key), *args, **kwargs)
