@@ -143,9 +143,9 @@ class MapfileToDict(Transformer):
                 else:
                     plural_key = self.plural(k)
                     if plural_key not in composite_dict.keys():
-                        composite_dict[plural_key] = [d]
-                    else:
-                        composite_dict[plural_key].append(d)
+                        composite_dict[plural_key] = []
+
+                    composite_dict[plural_key].append(d)
             else:
                 #  simple attribute
                 pos = d.pop("__position__")
@@ -156,11 +156,10 @@ class MapfileToDict(Transformer):
                     # there may be several config dicts - one for each setting
                     if key_name not in composite_dict.keys():
                         # create an initial OrderedDict
-                        composite_dict[key_name] = OrderedDict(list(d[key_name].items()))
-                    else:
-                        # populate the existing config dict
-                        cfg_dict = composite_dict[key_name]
-                        cfg_dict.update(d[key_name])
+                        composite_dict[key_name] = DefaultOrderedDict(DefaultOrderedDict)
+                    # populate the existing config dict
+                    cfg_dict = composite_dict[key_name]
+                    cfg_dict.update(d[key_name])
 
                     if self.include_position:
                         if key_name not in pd.keys():
@@ -184,9 +183,8 @@ class MapfileToDict(Transformer):
                             composite_dict[key_name] = [existing_points]
 
                         if key_name not in composite_dict.keys():
-                            composite_dict[key_name] = [d[key_name]]
-                        else:
-                            composite_dict[key_name].append(d[key_name])
+                            composite_dict[key_name] = []
+                        composite_dict[key_name].append(d[key_name])
 
                     if self.include_position:
                         if key_name not in pd.keys():
@@ -199,9 +197,9 @@ class MapfileToDict(Transformer):
 
                 elif key_name in ("processing", "formatoption", "include"):
                     if key_name not in composite_dict.keys():
-                        composite_dict[key_name] = [d[key_name]]
-                    else:
-                        composite_dict[key_name].append(d[key_name])
+                        composite_dict[key_name] = []
+
+                    composite_dict[key_name].append(d[key_name])
 
                     if self.include_position:
                         if key_name not in pd.keys():
@@ -209,10 +207,11 @@ class MapfileToDict(Transformer):
                         pd[key_name].append(pos)
 
                 else:
+                    assert(len(d.items()) == 1)
                     if self.include_position:
                         # hoist position details to composite
                         pd[key_name] = pos
-                    composite_dict.update(d)
+                    composite_dict[key_name] = d[key_name]
 
         return composite_dict
 

@@ -58,7 +58,7 @@ def test_config_directive():
     print(d["name"])
     assert(d["name"] == "NewName")  # "'ConfigMap'")
 
-    print(d["CONFIG"])  # even though this key is now lowercase it will correctly return (DefaultOrderedDict only)
+    print(d["CONFIG"])  # even though this key is now lower-case it will correctly return (as DefaultOrderedDict calls key.lower())
     assert(d["config"]["PROJ_DEBUg"] == "OFF")
     output(d)
 
@@ -78,6 +78,14 @@ def test_debug():
     output(d)
 
 
+def test_false_value():
+
+    d = DefaultOrderedDict(DefaultOrderedDict)
+    d["key"] = False
+    print(json.dumps(d, indent=4))
+    assert(d["key"] == False)
+
+
 def run_tests():
     # pytest.main(["tests/test_ordereddict.py::test_dict"])
     pytest.main(["tests/test_ordereddict.py"])
@@ -85,6 +93,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    run_tests()
-    # test_config_directive()
+    # run_tests()
+    test_false_value()
     print("Done!")

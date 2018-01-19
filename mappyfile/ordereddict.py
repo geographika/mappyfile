@@ -17,26 +17,12 @@ class DefaultOrderedDict(OrderedDict):
         self.default_factory = default_factory
 
     def __getitem__(self, key):
-        """
-        All keys should be lower-case to make editing easier
-        However when manually editing try the requested key
-        and finally upper-case
-        """
-        key_options = [key, key.lower(), key.upper()]
-        val = None
 
-        for k in key_options:
-            try:
-                val = OrderedDict.__getitem__(self, k)
-                # exit the loop on success
-                break    
-            except KeyError:
-                # repeat the loop on failure
-                continue
+        key = key.lower()  # all keys should be lower-case to make editing easier
 
-        if val:
-            return val
-        else:
+        try:
+            return OrderedDict.__getitem__(self, key)
+        except KeyError:
             return self.__missing__(key)
 
     def __missing__(self, key):
