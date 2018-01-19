@@ -1,10 +1,21 @@
 Releases
 --------
 
+0.6.0 (17/01/2018)
+++++++++++++++++++
+
++ Extensive refactoring of grammar and transformer
++ Removal of Earley grammar
++ Whitespace ignored when parsing
++ JSON schema fixes
++ `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Set fixed dependency ranges`
++ *Experimental* - inclusion of token positions
++ *Experimental* - inclusion of validation comments
+
 0.5.1 (05/01/2018)
 ++++++++++++++++++
 
-* `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Remove unnessesary parser keyword`
++ `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Remove unnecessary parser keyword`
 
 0.5.0 (01/11/2017)
 ++++++++++++++++++
