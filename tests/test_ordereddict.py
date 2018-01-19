@@ -97,7 +97,6 @@ def test_case_sensitive_ordered_dict():
     assert(d["kEy2"] == 2)
 
 
-
 def run_tests():
     # pytest.main(["tests/test_ordereddict.py::test_dict"])
     pytest.main(["tests/test_ordereddict.py"])
