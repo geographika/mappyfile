@@ -762,6 +762,20 @@ def test_escaped_string():
     assert(output(s, schema_name="layer") == exp)
 
 
+@pytest.mark.xfail
+def test_filename():
+
+    s = """
+    WEB
+        IMAGEURL "/tmp/"
+        TEMPLATE example3.html
+    END
+    """
+    exp = "WEB IMAGEURL '/tmp/' TEMPLATE 'example3.html' END"
+    print(output(s, schema_name="web"))
+    assert(output(s, schema_name="web") == exp)
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -774,6 +788,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # test_label()
+    # test_filename()
     run_tests()
     print("Done!")
