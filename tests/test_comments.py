@@ -78,7 +78,7 @@ END"""
 
 
 def run_tests():
-    pytest.main(["-s","tests/test_comments.py"])
+    pytest.main(["-s", "tests/test_comments.py"])
 
 
 if __name__ == '__main__':
