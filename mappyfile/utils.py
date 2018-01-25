@@ -32,23 +32,8 @@ def dumps(d):
 
 def find(lst, key, value):
     """
-    When looking for an item by value also check for the value
-    surrounded by apostrophes
+    Find an item in a list of dicts using a key and a value
     """
-    obj = __find__(lst, key, value)
-
-    if not obj:
-        v = "'%s'" % value
-        obj = __find__(lst, key, v)
-
-    if not obj:
-        v = '"%s"' % value
-        obj = __find__(lst, key, v)
-
-    return obj
-
-
-def __find__(lst, key, value):
     return next((item for item in lst if item[key.lower()] == value), None)
 
 
