@@ -124,3 +124,8 @@ directive can be found at http://mapserver.org/mapfile/include.html:
     http://loup-vaillant.fr/tutorials/earley-parsing/what-and-why
     http://loup-vaillant.fr/tutorials/earley-parsing/right-recursion
     https://www.reddit.com/r/programming/comments/3j0zfu/fast_handy_languages_an_article_about_fast_marpa/
+
+    TO ADD
+    Output of image
+    Link to grammar discussion
+    Move types to transformer page?
