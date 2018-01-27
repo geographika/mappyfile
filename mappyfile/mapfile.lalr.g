@@ -100,7 +100,7 @@ SYMBOL: "SYMBOL"i
 STYLE: "STYLE"i
 
 AUTO: "AUTO"i
-PATH: /([a-z0-9_]*\.*\/|[a-z_]+[.\/])[a-z0-9_\/\.-]+/i
+PATH: /([a-z0-9_]*\.*\/|[a-z0-9_]+[.\/])[a-z0-9_\/\.-]+/i
 
 // rules allow optional alphachannel
 DOUBLE_QUOTED_HEXCOLOR.2: /\"#(?:[0-9a-fA-F]{3}){1,2}([0-9a-fA-F]{2})?\"/
