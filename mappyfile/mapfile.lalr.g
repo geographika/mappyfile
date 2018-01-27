@@ -55,11 +55,19 @@ not_expression: ("!"|"NOT"i) expression
 expression: "(" or_test ")"
 ?or_test : (or_test ("OR"i|"||"))? and_test
 ?and_test : (and_test ("AND"i|"&&"))? comparison
-?comparison: (comparison compare_op)? add
+?comparison: (comparison compare_op)? sum
 !compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" 
 | "<=" | "IN"i | "NE"i | "EQ"i | "LE"i | "LT"i | "GE"i | "GT"i
 
-?add: (add "+")? (func_call | value)
+?sum: product
+    | sum "+" product -> add
+    | sum "-" product -> sub
+
+?product: atom
+    | product "*" atom -> mul
+    | product "/" atom -> div
+
+?atom: (func_call | value)
 // ?multiply: (multiply "*")? (func_call | value)
 
 func_call: UNQUOTED_STRING "(" func_params ")"

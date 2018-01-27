@@ -262,7 +262,6 @@ def test_divide():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_multiply():
     s = """
     CLASS
@@ -273,7 +272,6 @@ def test_multiply():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_divide_expression():
     """
     http://mapserver.org/mapfile/expressions.html
