@@ -288,7 +288,6 @@ def test_divide_expression():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_escaped_string():
     """
     http://mapserver.org/mapfile/expressions.html#quotes-escaping-in-strings

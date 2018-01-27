@@ -95,8 +95,8 @@ AUTO: "AUTO"i
 PATH: /([a-z0-9_]*\.*\/|[a-z_]+[.\/])[a-z0-9_\/\.-]+/i
 
 // rules allow optional alphachannel
-DOUBLE_QUOTED_HEXCOLOR.2: /\"#(?:[0-9a-fA-F]{3}){1,2}([0-9a-fA-F]{2})?\"/ 
-SINGLE_QUOTED_HEXCOLOR.2: /'#(?:[0-9a-fA-F]{3}){1,2}([0-9a-fA-F]{2})?'/ 
+DOUBLE_QUOTED_HEXCOLOR.2: /\"#(?:[0-9a-fA-F]{3}){1,2}([0-9a-fA-F]{2})?\"/
+SINGLE_QUOTED_HEXCOLOR.2: /'#(?:[0-9a-fA-F]{3}){1,2}([0-9a-fA-F]{2})?'/
 
 NULL: "NULL"i
 
@@ -108,8 +108,8 @@ SIGNED_INT: ["-"|"+"] INT
 
 // UNQUOTED_STRING: /[a-z_][a-z0-9_\-]*/i
 UNQUOTED_STRING: /[a-z0-9_\-]+/i
-DOUBLE_QUOTED_STRING: /".*?(?<!\\\\)(\\\\\\\\)*?"i?/
-SINGLE_QUOTED_STRING: /'.*?(?<!\\\\)(\\\\\\\\)*?'i?/
+DOUBLE_QUOTED_STRING: "\"" ("\\\""|/[^"]/)* "\"" "i"?
+SINGLE_QUOTED_STRING: "'" ("\\'"|/[^']/)* "'" "i"?
 ESCAPED_STRING: /`.*?`i?/
 //KEYWORD: /[a-z]+/i
 
