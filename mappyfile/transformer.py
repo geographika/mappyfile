@@ -74,7 +74,7 @@ class MapfileToDict(Transformer):
                 assert("__tokens__" in v.keys())
                 flat_list += v["__tokens__"]
             else:
-                raise ValueError("Attribute value type not supported")
+                raise ValueError("Attribute value type not supported", v)
 
         return flat_list
 

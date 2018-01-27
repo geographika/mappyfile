@@ -111,8 +111,9 @@ NULL: "NULL"i
 SIGNED_FLOAT: ["-"|"+"] FLOAT
 SIGNED_INT: ["-"|"+"] INT
 
+INT: /[0-9]+(?![_a-zA-Z])/
+
 %import common.FLOAT
-%import common.INT
 
 // UNQUOTED_STRING: /[a-z_][a-z0-9_\-]*/i
 UNQUOTED_STRING: /[a-z0-9_\-]+/i
