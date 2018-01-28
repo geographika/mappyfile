@@ -552,4 +552,6 @@ class MapfileToDict(Transformer):
 
     def list(self, t):
         # http://www.mapserver.org/mapfile/expressions.html#list-expressions
-        return "{%s}" % ",".join([str(v) for v in t])
+        v = t[0]
+        v.value = "{%s}" % ",".join([str(s) for s in t])
+        return v

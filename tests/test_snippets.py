@@ -679,7 +679,6 @@ def test_ogr_connection():
     assert(output(s, schema_name="layer") == exp)
 
 
-@pytest.mark.xfail
 def test_quoted_data():
     """
     Make sure a raw string is used

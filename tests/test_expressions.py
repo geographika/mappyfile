@@ -245,7 +245,6 @@ def test_numerical_operator_lt_expression():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_divide():
     """
     Not sure if these should be in brackets or not
@@ -302,7 +301,6 @@ def test_escaped_string():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_list_expression_alt():
     """
     See issue #38
@@ -312,8 +310,6 @@ def test_list_expression_alt():
 
     To activate them enclose a comma separated list of values between {}, without adding quotes
     or extra spaces.
-
-    Fields starting with numbers are allowed - this is the reason for the failing test
     """
     s = """
     CLASS
@@ -335,6 +331,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # test_escaped_string()
+    # test_list_expression_alt()
     run_tests()
     print("Done!")
