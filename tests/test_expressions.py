@@ -271,6 +271,30 @@ def test_multiply():
     assert(output(s) == exp)
 
 
+@pytest.mark.xfail
+def test_negation():
+    """
+    TODO - check the exact syntax for this
+    """
+    s = """
+    CLASS
+        EXPRESSION (-[field1])
+    END
+    """
+    exp = "CLASS EXPRESSION (-[field1]) END"
+    assert(output(s) == exp)
+
+
+def test_power():
+    s = """
+    CLASS
+        EXPRESSION ([field1] ^ [field2])
+    END
+    """
+    exp = "CLASS EXPRESSION ([field1] ^ [field2]) END"
+    assert(output(s) == exp)
+
+
 def test_divide_expression():
     """
     http://mapserver.org/mapfile/expressions.html
@@ -331,6 +355,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # test_list_expression_alt()
-    run_tests()
+    test_negation()
+    # run_tests()
     print("Done!")

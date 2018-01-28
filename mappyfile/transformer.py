@@ -440,6 +440,11 @@ class MapfileToDict(Transformer):
         t[0].value = "{} * {}".format(t[0].value, t[1].value)
         return t[0]
 
+    def power(self, t):
+        assert(len(t) == 2)
+        t[0].value = "{} ^ {}".format(t[0].value, t[1].value)
+        return t[0]
+
     def runtime_var(self, t):
         v = t[0]
         return v

@@ -66,6 +66,7 @@ expression: "(" or_test ")"
 ?product: atom
     | product "*" atom -> mul
     | product "/" atom -> div
+    | product "^" atom -> power
 
 ?atom: (func_call | value)
 // ?multiply: (multiply "*")? (func_call | value)
