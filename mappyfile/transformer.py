@@ -387,20 +387,20 @@ class MapfileToDict(Transformer):
     def comparison(self, t):
         assert(len(t) == 3)
         parts = [str(p.value) for p in t]
-        v = " ".join(parts)
+        v = str(" ").join(parts)
 
-        v = "( {} )".format(v)
+        v = str("( {} )").format(v)
         t[0].value = v
         return t[0]
 
     def and_test(self, t):
         assert(len(t) == 2)
-        t[0].value = "( {} AND {} )".format(t[0].value, t[1].value)
+        t[0].value = str("( {} AND {} )").format(t[0].value, t[1].value)
         return t[0]
 
     def or_test(self, t):
         assert(len(t) == 2)
-        t[0].value = "( {} OR {} )".format(t[0].value, t[1].value)
+        t[0].value = str("( {} OR {} )").format(t[0].value, t[1].value)
         return t[0]
 
     def compare_op(self, t):
@@ -409,41 +409,41 @@ class MapfileToDict(Transformer):
 
     def not_expression(self, t):
         v = t[0]
-        v.value = "NOT {}".format(v.value)
+        v.value = str("NOT {}").format(v.value)
         return v
 
     def expression(self, t):
 
-        exp = " ".join([str(v.value) for v in t])  # convert to string for boolean expressions e.g. (true)
+        exp = str(" ").join([str(v.value) for v in t])  # convert to string for boolean expressions e.g. (true)
 
         if not self.quoter.in_parenthesis(exp):
-            t[0].value = "({})".format(exp)
+            t[0].value = str("({})").format(exp)
 
         return t[0]
 
     def add(self, t):
         assert(len(t) == 2)
-        t[0].value = "{} + {}".format(t[0].value, t[1].value)
+        t[0].value = str("{} + {}").format(t[0].value, t[1].value)
         return t[0]
 
     def sub(self, t):
         assert(len(t) == 2)
-        t[0].value = "{} - {}".format(t[0].value, t[1].value)
+        t[0].value = str("{} - {}").format(t[0].value, t[1].value)
         return t[0]
 
     def div(self, t):
         assert(len(t) == 2)
-        t[0].value = "{} / {}".format(t[0].value, t[1].value)
+        t[0].value = str("{} / {}").format(t[0].value, t[1].value)
         return t[0]
 
     def mul(self, t):
         assert(len(t) == 2)
-        t[0].value = "{} * {}".format(t[0].value, t[1].value)
+        t[0].value = str("{} * {}").format(t[0].value, t[1].value)
         return t[0]
 
     def power(self, t):
         assert(len(t) == 2)
-        t[0].value = "{} ^ {}".format(t[0].value, t[1].value)
+        t[0].value = str("{} ^ {}").format(t[0].value, t[1].value)
         return t[0]
 
     def runtime_var(self, t):
@@ -465,17 +465,17 @@ class MapfileToDict(Transformer):
         """
         func, params = t
         func_name = func.value
-        func.value = "({}({}))".format(func_name, params)
+        func.value = str("({}({}))").format(func_name, params)
         return func
 
     def func_params(self, t):
-        params = ",".join(v.value for v in t)
+        params = str(",").join(v.value for v in t)
         return params
 
     def attr_bind(self, t):
         assert(len(t) == 1)
         t = t[0]
-        t.value = "[{}]".format(t.value)
+        t.value = str("[{}]").format(t.value)
         return t
 
     def extent(self, t):
@@ -559,5 +559,5 @@ class MapfileToDict(Transformer):
     def list(self, t):
         # http://www.mapserver.org/mapfile/expressions.html#list-expressions
         v = t[0]
-        v.value = "{%s}" % ",".join([str(s) for s in t])
+        v.value = str("{%s}") % ",".join([str(s) for s in t])
         return v
