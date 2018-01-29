@@ -5,14 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test_map_collection.py</StartupFile>
+    <StartupFile>misc\make_json_schema.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>{fad84a32-0226-4532-a164-c8103b59a949}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,8 +66,42 @@
     <Content Include="docs\images\tree_no_terminals.png" />
     <Content Include="docs\python_integration.rst" />
     <Content Include="docs\schemas.rst" />
+    <Content Include="docs\schemas\class.rst" />
+    <Content Include="docs\schemas\cluster.rst" />
+    <Content Include="docs\schemas\color.rst" />
+    <Content Include="docs\schemas\composite.rst" />
+    <Content Include="docs\schemas\debug.rst" />
+    <Content Include="docs\schemas\expression.rst" />
+    <Content Include="docs\schemas\extent.rst" />
+    <Content Include="docs\schemas\feature.rst" />
+    <Content Include="docs\schemas\grid.rst" />
+    <Content Include="docs\schemas\hex.rst" />
+    <Content Include="docs\schemas\hex2.rst" />
+    <Content Include="docs\schemas\index.rst" />
+    <Content Include="docs\schemas\join.rst" />
+    <Content Include="docs\schemas\label.rst" />
     <Content Include="docs\schemas\layer.rst" />
+    <Content Include="docs\schemas\leader.rst" />
+    <Content Include="docs\schemas\legend.rst" />
     <Content Include="docs\schemas\map.rst" />
+    <Content Include="docs\schemas\metadata.rst" />
+    <Content Include="docs\schemas\onoff.rst" />
+    <Content Include="docs\schemas\outputformat.rst" />
+    <Content Include="docs\schemas\points.rst" />
+    <Content Include="docs\schemas\position.rst" />
+    <Content Include="docs\schemas\projection.rst" />
+    <Content Include="docs\schemas\querymap.rst" />
+    <Content Include="docs\schemas\reference.rst" />
+    <Content Include="docs\schemas\rgb.rst" />
+    <Content Include="docs\schemas\scalebar.rst" />
+    <Content Include="docs\schemas\scaletoken.rst" />
+    <Content Include="docs\schemas\sizeunits.rst" />
+    <Content Include="docs\schemas\style.rst" />
+    <Content Include="docs\schemas\symbol.rst" />
+    <Content Include="docs\schemas\units.rst" />
+    <Content Include="docs\schemas\validation.rst" />
+    <Content Include="docs\schemas\web.rst" />
+    <Content Include="docs\schemas\yesno.rst" />
     <Content Include="docs\testing.rst" />
     <Content Include="docs\validation.rst" />
     <Content Include="docs\xml.rst">
@@ -552,7 +585,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\__init__.py" />
+    <Compile Include="misc\colours_plugin.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="misc\docs_parser.py" />
+    <Compile Include="misc\make_json_schema.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="misc\test_docs_parser.py" />
     <Compile Include="misc\__init__.py" />
     <Compile Include="setup.py" />
@@ -587,7 +626,6 @@
   <ItemGroup>
     <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
       <Id>{fad84a32-0226-4532-a164-c8103b59a949}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
       <Version>2.7</Version>
       <Description>mappyfile (Python 64-bit 2.7)</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
