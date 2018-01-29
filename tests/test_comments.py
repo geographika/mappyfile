@@ -1,4 +1,5 @@
 import collections
+import json
 import logging
 import pytest
 from mappyfile.pprint import PrettyPrinter
@@ -9,7 +10,7 @@ def test_comment():
     d["name"] = "Test"
     d["__type__"] = "layer"
     d["__comments__"] = {"name": "Test comment"}
-
+    print(json.dumps(d, indent=4))
     pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
     s = pp.pprint(d)
     exp = """LAYER
@@ -25,6 +26,8 @@ def test_double_comment():
     d["__comments__"] = {"name": "Name comment", "type": "Type comment"}
 
     d["type"] = "polygon"
+
+    print(json.dumps(d, indent=4))
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
     s = pp.pprint(d)
@@ -44,6 +47,8 @@ def test_header_comment():
     d["__type__"] = "layer"
     d["__comments__"] = {"__type__": "Layer comment"}
 
+    print(json.dumps(d, indent=4))
+
     pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
     s = pp.pprint(d)
     exp = """# Layer comment
@@ -61,7 +66,7 @@ def test_header_list_comments():
     d["name"] = "Test"
     d["__type__"] = "layer"
     d["__comments__"] = {"__type__": ["Layer comment 1", "Layer comment 2"]}
-
+    print(json.dumps(d, indent=4))
     pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
     s = pp.pprint(d)
     exp = """# Layer comment 1
@@ -73,7 +78,7 @@ END"""
 
 
 def run_tests():
-    pytest.main(["tests/test_comments.py"])
+    pytest.main(["-s", "tests/test_comments.py"])
 
 
 if __name__ == '__main__':

@@ -245,7 +245,6 @@ def test_numerical_operator_lt_expression():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_divide():
     """
     Not sure if these should be in brackets or not
@@ -262,7 +261,6 @@ def test_divide():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_multiply():
     s = """
     CLASS
@@ -274,6 +272,29 @@ def test_multiply():
 
 
 @pytest.mark.xfail
+def test_negation():
+    """
+    TODO - check the exact syntax for this
+    """
+    s = """
+    CLASS
+        EXPRESSION (-[field1])
+    END
+    """
+    exp = "CLASS EXPRESSION (-[field1]) END"
+    assert(output(s) == exp)
+
+
+def test_power():
+    s = """
+    CLASS
+        EXPRESSION ([field1] ^ [field2])
+    END
+    """
+    exp = "CLASS EXPRESSION ([field1] ^ [field2]) END"
+    assert(output(s) == exp)
+
+
 def test_divide_expression():
     """
     http://mapserver.org/mapfile/expressions.html
@@ -288,7 +309,6 @@ def test_divide_expression():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_escaped_string():
     """
     http://mapserver.org/mapfile/expressions.html#quotes-escaping-in-strings
@@ -305,7 +325,6 @@ def test_escaped_string():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_list_expression_alt():
     """
     See issue #38
@@ -315,8 +334,6 @@ def test_list_expression_alt():
 
     To activate them enclose a comma separated list of values between {}, without adding quotes
     or extra spaces.
-
-    Fields starting with numbers are allowed - this is the reason for the failing test
     """
     s = """
     CLASS
@@ -338,6 +355,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # test_escaped_string()
-    run_tests()
+    test_negation()
+    # run_tests()
     print("Done!")

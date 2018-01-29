@@ -8,7 +8,7 @@ Releases
 + Removal of Earley grammar
 + Whitespace ignored when parsing
 + JSON schema fixes
-+ `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Set fixed dependency ranges`
++ `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Set fixed dependency ranges
 + *Experimental* - inclusion of token positions
 + *Experimental* - inclusion of validation comments
 
@@ -21,11 +21,7 @@ Releases
 ++++++++++++++++++
 
 + Add in jsonschema and validation class
-
-Resolved Issues
-***************
-
-* `#44 <https://github.com/geographika/mappyfile/issues/44>`_ Includes should be relative to Mapfile`
++ `#44 <https://github.com/geographika/mappyfile/issues/44>`_ Includes should be relative to Mapfile`
 
 0.4.3 (28/08/2017)
 ++++++++++++++++++
@@ -43,11 +39,7 @@ Resolved Issues
 + Add a experimental validator module using jsonschema
 + `#30 <https://github.com/geographika/mappyfile/pull/30>`_ Flake8 support` - thanks @loicgrasser
 + `#28 <https://github.com/geographika/mappyfile/pull/28>`_ Add support for relative path for nested include` - thanks @loicgrasser
-
-Resolved Issues
-***************
-
-* `#25 <https://github.com/geographika/mappyfile/issues/25>`_ Expression grammar not allowing !`
++ `#25 <https://github.com/geographika/mappyfile/issues/25>`_ Expression grammar not allowing !`
  
 0.3.2
 +++++
@@ -66,16 +58,12 @@ Resolved Issues
 + Allow multiple composites to be parsed directly (e.g. ``CLASS..END CLASS..END``)
 + Allow direct parsing of the ``METADATA`` and ``VALIDATION`` blocks
 + UTF-8 checks when opening a Mapfile
-
-Resolved Issues
-***************
-
-* `#23 <https://github.com/geographika/mappyfile/issues/23>`_ Alternative NE and EQ comparisons not defined`
-* `#22 <https://github.com/geographika/mappyfile/issues/22>`_ Handle AUTO Projection setting`
-* `#21 <https://github.com/geographika/mappyfile/issues/21>`_ INCLUDES throw error when no cwd set`
-* `#20 <https://github.com/geographika/mappyfile/issues/20>`_ Only the first FORMATOPTION is kept after transform`
-* `#19 <https://github.com/geographika/mappyfile/issues/19>`_ IMAGEMODE FEATURE throws parsing error`
-* `#18 <https://github.com/geographika/mappyfile/issues/18>`_ CONFIG keyword not capitalised`
++ `#23 <https://github.com/geographika/mappyfile/issues/23>`_ Alternative NE and EQ comparisons not defined`
++ `#22 <https://github.com/geographika/mappyfile/issues/22>`_ Handle AUTO Projection setting`
++ `#21 <https://github.com/geographika/mappyfile/issues/21>`_ INCLUDES throw error when no cwd set`
++ `#20 <https://github.com/geographika/mappyfile/issues/20>`_ Only the first FORMATOPTION is kept after transform`
++ `#19 <https://github.com/geographika/mappyfile/issues/19>`_ IMAGEMODE FEATURE throws parsing error`
++ `#18 <https://github.com/geographika/mappyfile/issues/18>`_ CONFIG keyword not capitalised`
 
 Older Releases
 ++++++++++++++

@@ -19,35 +19,42 @@ def output(fn):
     m = MapfileToDict()
     v = Validator()
 
-    ast = p.parse_file(fn)
-    # print(ast)
-    d = m.transform(ast)
-    logging.debug("Number of layers: {}".format(len(d["layers"])))
-
-    errors = v.validate(d)
-    assert(len(errors) == 0)
-
     try:
-        s = mappyfile.utils.dumps(d)
-    except Exception:
-        logging.warning(json.dumps(d, indent=4))
-        logging.warning("%s could not be successfully re-written", fn)
+        ast = p.parse_file(fn)
+        # print(ast)
+        d = m.transform(ast)
+        logging.debug("Number of layers: {}".format(len(d["layers"])))
+
+        errors = v.validate(d)
+        assert(len(errors) == 0)
+
+    except Exception as ex:
+        logging.exception(ex)
+        logging.warning("%s could not be successfully parsed", fn)
+        d = None
         raise
 
-    # now try reading it again
-    ast = p.parse(s)
-    d = m.transform(ast)
+    if d:
+        try:
+            s = mappyfile.utils.dumps(d)
+        except Exception:
+            logging.warning(json.dumps(d, indent=4))
+            logging.warning("%s could not be successfully re-written", fn)
+            raise
 
-    errors = v.validate(d)
-    assert(len(errors) == 0)
+        # now try reading it again
+        ast = p.parse(s)
+        d = m.transform(ast)
+
+        errors = v.validate(d)
+        assert(len(errors) == 0)
 
 
 def test_maps():
     sample_dir = os.path.join(os.path.dirname(__file__), "mapfiles")
     pth = sample_dir + '/**/*.map'
     mapfiles = glob2.glob(pth)
-    print(pth)
-    # mapfiles = ["map4.txt"]
+    mapfiles = [f for f in mapfiles if "basemaps" not in f]
 
     for fn in mapfiles:
         logging.info("Processing {}".format(fn))

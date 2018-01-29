@@ -74,7 +74,7 @@ class MapfileToDict(Transformer):
                 assert("__tokens__" in v.keys())
                 flat_list += v["__tokens__"]
             else:
-                raise ValueError("Attribute value type not supported")
+                raise ValueError("Attribute value type not supported", v)
 
         return flat_list
 
@@ -425,6 +425,26 @@ class MapfileToDict(Transformer):
         t[0].value = "{} + {}".format(t[0].value, t[1].value)
         return t[0]
 
+    def sub(self, t):
+        assert(len(t) == 2)
+        t[0].value = "{} - {}".format(t[0].value, t[1].value)
+        return t[0]
+
+    def div(self, t):
+        assert(len(t) == 2)
+        t[0].value = "{} / {}".format(t[0].value, t[1].value)
+        return t[0]
+
+    def mul(self, t):
+        assert(len(t) == 2)
+        t[0].value = "{} * {}".format(t[0].value, t[1].value)
+        return t[0]
+
+    def power(self, t):
+        assert(len(t) == 2)
+        t[0].value = "{} ^ {}".format(t[0].value, t[1].value)
+        return t[0]
+
     def runtime_var(self, t):
         v = t[0]
         return v
@@ -537,4 +557,6 @@ class MapfileToDict(Transformer):
 
     def list(self, t):
         # http://www.mapserver.org/mapfile/expressions.html#list-expressions
-        return "{%s}" % ",".join([str(v) for v in t])
+        v = t[0]
+        v.value = "{%s}" % ",".join([str(s) for s in t])
+        return v

@@ -5,7 +5,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
+<<<<<<< HEAD
     <StartupFile>misc\make_json_schema.py</StartupFile>
+=======
+    <StartupFile>tests\test_expressions.py</StartupFile>
+>>>>>>> 60e98e8e4983a882cb83cb7841423a21ffa8aaf3
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>

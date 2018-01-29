@@ -79,6 +79,10 @@ class Quoter(object):
         val = val.strip()
         return val.startswith("(") and val.endswith(")")
 
+    def in_braces(self, val):
+        val = val.strip()
+        return val.startswith("{") and val.endswith("}")
+
     def in_slashes(self, val):
         val = val.strip()
         return self._in_quotes(val, "/")
@@ -344,7 +348,10 @@ class PrettyPrinter(object):
             if self.quoter.is_string(value):
                 if self.quoter.in_parenthesis(value):
                     pass
-                elif self.quoter.in_brackets(value) and attr != "text":
+                elif attr == "expression" and self.quoter.in_braces(value):
+                    # don't add quotes to list expressions such as {val1, val2}
+                    pass
+                elif attr != "text" and self.quoter.in_brackets(value):
                     # TEXT expressions are often "[field1]-[field2]" so need to leave quotes for these
                     pass
                 elif value.startswith("NOT ") and self.quoter.in_parenthesis(value[4:]):

@@ -52,7 +52,6 @@ def test_standardise_quotes():
     assert(v2 == exp)
 
 
-@pytest.mark.xfail
 def test_already_escaped():
     """
     Don't escape an already escaped quote
