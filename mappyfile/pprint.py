@@ -284,7 +284,10 @@ class PrettyPrinter(object):
 
     def get_attribute_properties(self, type_, attr):
 
-        jsn_schema, resolver = self.validator.get_schema(type_)
+        validator = self.validator.get_validator(type_)
+        jsn_schema = validator.schema
+        resolver = validator.resolver
+
         props = jsn_schema["properties"]
 
         # check if a value needs to be quoted or not, by referring to the Json schema
