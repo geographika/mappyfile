@@ -36,7 +36,7 @@ class Validator(object):
 
         return root_schema_path
 
-    def get_schema(self, schema_name):
+    def get_validator(self, schema_name):
         """
         Had to remove the id property from map.json or it uses URLs for validation
         See various issues at https://github.com/Julian/jsonschema/pull/306
@@ -66,7 +66,10 @@ class Validator(object):
         else:
             jsn_schema, resolver = self.schemas[schema_name]
 
-        return jsn_schema, resolver
+        validator = jsonschema.Draft4Validator(schema=jsn_schema, resolver=resolver)
+        # validator.check_schema(jsn_schema) # check schema is valid
+
+        return validator
 
     def convert_lowercase(self, x):
 
@@ -123,8 +126,7 @@ class Validator(object):
 
     def validate(self, value, add_messages=False, schema_name="map"):
 
-        jsn_schema, resolver = self.get_schema(schema_name)
-        validator = jsonschema.Draft4Validator(schema=jsn_schema, resolver=resolver)
+        validator = self.get_validator(schema_name)
 
         errors = []
 
