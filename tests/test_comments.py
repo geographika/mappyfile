@@ -3,7 +3,8 @@ import json
 import logging
 import pytest
 from mappyfile.pprint import PrettyPrinter
-
+from mappyfile.parser import Parser
+from mappyfile.transformer import MapfileToDict
 
 def test_comment():
     d = collections.OrderedDict()
@@ -77,6 +78,29 @@ END"""
     assert(s == exp)
 
 
+def test_comment_parsing():
+
+    s = """
+    # Map comment 1
+    # Map comment 2
+    MAP
+    NAME 'Test' # Name comment
+    TYPE POLYGON # Type comment
+    END
+
+    # Layer comment
+    LAYER
+
+    END"""
+
+    p = Parser()
+    ast = p.parse(s)
+    print(ast.pretty())
+    m = MapfileToDict()
+    d = json.dumps(m.transform(ast))
+    print(d)
+
+
 def run_tests():
     pytest.main(["-s", "tests/test_comments.py"])
 
@@ -84,5 +108,6 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
-    run_tests()
+    test_comment_parsing()
+    # run_tests()
     print("Done!")
