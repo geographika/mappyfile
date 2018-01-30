@@ -1,0 +1,69 @@
+LAYER
+  CLASSITEM "objval"
+  CONNECTION "user=myuser password=mypassword host=myhost port=5432 dbname=mydb"
+  CONNECTIONTYPE POSTGIS
+  DATA "the_geom from vec200_ramp using unique gtdboid using srid=2056"
+  GROUP "Vector200"
+  TEMPLATE "ttt"
+  NAME "ch.swisstopo.vec200-transportation-ramp"
+  STATUS OFF
+  TYPE LINE
+  UNITS METERS
+  METADATA
+    "wms_enable_request" "*"
+    "wms_srs" "EPSG:21781 EPSG:2056 EPSG:4326 EPSG:3857 EPSG:3034 EPSG:3035 EPSG:4258 EPSG:31287 EPSG:25832 EPSG:25833 EPSG:31467 EPSG:32632 EPSG:32633"
+    "wms_group_title"     "vec200"
+    "wms_title"           "Vector200 ramp"
+    "gml_featureid"       "gtdboid"
+    "ows_include_items"   "all"
+    "wms_extent" "2100000 1050000 2850000 1400000"
+  END
+  CLASS
+    EXPRESSION ( '[construct]' eq 'Brücke' )
+    STYLE
+      ANGLE 360
+      COLOR 0 0 0
+      OPACITY 100
+      SIZE 6
+      SYMBOL "circle"
+    END
+    STYLE
+      ANGLE 360
+      COLOR 196 0 230
+      OPACITY 100
+      SIZE 4
+      SYMBOL "circle"
+    END
+    STYLE
+      ANGLE 360
+      COLOR 0 0 0
+      OPACITY 100
+      SIZE 1
+      SYMBOL "circle"
+    END
+  END
+  CLASS
+    EXPRESSION ( '[construct]' eq 'Bär' )
+    STYLE
+      ANGLE 360
+      COLOR 0 0 0
+      OPACITY 100
+      SIZE 6
+      SYMBOL "circle"
+    END
+    STYLE
+      ANGLE 360
+      COLOR 296 0 130
+      OPACITY 100
+      SIZE 4
+      SYMBOL "circle"
+    END
+    STYLE
+      ANGLE 360
+      COLOR 0 0 0
+      OPACITY 100
+      SIZE 1
+      SYMBOL "circle"
+    END
+  END
+END

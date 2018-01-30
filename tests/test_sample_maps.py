@@ -93,6 +93,16 @@ def test_two_includes():
     assert(output == expected)
 
 
+def test_non_ascii():
+    p = Parser()
+
+    ast = p.parse_file('./tests/samples/non_ascii.map')
+    m = MapfileToDict()
+
+    d = (m.transform(ast))  # works
+    print(mappyfile.dumps(d))
+
+
 def run_tests():
     pytest.main(["tests/test_sample_maps.py"])
 
@@ -100,5 +110,6 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
-    run_tests()
+    # run_tests()
+    test_non_ascii()
     print("Done!")
