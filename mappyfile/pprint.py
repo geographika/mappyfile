@@ -283,6 +283,30 @@ class PrettyPrinter(object):
         result = self.newlinechar.join(lines)
         return result
 
+    def resolve_references(self, resolver, attr_props):
+        """
+        See https://spacetelescope.github.io/understanding-json-schema/reference/combining.html
+        Doesn't handle nested references - but we always access from the parent composite item
+        so this should not be required
+        Also no need to resolve array items - resolve(attr_props["items"])
+        The type is sufficient here
+        """
+
+        def resolve(prop):
+            if "$ref" in prop.keys():
+                _, prop = resolver.resolve(prop["$ref"])
+            return prop
+
+        combined_keys = ["oneOf", "anyOf"]
+        for k in combined_keys:
+            if k in attr_props.keys():
+                attr_props[k] = [resolve(op) for op in attr_props[k]]
+
+        if "$ref" in attr_props:
+            attr_props = resolve(attr_props)
+
+        return attr_props
+
     def get_attribute_properties(self, type_, attr):
 
         validator = self.validator.get_validator(type_)
@@ -291,7 +315,8 @@ class PrettyPrinter(object):
 
         props = jsn_schema["properties"]
 
-        # check if a value needs to be quoted or not, by referring to the Json schema
+        # check if a value needs to be quoted or not, by referring to the JSON schema
+
         try:
             attr_props = props[attr]
         except KeyError as ex:
@@ -299,10 +324,7 @@ class PrettyPrinter(object):
             log.error(ex)
             return {}
 
-        if "$ref" in attr_props:
-            _, attr_props = resolver.resolve(attr_props["$ref"])
-
-        return attr_props
+        return self.resolve_references(resolver, attr_props)
 
     def is_expression(self, option):
         return "description" in option and (option["description"] == "expression")

@@ -346,6 +346,28 @@ def test_get_ref_attribute_properties():
     assert(len(props["enum"]) == 2)
 
 
+def test_get_label_shadowcolor_properties():
+    # check a single ref is resolved
+    pp = PrettyPrinter()
+    props = pp.get_attribute_properties("label", "shadowcolor")
+    print(props)
+    assert(len(props["oneOf"]) == 2)
+
+
+def test_get_label_position_properties():
+    pp = PrettyPrinter()
+    props = pp.get_attribute_properties("label", "position")
+    assert(props["oneOf"][1]["enum"] == [u'ul', u'uc', u'ur', u'cl', u'cc', u'cr', u'll', u'lc', u'lr'])
+
+
+def test_map_layers_props():
+    pp = PrettyPrinter()
+    props = pp.get_attribute_properties("map", "layers")
+    print(props)
+    # assert(props["type"] == "object")
+    assert(props["type"] == "array")
+
+
 def run_tests():
     # pytest.main(["tests/test_pprint.py::test_format_list"])
     pytest.main(["tests/test_pprint.py"])
@@ -353,7 +375,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    # run_tests()
-    test_already_escaped()
-    # test_nested_quotes()
+    # test_get_ref_attribute_properties()
+    run_tests()
     print("Done!")

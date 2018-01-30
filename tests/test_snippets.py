@@ -774,6 +774,23 @@ def test_filename():
     assert(output(s, schema_name="web") == exp)
 
 
+def test_label_position_uc():
+
+    s = """
+    LABEL
+      COLOR  0 0 0
+      FONT Vera
+      TYPE truetype
+      SIZE 8
+      POSITION UC
+      PARTIALS FALSE
+      OUTLINECOLOR 255 255 255
+    END
+    """
+    exp = "LABEL COLOR 0 0 0 FONT 'Vera' TYPE TRUETYPE SIZE 8 POSITION UC PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
+    assert(output(s, schema_name="label") == exp)
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -786,6 +803,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    # test_filename()
-    run_tests()
+    test_label_position_uc()
+    # run_tests()
     print("Done!")
