@@ -9,7 +9,7 @@ log = logging.getLogger("mappyfile")
 
 class Parser(object):
 
-    def __init__(self, expand_includes=True, keep_comments=True):
+    def __init__(self, expand_includes=True, keep_comments=False):
         self.expand_includes = expand_includes
         self.keep_comments = keep_comments
         self._comments = []
@@ -90,7 +90,6 @@ class Parser(object):
             log.error("Parsing of Mapfile unsuccessful")
             log.info(ex)
             raise
-
 
 
 def assign_comments(tree, comments):
