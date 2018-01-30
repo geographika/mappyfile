@@ -230,22 +230,6 @@ def test_label():
     assert(output(s, schema_name="label") == exp)
 
 
-def test_label_position_uc():
-    s = """
-    LABEL
-      COLOR  0 0 0
-      FONT Vera
-      TYPE truetype
-      SIZE 8
-      POSITION UC
-      PARTIALS FALSE
-      OUTLINECOLOR 255 255 255
-    END
-    """
-    exp = "LABEL COLOR 0 0 0 FONT 'Vera' TYPE TRUETYPE SIZE 8 POSITION UC PARTIALS FALSE OUTLINECOLOR 255 255 255 END"
-    assert(output(s, schema_name="label") == exp)
-
-
 def test_output_format():
 
     s = """
