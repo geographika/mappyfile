@@ -4,7 +4,8 @@ import logging
 import pytest
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.parser import Parser
-from mappyfile.transformer import MapfileToDict
+from mappyfile.transformer import MapfileToDict, CommentsTransformer
+
 
 def test_comment():
     d = collections.OrderedDict()
@@ -78,27 +79,35 @@ END"""
     assert(s == exp)
 
 
-def test_comment_parsing():
+def xtest_comment_parsing():
 
     s = """
     # Map comment 1
     # Map comment 2
     MAP
     NAME 'Test' # Name comment
-    TYPE POLYGON # Type comment
-    END
-
     # Layer comment
     LAYER
-
+    TYPE POLYGON # Type comment
+    END
     END"""
 
     p = Parser()
+    m = MapfileToDict(include_position=False)
+    m2 = CommentsTransformer(m)
+
     ast = p.parse(s)
     print(ast.pretty())
-    m = MapfileToDict()
-    d = json.dumps(m.transform(ast))
-    print(d)
+
+    ast = m2.transform(ast)   # transform only attr, composite and their descendants
+    # print(ast.pretty())
+    d = m.transform(ast)      # transform the rest
+
+    print(json.dumps(d, indent=4))
+
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
+    s = pp.pprint(d)
+    print(s)
 
 
 def run_tests():
