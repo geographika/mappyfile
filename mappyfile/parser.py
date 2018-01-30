@@ -103,9 +103,9 @@ def assign_comments(tree, comments):
     idx = []
     for i in range(max(idx_by_line.keys()), 0, -1):
         if i in idx_by_line:
-            idx.append( idx_by_line[i] )
+            idx.append(idx_by_line[i])
         else:
-            idx.append( idx[-1] )
+            idx.append(idx[-1])
     idx.append(0)
     idx.reverse()
 
