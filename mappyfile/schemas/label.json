@@ -121,7 +121,9 @@
         },
         "position": {
             "oneOf": [
-                { "enum": [ "auto" ] },
+                {
+                    "enum": [ "auto" ]
+                },
                 {
                     "$ref": "position.json"
                 }
