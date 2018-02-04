@@ -5,13 +5,13 @@ For a great introduction to Lark, the general purpose parsing library used by ma
 `Lark reference page <https://github.com/erezsh/lark/blob/master/docs/reference.md>`_. 
 
 The full Mapfile grammar file is shown at the end of this page. The latest version can be seen `here on 
-GitHub <https://github.com/geographika/mappyfile/blob/master/mappyfile/mapfile.g>`_. 
+GitHub <https://github.com/geographika/mappyfile/blob/master/mappyfile/mapfile.lalr.g>`_. 
 
 A Simple Example
 ----------------
 
-The easiest way to understand how the parser and grammar work is to go through a short example. We will use the Mapfile snippet 
-below to parse and turn into an AST (Abstract Syntax Tree). 
+The easiest way to understand how the parser and grammar work is to go through a short example. 
+We will use the Mapfile snippet below to parse and turn into an AST (Abstract Syntax Tree). 
 
 .. code-block:: mapfile
 
@@ -27,9 +27,24 @@ The tree is stored as a Python object, shown below:
 
 .. code-block:: python
 
-    Tree(start, [Tree(composite, [Tree(composite_type, [Token(__MAP32, 'MAP')]), Tree(attr, [Tree(attr_name, [Token(NAME, 'NAME')]), Tree(string, [Token(STRING2, "'Test'")])])])])
+    Tree(start, [Tree(composite, [Tree(composite_type, [Token(__MAP39, 'MAP')]), 
+    Tree(composite_body, [Tree(attr, [Token(UNQUOTED_STRING, 'NAME'), 
+    Tree(string, [Token(SINGLE_QUOTED_STRING, "'Test'")])])])])])
 
-The grammar file contains rules and `terminals <http://www.parsifalsoft.com/gloss.html#Terminal>`_, and the parser matches these to the input text to create the tree. 
+This can formatted as follows:
+
+.. code-block:: bat
+
+    start
+      composite
+        composite_type	MAP
+        composite_body
+          attr
+            NAME
+            string	'Test'
+
+The grammar file contains rules and `terminals <http://www.parsifalsoft.com/gloss.html#Terminal>`_, 
+and the parser matches these to the input text to create the tree. 
 
 We will now go through all the rules matched by our example Mapfile. 
 
@@ -37,27 +52,26 @@ The first rule ``start`` will always be at the root of the tree:
 
 .. code-block:: javascript
 
-    start: _NL* composite _NL*
+    start: composite+
 
-The rule checks for a ``composite`` rule, surrounded by zero to many (denoted by **\***) new lines. 
-The newline terminal ``_NL`` is defined at the end of the grammar file. 
+The rule checks for a ``composite`` rule, followed by a plus sign, indicating one or more 
+composite types should be found in the input.
 
 Next we'll look at the ``composite`` rule:
 
 .. code-block:: javascript
 
-    composite: composite_type attr? _NL+ composite_body _END
-           | composite_type points _END
-           | composite_type pattern _END
-           | composite_type attr _END
+    composite: composite_type composite_body _END
+           | metadata
+           | validation
 
 This rule is matched by a list of options - each on its own line starting with the **|** (pipe) character. When writing or debugging a grammar
 you can comment out options to see which one matches for a particular input. 
 
-In our example the Mapfile matches the last option ``composite_type attr _END``, which can be broken down as follows:
+In our example the Mapfile matches the first option ``composite_type composite_body _END``, which can be broken down as follows:
 
 + a ``composite_type`` rule (in this case ``MAP``)
-+ an ``attr`` rule
++ a ``composite_body`` rule
 + the ``_END`` terminal (the literal string "END")
 
 As each rule creates a new branch on the tree a new ``composite`` branch is created from the ``start`` branch. 
@@ -65,23 +79,24 @@ As each rule creates a new branch on the tree a new ``composite`` branch is crea
 .. code-block:: javascript
 
     !composite_type: "CLASS"i // i here is used for case insensitive matches, so CLASS, Class, or class will all be matched             
-                | "LEGEND"i
+                | "CLUSTER"i
                 | "MAP"i
                 // list cut for brevity
 
-The ``composite_type`` rule again has a list of options, but in this case consists of string literals. The **!** before the rule name means the 
-rule will keep all their terminals. Without the **!** the tree would look as below - note the ``MAP`` value is missing from the ``composite_type`` branch. 
+The ``composite_type`` rule again has a list of options, but in this case consists of string literals. 
+The **!** before the rule name means the rule will keep all their terminals. 
+Without the **!** the tree would look as below - note the ``MAP`` value is missing from the ``composite_type`` branch. 
 
 .. image:: images/tree_no_terminals.png
 
-Next we look at the ``attr`` rule:
+Next let's look at the ``attr`` rule:
 
 .. code-block:: javascript
   
     attr: attr_name value+
 
-This consists of 2 further rules. An ``attr_name`` match and one or more ``value`` rules (the + denotes one or more matches). A new ``attr``
-branch is added to the tree with these rules as children. 
+This consists of 2 further rules. An ``attr_name`` match and one or more ``value`` rules (as noted above 
+the + denotes one or more matches). A new ``attr`` branch is added to the tree with these rules as children. 
 
 The ``attr_name`` rule is as follows:
 
@@ -89,7 +104,8 @@ The ``attr_name`` rule is as follows:
 
     attr_name: NAME | composite_type
     
-In our example the rule is matched by the ``NAME`` terminal (the alternative is a ``composite_type``). This is defined using a regular expression to match a string:
+In our example the rule is matched by the ``NAME`` terminal (the alternative is a ``composite_type``). 
+This is defined using a regular expression to match a string:
 
 .. code-block:: javascript
 
@@ -190,3 +206,5 @@ The full Mapfile grammar is shown below.
 		STYLE HILIYE
 
 	Style is also a composite
+
+    Newlines ignored
