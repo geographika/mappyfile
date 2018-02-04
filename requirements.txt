@@ -1,5 +1,6 @@
 colorama
 jsonschema
+jsonref==0.1
 py
 pydot
 pyparsing

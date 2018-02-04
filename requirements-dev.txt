@@ -11,4 +11,5 @@ pytest-cov
 tox
 virtualenv
 jsonschema
+jsonref==0.1
 glob2
