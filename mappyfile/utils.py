@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter

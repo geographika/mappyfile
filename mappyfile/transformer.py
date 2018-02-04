@@ -3,6 +3,7 @@ Module to transform an AST (Abstract Syntax Tree) to a
 Python dict structure
 """
 
+from __future__ import unicode_literals
 import sys
 from collections import OrderedDict
 from lark import Transformer
@@ -149,7 +150,7 @@ class MapfileToDict(Transformer):
             else:
                 #  simple attribute
                 pos = d.pop("__position__")
-                d.pop("__tokens__", None)  # no longer needed
+                d.pop("__tokens__", None)  # tokens are no longer needed now we have the positions
                 key_name = self.get_single_key(d)
 
                 if key_name == "config":

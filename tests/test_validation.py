@@ -304,7 +304,9 @@ def test_deref():
     """
     v = Validator()
     schema_name = "cluster"
-    jsn_schema, resolver = v.get_schema(schema_name)
+    validator = v.get_schema_validator(schema_name)
+    jsn_schema = validator.schema
+
     print(json.dumps(jsn_schema, indent=4))
     print(jsn_schema["properties"]["filter"])
     assert(jsn_schema["properties"]["filter"].keys()[0] == "$ref")
@@ -320,11 +322,13 @@ def test_cached_schema():
     """
     v = Validator()
     schema_name = "cluster"
-    jsn_schema, resolver = v.get_schema(schema_name)
+    validator = v.get_schema_validator(schema_name)
+    jsn_schema = validator.schema
     assert(jsn_schema["properties"]["filter"].keys()[0] == "$ref")
 
     # get the schame again
-    jsn_schema, resolver = v.get_schema(schema_name)
+    validator = v.get_schema_validator(schema_name)
+    jsn_schema = validator.schema
     assert(jsn_schema["properties"]["filter"].keys()[0] == "$ref")
 
 def test_cached_expanded_schema():

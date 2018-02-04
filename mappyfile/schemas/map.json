@@ -27,7 +27,7 @@
       "type": "string"
     },
     "debug": {
-      "$ref": "debug.json"
+      "$refss": "debug.json"
     },
     "defresolution": {
       "type": "integer"

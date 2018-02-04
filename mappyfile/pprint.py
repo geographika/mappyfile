@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import sys
 import logging
 import numbers
@@ -284,19 +285,17 @@ class PrettyPrinter(object):
 
     def get_attribute_properties(self, type_, attr):
 
-        jsn_schema, resolver = self.validator.get_schema(type_)
+        jsn_schema = self.validator.get_expanded_schema(type_)
         props = jsn_schema["properties"]
 
-        # check if a value needs to be quoted or not, by referring to the Json schema
+        # check if a value needs to be quoted or not, by referring to the JSON schema
+
         try:
             attr_props = props[attr]
         except KeyError as ex:
             log.error("The key '{}' was not found in the JSON schema for '{}'".format(attr, type_))
             log.error(ex)
             return {}
-
-        if "$ref" in attr_props:
-            _, attr_props = resolver.resolve(attr_props["$ref"])
 
         return attr_props
 
