@@ -29,9 +29,13 @@ uri = "file:///D:/GitHub/mappyfile/mappyfile/schemas/"
 with open(fn) as f:
     j = jsonref.load(f, base_uri=uri)
 
-print(jsonref.dumps(j, indent=4, sort_keys=False))
+jsn = jsonref.dumps(j, indent=4, sort_keys=False)
+
+with open(r"D:\Temp\mapfile.json", "w") as f:
+    f.write(jsonref.dumps(j, indent=4, sort_keys=False))
 
 ## The JsonRef.replace_refs class method will return a copy of the document
 ## with refs replaced by :class:`JsonRef` objects
 #pprint(JsonRef.replace_refs(document))
 
+print("Done!")
