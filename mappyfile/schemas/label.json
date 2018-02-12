@@ -137,7 +137,8 @@
       ]
     },
     "repeatdistance": {
-      "type": "integer"
+      "type": "integer",
+      "default":  0
     },
     "shadowcolor": {
       "$ref": "color.json"
