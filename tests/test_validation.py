@@ -309,11 +309,11 @@ def test_deref():
 
     print(json.dumps(jsn_schema, indent=4))
     print(jsn_schema["properties"]["filter"])
-    assert(jsn_schema["properties"]["filter"].keys()[0] == "$ref")
+    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
     deref_schema = v.get_expanded_schema(schema_name)
     print(json.dumps(deref_schema, indent=4))
     print(deref_schema["properties"]["filter"])
-    assert(deref_schema["properties"]["filter"].keys()[0] == "anyOf")
+    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
 
 
 def test_cached_schema():
@@ -324,12 +324,12 @@ def test_cached_schema():
     schema_name = "cluster"
     validator = v.get_schema_validator(schema_name)
     jsn_schema = validator.schema
-    assert(jsn_schema["properties"]["filter"].keys()[0] == "$ref")
+    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
 
     # get the schame again
     validator = v.get_schema_validator(schema_name)
     jsn_schema = validator.schema
-    assert(jsn_schema["properties"]["filter"].keys()[0] == "$ref")
+    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
 
 
 def test_cached_expanded_schema():
@@ -340,11 +340,11 @@ def test_cached_expanded_schema():
     schema_name = "cluster"
 
     deref_schema = v.get_expanded_schema(schema_name)
-    assert(deref_schema["properties"]["filter"].keys()[0] == "anyOf")
+    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
 
     # get the schame again
     deref_schema = v.get_expanded_schema(schema_name)
-    assert(deref_schema["properties"]["filter"].keys()[0] == "anyOf")
+    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
 
 
 def run_tests():
