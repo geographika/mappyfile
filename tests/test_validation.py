@@ -331,6 +331,7 @@ def test_cached_schema():
     jsn_schema = validator.schema
     assert(jsn_schema["properties"]["filter"].keys()[0] == "$ref")
 
+
 def test_cached_expanded_schema():
     """
     Check that the full schema properties have been expanded
@@ -344,6 +345,7 @@ def test_cached_expanded_schema():
     # get the schame again
     deref_schema = v.get_expanded_schema(schema_name)
     assert(deref_schema["properties"]["filter"].keys()[0] == "anyOf")
+
 
 def run_tests():
     """
