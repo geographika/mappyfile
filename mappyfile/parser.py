@@ -2,7 +2,7 @@ import os
 import logging
 from io import open
 from lark import Lark, ParseError, Tree
-from lark.lexer import UnexpectedInput
+from lark.lexer import UnexpectedInput, Token
 
 log = logging.getLogger("mappyfile")
 
@@ -73,6 +73,12 @@ class Parser(object):
         return self.parse(text, fn=fn)
 
     def assign_comments(self, tree, comments):
+        """
+        Capture any comments in the tree
+
+        header_comments stores comments preceeding a node
+
+        """
         comments = list(comments)
         comments.sort(key=lambda c: c.line)
 
@@ -81,6 +87,10 @@ class Parser(object):
             if c.line not in idx_by_line:
                 idx_by_line[c.line] = i
         idx = []
+
+        # convert comment tokens to strings
+        comments = [c.value for c in comments]
+
         for i in range(max(idx_by_line.keys()), 0, -1):
             if i in idx_by_line:
                 idx.append(idx_by_line[i])
@@ -89,7 +99,7 @@ class Parser(object):
         idx.append(0)
         idx.reverse()
 
-        def _get_comments(self, from_line, to_line):
+        def _get_comments(from_line, to_line):
             if from_line >= len(idx):
                 return []
             from_idx = idx[from_line]
@@ -97,15 +107,24 @@ class Parser(object):
 
         def _assign_comments(_tree, prev_end_line):
             for node in _tree.children:
+
                 try:
                     line = node.line
                 except AttributeError:
                     assert not node.children
                     continue
 
-                node.line_comments = _get_comments(prev_end_line, line)
+                if isinstance(node, Token):
+                    continue
+                if node.data not in ("composite", "attr"):
+                    if isinstance(node, Tree):
+                        _assign_comments(node, line)
+                        continue
+
+                node.header_comments = _get_comments(prev_end_line, line)
                 if node.line == node.end_line:
-                    node.comments = _get_comments(line, line+1)
+                    # node is on a single line, so check for inline comments
+                    node.inline_comments = _get_comments(line, line+1)
                     prev_end_line = node.end_line + 1
                 else:
                     if isinstance(node, Tree):
@@ -127,6 +146,7 @@ class Parser(object):
             tree = self.lalr.parse(text)
             if self.keep_comments:
                 self.assign_comments(tree, self._comments)
+                log.debug(self._comments)
             return tree
         except (ParseError, UnexpectedInput) as ex:
             log.error("Parsing of Mapfile unsuccessful")

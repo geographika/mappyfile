@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import sys
 import logging
 import numbers
@@ -384,24 +383,40 @@ class PrettyPrinter(object):
         return line
 
     def format_comment(self, spacer, value):
-        return "{}# {}".format(spacer, value)
+        return "{}{}".format(spacer, value)
 
-    def process_comment(self, comments, key):
-
+    def process_composite_comment(self, level, comments, key):
+        """
+        Process comments for composites such as MAP, LAYER etc.
+        """
         if key not in comments:
             comment = ""
         else:
             value = comments[key]
-            if key == "__type__":
-                spacer = ""
-            else:
-                spacer = " "
+            spacer = self.whitespace(level, 0)
 
             if isinstance(value, list):
                 comments = [self.format_comment(spacer, v) for v in value]
                 comment = self.newlinechar.join(comments)
             else:
                 comment = self.format_comment(spacer, value)
+
+        return comment
+
+    def process_attribute_comment(self, comments, key):
+
+        if key not in comments:
+            comment = ""
+        else:
+            value = comments[key]
+            spacer = " "
+
+            # for multiple comments associated with an attribute
+            # simply join them together as a single string
+            if isinstance(value, list):
+                value = " ".join(value)
+
+            comment = self.format_comment(spacer, value)
 
         return comment
 
@@ -417,7 +432,7 @@ class PrettyPrinter(object):
             assert(type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES))
             is_hidden = False
 
-            comment = self.process_comment(comments, '__type__')
+            comment = self.process_composite_comment(level, comments, '__type__')
 
             if comment:
                 lines.append(comment)
@@ -452,7 +467,7 @@ class PrettyPrinter(object):
             else:
                 # standard key value pair
                 line = self.process_attribute(type_, attr, value, level)
-                line += self.process_comment(comments, attr)
+                line += self.process_attribute_comment(comments, attr)
                 lines.append(line)
 
         if not is_hidden:
