@@ -1,10 +1,10 @@
-from __future__ import unicode_literals
 import json
 import os
 import sys
 from collections import OrderedDict
 import logging
 import jsonschema
+import jsonref
 
 log = logging.getLogger("mappyfile")
 
@@ -17,6 +17,7 @@ class Validator(object):
 
     def __init__(self):
         self.schemas = {}
+        self.expanded_schemas = {}
 
     def get_schema_path(self, schemas_folder):
         """
@@ -37,29 +38,36 @@ class Validator(object):
 
         return root_schema_path
 
-    def get_validator(self, schema_name):
+    def get_schemas_folder(self):
+        return os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
+
+    def get_schema_file(self, schema_name):
+
+        schema_name += ".json"
+        schemas_folder = self.get_schemas_folder()
+        schema_file = os.path.join(schemas_folder, schema_name)
+
+        if not os.path.isfile(schema_file):
+            raise IOError("The file %s does not exist" % schema_file)
+
+        return schema_file
+
+    def get_schema_validator(self, schema_name):
         """
         Had to remove the id property from map.json or it uses URLs for validation
         See various issues at https://github.com/Julian/jsonschema/pull/306
         """
 
-        schema_name += ".json"
-
         if schema_name not in self.schemas.keys():
-
-            schemas_folder = os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
-            schema_file = os.path.join(schemas_folder, schema_name)
-
-            if not os.path.isfile(schema_file):
-                raise IOError("The file %s does not exist" % schema_file)
-
+            schema_file = self.get_schema_file(schema_name)
             with open(schema_file) as f:
                 try:
-                    jsn_schema = json.loads(f.read())
+                    jsn_schema = json.load(f)
                 except ValueError as ex:
                     log.error("Could not load %s", schema_file)
                     raise ex
 
+            schemas_folder = self.get_schemas_folder()
             root_schema_path = self.get_schema_path(schemas_folder)
             resolver = jsonschema.RefResolver(root_schema_path, None)
             # cache the schema for future use
@@ -127,7 +135,7 @@ class Validator(object):
 
     def validate(self, value, add_messages=False, schema_name="map"):
 
-        validator = self.get_validator(schema_name)
+        validator = self.get_schema_validator(schema_name)
 
         errors = []
 
@@ -138,3 +146,22 @@ class Validator(object):
             errors = self._validate(value, validator, add_messages, schema_name)
 
         return errors
+
+    def get_expanded_schema(self, schema_name):
+        """
+        Return a schema file with all $ref properties expanded
+        """
+        if schema_name not in self.expanded_schemas.keys():
+            fn = self.get_schema_file(schema_name)
+            schemas_folder = self.get_schemas_folder()
+            base_uri = self.get_schema_path(schemas_folder)
+
+            with open(fn) as f:
+                jsn_schema = jsonref.load(f, base_uri=base_uri)
+
+                # cache the schema for future use
+                self.expanded_schemas[schema_name] = jsn_schema
+        else:
+            jsn_schema = self.expanded_schemas[schema_name]
+
+        return jsn_schema

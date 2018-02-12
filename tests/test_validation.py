@@ -195,6 +195,20 @@ def test_hexcolor_validation_fail():
     assert(len(errors) == 1)
 
 
+def test_nested_validation():
+    s = """
+    MAP
+        LAYER
+            TYPE POLYGON
+            EXTENT 0 0 0
+        END
+    END
+    """
+    errors = validate(s)
+    print(errors)
+    assert(len(errors) == 1)
+
+
 def test_lowercase():
 
     s = """
@@ -284,6 +298,55 @@ def test_add_messages():
     print(res)
 
 
+def test_deref():
+    """
+    Check that the full schema properties have been expanded
+    """
+    v = Validator()
+    schema_name = "cluster"
+    validator = v.get_schema_validator(schema_name)
+    jsn_schema = validator.schema
+
+    print(json.dumps(jsn_schema, indent=4))
+    print(jsn_schema["properties"]["filter"])
+    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
+    deref_schema = v.get_expanded_schema(schema_name)
+    print(json.dumps(deref_schema, indent=4))
+    print(deref_schema["properties"]["filter"])
+    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
+
+
+def test_cached_schema():
+    """
+    Check that the full schema properties have been expanded
+    """
+    v = Validator()
+    schema_name = "cluster"
+    validator = v.get_schema_validator(schema_name)
+    jsn_schema = validator.schema
+    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
+
+    # get the schame again
+    validator = v.get_schema_validator(schema_name)
+    jsn_schema = validator.schema
+    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
+
+
+def test_cached_expanded_schema():
+    """
+    Check that the full schema properties have been expanded
+    """
+    v = Validator()
+    schema_name = "cluster"
+
+    deref_schema = v.get_expanded_schema(schema_name)
+    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
+
+    # get the schame again
+    deref_schema = v.get_expanded_schema(schema_name)
+    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -296,5 +359,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     run_tests()
-    # test_add_messages()
+    # test_deref()
     print("Done!")

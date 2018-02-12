@@ -1,7 +1,7 @@
 """
 Create MapServer class diagrams
 
-Requires http://www.graphviz.org/Download_windows.php
+Requires https://graphviz.gitlab.io/_pages/Download/Download_windows.html
 https://stackoverflow.com/questions/1494492/graphviz-how-to-go-from-dot-to-a-graph
 
 For DOT languge see http://www.graphviz.org/doc/info/attrs.html

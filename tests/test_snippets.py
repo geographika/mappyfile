@@ -791,23 +791,6 @@ def test_label_position_uc():
     assert(output(s, schema_name="label") == exp)
 
 
-def test_style_geotransform():
-    """
-    GEOMTRANSFORM "end" (since END is used to end objects in the map file, end must be embedded in quotes)
-    http://mapserver.org/mapfile/geomtransform.html#end-and-start    
-    """
-    s = """                                                                         
-    STYLE                                                                           
-        SIZE 0                                                                        
-        GEOMTRANSFORM "end"                                                           
-    END                                                                             
-    """                                                                             
-      
-    print(output(s, schema_name="style"))                                                                         
-    exp = "STYLE SIZE 0 GEOMTRANSFORM 'end' END"
-    assert(output(s, schema_name="style") == exp)
-
-
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -820,6 +803,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_style_geotransform()
-    # run_tests()
+    # test_label_position_uc()
+    run_tests()
     print("Done!")

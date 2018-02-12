@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import sys
 import logging
 import numbers
@@ -283,36 +282,9 @@ class PrettyPrinter(object):
         result = self.newlinechar.join(lines)
         return result
 
-    def resolve_references(self, resolver, attr_props):
-        """
-        See https://spacetelescope.github.io/understanding-json-schema/reference/combining.html
-        Doesn't handle nested references - but we always access from the parent composite item
-        so this should not be required
-        Also no need to resolve array items - resolve(attr_props["items"])
-        The type is sufficient here
-        """
-
-        def resolve(prop):
-            if "$ref" in prop.keys():
-                _, prop = resolver.resolve(prop["$ref"])
-            return prop
-
-        combined_keys = ["oneOf", "anyOf"]
-        for k in combined_keys:
-            if k in attr_props.keys():
-                attr_props[k] = [resolve(op) for op in attr_props[k]]
-
-        if "$ref" in attr_props:
-            attr_props = resolve(attr_props)
-
-        return attr_props
-
     def get_attribute_properties(self, type_, attr):
 
-        validator = self.validator.get_validator(type_)
-        jsn_schema = validator.schema
-        resolver = validator.resolver
-
+        jsn_schema = self.validator.get_expanded_schema(type_)
         props = jsn_schema["properties"]
 
         # check if a value needs to be quoted or not, by referring to the JSON schema
@@ -324,7 +296,7 @@ class PrettyPrinter(object):
             log.error(ex)
             return {}
 
-        return self.resolve_references(resolver, attr_props)
+        return attr_props
 
     def is_expression(self, option):
         return "description" in option and (option["description"] == "expression")
@@ -415,24 +387,40 @@ class PrettyPrinter(object):
         return line
 
     def format_comment(self, spacer, value):
-        return "{}# {}".format(spacer, value)
+        return "{}{}".format(spacer, value)
 
-    def process_comment(self, comments, key):
-
+    def process_composite_comment(self, level, comments, key):
+        """
+        Process comments for composites such as MAP, LAYER etc.
+        """
         if key not in comments:
             comment = ""
         else:
             value = comments[key]
-            if key == "__type__":
-                spacer = ""
-            else:
-                spacer = " "
+            spacer = self.whitespace(level, 0)
 
             if isinstance(value, list):
                 comments = [self.format_comment(spacer, v) for v in value]
                 comment = self.newlinechar.join(comments)
             else:
                 comment = self.format_comment(spacer, value)
+
+        return comment
+
+    def process_attribute_comment(self, comments, key):
+
+        if key not in comments:
+            comment = ""
+        else:
+            value = comments[key]
+            spacer = " "
+
+            # for multiple comments associated with an attribute
+            # simply join them together as a single string
+            if isinstance(value, list):
+                value = " ".join(value)
+
+            comment = self.format_comment(spacer, value)
 
         return comment
 
@@ -448,7 +436,7 @@ class PrettyPrinter(object):
             assert(type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES))
             is_hidden = False
 
-            comment = self.process_comment(comments, '__type__')
+            comment = self.process_composite_comment(level, comments, '__type__')
 
             if comment:
                 lines.append(comment)
@@ -483,7 +471,7 @@ class PrettyPrinter(object):
             else:
                 # standard key value pair
                 line = self.process_attribute(type_, attr, value, level)
-                line += self.process_comment(comments, attr)
+                line += self.process_attribute_comment(comments, attr)
                 lines.append(line)
 
         if not is_hidden:

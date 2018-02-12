@@ -49,3 +49,5 @@ Alert deprecated keywords? This appears to be a suggested feature of JSON Schema
 	Examples of snippets and validating against sub-schemas
 
 	additionalProperties true to allow for metadata such as __position__
+
+    Any named symmbols which do not exist cause mappyscript to crash

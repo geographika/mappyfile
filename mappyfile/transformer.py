@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 import sys
 from collections import OrderedDict
 from lark import Transformer
+from lark.tree import Transformer_NoRecurse
 from lark.lexer import Token
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES
@@ -19,11 +20,31 @@ if PY2:
     str = unicode # NOQA
 
 
-class MapfileToDict(Transformer):
+class MapfileToDict(object):
 
-    def __init__(self, include_position=False):
+    def __init__(self, include_position=False, include_comments=False):
         self.quoter = Quoter()
         self.include_position = include_position
+        self.include_comments = include_comments
+
+    def transform(self, tree):
+
+        mapfile_transformer = MapfileTransformer(include_position=self.include_position,
+                                                 include_comments=self.include_comments)
+
+        if self.include_comments:
+            comments_transformer = CommentsTransformer(mapfile_transformer)
+            tree = comments_transformer.transform(tree)
+
+        return mapfile_transformer.transform(tree)
+
+
+class MapfileTransformer(Transformer):
+
+    def __init__(self, include_position=False, include_comments=False):
+        self.quoter = Quoter()
+        self.include_position = include_position
+        self.include_comments = include_comments
 
     def key_name(self, token):
         return token.value.lower()
@@ -135,6 +156,9 @@ class MapfileToDict(Transformer):
             pd = self.create_position_dict(key_token, None)
             composite_dict["__position__"] = pd
 
+        if self.include_comments:
+            comments_dict = composite_dict["__comments__"] = OrderedDict()
+
         for d in attribute_dicts:
             keys = d.keys()
             if "__type__" in keys:
@@ -151,6 +175,8 @@ class MapfileToDict(Transformer):
                 #  simple attribute
                 pos = d.pop("__position__")
                 d.pop("__tokens__", None)  # tokens are no longer needed now we have the positions
+                comments = d.pop("__comments__", None)
+
                 key_name = self.get_single_key(d)
 
                 if key_name == "config":
@@ -212,6 +238,10 @@ class MapfileToDict(Transformer):
                     if self.include_position:
                         # hoist position details to composite
                         pd[key_name] = pos
+                    if self.include_comments and comments:
+                        # hoist comments to composite
+                        comments_dict[key_name] = comments
+
                     composite_dict[key_name] = d[key_name]
 
         return composite_dict
@@ -559,5 +589,36 @@ class MapfileToDict(Transformer):
     def list(self, t):
         # http://www.mapserver.org/mapfile/expressions.html#list-expressions
         v = t[0]
-        v.value = "{%s}" % ",".join([str(s) for s in t])
+        list_values = ",".join([str(s) for s in t])
+        v.value = "{%s}" % list_values
         return v
+
+
+class CommentsTransformer(Transformer_NoRecurse):
+
+    def __init__(self, mapfile_todict):
+        self._mapfile_todict = mapfile_todict
+
+    def get_comments(self, tree):
+        all_comments = []
+
+        if hasattr(tree, 'inline_comments'):
+            all_comments += tree.inline_comments
+
+        if hasattr(tree, 'header_comments'):
+            all_comments += tree.header_comments
+
+        return all_comments
+
+    def _save_attr_comments(self, tree):
+        d = self._mapfile_todict.transform(tree)
+        d["__comments__"] = self.get_comments(tree)
+        return d
+
+    def _save_composite_comments(self, tree):
+        d = self._mapfile_todict.transform(tree)
+        d["__comments__"]["__type__"] = self.get_comments(tree)
+        return d
+
+    attr = _save_attr_comments
+    composite = _save_composite_comments
