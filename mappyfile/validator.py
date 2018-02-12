@@ -156,7 +156,7 @@ class Validator(object):
             schemas_folder = self.get_schemas_folder()
             base_uri = self.get_schema_path(schemas_folder)
 
-            with open (fn) as f:
+            with open(fn) as f:
                 jsn_schema = jsonref.load(f, base_uri=base_uri)
 
                 # cache the schema for future use
