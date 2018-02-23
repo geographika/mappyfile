@@ -111,5 +111,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
     # run_tests()
-    test_non_ascii()
+    test_includes()
     print("Done!")

@@ -42,8 +42,17 @@ class Parser(object):
                 if _nested_includes == 5:
                     raise Exception("Maximum nested include exceeded! (MaxNested=5)")
 
-                inc, inc_file_path = l.split()
+                if "#" in l:
+                    # remove any comments on the same line
+                    l = l.split("#")[0]
+
+                include_pairs = l.split()
+                if len(include_pairs) > 2:
+                    log.warning("Multiple include files have been found on the same line. " \
+                        "Only the first will be used. ")
+                inc_file_path = l.split()[1]
                 inc_file_path = self._strip_quotes(inc_file_path)
+
                 if not os.path.isabs(inc_file_path):
                     inc_file_path = os.path.join(os.path.dirname(fn), inc_file_path)
                 try:
