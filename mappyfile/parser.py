@@ -98,8 +98,8 @@ class Parser(object):
                 idx_by_line[c.line] = i
         idx = []
 
-        # convert comment tokens to strings
-        comments = [c.value for c in comments]
+        # convert comment tokens to strings, and remove any line breaks
+        comments = [c.value.strip() for c in comments]
 
         for i in range(max(idx_by_line.keys()), 0, -1):
             if i in idx_by_line:
