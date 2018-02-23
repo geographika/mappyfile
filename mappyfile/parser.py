@@ -27,9 +27,19 @@ class Parser(object):
             extra_args = {}
         return Lark(grammar_text, parser="lalr", lexer="contextual", **extra_args)
 
-    def _strip_quotes(self, s):
-        s = s[:s.index('#')] if '#' in s else s
-        return s.strip("'").strip('"')
+    def _get_include_filename(self, line):
+
+        if "#" in line:
+            # remove any comments on the same line
+            line = line.split("#")[0]
+
+        include_pairs = line.split()
+        if len(include_pairs) > 2:
+            log.warning("Multiple include files have been found on the same line. "
+                        "Only the first will be used. ")
+        inc_file_path = include_pairs[1]
+
+        return inc_file_path.strip("'").strip('"')
 
     def load_includes(self, text, fn=None, _nested_includes=0):
         # Per default use working directory of the process
@@ -42,16 +52,7 @@ class Parser(object):
                 if _nested_includes == 5:
                     raise Exception("Maximum nested include exceeded! (MaxNested=5)")
 
-                if "#" in l:
-                    # remove any comments on the same line
-                    l = l.split("#")[0]
-
-                include_pairs = l.split()
-                if len(include_pairs) > 2:
-                    log.warning("Multiple include files have been found on the same line. " \
-                        "Only the first will be used. ")
-                inc_file_path = l.split()[1]
-                inc_file_path = self._strip_quotes(inc_file_path)
+                inc_file_path = self._get_include_filename(l)
 
                 if not os.path.isabs(inc_file_path):
                     inc_file_path = os.path.join(os.path.dirname(fn), inc_file_path)
