@@ -1,5 +1,21 @@
 Releases
 --------
+0.6.2 (24/02/2018)
+++++++++++++++++++
+
++ New preserve comments feature - *experimental*
++ Add basic plugin system
++ Updates to schema docs (fixes for POSITION, AUTO, and added new default values)
++ Fix issue with comments on INCLUDE lines
++ `#50 <https://github.com/geographika/mappyfile/issues/50>`_ Allow END keyword for GEOTRANSFORM parameter
++ `#49 <https://github.com/geographika/mappyfile/issues/45>`_ Allow non-ASCII characters in parser
++ `#47 <https://github.com/geographika/mappyfile/issues/47>`_ Add in missing expression operators - 
+  divide, multiply, and power. 
+
+0.6.1 (06/02/2018)
+++++++++++++++++++
+
++ Fixes to setup.py
 
 0.6.0 (17/01/2018)
 ++++++++++++++++++

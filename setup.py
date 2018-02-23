@@ -16,7 +16,7 @@ setup(name='mappyfile',
       long_description=readme(),
       classifiers=[
           # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-          'Development Status :: 3 - Alpha',
+          'Development Status :: 4 - Beta',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.3',
