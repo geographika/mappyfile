@@ -184,7 +184,7 @@ class TermVisitor(docutils.nodes.GenericNodeVisitor):
             text = node.astext()
             key, values = clean_term(text)            
             if key:
-                if key in self.kwds_dict.keys():
+                if key in self.kwds_dict:
                     logging.warning("The key '%s' is already in the keywords dictionary! Ignoring '%s'", key, text)
                 else:
                     self.kwds_dict[key] = values

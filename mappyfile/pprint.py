@@ -240,7 +240,7 @@ class PrettyPrinter(object):
 
     def is_composite(self, val):
 
-        if isinstance(val, dict) and "__type__" in val.keys():
+        if isinstance(val, dict) and "__type__" in val:
             return True
         else:
             return False
@@ -427,7 +427,7 @@ class PrettyPrinter(object):
         # get any comments associated with the composite
         comments = composite.get("__comments__", {})
 
-        if isinstance(composite, dict) and '__type__' in composite.keys():
+        if isinstance(composite, dict) and '__type__' in composite:
             type_ = composite['__type__']
             assert(type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES))
             is_hidden = False
