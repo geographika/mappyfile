@@ -18,8 +18,8 @@ _composite_item: (composite|attr|points|projection|pattern|values|config)
 !validation: "VALIDATION"i string_pair* _END
 
 attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING)
-//attr: (UNQUOTED_STRING | SYMBOL | STYLE) (value | UNQUOTED_STRING)
-// STYLE and SYMBOL are listed in composite_type but also attribute names
+//attr: (UNQUOTED_STRING | SYMBOL) (value | UNQUOTED_STRING)
+// SYMBOL is listed in composite_type but is also an attribute name
 
 ?value: string | int | float | expression | not_expression | attr_bind | path
 | regexp | runtime_var | list | NULL | true | false | extent | rgb | hexcolor
@@ -98,7 +98,6 @@ func_params: value ("," value)*
             | SYMBOL
 
 SYMBOL: "SYMBOL"i
-STYLE: "STYLE"i
 
 AUTO: "AUTO"i
 PATH: /([a-z0-9_]*\.*\/|[a-z0-9_]+[.\/])[a-z0-9_\/\.-]+/i
