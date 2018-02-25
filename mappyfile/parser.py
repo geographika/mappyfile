@@ -9,9 +9,9 @@ log = logging.getLogger("mappyfile")
 
 class Parser(object):
 
-    def __init__(self, expand_includes=True, keep_comments=False):
+    def __init__(self, expand_includes=True, include_comments=False):
         self.expand_includes = expand_includes
-        self.keep_comments = keep_comments
+        self.include_comments = include_comments
         self._comments = []
         self.lalr = self._create_lalr_parser()
 
@@ -21,7 +21,7 @@ class Parser(object):
 
     def _create_lalr_parser(self):
         grammar_text = self.load_grammar("mapfile.lalr.g")
-        if self.keep_comments:
+        if self.include_comments:
             extra_args = dict(propagate_positions=True, lexer_callbacks={'COMMENT': self._comments.append})
         else:
             extra_args = {}
@@ -69,6 +69,94 @@ class Parser(object):
             lines.insert(idx, txt)
         return '\n'.join(lines)
 
+    def assign_comments(self, tree, comments):
+        """
+        Capture any comments in the tree
+
+        header_comments stores comments preceeding a node
+
+        """
+        comments = list(comments)
+        comments.sort(key=lambda c: c.line)
+
+        idx_by_line = {0: 0} # {line_no: comment_idx}
+
+        for i, c in enumerate(comments):
+            if c.line not in idx_by_line:
+                idx_by_line[c.line] = i
+
+        idx = []
+
+        # convert comment tokens to strings, and remove any line breaks
+        self.comments = [c.value.strip() for c in comments]
+        log.debug(self.comments)
+        last_comment_line = max(idx_by_line.keys())
+
+        # make a list with an entry for each line
+        # number associated with a comment list index
+
+        for i in range(last_comment_line, 0, -1):
+            if i in idx_by_line:
+                # associate line with new comment
+                idx.append(idx_by_line[i])
+            else:
+                # associate line with following comment
+                idx.append(idx[-1])
+
+        idx.append(0) # line numbers start from 1
+        idx.reverse()
+        self.idx = idx
+        log.debug(idx)
+        self._assign_comments(tree, 0)
+
+    def _get_comments(self, from_line, to_line):
+
+        idx = self.idx
+        comments = self.comments
+
+        if from_line >= len(idx):
+            return [] # no more comments
+
+        from_idx = idx[from_line]
+
+        if to_line < len(idx):
+            associated_comments = comments[from_idx:idx[to_line]]
+        else:
+            # get all remaining comments
+            associated_comments = comments[from_idx:]
+
+        return associated_comments
+
+    def _assign_comments(self, _tree, prev_end_line):
+
+        for node in _tree.children:
+            try:
+                line = node.line
+            except AttributeError:
+                assert not node.children
+                continue
+
+            if isinstance(node, Token):
+                continue
+            if node.data not in ("composite", "attr", "string_pair"):
+                if isinstance(node, Tree):
+                    self._assign_comments(node, prev_end_line)
+                    continue
+
+            node.header_comments = self._get_comments(prev_end_line, line)
+            if node.line == node.end_line:
+                # node is on a single line, so check for inline comments
+                node.inline_comments = self._get_comments(line, line +1)
+                prev_end_line = node.end_line + 1
+            else:
+                if isinstance(node, Tree):
+                    self._assign_comments(node, line)
+                prev_end_line = node.end_line
+
+    def load(self, fp):
+        text = fp.read()
+        return self.parse(text)
+
     def open_file(self, fn):
         try:
             # specify Unicode for Python 2.7
@@ -82,67 +170,6 @@ class Parser(object):
         text = self.open_file(fn)
         return self.parse(text, fn=fn)
 
-    def assign_comments(self, tree, comments):
-        """
-        Capture any comments in the tree
-
-        header_comments stores comments preceeding a node
-
-        """
-        comments = list(comments)
-        comments.sort(key=lambda c: c.line)
-
-        idx_by_line = {0: 0}
-        for i, c in enumerate(comments):
-            if c.line not in idx_by_line:
-                idx_by_line[c.line] = i
-        idx = []
-
-        # convert comment tokens to strings, and remove any line breaks
-        comments = [c.value.strip() for c in comments]
-
-        for i in range(max(idx_by_line.keys()), 0, -1):
-            if i in idx_by_line:
-                idx.append(idx_by_line[i])
-            else:
-                idx.append(idx[-1])
-        idx.append(0)
-        idx.reverse()
-
-        def _get_comments(from_line, to_line):
-            if from_line >= len(idx):
-                return []
-            from_idx = idx[from_line]
-            return comments[from_idx:idx[to_line]] if to_line < len(idx) else comments[from_idx:]
-
-        def _assign_comments(_tree, prev_end_line):
-            for node in _tree.children:
-
-                try:
-                    line = node.line
-                except AttributeError:
-                    assert not node.children
-                    continue
-
-                if isinstance(node, Token):
-                    continue
-                if node.data not in ("composite", "attr"):
-                    if isinstance(node, Tree):
-                        _assign_comments(node, line)
-                        continue
-
-                node.header_comments = _get_comments(prev_end_line, line)
-                if node.line == node.end_line:
-                    # node is on a single line, so check for inline comments
-                    node.inline_comments = _get_comments(line, line+1)
-                    prev_end_line = node.end_line + 1
-                else:
-                    if isinstance(node, Tree):
-                        _assign_comments(node, line)
-                    prev_end_line = node.end_line
-
-        _assign_comments(tree, 0)
-
     def parse(self, text, fn=None):
         """
         Parse the Mapfile
@@ -152,9 +179,9 @@ class Parser(object):
             text = self.load_includes(text, fn=fn)
 
         try:
-            self._comments[:] = []
+            self._comments[:] = [] # clear any comments from a previous parse
             tree = self.lalr.parse(text)
-            if self.keep_comments:
+            if self.include_comments:
                 self.assign_comments(tree, self._comments)
                 log.debug(self._comments)
             return tree
