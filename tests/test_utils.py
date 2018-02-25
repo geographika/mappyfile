@@ -4,19 +4,19 @@ import mappyfile
 import pytest
 
 
-def test_load():
+def test_open():
 
     fn = './tests/sample_maps/256_overlay_res.map'
-    d = mappyfile.load(fn)
+    d = mappyfile.open(fn)
     assert d["name"] == "TEST"
 
-    d = mappyfile.load(fn, expand_includes=False)
+    d = mappyfile.open(fn, expand_includes=False)
     assert d["name"] == "TEST"
 
-    d = mappyfile.load(fn, include_position=True)
+    d = mappyfile.open(fn, include_position=True)
     assert d["name"] == "TEST"
 
-    d = mappyfile.load(fn, include_comments=True)
+    d = mappyfile.open(fn, include_comments=True)
     assert d["name"] == "TEST"
 
 
@@ -43,11 +43,11 @@ def test_write():
     fn = tempfile.mktemp()
     d = mappyfile.loads(s)
     mappyfile.write(d, fn)
-    d = mappyfile.load(fn)
+    d = mappyfile.open(fn)
     assert d["name"] == "TEST"
 
     mappyfile.write(d, fn, indent=2, spacer="\t", quote="'", newlinechar="")
-    d = mappyfile.load(fn)
+    d = mappyfile.open(fn)
     assert d["name"] == "TEST"
 
 
@@ -70,6 +70,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    # run_tests()
-    test_dump()
+    run_tests()
+    # test_dump()
     print("Done!")
