@@ -1,7 +1,7 @@
 import mappyfile
 
 def test():
-    mapfile = mappyfile.load("./docs/examples/raster.map")
+    mapfile = mappyfile.open("./docs/examples/raster.map")
     # START OF API EXAMPLE
     # update the map name
     mapfile["name"] = "MyNewMap"

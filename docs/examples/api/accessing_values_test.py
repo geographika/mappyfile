@@ -3,7 +3,7 @@ import mappyfile
 def test():
     # START OF API EXAMPLE
     # load will accept a filename (loads will accept a string)
-    mapfile = mappyfile.load("./docs/examples/raster.map")
+    mapfile = mappyfile.open("./docs/examples/raster.map")
 
     # print the map name
     print(mapfile["name"]) # "MyMap"
