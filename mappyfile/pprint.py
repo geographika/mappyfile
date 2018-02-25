@@ -144,13 +144,19 @@ class PrettyPrinter(object):
         """
         Process key value dicts e.g. METADATA "key" "value"
         """
-        lines = [self.add_start_line(key, level)]
-        lines += self.process_dict(d, level)
+
+        # add any composite level comments
+        comments = d.get("__comments__", {})
+        lines = []
+        self._add_type_comment(level, comments, lines)
+
+        lines += [self.add_start_line(key, level)]
+        lines += self.process_dict(d, level, comments)
         lines.append(self.add_end_line(level, 1))
 
         return lines
 
-    def process_dict(self, d, level):
+    def process_dict(self, d, level, comments):
         """
         Process keys and values within a block
         """
@@ -160,9 +166,11 @@ class PrettyPrinter(object):
             if k in ("__comments__", "__position__"):
                 pass
             elif k != "__type__":
-                k = self.quoter.add_quotes(k)
-                v = self.quoter.add_quotes(v)
-                lines.append(self.__format_line(self.whitespace(level, 2), k, v))
+                qk = self.quoter.add_quotes(k)
+                qv = self.quoter.add_quotes(v)
+                line = self.__format_line(self.whitespace(level, 2), qk, qv)
+                line += self.process_attribute_comment(comments, k)
+                lines.append(line)
 
         return lines
 
@@ -420,6 +428,12 @@ class PrettyPrinter(object):
 
         return comment
 
+    def _add_type_comment(self, level, comments, lines):
+        comment = self.process_composite_comment(level, comments, '__type__')
+
+        if comment:
+            lines.append(comment)
+
     def _format(self, composite, level=0):
 
         lines = []
@@ -429,14 +443,9 @@ class PrettyPrinter(object):
 
         if isinstance(composite, dict) and '__type__' in composite:
             type_ = composite['__type__']
-            assert(type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES))
+            assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES)
             is_hidden = False
-
-            comment = self.process_composite_comment(level, comments, '__type__')
-
-            if comment:
-                lines.append(comment)
-
+            self._add_type_comment(level, comments, lines)
             s = self.whitespace(level, 0) + type_.upper()
             lines.append(s)
 
@@ -454,6 +463,7 @@ class PrettyPrinter(object):
                 # metadata and values are also composites
                 # but will be processed here
                 lines += self.process_key_dict(attr, value, level)
+
             elif attr == "projection":
                 lines += self.process_projection(attr, value, level)
             elif attr in ("processing", "formatoption", "include"):
