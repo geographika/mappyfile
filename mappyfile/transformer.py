@@ -336,11 +336,6 @@ class MapfileTransformer(Transformer):
         key, body = self.check_composite_tokens(type_, tokens)
         key_name = self.key_name(key)
 
-        # keys = [self.clean_string(t[0].value) for t in body]
-        # vals = [self.clean_string(t[1].value) for t in body]
-
-        # d = OrderedDict(zip(keys, vals))
-
         d = CaseInsensitiveOrderedDict(((self.clean_string(t[0].value), self.clean_string(t[1].value))
                                        for t in body))
 
@@ -626,6 +621,17 @@ class CommentsTransformer(Transformer_NoRecurse):
         comments = self.get_comments(tree)
         if comments:
             d["__comments__"]["__type__"] = comments
+
+        if d["__type__"] == "metadata":
+            md = tree.children[0].children
+            if len(md) > 2:
+                string_pairs = md[1:-1]
+                md_keys = [k for k in d.keys() if k not in ["__type__", "__comments__"]]
+                assert len(string_pairs) == len(md_keys)
+                for k, sp in zip(md_keys, string_pairs):
+                    key_comments = self.get_comments(sp)
+                    d["__comments__"][k] = key_comments
+
         return d
 
     attr = _save_attr_comments
