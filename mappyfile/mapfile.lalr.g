@@ -93,8 +93,8 @@ func_params: value ("," value)*
             | "REFERENCE"i
             | "SCALEBAR"i
             | "SCALETOKEN"i
+            | "STYLE"i
             | "WEB"i
-            | STYLE
             | SYMBOL
 
 SYMBOL: "SYMBOL"i
