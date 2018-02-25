@@ -7,7 +7,7 @@ from mappyfile.utils import load, loads, find, findall, dumps, write
 
 __version__ = "0.6.2"
 
-__all__ = ['load', 'loads', 'find', 'findall', 'dumps', 'write']
+__all__ = ['load', 'loads', 'find', 'findall', 'dumps', 'dump', 'write']
 
 
 plugins = ModuleType('mappyfile.plugins')
