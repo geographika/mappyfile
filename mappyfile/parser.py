@@ -79,7 +79,7 @@ class Parser(object):
         comments = list(comments)
         comments.sort(key=lambda c: c.line)
 
-        idx_by_line = {0: 0} # {line_no: comment_idx}
+        idx_by_line = {0: 0}  # {line_no: comment_idx}
 
         for i, c in enumerate(comments):
             if c.line not in idx_by_line:
@@ -103,7 +103,7 @@ class Parser(object):
                 # associate line with following comment
                 idx.append(idx[-1])
 
-        idx.append(0) # line numbers start from 1
+        idx.append(0)  # line numbers start from 1
         idx.reverse()
         self.idx = idx
         log.debug(idx)
@@ -115,7 +115,7 @@ class Parser(object):
         comments = self.comments
 
         if from_line >= len(idx):
-            return [] # no more comments
+            return []  # no more comments
 
         from_idx = idx[from_line]
 
@@ -146,7 +146,7 @@ class Parser(object):
             node.header_comments = self._get_comments(prev_end_line, line)
             if node.line == node.end_line:
                 # node is on a single line, so check for inline comments
-                node.inline_comments = self._get_comments(line, line +1)
+                node.inline_comments = self._get_comments(line, line + 1)
                 prev_end_line = node.end_line + 1
             else:
                 if isinstance(node, Tree):
@@ -179,7 +179,7 @@ class Parser(object):
             text = self.load_includes(text, fn=fn)
 
         try:
-            self._comments[:] = [] # clear any comments from a previous parse
+            self._comments[:] = []  # clear any comments from a previous parse
             tree = self.lalr.parse(text)
             if self.include_comments:
                 self.assign_comments(tree, self._comments)

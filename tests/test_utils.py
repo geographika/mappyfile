@@ -1,8 +1,8 @@
-import os
 import logging
 import tempfile
 import mappyfile
 import pytest
+
 
 def test_load():
 
@@ -43,26 +43,24 @@ def test_write():
     fn = tempfile.mktemp()
     d = mappyfile.loads(s)
     mappyfile.write(d, fn)
-    m = mappyfile.load(fn)
+    d = mappyfile.load(fn)
     assert d["name"] == "TEST"
 
     mappyfile.write(d, fn, indent=2, spacer="\t", quote="'", newlinechar="")
-    m = mappyfile.load(fn)
+    d = mappyfile.load(fn)
     assert d["name"] == "TEST"
 
 
 def test_dump():
 
     s = """MAP NAME "TEST" END"""
-    fp = tempfile.TemporaryFile()
     d = mappyfile.loads(s)
-    mappyfile.dump(d, fp)
+    with tempfile.NamedTemporaryFile(mode="w+", delete=False) as fp:
+        mappyfile.dump(d, fp)
 
-    m = mappyfile.load(fn)
-    assert d["name"] == "TEST"
+    with open(fp.name) as fp:
+        d = mappyfile.load(fp)
 
-    mappyfile.write(d, fn, indent=2, spacer="\t", quote="'", newlinechar="")
-    m = mappyfile.load(fp)
     assert d["name"] == "TEST"
 
 

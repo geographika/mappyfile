@@ -75,14 +75,14 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
 @deprecated
 def write(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
-    Write a Mapfile dictionary to a file. The save function should now be used. 
+    Write a Mapfile dictionary to a file. The save function should now be used.
     """
     return save(d, output_file, indent, spacer, quote, newlinechar)
 
 
 def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
-    Write a Mapfile dictionary to a file. 
+    Write a Mapfile dictionary to a file.
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)
     _save(output_file, map_string)
@@ -91,7 +91,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
 
 def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
-    Output a Mapfile dictionary as a string. 
+    Output a Mapfile dictionary as a string.
     """
     return _pprint(d, indent, spacer, quote, newlinechar)
 
@@ -105,7 +105,7 @@ def find(lst, key, value):
 
 def findall(lst, key, value):
     """
-    Find all objects in lst where key matches value. 
+    Find all objects in lst where key matches value.
     For example find all LAYERs in a MAP where GROUP equals VALUE
     """
     possible_values = ("'%s'" % value, '"%s"' % value)
@@ -118,6 +118,6 @@ def _save(output_file, map_string):
 
 
 def _pprint(d, indent, spacer, quote, newlinechar):
-    pp = PrettyPrinter(indent=indent, spacer=spacer, 
+    pp = PrettyPrinter(indent=indent, spacer=spacer,
                        quote=quote, newlinechar=newlinechar)
     return pp.pprint(d)

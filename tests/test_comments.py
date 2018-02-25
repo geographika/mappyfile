@@ -166,9 +166,9 @@ def test_metadata_comment():
     END
     END"""
     d = mappyfile.loads(txt, include_comments=True, include_position=False)
-    #print(json.dumps(d, indent=4))
+    # print(json.dumps(d, indent=4))
     s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
-    #print(s)
+    # print(s)
     expected = """MAP
 # metadata comment
 # on two lines
