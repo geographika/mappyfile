@@ -31,7 +31,7 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
 
     :param string fn: The path to the Mapfile, or partial Mapfile
     :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
-    :param boolean include_comments: Include or discard comment strings from 
+    :param boolean include_comments: Include or discard comment strings from
                                      the Mapfile - *experimental*
     :param boolean include_position: Include the position of the Mapfile tokens in the output
     """
@@ -50,7 +50,7 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
 
     :param fp: A file-like object
     :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
-    :param boolean include_comments: Include or discard comment strings from 
+    :param boolean include_comments: Include or discard comment strings from
                                      the Mapfile - *experimental*
     :param boolean include_position: Include the position of the Mapfile tokens in the output
     """
@@ -69,7 +69,7 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
 
     :param string s: The Mapfile, or partial Mapfile, text
     :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
-    :param boolean include_comments: Include or discard comment strings from 
+    :param boolean include_comments: Include or discard comment strings from
                                      the Mapfile - *experimental*
     :param boolean include_position: Include the position of the Mapfile tokens in the output
     """
@@ -88,7 +88,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
 
     :param dictionary d: A Python dictionary based on the the mappyfile schema
     :param fp: A file-like object
-    :param integer indent: The number of ``spacer`` characters to indent structures in 
+    :param integer indent: The number of ``spacer`` characters to indent structures in
                            the Mapfile
     :param string spacer: The character to use for indenting structures in the Mapfile. Typically
                           spaces or tab characters (``\\t``)
@@ -113,7 +113,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
 
     :param dictionary d: A Python dictionary based on the the mappyfile schema
     :param string output_file: The output filename
-    :param integer indent: The number of ``spacer`` characters to indent structures in 
+    :param integer indent: The number of ``spacer`` characters to indent structures in
                            the Mapfile
     :param string spacer: The character to use for indenting structures in the Mapfile. Typically
                           spaces or tab characters (``\\t``)
@@ -130,7 +130,7 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     Output a Mapfile dictionary as a string
 
     :param dictionary d: A Python dictionary based on the the mappyfile schema
-    :param integer indent: The number of ``spacer`` characters to indent structures in 
+    :param integer indent: The number of ``spacer`` characters to indent structures in
                            the Mapfile
     :param string spacer: The character to use for indenting structures in the Mapfile. Typically
                           spaces or tab characters (``\\t``)
