@@ -16,7 +16,7 @@ setup(name='mappyfile',
       long_description=readme(),
       classifiers=[
           # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-          'Development Status :: 3 - Alpha',
+          'Development Status :: 4 - Beta',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.3',
@@ -36,7 +36,6 @@ setup(name='mappyfile',
       author_email='sethg@geographika.co.uk',
       license='MIT',
       packages=['mappyfile'],
-      dependency_links=["http://github.com/erezsh/lark/tarball/master#egg=package-1.0"],
-      install_requires=['jsonschema >=2.0, <3.0', 'jsonref==0.1'],
-      # install_requires=['lark-parser>=0.5, <0.6', 'jsonschema >=2.0, <3.0', 'jsonref==0.1'],
+      # dependency_links=["http://github.com/erezsh/lark/tarball/master#egg=package-1.0"],
+      install_requires=['lark-parser>=0.5.4, <0.6', 'jsonschema >=2.0, <3.0', 'jsonref==0.1'],
       zip_safe=False)

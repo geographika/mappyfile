@@ -51,3 +51,4 @@ Alert deprecated keywords? This appears to be a suggested feature of JSON Schema
 	additionalProperties true to allow for metadata such as __position__
 
     Any named symmbols which do not exist cause mappyscript to crash
+    SIZE when using POLYGON and no SYMBOL - crash

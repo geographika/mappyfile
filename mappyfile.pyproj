@@ -5,7 +5,6 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>misc\shapefile_fields.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -31,6 +30,7 @@
     <Folder Include="docs\examples\geometry\" />
     <Folder Include="docs\images\" />
     <Folder Include="docs\examples\" />
+    <Folder Include="docs\api\" />
     <Folder Include="docs\schemas\" />
     <Folder Include="docs\scripts\" />
     <Folder Include="docs\_static\" />
@@ -50,6 +50,7 @@
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
     <Content Include=".travis.yml" />
+    <Content Include="docs\api\main.rst" />
     <Content Include="docs\comments.rst" />
     <Content Include="docs\development.rst" />
     <Content Include="docs\examples\animation\animated_buffer.map" />
@@ -624,6 +625,7 @@
     <Compile Include="tests\test_snippets.py" />
     <Compile Include="tests\test_transformer.py" />
     <Compile Include="tests\test_linter.py" />
+    <Compile Include="tests\test_utils.py" />
     <Compile Include="tests\test_validation.py">
       <SubType>Code</SubType>
     </Compile>

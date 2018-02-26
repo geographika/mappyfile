@@ -75,7 +75,7 @@ class MapfileTransformer(Transformer):
 
     def get_position_dict(self, d):
 
-        if "__position__" in d.keys():
+        if "__position__" in d:
             position_dict = d["__position__"]
         else:
             position_dict = d["__position__"] = OrderedDict()
@@ -93,7 +93,7 @@ class MapfileTransformer(Transformer):
             elif isinstance(v, tuple):
                 flat_list += v
             elif isinstance(v, dict):
-                assert("__tokens__" in v.keys())
+                assert("__tokens__" in v)
                 flat_list += v["__tokens__"]
             else:
                 raise ValueError("Attribute value type not supported", v)
@@ -167,7 +167,7 @@ class MapfileTransformer(Transformer):
                     composite_dict[k] = d
                 else:
                     plural_key = self.plural(k)
-                    if plural_key not in composite_dict.keys():
+                    if plural_key not in composite_dict:
                         composite_dict[plural_key] = []
 
                     composite_dict[plural_key].append(d)
@@ -181,7 +181,7 @@ class MapfileTransformer(Transformer):
 
                 if key_name == "config":
                     # there may be several config dicts - one for each setting
-                    if key_name not in composite_dict.keys():
+                    if key_name not in composite_dict:
                         # create an initial OrderedDict
                         composite_dict[key_name] = CaseInsensitiveOrderedDict()
                     # populate the existing config dict
@@ -189,14 +189,14 @@ class MapfileTransformer(Transformer):
                     cfg_dict.update(d[key_name])
 
                     if self.include_position:
-                        if key_name not in pd.keys():
+                        if key_name not in pd:
                             pd[key_name] = OrderedDict()
 
                         subkey_name = self.get_single_key(d[key_name])
                         pd[key_name][subkey_name] = pos
 
                 elif key_name == "points":
-                    if key_name not in composite_dict.keys():
+                    if key_name not in composite_dict:
                         composite_dict[key_name] = d[key_name]
                     else:
                         # if points are already in a feature then
@@ -209,12 +209,12 @@ class MapfileTransformer(Transformer):
                         if depth(existing_points) == 2:
                             composite_dict[key_name] = [existing_points]
 
-                        if key_name not in composite_dict.keys():
+                        if key_name not in composite_dict:
                             composite_dict[key_name] = []
                         composite_dict[key_name].append(d[key_name])
 
                     if self.include_position:
-                        if key_name not in pd.keys():
+                        if key_name not in pd:
                             pd[key_name] = pos
                         else:
                             existing_pos = pd[key_name]
@@ -223,13 +223,13 @@ class MapfileTransformer(Transformer):
                             pd[key_name].append(pos)
 
                 elif key_name in ("processing", "formatoption", "include"):
-                    if key_name not in composite_dict.keys():
+                    if key_name not in composite_dict:
                         composite_dict[key_name] = []
 
                     composite_dict[key_name].append(d[key_name])
 
                     if self.include_position:
-                        if key_name not in pd.keys():
+                        if key_name not in pd:
                             pd[key_name] = []
                         pd[key_name].append(pos)
 
@@ -335,11 +335,6 @@ class MapfileTransformer(Transformer):
         """
         key, body = self.check_composite_tokens(type_, tokens)
         key_name = self.key_name(key)
-
-        # keys = [self.clean_string(t[0].value) for t in body]
-        # vals = [self.clean_string(t[1].value) for t in body]
-
-        # d = OrderedDict(zip(keys, vals))
 
         d = CaseInsensitiveOrderedDict(((self.clean_string(t[0].value), self.clean_string(t[1].value))
                                        for t in body))
@@ -617,7 +612,26 @@ class CommentsTransformer(Transformer_NoRecurse):
 
     def _save_composite_comments(self, tree):
         d = self._mapfile_todict.transform(tree)
-        d["__comments__"]["__type__"] = self.get_comments(tree)
+
+        # composites such as METADATA will not have had a comments
+        # dict created yet
+        if "__comments__" not in d:
+            d["__comments__"] = OrderedDict()
+
+        comments = self.get_comments(tree)
+        if comments:
+            d["__comments__"]["__type__"] = comments
+
+        if d["__type__"] == "metadata":
+            md = tree.children[0].children
+            if len(md) > 2:
+                string_pairs = md[1:-1]
+                md_keys = [k for k in d.keys() if k not in ["__type__", "__comments__"]]
+                assert len(string_pairs) == len(md_keys)
+                for k, sp in zip(md_keys, string_pairs):
+                    key_comments = self.get_comments(sp)
+                    d["__comments__"][k] = key_comments
+
         return d
 
     attr = _save_attr_comments

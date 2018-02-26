@@ -44,7 +44,7 @@ Updating a Validation Setting
 
 
     # mappyfile
-    if "MYPARAMETER" in l["validation"].keys():
+    if "MYPARAMETER" in l["validation"]:
         l["validation"]["MYPARAMETER"] = filter
 
 Replacing Classes in a Layer

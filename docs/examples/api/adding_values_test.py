@@ -1,6 +1,6 @@
 import mappyfile
 
-mapfile = mappyfile.load("./docs/examples/raster.map")
+mapfile = mappyfile.open("./docs/examples/raster.map")
 
 def test_layer():
     # START OF ADD LAYER EXAMPLE

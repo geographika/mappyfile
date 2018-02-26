@@ -58,7 +58,7 @@ class Validator(object):
         See various issues at https://github.com/Julian/jsonschema/pull/306
         """
 
-        if schema_name not in self.schemas.keys():
+        if schema_name not in self.schemas:
             schema_file = self.get_schema_file(schema_name)
             with open(schema_file) as f:
                 try:
@@ -107,7 +107,7 @@ class Validator(object):
             else:
                 d = d.setdefault(p, {})
 
-        if "__comments__" not in d.keys():
+        if "__comments__" not in d:
             d["__comments__"] = OrderedDict()
 
         d["__comments__"][key] = comment
@@ -151,7 +151,7 @@ class Validator(object):
         """
         Return a schema file with all $ref properties expanded
         """
-        if schema_name not in self.expanded_schemas.keys():
+        if schema_name not in self.expanded_schemas:
             fn = self.get_schema_file(schema_name)
             schemas_folder = self.get_schemas_folder()
             base_uri = self.get_schema_path(schemas_folder)

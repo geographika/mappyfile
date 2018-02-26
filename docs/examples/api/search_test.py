@@ -3,7 +3,7 @@ import mappyfile
 def test():
     # START OF API EXAMPLE
     # load will accept a filename (loads will accept a string)
-    mapfile = mappyfile.load("./docs/examples/raster.map")
+    mapfile = mappyfile.open("./docs/examples/raster.map")
 
     # search for a layer by name
     layer = mappyfile.find(mapfile['layers'], 'name', 'sea')

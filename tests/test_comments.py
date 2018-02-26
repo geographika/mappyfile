@@ -2,6 +2,7 @@ import collections
 import json
 import logging
 import pytest
+import mappyfile
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
 from mappyfile.parser import Parser
@@ -115,7 +116,7 @@ def test_header_comment2():
         # post name comment
     END"""
 
-    p = Parser(keep_comments=True)
+    p = Parser(include_comments=True)
     ast = p.parse(s)
     print(p._comments)
     print(ast.pretty())
@@ -141,9 +142,10 @@ def test_comment_parsing():
     END
     END"""
 
-    p = Parser(keep_comments=True)
+    p = Parser(include_comments=True)
     m = MapfileToDict(include_position=False, include_comments=True)
     ast = p.parse(s)
+    print(p._comments)
     print(ast.pretty())
     d = m.transform(ast)      # transform the rest
     print(json.dumps(d, indent=4))
@@ -153,13 +155,37 @@ def test_comment_parsing():
     print(s)
 
 
+def test_metadata_comment():
+
+    txt = """MAP
+    # metadata comment
+    # on two lines
+    METADATA
+        # another comment
+        'wms_title' 'Test simple wms' # prop comment
+    END
+    END"""
+    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    # print(json.dumps(d, indent=4))
+    s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
+    # print(s)
+    expected = """MAP
+# metadata comment
+# on two lines
+METADATA
+'wms_title' 'Test simple wms' # prop comment # another comment
+END
+END"""
+    assert s == expected
+
+
 def run_tests():
     pytest.main(["-s", "tests/test_comments.py"])
 
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    logging.getLogger('mappyfile').setLevel(logging.INFO)
-    # test_comment_parsing()
+    logging.getLogger('mappyfile').setLevel(logging.DEBUG)
+    # test_metadata_comment()
     run_tests()
     print("Done!")

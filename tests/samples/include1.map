@@ -1,4 +1,4 @@
 MAP
     NAME 'include_test'
-    INCLUDE 'include2.map'
+    INCLUDE 'include2.map' INCLUDE 'ignored.map' # with comment
 END
