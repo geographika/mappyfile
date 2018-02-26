@@ -29,14 +29,14 @@ class MapfileToDict(object):
 
     def transform(self, tree):
 
-        mapfile_transformer = MapfileTransformer(include_position=self.include_position,
+        self.mapfile_transformer = MapfileTransformer(include_position=self.include_position,
                                                  include_comments=self.include_comments)
 
         if self.include_comments:
-            comments_transformer = CommentsTransformer(mapfile_transformer)
+            comments_transformer = CommentsTransformer(self.mapfile_transformer)
             tree = comments_transformer.transform(tree)
 
-        return mapfile_transformer.transform(tree)
+        return self.mapfile_transformer.transform(tree)
 
 
 class MapfileTransformer(Transformer):
