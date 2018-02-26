@@ -25,9 +25,15 @@ def deprecated(func):
     return new_func
 
 
-def open(fn, expand_includes=True, include_position=False, include_comments=False):
+def open(fn, expand_includes=True, include_comments=False, include_position=False):
     """
-    Load a Mapfile from a filename
+    Load a Mapfile from the supplied filename into a Python dictionary
+
+    :param string fn: The path to the Mapfile, or partial Mapfile
+    :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
+    :param boolean include_comments: Include or discard comment strings from 
+                                     the Mapfile - *experimental*
+    :param boolean include_position: Include the position of the Mapfile tokens in the output
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments)
@@ -41,6 +47,12 @@ def open(fn, expand_includes=True, include_position=False, include_comments=Fals
 def load(fp, expand_includes=True, include_position=False, include_comments=False):
     """
     Load a Mapfile from a file-like object
+
+    :param fp: A file-like object
+    :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
+    :param boolean include_comments: Include or discard comment strings from 
+                                     the Mapfile - *experimental*
+    :param boolean include_position: Include the position of the Mapfile tokens in the output
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments)
@@ -54,6 +66,12 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
 def loads(s, expand_includes=True, include_position=False, include_comments=False):
     """
     Load a Mapfile from a string
+
+    :param string s: The Mapfile, or partial Mapfile, text
+    :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
+    :param boolean include_comments: Include or discard comment strings from 
+                                     the Mapfile - *experimental*
+    :param boolean include_position: Include the position of the Mapfile tokens in the output
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments)
@@ -67,6 +85,15 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
 def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
     Write d (the Mapfile dictionary) as a JSON formatted stream to fp
+
+    :param dictionary d: A Python dictionary based on the the mappyfile schema
+    :param fp: A file-like object
+    :param integer indent: The number of ``spacer`` characters to indent structures in 
+                           the Mapfile
+    :param string spacer: The character to use for indenting structures in the Mapfile. Typically
+                          spaces or tab characters (``\\t``)
+    :param string quote: The quote character to use in the Mapfile (double or single quotes)
+    :param string newlinechar: The character to to insert newlines in the Mapfile
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)
     fp.write(map_string)
@@ -83,6 +110,15 @@ def write(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
 def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
     Write a Mapfile dictionary to a file.
+
+    :param dictionary d: A Python dictionary based on the the mappyfile schema
+    :param string output_file: The output filename
+    :param integer indent: The number of ``spacer`` characters to indent structures in 
+                           the Mapfile
+    :param string spacer: The character to use for indenting structures in the Mapfile. Typically
+                          spaces or tab characters (``\\t``)
+    :param string quote: The quote character to use in the Mapfile (double or single quotes)
+    :param string newlinechar: The character to to insert newlines in the Mapfile
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)
     _save(output_file, map_string)
@@ -91,7 +127,15 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
 
 def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
-    Output a Mapfile dictionary as a string.
+    Output a Mapfile dictionary as a string
+
+    :param dictionary d: A Python dictionary based on the the mappyfile schema
+    :param integer indent: The number of ``spacer`` characters to indent structures in 
+                           the Mapfile
+    :param string spacer: The character to use for indenting structures in the Mapfile. Typically
+                          spaces or tab characters (``\\t``)
+    :param string quote: The quote character to use in the Mapfile (double or single quotes)
+    :param string newlinechar: The character to to insert newlines in the Mapfile
     """
     return _pprint(d, indent, spacer, quote, newlinechar)
 
@@ -99,14 +143,22 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
 def find(lst, key, value):
     """
     Find an item in a list of dicts using a key and a value
+
+    :param list lst: A list of composite dictionaries e.g. ``layers``, ``classes``
+    :param string key: The key name to search each dictionary in the list
+    :param value: The value to search for
     """
     return next((item for item in lst if item[key.lower()] == value), None)
 
 
 def findall(lst, key, value):
     """
-    Find all objects in lst where key matches value.
-    For example find all LAYERs in a MAP where GROUP equals VALUE
+    Find all items in lst where key matches value.
+    For example find all ``LAYER``s in a ``MAP`` where ``GROUP`` equals ``VALUE``
+
+    :param list lst: A list of composite dictionaries e.g. ``layers``, ``classes``
+    :param string key: The key name to search each dictionary in the list
+    :param value: The value to search for
     """
     possible_values = ("'%s'" % value, '"%s"' % value)
     return (item for item in lst if item[key.lower()] in possible_values)

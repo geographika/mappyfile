@@ -25,6 +25,8 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     grammar.rst
     python_integration.rst
 
+    api/main.rst
+
 .. image:: images/class_parsed.png
 
 What is mappyfile?

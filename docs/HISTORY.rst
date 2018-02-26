@@ -3,6 +3,9 @@ Releases
 0.6.2 (24/02/2018)
 ++++++++++++++++++
 
++ **Breaking Change** - the ``mappyfile.load`` method now accepts a file-like object rather than a 
+  filename to match the usage in other Python libraries. A new ``mappyfile.open`` method allows opening 
+  directly with a filename. 
 + New preserve comments feature - *experimental*
 + Add basic plugin system
 + Updates to schema docs (fixes for POSITION, AUTO, and added new default values)
