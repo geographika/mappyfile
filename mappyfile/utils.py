@@ -7,6 +7,11 @@ from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 
 
+PY2 = sys.version_info[0] < 3
+if PY2:
+    str = unicode # NOQA
+
+
 def deprecated(func):
     """
     From https://stackoverflow.com/questions/2536307/how-do-i-deprecate-python-functions/30253848#30253848
@@ -96,7 +101,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     :param string newlinechar: The character to to insert newlines in the Mapfile
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)
-    fp.write(map_string.encode('utf-8'))
+    fp.write(str(map_string.encode('utf-8')))
 
 
 @deprecated
