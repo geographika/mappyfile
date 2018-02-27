@@ -1,16 +1,10 @@
 from __future__ import unicode_literals
-import sys
 import codecs
 import warnings
 import functools
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
-
-
-PY2 = sys.version_info[0] < 3
-if PY2:
-    str = unicode # NOQA
 
 
 def deprecated(func):
