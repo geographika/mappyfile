@@ -287,7 +287,7 @@ class PrettyPrinter(object):
             else:
                 lines += self._format(composite)
 
-        result = self.newlinechar.join(lines)
+        result = str(self.newlinechar.join(lines))
         return result
 
     def get_attribute_properties(self, type_, attr):

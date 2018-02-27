@@ -102,7 +102,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     :param string newlinechar: The character to to insert newlines in the Mapfile
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)
-    fp.write(str(map_string.encode('utf-8')))
+    fp.write(map_string.encode('utf-8'))
 
 
 @deprecated
