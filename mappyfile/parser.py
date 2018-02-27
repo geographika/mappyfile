@@ -1,8 +1,15 @@
 import os
+import sys
 import logging
 from io import open
 from lark import Lark, ParseError, Tree
 from lark.lexer import UnexpectedInput, Token
+
+
+PY2 = sys.version_info[0] < 3
+if PY2:
+    str = unicode # NOQA
+
 
 log = logging.getLogger("mappyfile")
 
@@ -154,7 +161,7 @@ class Parser(object):
                 prev_end_line = node.end_line
 
     def load(self, fp):
-        text = fp.read()
+        text = str(fp.read())
         return self.parse(text)
 
     def open_file(self, fn):
