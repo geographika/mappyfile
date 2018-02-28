@@ -815,7 +815,7 @@ def test_font_symbol():
     GEOMTRANSFORM "end" (since END is used to end objects in the map file, end must be embedded in quotes)
     http://mapserver.org/mapfile/geomtransform.html#end-and-start    
     """
-    s = """
+    s = u"""
     LABEL
         TEXT "►"
         ANGLE FOLLOW

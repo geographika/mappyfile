@@ -161,7 +161,7 @@ class Parser(object):
                 prev_end_line = node.end_line
 
     def load(self, fp):
-        text = str(fp.read())
+        text = fp.read()
         return self.parse(text)
 
     def open_file(self, fn):
@@ -182,6 +182,7 @@ class Parser(object):
         Parse the Mapfile
         """
 
+        text = str(text)
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 
