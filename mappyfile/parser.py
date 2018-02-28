@@ -162,7 +162,7 @@ class Parser(object):
 
     def load(self, fp):
         text = str(fp.read())
-        return str(self.parse(text))
+        return self.parse(text)
 
     def open_file(self, fn):
         try:

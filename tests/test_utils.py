@@ -70,6 +70,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
-    # test_dump()
+    # run_tests()
+    test_dump()
     print("Done!")
