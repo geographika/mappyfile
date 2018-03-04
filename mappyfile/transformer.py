@@ -30,7 +30,7 @@ class MapfileToDict(object):
     def transform(self, tree):
 
         self.mapfile_transformer = MapfileTransformer(include_position=self.include_position,
-                                                 include_comments=self.include_comments)
+                                                      include_comments=self.include_comments)
 
         if self.include_comments:
             comments_transformer = CommentsTransformer(self.mapfile_transformer)
@@ -336,8 +336,10 @@ class MapfileTransformer(Transformer):
         key, body = self.check_composite_tokens(type_, tokens)
         key_name = self.key_name(key)
 
-        d = CaseInsensitiveOrderedDict(((self.clean_string(t[0].value), self.clean_string(t[1].value))
-                                       for t in body))
+        d = CaseInsensitiveOrderedDict()
+
+        for t in body:
+            d[self.clean_string(t[0].value)] = self.clean_string(t[1].value)
 
         if self.include_position:
             pd = self.create_position_dict(key, body)
