@@ -1,5 +1,11 @@
 from collections import OrderedDict, Callable
 import copy
+import sys
+
+
+PY2 = sys.version_info[0] < 3
+if PY2:
+    str = unicode # NOQA
 
 
 class CaseInsensitiveOrderedDict(OrderedDict):
