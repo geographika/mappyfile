@@ -825,7 +825,7 @@ def test_font_symbol():
     """
 
     print(output(s, schema_name="label"))
-    exp = "LABEL TEXT '►' ANGLE FOLLOW FONT 'arial' TYPE TRUETYPE END"
+    exp = u"LABEL TEXT '►' ANGLE FOLLOW FONT 'arial' TYPE TRUETYPE END"
     assert(output(s, schema_name="label") == exp)
 
 
