@@ -274,7 +274,7 @@ class PrettyPrinter(object):
         # if only a single composite is used then cast to list
         # and allow for multiple root composites
 
-        if not isinstance(composites, list):
+        if composites and not isinstance(composites, list):
             composites = [composites]
 
         lines = []
