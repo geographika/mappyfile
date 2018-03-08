@@ -1,0 +1,554 @@
+         1093091 function calls (1060763 primitive calls) in 0.919 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+    28630    0.345    0.000    0.345    0.000 {_winreg.OpenKey}
+    28629    0.063    0.000    0.063    0.000 {_winreg.EnumKey}
+5754/2298    0.056    0.000    0.146    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:395(_parse)
+        1    0.044    0.044    0.481    0.481 C:\Python27\Lib\mimetypes.py:228(read_windows_registry)
+    52703    0.032    0.000    0.037    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:193(__next)
+ 3845/438    0.014    0.000    0.028    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:64(_compile)
+9008/2106    0.013    0.000    0.015    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:151(getwidth)
+      942    0.013    0.000    0.013    0.000 {_winreg.QueryValueEx}
+    28629    0.011    0.000    0.075    0.000 C:\Python27\Lib\mimetypes.py:241(enum_types)
+     1618    0.010    0.000    0.058    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:61(step)
+  1021/24    0.010    0.000    0.017    0.001 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:64(replace_refs)
+4190/1366    0.010    0.000    0.151    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:317(_parse_sub)
+    32615    0.010    0.000    0.020    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:206(match)
+     8216    0.010    0.000    0.028    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:125(_expand_rule)
+    10884    0.009    0.000    0.010    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:8(__init__)
+187756/184119    0.009    0.000    0.010    0.000 {len}
+    37232    0.009    0.000    0.034    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:212(get)
+    89454    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
+ 3420/238    0.007    0.000    0.025    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:109(transform)
+    10853    0.007    0.000    0.129    0.000 C:\VirtualEnvs\mappyfile\lib\re.py:230(_compile)
+    21189    0.007    0.000    0.011    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:141(__getitem__)
+     3251    0.007    0.000    0.007    0.000 C:\VirtualEnvs\mappyfile\lib\re.py:208(escape)
+55607/55606    0.006    0.000    0.009    0.000 {isinstance}
+    12946    0.006    0.000    0.006    0.000 {method 'match' of '_sre.SRE_Pattern' objects}
+ 4082/254    0.006    0.000    0.063    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\utils.py:30(bfs)
+     1578    0.006    0.000    0.014    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:83(lex)
+     4025    0.006    0.000    0.010    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_parser.py:52(reduce)
+       59    0.006    0.000    0.053    0.001 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:133(_create_unless)
+    28876    0.005    0.000    0.005    0.000 {method 'startswith' of 'str' objects}
+    14869    0.005    0.000    0.005    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:81(_get_flags)
+     8895    0.004    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:221(isident)
+        1    0.004    0.004    0.007    0.007 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:45(calculate_sets)
+    15482    0.004    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:31(__eq__)
+        3    0.004    0.001    0.029    0.010 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_parser.py:32(parse)
+       59    0.003    0.000    0.256    0.004 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:177(__init__)
+     2413    0.003    0.000    0.005    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:71(iter_subtrees)
+     9226    0.003    0.000    0.010    0.000 C:\VirtualEnvs\mappyfile\lib\re.py:138(match)
+     1366    0.003    0.000    0.157    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:706(parse)
+     2402    0.003    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:268(_escape)
+    11618    0.003    0.000    0.006    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:96(to_regexp)
+    16739    0.003    0.000    0.006    0.000 {method 'add' of 'set' objects}
+    10884    0.003    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:33(__hash__)
+    12810    0.003    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:149(append)
+      245    0.003    0.000    0.005    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:43(<dictcomp>)
+    15826    0.003    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:10(is_terminal)
+    12810    0.002    0.000    0.003    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:137(__len__)
+    18094    0.002    0.000    0.002    0.000 {min}
+    14622    0.002    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:19(next)
+      737    0.002    0.000    0.034    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:122(expand_rule)
+     2808    0.002    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:37(update_set)
+     9037    0.002    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:92(__init__)
+        1    0.002    0.002    0.919    0.919 D:\GitHub\mappyfile\tests\mapfiles\profiler.py:13(parse)
+     2296    0.002    0.000    0.002    0.000 {method 'items' of 'dict' objects}
+      452    0.002    0.000    0.006    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:256(_optimize_charset)
+        1    0.002    0.002    0.259    0.259 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:216(__init__)
+      928    0.002    0.000    0.085    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\utils.py:117(get_regexp_width)
+     9628    0.002    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_parser.py:43(get_action)
+      992    0.002    0.000    0.006    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:227(isname)
+     3251    0.002    0.000    0.011    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:87(to_regexp)
+  1126/70    0.002    0.000    0.016    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:115(<genexpr>)
+      438    0.002    0.000    0.009    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:433(_compile_info)
+     3183    0.002    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:64(feed)
+      305    0.001    0.000    0.003    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\utils.py:20(classify)
+     2078    0.001    0.000    0.003    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:23(advance)
+     1753    0.001    0.000    0.003    0.000 C:\VirtualEnvs\mappyfile\lib\abc.py:128(__instancecheck__)
+3339/2266    0.001    0.000    0.006    0.000 {method 'join' of 'unicode' objects}
+     1537    0.001    0.000    0.045    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:198(<lambda>)
+     54/1    0.001    0.000    0.512    0.512 .\mappyfile\pprint.py:441(_format)
+     1390    0.001    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:60(__call__)
+     5130    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:12(__init__)
+     1624    0.001    0.000    0.005    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:162(<genexpr>)
+      438    0.001    0.000    0.122    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:567(compile)
+     4341    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:27(is_satisfied)
+     7217    0.001    0.000    0.001    0.000 {getattr}
+      471    0.001    0.000    0.002    0.000 C:\Python27\Lib\collections.py:50(__init__)
+     1373    0.001    0.000    0.005    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:70(<setcomp>)
+      483    0.001    0.000    0.001    0.000 C:\Python27\Lib\collections.py:117(keys)
+     8741    0.001    0.000    0.001    0.000 {_sre.getlower}
+    14366    0.001    0.000    0.001    0.000 {method 'isupper' of 'unicode' objects}
+       59    0.001    0.000    0.046    0.001 {method 'sort' of 'list' objects}
+     1123    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:74(opengroup)
+     9274    0.001    0.000    0.001    0.000 {method 'get' of 'dict' objects}
+     1655    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:28(__new__)
+      732    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:182(_flatten)
+      245    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:96(<dictcomp>)
+     1538    0.001    0.000    0.001    0.000 C:\Python27\Lib\collections.py:71(__setitem__)
+       67    0.001    0.000    0.004    0.000 .\mappyfile\transformer.py:135(composite)
+     1627    0.001    0.000    0.126    0.000 C:\VirtualEnvs\mappyfile\lib\re.py:192(compile)
+       19    0.001    0.000    0.001    0.000 {open}
+     4487    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:101(fixup)
+      202    0.001    0.000    0.005    0.000 .\mappyfile\transformer.py:262(attr)
+        2    0.001    0.000    0.005    0.002 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:540(resolve_token_references)
+12195/12174    0.001    0.000    0.001    0.000 {hash}
+     3087    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:70(__contains__)
+     1537    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:173(_regexp_has_newline)
+    11399    0.001    0.000    0.001    0.000 {ord}
+      245    0.001    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\utils.py:8(classify_bool)
+   685/53    0.001    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:153(visit)
+      127    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:411(_mk_bitmap)
+  355/344    0.001    0.000    0.002    0.000 {map}
+      452    0.001    0.000    0.007    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:228(_compile_charset)
+       18    0.001    0.000    0.001    0.000 C:\Python27\Lib\json\decoder.py:370(raw_decode)
+     1366    0.001    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:189(__init__)
+      199    0.001    0.000    0.491    0.002 .\mappyfile\pprint.py:329(format_value)
+     1960    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:123(__default__)
+      740    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:428(_simple)
+     2178    0.001    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:148(_get_func)
+  464/192    0.001    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:191(expansion)
+      438    0.001    0.000    0.037    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:552(_code)
+     1366    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:67(__init__)
+      202    0.001    0.000    0.002    0.000 .\mappyfile\transformer.py:110(create_position_dict)
+     2146    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:90(min_width)
+        1    0.001    0.001    0.001    0.001 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:117(create_callback)
+       19    0.001    0.000    0.001    0.000 {method 'read' of 'file' objects}
+     2263    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:63(<lambda>)
+      539    0.001    0.000    0.001    0.000 C:\Python27\Lib\mimetypes.py:78(add_type)
+      120    0.001    0.000    0.001    0.000 {compile}
+      182    0.001    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:96(_init_builders)
+       27    0.000    0.000    0.000    0.000 {nt.stat}
+     2078    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:68(<lambda>)
+     1021    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:225(__init__)
+       68    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:260(pattern)
+  541/486    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\abc.py:148(__subclasscheck__)
+      438    0.000    0.000    0.000    0.000 {_sre.compile}
+  270/241    0.000    0.000    0.004    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:120(<genexpr>)
+      876    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\sre_compile.py:546(isstring)
+     1712    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x000000006C9961C0}
+     2594    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:145(__setitem__)
+     1954    0.000    0.000    0.000    0.000 {method 'find' of 'bytearray' objects}
+      216    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:224(expansions)
+      120    0.000    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:334(_literal_to_pattern)
+     4006    0.000    0.000    0.000    0.000 {method 'group' of '_sre.SRE_Match' objects}
+     1894    0.000    0.000    0.000    0.000 {range}
+      120    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:311(_fix_escaping)
+     8980    0.000    0.000    0.000    0.000 {id}
+      419    0.000    0.000    0.000    0.000 {method 'format' of 'unicode' objects}
+      218    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\utils.py:57(inline_args)
+      218    0.000    0.000    0.001    0.000 C:\Python27\Lib\functools.py:17(update_wrapper)
+      464    0.000    0.000    0.044    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:99(min_width)
+       87    0.000    0.000    0.104    0.001 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:154(_build_mres)
+     1042    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\proxytypes.py:115(_should_proxy)
+     2429    0.000    0.000    0.000    0.000 C:\Python27\Lib\collections.py:90(__iter__)
+      464    0.000    0.000    0.043    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:102(max_width)
+        1    0.000    0.000    0.015    0.015 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:471(compile)
+ 1020/999    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:53(__hash__)
+      2/1    0.000    0.000    0.025    0.025 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:590(load_grammar)
+  256/176    0.000    0.000    0.489    0.003 C:\VirtualEnvs\mappyfile\lib\site-packages\proxytypes.py:86(wrapper)
+      253    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:256(is_hidden_container)
+      199    0.000    0.000    0.509    0.003 .\mappyfile\pprint.py:386(process_attribute)
+     1123    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:85(closegroup)
+      267    0.000    0.000    0.001    0.000 C:\Python27\Lib\collections.py:125(items)
+     1179    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:14(__call__)
+      446    0.000    0.000    0.000    0.000 {method 'encode' of 'unicode' objects}
+     1596    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:178(<genexpr>)
+     1684    0.000    0.000    0.000    0.000 {max}
+      198    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:236(_class_escape)
+  508/176    0.000    0.000    0.489    0.003 C:\VirtualEnvs\mappyfile\lib\site-packages\proxytypes.py:128(__getattribute__)
+        2    0.000    0.000    0.000    0.000 {method 'read' of '_io.TextIOWrapper' objects}
+      877    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:224(isdigit)
+     1242    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:106(_get_func)
+       59    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:192(<setcomp>)
+      606    0.000    0.000    0.001    0.000 C:\Python27\Lib\collections.py:149(pop)
+      471    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_abcoll.py:548(update)
+      466    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:120(__call__)
+      715    0.000    0.000    0.009    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:243(lex)
+      245    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+     1537    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:134(<lambda>)
+      199    0.000    0.000    0.018    0.000 .\mappyfile\validator.py:150(get_expanded_schema)
+       74    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:126(__init__)
+      181    0.000    0.000    0.001    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:76(maybe_create_child_filter)
+      240    0.000    0.000    0.001    0.000 {all}
+  698/342    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:62(scan_values)
+      985    0.000    0.000    0.000    0.000 {method 'startswith' of 'unicode' objects}
+       54    0.000    0.000    0.000    0.000 {method 'union' of 'frozenset' objects}
+     2299    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+      534    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\proxytypes.py:133(__setattr__)
+       86    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:233(urlunsplit)
+     2191    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:60(<lambda>)
+       46    0.000    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:683(<setcomp>)
+      464    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:71(__getitem__)
+      368    0.000    0.000    0.000    0.000 C:\Python27\Lib\collections.py:81(__delitem__)
+      694    0.000    0.000    0.000    0.000 {method 'count' of 'unicode' objects}
+      118    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:168(urlsplit)
+      233    0.000    0.000    0.000    0.000 {sorted}
+     1037    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:303(urldefrag)
+     3344    0.000    0.000    0.000    0.000 {method 'popleft' of 'collections.deque' objects}
+      233    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:39(expand_kids_by_index)
+        2    0.000    0.000    0.000    0.000 {_io.open}
+       87    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:166(<dictcomp>)
+      226    0.000    0.000    0.001    0.000 .\mappyfile\pprint.py:61(remove_quotes)
+      120    0.000    0.000    0.001    0.000 C:\Python27\Lib\ast.py:40(literal_eval)
+      265    0.000    0.000    0.000    0.000 {hasattr}
+      199    0.000    0.000    0.018    0.000 .\mappyfile\pprint.py:293(get_attribute_properties)
+     1574    0.000    0.000    0.000    0.000 {method 'setdefault' of 'dict' objects}
+      305    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+     1123    0.000    0.000    0.000    0.000 {method 'remove' of 'list' objects}
+        1    0.000    0.000    0.006    0.006 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:36(from_ParseTable)
+      948    0.000    0.000    0.000    0.000 {method 'lower' of 'unicode' objects}
+      835    0.000    0.000    0.000    0.000 {setattr}
+       68    0.000    0.000    0.009    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:137(transform)
+      506    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:57(is_string)
+     1460    0.000    0.000    0.000    0.000 {method 'isupper' of 'str' objects}
+      130    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:530(int)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:97(<setcomp>)
+      202    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:124(get_single_key)
+        8    0.000    0.000    0.483    0.060 C:\Python27\Lib\urllib2.py:1351(open_local_file)
+      104    0.000    0.000    0.489    0.005 C:\VirtualEnvs\mappyfile\lib\site-packages\proxytypes.py:153(proxied)
+      446    0.000    0.000    0.000    0.000 {any}
+      409    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:42(_in_quotes)
+      202    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:85(flatten)
+      218    0.000    0.000    0.003    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\utils.py:70(_f)
+     2606    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+      194    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:60(__init__)
+      218    0.000    0.000    0.000    0.000 C:\Python27\Lib\functools.py:39(wraps)
+        4    0.000    0.000    0.000    0.000 {method 'clear' of 'dict' objects}
+      346    0.000    0.000    0.000    0.000 {method 'replace' of 'unicode' objects}
+       16    0.000    0.000    0.488    0.030 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:154(callback)
+        1    0.000    0.000    0.378    0.378 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lark.py:99(__init__)
+      538    0.000    0.000    0.000    0.000 {method 'rindex' of 'unicode' objects}
+        8    0.000    0.000    0.485    0.061 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:281(get_remote_json)
+       20    0.000    0.000    0.000    0.000 {nt._getfullpathname}
+     1239    0.000    0.000    0.000    0.000 {method 'update' of 'dict' objects}
+      360    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:307(<genexpr>)
+      209    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:47(__eq__)
+       16    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:251(urljoin)
+      241    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:133(__format_line)
+       13    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:159(process_dict)
+      226    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:39(in_quotes)
+      273    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:684(<lambda>)
+      135    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:58(__iter__)
+     1329    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+      382    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:117(whitespace)
+      108    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:96(splitdrive)
+      419    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:336(<genexpr>)
+      290    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:68(__hash__)
+      276    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:49(key_name)
+      120    0.000    0.000    0.002    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:355(literal)
+      443    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+      104    0.000    0.000    0.488    0.005 C:\VirtualEnvs\mappyfile\lib\site-packages\proxytypes.py:204(__subject__)
+        1    0.000    0.000    0.007    0.007 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:106(__init__)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\rfc822.py:122(readheaders)
+      716    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:240(set_parser_state)
+       87    0.000    0.000    0.104    0.001 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:170(build_mres)
+        9    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:348(add_handler)
+      303    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:73(_should_expand)
+      181    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:232(expansion)
+      215    0.000    0.000    0.001    0.000 .\mappyfile\transformer.py:249(clean_string)
+      191    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:15(_k)
+       20    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:415(normpath)
+       13    0.000    0.000    0.001    0.000 .\mappyfile\transformer.py:330(process_value_pairs)
+       40    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:137(urlparse)
+       54    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:64(__init__)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:98(<setcomp>)
+      216    0.000    0.000    0.000    0.000 {method 'rfind' of 'unicode' objects}
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\nturl2path.py:3(url2pathname)
+       46    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:561(options_from_rule)
+      409    0.000    0.000    0.000    0.000 {method 'upper' of 'unicode' objects}
+       10    0.000    0.000    0.016    0.002 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:302(load)
+      222    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:59(find_data)
+       70    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:222(normalize)
+      120    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:306(_rfind)
+      177    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:30(add_quotes)
+      222    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:56(find_pred)
+       23    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:174(split)
+       26    0.000    0.000    0.001    0.000 .\mappyfile\pprint.py:312(check_options_list)
+      203    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:249(is_composite)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\email\utils.py:124(formatdate)
+       26    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:391(expr)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_parser.py:16(<dictcomp>)
+      199    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:353(<genexpr>)
+       33    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:63(join)
+        1    0.000    0.000    0.069    0.069 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:57(compute_lookahead)
+       86    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:384(expansions)
+      182    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\grammar.py:7(__init__)
+       68    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:23(__getitem__)
+       73    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:83(add)
+      177    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:36(_add_quotes)
+       72    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:26(__exit__)
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\mimetypes.py:64(__init__)
+       16    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:305(check_composite_tokens)
+       52    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:45(escape_quotes)
+        8    0.000    0.000    0.484    0.060 C:\Python27\Lib\urllib2.py:411(open)
+       14    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:142(_ref_kwargs)
+      264    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\sre_parse.py:216(tell)
+      187    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:309(is_expression)
+       55    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:26(__setitem__)
+       18    0.000    0.000    0.001    0.000 C:\Python27\Lib\json\decoder.py:359(decode)
+      127    0.000    0.000    0.000    0.000 {method 'translate' of 'str' objects}
+        1    0.000    0.000    0.335    0.335 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parser_frontends.py:41(__init__)
+        9    0.000    0.000    0.000    0.000 {dir}
+      120    0.000    0.000    0.001    0.000 C:\Python27\Lib\ast.py:32(parse)
+      181    0.000    0.000    0.000    0.000 {filter}
+      183    0.000    0.000    0.000    0.000 {method 'endswith' of 'unicode' objects}
+      241    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:418(process_attribute_comment)
+      166    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:339(<genexpr>)
+       86    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:107(__init__)
+       86    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:377(expansion)
+       55    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:32(__contains__)
+       13    0.000    0.000    0.001    0.000 .\mappyfile\pprint.py:143(process_key_dict)
+        1    0.000    0.000    0.259    0.259 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parser_frontends.py:16(init_contextual_lexer)
+       10    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:141(_add_recurse_rule)
+       30    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_abcoll.py:386(__contains__)
+       44    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+   118/49    0.000    0.000    0.000    0.000 {issubclass}
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parser_frontends.py:18(<dictcomp>)
+      168    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+      407    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:79(<genexpr>)
+       20    0.000    0.000    0.001    0.000 .\mappyfile\validator.py:41(get_schemas_folder)
+        8    0.000    0.000    0.483    0.060 C:\Python27\Lib\urllib2.py:439(_open)
+       14    0.000    0.000    0.485    0.035 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:265(__call__)
+       72    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:20(__enter__)
+       10    0.000    0.000    0.001    0.000 C:\Python27\Lib\json\__init__.py:258(load)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:226(__init__)
+       16    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:150(full_uri)
+       67    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:435(_add_type_comment)
+      120    0.000    0.000    0.000    0.000 C:\Python27\Lib\ast.py:52(_convert)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\mimetools.py:24(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:237(__init__)
+       70    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:130(add_end_line)
+      189    0.000    0.000    0.000    0.000 {method 'lower' of 'str' objects}
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\mimetools.py:33(parsetype)
+       12    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:358(range)
+        1    0.000    0.000    0.482    0.482 C:\Python27\Lib\mimetypes.py:347(init)
+       19    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\genericpath.py:34(isfile)
+        1    0.000    0.000    0.007    0.007 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:529(import_grammar)
+        9    0.000    0.000    0.000    0.000 {_codecs.utf_8_decode}
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\mimetypes.py:95(guess_type)
+        1    0.000    0.000    0.001    0.001 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:87(__init__)
+       38    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:229(__getitem__)
+       22    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+       10    0.000    0.000    0.001    0.000 .\mappyfile\validator.py:44(get_schema_file)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:208(request_host)
+      182    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_parser.py:12(<genexpr>)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\rfc822.py:88(__init__)
+       18    0.000    0.000    0.001    0.000 C:\Python27\Lib\json\__init__.py:294(loads)
+       32    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:232(__setitem__)
+       20    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:483(abspath)
+       13    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:19(__init__)
+      104    0.000    0.000    0.000    0.000 {method 'insert' of 'list' objects}
+       16    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1078(splittype)
+       32    0.000    0.000    0.000    0.000 {method 'split' of 'unicode' objects}
+        8    0.000    0.000    0.484    0.061 C:\Python27\Lib\urllib2.py:131(urlopen)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:39(<dictcomp>)
+       13    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:41(get)
+       13    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:153(expr)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\parser.py:25(load_grammar)
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1371(getproxies_environment)
+       70    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:125(geturl)
+      119    0.000    0.000    0.000    0.000 {method 'find' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 .\mappyfile\parser.py:167(open_file)
+       10    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\genericpath.py:93(_splitext)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:958(__init__)
+        8    0.000    0.000    0.483    0.060 C:\Python27\Lib\urllib2.py:1329(file_open)
+        9    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:160(_splitnetloc)
+       72    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:16(__init__)
+       40    0.000    0.000    0.000    0.000 <string>:8(__new__)
+       79    0.000    0.000    0.000    0.000 {method 'count' of 'str' objects}
+       23    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:535(float)
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:479(build_opener)
+       16    0.000    0.000    0.483    0.030 C:\Python27\Lib\urllib2.py:399(_call_chain)
+       49    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:103(plural)
+        8    0.000    0.000    0.000    0.000 {method 'decode' of 'str' objects}
+       24    0.000    0.000    0.000    0.000 C:\Python27\Lib\rfc822.py:202(isheader)
+       40    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1220(unquote)
+       92    0.000    0.000    0.000    0.000 {method 'lstrip' of 'unicode' objects}
+       26    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:74(in_brackets)
+       72    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:52(_commit_removals)
+      159    0.000    0.000    0.000    0.000 {iter}
+       58    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\grammar.py:21(__init__)
+       14    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_weakrefset.py:36(__init__)
+       26    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:78(in_parenthesis)
+       40    0.000    0.000    0.000    0.000 {method 'find' of 'unicode' objects}
+       16    0.000    0.000    0.488    0.031 C:\VirtualEnvs\mappyfile\lib\site-packages\proxytypes.py:193(__subject__)
+       66    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:382(<genexpr>)
+       66    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:99(<genexpr>)
+       48    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:389(<genexpr>)
+      182    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:110(<lambda>)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1092(splithost)
+        8    0.000    0.000    0.482    0.060 C:\Python27\Lib\mimetypes.py:274(guess_type)
+       16    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:293(get_selector)
+       87    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:547(string)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:246(__getattr__)
+       21    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:213(dirname)
+        1    0.000    0.000    0.512    0.512 .\mappyfile\utils.py:172(_pprint)
+        1    0.000    0.000    0.076    0.076 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_parser.py:11(__init__)
+       40    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1054(_is_unicode)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1017(__init__)
+       16    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:127(add_start_line)
+       67    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:400(process_composite_comment)
+        1    0.000    0.000    0.337    0.337 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lark.py:172(_build_parser)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1069(unwrap)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:103(__init__)
+        8    0.000    0.000    0.000    0.000 {time.gmtime}
+     35/2    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:237(depth)
+       10    0.000    0.000    0.000    0.000 .\mappyfile\validator.py:22(get_schema_path)
+       14    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:86(in_slashes)
+       28    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:117(__init__)
+       16    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:286(get_host)
+       64    0.000    0.000    0.000    0.000 {method '__subclasses__' of 'type' objects}
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1182(splittag)
+       59    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
+       16    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:279(get_type)
+        8    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\posixpath.py:97(splitext)
+       16    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:223(urlunparse)
+       47    0.000    0.000    0.000    0.000 {operator.__contains__}
+        1    0.000    0.000    0.512    0.512 .\mappyfile\pprint.py:269(pprint)
+       46    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        8    0.000    0.000    0.000    0.000 {cStringIO.StringIO}
+        8    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\encodings\utf_8.py:15(decode)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\grammar_analysis.py:49(<setcomp>)
+        1    0.000    0.000    0.404    0.404 .\mappyfile\utils.py:28(open)
+       13    0.000    0.000    0.001    0.000 .\mappyfile\transformer.py:354(metadata)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lark.py:46(__init__)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:256(<dictcomp>)
+        8    0.000    0.000    0.000    0.000 {method 'sub' of '_sre.SRE_Pattern' objects}
+       13    0.000    0.000    0.000    0.000 .\mappyfile\ordereddict.py:51(_convert_keys)
+       59    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_abcoll.py:98(__subclasshook__)
+        2    0.000    0.000    0.015    0.007 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parser_frontends.py:35(parse)
+       42    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:554(string_pair)
+        8    0.000    0.000    0.000    0.000 {_bisect.insort}
+        2    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:215(format_pair_list)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1233(findCaller)
+       10    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\stat.py:49(S_ISREG)
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1525(getproxies_registry)
+       16    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\jsonref.py:176(resolve_pointer)
+       41    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:56(__init__)
+        5    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:241(maybe)
+       20    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:380(<setcomp>)
+       29    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:558(rgb)
+       68    0.000    0.000    0.000    0.000 {function __getitem__ at 0x000000000645DC18}
+       61    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:132(composite_type)
+       81    0.000    0.000    0.000    0.000 {method 'strip' of 'unicode' objects}
+       12    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:70(__eq__)
+       35    0.000    0.000    0.000    0.000 {method 'rindex' of 'str' objects}
+       16    0.000    0.000    0.000    0.000 C:\Python27\Lib\rfc822.py:290(getheader)
+       24    0.000    0.000    0.000    0.000 C:\Python27\Lib\rfc822.py:214(islast)
+       64    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:373(pattern)
+       32    0.000    0.000    0.000    0.000 {method 'readline' of 'cStringIO.StringI' objects}
+        1    0.000    0.000    0.000    0.000 {_codecs.charmap_decode}
+       21    0.000    0.000    0.000    0.000 {operator.__getitem__}
+       72    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:544(<dictcomp>)
+       20    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1267(_log)
+        1    0.000    0.000    0.378    0.378 .\mappyfile\parser.py:29(_create_lalr_parser)
+       56    0.000    0.000    0.000    0.000 {method 'tell' of 'cStringIO.StringI' objects}
+       40    0.000    0.000    0.000    0.000 {method 'strip' of 'str' objects}
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:326(get_header)
+        2    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:395(process_pair_lists)
+       16    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:387(<setcomp>)
+       47    0.000    0.000    0.000    0.000 {method 'isalnum' of 'unicode' objects}
+        1    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:201(process_projection)
+        1    0.000    0.000    0.015    0.015 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parser_frontends.py:45(parse)
+       36    0.000    0.000    0.000    0.000 {method 'end' of '_sre.SRE_Match' objects}
+       18    0.000    0.000    0.000    0.000 C:\Python27\Lib\urlparse.py:206(<genexpr>)
+        3    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parser_frontends.py:22(lex)
+        3    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:19(__init__)
+       54    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:129(composite_body)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:506(<setcomp>)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1183(error)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1320(callHandlers)
+       53    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:230(expansions)
+       13    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:528(__lt__)
+        2    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:230(format_repeated_pair_list)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:25(__init__)
+        1    0.000    0.000    0.011    0.011 .\mappyfile\transformer.py:30(transform)
+       24    0.000    0.000    0.000    0.000 C:\Python27\Lib\rfc822.py:224(iscomment)
+       33    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parse_tree_builder.py:11(__init__)
+        1    0.000    0.000    0.378    0.378 .\mappyfile\parser.py:19(__init__)
+        1    0.000    0.000    0.015    0.015 .\mappyfile\parser.py:180(parse)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1254(makeRecord)
+       55    0.000    0.000    0.000    0.000 {function __contains__ at 0x000000000645DD68}
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\mimetools.py:50(parseplist)
+        7    0.000    0.000    0.000    0.000 .\mappyfile\pprint.py:82(in_braces)
+        1    0.000    0.000    0.512    0.512 .\mappyfile\utils.py:128(dumps)
+        1    0.000    0.000    0.000    0.000 {_locale._getdefaultlocale}
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:211(lex)
+       10    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\stat.py:24(S_IFMT)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\codecs.py:311(decode)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\locale.py:595(getpreferredencoding)
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:739(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1346(getEffectiveLevel)
+        1    0.000    0.000    0.015    0.015 .\mappyfile\parser.py:176(parse_file)
+        6    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:520(true)
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:337(__init__)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:255(<setcomp>)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:70(<lambda>)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:273(get_full_url)
+       16    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:578(num_pair)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:253(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1288(handle)
+       39    0.000    0.000    0.000    0.000 {method 'isalpha' of 'unicode' objects}
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1360(isEnabledFor)
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:126(__mul__)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\codecs.py:302(__init__)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:383(projection)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:148(getLevelName)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\encodings\cp1252.py:22(decode)
+        1    0.000    0.000    0.015    0.015 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lark.py:196(parse)
+        3    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:57(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'Close' of 'PyHKEY' objects}
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib.py:1571(getproxies)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_abcoll.py:24(_hasattr)
+        2    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:406(points)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\threading.py:958(name)
+        2    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+       27    0.000    0.000    0.000    0.000 {next}
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:43(normcase)
+        5    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:234(alias)
+        8    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:521(add_parent)
+        1    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:1235(__init__)
+        2    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:508(extent)
+        3    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\lexer.py:80(__init__)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:44(__init__)
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:419(__init__)
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\codecs.py:253(__init__)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\validator.py:18(__init__)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:134(__init__)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:45(__init__)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:607(filter)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_abcoll.py:128(__subclasshook__)
+       13    0.000    0.000    0.000    0.000 {method '__subclasshook__' of 'object' objects}
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_analysis.py:29(__init__)
+        3    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:480(regexp)
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:206(basename)
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\_abcoll.py:26(<genexpr>)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\os.py:444(__contains__)
+        2    0.000    0.000    0.000    0.000 {time.time}
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\ntpath.py:199(splitext)
+        5    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\load_grammar.py:215(alias)
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\threading.py:1143(currentThread)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parser_frontends.py:174(get_frontend)
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\tree.py:134(__init__)
+        2    0.000    0.000    0.000    0.000 {nt.getpid}
+        2    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\UserDict.py:57(items)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:52(start)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\parsers\lalr_parser.py:26(__init__)
+        2    0.000    0.000    0.000    0.000 {sys._getframe}
+        4    0.000    0.000    0.000    0.000 {thread.get_ident}
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\urllib2.py:1117(__init__)
+        1    0.000    0.000    0.000    0.000 C:\VirtualEnvs\mappyfile\lib\site-packages\lark\common.py:52(__init__)
+        1    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:525(false)
+        4    0.000    0.000    0.000    0.000 .\mappyfile\transformer.py:551(path)
+        1    0.000    0.000    0.000    0.000 {sys.getdefaultencoding}
+        1    0.000    0.000    0.000    0.000 {method 'upper' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 C:\Python27\Lib\logging\__init__.py:1699(handle)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+

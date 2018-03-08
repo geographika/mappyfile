@@ -1,0 +1,52 @@
+# https://github.com/mapserver/mapserver/issues/5004
+
+MAP
+    IMAGETYPE           PNG
+    SIZE                    400 300
+    MAXSIZE             2400
+    SHAPEPATH           "/var/www/maps/demo/shp/"
+    IMAGECOLOR      "#FFFFFF"
+    WEB
+        METADATA
+            "wfs_srs"             "EPSG:3857 EPSG:900913"
+            "wfs_enable_request"    "GetMap GetFeature GetCapabilities GetLegendGraphic"
+        END
+    END
+    PROJECTION
+        "init=epsg:3857"
+    END
+    LAYER
+        NAME         live
+        METADATA
+            "wfs_title"         "live"
+            "wfs_srs"             "EPSG:3857 EPSG:900913"
+            "gml_include_items" "all"
+            "gml_featureid"     "id"
+            "wfs_enable_request"    "*"
+        END
+        DATA         demo_2014_live
+        STATUS       ON
+        TYPE         POLYGON
+        PROJECTION
+            "init=epsg:4326"
+        END
+        CLASS
+            NAME       "Done"
+            #EXPRESSION ([boxesMatch] / [boxes] > 0.1) # TODO fix this
+            STYLE
+                COLOR   "#008000"
+                SIZE 4.0
+                WIDTH 3.0
+            END
+        END
+        CLASS
+            NAME       "Todo"
+            EXPRESSION (true)
+            STYLE
+                COLOR   "#C0C0C0"
+                SIZE 4.0
+                WIDTH 3.0
+            END
+        END
+    END
+END

@@ -1,0 +1,5174 @@
+MAP
+NAME kobanya
+EXTENT 653350 234700 663500 240650
+SIZE 600 600
+IMAGETYPE png
+SHAPEPATH "/web/html/x/data"
+#SHAPEPATH "/home/html/x/data"
+FONTSET "/web/html/x/fonts.lst"
+#FONTSET "/home/html/x/fonts.lst"
+SYMBOLSET "/web/html/x/x.sym"
+#SYMBOLSET "/home/html/x/x.sym"
+UNITS meters
+#TEMPLATEPATTERN ".*\.html"
+CONFIG "MS_ERRORFILE"  "/web/html/x/tmp/error.txt"
+#CONFIG "MS_ERRORFILE"  "/home/html/x/tmp/error.txt"
+DEBUG 5
+INTERLACE OFF
+RESOLUTION 96
+PROJECTION
+	"init=epsg:23700"
+END
+
+OUTPUTFORMAT
+	NAME png
+	DRIVER "GD/PNG"
+	MIMETYPE "image/png"
+	IMAGEMODE RGB	# better image quality for photos
+	FORMATOPTION  "INTERLACE=OFF"
+	TRANSPARENT OFF
+	EXTENSION "png"
+END
+
+WEB
+	TEMPLATE "x_template.html"
+	IMAGEPATH "/web/html/x/tmp/"
+#	IMAGEPATH "/home/html/x/tmp/"
+	IMAGEURL "/x/tmp/"
+#	HEADER "x_header.html"
+#	FOOTER "x_footer.html"
+	MAXSCALEDENOM 100000
+#	MINSCALEDENOM 100
+#	ERROR "/x/hiba.html"
+#	EMPTY "/x/hiba.html"
+	METADATA
+		wms_title "X WMS Server"
+		wms_abstract "Several map layers for 10th district of Budapest"
+#		wms_onlineresource "http://localhost/cgi-bin/mapserv?map=/home/html/x/pmapper/config/default/x201406.map&"
+		wms_onlineresource "http://terkep.kobanya.hu/cgi-bin/mapserv?map=/web/html/x/pmapper/config/default/x201703.map&"
+		wms_srs "EPSG:23700 EPSG:3857 EPSG:900913"
+	END
+END
+
+# leptek
+SCALEBAR
+	IMAGECOLOR 255 255 255
+	LABEL
+		COLOR 0 0 0
+		SIZE TINY
+	END
+	STYLE 0
+	SIZE 350 6
+	COLOR 0 0 0
+	OUTLINECOLOR 0 0 0
+	UNITS METERS
+	INTERVALS 5
+	STATUS TRUE
+END
+
+# attekinto terkep
+REFERENCE
+	IMAGE ../../images/xref.png
+	EXTENT 653350 235000 663500 240650
+	SIZE 266 157
+	STATUS ON
+#	COLOR 255 0 0
+	COLOR -1 -1 -1
+	MAXBOXSIZE 100
+	MINBOXSIZE 10
+	MARKERSIZE 15
+	MARKER 'circle'
+	OUTLINECOLOR 255 0 0
+END
+
+# jelkulcs
+LEGEND
+END
+
+# lekerdezes attekinto
+QUERYMAP
+#	SIZE 600 600
+	STATUS ON
+	STYLE HILITE
+	COLOR 200 0 200
+END
+
+# cimpontok (nem lathato, csak kereseshez)
+LAYER
+	NAME "cimpont"
+	DATA "cim/cimek"
+	TYPE POINT
+	STATUS DEFAULT
+	METADATA
+		"DESCRIPTION"	"Címpontok"
+		"wms_name"	"cimpontok"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"cimpontok"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "IRSZ,ADDR,MEGJEGYZES"
+		"RESULT_HEADERS" "Irsz,Cím,Megjegyzés"
+	END
+	CLASS
+		COLOR -1 -1 -1
+#		COLOR 255 0 0
+		SYMBOL 'circle' 
+		SIZE 10
+	END
+	TEMPLATE "empty.html"
+	HEADER "x_template.html"
+	FOOTER "empty.html"
+END
+
+LAYER
+	NAME "ed"
+	GROUP "perspektiv"
+	DATA "ferdefoto/ed.shp"
+	TYPE POLYGON
+	STATUS OFF
+	CLASS
+		NAME "Képhatár É-D"
+		COLOR -1 -1 -1
+		OUTLINECOLOR 255 0 0
+	END
+	TEMPLATE "dummy"
+	METADATA
+		"DESCRIPTION" "Perspektív légifénykép"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_HYPERLINK" "ID"
+		"RESULT_FIELDS" "ID,IRANY"
+		"RESULT_HEADERS" "Képszám,Irány"
+	END
+END
+
+LAYER
+	NAME "kny1"
+	GROUP "perspektiv"
+	DATA "ferdefoto/kny1.shp"
+	TYPE POLYGON
+	STATUS OFF
+	CLASS
+		NAME "Képhatár K-NY"
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 255 0
+	END
+	TEMPLATE "dummy"
+	METADATA
+		"DESCRIPTION" "Perspektív légifénykép K-NY I."
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_HYPERLINK" "ID"
+		"RESULT_FIELDS" "ID,IRANY"
+		"RESULT_HEADERS" "Képszám,Irány"
+	END
+END
+
+LAYER
+	NAME "kny2"
+	GROUP "perspektiv"
+	DATA "ferdefoto/kny2.shp"
+	TYPE POLYGON
+	STATUS OFF
+	CLASS
+		NAME "Képhatár K_NY"
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 255
+	END
+	TEMPLATE "dummy"
+	METADATA
+		"DESCRIPTION" "Perspektív légifénykép K-NY II."
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_HYPERLINK" "ID"
+		"RESULT_FIELDS" "ID,IRANY"
+		"RESULT_HEADERS" "Képszám,Irány"
+	END
+END
+
+# domborzat
+LAYER
+	NAME "dtm"
+	DATA "dtm/g_bp101.img"
+	TYPE RASTER
+	STATUS OFF
+	METADATA
+		"DESCRIPTION" "Domborzat"
+	END
+	CLASSITEM "[pixel]"
+	CLASS
+		NAME "105 - 110"
+		EXPRESSION ([pixel] < 110)
+		STYLE
+			COLOR 0 67 39
+		END
+	END
+	CLASS
+		NAME "110 - 115"
+		EXPRESSION ([pixel] < 115)
+		STYLE
+			COLOR 0 117 39
+		END
+	END
+	CLASS
+		NAME "115 - 120"
+		EXPRESSION ([pixel] < 120)
+		STYLE
+			COLOR 0 175 78
+		END
+	END
+	CLASS
+		NAME "120 - 125"
+		EXPRESSION ([pixel] < 125)
+		STYLE
+			COLOR 78 195 50
+		END
+	END
+	CLASS
+		NAME "125 - 130"
+		EXPRESSION ([pixel] < 130)
+		STYLE
+			COLOR 78 195 50
+		END
+	END
+	CLASS
+		NAME "130 - 135"
+		EXPRESSION ([pixel] < 135)
+		STYLE
+			COLOR 156 214 23
+		END
+	END
+	CLASS
+		NAME "135 - 140"
+		EXPRESSION ([pixel] < 140)
+		STYLE
+			COLOR 191 223 12
+		END
+	END
+	CLASS
+		NAME "140 - 145"
+		EXPRESSION ([pixel] < 145)
+		STYLE
+			COLOR 234 234 0
+		END
+	END
+	CLASS
+		NAME "145 - 150"
+		EXPRESSION ([pixel] < 150)
+		STYLE
+			COLOR 214 185 10
+		END
+	END
+	CLASS
+		NAME "150 - 155"
+		EXPRESSION ([pixel] < 155)
+		STYLE
+			COLOR 195 136 20
+		END
+	END
+END
+
+# legifenykepek 2015 (tiled)
+LAYER
+	NAME "foto2015"
+	TILEINDEX "xfoto2015/tile2015"
+	TILEITEM "Location"
+	MINSCALEDENOM 299
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 2015"
+		"wms_name"	"foto2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto2015"
+	END
+END
+
+# legifenykepek 2013 (tiled)
+LAYER
+	NAME "foto2013"
+	TILEINDEX "xfoto2013/tile2013"
+	TILEITEM "Location"
+	MINSCALEDENOM 299
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 2013"
+		"wms_name"	"foto2013"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto2013"
+	END
+END
+
+# legifenykepek 2007 (tiled)
+LAYER
+	NAME "foto2007"
+	TILEINDEX "xfoto2007/tile2007"
+	TILEITEM "Location"
+	MINSCALEDENOM 299
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 2007"
+		"wms_name"	"foto2007"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto2007"
+	END
+END
+
+# legifenykepek 2005 (tiled)
+LAYER
+	NAME "foto2005"
+	TILEINDEX "xfoto2005/tile2005"
+	TILEITEM "Location"
+	MINSCALEDENOM 299
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 2005"
+		"wms_name"	"foto2005"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto2005"
+	END
+END
+
+# legifenykepek (tiles)
+LAYER
+	NAME "foto"
+	TILEINDEX "xfoto/tiles"
+	TILEITEM "Location"
+	MINSCALEDENOM 500
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 2000"
+		"wms_name"	"foto"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto"
+	END
+END
+
+# legifenykepek 1997 (tiled)
+LAYER
+	NAME "foto1997"
+	TILEINDEX "xfoto1997/tile1997"
+	TILEITEM "Location"
+	MINSCALEDENOM 299
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 1997"
+		"wms_name"	"foto1997"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto1997"
+	END
+END
+
+# legifenykepek 1997 infra (tiled)
+LAYER
+	NAME "foto1997_infra"
+	TILEINDEX "xfoto1997_infra/tile1997_infra"
+	TILEITEM "Location"
+	MINSCALEDENOM 299
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 1997 (infra)"
+		"wms_name"	"foto1997_infra"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto1997_infra"
+	END
+END
+
+# legifenykepek 1993 (tiled)
+LAYER
+	NAME "foto1993"
+	TILEINDEX "xfoto1993/tile1993"
+	TILEITEM "Location"
+	MINSCALEDENOM 299
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Légifénykép 1993"
+		"wms_name"	"foto1993"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"foto1993"
+	END
+END
+
+# Budapest szabalyozasi terv 1900
+LAYER
+	NAME "bp1900"
+	TILEINDEX "bp1900/bp1900"
+	TILEITEM "Location"
+	MINSCALEDENOM 999
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		DESCRIPTION "Budapest övezeti térkép 1900"
+	END
+END  
+
+# topografiai terkepek(tiled)
+LAYER
+	NAME "topo10000"
+	GROUP "topo"
+	TILEINDEX "xtopo/10000/topo10000"
+	TILEITEM "Location"
+	MINSCALEDENOM 25001
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Topográfiai térkép 1:10000"
+		"wms_name"	"topo"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"topo"
+	END
+END
+
+LAYER
+	NAME "topo4000"
+	GROUP "topo"
+	TILEINDEX "xtopo/4000/topo4000"
+	TILEITEM "Location"
+	MAXSCALEDENOM 25000
+	MINSCALEDENOM 15001
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Topográfiai térkép 1:10000"
+		"wms_name"	"topo"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"topo"
+	END
+END
+
+LAYER
+	NAME "topo2000"
+	GROUP "topo"
+	TILEINDEX "xtopo/2000/topo2000"
+	TILEITEM "Location"
+	MAXSCALEDENOM 15000
+	MINSCALEDENOM 5001
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Topográfiai térkép 1:10000"
+		"wms_name"	"topo"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"topo"
+	END
+END
+
+LAYER
+	NAME "topo1000"
+	GROUP "topo"
+	TILEINDEX "xtopo/1000/topo1000"
+	TILEITEM "Location"
+	MAXSCALEDENOM 5000
+	MINSCALEDENOM 499
+	STATUS OFF
+	TYPE RASTER
+	METADATA
+		"DESCRIPTION"	"Topográfiai térkép 1:10000"
+		"wms_name"	"topo"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"topo"
+	END
+END
+
+# földtan
+LAYER
+	NAME 'foldtan'
+	TYPE POLYGON
+	TEMPLATE dummy
+	DATA 'foldtan/foldtan'
+	METADATA
+		"DESCRIPTION"	"Földtan"
+		"wms_name"	"foldtan"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		'ows_title' 'foldtan'
+	END
+	STATUS OFF
+	CLASSITEM 'FOLDTAN'
+	CLASS
+		NAME "Bádeni mészkő, mészmárga" 
+		EXPRESSION "/B.deni m.szk., m.szm.rga/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 216 255 255
+		END
+	END
+	CLASS
+		NAME "Felső-pannon homokos-kőzetliszt, kőzetlisztes-agyag, agyagmárga" 
+		EXPRESSION "/Fels.-pannon homokos-k.zetliszt, k.zetlisztes-agyag, agyagm.rga/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 58 109 205
+		END
+	END
+	CLASS
+		NAME "Felső-pannon kőzetliszt, homok, huminites agyag közbetelepülésekkel" 
+		EXPRESSION "/Fels.-pannon k.zetliszt, homok, huminites agyag k.zbetelep.l.sekkel/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 120 117 243
+		END
+	END
+	CLASS
+		NAME "Felső-pannon kőzetlisztes-agyag, agyagmárga" 
+		EXPRESSION "/Fels.-pannon k.zetlisztes-agyag, agyagm.rga/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 71 70 150
+		END
+	END
+	CLASS
+		NAME "Felső-pleisztocén homokos-kavics, homok" 
+		EXPRESSION "/Fels.-pleisztoc.n homokos-kavics, homok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 15 3 235
+		END
+	END
+	CLASS
+		NAME "Felső-pleisztocén kavicsos-homok és kőzetliszt" 
+		EXPRESSION "/Fels.-pleisztoc.n kavicsos-homok .s k.zetliszt/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 96 24 173
+		END
+	END
+	CLASS
+		NAME "Felső-pliocén kavicsos-homok, homok" 
+		EXPRESSION "/Fels.-plioc.n kavicsos-homok, homok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 177 214 186
+		END
+	END
+	CLASS
+		NAME "Holocén-pleisztocén homokos kőzetliszt és agyag" 
+		EXPRESSION "/Holoc.n-pleisztoc.n homokos k.zetliszt és agyag/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 132 253 192
+		END
+	END
+	CLASS
+		NAME "Holocén-pleisztocén kőzettörmelékes ill. kavicsos homok" 
+		EXPRESSION "/Holoc.n-pleisztoc.n k.zett.rmel.kes ill. kavicsos homok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 220 54 199
+		END
+	END
+	CLASS
+		NAME "Kultúrfeltöltés" 
+		EXPRESSION "/Kult.rfelt.lt.s/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 190 28 153
+		END
+	END
+	CLASS
+		NAME "Kárpáti chlamysos és bryozoás homok, homokkő" 
+		EXPRESSION "/K.rp.ti chlamysos és bryozo.s homok, homokk./"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 99 188 156
+		END
+	END
+	CLASS
+		NAME "Kárpáti középső riolit-tufa" 
+		EXPRESSION "/K.rp.ti k.z.ps. riolit-tufa/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 90 15 155
+		END
+	END
+	CLASS
+		NAME "Középső-pleisztocén homokos-kavics, homok" 
+		EXPRESSION "/K.z.ps.-pleisztoc.n homokos-kavics, homok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 146 93 39
+		END
+	END
+	CLASS
+		NAME "Szarmata oolitos-mészkő, mészmárga, bentonitosodott riolit-tufával" 
+		EXPRESSION "/Szarmata oolitos-m.szk., m.szm.rga, bentonitosodott riolit-tuf.val/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 156 101 68
+		END
+	END
+	CLASS
+		NAME "Óholocén agyagos-kőzetlisztes-medencekitöltés" 
+		EXPRESSION "/.holoc.n agyagos-k.zetlisztes-medencekit.lt.s/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 89 44 168
+		END
+	END
+	CLASS
+		NAME "Óholocén kavics, homokos-kavics" 
+		EXPRESSION "/.holoc.n kavics, homokos-kavics/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 124 53 190
+		END
+	END
+	CLASS
+		NAME "Óholocén kőzetlisztes-homok" 
+		EXPRESSION "/.holoc.n k.zetlisztes-homok/"
+		STYLE
+		OUTLINECOLOR 0 0 0
+		COLOR 37 118 61
+		END
+	END
+	CLASS
+		NAME "Óholocén öntésiszap, tőzegsár, mésziszap" 
+		EXPRESSION "/.holoc.n .nt.siszap, t.zegs.r, m.sziszap/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 76 215 7
+		END
+	END
+	CLASS
+		NAME "Újholocén futóhomok" 
+		EXPRESSION "/.jholoc.n fut.homok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 43 170 115
+		END
+	END
+	CLASS
+		NAME "Újholocén homokos-kavics, homok" 
+		EXPRESSION "/.jholoc.n homokos-kavics, homok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 200 205 133
+		END
+	END
+	CLASS
+		NAME "Újholocén huminites-öntésiszap" 
+		EXPRESSION "/.jholoc.n huminites-.nt.siszap/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 244 237 138
+		END
+	END
+	CLASS
+		NAME "Újholocén kőzetlisztes-homok, kőzetliszt, agyag" 
+		EXPRESSION "/.jholoc.n k.zetlisztes-homok, k.zetliszt, agyag/"
+		STYLE
+		OUTLINECOLOR 0 0 0
+		COLOR 77 224 186
+		END
+	END
+	CLASS
+		NAME "Újholocén lepelhomok" 
+		EXPRESSION "/.jholoc.n lepelhomok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 146 154 155
+		END
+	END
+END
+
+LAYER
+	NAME 'geology'
+	TYPE POLYGON
+	TEMPLATE dummy
+	DATA 'foldtan/geology'
+	METADATA
+		"DESCRIPTION"	"Geológia"
+		"wms_name"	"geology"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		'ows_title' 'geology'
+	END
+	STATUS OFF
+	CLASSITEM 'IGDS_TEXT'
+	CLASS
+		NAME "1" 
+		EXPRESSION "1" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 41 129 246
+		END
+	END
+	CLASS
+		NAME "1/11" 
+		EXPRESSION "1/11" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 186 12 171
+		END
+	END
+	CLASS
+		NAME "1/32" 
+		EXPRESSION "1/32" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 157 159 177
+		END
+	END
+	CLASS
+		NAME "1/36" 
+		EXPRESSION "1/36" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 250 81 146
+		END
+	END
+	CLASS
+		NAME "1/37" 
+		EXPRESSION "1/37" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 62 49 155
+		END
+	END
+	CLASS
+		NAME "10" 
+		EXPRESSION "10" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 86 46 254
+		END
+	END
+	CLASS
+		NAME "11" 
+		EXPRESSION "11" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 74 58 197
+		END
+	END
+	CLASS
+		NAME "16" 
+		EXPRESSION "16" 
+		STYLE
+		OUTLINECOLOR 0 0 0
+		COLOR 117 255 25
+		END
+	END
+	CLASS
+		NAME "17" 
+		EXPRESSION "17" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 78 45 28
+		END
+	END
+	CLASS
+		NAME "19" 
+		EXPRESSION "19" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 155 116 119
+		END
+	END
+	CLASS
+		NAME "2" 
+		EXPRESSION "2" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 75 112 60
+		END
+	END
+	CLASS
+		NAME "22" 
+		EXPRESSION "22" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 105 52 161
+		END
+	END
+	CLASS
+		NAME "25" 
+		EXPRESSION "25" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 127 21 189
+		END
+	END
+	CLASS
+		NAME "27" 
+		EXPRESSION "27" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 212 160 184
+		END
+	END
+	CLASS
+		NAME "3" 
+		EXPRESSION "3" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 148 136 161
+		END
+	END
+	CLASS
+		NAME "32" 
+		EXPRESSION "32" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 189 142 231
+		END
+	END
+	CLASS
+		NAME "36" 
+		EXPRESSION "36" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 206 39 147
+		END
+	END
+	CLASS
+		NAME "37" 
+		EXPRESSION "37" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 153 162 218
+		END
+	END
+	CLASS
+		NAME "4" 
+		EXPRESSION "4" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 178 236 49
+		END
+	END
+	CLASS
+		NAME "40" 
+		EXPRESSION "40" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 238 13 229
+		END
+	END
+	CLASS
+		NAME "42" 
+		EXPRESSION "42" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 160 25 112
+		END
+	END
+	CLASS
+		NAME "45" 
+		EXPRESSION "45" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 112 52 178
+		END
+	END
+	CLASS
+		NAME "46" 
+		EXPRESSION "46" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 179 150 90
+		END
+	END
+	CLASS
+		NAME "6" 
+		EXPRESSION "6" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 175 139 19
+		END
+	END
+	CLASS
+		NAME "69" 
+		EXPRESSION "69" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 222 233 157
+		END
+	END
+	CLASS
+		NAME "7" 
+		EXPRESSION "7" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 30 116 192
+		END
+	END
+	CLASS
+		NAME "8" 
+		EXPRESSION "8" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 222 218 190
+		END
+	END
+	CLASS
+		NAME "9" 
+		EXPRESSION "9" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 145 96 47
+		END
+	END
+END
+
+LAYER
+	NAME 'vizmelyseg'
+	TYPE POLYGON
+	TEMPLATE dummy
+	DATA 'foldtan/vizmelyseg'
+	METADATA
+		"DESCRIPTION"	"Vízmélység"
+		"wms_name"	"vizmelyseg"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		'ows_title' 'vizmelyseg'
+	END
+	STATUS OFF
+	CLASSITEM 'VIZMELYSEG'
+	CLASS
+		NAME "0,0-1,0" 
+		EXPRESSION "0,0-1,0" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 170 255
+		END
+	END
+	CLASS
+		NAME "1,0-2,5" 
+		EXPRESSION "1,0-2,5" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 141 211
+		END
+	END
+	CLASS
+		NAME "10,0-12,5" 
+		EXPRESSION "10,0-12,5" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 95 143
+		END
+	END
+	CLASS
+		NAME "12,5-15,0" 
+		EXPRESSION "12,5-15,0" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 85 255
+		END
+	END
+	CLASS
+		NAME "2,5-5,0" 
+		EXPRESSION "2,5-5,0" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 71 215
+		END
+	END
+	CLASS
+		NAME "5,0-7,5" 
+		EXPRESSION "5,0-7,5" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 51 155
+		END
+	END
+	CLASS
+		NAME "7,5-10,0" 
+		EXPRESSION "7,5-10,0" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 28 84
+		END
+	END
+	CLASS
+		NAME "Feltőltés, kűlszíni bánya" 
+		EXPRESSION "/Felt.lt.s, k.lsz.ni b.nya/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 255 255 255
+		END
+	END
+	CLASS
+		NAME "Porózus vízadók területei" 
+		EXPRESSION "/Por.zus v.zad.k ter.letei/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 255 255 255
+		END
+	END
+	CLASS
+		NAME "Rés és hasadékvizes területek" 
+		EXPRESSION "/R.s .s hasad.kvizes ter.letek/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 255 255 255
+		END
+	END
+END
+
+LAYER
+	NAME 'teldomb'
+	TYPE POLYGON
+	TEMPLATE dummy
+	DATA 'foldtan/teldomb'
+	METADATA
+		"DESCRIPTION"	"teldomb"
+		"wms_name"	"teldomb"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		'ows_title' 'teldomb'
+	END
+	STATUS OFF
+	CLASSITEM 'JELMAGYARA'
+	CLASS
+		NAME "125-160 mBf. terület" 
+		EXPRESSION "/125-160 mBf. ter.let/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 146 154 155
+		END
+	END
+	CLASS
+		NAME "Deráziós völgy" 
+		EXPRESSION "/Der.zi.s v.lgy/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 4 24 93
+		END
+	END
+	CLASS
+		NAME "Erodált sík" 
+		EXPRESSION "/Erod.lt s.k/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 77 224 186
+		END
+	END
+	CLASS
+		NAME "Futóhomok" 
+		EXPRESSION "/Fut.homok/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 255 255 0
+		END
+	END
+	CLASS
+		NAME "Futóhomok buckák" 
+		EXPRESSION "/Fut.homok buck.k/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 255 170 0
+		END
+	END
+	CLASS
+		NAME "II b. Duna-terasz" 
+		EXPRESSION "II b. Duna-terasz" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 90 15 155
+		END
+	END
+	CLASS
+		NAME "III. sz. Duna-terasz" 
+		EXPRESSION "III. sz. Duna-terasz" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 200 205 133
+		END
+	END
+	CLASS
+		NAME "Külszíni bánya" 
+		EXPRESSION "/K.lsz.ni b.nya/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 207 150 123
+		END
+	END
+	CLASS
+		NAME "Lejtőpihenő" 
+		EXPRESSION "/Lejt.pihen./"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 43 170 115
+		END
+	END
+	CLASS
+		NAME "Patakmenti teraszok" 
+		EXPRESSION "Patakmenti teraszok" 
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 197 98 0
+		END
+	END
+	CLASS
+		NAME "Rákos-patak medre" 
+		EXPRESSION "/R.kos-patak medre/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 85 255
+		END
+	END
+	CLASS
+		NAME "Stabil lejtők" 
+		EXPRESSION "/Stabil lejt.k/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 114 31 2
+		END
+	END
+	CLASS
+		NAME "Vizenyős területek" 
+		EXPRESSION "/Vizeny.s ter.letek/"
+		STYLE
+			OUTLINECOLOR 0 0 0
+			COLOR 0 170 255
+		END
+	END
+END
+
+# hatarok
+LAYER
+	NAME "fekves"
+	DATA "alapterkep201703/fekves"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Fekvések"
+		"wms_name"	"fekves"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"fekves"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fekvés"
+		COLOR -1 -1 -1
+		OUTLINECOLOR 255 0 0
+		SYMBOL 'circle'
+		SIZE 3
+	END
+	TEMPLATE "dummy"
+END
+
+# városrészek
+LAYER
+	NAME "varosr"
+	DATA szelveny/varosreszek
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Városrészek"
+		"wms_name"	"varosreszek"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"varosreszek"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "VAROSR"
+	CLASSITEM "ID"
+	SYMBOLSCALEDENOM 15000
+	CLASS 
+		NAME "Laposdűlő"
+		EXPRESSION "1"
+		COLOR 183 255 120
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Ligettelek"
+		EXPRESSION "2"
+		COLOR 255 199 51
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Felsőrákos"
+		EXPRESSION "3"
+		COLOR 143 255 255
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Kőbánya-Kertváros"
+		EXPRESSION "4"
+		COLOR 255 255 110
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Keresztúri-dűlő"
+		EXPRESSION "5"
+		COLOR 184 181 255
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Újhegy"
+		EXPRESSION "6"
+		COLOR 255 255 43
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Téglagyárdűlő"
+		EXPRESSION "7"
+		COLOR 255 190 190
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Óhegy"
+		EXPRESSION "8"
+		COLOR 238 241 160
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Kúttó"
+		EXPRESSION "9"
+		COLOR 225 225 225
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Gyárdűlő"
+		EXPRESSION "10"
+		COLOR 233 255 190
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS 
+		NAME "Népliget"
+		EXPRESSION "11"
+		COLOR 170 255 0
+		LABEL
+			COLOR 0 0 255
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+	
+# FSZKT keretovezetek
+LAYER
+	NAME "terfel"
+	DATA "fszkt2014/kerulet/keretovezet"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"FSZKT övezetek"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS"		"AREA,KERETOV,TOVEZET"
+		"RESULT_HEADERS"	"Terület,Keretövezet,Övezet"
+	END
+	CLASSITEM "KERETOV"
+	CLASS
+		EXPRESSION "E"
+		NAME "E Erdőterületek"
+		COLOR 101 179 101
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "F1"
+		NAME "F1 Fejlesztési terület"
+		COLOR 245 217 255
+		OUTLINECOLOR -1 -1 -1
+	END
+#	CLASS
+#		EXPRESSION "F2"
+#		NAME "F2 Fejlesztési terület"
+#		COLOR 255 255 255
+#		OUTLINECOLOR -1 -1 -1
+#	END
+	CLASS
+		EXPRESSION "I"
+		NAME "I Intézményterület"
+		COLOR 154 178 255
+		OUTLINECOLOR -1 -1 -1
+	END
+#	CLASS
+#		EXPRESSION "IP"
+#		NAME "IP Iparterület"
+#		COLOR 179 101 179
+#		OUTLINECOLOR -1 -1 -1
+#	END
+	CLASS
+		EXPRESSION "IZ"
+		NAME "IZ Jelentős zöldfelületű intézményterület"
+		COLOR 194 209 255
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "K"
+		NAME "K Különleges területek"
+		COLOR 224 194 178
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "KL"
+		NAME "KL Közlekedési területek"
+		COLOR 217 217 217
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "KV"
+		NAME "KV Különleges városüzemeltetési területek"
+		COLOR 204 154 126
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "L2"
+		NAME "L2 Városias jellemzően zártsorú beépítésű lakóterület"
+		COLOR 255 214 154
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION /^L2.A$/
+		NAME "L2/A Kisvárosias jellemzően zártsorú beépítésű lakóterület"
+		COLOR 255 184 76
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "L3"
+		NAME "L3 Kisvárosias jellemzően szabadonálló beépítésű lakóterület"
+		COLOR 255 232 208
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "L4"
+		NAME "L4 Intezív kervárosias lakóterület"
+		COLOR 255 235 154
+		OUTLINECOLOR -1 -1 -1
+	END
+#	CLASS
+#		EXPRESSION "L5 Laza kertvárosias jellemzően szabadonálló beépítésű lakóterület"
+#		NAME "L5"
+#		COLOR 255 255 208
+#		OUTLINECOLOR -1 -1 -1
+#	END
+#	CLASS
+#		EXPRESSION "L6 Hegyvidéki kertvárosias"
+#		NAME "L6"
+#		COLOR 224 255 176
+#		OUTLINECOLOR -1 -1 -1
+#	END
+	CLASS
+		EXPRESSION "L7"
+		NAME "L7 Telepszerű lakóterület"
+		COLOR 255 147 76
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "M"
+		NAME "M Munkahelyi terület"
+		COLOR 204 154 204
+		OUTLINECOLOR -1 -1 -1
+	END
+#	CLASS
+#		EXPRESSION "MG"
+#		NAME "MG Mezőgazdasági területek"
+#		COLOR 176 255 176
+#		OUTLINECOLOR -1 -1 -1
+#	END
+	CLASS
+		EXPRESSION "MZ"
+		NAME "MZ Jelentős zöldfelületű munkahelyi terület"
+		COLOR 230 204 230
+		OUTLINECOLOR -1 -1 -1
+	END
+#	CLASS
+#		EXPRESSION "Ü"
+#		NAME "Ü Üdülőterületek"
+#		COLOR 178 217 217
+#		OUTLINECOLOR -1 -1 -1
+#	END
+	CLASS
+		EXPRESSION "VK"
+		NAME "VK Városközponti terület"
+		COLOR 255 101 101
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "VT"
+		NAME "VT Vízgazdálkodási területek"
+		COLOR 255 229 204
+		OUTLINECOLOR -1 -1 -1
+	END
+	CLASS
+		EXPRESSION "Z"
+		NAME "Z Zöldterületek"
+		COLOR 178 217 178
+		OUTLINECOLOR -1 -1 -1
+	END
+#	CLASS
+#		NAME "Ismeretlen"
+#		COLOR 255 255 255
+#		OUTLINECOLOR 0 0 0
+#	END
+	TOLERANCE 0
+	TOLERANCEUNITS pixels
+	HEADER "terfel_header.html"
+	FOOTER "query_footer.html"
+	TEMPLATE "terfel.html"
+END
+
+# FSZKT ovezetkod feliratok
+LAYER
+	NAME "ovtxt"
+	DATA "fszkt2014/kerulet/keretovezet"
+	STATUS OFF
+	GROUP "ovezet"
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"fszkt_zones_txt"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "TOVEZET"
+	LABELMAXSCALEDENOM 8001
+	SYMBOLSCALEDENOM 1000
+	CLASS
+		LABEL
+			COLOR 0 0 0
+			SIZE 40
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+#  tombhatarok
+LAYER
+	NAME "tombhatar"
+	DATA "fszkt2014/kerulet/tomb"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"fszkt_block"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Tömbhatár"
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 255
+	END
+END
+
+# telekhatarok
+LAYER
+	NAME "telek"
+	DATA alapterkep201703/foldreszlet
+	STATUS OFF
+	GROUP "telkek"
+	TYPE POLYGON 
+	METADATA
+		"DESCRIPTION"	"Földrészletek"
+		"wms_name"	"telek"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"telek"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "HRSZ,TERULET,KOZTER,MUV_AG"
+		"WMS_INCLUDE_ITEMS" "HRSZ,TERULET,KOZTER,MUV_AG"
+		"RESULT_HEADERS" "HRSZ,Terület m2,Közterület,Műv.ág"
+	END
+	CLASSITEM KOZTER
+	CLASS
+		EXPRESSION /k.zter.let/
+		NAME 'Közterület határ'
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 0
+		SYMBOL 'circle'
+		SIZE 2
+	END
+	CLASS
+		NAME 'Telekhatár'
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 0
+	END
+	TEMPLATE "telek_cim.html"
+END
+
+# kiválló földek
+LAYER
+	NAME "kivallo_foldek"
+	DATA alapterkep200903/kivallo_foldek
+	STATUS OFF
+#	GROUP "telkek"
+	TYPE POLYGON 
+	METADATA
+		"DESCRIPTION"	"Kiválló földek"
+		"wms_name"	"kivallo_foldek"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"kivallo_foldek"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "HRSZ,TERULET,MUV_AG,FEKVES,ARANYK,FOLDMIN"
+		"RESULT HEADERS" "HRSZ,Terület,Műv.ág,Fekvés,Aranykorona,Földminőség"
+	END
+	CLASS
+		NAME "Kiválló földek"
+		COLOR 255 40 40
+		OUTLINECOLOR 0 0 0
+	END
+	TEMPLATE "dummy"
+END
+
+# burkolatbontasi tilalmak
+LAYER
+	NAME "tilalom"
+	DATA tilalom/tilalom
+	STATUS OFF
+	TYPE POLYGON 
+	METADATA
+		"DESCRIPTION"	"Burkolatbontási tilalmak"
+		"wms_name"	"tilalmak"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"tilalmak"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "KOZTER,EPITES,BONTHATO,HELY"
+		"RESULT_HEADERS" "Közterület,Építés,Bontható,Leírás"
+	END
+	CLASSITEM BONTHATO
+	CLASS
+		NAME "2016.01.01-ig"
+		EXPRESSION "2016"
+		COLOR 255 180 87
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		NAME "2017.01.01-ig"
+		EXPRESSION "2017"
+		COLOR 255 87 0
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		NAME "2018.01.01-ig"
+		EXPRESSION "2018"
+		COLOR 255 24 24
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		NAME "2019.01.01-ig"
+		EXPRESSION "2019"
+		COLOR 225 24 24
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		NAME "2020.01.01-ig"
+		EXPRESSION "2020"
+		COLOR 200 24 24
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		NAME "Korábban felújított utak"
+		COLOR 200 200 200
+		OUTLINECOLOR 0 0 0
+	END
+	TEMPLATE "dummy"
+END
+
+LAYER
+	NAME "onking"
+	DATA "onking/onking"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Önkormányzati ingatlanok"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "HRSZ,megnevezes,cim,TERULET,th,kezelo,uzemelteto"
+		"RESULT_HEADERS" "Hrsz,Megnevezés,Cím,Terület,Tul.h,Kezelő,Üzemeltető"
+	END
+    CLASSITEM "th"
+    CLASS
+        NAME "Önkormányzati ingatlan (1/1)"
+        EXPRESSION "1/1"
+        COLOR 200 200 200
+        OUTLINECOLOR 0 0 0
+    END
+    CLASS
+        NAME "Önkormányzati ingatlan résztulajdon"
+        STYLE
+            COLOR 200 200 200
+            OUTLINECOLOR 0 0 0
+        END
+        STYLE
+            COLOR 0 0 0
+            SYMBOL "fillrect"
+            SIZE 20
+        END
+    END
+	TEMPLATE "dummy"
+END
+
+# alrészletek
+LAYER
+	NAME "alreszlet"
+	DATA alapterkep201703/alreszlet
+	STATUS OFF
+	GROUP "alreszletek"
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Alrészletek"
+		"wms_name"	"alreszletek"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"alreszletek"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME "Alrészlethatár"
+		COLOR -1 -1 -1
+		OUTLINECOLOR 200 200 200
+	END
+END
+
+# FSZKT vizrajz
+LAYER
+	NAME viz20li
+	DATA "fszkt2014/alap/viz20000_polyline"
+	GROUP "vizrajz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Vízrajz"
+		"wms_name"	"viz20li"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"viz20li"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+#		NAME "Patakok"
+		COLOR 0 0 255
+		SYMBOL "circle"
+		SIZE 2
+	END
+END
+
+LAYER
+	NAME viz20po
+	DATA "fszkt2014/alap/viz20000"
+	GROUP "vizrajz"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Vízrajz"
+		"wms_name"	"viz20po"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"viz20po"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+#		NAME "Tavak, folyók"
+		COLOR 0 0 255
+	END
+END
+
+# kulterulet hatar
+LAYER
+	NAME "kulter"
+	DATA "fszkt2014/alap/bp_kultr"
+	GROUP "hatar"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Külterületi határvonal"
+		"wms_name"	"hatar"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"hatar"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	SYMBOLSCALEDENOM 3000
+	LABELMINSCALEDENOM 2999
+	CLASS
+		NAME "Külterületi határvonal"
+		COLOR 255 255 0
+		SYMBOL "circle"
+		SIZE 5
+		LABEL
+			COLOR 0 0 0
+			SIZE 40
+			POSITION CC
+			FONT arial
+			TYPE TRUETYPE
+			FORCE TRUE
+		END
+		TEXT "KÜLTERÜLET"
+	END
+END
+
+# szabalyozasi terv hatarok
+LAYER
+	NAME kszt1
+	DATA "kszt/kszt1"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION" "KVSZ és KSZT határok"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_HYPERLINK" "RENDELET,TERVLAP,KORNYEZET"
+		"RESULT_FIELDS" "SZAM,RENDELET,ELOZMENY,TERVLAP,MEGJEGYZES,TERULET,KORNYEZET"
+		"RESULT_HEADERS" "Szám,Rendelet,Előzmények,Mellékletek/szabályozási tervlap,Megjegyzés,Terület,Környezetalakítás"
+	END
+	LABELITEM "SORSZAM"
+	SYMBOLSCALEDENOM 1000
+	CLASSITEM "SZAM"
+	CLASS
+		NAME "KVSZ"
+		EXPRESSION "KVSZ"
+		STYLE
+			COLOR 213 27 211
+			SYMBOL "fillrect"
+			SIZE 35
+		END
+		STYLE 
+			OUTLINECOLOR 255 0 255
+			SYMBOL "circle"
+			SIZE 30
+		END
+	END
+#	CLASS
+#		NAME "KVSZ szabályozási terv"
+#		EXPRESSION "KVSZ_"
+#		STYLE
+#			COLOR 213 27 211
+#			SYMBOL "fillcross"
+#			SIZE 35
+#		END
+#		STYLE 
+#			OUTLINECOLOR 255 0 255
+#			SYMBOL "circle"
+#			SIZE 3
+#		END
+#		LABEL
+#			COLOR 255 0 255
+#			SHADOWCOLOR 255 255 255
+#			SHADOWSIZE 1 1
+#			SIZE 400
+#			FONT times
+#			TYPE TRUETYPE
+#		END
+#	END
+	CLASS
+		NAME "KSZT"
+		STYLE
+			COLOR 255 0 255
+			SYMBOL "fill45"
+			SIZE 35
+		END
+		STYLE 
+			OUTLINECOLOR 255 0 255
+			SYMBOL "circle"
+			SIZE 30
+		END
+		LABEL
+			COLOR 255 0 0
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			SIZE 400
+			FONT times
+			TYPE TRUETYPE
+		END
+	END
+	TEMPLATE "dummy"
+	TOLERANCE 0
+END
+
+# kerulethatarok
+LAYER
+	NAME ker98
+	DATA "fszkt2014/kerulet/kerulet"
+	GROUP "hatar"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Kerület határ"
+		"wms_name"	"hatar"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"hatar"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Kerület határ"
+		COLOR 255 0 0
+		SYMBOL "circle"
+		SIZE 4
+	END
+END
+
+# BVKSZ temeto, park
+LAYER
+	NAME "bptemeto"
+	DATA "fszkt2014/10e/bptemeto"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Védelmi és korlátozási területek"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fővárosi jelentőségü védett közpark, tér, kert, temető"
+		COLOR 144 255 144
+		OUTLINECOLOR -1 -1 -1
+	END
+END
+
+LAYER
+	NAME "park"
+	DATA "fszkt2014/10e/park"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Védelmi és korlátozási területek"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+#		NAME "Fővárosi jelentőségű védett közpark, tér, kert, temető"
+		COLOR 144 255 144
+		OUTLINECOLOR -1 -1 -1
+	END
+END
+
+# BVKSZ lakotelep
+LAYER
+	NAME "lakotelep"
+	DATA "fszkt2014/10e/lakotel"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Lakótelepi területek"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Lakótelepi területek"
+		COLOR 192 192 192
+		OUTLINECOLOR -1 -1 -1
+	END
+END
+
+# otermved
+LAYER
+	NAME "otermved"
+	DATA "fszkt2014/10e/otermved"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Országos jelentőségű védett természeti terület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Országos jelentőségű védett természeti terület"
+		STYLE
+			COLOR 255 255 0
+			OUTLINECOLOR -1 -1 -1
+		END
+		STYLE
+			SYMBOL 'fillrect'
+			SIZE 1
+			COLOR 0 128 0
+			OUTLINECOLOR -1 -1 -1
+		END
+	END
+END
+
+# jav. termved
+LAYER
+	NAME "javtermv"
+	DATA "fszkt2014/10e/javtermv"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Fővárosi védelemre javasolt természeti terület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fővárosi védelemre javasolt természeti terület"
+		STYLE
+			COLOR 211 255 144
+		END
+		STYLE
+			SYMBOL 'fillcross'
+			SIZE 2
+			COLOR 0 128 0
+		END
+		STYLE
+			OUTLINECOLOR 0 128 0
+			SIZE 3
+			SYMBOL 'circle'
+		END
+	END
+END
+
+# vasutfejlesztes
+LAYER
+	NAME "irszabva"
+	DATA "fszkt2014/4e/irszabva"
+	GROUP "ovezet"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Területbiztosítást igénylő vasútfejlesztés"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Területbiztosítást igénylő vasútfejlesztés irányadó területe"
+		SYMBOL 'fillcross'
+		SIZE 3
+		COLOR 0 0 255
+		OUTLINECOLOR -1 -1 -1
+	END
+	HEADER "empty.html"
+	FOOTER "empty.html"
+	TEMPLATE "irszabva.html"
+END
+
+# kiemelt utvonalak
+LAYER
+	NAME "varpol2c"
+	DATA "fszkt2014/10e/varpol2c"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Városkép szempontjából kiemelt útvonalak"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Városkép szempontjából kiemelt útvonalak"
+		SYMBOL 'fill45'
+		SIZE 3
+		COLOR 0 0 255
+		OUTLINECOLOR -1 -1 -1
+	END
+END
+
+# utfejlesztes
+LAYER
+	NAME "irszabut"
+	DATA "fszkt2014/4e/irszabut"
+	GROUP "ovezet"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Területbiztosítást igénylő főutak"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Területbiztosítást igénylő főutak és egyéb szerkezeti jelentőségű utak irányadó szabályozása"
+		SYMBOL 'fill45'
+		SIZE 3
+		COLOR 0 0 255
+		OUTLINECOLOR -1 -1 -1
+	END
+	HEADER "empty.html"
+	FOOTER "empty.html"
+	TEMPLATE "irszabut.html"
+END
+
+# fszt
+LAYER
+	NAME "fszt"
+	DATA "fszkt2014/4e/fszt"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Kiemelt szabályozást igénylő összvárosi érdekű terület"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Kiemelt szabályozást igénylő összvárosi érdekü terület"
+		STYLE 
+			COLOR 0 0 128
+			SYMBOL 'dot'
+			SIZE 3
+		END
+	END
+END
+
+# rszt
+LAYER
+	NAME "rszt"
+	DATA "fszkt2014/4e/rszt"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Rehabilitíciós szabályozást igénylő terület"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Rehabilitációs szabályozást igénylő terület"
+		STYLE 
+			COLOR 0 128 0
+			SYMBOL 'dot'
+			SIZE 3
+		END
+	END
+END
+
+# sszt
+LAYER
+	NAME "sszt"
+	DATA "fszkt2014/4e/sszt"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Speciális szabályozást igénylő terület"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Speciális szabályozást igénylő terület"
+		STYLE 
+			COLOR 255 0 255
+			SYMBOL 'dot'
+			SIZE 3
+		END
+	END
+END
+
+# valasztasi adatok
+LAYER
+	NAME "oevk"
+	DATA "valasztas/ogy2014"
+#	GROUP "valasztas"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Országos egyéni 2014"
+		"wms_name"	"ogy2014"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ogy2014"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Országos egyéni választókerület határ"
+		STYLE
+			COLOR -1 -1 -1
+		END
+		STYLE
+			OUTLINECOLOR 255 0 0
+			SYMBOL 'circle'
+			SIZE 4
+		END
+	END
+END
+
+LAYER
+	NAME "valasztokerulet"
+	DATA "valasztas/vk2014"
+#	GROUP "valasztas"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Választókerületek 2014"
+		"wms_name"	"vk2014"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"vk2014"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS"	"AZONOSITO"
+		"RESULT_HEADERS"	"Választókerület"
+	END
+	LABELITEM "AZONOSITO"
+	SYMBOLSCALEDENOM 50000
+	CLASS
+		NAME "Választókerület határ"
+		STYLE
+			COLOR -1 -1 -1
+		END
+		STYLE
+			OUTLINECOLOR 0 255 0
+			SYMBOL 'circle'
+			SIZE 3
+		END
+		LABEL
+			COLOR 0 255 0
+			SIZE 14
+			FONT times
+			TYPE TRUETYPE
+		END
+	END
+	HEADER "empty.html"
+	FOOTER "empty.html"
+	TEMPLATE "valasztoker.html"
+END
+
+LAYER
+	NAME "szavazokor"
+	DATA "valasztas/szk2014"
+#	GROUP "valasztas"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Szavazókörök 2014"
+		"wms_name"	"szk2014"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"szk2014"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS"	"AZONOSITO"
+		"RESULT_HEADERS"	"Szavazókör"
+	END
+	LABELITEM "AZONOSITO"
+	SYMBOLSCALEDENOM 50000
+	CLASS
+		NAME "Szavazókör határ"
+		STYLE
+			COLOR -1 -1 -1
+		END
+		STYLE
+			OUTLINECOLOR 0 0 255
+			SYMBOL 'circle'
+			SIZE 2
+		END
+		LABEL
+			COLOR 0 0 255
+			SIZE 10
+			FONT times
+			TYPE TRUETYPE
+		END
+	END
+	HEADER "empty.html"
+	FOOTER "empty.html"
+	TEMPLATE "szavazokor.html"
+END
+
+# egyeb szoveges
+LAYER
+	NAME "szoveges"
+	DATA "fszkt2014/4e/szoveges"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Egyéb szöveges szabályozási elem"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Egyéb szöveges szabályozási elem"
+		STYLE 
+			COLOR 128 0 128
+			SYMBOL 'dot'
+			SIZE 3
+		END
+	END
+END
+
+# fejlesztesi ter
+LAYER
+	NAME "fejleszt"
+	DATA "fszkt2014/4e/fejleszt"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Fejlesztési ill. tartalék terület"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fejlesztési ill tartalék terület"
+		STYLE 
+			COLOR 128 0 128
+			SYMBOL 'dot'
+			SIZE 3
+		END
+	END
+END
+
+# BVKSZ vedett egyuttes
+LAYER
+	NAME "vedett6"
+	DATA "fszkt2014/10e/vedett6"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Fővárosi rendeletben védett épületegyüttes"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fővárosi rendeletben védett épületegyüttes"
+		STYLE
+			COLOR 255 255 0
+			SYMBOL 'fillcross'
+			SIZE 3
+		END
+		STYLE
+			OUTLINECOLOR 255 255 0
+			SYMBOL 'circle'
+			SIZE 3
+		END
+	END
+END
+
+# BVKSZ regeszet
+LAYER
+	NAME "regeszet"
+	DATA "fszkt2014/10e/regeszet"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Régészetileg védett terület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Régészetileg védett terület"
+		COLOR 0 0 0
+		SYMBOL 'fill135'
+		SIZE 3
+	END
+END
+
+# BVKSZ karsztos
+LAYER
+	NAME "karsztos"
+	DATA "fszkt2014/10e/karsztos"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Karsztos terület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Karsztos terület"
+		COLOR 2 2 106
+		SYMBOL 'fillwave'
+		SIZE 3
+		OUTLINECOLOR -1 -1 -1
+	END
+END
+
+# BVKSZ fmozg
+LAYER
+	NAME "fmozg"
+	DATA "fszkt2014/10e/fmozg"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Felszínmozgásveszélyes terület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Felszínmozgásveszélyes terület"
+		STYLE
+			COLOR 128 0 0
+			SYMBOL 'fillwave'
+			SIZE 3
+		END
+		STYLE
+			OUTLINECOLOR 80 20 0
+			SYMBOL 'circle'
+			SIZE 2
+		END
+	END
+END
+
+# BVKSZ felszmt
+LAYER
+	NAME "felszmt"
+	DATA "fszkt2014/10e/felszmt"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Beépített, beépítésre szánt mélyfekvésű terület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Beépített, beépítésre szánt mélyfekvésű terület"
+		STYLE
+			COLOR 176 88 0
+			SYMBOL 'fillwave'
+			SIZE 3
+			OUTLINECOLOR -1 -1 -1
+		END
+	END
+END
+
+# BVKSZ barlorsz
+LAYER
+	NAME "barlorsz"
+	DATA "fszkt2014/10e/barlorsz"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Barlangveszélyes terület felszini védőzónája"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Barlangveszélyes terület felszini védőzónája"
+		STYLE
+			COLOR 80 20 0
+			SYMBOL 'fillrect'
+			SIZE 3
+		END
+		STYLE
+			OUTLINECOLOR 255 0 0
+			SYMBOL 'circle'
+			SIZE 2
+		END
+	END
+END
+
+# BVKSZ magaskor
+LAYER
+	NAME "magaskor"
+	DATA "fszkt2014/10e/magaskor"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Mikrohullámú sáv"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Mikrohullámú sáv"
+		STYLE
+			COLOR 0 0 0
+			SYMBOL 'fill00'
+			SIZE 4
+			OUTLINECOLOR -1 -1 -1
+		END
+	END
+END
+
+# BVKSZ tbp7a7b
+LAYER
+	NAME "tbp7a7b"
+	DATA "fszkt2014/10e/tbp7a7b"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Repülőtér zajgátló vedőövezetei"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Repülőtér zajgátló vedőövezetei"
+		STYLE
+			COLOR 0 0 0
+			SYMBOL 'fill000'
+			SIZE 4
+		END
+		STYLE
+			OUTLINECOLOR 0 0 0
+			SYMBOL 'circle'
+			SIZE 2
+		END
+	END
+END
+ 
+# BVKSZ zonamhaz
+LAYER
+	NAME "zonamhaz"
+	DATA "fszkt2014/10e/zonamhaz"
+	GROUP "bvksz"
+	STATUS OFF
+	TRANSPARENCY alpha
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Magasépítmények elhelyezhetősége"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Magasépítmények elhelyezhetősége"
+		STYLE
+			COLOR 0 128 0
+			SYMBOL 'fill90'
+			SIZE 4
+			OUTLINECOLOR -1 -1 -1
+		END
+	END
+END
+
+# BVKSZ elovegyb
+LAYER
+	NAME "elovegyb"
+	DATA "fszkt2014/10e/elovegyb"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Településrendezési célok megvalósításához szükséges területek"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Településrendezési célok megvalósításához szükséges területek"
+		STYLE
+			COLOR 96 96 96
+			OUTLINECOLOR 0 0 0
+		END
+	END
+END
+
+# BVKSZ vilagorokseg
+LAYER
+	NAME "vilormu"
+	DATA "fszkt2014/10e/vilormu"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Műemléki jelentőségű terület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Műemléki jelentőségű terület (Világörökség kiterjesztett területe)"
+		STYLE
+			COLOR 255 0 0
+			SYMBOL 'circle'
+			SIZE 4
+		END
+	END
+END
+
+# BVKSZ muemleki korny.
+LAYER
+	NAME "mkpol"
+	DATA "fszkt2014/10e/mkpol"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Műemléki környezet"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Műemléki környezet"
+		STYLE
+			COLOR 255 128 0
+			SYMBOL 'boxline'
+			SIZE 3
+		END
+	END
+END
+
+# BVKSZ furdpol
+LAYER
+	NAME "furdpol"
+	DATA "fszkt2014/10e/furdpol"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Hővíznyerőhelyek védőterülete"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Hővíznyerőhelyek védőterülete"
+		COLOR 0 107 160
+		SYMBOL "circle"
+		SIZE 2
+		STYLE
+			SYMBOL 'peg'
+			COLOR 0 107 160
+			OFFSET 3 -99
+		END
+	END
+END
+ 
+# BVKSZ hidrpol
+LAYER
+	NAME "hidrpol"
+	DATA "fszkt2014/10e/hidrpol"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Fővárosi jelentőségű víznyerőhelyek védőterülete"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fővárosi jelentőségű víznyerőhelyek védőterülete"
+		COLOR 0 107 160
+		SYMBOL "dash-long"
+		SIZE 2
+		STYLE
+			SYMBOL 'peg'
+			COLOR 0 107 160
+			OFFSET 3 -99
+		END
+	END
+END
+
+# BVKSZ 
+LAYER
+	NAME "melykor"
+	DATA "fszkt2014/10e/melykor"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Metró védelmi zóna"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Metró védelmi zóna"
+		STYLE
+			COLOR 0 0 0 
+			SYMBOL 'boxline'
+			SIZE 3
+		END
+		STYLE
+			COLOR 0 0 0
+		END
+	END
+END
+
+# BVKSZ 
+LAYER
+	NAME "varpol"
+	DATA "fszkt2014/10e/varpol1b"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Városkép szempontjából kiemelt területek"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Városkép szempontjából kiemelt területek"
+		STYLE
+			COLOR 0 0 255 
+			SYMBOL 'boxline'
+			SIZE 3
+		END
+	END
+END
+
+# BVKSZ fasor
+LAYER
+	NAME "fasor"
+	DATA "fszkt2014/10e/fasor"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Fővárosi jelentőségű védett fasor"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fővárosi jelentőségű védett fasor"
+		COLOR 0 255 0
+		SYMBOL 'dot'
+		SIZE 3
+	END
+END
+
+# FSZKT celzott teruletfelhasznalas
+LAYER
+	NAME "alovhat"
+	DATA "fszkt2014/4e/alovhat"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Célzott területfelhasználási módú területek közötti határvonal (egy keretövezeten belül)"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Célzott területfelhasználási módú területek közötti határvonal"
+		COLOR 0 0 255
+		SYMBOL 'circle'
+		SIZE 3
+	END
+END
+ 
+# FSZKT egyeb
+LAYER
+	NAME "egyeb_polyline"
+	DATA "fszkt2014/4e/egyeb_polyline"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Egyéb"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		COLOR 0 0 0
+	END
+END
+
+LAYER
+	NAME "egyeb_text"
+	DATA "fszkt2014/4e/egyeb_text"
+	GROUP "ovezet"
+	STATUS OFF
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"Egyéb feliratok"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "TEXTSTRING"
+	LABELMAXSCALEDENOM 15001
+	SYMBOLSCALEDENOM 1000
+	CLASSITEM "TIPUS"
+	CLASS
+		EXPRESSION "KL"
+		COLOR -1 -1 -1
+		LABEL
+			ANGLE [TEXT_ANGLE]
+			COLOR 128 0 128
+			SIZE 30
+			FONT times
+			TYPE TRUETYPE
+			POSITION UC
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS
+		COLOR -1 -1 -1
+		LABEL
+			COLOR 0 0 0
+			SIZE 30
+			FONT times
+			TYPE TRUETYPE
+			POSITION UC
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+# viz mutargy
+LAYER
+	NAME "mutargy_viz"
+	DATA alapterkep201703/mutargy_viz
+	GROUP "egyeb"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Egyebek"
+		"wms_name"	"mutargy_viz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"viz_mutargy"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Víz műtárgy'
+		COLOR 0 0 200
+		OUTLINECOLOR 0 0 0
+	END
+END
+
+# epulet tartozekok
+LAYER
+	NAME "terasz"
+	DATA alapterkep201703/terasz
+	GROUP "eptartozek"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Épület tatozékok"
+		"wms_name"	"terasz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"terasz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Terasz'
+		COLOR 63 63 63
+	END
+END
+
+LAYER
+	NAME "ep_lepcso"
+	DATA alapterkep201703/ep_lepcso
+	GROUP "eptartozek"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Épület tatozékok"
+		"wms_name"	"ep_lepcso"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ep_lepcso"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Épület lépcső'
+		COLOR 127 127 127
+	END
+END
+
+LAYER
+	NAME "levfalsik"
+	DATA alapterkep201703/vetitett_sik
+	GROUP "eptartozek"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Épület tartozékok"
+		"wms_name"	"vetitett_sik"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"vetitett_sik"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Vetített sík'
+		COLOR 0 0 0
+		SYMBOL "dash-shorter"
+	END
+END
+
+LAYER
+	NAME "tamf"
+	DATA alapterkep201703/tamfal
+	GROUP "eptartozek"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Épület tartozékok"
+		"wms_name"	"tamfalak"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"tamfalak"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Támfal'
+		COLOR 175 139 19
+	END
+END
+
+LAYER
+	NAME "piller"
+	DATA alapterkep201703/piller
+	GROUP "eptartozek"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Épület tartozékok"
+		"wms_name"	"pillerek"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"pillerek"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Pillér'
+		COLOR 50 50 50
+		OUTLINECOLOR 0 0 0
+	END
+END
+
+# 1:1000 sztereo szelvenyek (kanyarhoz)
+LAYER
+	NAME "szt1000"
+	DATA szelveny/sztereo
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"1:1000 Kanyar szelvények"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_HYPERLINK" "alap,felevi"
+		"RESULT_FIELDS" "szam,alap,felevi"
+		"RESULT_HEADERS" "Szám,Eredeti,Frissített"
+	END
+	LABELITEM "szam"
+	LABELMAXSCALEDENOM 80000
+	SYMBOLSCALEDENOM 8000
+	CLASS
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 0
+		LABEL
+			COLOR 0 0 0
+			SHADOWSIZE 1 1
+			SHADOWCOLOR 255 255 255
+			SIZE 60
+			FONT times
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	TEMPLATE "dummy"
+END
+
+# 1:4000 szelvenyek
+LAYER
+	NAME eov4000
+	DATA szelveny/xeov4
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"1:4000 EOV szelvények"
+	END
+	LABELITEM "MAPSHEET"
+	LABELMAXSCALEDENOM 80000
+	SYMBOLSCALEDENOM 8000
+	CLASS
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 0
+		LABEL
+			COLOR 0 0 0
+			SHADOWSIZE 1 1
+			SHADOWCOLOR 255 255 255
+			SIZE 80
+			FONT times
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+			FORCE true
+		END
+	END
+END
+
+# 1:1000 szelvenyek
+LAYER
+	NAME eov1000
+	DATA szelveny/xeov1
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"1:1000 EOV szelvények"
+	END
+	LABELITEM "SZAM"
+	LABELMAXSCALEDENOM 40000
+	SYMBOLSCALEDENOM 2000
+	CLASS
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 0
+		LABEL
+			COLOR 0 0 0
+			SHADOWSIZE 1 1
+			SHADOWCOLOR 255 255 255
+			SIZE 80
+			FONT times
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+			FORCE true
+		END
+	END
+END
+
+# 1:500 szelvenyek
+LAYER
+	NAME eov500
+	DATA szelveny/xeov500
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"1:500 EOV szelvények"
+	END
+	LABELITEM "SZAM"
+	LABELMAXSCALEDENOM 40000
+	SYMBOLSCALEDENOM 1000
+	CLASS
+		COLOR -1 -1 -1
+		OUTLINECOLOR 0 0 0
+		LABEL
+			COLOR 0 0 0
+			SHADOWSIZE 1 1
+			SHADOWCOLOR 255 255 255
+			SIZE 80
+			FONT times
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+			FORCE true
+		END
+	END
+END
+
+# feluljarok
+LAYER
+	NAME "feluljaro"
+	DATA alapterkep201703/feluljaro
+	GROUP "egyeb"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Egyebek"
+		"wms_name"	"feluljaro"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"feluljaro"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Felüljáró'
+		COLOR 200 200 200
+		OUTLINECOLOR 0 0 0
+	END
+END
+
+# toltes
+LAYER
+	NAME "toltes"
+	DATA alapterkep201703/toltes
+	GROUP "egyeb"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Egyebek"
+		"wms_name"	"toltes"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"toltes"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Töltés'
+		COLOR 181 102 38
+		SYMBOL 'circle'
+		SIZE 2
+	END
+END
+
+# hid
+LAYER
+	NAME "hid"
+	DATA alapterkep201703/hid
+	GROUP "egyeb"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Egyebek"
+		"wms_name"	"hid"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"hid"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Híd'
+		COLOR 102 38 181 
+		SYMBOL 'circle'
+		SIZE 2
+	END
+END
+
+# fal_kerites
+LAYER
+	NAME "kerites"
+	DATA alapterkep201703/fal_keri
+	GROUP "egyeb"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Egyebek"
+		"wms_name"	"kerites"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"kerites"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		NAME 'Fal, kerítés'
+		COLOR 255 0 0
+		SYMBOL 'circle'
+		SIZE 2
+	END
+END
+
+# kozmu alapterkep
+# feluletek
+LAYER
+	NAME "kozmu2012_poly"
+	DATA "kozmu2012/dta50_poly"
+	GROUP "kozmualap"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Közmű alaptérkép"
+		"wms_name"	"kozmu_poly"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"kozmu_poly"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASSITEM "LAYER"
+	CLASS
+		EXPRESSION "LEVEL_3"
+		NAME "Épületek"
+		COLOR 204 102 0
+		OUTLINECOLOR -1 -1 -1
+	END
+END
+
+LAYER
+	NAME "vepegy"
+	DATA m_ved/ep_egy
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Védelemmel érintett épületegyüttes"
+		"wms_name"	"mepegy"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"mepegy"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASSITEM ID
+	CLASS
+		EXPRESSION "KV"
+		NAME "Helyi (kerületi) védelem"
+		COLOR 255 152 49
+	END
+	CLASS
+		EXPRESSION "FV"
+		NAME "Fővárosi védelem"
+		COLOR 180 255 66
+	END
+END
+
+LAYER
+	NAME "mkorny"
+	DATA m_ved/m_kornyezet
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Műemléki környezet"
+		"wms_name"	"mkornyezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"mkornyezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME	"Műemléki környezet"
+		OUTLINECOLOR 127 0 129
+		COLOR 127 0 129
+		SYMBOL 'fill90'
+		SIZE 3
+	END
+END
+
+# szintvonalak
+LAYER
+	NAME "szintvonal"
+	DATA dtm/szv_vonal
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Szintvonalak"
+	END
+	LABELITEM "CONTOUR"
+	LABELMAXSCALEDENOM 4000
+#	SYMBOLSCALEDENOM 1000
+	CLASS
+		COLOR 255 0 0
+		SYMBOL "circle"
+		SIZE 2
+		LABEL
+			ANGLE AUTO
+			COLOR 255 0 0
+			BACKGROUNDCOLOR 255 255 255
+			SIZE 10
+			FONT times
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+# epuletek 
+LAYER
+	NAME "epulet"
+	DATA alapterkep201703/epulet
+	GROUP "ep"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Épületek"
+		"wms_name"	"epuletek"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"lakoepuletek"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 49999
+	CLASSITEM OBJ_FELS
+	CLASS
+		EXPRESSION "CA01"
+		NAME 'Lakóépület'
+		COLOR 255 0 0
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		EXPRESSION "CA02"
+		NAME 'Üdülőépület'
+		COLOR 150 150 150
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		EXPRESSION "CA03"
+		NAME 'Intézményi épület'
+		COLOR 0 255 0
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		EXPRESSION "CA04"
+		NAME 'Üzemi épület'
+		COLOR 212 44 212
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		EXPRESSION "CA05"
+		NAME 'Melléképület'
+		COLOR 0 0 255
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		EXPRESSION "CA06"
+		NAME 'Gazdasági épület'
+		COLOR 0 0 255
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		EXPRESSION "CA07"
+		NAME 'Vegyes funkció'
+		COLOR 253 157 221
+		OUTLINECOLOR 0 0 0
+	END
+	CLASS
+		EXPRESSION "CA08"
+		NAME 'Rendezettlen funkció'
+		COLOR 128 80 110
+		OUTLINECOLOR 0 0 0
+	END
+END
+
+# műemlék épületek
+LAYER
+	NAME "vep"
+	DATA m_ved/m_epulet
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Védelemmel érintett épületek"
+		"wms_name"	"mepuletek"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"mepuletek"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "C_M,V_DELEM_T_,V_DELEM_JE,MEGJEGYZ_S,ADATLAP"
+		"RESULT_HEADERS" "Cím,Típus,Jelleg,Megjegyzés,Adatlap"
+	END
+	MAXSCALEDENOM 49999
+	CLASSITEM V_DELEM_T_
+	CLASS
+		EXPRESSION  /^F.v.rosi v.delem$/
+		NAME 'Fővárosi védelem'
+		STYLE
+			COLOR 0 127 0
+		END
+		STYLE
+			OUTLINECOLOR 0 0 0
+			SIZE 3
+			SYMBOL 'circle'
+		END
+	END
+	CLASS
+		EXPRESSION  /^Helyi v.delem$/
+		NAME 'Helyi (kerületi) védelem'
+		STYLE
+			COLOR 254 112 66
+		END
+		STYLE
+			OUTLINECOLOR 0 0 0
+			SIZE 3
+			SYMBOL 'circle'
+		END
+	END
+	CLASS
+		EXPRESSION  /^M.eml.ki v.delem$/
+		NAME 'Műemléki védelem'
+		STYLE
+			COLOR 194 127 255
+		END
+		STYLE
+			OUTLINECOLOR 0 0 0
+			SIZE 3
+			SYMBOL 'circle'
+		END
+	END
+	CLASS
+		EXPRESSION  /^M.eml.ki v.d.si elj.r.s alatti$/
+		NAME 'Műemléki védési eljárás alatti'
+		STYLE
+			COLOR 1 255 255
+		END
+		STYLE
+			OUTLINECOLOR 0 0 0
+			SIZE 3
+			SYMBOL 'circle'
+		END
+	END
+	CLASS
+		NAME 'Egyéb védett'
+		STYLE
+			COLOR 0 0 0
+			SYMBOL 'fill135'
+			SIZE 3
+		END
+		STYLE
+			OUTLINECOLOR 0 0 0
+			SIZE 3
+			SYMBOL 'circle'
+		END
+	END
+	TEMPLATE "dummy"
+END
+
+# vonalak es szimbolumok
+LAYER
+	NAME "kozmu2012_vonal"
+	DATA "kozmu2012/dta50"
+	GROUP "kozmualap"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Közmű alaptérkép"
+		"wms_name"	"kozmualap"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"kozmualap"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+#	MAXSCALEDENOM 5001
+	CLASSITEM "LAYER"
+	CLASS
+		EXPRESSION "/LEVEL_1[12]/"
+		COLOR 50 50 50
+	END
+	CLASS
+		EXPRESSION "/LEVEL_13/"
+		COLOR 50 50 50
+		SYMBOL "dash-short"
+	END
+	CLASS
+		# epulet utcafront
+		EXPRESSION "/LEVEL_21/"
+		COLOR 50 50 50
+		SYMBOL "circle"
+		SIZE 3
+	END
+	CLASS
+		# epulet
+		EXPRESSION "/LEVEL_22/"
+		COLOR 50 50 50
+	END
+	CLASS
+		# bizonytalan epulethatar
+		EXPRESSION "/LEVEL_23/"
+		COLOR 50 50 50
+		SYMBOL "dash-shorter"
+	END
+	CLASS
+		# epulettartozek kozteruleten es nem kozteruleten
+		EXPRESSION "/LEVEL_3[1256]/"
+		COLOR 50 50 50
+	END
+	CLASS
+		# kiemelt szegely
+		EXPRESSION "/LEVEL_33/"
+		COLOR 75 75 75
+	END
+	CLASS
+		# burkolatvaltas
+		EXPRESSION "/LEVEL_34/"
+		COLOR 75 75 75
+		SYMBOL "dash-shorter"
+	END
+	CLASS
+		# vasut, villamos
+		EXPRESSION "/LEVEL_37/"
+		COLOR 0 0 255
+	END
+#	CLASS
+#		# jelkulcsi jelek es fak
+#		EXPRESSION "/LEVEL_3[89]/"
+#		COLOR 50 50 50
+#	END
+	CLASS
+		COLOR 0 0 0
+	END
+END
+
+# kozmu alapterkep szimbolumok feluletei
+LAYER
+	NAME "kozmu2012symp"
+	DATA "kozmu2012/dta50_symp"
+	GROUP "kozmualap"
+	STATUS OFF
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Közmű alaptérkép"
+		"wms_name"	"kozmualap"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"kozmualap"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 1001
+	CLASS
+		COLOR 0 0 0
+	END
+END
+
+# kozmu alapterkep szimbolumok vonalai
+LAYER
+	NAME "kozmu2012syml"
+	DATA "kozmu2012/dta50_syml"
+	GROUP "kozmualap"
+	STATUS OFF
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Közmű alaptérkép"
+		"wms_name"	"kozmualap"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"kozmualap"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	MAXSCALEDENOM 1001
+	CLASS
+		COLOR 0 0 0
+	END
+END
+
+LAYER
+	NAME "kozmu2012txt"
+	DATA "kozmu2012/dta50_txt"
+	GROUP "kozmualap"
+	STATUS OFF
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"Közmű alaptérkép"
+		"wms_name"	"kozmualap"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"kozmualap"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "TEXT"
+	CLASSITEM "LAYER"
+	MAXSCALEDENOM 1501
+	SYMBOLSCALEDENOM 1000
+	CLASS
+		# hrsz
+		EXPRESSION /LEVEL_15/
+		LABEL
+			COLOR 125 125 125
+			SIZE 8
+			POSITION UR
+			FONT times
+			TYPE TRUETYPE
+			ANGLE [TXTANGLE]
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS
+		# hazszam
+		EXPRESSION /LEVEL_25/
+		LABEL
+			COLOR 0 0 0
+			SIZE 6
+			POSITION UR
+			FONT times
+			TYPE TRUETYPE
+			ANGLE [TXTANGLE]
+			ENCODING "ISO-8859-2"
+		END
+	END
+	CLASS
+		# kozterulet nev
+		EXPRESSION /LEVEL_42/
+		LABEL
+			COLOR 125 125 125
+			SIZE 12
+			POSITION UR
+			FONT times
+			TYPE TRUETYPE
+			ANGLE [TXTANGLE]
+			ENCODING "ISO-8859-2"
+			OUTLINECOLOR 255 255 255
+		END
+	END
+	CLASS
+		# KKN kod (kozteruleti hrsz)
+		EXPRESSION /LEVEL_43/
+		LABEL
+			COLOR 125 125 125
+			SIZE 8
+			POSITION UR
+			FONT times
+			TYPE TRUETYPE
+			ANGLE [TXTANGLE]
+			ENCODING "ISO-8859-2"
+			OUTLINECOLOR 255 255 255
+		END
+	END
+	CLASS
+		# egyeb felirat
+		EXPRESSION /LEVEL_44/
+		LABEL
+			COLOR 125 125 125
+			SIZE 10
+			POSITION UR
+			FONT times
+			TYPE TRUETYPE
+			ANGLE [TXTANGLE]
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+# kozmu
+# kozuti forg. iranyitas
+#LAYER
+#	NAME "kozut"
+#	DATA "kozmu2012/vilati"
+#	STATUS OFF
+#	GROUP "vilati"
+#	TYPE LINE
+#	METADATA
+#		"DESCRIPTION"	"Vilati"
+#		"wms_name"	"vilati2012"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"vilati2010"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#		"RESULT_FIELDS" "TYPE"
+#		"RESULT_HEADERS" "Típus"
+#	END
+#	CLASSITEM "LAYER"
+#	CLASS
+#		NAME "Vilati nyomvonal"
+#		EXPRESSION /^LEVEL_[1-3]$/
+#		COLOR 128 0 0
+#		SYMBOL "dash-utility"
+#	END
+#	CLASS
+#		NAME "BKV nyomvonal"
+#		EXPRESSION /^LEVEL_[45]$/
+#		COLOR 128 0 0
+#		SYMBOL "dash-utility"
+#		SIZE 2
+#	END
+#	CLASS
+#		COLOR 128 0 0
+#	END
+#	TEMPLATE "dummy"
+#END
+
+#LAYER
+#	NAME "kozuttxt"
+#	DATA "kozmu2012/vilati_txt"
+#	STATUS OFF
+#	GROUP "vilati"
+#	TYPE ANNOTATION
+#	METADATA
+#		"DESCRIPTION"	"Vilati"
+#		"wms_name"	"vilati"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"vilati"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#	END
+#	LABELITEM "txt"
+#	LABELMAXSCALEDENOM 1001
+#	SYMBOLSCALEDENOM 1000
+#	CLASS
+#		COLOR -1 -1 -1
+#		LABEL
+#			COLOR 255 0 0
+#			ANGLE [irany]
+#			SIZE 10
+#			FONT times
+#			TYPE TRUETYPE
+#			ENCODING "ISO-8859-2"
+#			POSITION UR
+#		END
+#	END
+#END
+ 
+# elektromos
+LAYER
+	NAME "elektromos"
+	DATA "kozmu2015/elektromos_2015"
+	STATUS OFF
+	GROUP "elektr"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Elektromos"
+		"wms_name"	"elektr2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"elektr2015"
+		"LAYER_ENCODING" "UTF-8"
+		"RESULT_FIELDS" "TIPUS,FESZULTSEG,FAJTA,HOSSZ"
+		"RESULT_HEADERS" "Típus,Feszültség,Fajta,Hossz"
+	END
+	CLASSITEM "TIPUS"
+	CLASS
+		NAME "Földkábel"
+		EXPRESSION "földkábel"
+		COLOR 255 0 0
+		SYMBOL "dash-utility"
+		SIZE 2
+	END
+	CLASS
+		NAME "Légvezeték"
+		EXPRESSION "légvezeték"
+		COLOR 255 0 0
+	END
+	CLASS
+		NAME "Szigetelt légvezeték"
+		EXPRESSION "szigetelt légvezeték"
+		COLOR 255 0 0
+		SIZE 2
+	END
+	CLASS
+		COLOR 255 0 0
+	END
+	TEMPLATE "dummy"
+END
+
+#LAYER
+#	NAME "elektromostxt"
+#	DATA "kozmu2012/elektr_txt"
+#	STATUS OFF
+#	GROUP "elektr"
+#	TYPE ANNOTATION
+#	METADATA
+#		"DESCRIPTION"	"Elektromos"
+#		"wms_name"	"elektr"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"elektr"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#	END
+#	LABELITEM "txt"
+#	LABELMAXSCALEDENOM 1001
+#	SYMBOLSCALEDENOM 1000
+#	CLASS
+#		COLOR -1 -1 -1
+#		LABEL
+#			COLOR 255 0 0
+#			ANGLE [irany]
+#			SIZE 10
+#			FONT times
+#			TYPE TRUETYPE
+#			ENCODING "ISO-8859-2"
+#			POSITION UR
+#		END
+#	END
+#END
+
+# posta
+LAYER
+	NAME "postakabel"
+	DATA "kozmu2015/telekom_2015"
+	STATUS OFF
+	GROUP "posta"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Telekom"
+		"wms_name"	"posta2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"posta2015"
+		"LAYER_ENCODING" "UTF-8"
+		"RESULT_FIELDS" "HALOZAT,TIPUS,HOSSZ"
+		"RESULT_HEADERS" "Hálózat,Típus,Hossz"
+	END
+	CLASSITEM "HALOZAT"
+	CLASS
+		NAME "Alépítmény hálózat"
+		EXPRESSION "Alépítmény hálózat"
+		COLOR 0 255 0
+		SYMBOL "dash-utility"
+		SIZE 2
+	END
+	CLASS
+		NAME "Földkábel hálózat"
+		EXPRESSION "Földkábel hálózat"
+		COLOR 0 255 0
+		SYMBOL "dash-utility"
+	END
+	CLASS
+		NAME "Földfeletti hálózat"
+		EXPRESSION "Földfeletti hálózat"
+		COLOR 0 255 0
+	END
+	CLASS
+		COLOR 0 255 0
+	END
+	TEMPLATE "dummy"
+END
+
+#LAYER
+#	NAME "postatxt"
+#	DATA "kozmu2012/posta_txt"
+#	STATUS OFF
+#	GROUP "posta"
+#	TYPE ANNOTATION
+#	METADATA
+#		"DESCRIPTION"	"Postakábel"
+#		"wms_name"	"posta"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"posta"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#	END
+#	LABELITEM "txt"
+#	LABELMAXSCALEDENOM 1001
+#	SYMBOLSCALEDENOM 1000
+#	CLASS
+#		COLOR -1 -1 -1
+#		LABEL
+#			COLOR 0 255 0
+#			ANGLE [irany]
+#			SIZE 10
+#			FONT times
+#			TYPE TRUETYPE
+#			ENCODING "ISO-8859-2"
+#			POSITION UR
+#		END
+#	END
+#END
+
+# viz
+LAYER
+	NAME "tuzcsap"
+	DATA "kozmu2015/tuzcsap_pol"
+	STATUS OFF
+	GROUP "viz"
+	TYPE POLYGON
+	METADATA
+		"DESCRIPTION"	"Vízvezeték és tűzcsap"
+		"wms_name"	"viz2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"viz2015"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		COLOR 0 0 0
+	END
+END
+
+LAYER
+	NAME "tuzcsap1"
+	DATA "kozmu2015/tuzcsap_line"
+	STATUS OFF
+	GROUP "viz"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Vízvezeték és tűzcsap"
+		"wms_name"	"viz2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"viz2015"
+	END
+	MAXSCALEDENOM 4000
+	CLASS
+		COLOR 0 0 0
+	END
+END
+
+LAYER
+	NAME "vizvez"
+	DATA "kozmu2015/viz_2015"
+	STATUS OFF
+	GROUP "viz"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Vízvezeték és tűzcsap"
+		"wms_name"	"viz2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"viz2015"
+		"LAYER_ENCODING" "UTF-8"
+		"RESULT_FIELDS" "TIPUS,HOSSZ"
+		"RESULT_HEADERS" "Típus,Hossz"
+	END
+	CLASSITEM "TIPUS"
+	CLASS
+		NAME "Átm>1m"
+		EXPRESSION "Átmérő nagyobb 1m"
+		COLOR 0 0 255
+		SYMBOL "dash-utility"
+		SIZE 3
+	END
+	CLASS
+		NAME "Ivóvíz átm<1m"
+		EXPRESSION "Ivóvíz átmérő kisebb 1m"
+		COLOR 0 0 255
+		SYMBOL "dash-utility"
+		SIZE 2
+	END
+	CLASS
+		NAME "Ipari víz átm<1m"
+		EXPRESSION "Ipari víz kisebb 1m"
+		COLOR 0 0 255
+		SYMBOL "dash-utility"
+		SIZE 2
+	END
+	CLASS
+		NAME "Közterületi locsoló"
+		EXPRESSION "Közterületi locsoló"
+		COLOR 0 0 255
+	END
+	CLASS
+		NAME "Házi bekötés"
+		EXPRESSION "Házi bekötés"
+		COLOR 0 0 255
+		SYMBOL "dash-shorter"
+	END
+	CLASS
+		COLOR 0 0 255
+	END
+	TEMPLATE "dummy"
+END
+
+#LAYER
+#	NAME "viztxt"
+#	DATA "kozmu2012/viz_txt"
+#	STATUS OFF
+#	GROUP "viz"
+#	TYPE ANNOTATION
+#	METADATA
+#		"DESCRIPTION"	"Vízvezeték"
+#		"wms_name"	"viz"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"viz"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#	END
+#	LABELITEM "txt"
+#	LABELMAXSCALEDENOM 1001
+#	SYMBOLSCALEDENOM 1000
+#	CLASS
+#		COLOR -1 -1 -1
+#		LABEL
+#			COLOR 0 0 255
+#			ANGLE [irany]
+#			SIZE 10
+#			FONT times
+#			TYPE TRUETYPE
+#			ENCODING "ISO-8859-2"
+#			POSITION UR
+#		END
+#	END
+#END
+
+# csatorna
+LAYER
+	NAME "csat"
+	DATA "kozmu2015/csatorna_2015"
+	STATUS OFF
+	GROUP "csatorna"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Csatorna"
+		"wms_name"	"csatorna2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"csatorna2015"
+		"LAYER_ENCODING" "UTF-8"
+		"RESULT_FIELDS" "TIPUS,HOSSZ"
+		"RESULT_HEADERS" "Típus,Hossz"
+	END
+	CLASSITEM "TIPUS"
+	CLASS
+		NAME "Grav. csapadék"
+		EXPRESSION "Gravitációs csapadék"
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "dash-utility"
+		END
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "arrow"
+		END
+	END
+	CLASS
+		NAME "Grav. szennyvíz"
+		EXPRESSION "Gravitációs szennyvíz"
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "dash-utility"
+			SIZE 2
+		END
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "arrow"
+		END
+	END
+	CLASS
+		NAME "Grav. egyesített"
+		EXPRESSION "Gravitációs egyesített"
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "dash-utility"
+			SIZE 3
+		END
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "arrow"
+		END
+	END
+	CLASS
+		NAME "Nyom. csapadék"
+		EXPRESSION "Nyomott csapadék"
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "dash-utility"
+		END
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "arrow-arrow"
+		END
+	END
+	CLASS
+		NAME "Nyom. szennyvíz"
+		EXPRESSION "Nyomott szennyvíz"
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "dash-utility"
+			SIZE 2
+		END
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "arrow-arrow"
+		END
+	END
+	CLASS
+		NAME "Nyom. egyesített"
+		EXPRESSION "Nyomott egyesített"
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "dash-utility"
+			SIZE 3
+		END
+		STYLE
+			COLOR 255 127 0
+			SYMBOL "arrow-arrow"
+		END
+	END
+	CLASS
+		NAME "Házi bekötés"
+		EXPRESSION "Bekötő"
+		COLOR 255 127 0
+		SYMBOL "dash-shorter"
+	END
+	CLASS
+		COLOR 255 127 0
+	END
+	TEMPLATE "dummy"
+END
+
+#LAYER
+#	NAME "csattxt"
+#	DATA "kozmu2012/csatorna_txt"
+#	STATUS OFF
+#	GROUP "csatorna"
+#	TYPE ANNOTATION
+#	METADATA
+#		"DESCRIPTION"	"Csatorna"
+#		"wms_name"	"csatorna"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"csatorna"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#	END
+#	LABELITEM "txt"
+#	LABELMAXSCALEDENOM 1001
+#	SYMBOLSCALEDENOM 1000
+#	CLASS
+#		COLOR -1 -1 -1
+#		LABEL
+#			COLOR 255 127 0
+#			ANGLE [irany]
+#			SIZE 10
+#			FONT times
+#			TYPE TRUETYPE
+#			ENCODING "ISO-8859-2"
+#			POSITION UR
+#		END
+#	END
+#END
+
+# foldgaz
+LAYER
+	NAME "gazos"
+	DATA "kozmu2015/gaz_2015"
+	STATUS OFF
+	GROUP "gaz"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Gáz"
+		"wms_name"	"gaz2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"gaz2015"
+		"LAYER_ENCODING" "UTF-8"
+		"RESULT_FIELDS" "TIPUS,HOSSZ"
+		"RESULT_HEADERS" "Típus,Hossz"
+	END
+	CLASSITEM "TIPUS"
+	CLASS
+		NAME "Földgáz kisnyomású"
+		EXPRESSION "kisnyomású földgázvezeték"
+		STYLE
+			COLOR 255 255 0
+			SYMBOL "dash-utility"
+		END
+	END
+	CLASS
+		NAME "Földgáz nagyközépnyomású"
+		EXPRESSION "nagyközépnyomású földgázvezeték"
+		COLOR 255 255 0
+		SYMBOL "dash-utility"
+		SIZE 3
+	END
+	CLASS
+		NAME "Földgáz nagynyomású"
+		EXPRESSION "nagynyomású földgázvezeték"
+		STYLE
+			COLOR 255 255 0
+			SYMBOL "dash-utility"
+			SIZE 4
+		END
+	END
+	CLASS
+		NAME "Házi bekötés"
+		EXPRESSION "házi (földgáz) bekötés"
+		COLOR 255 255 0
+		SYMBOL "dash-shorter"
+	END
+	CLASS
+		COLOR 255 255 0
+	END
+	TEMPLATE "dummy"
+END
+
+#LAYER
+#	NAME "gaztxt"
+#	DATA "kozmu2012/gaz_txt"
+#	STATUS OFF
+#	GROUP "gaz"
+#	TYPE ANNOTATION
+#	METADATA
+#		"DESCRIPTION"	"Gáz"
+#		"wms_name"	"gaz2012"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"gaz2012"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#	END
+#	LABELITEM "txt"
+#	LABELMAXSCALEDENOM 1001
+#	SYMBOLSCALEDENOM 1000
+#	CLASS
+#		COLOR -1 -1 -1
+#		LABEL
+#			COLOR 255 255 0
+#			ANGLE [irany]
+#			SIZE 10
+#			FONT times
+#			TYPE TRUETYPE
+#			ENCODING "ISO-8859-2"
+#			POSITION UR
+#		END
+#	END
+#END
+
+# tavho
+LAYER
+	NAME "th"
+	DATA "kozmu2015/tavho_2015"
+	STATUS OFF
+	GROUP "tavho"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Távhő"
+		"wms_name"	"tavho2015"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"tavho2015"
+		"LAYER_ENCODING" "UTF-8"
+		"RESULT_FIELDS" "TIPUS,HOSSZ"
+		"RESULT_HEADERS" "Típus,Hossz"
+	END
+	CLASSITEM "TIPUS"
+	CLASS
+		NAME "Primer-szekunder vezeték"
+		EXPRESSION "primer-szekunder vezeték"
+		COLOR 255 0 255
+		SYMBOL "dash-utility"
+		SIZE 2
+	END
+	CLASS
+		NAME "1m-nél nagyobb vezeték szélei"
+		EXPRESSION "1m-nél nagyobb vezeték szélei"
+		COLOR 255 0 255
+		SYMBOL "dash-utility"
+		SIZE 3
+	END
+	CLASS
+		NAME "Távhő vezeték"
+		EXPRESSION "távhő vezeték"
+		COLOR 255 0 255
+		SYMBOL "dash-utility"
+		SIZE 2
+	END
+	CLASS
+		NAME "Pótolt távhő vezeték"
+		EXPRESSION "pótolt távhő vezeték"
+		COLOR 255 0 255
+		SYMBOL "dash-utility"
+		SIZE 2
+	END
+	CLASS
+		COLOR 255 0 255
+	END
+	TEMPLATE "dummy"
+END
+
+#LAYER
+#	NAME "thtxt"
+#	DATA "kozmu2012/tavho_txt"
+#	STATUS OFF
+#	GROUP "gaz"
+#	TYPE ANNOTATION
+#	METADATA
+#		"DESCRIPTION"	"Távhő"
+#		"wms_name"	"tavho2012"
+#		"wms_style"	"visual"
+#		"wms_server_version"	"1.1.1"
+#		"wms_format"	"image/png"
+#		"ows_title"	"tavho2012"
+#		"LAYER_ENCODING" "ISO-8859-2"
+#	END
+#	LABELITEM "txt"
+#	LABELMAXSCALEDENOM 1001
+#	SYMBOLSCALEDENOM 1000
+#	CLASS
+#		COLOR -1 -1 -1
+#		LABEL
+#			COLOR 255 255 0
+#			ANGLE [irany]
+#			SIZE 10
+#			FONT times
+#			TYPE TRUETYPE
+#			ENCODING "ISO-8859-2"
+#			POSITION UR
+#		END
+#	END
+#END
+
+# tomegkozlekedes
+LAYER
+	NAME "busz"
+	DATA "bkv/utvonalak"
+	STATUS OFF
+	TYPE LINE
+	FILTER "busz"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Busz"
+		"wms_name"	"busz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"busz"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS"
+		"RESULT_HEADERS" "Járat,Típus"
+	END
+	CLASS
+		NAME "Buszvonalak"
+		COLOR 0 0 255
+		SYMBOL 'circle'
+		SIZE 2
+	END
+	TEMPLATE "dummy"
+END
+
+LAYER
+	NAME "ejszbusz"
+	DATA "bkv/utvonalak"
+	STATUS OFF
+	TYPE LINE
+	FILTER "/.jszakai busz/"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Éjszakai busz"
+		"wms_name"	"ejszakai_busz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ejszakai_busz"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS"
+		"RESULT_HEADERS" "Járat,Típus"
+	END
+	CLASS
+		NAME "Éjszakai buszvonalak"
+		COLOR 0 0 255
+		SYMBOL 'circle'
+		SIZE 2
+	END
+	TEMPLATE "dummy"
+END
+ 
+LAYER
+	NAME "villamos"
+	DATA "bkv/utvonalak"
+	STATUS OFF
+	TYPE LINE
+	FILTER "villamos"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Villamos"
+		"wms_name"	"villamos"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"villamos"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS"
+		"RESULT_HEADERS" "Járat,Típus"
+	END
+	CLASS
+		NAME "Villamos vonalak"
+		COLOR 255 255 0
+		SYMBOL 'circle'
+		SIZE 2
+	END
+	TEMPLATE "dummy"
+END
+
+LAYER
+	NAME "troli"
+	DATA "bkv/utvonalak"
+	STATUS OFF
+	TYPE LINE
+	FILTER "troli"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Troli"
+		"wms_name"	"troli"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"troli"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS"
+		"RESULT_HEADERS" "Járat,Típus"
+	END
+	CLASS
+		NAME "Troli vonalak"
+		COLOR 255 0 255
+		SYMBOL 'circle'
+		SIZE 2
+	END
+	TEMPLATE "dummy"
+END
+
+LAYER
+	NAME "metro"
+	DATA "bkv/utvonalak"
+	STATUS OFF
+	TYPE LINE
+	FILTER "metro"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Metro"
+		"wms_name"	"metro"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"metro"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS"
+		"RESULT_HEADERS" "Járat,Típus"
+	END
+	CLASS
+		NAME "Metro vonalak"
+		COLOR 255 0 0
+		SYMBOL 'circle'
+		SIZE 2
+	END
+	TEMPLATE "dummy"
+END
+
+LAYER
+	NAME "buszm"
+	DATA "bkv/megallok"
+	STATUS OFF
+	TYPE POINT
+	FILTER "busz"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Buszmegállók"
+		"wms_name"	"busz_megallok"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"busz_megallok"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS,TEXT"
+		"RESULT_HEADERS" "Járat,Típus,Név"
+	END
+#	LABELMAXSCALEDENOM 10001
+#	SYMBOLSCALEDENOM 1000
+	LABELITEM "TEXT"
+	CLASS
+		NAME "Buszmegállók"
+		COLOR 0 0 127
+		SYMBOL 'circle'
+		SIZE 10
+		LABEL
+			COLOR 0 0 127
+			SIZE 10
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION UR
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	TEMPLATE "dummy"
+	TOLERANCE 10
+END
+
+LAYER
+	NAME "ejszbuszm"
+	DATA "bkv/megallok"
+	STATUS OFF
+	TYPE POINT
+	FILTER "/.jszakai busz/"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Éjszakai buszmegálló"
+		"wms_name"	"ejszakai_busz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ejszakai_busz"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS,TEXT"
+		"RESULT_HEADERS" "Járat,Típus,Név"
+	END
+	LABELITEM "TEXT"
+	CLASS
+		NAME "Éjszakai buszmegállók"
+		COLOR 0 0 63
+		SYMBOL 'circle'
+		SIZE 10
+		LABEL
+			COLOR 0 0 64
+			SIZE 10
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION UR
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	TEMPLATE "dummy"
+	TOLERANCE 10
+END
+ 
+LAYER
+	NAME "villamosm"
+	DATA "bkv/megallok"
+	STATUS OFF
+	TYPE POINT
+	FILTER "villamos"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Villamosmegálló"
+		"wms_name"	"villamos_megallo"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"villamos_megallo"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS,TEXT"
+		"RESULT_HEADERS" "Járat,Típus,Név"
+	END
+	LABELITEM "TEXT"
+	CLASS
+		NAME "Villamosmegállók"
+		COLOR 127 127 0
+		SYMBOL 'circle'
+		SIZE 10
+		LABEL
+			COLOR 127 127 0
+			SIZE 10
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION UR
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	TEMPLATE "dummy"
+	TOLERANCE 10
+END
+
+LAYER
+	NAME "trolim"
+	DATA "bkv/megallok"
+	STATUS OFF
+	TYPE POINT
+	FILTER "troli"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Trolimegálló"
+		"wms_name"	"troli_megallo"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"troli_megallo"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS,TEXT"
+		"RESULT_HEADERS" "Járat,Típus,Név"
+	END
+	LABELITEM "TEXT"
+	CLASS
+		NAME "Trolimegállók"
+		COLOR 127 0 127
+		SYMBOL 'circle'
+		SIZE 10
+		LABEL
+			COLOR 127 0 127
+			SIZE 10
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION UR
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	TEMPLATE "dummy"
+	TOLERANCE 10
+END
+
+LAYER
+	NAME "metrom"
+	DATA "bkv/megallok"
+	STATUS OFF
+	TYPE POINT
+	FILTER "metro"
+	FILTERITEM "TIPUS"
+	METADATA
+		"DESCRIPTION"	"Metromegálló"
+		"wms_name"	"metro_m"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"metro"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "JARAT,TIPUS,TEXT"
+		"RESULT_HEADERS" "Járat,Típus,Név"
+	END
+	LABELITEM "TEXT"
+	CLASS
+		NAME "Metromegállók"
+		COLOR 127 0 0
+		SYMBOL 'circle'
+		SIZE 10
+		LABEL
+			COLOR 127 0 0
+			SIZE 10
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION UR
+			FONT arial
+			TYPE TRUETYPE
+			ENCODING "ISO-8859-2"
+		END
+	END
+	TEMPLATE "dummy"
+	TOLERANCE 10
+END
+
+# BVKSZ muemlek pont
+LAYER
+	NAME "omvhszim"
+	DATA "fszkt2014/10e/omvhszim"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE POINT
+	METADATA
+		"DESCRIPTION"	"Műemlék pontok"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Műemlék"
+		COLOR 255 0 0
+		SYMBOL 'circle'
+		SIZE 10
+	END
+END
+
+# BVKSZ  vedett epulet
+LAYER
+	NAME "ved7szim"
+	DATA "fszkt2014/10e/ved7szim"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE POINT
+	METADATA
+		"DESCRIPTION"	"Fővárosi rendeletben védett épület"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fővárosi rendeletben védett épület"
+		COLOR 255 255 0
+		SYMBOL 'box'
+		SIZE 10
+	END
+END
+
+# BVKSZ  vedett ertek
+LAYER
+	NAME "htermsz"
+	DATA "fszkt2014/10e/htermsz"
+	GROUP "bvksz"
+	STATUS OFF
+	TYPE POINT
+	METADATA
+		"DESCRIPTION"	"Védett érték"
+		"wms_name"	"bvksz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"bvksz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Fővárosi jelentőségű védett érték"
+		COLOR 0 255 0
+		SYMBOL 'triangle'
+		SIZE 10
+	END
+END
+
+# parkolo es FSZT feliratok
+LAYER
+	NAME "ptxt"
+	DATA "fszkt2014/4e/felirat"
+	STATUS OFF
+	GROUP "ovezet"
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"FSZKT feliratok"
+		"wms_name"	"ovezet"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"ovezet"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "TEXTSTRING"
+	LABELMAXSCALEDENOM 8001
+	SYMBOLSCALEDENOM 1000
+	CLASS
+#		EXPRESSION "PR"
+		LABEL
+			ANGLE [TEXT_ANGLE]
+			COLOR 0 0 0
+			SIZE 60
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 2 2
+			POSITION UR
+			FONT arial
+			TYPE TRUETYPE
+			WRAP "_"
+			FORCE TRUE
+		END
+	END
+END
+
+# pincek
+LAYER
+	NAME "pegyeb"
+	DATA "pince/egyeb"
+	STATUS OFF
+	GROUP "pincek"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Pincék"
+		"wms_name"	"egyeb_pince"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"egyeb_pince"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Egyéb pince"
+		COLOR 215 7 96
+		SYMBOL "circle"
+		SIZE 2
+	END
+END
+
+LAYER
+	NAME "plepcso"
+	DATA "pince/lepcso"
+	STATUS OFF
+	GROUP "pincek"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Pincék"
+		"wms_name"	"pince_lepcso"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"pince_lepcso"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Pince lépcső"
+		COLOR 0 0 250
+		SYMBOL "circle"
+		SIZE 2
+	END
+END
+
+LAYER
+	NAME "pkorv"
+	DATA "pince/pince"
+	STATUS OFF
+	GROUP "pincek"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Pincék"
+		"wms_name"	"pince_korvonal"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"pince_korvonal"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Pince körvonal"
+		COLOR 86 86 86
+		SYMBOL "circle"
+		SIZE 2
+	END
+END
+
+LAYER
+	NAME "ppoly"
+	DATA "pince/pince_poly"
+	STATUS OFF
+	GROUP "pincek"
+	TYPE LINE
+	METADATA
+		"DESCRIPTION"	"Pincék"
+		"wms_name"	"pince_"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"pince_"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	CLASS
+		NAME "Pince"
+		COLOR 174 174 174
+		OUTLINECOLOR -1 -1 -1
+		SYMBOL "circle"
+		SIZE 1
+	END
+END
+
+# feliratok
+LAYER
+	NAME "alrtxt"
+	DATA "alapterkep201703/alreszlet_text"
+	STATUS OFF
+	GROUP "felirat"
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"Feliratok"
+		"wms_name"	"alreszl"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"alreszl"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "TEXT"
+		"RESULT_HEADERS" "Felirat"
+	END
+	LABELITEM "TEXT"
+	LABELMAXSCALEDENOM 4999
+	SYMBOLSCALEDENOM 4000
+	CLASS
+		LABEL
+			COLOR 0 0 255
+			SIZE 9
+			POSITION CR
+			FONT times
+			TYPE TRUETYPE
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			ANGLE [DIRECTION]
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+LAYER
+	NAME "eptxt"
+	DATA "alapterkep201703/epulet_text"
+	STATUS OFF
+	GROUP "felirat"
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"Feliratok"
+		"wms_name"	"epulet_text"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"epulet_text"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "TEXT"
+	LABELMAXSCALEDENOM 4999
+	SYMBOLSCALEDENOM 4000
+	CLASS
+		LABEL
+			COLOR 0 0 255
+			SIZE 4
+			POSITION CR
+			FONT times
+			TYPE TRUETYPE
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			ANGLE [DIRECTION]
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+LAYER
+	NAME "hsztxt"
+	DATA "alapterkep201703/hazszam_text"
+	STATUS OFF
+	GROUP "felirat"
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"Feliratok"
+		"wms_name"	"hazszam"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"hazszam"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "TEXT"
+	LABELMAXSCALEDENOM 4999
+	SYMBOLSCALEDENOM 4000
+	CLASS
+		LABEL
+			COLOR 0 0 0
+			SIZE 2
+			POSITION CR
+			FONT times
+			TYPE TRUETYPE
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			ANGLE [DIRECTION]
+			FORCE TRUE
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+LAYER
+	NAME "hrsztxt"
+	DATA "alapterkep201703/hrsz_text"
+	STATUS OFF
+	GROUP "felirat"
+	TYPE ANNOTATION
+	METADATA
+		"DESCRIPTION"	"Feliratok"
+		"wms_name"	"hrsz"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"hrsz"
+		"LAYER_ENCODING" "ISO-8859-2"
+	END
+	LABELITEM "TEXT"
+	LABELMAXSCALEDENOM 4999
+	SYMBOLSCALEDENOM 4000
+	CLASS
+		LABEL
+			COLOR 0 0 0
+			SIZE 2
+			POSITION CR
+			FONT times
+			TYPE TRUETYPE
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			ANGLE [DIRECTION]
+			FORCE TRUE
+			ENCODING "ISO-8859-2"
+		END
+	END
+END
+
+LAYER
+	NAME "unev"
+	DATA "alapterkep201703/utcanev_text"
+	STATUS OFF
+	GROUP "felirat"
+	TYPE POINT
+	METADATA
+		"DESCRIPTION"	"Feliratok"
+		"wms_name"	"utcanev"
+		"wms_style"	"visual"
+		"wms_server_version"	"1.1.1"
+		"wms_format"	"image/png"
+		"ows_title"	"felirat"
+		"LAYER_ENCODING" "ISO-8859-2"
+		"RESULT_FIELDS" "TEXT"
+		"RESULT_HEADERS" "Felirat"
+	END
+	LABELITEM "TEXT"
+#	LABELMINSCALEDENOM 2500
+	LABELMAXSCALEDENOM 4999
+	SYMBOLSCALEDENOM 4000
+	CLASS
+		COLOR -1 -1 -1
+		SYMBOL 'circle' 
+		SIZE 1
+		LABEL
+			COLOR 0 0 255
+			SIZE 4
+			POSITION UR
+			FONT times
+			TYPE TRUETYPE
+			SHADOWCOLOR 255 255 255
+			SHADOWSIZE 1 1
+			ANGLE [DIRECTION]
+			FORCE true
+			ENCODING "ISO-8859-2"
+		END
+	END
+	TEMPLATE "dummy"
+END
+
+END

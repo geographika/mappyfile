@@ -1,0 +1,231 @@
+# https://github.com/mapserver/mapserver/issues/5486
+
+MAP
+
+ # all temp files get prefixed with this string
+ NAME "ms-ogc-workshop"
+
+ # background color of image if transparency
+ # is not requested
+ IMAGECOLOR 125 125 125
+
+ # default output image dimensions
+ SIZE 600 400
+
+ # always returns a map
+ STATUS ON
+
+ # set top level projection
+ PROJECTION
+  "init=epsg:4326"
+ END
+
+ # image format options
+ OUTPUTFORMAT
+  NAME png
+  DRIVER "GD/PNG"
+  MIMETYPE "image/png"
+  IMAGEMODE RGB
+  EXTENSION "png"
+ END
+
+ OUTPUTFORMAT
+  NAME GEOTIFF_RGB
+  DRIVER "GDAL/GTiff"
+  MIMETYPE "image/tiff"
+  IMAGEMODE RGB
+  EXTENSION "tif"
+ END
+
+ # minx miny maxx maxy
+ # sets:
+ # /WMT_MS_Capabilities/Capability/Layer/LatLonBoundingBox(@minx @miny @maxx @maxx)
+ EXTENT -180 -90 180 90 # World
+
+ # add def pointers for symbols
+
+ SYMBOLSET "../etc/symbols/symbols.txt"
+ FONTSET   "../etc/fonts/fonts.txt"
+
+ #
+ # Start of web interface definition
+ WEB
+
+  # this is the real filepath to the temp dir for intermediate file creation
+  INCLUDE "../common/imagepath.inc"
+
+  # this is the web-accessible path to IMAGEPATH
+  IMAGEURL "/ms_tmp/"
+  
+  HEADER "../templates/query_header.html"
+  FOOTER "../templates/query_footer.html"
+
+  METADATA
+
+   "map" "C:/ms4w/apps/ms-ogc-workshop/service/calix_config.map"  
+   "ows_schemas_location" "http://schemas.opengis.net"
+   "ows_title" "Sample OWS for MapServer OGC Web Services Workshop"
+   "ows_abstract" "Sample OWS for MapServer OGC Web Services Workshop.  Enjoy!"
+   "ows_keywordlist" "mapserver,ogc,workshop"
+   "ows_service_onlineresource" "http://usgvdcalix2:8085/ms-ogc-workshop/index.html"
+   "ows_onlineresource" "http://usgvdcalix2:8085/cgi-bin/mapserv.exe?map=C:/ms4w/apps/ms-ogc-workshop/service/calix_config.map"
+   "ows_fees" "none"
+   "ows_accessconstraints" "none"
+   "ows_contactperson" "Corey Alix"
+   "ows_contactorganization" "Infor Global Solutions"
+   "ows_contactposition" "Developer"
+   "ows_addresstype" "postal"
+   "ows_address"     "867 Lakeshore Road"
+   "ows_city" "Burlington"
+   "ows_stateorprovince" "Ontario"
+   "ows_postcode" "L7R-4A6"
+   "ows_country" "Canada"
+   "ows_contactvoicetelephone" "+01-905-336-4409"
+   "ows_contactfacsimiletelephone" "+01-905-336-4499"
+   "ows_contactelectronicmailaddress" "tom.kralidis@ec.gc.ca"
+   "wms_srs" "EPSG:4326 EPSG:3857"	
+   "wfs_srs" "EPSG:4326 EPSG:3857"	
+   "wms_attribution_onlineresource" "http://www.ec.gc.ca/"
+   "wms_attribution_title" "Data from Environment Canada"
+   "wms_attribution_logourl_width" "439"
+   "wms_attribution_logourl_height" "68"
+   "wms_attribution_logourl_format" "image/jpeg"
+   "wms_attribution_logourl_href" "http://mapserver.osgeo.org/_static/mapserver.jpg"
+   "wms_feature_info_mime_type"  "text/html"
+   "wfs_namespace_uri" "http://usgvdcalix2:8085/ms-ogc-workshop"
+   "wfs_namespace_prefix" "ms-ogc-workshop"
+   "wcs_label" "Sample OWS for MapServer OGC Web Services Workshop"
+   "wcs_description" "Sample OWS for MapServer OGC Web Services Workshop.  Enjoy!"
+   "wcs_metadatalink_href" "http://usgvdcalix2:8085/ms-ogc-workshop/index.html"
+   "ows_enable_request" "*"   
+   END
+ END
+
+ # hilite map for GetFeatureInfo "info_format=text/html"
+ # requests
+
+ QUERYMAP
+  STATUS ON
+  SIZE 200 200
+  STYLE HILITE
+  COLOR 255 255 0
+ END
+
+
+ # set defaults for GetLegendGraphic requests 
+ LEGEND
+  LABEL
+   TYPE BITMAP
+   SIZE MEDIUM
+   COLOR 0 0 0
+  END
+ END
+
+ CONFIG "MS_ERRORFILE" "c:\temp\log\mapserver.txt"
+
+ LAYER
+  NAME addresses
+
+  PROJECTION
+   "init=epsg:3421"
+  END
+
+  TYPE POINT
+
+  STATUS ON
+
+  DATA ../data/Addresses
+
+  METADATA
+   "ows_title"    "Addresses"
+   "ows_abstract"    "These are Addresses"
+   "ows_keywordlist"    "Addresses,world"
+   "wfs_srs" "EPSG:4326 EPSG:3857"
+   "wms_srs" "EPSG:4326 EPSG:3857"
+   "wms_opaque"    "0"
+   "wms_dataurl_href" "http://usgvdcalix2:8085/ms-ogc-workshop/data/"
+   "wms_dataurl_format" "text/html"
+   "ows_metadataurl_type" "FGDC"
+   "ows_metadataurl_href" "http://usgvdcalix2:8085/ms-ogc-workshop/index.html"
+   "ows_metadataurl_format" "text/html"
+   "wfs_metadataurl_format" "TXT"
+   "gml_include_items" "all"
+  END
+
+  TOLERANCE 5
+
+  CLASS
+    # Start of the first Style
+    STYLE
+      # Symbol to be used (reference)
+      SYMBOL "square"
+      # Size of the symbol in pixels
+      SIZE 16
+      # Colour (RGB) - red
+      COLOR 255 0 0
+      # Outline colour (RGB) - black
+      OUTLINECOLOR 0 0 0
+    END # end of STYLE
+    # Start of the second Style
+    STYLE
+      # Symbol to be used (reference)
+      SYMBOL "circle"
+      # Size of the symbol in pixels
+      SIZE 10
+      # Colour (RGB) - blue
+      COLOR 0 0 255
+    END # end of STYLE
+  END # end of CLASS
+
+ END
+
+ LAYER
+  NAME rivers
+
+  PROJECTION
+   "init=epsg:4326"
+  END
+
+  TYPE LINE
+
+  STATUS ON
+
+  DATA ../data/rivers
+
+  METADATA
+
+   "ows_title"    "Rivers"
+   "ows_abstract"    "These are rivers"
+   "ows_keywordlist"    "Rivers,world"
+   "wfs_srs" "EPSG:4326 EPSG:3857"
+   "wms_srs" "EPSG:4326 EPSG:3857"
+   "wms_opaque"    "0"
+   "wms_group_title" "Vectors"
+   "wms_group_abstract" "Vector layers"
+   "wms_dataurl_href" "http://usgvdcalix2:8085/ms-ogc-workshop/data/"
+   "wms_dataurl_format" "text/html"
+   "ows_metadataurl_type" "FGDC"
+   "ows_metadataurl_href" "http://usgvdcalix2:8085/ms-ogc-workshop/index.html"
+   "ows_metadataurl_format" "text/html"
+   "wfs_metadataurl_format" "TXT"
+   "gml_include_items" "all"
+
+  END
+
+  # data is queryable
+  DUMP TRUE
+
+  HEADER   ../templates/rivers_query_header.html
+  TEMPLATE ../templates/rivers_query_body.html
+
+  # fuzziness for querying
+  TOLERANCE 5
+
+  # how will this data look?
+  CLASS
+   NAME "Rivers"
+   COLOR 0 255 0
+  END
+ END
+ 
+END
