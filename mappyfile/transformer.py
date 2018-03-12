@@ -496,7 +496,7 @@ class MapfileTransformer(Transformer):
         return func
 
     def func_params(self, t):
-        params = ",".join(v.value for v in t)
+        params = ",".join(str(v.value) for v in t)
         return params
 
     def attr_bind(self, t):
