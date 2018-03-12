@@ -829,6 +829,19 @@ def test_font_symbol():
     assert(output(s, schema_name="label") == exp)
 
 
+def test_buffer_expression():
+
+    s = u"""
+    STYLE
+        GEOMTRANSFORM (buffer([shape], 20))
+    END
+    """
+
+    print(output(s, schema_name="label"))
+    exp = u"STYLE GEOMTRANSFORM (buffer([shape],20)) END"
+    assert(output(s, schema_name="label") == exp)
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -841,6 +854,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_font_symbol()
+    test_buffer_expression()
     # run_tests()
     print("Done!")
