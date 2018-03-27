@@ -34,7 +34,6 @@ def test_all_maps():
         except (BaseException, UnexpectedToken) as ex:
             logging.warning("Cannot process %s ", fn)
             logging.error(ex)
-            raise
             failing_maps.append(fn)
 
     logging.warning(failing_maps)
