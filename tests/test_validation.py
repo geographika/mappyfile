@@ -255,6 +255,9 @@ def test_lowercase():
     d = m.transform(ast)
 
     print(json.dumps(d, indent=4))
+    errors = validate(s)
+    print(errors)
+    assert(len(errors) == 0)
     # deepcopy crashes on (u'config', OrderedDict([('ON_MISSING_DATA', Token(NAME, 'FAIL'))]))
 
 
@@ -358,6 +361,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
-    # test_deref()
+    # run_tests()
+    test_lowercase()
     print("Done!")
