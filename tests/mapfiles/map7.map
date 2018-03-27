@@ -1,0 +1,75 @@
+# https://github.com/mapserver/mapserver/pull/4972
+
+MAP
+  CONFIG "PROJ_LIB" "/tmp/navhome/lib/share/proj"
+  CONFIG "PROJ_DEBUG" "OFF"
+  CONFIG "CPL_DEBUG" "ON"
+  #CONFIG "MS_ERRORFILE" "mapserver.log"
+  CONFIG "ON_MISSING_DATA" "LOG"
+  DEBUG 5
+
+  EXTENT -110.5 38.5 -110 39.5 # fails
+
+  FONTSET "fontset.txt"
+  IMAGECOLOR 0 0 0
+  IMAGETYPE "png"
+  NAME "global_map"
+  SIZE 1280 768
+  STATUS ON
+  UNITS DD
+
+  OUTPUTFORMAT
+    NAME "AGG_PNG"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE RGBA
+    TRANSPARENT TRUE
+    FORMATOPTION "COMPRESSION=0"
+  END # OUTPUTFORMAT
+
+  PROJECTION
+    "proj=latlong"
+    "ellps=WGS84"
+  END # PROJECTION
+
+  SYMBOL
+    NAME 'City'
+    TYPE ELLIPSE
+    POINTS 1 1 END
+    FILLED FALSE
+  END
+
+LAYER
+  NAME 'badwkt'
+  TYPE LINE
+  STATUS DEFAULT
+  FEATURE
+    POINTS
+#      -110.220982 38.982832  #works
+       -110.220980 38.982832  #fails
+      -110.220887 38.982863
+      -110.221614 38.982708
+      -110.220980 38.982832
+    END
+    TEXT "Testing"
+  END
+
+  CLASS
+
+    LABEL
+      FONT "Uni"
+        SIZE 10
+        COLOR 255 255 255
+        ENCODING "UTF-8"
+        PARTIALS FALSE
+        POSITION LC
+      END # LABEL
+
+    STYLE
+      COLOR 255 255 255
+      WIDTH 4
+    END
+  END
+END
+END # MAP

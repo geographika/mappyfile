@@ -1,0 +1,93 @@
+# https://github.com/mapserver/mapserver/issues/3016
+MAP
+NAME 'USNG'
+SIZE 800 650
+STATUS ON
+##IMAGECOLOR 254 254 254
+##EXTENT 540000 135000 600000 175000
+EXTENT 593133.398829 170094.734526 593893.148973 170712.010326
+UNITS FEET
+
+FONTSET ./0000_00/MN_Line_Experiments/fonts/font.list
+SYMBOLSET ./0000_00/MN_Line_Experiments/symbols/symbol.list
+
+TRANSPARENT ON # TRUE # This should be ON or OFF!
+IMAGETYPE PNG
+
+LAYER
+METADATA
+"ows_title" "layer_0"
+"gml_include_items"
+"all"
+END
+NAME 'usng_l1'
+DATA '0000_00/MN_Line_Experiments/MN_USNG_Ramsey_Line_Northing_Beta'
+STATUS OFF
+TYPE LINE
+LABELITEM 'NORTHING'
+CLASS
+COLOR 0 0 0
+LABEL
+TYPE TRUETYPE
+FONT bluehigh
+SIZE 10
+COLOR 25 25 25
+OUTLINECOLOR 255 255 254
+OFFSET -15 -1
+ANGLE follow
+FORCE true
+END
+END
+END
+
+LAYER
+METADATA
+"ows_title" "layer_0"
+"gml_include_items"
+"all"
+END
+NAME 'usng_l2'
+DATA '0000_00/MN_Line_Experiments/MN_USNG_Ramsey_Line_Northing_Beta'
+STATUS OFF
+TYPE LINE
+LABELITEM 'NORTHING'
+CLASS
+LABEL
+TYPE TRUETYPE
+FONT bluehigh
+SIZE 15
+COLOR 25 25 25
+OUTLINECOLOR 255 255 254
+FORCE true
+ANGLE follow
+END
+END
+END
+
+LAYER
+METADATA
+"ows_title" "layer_0"
+"gml_include_items"
+"all"
+END
+NAME 'usng_l3'
+DATA '0000_00/MN_Line_Experiments/MN_USNG_Ramsey_Line_Northing_Beta'
+STATUS OFF
+TYPE LINE
+LABELITEM 'NORTHING'
+CLASS
+LABEL
+TYPE TRUETYPE
+FONT bluehigh
+SIZE 10
+COLOR 25 25 25
+OUTLINECOLOR 255 255 254
+OFFSET 14 -1
+ANGLE follow
+FORCE true
+END
+END
+MAXSCALE 5000000
+END
+
+END ## end Map
