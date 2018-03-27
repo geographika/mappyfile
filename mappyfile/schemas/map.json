@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema#",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
     "angle": {
       "type": "number"
@@ -16,8 +17,7 @@
         },
         "ON_MISSING_DATA": {
           "type": "string",
-          "enum": [ "FAIL", "LOG", "IGNORE" ],
-          "additionalProperties": false
+          "enum": [ "FAIL", "LOG", "IGNORE" ]
         },
         "PROJ_LIB": { "type": "string" }
       },
@@ -27,7 +27,7 @@
       "type": "string"
     },
     "debug": {
-      "$refss": "debug.json"
+      "$ref": "debug.json"
     },
     "defresolution": {
       "type": "integer"
@@ -128,6 +128,5 @@
     "__type__": {
       "type": "string"
     }
-  },
-  "additionalProperties": true
+  }
 }

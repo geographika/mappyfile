@@ -2,8 +2,11 @@
   "type": "object",
   "required": [ "type" ],
   "properties": {
-    "class": {
-      "$ref": "class.json"
+    "classes": {
+      "type": "array",
+      "items": {
+        "$ref": "class.json"
+      }
     },
     "classgroup": {
       "type": "string"
