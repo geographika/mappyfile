@@ -3,6 +3,18 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "__type__": {
+      "enum": [ "map" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "angle": {
       "type": "number"
     },

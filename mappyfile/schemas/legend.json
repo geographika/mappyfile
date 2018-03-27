@@ -1,7 +1,16 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "properties": {
-
+    "__type__": {
+      "enum": [ "legend" ]
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "imagecolor": {
       "$ref": "color.json"
     },

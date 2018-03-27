@@ -1,6 +1,19 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "properties": {
+    "__type__": {
+      "enum": [ "querymap" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "color": {
       "$ref": "color.json"
     },

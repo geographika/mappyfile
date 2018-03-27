@@ -1,27 +1,40 @@
 {
-    "type": "object",
-    "properties": {
-        "points": {
-            "oneOf": [
-                {
-                    "type": "array",
-                    "items": {
-                        "$ref": "points.json"
-                    }
-                },
-                {
-                    "$ref": "points.json"
-                }
-            ]
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "__type__": {
+      "enum": [ "feature" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "points": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "points.json"
+          }
         },
-        "items": {
-            "type": "string"
-        },
-        "text": {
-            "type": "string"
-        },
-        "wkt": {
-            "type": "string"
+        {
+          "$ref": "points.json"
         }
+      ]
+    },
+    "items": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "wkt": {
+      "type": "string"
     }
+  }
 }

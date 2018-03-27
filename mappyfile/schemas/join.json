@@ -1,7 +1,19 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "properties": {
-
+    "__type__": {
+      "enum": [ "join" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "connection": {
       "type": "string"
     },
@@ -31,7 +43,7 @@
     },
     "type": {
       "type": "string",
-      "enum": ["one-to-one", "one-to-many"],
+      "enum": [ "one-to-one", "one-to-many" ],
       "additionalProperties": false
     }
   }

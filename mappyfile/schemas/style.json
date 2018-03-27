@@ -1,203 +1,219 @@
 {
-    "type": "object",
-    "properties": {
-        "angle": {
-          "oneOf": [
-            {
-              "type": "number"
-            },
-            {
-              "type": "string",
-              "pattern": "^\\[(.*?)\\]$",
-              "description": "attribute"
-            },
-            { "enum": [ "auto" ] }
-          ]
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "__type__": {
+      "enum": [ "style" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "angle": {
+      "oneOf": [
+        {
+          "type": "number"
         },
-        "angleitem": {
-            "type": "string"
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
         },
-        "antialias": {
-            "type": "boolean"
-        },
-        "backgroundcolor": {
-            "$ref": "color.json"
-        },
-        "color": {
-            "oneOf": [
-                { "$ref": "color.json" },
-                {
-                    "type": "string",
-                    "pattern": "^\\[(.*?)\\]$",
-                    "description": "attribute"
-                }
-            ]
-        },
-        "colorrange": {
-            "oneOf": [
-                {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    },
-                    "minItems": 6,
-                    "maxItems": 6
-                },
-                {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "minItems": 2,
-                    "maxItems": 2
-                }
-            ]
-        },
-        "datarange": {
-            "type": "array",
-            "items": {
-                "type": "number"
-            },
-            "minItems": 2,
-            "maxItems": 2
-        },
-        "gap": {
-            "type": "number"
-        },
-        "geomtransform": {
-            "oneOf": [
-                {
-                    "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "start", "vertices" ]
-                },
-                {
-                    "type": "string",
-                    "pattern": "^\\((.*?)\\)$",
-                    "description": "expression"
-                }
-            ]
-        },
-        "initialgap": {
-            "type": "number"
-        },
-        "linecap": {
-            "enum": [ "butt", "round", "square" ]
-        },
-        "linejoin": {
-            "enum": [ "round", "miter", "bevel", "none" ]
-        },
-        "linejoinmaxsize": {
-            "type": "integer"
-        },
-
-        "maxscaledenom": {
-            "type": "number"
-        },
-        "maxsize": {
-            "type": "number"
-        },
-        "maxwidth": {
-            "type": "number"
-        },
-        "minscaledenom": {
-            "type": "number"
-        },
-        "minsize": {
-            "type": "number"
-        },
-        "minwidth": {
-            "type": "number"
-        },
-        "offset": {
-            "type": "array",
-            "items": {
-                "type": "number"
-            },
-            "minItems": 2,
-            "maxItems": 2
-        },
-        "opacity": {
-            "oneOf": [
-                { "type": "integer" },
-                {
-                    "type": "string",
-                    "pattern": "^\\[(.*?)\\]$",
-                    "description": "attribute"
-                }
-            ]
-        },
-        "outlinecolor": {
-            "oneOf": [
-                { "$ref": "color.json" },
-                {
-                    "type": "string",
-                    "pattern": "^\\[(.*?)\\]$",
-                    "description": "attribute"
-                }
-            ]
-        },
-        "outlinewidth": {
-            "oneOf": [
-                { "type": "number" },
-                {
-                    "type": "string",
-                    "pattern": "^\\[(.*?)\\]$",
-                    "description": "attribute"
-                }
-            ]
-        },
-        "pattern": {
-            "$ref": "points.json"
-        },
-        "polaroffset": {
-            "type": "array",
-            "items": {
-                "oneOf": [
-                    {
-                        "type": "number"
-                    },
-                    {
-                        "type": "string",
-                        "pattern": "^\\[(.*?)\\]$",
-                        "description": "attribute"
-                    }
-                ],
-                "minItems": 2,
-                "maxItems": 2
-            }
-        },
-        "size": {
-            "oneOf": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "string",
-                    "pattern": "^\\[(.*?)\\]$",
-                    "description": "attribute"
-                }
-            ]
-        },
-        "symbol": {
-            "oneOf": [
-                {
-                    "type": "string"
-                },
-                {
-                    "$ref": "symbol.json"
-                }
-            ]
-        },
-        "width": {
-            "oneOf": [
-                {
-                    "type": "number"
-                },
-                {
-                    "type": "string",
-                    "pattern": "^\\[(.*?)\\]$",
-                    "description": "attribute"
-                }
-            ]
+        { "enum": [ "auto" ] }
+      ]
+    },
+    "angleitem": {
+      "type": "string"
+    },
+    "antialias": {
+      "type": "boolean"
+    },
+    "backgroundcolor": {
+      "$ref": "color.json"
+    },
+    "color": {
+      "oneOf": [
+        { "$ref": "color.json" },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
         }
+      ]
+    },
+    "colorrange": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
+    },
+    "datarange": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "gap": {
+      "type": "number"
+    },
+    "geomtransform": {
+      "oneOf": [
+        {
+          "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "start", "vertices" ]
+        },
+        {
+          "type": "string",
+          "pattern": "^\\((.*?)\\)$",
+          "description": "expression"
+        }
+      ]
+    },
+    "initialgap": {
+      "type": "number"
+    },
+    "linecap": {
+      "enum": [ "butt", "round", "square" ]
+    },
+    "linejoin": {
+      "enum": [ "round", "miter", "bevel", "none" ]
+    },
+    "linejoinmaxsize": {
+      "type": "integer"
+    },
+
+    "maxscaledenom": {
+      "type": "number"
+    },
+    "maxsize": {
+      "type": "number"
+    },
+    "maxwidth": {
+      "type": "number"
+    },
+    "minscaledenom": {
+      "type": "number"
+    },
+    "minsize": {
+      "type": "number"
+    },
+    "minwidth": {
+      "type": "number"
+    },
+    "offset": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "opacity": {
+      "oneOf": [
+        { "type": "integer" },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
+        }
+      ]
+    },
+    "outlinecolor": {
+      "oneOf": [
+        { "$ref": "color.json" },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
+        }
+      ]
+    },
+    "outlinewidth": {
+      "oneOf": [
+        { "type": "number" },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
+        }
+      ]
+    },
+    "pattern": {
+      "$ref": "points.json"
+    },
+    "polaroffset": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string",
+            "pattern": "^\\[(.*?)\\]$",
+            "description": "attribute"
+          }
+        ],
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "size": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
+        }
+      ]
+    },
+    "symbol": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "symbol.json"
+        }
+      ]
+    },
+    "width": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
+        }
+      ]
     }
+  }
 }

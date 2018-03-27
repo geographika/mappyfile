@@ -1,6 +1,19 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "properties": {
+    "__type__": {
+      "enum": [ "web" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "browseformat": {
       "type": "string",
       "description": "mime-type"

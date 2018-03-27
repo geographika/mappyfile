@@ -1,49 +1,62 @@
 {
-    "type": "object",
-    "properties": {
-        "anchorpoint": {
-            "type": "array",
-            "items": [
-                {
-                    "type": "number",
-                    "minimum": 0,
-                    "maximum": 1
-                }
-            ],
-            "minItems": 2,
-            "maxItems": 2
-        },
-        "antialias": {
-            "type": "boolean"
-        },
-        "backgroundcolor": {
-            "$ref": "color.json"
-        },
-        "character": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 1
-        },
-        "filled": {
-            "type": "boolean"
-        },
-        "font": {
-            "type": "string"
-        },
-        "image": {
-            "type": "string"
-        },
-        "name": {
-            "type": "string"
-        },
-        "points": {
-            "$ref": "points.json"
-        },
-        "transparent": {
-            "type": "integer"
-        },
-        "type": {
-            "enum": [ "ellipse", "hatch", "pixmap", "svg", "truetype", "vector" ]
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "__type__": {
+      "enum": [ "symbol" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "anchorpoint": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
         }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "antialias": {
+      "type": "boolean"
+    },
+    "backgroundcolor": {
+      "$ref": "color.json"
+    },
+    "character": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1
+    },
+    "filled": {
+      "type": "boolean"
+    },
+    "font": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "points": {
+      "$ref": "points.json"
+    },
+    "transparent": {
+      "type": "integer"
+    },
+    "type": {
+      "enum": [ "ellipse", "hatch", "pixmap", "svg", "truetype", "vector" ]
     }
+  }
 }
