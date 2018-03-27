@@ -1,10 +1,10 @@
-.. _rfc118:
+.. _rfc121:
 
 =========================================================================
-MS RFC 118: Mapfile JSON Schema
+MS RFC 121: Mapfile JSON Schema
 =========================================================================
 
-:Date:  2013/08
+:Date:  2018/03
 :Author: Seth Girvin
 :Contact: sethg@geographika.co.uk
 :Status: Proposed
@@ -22,20 +22,22 @@ Validating a Mapfile against a schema has the following advantages:
 + warn of an invalid structure
 + more comprehensive and consistent documentation
 + warnings of deprecated keywords
++ a parseable definition of the Mapfile language allowing the creation of Mapfile-related syntaxes
+  for the Ace Editor, Pygments, VIM etc. 
 
-In addition it is proposed metada for each attribute is added recording
+In addition it is proposed metadata for each attribute is added recording
 which version of MapServer introduced a keyword, and if it has been deprecated the 
 last version it was valid. 
 
 A similar proposal was made in 2009 to introduce an XML schema for Mapfiles - 
 see RFC 51. 
 
-Storing the full Mapfile syntax in a machine-parseable format opens up other possibilites
+Storing the full Mapfile syntax in a machine-parseable format opens up other possibilities
 such as automating the generation of the Mapfile syntax documentation. 
 
 mappyfile nested dictionary structure. independent of this. Any language could be
-used to create a Mapfile JSON object for validation. Priting functionality would also 
-need to be created to convert the strcuture back to a Mapfile - however this step is
+used to create a Mapfile JSON object for validation. Printing functionality would also 
+need to be created to convert the structure back to a Mapfile - however this step is
 much easier than the initial parsing of the Mapfile and transformation to a dictionary 
 structure. Along with the Python example in mappyfile, a JavaScript port of the pretty-printer
 class should be fairly straight-forward. 
@@ -107,7 +109,7 @@ The ``additionalProperties`` property defines whether or not the object can
 have properties not listed in the schema. In the majority of cases this will be 
 set to ``false``, as any keywords not listed in the schema will be invalid. 
 
-In cases where arbitary keywords can be set such as ``METADATA`` and ``VALIDATION``
+In cases where arbitrary keywords can be set such as ``METADATA`` and ``VALIDATION``
 objects the ``additionalProperties`` will be set to ``true``. When any values are allowed
 the JSON Schema definition is left open as follows:
 
@@ -152,6 +154,10 @@ follows:
           "$ref": "metadata.json"
         }
     }
+
++ TODO add "include":  "string"
++ Can't include   "required": [ "type" ] in layer as this could be in an include
++ "__position__"
 
 2.3 Arrays of Mapfile Classes
 -----------------------------
