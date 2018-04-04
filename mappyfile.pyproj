@@ -11,7 +11,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_ordereddict.py</StartupFile>
+    <StartupFile>tests\test_map_collection.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -620,7 +620,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\tokens.py" />
-    <Compile Include="mappyfile\transformer.ordereddict.py" />
     <Compile Include="mappyfile\transformer.py">
       <SubType>Code</SubType>
     </Compile>
@@ -639,6 +638,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\shapefile_fields.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="misc\symbolset_tests.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\test_docs_parser.py" />
