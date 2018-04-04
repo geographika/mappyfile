@@ -1,5 +1,17 @@
 Releases
 --------
+
+0.7.0 (04/04/2018)
+++++++++++++++++++
+
++ Finalise validation API
++ Finalised Mapfile comments API
++ New ``dictfind`` function
++ Allow non-string function parameters in expressions
++ Use of CaseInsensitiveOrderedDict throughout transformer
++ UTF comments
++ JSONSchema updates and fixes
+
 0.6.2 (24/02/2018)
 ++++++++++++++++++
 
