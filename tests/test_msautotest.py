@@ -83,7 +83,7 @@ def main(msautotest_fld, create_new_copy=True):
     for fn in mapfiles:
 
         d = parse_mapfile(parser, transformer, pp, fn)
-        errors = v.validate(d, add_messages=True)
+        errors = v.validate(d, add_comments=True)
         if errors:
             logging.warning("{} failed validation".format(fn))
 
@@ -99,7 +99,7 @@ def main(msautotest_fld, create_new_copy=True):
         print(json.dumps(d, indent=4))
         d = parse_mapfile(parser, transformer, pp, output_file)
 
-        errors = v.validate(d, add_messages=True)
+        errors = v.validate(d, add_comments=True)
         if errors:
             logging.warning("{} failed validation".format(fn))
 

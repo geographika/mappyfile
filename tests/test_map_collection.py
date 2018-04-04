@@ -15,8 +15,8 @@ def output(fn):
     Parse, transform, and pretty print
     the result
     """
-    p = Parser(expand_includes=False)
-    m = MapfileToDict()
+    p = Parser(expand_includes=False, include_comments=True)
+    m = MapfileToDict(include_position=True, include_comments=True)
     v = Validator()
 
     try:
@@ -25,7 +25,7 @@ def output(fn):
         d = m.transform(ast)
         logging.debug("Number of layers: {}".format(len(d["layers"])))
 
-        errors = v.validate(d)
+        errors = v.validate(d, add_comments=True)
         assert(len(errors) == 0)
 
     except Exception as ex:
