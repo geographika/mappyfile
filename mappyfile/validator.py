@@ -5,6 +5,7 @@ from collections import OrderedDict
 import logging
 import jsonschema
 import jsonref
+import mappyfile as utils
 
 log = logging.getLogger("mappyfile")
 
@@ -92,18 +93,25 @@ class Validator(object):
 
         return x
 
-    def create_message(self, d, path, error, add_comments):
+    def create_message(self, rootdict, path, error, add_comments):
         """
         Add a validation comment to the dictionary
+        path is the path to the error object, it can be empty if the error is in the root object
+        http://python-jsonschema.readthedocs.io/en/latest/errors/#jsonschema.exceptions.ValidationError.absolute_path
+        It can also reference an object in a list e.g. [u'layers', 0]
         """
 
-        key = path[-1]
-
-        for p in path[:-1]:
-            if isinstance(p, int):
-                d = d[p]
-            else:
-                d = d.setdefault(p, {})
+        if not path:
+            # error applies to the root type
+            d = rootdict
+            key = d["__type__"]
+        elif isinstance(path[-1], int):
+            # the error is on an object in a list
+            d = utils.dictfind(rootdict, *path)
+            key = d["__type__"]
+        else:
+            key = path[-1]
+            d = utils.dictfind(rootdict, *path[:-1])
 
         error_message = "ERROR: Invalid value for {}".format(key.upper())
 
@@ -118,7 +126,7 @@ class Validator(object):
         error_message = {"error": error.message,
                          "message": error_message}
 
-        # add in details of the error line, when Mapfile was parsed to 
+        # add in details of the error line, when Mapfile was parsed to
         # include position details
 
         if "__position__" in d:
@@ -133,8 +141,6 @@ class Validator(object):
         error_messages = []
 
         for error in errors:
-            #  print(error.schema_path)
-            print(error)
             pth = error.absolute_path
             pth = list(pth)  # convert deque to list
             em = self.create_message(d, pth, error, add_comments)
