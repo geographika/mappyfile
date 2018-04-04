@@ -1,6 +1,19 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "properties": {
+    "__type__": {
+      "enum": [ "label" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "align": {
       "type": "string",
       "enum": [ "left", "center", "right" ],
@@ -138,7 +151,7 @@
     },
     "repeatdistance": {
       "type": "integer",
-      "default":  0
+      "default": 0
     },
     "shadowcolor": {
       "$ref": "color.json"
@@ -187,8 +200,11 @@
         }
       ]
     },
-    "style": {
-      "$ref": "style.json"
+    "styles": {
+      "type": "array",
+      "items": {
+        "$ref": "style.json"
+      }
     },
     "text": {
       "$ref": "expression.json"

@@ -1,14 +1,32 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "properties": {
+    "__type__": {
+      "enum": [ "leader" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "gridstep": {
       "type": "integer"
     },
     "maxdistance": {
       "type": "integer"
     },
-    "style": {
-      "$ref": "style.json"
+    "styles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "$ref": "style.json"
+      }
     }
   }
 }

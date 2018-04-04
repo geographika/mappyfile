@@ -1,7 +1,19 @@
 {
   "type": "object",
-  "required": [ "type" ],
+  "additionalProperties": false,
   "properties": {
+    "__type__": {
+      "enum": [ "layer" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "classes": {
       "type": "array",
       "items": {
@@ -17,8 +29,11 @@
     "cluster": {
       "type": "object"
     },
-    "composite": {
-      "type": "object"
+    "composites": {
+      "type": "array",
+      "items": {
+        "$ref": "composite.json"
+      }
     },
     "connection": {
       "type": "string"
@@ -186,8 +201,11 @@
     "requires": {
       "type": "string"
     },
-    "scaletoken": {
-      "$ref": "scaletoken.json"
+    "scaletokens": {
+      "type": "array",
+      "items": {
+        "$ref": "scaletoken.json"
+      }
     },
     "sizeunits": {
       "enum": [ "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "pixels" ]

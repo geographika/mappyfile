@@ -1,6 +1,19 @@
 {
   "type": "object",
+  "additionalProperties": false,
   "properties": {
+    "__type__": {
+      "enum": [ "class" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "backgroundcolor": {
       "$ref": "color.json"
     },
@@ -20,8 +33,11 @@
       "type": "string",
       "description": "filename"
     },
-    "label": {
-      "$ref": "label.json"
+    "labels": {
+      "type": "array",
+      "items": {
+        "$ref": "label.json"
+      }
     },
     "leader": {
       "$ref": "leader.json"
@@ -58,13 +74,19 @@
     "status": {
       "$ref": "onoff.json"
     },
-    "style": {
-      "$ref": "style.json"
+    "styles": {
+      "type": "array",
+      "items": {
+        "$ref": "style.json"
+      }
     },
     "symbol": {
       "oneOf": [
         {
           "type": "string"
+        },
+        {
+          "type": "number"
         },
         {
           "$ref": "symbol.json"
@@ -80,7 +102,7 @@
     },
     "title": {
       "type": "string",
-      "description":  "missing"
+      "description": "missing"
     },
     "validation": {
       "$ref": "validation.json"

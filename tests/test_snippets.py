@@ -445,24 +445,6 @@ def test_map():
     assert(output(s) == exp)
 
 
-def test_oneline_composites():
-    """
-    Test a composite on one line is parsed correctly
-    """
-
-    s = """
-    LAYER
-    TYPE POINT
-    PROJECTION "init=epsg:2056"
-    END
-    END
-    """
-
-    # put on one line
-    exp = "LAYER TYPE POINT PROJECTION 'init=epsg:2056' END END"
-    assert(output(s, schema_name="class") == exp)
-
-
 def test_querymap():
 
     s = """
@@ -635,7 +617,7 @@ def test_symbol_style():
     END
     """
     exp = "STYLE SYMBOL 'barb_warm' END"
-    assert(output(s, schema_name="class") == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 @pytest.mark.xfail
@@ -652,7 +634,7 @@ def test_symbol_style2():
     END
     """
     exp = "STYLE SYMBOL 'barb_warm' END"
-    assert(output(s, schema_name="class") == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_extent():
@@ -837,9 +819,9 @@ def test_buffer_expression():
     END
     """
 
-    print(output(s, schema_name="label"))
+    print(output(s, schema_name="style"))
     exp = u"STYLE GEOMTRANSFORM (buffer([shape],20)) END"
-    assert(output(s, schema_name="label") == exp)
+    assert(output(s, schema_name="style") == exp)
 
 
 def test_symbolset_include():

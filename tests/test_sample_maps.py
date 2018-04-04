@@ -7,6 +7,7 @@ from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 from lark.common import UnexpectedToken
+from mappyfile.validator import Validator
 
 
 def test_all_maps():
@@ -14,13 +15,22 @@ def test_all_maps():
     sample_dir = os.path.join(os.path.dirname(__file__), "sample_maps")
 
     p = Parser(expand_includes=False)
+    m = MapfileToDict(include_position=True)
+    v = Validator()
 
     failing_maps = []
 
     for fn in os.listdir(sample_dir):
         print(fn)
         try:
-            p.parse_file(os.path.join(sample_dir, fn))
+            ast = p.parse_file(os.path.join(sample_dir, fn))
+            d = m.transform(ast)
+            errors = v.validate(d)
+            try:
+                assert(len(errors) == 0)
+            except AssertionError as ex:
+                logging.warning("Validation errors in %s ", fn)
+                logging.warning(errors)
         except (BaseException, UnexpectedToken) as ex:
             logging.warning("Cannot process %s ", fn)
             logging.error(ex)
@@ -110,6 +120,6 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
-    # run_tests()
-    test_includes()
+    run_tests()
+    # test_includes()
     print("Done!")

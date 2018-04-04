@@ -1,30 +1,43 @@
 {
-    "type": "object",
-    "properties": {
-        "labelformat": {
-            "type": "string",
-            "enum": [ "dd", "ddmm", "ddmmss" ],
-            "additionalProperties": true
-        },
-        "minarcs": {
-            "type": "number",
-            "default": 16
-        },
-        "maxarcs": {
-            "type": "number"
-        },
-        "mininterval": {
-            "type": "number"
-        },
-        "maxinterval": {
-            "type": "number"
-        },
-        "minsubdivide": {
-            "type": "number"
-        },
-        "maxsubdivide": {
-            "type": "number",
-            "default": 256
-        }
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "__type__": {
+      "enum": [ "grid" ]
+    },
+    "__position__": {
+      "type": "object"
+    },
+    "include": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "labelformat": {
+      "type": "string",
+      "enum": [ "dd", "ddmm", "ddmmss" ],
+      "additionalProperties": true
+    },
+    "minarcs": {
+      "type": "number",
+      "default": 16
+    },
+    "maxarcs": {
+      "type": "number"
+    },
+    "mininterval": {
+      "type": "number"
+    },
+    "maxinterval": {
+      "type": "number"
+    },
+    "minsubdivide": {
+      "type": "number"
+    },
+    "maxsubdivide": {
+      "type": "number",
+      "default": 256
     }
+  }
 }
