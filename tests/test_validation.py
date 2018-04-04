@@ -275,7 +275,7 @@ def test_ref_path():
     assert(scheme == "file")
 
 
-def test_add_messages():
+def test_add_comments():
     s = """
     MAP
         IMAGECOLOR 'FF00FF'
@@ -287,13 +287,13 @@ def test_add_messages():
     """
     d = to_dict(s)
     v = Validator()
-    errors = v.validate(d, add_messages=True)
+    errors = v.validate(d, add_comments=True)
 
     print(len(errors))
     print(json.dumps(d, indent=4))
 
     for error in errors:
-        print(error.__dict__)
+        print(error)
 
     pp = PrettyPrinter(indent=4, quote='"')  # expected
 
@@ -365,45 +365,45 @@ def test_extra_property_validation():
     d = to_dict(s)
     d["__unwanted__"] = "error"
     v = Validator()
-    errors = v.validate(d, add_messages=True)
+    errors = v.validate(d, add_comments=True)
     print(errors)
     assert(len(errors) == 1)
 
 
-def test_dict_lookup():
+def test_double_error():
 
-    v = Validator()
-
-    s = """
-    MAP
-        LAYER
-            NAME "Layer1"
-            TYPE POLYGON
-        END
-        LAYER
-            NAME "Layer2"
-            TYPE POLYGON
-            CLASS
-                NAME "Class1"
-                COLOR 0 0 -8
-            END
-        END
+    s = """MAP
+    NAME "sample"
+    STATUS ON
+    SIZE 600 400
+    SYMBOLSET "../etc/symbols.txt"
+    EXTENT -180 -90 180
+    UNITS DD
+    SHAPEPATH "../data"
+    IMAGECOLOR 255 255 256
+    FONTSET "../etc/fonts.txt"
+    WEB
+        IMAGEPATH "/ms4w/tmp/ms_tmp/"
+        IMAGEURL "/ms_tmp/"
     END
-    """
+    LAYER
+        NAME "global-raster"
+        TYPE RASTER
+        STATUS DEFAULT
+        DATA "bluemarble.gif"
+    END
+END"""
 
-    d = to_dict(s)
-
-    errors = v.validate(d, add_messages=True)
-    print(errors)
-
-    pth = ["layers", 1]
-    l = v.dict_lookup(d, *pth)
-    assert l["name"] == "Layer2"
-
-    pth = ["layers", 1, "classes", 0]
-    l = v.dict_lookup(d, *pth)
-    print(l)
-    assert l["name"] == "Class1"
+    d = mappyfile.loads(s, include_position=True)
+    # print(json.dumps(d, indent=4))
+    v = Validator()
+    errors = v.validate(d, add_comments=True)
+    # print(json.dumps(d, indent=4))
+    # print(errors)
+    for e in errors:
+        print(e)
+    assert(len(errors) == 2)
+    print(mappyfile.dumps(d))
 
 
 def run_tests():
@@ -418,5 +418,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_add_messages()
+    test_add_comments()
     print("Done!")
