@@ -17,3 +17,4 @@ cache
 /.vs/config
 /.venv
 /.coverage
+/tests/mapfiles/large_map2.map

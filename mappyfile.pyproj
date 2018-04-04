@@ -10,7 +10,8 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
+    <StartupFile>tests\test_ordereddict.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,11 @@
     <Folder Include="misc\" />
     <Folder Include="tests\" />
     <Folder Include="tests\mapfiles\" />
+    <Folder Include="tests\mapfiles\performance\" />
+    <Folder Include="tests\mapfiles\performance\run2-py37\" />
+    <Folder Include="tests\mapfiles\performance\run2-py27\" />
+    <Folder Include="tests\mapfiles\performance\run1-py27\" />
+    <Folder Include="tests\mapfiles\performance\run1-py37\" />
     <Folder Include="tests\samples\" />
     <Folder Include="tests\samples\layers\" />
     <Folder Include="tests\samples\mapfile_include\" />
@@ -67,6 +73,7 @@
     <Content Include="docs\images\tree_noinlining.png" />
     <Content Include="docs\images\tree_no_terminals.png" />
     <Content Include="docs\python_integration.rst" />
+    <Content Include="docs\rfc.rst" />
     <Content Include="docs\schemas.rst" />
     <Content Include="docs\schemas\class.rst" />
     <Content Include="docs\schemas\cluster.rst" />
@@ -200,19 +207,55 @@
     <Content Include="tests\errors_lark.log" />
     <Content Include="tests\issues.txt" />
     <Content Include="tests\mapfiles\itasca.map" />
-    <Content Include="tests\mapfiles\large_map1.txt" />
-    <Content Include="tests\mapfiles\large_map2.txt" />
-    <Content Include="tests\mapfiles\large_map3.txt">
+    <Content Include="tests\mapfiles\large_map1.map" />
+    <Content Include="tests\mapfiles\large_map2.map" />
+    <Content Include="tests\mapfiles\large_map3.map">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="tests\mapfiles\map4.txt">
+    <Content Include="tests\mapfiles\map4.map">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="tests\mapfiles\map5.txt">
+    <Content Include="tests\mapfiles\map5.map">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="tests\mapfiles\map7.txt" />
-    <Content Include="tests\mapfiles\map6.txt" />
+    <Content Include="tests\mapfiles\map7.map" />
+    <Content Include="tests\mapfiles\map6.map" />
+    <Content Include="tests\mapfiles\performance\run1-py27\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py27\ReadMe.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py37\ReadMe.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py27\ReadMe.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py37\ReadMe.txt" />
     <Content Include="tests\samples\connection.map" />
     <Content Include="tests\samples\include1_nested_path.map" />
     <Content Include="tests\samples\include1_recursive.map" />
@@ -539,10 +582,6 @@
     <Compile Include="docs\examples\animation\animated_buffer.py" />
     <Compile Include="docs\examples\api\adding_values_test.py" />
     <Compile Include="docs\examples\geometry\geometry.py" />
-    <Compile Include="docs\examples\update_datasource.py" />
-    <Compile Include="docs\examples\split_mapfile.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="docs\scripts\class_diagrams.py">
       <SubType>Code</SubType>
     </Compile>
@@ -581,6 +620,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\tokens.py" />
+    <Compile Include="mappyfile\transformer.ordereddict.py" />
     <Compile Include="mappyfile\transformer.py">
       <SubType>Code</SubType>
     </Compile>
@@ -604,6 +644,9 @@
     <Compile Include="misc\test_docs_parser.py" />
     <Compile Include="misc\__init__.py" />
     <Compile Include="setup.py" />
+    <Compile Include="tests\mapfiles\profiler.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\test_comments.py">
       <SubType>Code</SubType>
     </Compile>
