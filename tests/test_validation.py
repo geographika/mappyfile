@@ -350,6 +350,62 @@ def test_cached_expanded_schema():
     assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
 
 
+def test_extra_property_validation():
+    """
+    Check root errors are handled correctly
+    """
+    s = """
+    MAP
+        LAYER
+            TYPE POLYGON
+        END
+    END
+    """
+
+    d = to_dict(s)
+    d["__unwanted__"] = "error"
+    v = Validator()
+    errors = v.validate(d, add_messages=True)
+    print(errors)
+    assert(len(errors) == 1)
+
+
+def test_dict_lookup():
+
+    v = Validator()
+
+    s = """
+    MAP
+        LAYER
+            NAME "Layer1"
+            TYPE POLYGON
+        END
+        LAYER
+            NAME "Layer2"
+            TYPE POLYGON
+            CLASS
+                NAME "Class1"
+                COLOR 0 0 -8
+            END
+        END
+    END
+    """
+
+    d = to_dict(s)
+
+    errors = v.validate(d, add_messages=True)
+    print(errors)
+
+    pth = ["layers", 1]
+    l = v.dict_lookup(d, *pth)
+    assert l["name"] == "Layer2"
+
+    pth = ["layers", 1, "classes", 0]
+    l = v.dict_lookup(d, *pth)
+    print(l)
+    assert l["name"] == "Class1"
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -362,5 +418,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_lowercase()
+    test_add_messages()
     print("Done!")
