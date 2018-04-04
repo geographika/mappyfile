@@ -207,4 +207,7 @@ The full Mapfile grammar is shown below.
 
 	Style is also a composite
 
+    SCALEBAR
+        STYLE 1
+    END
     Newlines ignored
