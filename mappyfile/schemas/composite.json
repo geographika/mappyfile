@@ -5,6 +5,9 @@
     "__type__": {
       "enum": [ "composite" ]
     },
+    "__comments__": {
+      "type": "object"
+    },
     "__position__": {
       "type": "object"
     },

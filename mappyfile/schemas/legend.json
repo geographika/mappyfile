@@ -5,6 +5,12 @@
     "__type__": {
       "enum": [ "legend" ]
     },
+    "__comments__": {
+      "type": "object"
+    },
+    "__position__": {
+      "type": "object"
+    },
     "include": {
       "type": "array",
       "items": {
