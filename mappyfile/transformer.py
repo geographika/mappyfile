@@ -183,7 +183,7 @@ class MapfileTransformer(Transformer):
                     # there may be several config dicts - one for each setting
                     if key_name not in composite_dict:
                         # create an initial OrderedDict
-                        composite_dict[key_name] = CaseInsensitiveOrderedDict()
+                        composite_dict[key_name] = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
                     # populate the existing config dict
                     cfg_dict = composite_dict[key_name]
                     cfg_dict.update(d[key_name])
@@ -336,7 +336,7 @@ class MapfileTransformer(Transformer):
         key, body = self.check_composite_tokens(type_, tokens)
         key_name = self.key_name(key)
 
-        d = CaseInsensitiveOrderedDict()
+        d = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
 
         for t in body:
             d[self.clean_string(t[0].value)] = self.clean_string(t[1].value)
