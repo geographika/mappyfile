@@ -4,6 +4,6 @@ jsonref==0.1
 py
 pydot
 pyparsing
-lark-parser>=0.5.4
+lark-parser>=0.5.5
 pip
 setuptools
