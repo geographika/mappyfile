@@ -125,7 +125,8 @@
     "symbols": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "$ref": "symbol.json"
       }
     },
     "templatepattern": {
