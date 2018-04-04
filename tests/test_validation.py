@@ -171,8 +171,16 @@ def test_color_validation_fail():
         IMAGECOLOR 255 255 256
     END
     """
-    errors = validate(s)
+    d = mappyfile.loads(s, include_position=True)
+    #print(json.dumps(d, indent=4))
+    v = Validator()
+    errors = v.validate(d, add_comments=True)
+    #print(json.dumps(d, indent=4))
+    #print(errors)
+    for e in errors:
+        print(e)
     assert(len(errors) == 1)
+    print(mappyfile.dumps(d))
 
 
 def test_hexcolor_validation():
@@ -272,7 +280,7 @@ def test_ref_path():
     assert(scheme == "file")
 
 
-def test_add_messages():
+def test_add_comments():
     s = """
     MAP
         IMAGECOLOR 'FF00FF'
@@ -284,7 +292,7 @@ def test_add_messages():
     """
     d = to_dict(s)
     v = Validator()
-    errors = v.validate(d, add_messages=True)
+    errors = v.validate(d, add_comments=True)
 
     print(len(errors))
     print(json.dumps(d, indent=4))
@@ -347,6 +355,41 @@ def test_cached_expanded_schema():
     assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
 
 
+def test_double_error():
+
+    s = """MAP
+    NAME "sample"
+    STATUS ON
+    SIZE 600 400
+    SYMBOLSET "../etc/symbols.txt"
+    EXTENT -180 -90 180
+    UNITS DD
+    SHAPEPATH "../data"
+    IMAGECOLOR 255 255 256
+    FONTSET "../etc/fonts.txt"
+    WEB
+        IMAGEPATH "/ms4w/tmp/ms_tmp/"
+        IMAGEURL "/ms_tmp/"
+    END
+    LAYER
+        NAME "global-raster"
+        TYPE RASTER
+        STATUS DEFAULT
+        DATA "bluemarble.gif"
+    END
+END"""
+
+    d = mappyfile.loads(s, include_position=True)
+    #print(json.dumps(d, indent=4))
+    v = Validator()
+    errors = v.validate(d, add_comments=True)
+    #print(json.dumps(d, indent=4))
+    #print(errors)
+    for e in errors:
+        print(e)
+    assert(len(errors) == 2)
+    print(mappyfile.dumps(d))
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -358,6 +401,8 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
+    # run_tests()
+    test_color_validation_fail()
+    test_double_error()
     # test_deref()
     print("Done!")

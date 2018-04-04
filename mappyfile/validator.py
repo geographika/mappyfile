@@ -29,7 +29,7 @@ class Validator(object):
         schemas_folder = schemas_folder.replace("\\", "/")
 
         # HACK Python 2.7 on Linux seems to remove the root slash
-        # add this back in
+        # so add this back in
         if schemas_folder.startswith("/"):
             schemas_folder = "/" + schemas_folder
 
@@ -92,14 +92,12 @@ class Validator(object):
 
         return x
 
-    def set_comment(self, d, path, error):
+    def create_message(self, d, path, error, add_comments):
         """
         Add a validation comment to the dictionary
         """
 
         key = path[-1]
-        #  comment = error.message
-        comment = "ERROR: Invalid value for {}".format(key.upper())
 
         for p in path[:-1]:
             if isinstance(p, int):
@@ -107,45 +105,67 @@ class Validator(object):
             else:
                 d = d.setdefault(p, {})
 
-        if "__comments__" not in d:
-            d["__comments__"] = OrderedDict()
+        error_message = "ERROR: Invalid value for {}".format(key.upper())
 
-        d["__comments__"][key] = comment
+        # add a comment to the dict structure
 
-    def add_messages(self, d, errors):
+        if add_comments:
+            if "__comments__" not in d:
+                d["__comments__"] = OrderedDict()
+
+            d["__comments__"][key] = "# {}".format(error_message)
+
+        error_message = {"error": error.message,
+                         "message": error_message}
+
+        # add in details of the error line, when Mapfile was parsed to 
+        # include position details
+
+        if "__position__" in d:
+            pd = d["__position__"][key]
+            error_message["line"] = pd.get("line")
+            error_message["column"] = pd.get("column")
+
+        return error_message
+
+    def get_error_messages(self, d, errors, add_comments):
+
+        error_messages = []
 
         for error in errors:
             #  print(error.schema_path)
+            print(error)
             pth = error.absolute_path
             pth = list(pth)  # convert deque to list
-            self.set_comment(d, pth, error)
+            em = self.create_message(d, pth, error, add_comments)
+            error_messages.append(em)
 
-        return d
+        return error_messages
 
-    def _validate(self, d, validator, add_messages, schema_name):
+    def _validate(self, d, validator, add_comments, schema_name):
         lowercase_dict = self.convert_lowercase(d)
         jsn = json.loads(json.dumps(lowercase_dict), object_pairs_hook=OrderedDict)
 
         errors = list(validator.iter_errors(jsn))
+        error_messages = self.get_error_messages(d, errors, add_comments)
 
-        if add_messages:
-            self.add_messages(d, errors)
+        return error_messages
 
-        return errors
-
-    def validate(self, value, add_messages=False, schema_name="map"):
-
+    def validate(self, value, add_comments=False, schema_name="map"):
+        """
+        verbose - also return the jsonschema error details
+        """
         validator = self.get_schema_validator(schema_name)
 
-        errors = []
+        error_messages = []
 
         if isinstance(value, list):
             for d in value:
-                errors += self._validate(d, validator, add_messages, schema_name)
+                error_messages += self._validate(d, validator, add_comments, schema_name)
         else:
-            errors = self._validate(value, validator, add_messages, schema_name)
+            error_messages = self._validate(value, validator, add_comments, schema_name)
 
-        return errors
+        return error_messages
 
     def get_expanded_schema(self, schema_name):
         """
