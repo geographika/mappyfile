@@ -86,13 +86,12 @@ def test_dictfind():
     d = mappyfile.loads(s)
 
     pth = ["layers", 1]
-    l = mappyfile.dictfind(d, *pth)
-    assert l["name"] == "Layer2"
+    cmp = mappyfile.dictfind(d, *pth)
+    assert cmp["name"] == "Layer2"
 
     pth = ["layers", 1, "classes", 0]
-    l = mappyfile.dictfind(d, *pth)
-    print(l)
-    assert l["name"] == "Class1"
+    cmp = mappyfile.dictfind(d, *pth)
+    assert cmp["name"] == "Class1"
 
 
 def run_tests():
