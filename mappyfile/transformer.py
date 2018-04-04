@@ -11,7 +11,7 @@ from lark.tree import Transformer_NoRecurse
 from lark.lexer import Token
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES
-from mappyfile.ordereddict import DefaultOrderedDict, CaseInsensitiveOrderedDict
+from mappyfile.ordereddict import CaseInsensitiveOrderedDict
 from mappyfile.pprint import Quoter
 
 
@@ -149,7 +149,7 @@ class MapfileTransformer(Transformer):
             attribute_dicts = [attribute_dicts]
 
         key_name = self.key_name(key_token)
-        composite_dict = DefaultOrderedDict(CaseInsensitiveOrderedDict)
+        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
         composite_dict["__type__"] = key_name
 
         if self.include_position:
@@ -628,7 +628,7 @@ class CommentsTransformer(Transformer_NoRecurse):
             md = tree.children[0].children
             if len(md) > 2:
                 string_pairs = md[1:-1]
-                md_keys = [k for k in d.keys() if k not in ["__type__", "__comments__"]]
+                md_keys = [k for k in d.keys() if k not in ["__type__", "__comments__", "__position__"]]
                 assert len(string_pairs) == len(md_keys)
                 for k, sp in zip(md_keys, string_pairs):
                     key_comments = self.get_comments(sp)
