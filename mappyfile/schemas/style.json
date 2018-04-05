@@ -181,6 +181,11 @@
         "maxItems": 2
       }
     },
+    "rangeitem": {
+      "type": "string",
+      "pattern": "^\\[(.*?)\\]$",
+      "description": "attribute"
+    },
     "size": {
       "oneOf": [
         {
