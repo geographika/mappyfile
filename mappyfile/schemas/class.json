@@ -5,6 +5,9 @@
     "__type__": {
       "enum": [ "class" ]
     },
+    "__comments__": {
+      "type": "object"
+    },
     "__position__": {
       "type": "object"
     },

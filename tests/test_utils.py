@@ -64,6 +64,36 @@ def test_dump():
     assert d["name"] == "TEST"
 
 
+def test_dictfind():
+
+    s = """
+    MAP
+        LAYER
+            NAME "Layer1"
+            TYPE POLYGON
+        END
+        LAYER
+            NAME "Layer2"
+            TYPE POLYGON
+            CLASS
+                NAME "Class1"
+                COLOR 0 0 -8
+            END
+        END
+    END
+    """
+
+    d = mappyfile.loads(s)
+
+    pth = ["layers", 1]
+    cmp = mappyfile.dictfind(d, *pth)
+    assert cmp["name"] == "Layer2"
+
+    pth = ["layers", 1, "classes", 0]
+    cmp = mappyfile.dictfind(d, *pth)
+    assert cmp["name"] == "Class1"
+
+
 def run_tests():
     pytest.main(["tests/test_utils.py"])
 

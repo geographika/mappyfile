@@ -164,6 +164,18 @@ def findall(lst, key, value):
     return (item for item in lst if item[key.lower()] in possible_values)
 
 
+def dictfind(d, *keys):
+    """
+    Get an object in the dict based on a list of keys and/or indexes
+    """
+    if keys:
+        keys = list(keys)
+        key = keys.pop(0)
+        return dictfind(d[key], *keys)
+    else:
+        return d
+
+
 def _save(output_file, map_string):
     with codecs.open(output_file, "w", encoding="utf-8") as f:
         f.write(map_string)

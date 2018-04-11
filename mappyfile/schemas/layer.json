@@ -5,6 +5,9 @@
     "__type__": {
       "enum": [ "layer" ]
     },
+    "__comments__": {
+      "type": "object"
+    },
     "__position__": {
       "type": "object"
     },

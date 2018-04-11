@@ -6,6 +6,9 @@
     "__type__": {
       "enum": [ "map" ]
     },
+    "__comments__": {
+      "type": "object"
+    },
     "__position__": {
       "type": "object"
     },
@@ -122,7 +125,8 @@
     "symbols": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "$ref": "symbol.json"
       }
     },
     "templatepattern": {

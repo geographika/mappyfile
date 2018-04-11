@@ -96,7 +96,6 @@ class Parser(object):
 
         # convert comment tokens to strings, and remove any line breaks
         self.comments = [c.value.strip() for c in comments]
-        log.debug(self.comments)
         last_comment_line = max(idx_by_line.keys())
 
         # make a list with an entry for each line
@@ -113,7 +112,6 @@ class Parser(object):
         idx.append(0)  # line numbers start from 1
         idx.reverse()
         self.idx = idx
-        log.debug(idx)
         self._assign_comments(tree, 0)
 
     def _get_comments(self, from_line, to_line):
@@ -191,7 +189,6 @@ class Parser(object):
             tree = self.lalr.parse(text)
             if self.include_comments:
                 self.assign_comments(tree, self._comments)
-                log.debug(self._comments)
             return tree
         except (ParseError, UnexpectedInput) as ex:
             log.error("Parsing of Mapfile unsuccessful")

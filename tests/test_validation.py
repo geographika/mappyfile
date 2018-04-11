@@ -171,16 +171,8 @@ def test_color_validation_fail():
         IMAGECOLOR 255 255 256
     END
     """
-    d = mappyfile.loads(s, include_position=True)
-    #print(json.dumps(d, indent=4))
-    v = Validator()
-    errors = v.validate(d, add_comments=True)
-    #print(json.dumps(d, indent=4))
-    #print(errors)
-    for e in errors:
-        print(e)
+    errors = validate(s)
     assert(len(errors) == 1)
-    print(mappyfile.dumps(d))
 
 
 def test_hexcolor_validation():
@@ -301,7 +293,7 @@ def test_add_comments():
     print(json.dumps(d, indent=4))
 
     for error in errors:
-        print(error.__dict__)
+        print(error)
 
     pp = PrettyPrinter(indent=4, quote='"')  # expected
 
@@ -358,6 +350,26 @@ def test_cached_expanded_schema():
     assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
 
 
+def test_extra_property_validation():
+    """
+    Check root errors are handled correctly
+    """
+    s = """
+    MAP
+        LAYER
+            TYPE POLYGON
+        END
+    END
+    """
+
+    d = to_dict(s)
+    d["__unwanted__"] = "error"
+    v = Validator()
+    errors = v.validate(d, add_comments=True)
+    print(errors)
+    assert(len(errors) == 1)
+
+
 def test_double_error():
 
     s = """MAP
@@ -383,15 +395,16 @@ def test_double_error():
 END"""
 
     d = mappyfile.loads(s, include_position=True)
-    #print(json.dumps(d, indent=4))
+    # print(json.dumps(d, indent=4))
     v = Validator()
     errors = v.validate(d, add_comments=True)
-    #print(json.dumps(d, indent=4))
-    #print(errors)
+    # print(json.dumps(d, indent=4))
+    # print(errors)
     for e in errors:
         print(e)
     assert(len(errors) == 2)
     print(mappyfile.dumps(d))
+
 
 def run_tests():
     """
@@ -405,5 +418,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_lowercase()
+    test_add_comments()
     print("Done!")

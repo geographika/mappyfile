@@ -5,6 +5,9 @@
     "__type__": {
       "enum": [ "style" ]
     },
+    "__comments__": {
+      "type": "object"
+    },
     "__position__": {
       "type": "object"
     },
@@ -177,6 +180,11 @@
         "minItems": 2,
         "maxItems": 2
       }
+    },
+    "rangeitem": {
+      "type": "string",
+      "pattern": "^\\[(.*?)\\]$",
+      "description": "attribute"
     },
     "size": {
       "oneOf": [

@@ -97,6 +97,28 @@ def test_case_sensitive_ordered_dict():
     assert(d["kEy2"] == 2)
 
 
+def test_update_case_sensitive_ordered_dict():
+
+    d = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
+
+    d["b"] = "hello"
+    d["a"] = "goodbye"
+
+    print(json.dumps(d, indent=4))
+
+    d["config"]["ms_errorfile"] = "error.log"
+    print(json.dumps(d, indent=4))
+
+    d.update({"c": "hello"})
+
+    print(json.dumps(d, indent=4))
+
+    d.update(red=1, blue=2)
+
+    print(json.dumps(d, indent=4))
+    assert(d["a"] == "goodbye")
+
+
 def run_tests():
     # pytest.main(["tests/test_ordereddict.py::test_dict"])
     pytest.main(["tests/test_ordereddict.py"])
@@ -105,5 +127,5 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     # run_tests()
-    test_case_sensitive_ordered_dict()
+    test_update_case_sensitive_ordered_dict()
     print("Done!")

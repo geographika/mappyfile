@@ -3,11 +3,11 @@ import pkg_resources
 import sys
 from types import ModuleType
 # allow high-level functions to be accessed directly from the mappyfile module
-from mappyfile.utils import open, load, loads, find, findall, dumps, dump, save, write
+from mappyfile.utils import open, load, loads, find, findall, dumps, dump, save, write, dictfind
 
-__version__ = "0.6.2"
+__version__ = "0.7.0"
 
-__all__ = ['open', 'load', 'loads', 'find', 'findall', 'dumps', 'dump', 'save', 'write']
+__all__ = ['open', 'load', 'loads', 'find', 'findall', 'dumps', 'dump', 'save', 'write', 'dictfind']
 
 
 plugins = ModuleType('mappyfile.plugins')

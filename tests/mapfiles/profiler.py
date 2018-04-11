@@ -3,7 +3,6 @@ import cProfile
 import pstats
 import glob
 import os
-import tempfile
 import mappyfile
 
 
@@ -21,8 +20,9 @@ def parse(mf):
     # else:
     #     f = tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8")
     #     mappyfile.dump(m, f)
-      
+
     # f.close()
+    return s
 
 
 def profile(mf, test_name):
@@ -38,10 +38,9 @@ def profile(mf, test_name):
     with open(fn, "w") as f:
         ps = pstats.Stats(pr, stream=f).sort_stats(sortby)
         ps.print_stats()
-
-
     # pr.dump_stats(fn)
     # pr.print_stats(sort='time')
+
 
 def run(test_name):
 

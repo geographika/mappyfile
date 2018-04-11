@@ -824,64 +824,6 @@ def test_buffer_expression():
     assert(output(s, schema_name="style") == exp)
 
 
-def test_symbolset_include():
-    s = u"""
-    MAP
-        NAME "Test"
-        SYMBOLSET "./symbolset.txt"
-        SIZE 200 200
-    END
-    """
-
-    print(output(s, schema_name="map"))
-    exp = "MAP NAME 'Test' SYMBOLSET './symbolset.txt' SIZE 200 200 END"
-    assert(output(s, schema_name="map") == exp)
-
-
-def test_symbolset_file():
-    s = u"""
-    SYMBOLSET
-        SYMBOL
-            NAME 'default-circle'
-            TYPE ELLIPSE
-            FILLED TRUE
-            POINTS
-                1 1
-            END
-        END
-        SYMBOL
-            NAME 'other-circle'
-            TYPE ELLIPSE
-            FILLED FALSE
-            POINTS
-                1 1
-            END
-        END 
-    END
-    """
-
-    print(output(s, schema_name="symbolset"))
-    exp = "SYMBOLSET SYMBOL NAME 'default-circle' TYPE ELLIPSE FILLED TRUE POINTS 1 1 END " \
-          "END SYMBOL NAME 'other-circle' TYPE ELLIPSE FILLED FALSE POINTS 1 1 END END END"
-    assert(output(s, schema_name="symbolset") == exp)
-
-
-def test_symbol_points():
-
-    s = """
-    SYMBOL
-        NAME "circle"
-        TYPE ELLIPSE
-        POINTS
-            11 11
-        END
-        FILLED TRUE
-    END"""
-
-    print(output(s, schema_name="symbol"))
-    exp = "SYMBOLSET SYMBOL NAME 'default-circle' TYPE ELLIPSE FILLED TRUE POINTS 1 1 END "
-    assert(output(s, schema_name="symbol") == exp)
-
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py

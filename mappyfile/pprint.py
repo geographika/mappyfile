@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import sys
 import logging
 import numbers
@@ -436,7 +437,7 @@ class PrettyPrinter(object):
         comment = self.process_composite_comment(level, comments, '__type__')
 
         if comment:
-            lines.append(comment)
+            lines.append(str(comment))
 
     def _format(self, composite, level=0):
 
