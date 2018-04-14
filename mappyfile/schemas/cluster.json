@@ -21,7 +21,7 @@
       "type": "number"
     },
     "region": {
-      "type": "string"
+      "enum": [ "ellipse", "rectange"]
     },
     "buffer": {
       "type": "number"
