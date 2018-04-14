@@ -640,9 +640,6 @@
     <Compile Include="misc\shapefile_fields.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="misc\symbolset_tests.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="misc\test_docs_parser.py" />
     <Compile Include="misc\__init__.py" />
     <Compile Include="setup.py" />
