@@ -11,7 +11,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_map_collection.py</StartupFile>
+    <StartupFile>tests\test_symbolset.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -668,6 +668,9 @@
     <Compile Include="tests\test_ordereddict.py" />
     <Compile Include="tests\test_sample_maps.py" />
     <Compile Include="tests\test_snippets.py" />
+    <Compile Include="tests\test_symbolset.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\test_transformer.py" />
     <Compile Include="tests\test_linter.py" />
     <Compile Include="tests\test_utils.py" />
