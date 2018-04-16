@@ -46,7 +46,7 @@ def erosion(mapfile, dilated):
 
 def main():
     mf = "./docs/examples/geometry/geometry.map"
-    mapfile = mappyfile.load(mf)
+    mapfile = mappyfile.open(mf)
 
     mapfile["size"] = [600, 600]
     output_folder = os.path.join(os.getcwd(), "docs/images")
