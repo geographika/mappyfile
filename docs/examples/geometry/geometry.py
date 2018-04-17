@@ -11,11 +11,11 @@ def dilation(mapfile):
 
     line = LineString([(0, 0), (1, 1), (0, 2), (2, 2), (3, 1), (1, 0)])
     ll = mappyfile.find(mapfile["layers"], "name", "line")
-    ll["features"][0]["wkt"] = "'%s'" % line.wkt
+    ll["features"][0]["wkt"] = line.wkt
 
     dilated = line.buffer(0.5, cap_style=3)
     pl = mappyfile.find(mapfile["layers"], "name", "polygon")
-    pl["features"][0]["wkt"] = "'%s'" % dilated.wkt
+    pl["features"][0]["wkt"] = dilated.wkt
 
     mapfile["extent"] = " ".join(map(str, dilated.buffer(0.8).bounds))
     return dilated
@@ -38,11 +38,11 @@ def erosion(mapfile, dilated):
     mapfile["layers"].append(pl2)
 
     dilated = dilated.buffer(-0.3)
-    pl2["features"][0]["wkt"] = "'%s'" % dilated.wkt
+    pl2["features"][0]["wkt"] = dilated.wkt
 
     style = pl["classes"][0]["styles"][0]
-    style["color"] = "'#999999'"
-    style["outlinecolor"] = "'#b2b2b2'"
+    style["color"] = "#999999"
+    style["outlinecolor"] = "#b2b2b2"
 
 def main():
     mf = "./docs/examples/geometry/geometry.map"

@@ -7,7 +7,7 @@ DLL_LOCATION = r"C:\MapServer\bin"
 def create_image(name, mapfile, output_folder, format="png"):
 
     out_map = os.path.join(output_folder, "%s.map" % name)
-    mappyfile.write(mapfile, out_map)
+    mappyfile.save(mapfile, out_map)
 
     out_img = os.path.join(output_folder, name)
 
