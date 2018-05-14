@@ -1,15 +1,12 @@
 {
   "type": "object",
   "additionalProperties": false,
+  "patternProperties": {
+    "^__[a-z]+__$": {}
+  },
   "properties": {
     "__type__": {
       "enum": [ "cluster" ]
-    },
-    "__comments__": {
-      "type": "object"
-    },
-    "__position__": {
-      "type": "object"
     },
     "include": {
       "type": "array",
@@ -21,7 +18,7 @@
       "type": "number"
     },
     "region": {
-      "enum": [ "ellipse", "rectange"]
+      "enum": [ "ellipse", "rectange" ]
     },
     "buffer": {
       "type": "number"

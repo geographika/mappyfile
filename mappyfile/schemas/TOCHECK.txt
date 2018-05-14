@@ -67,3 +67,9 @@ TRANSPARENT - http://mapserver.org/mapfile/outputformat.html
         TRANSPARENT FALSE
         IMAGEMODE FEATURE
     END
+
+INCLUDEs must be in quotes or end of file errors in MapServer
+
+CLUSTER schema - http://mapserver.org/mapfile/cluster.html#mapfile-parameters need to add
+
+GetLegendGraphic - need CLASS name for it to appear
