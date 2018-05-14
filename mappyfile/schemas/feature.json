@@ -1,15 +1,12 @@
 {
   "type": "object",
   "additionalProperties": false,
+  "patternProperties": {
+    "^__[a-z]+__$": {}
+  },
   "properties": {
     "__type__": {
       "enum": [ "feature" ]
-    },
-    "__comments__": {
-      "type": "object"
-    },
-    "__position__": {
-      "type": "object"
     },
     "include": {
       "type": "array",

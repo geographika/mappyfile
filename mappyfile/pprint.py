@@ -115,6 +115,16 @@ class PrettyPrinter(object):
         self.end = u"END"
         self.validator = Validator()
 
+    def __is_metadata(self, key):
+        """
+        Check to see if the property is hidden metadata
+        e.g. "__type__", "__comments__", "__position__"
+        """
+        if key.startswith("__") and key.endswith("__"):
+            return True
+        else:
+            return False
+
     def whitespace(self, level, indent):
         return self.spacer * (level + indent)
 
@@ -164,9 +174,7 @@ class PrettyPrinter(object):
         lines = []
 
         for k, v in d.items():
-            if k in ("__comments__", "__position__"):
-                pass
-            elif k != "__type__":
+            if not self.__is_metadata(k):
                 qk = self.quoter.add_quotes(k)
                 qv = self.quoter.add_quotes(v)
                 line = self.__format_line(self.whitespace(level, 2), qk, qv)
@@ -455,7 +463,7 @@ class PrettyPrinter(object):
             lines.append(s)
 
         for attr, value in composite.items():
-            if attr in ("__type__", "__comments__", "__position__"):
+            if self.__is_metadata(attr):
                 # skip hidden attributes
                 continue
             elif self.is_hidden_container(attr, value):
