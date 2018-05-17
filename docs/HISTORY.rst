@@ -1,6 +1,13 @@
 Releases
 --------
 
+0.7.1 (XX/XX/2018)
+++++++++++++++++++
+
++ **Breaking Change** ``utils.dictfind`` renamed ``utils.findkey``
++ new update function - allowing for easier creation of Mapfiles using YAML
++ allow any custom hidden metadata tags of the form ``__property__`` to be used in dicts for custom processing
+
 0.7.0 (04/04/2018)
 ++++++++++++++++++
 
