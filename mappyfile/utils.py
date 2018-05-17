@@ -5,6 +5,12 @@ import functools
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
+from mappyfile.validator import Validator
+
+try:
+    from itertools import izip_longest as zip_longest  # py2
+except ImportError:
+    from itertools import zip_longest  # py3
 
 
 def deprecated(func):
@@ -164,16 +170,72 @@ def findall(lst, key, value):
     return (item for item in lst if item[key.lower()] in possible_values)
 
 
-def dictfind(d, *keys):
+def findunique(lst, key):
+    """
+    Find all unique key values for items in lst.
+    For example find all ``GROUP`` values in a ``LAYER``'s ``CLASS``es
+
+    :param list lst: A list of composite dictionaries e.g. ``layers``, ``classes``
+    :param string key: The key name to search each dictionary in the list
+    """
+    return sorted(set([item[key.lower()] for item in lst]))
+
+
+def findkey(d, *keys):
     """
     Get an object in the dict based on a list of keys and/or indexes
     """
     if keys:
         keys = list(keys)
         key = keys.pop(0)
-        return dictfind(d[key], *keys)
+        return findkey(d[key], *keys)
     else:
         return d
+
+
+def update(d1, d2):
+    """
+    Update dict d1 with properties from d2
+    Also allows deletion of objects with a special "__delete__" key
+    For any list of dicts new items can be added when updating
+    """
+    NoneType = type(None)
+
+    if d2.get("__delete__", False):
+        return {}
+
+    for k, v in d2.items():
+        if isinstance(v, dict):
+            if v.get("__delete__", False):
+                # allow a __delete__ property to be set to delete objects
+                del d1[k]
+            else:
+                d1[k] = update(d1.get(k, {}), v)
+        elif isinstance(v, (tuple, list)) and all(isinstance(li, (NoneType, dict)) for li in v):
+            # a list of dicts and/or NoneType
+            orig_list = d1.get(k, [])
+            new_list = []
+            pairs = list(zip_longest(orig_list, v, fillvalue=None))
+            for orig_item, new_item in pairs:
+                if orig_item is None:
+                    orig_item = {}  # can't use {} for fillvalue as only one dict created/modified!
+                if new_item is None:
+                    new_item = {}
+
+                if new_item.get("__delete__", False):
+                    d = None  # orig_list.remove(orig_item) # remove the item to delete
+                else:
+                    d = update(orig_item, new_item)
+
+                if d is not None:
+                    new_list.append(d)
+            d1[k] = new_list
+        else:
+            if k in d1 and v == "__delete__":
+                del d1[k]
+            else:
+                d1[k] = v
+    return d1
 
 
 def _save(output_file, map_string):
@@ -185,3 +247,8 @@ def _pprint(d, indent, spacer, quote, newlinechar):
     pp = PrettyPrinter(indent=indent, spacer=spacer,
                        quote=quote, newlinechar=newlinechar)
     return pp.pprint(d)
+
+
+def validate(d):
+    v = Validator()
+    return v.validate(d)

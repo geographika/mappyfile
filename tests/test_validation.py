@@ -363,7 +363,7 @@ def test_extra_property_validation():
     """
 
     d = to_dict(s)
-    d["__unwanted__"] = "error"
+    d["unwanted"] = "error"
     v = Validator()
     errors = v.validate(d, add_comments=True)
     print(errors)
