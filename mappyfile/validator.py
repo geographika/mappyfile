@@ -107,11 +107,11 @@ class Validator(object):
             key = d["__type__"]
         elif isinstance(path[-1], int):
             # the error is on an object in a list
-            d = utils.dictfind(rootdict, *path)
+            d = utils.findkey(rootdict, *path)
             key = d["__type__"]
         else:
             key = path[-1]
-            d = utils.dictfind(rootdict, *path[:-1])
+            d = utils.findkey(rootdict, *path[:-1])
 
         error_message = "ERROR: Invalid value for {}".format(key.upper())
 
