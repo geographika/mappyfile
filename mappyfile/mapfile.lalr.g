@@ -116,7 +116,7 @@ INT: /[0-9]+(?![_a-zA-Z])/
 %import common.FLOAT
 
 // UNQUOTED_STRING: /[a-z_][a-z0-9_\-]*/i
-UNQUOTED_STRING: /[a-z0-9_\-]+/i
+UNQUOTED_STRING: /[a-z0-9_\-:]+/i
 DOUBLE_QUOTED_STRING: "\"" ("\\\""|/[^"]/)* "\"" "i"?
 SINGLE_QUOTED_STRING: "'" ("\\'"|/[^']/)* "'" "i"?
 ESCAPED_STRING: /`.*?`i?/
