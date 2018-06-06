@@ -51,7 +51,9 @@ class Parser(object):
     def load_includes(self, text, fn=None, _nested_includes=0):
         # Per default use working directory of the process
         if fn is None:
-            fn = os.getcwd()+'/' #this stops windows eating the current dir
+            fn = os.getcwd()+'/'  
+            #this stops windows eating the current dir
+
         lines = text.split('\n')
         includes = {}
         for idx, l in enumerate(lines):
