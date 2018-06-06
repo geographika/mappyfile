@@ -52,7 +52,7 @@ class Parser(object):
         # Per default use working directory of the process
         if fn is None:
             fn = os.getcwd()+'/'  
-            #this stops windows eating the current dir
+            # this stops windows eating the current dir
 
         lines = text.split('\n')
         includes = {}
