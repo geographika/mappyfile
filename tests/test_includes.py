@@ -17,6 +17,25 @@ def test_includes():
     print(mappyfile.dumps(d))
 
 
+def test_include_from_string():
+    """
+    Check that a file is correctly included when parsing text
+    and that the current working directory is used as the root path
+    for includes - see https://github.com/geographika/mappyfile/issues/55
+    """
+    s = """
+    MAP
+        INCLUDE "tests/samples/include3.map"
+    END
+    """
+
+    d = mappyfile.loads(s, expand_includes=True)
+    pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
+    output = pp.pprint(d)
+    expected = "MAP NAME 'test' END"
+    assert(output == expected)
+
+
 def test_includes_nested_path():
     p = Parser()
 
@@ -93,5 +112,6 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
-    run_tests()
+    # run_tests()
+    test_include_from_string()
     print("Done!")
