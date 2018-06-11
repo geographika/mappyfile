@@ -52,3 +52,6 @@ Alert deprecated keywords? This appears to be a suggested feature of JSON Schema
 
     Any named symmbols which do not exist cause mappyscript to crash
     SIZE when using POLYGON and no SYMBOL - crash
+
+..
+    Check that layer, map, and group names are unique or get wrong legends etc.

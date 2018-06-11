@@ -80,7 +80,7 @@ class Parser(object):
         """
         Capture any comments in the tree
 
-        header_comments stores comments preceeding a node
+        header_comments stores comments preceding a node
 
         """
         comments = list(comments)
