@@ -344,6 +344,16 @@ def test_list_expression_alt():
     assert(output(s) == exp)
 
 
+def test_class_expression_oddname():
+    s = '''
+    CLASS
+      TEXT ([area:ian])
+    END
+    '''
+    exp = "CLASS TEXT ([area:ian]) END"
+    assert(output(s) == exp)
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
