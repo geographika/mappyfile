@@ -55,6 +55,7 @@
   <ItemGroup>
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
+    <Content Include=".readthedocs.yml" />
     <Content Include=".travis.yml" />
     <Content Include="appveyor.yml">
       <SubType>Code</SubType>
