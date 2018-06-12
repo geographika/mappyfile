@@ -17,7 +17,7 @@ install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - "python -m pip install --upgrade pip"
   - "pip install -r requirements-dev.txt"
-  - "python setup.py"
+  - "python setup.py install"
 
 test_script:
   - "pytest"
