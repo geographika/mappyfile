@@ -1,0 +1,25 @@
+# see https://www.appveyor.com/docs/build-environment/#python
+# and https://packaging.python.org/guides/supporting-windows-using-appveyor/
+
+environment:
+
+  matrix:
+
+    - PYTHON: "C:\\Python27"
+    - PYTHON: "C:\\Python27-x64"
+    - PYTHON: "C:\\Python36"
+    - PYTHON: "C:\\Python36-x64"
+
+install:
+  # Note that you must use the environment variable %PYTHON% to refer to
+  # the interpreter you're using - Appveyor does not do anything special
+  # to put the Python version you want to use on PATH.
+  - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - "python -m pip install --upgrade pip"
+  - "pip install -r requirements-dev.txt"
+  - "python setup.py"
+
+test_script:
+  - "pytest"
+  - "flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests"
+  - "flake8 mappyfile --max-line-length=120""

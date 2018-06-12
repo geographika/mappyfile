@@ -11,7 +11,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_utils.py</StartupFile>
+    <StartupFile>tests\test_includes.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +56,9 @@
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
     <Content Include=".travis.yml" />
+    <Content Include="appveyor.yml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\api\main.rst" />
     <Content Include="docs\comments.rst" />
     <Content Include="docs\development.rst" />
