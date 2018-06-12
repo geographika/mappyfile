@@ -19,6 +19,9 @@ install:
   - "pip install -r requirements-dev.txt"
   - "python setup.py install"
 
+# don't try and build the mappyfile.pyproj
+build: off
+
 test_script:
   - "pytest"
   - "flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests"
