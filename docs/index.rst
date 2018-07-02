@@ -71,29 +71,29 @@ One key difference is that mappyfile only deals with text, so you cannot retriev
 mappyfile's approach is to build a Mapfile that then uses the mapserv program to handle these requirements. This design was influenced by Sean Gillies,
 the MapScript maintainer for several years (until 2006). A couple of his last blog posts on MapScript make a strong case for working with Mapfiles rather than MapScript:  
 
-	*"Cease, or at the very least, minimize your use of MapServer's various language bindings. 
-	Instead, embrace MapServer's domain-specific language (DSL) and write more of the declarative 
-	cartographic scripts known as mapfiles. Use the mapserv (or shp2img) program to compile these 
-	scripts into images. This is the path to happiness and prosperity."*
+    *"Cease, or at the very least, minimize your use of MapServer's various language bindings. 
+    Instead, embrace MapServer's domain-specific language (DSL) and write more of the declarative 
+    cartographic scripts known as mapfiles. Use the mapserv (or shp2img) program to compile these 
+    scripts into images. This is the path to happiness and prosperity."*
 
-	Sean Gillies - `Stop using MapScript`_
+    Sean Gillies - `Stop using MapScript`_
 
 A later post listed the benefits of this approach:
 
-	*"the instructions encoded in a MapServer mapfile comprise a domain-specific language..
-	to embrace the map language is to benefit from simplicity, usability, and portability."*
+    *"the instructions encoded in a MapServer mapfile comprise a domain-specific language..
+    to embrace the map language is to benefit from simplicity, usability, and portability."*
 
-	Sean Gillies - `Declarative Maps`_
+    Sean Gillies - `Declarative Maps`_
 
 The concept of the Mapfile as a DSL has been implemented a few times. A Python `Mapfile builder`_ written by Norman Vine used an XML approach.
 
 More recently the Node module `node-mapserv`_ provides support for declarative mapfile programming. 
 As the author notes: 
 
-	*node-mapserv is not MapScript for Node. Instead it provides a simple declarative API for 
-	rendering mapserver mapfiles..most of what can be accomplished imperatively 
-	using mapscript can be done declaratively by custom generating new mapfiles and tweaking 
-	existing mapfiles*
+    *node-mapserv is not MapScript for Node. Instead it provides a simple declarative API for 
+    rendering mapserver mapfiles..most of what can be accomplished imperatively 
+    using mapscript can be done declaratively by custom generating new mapfiles and tweaking 
+    existing mapfiles*
 
 As an interesting footnote the MapScript "bindings" are available in several different languages thanks to `SWIG <https://en.wikipedia.org/wiki/SWIG>`_ which creates wrapper 
 code for C. SWIG was developed by `David Beazley <http://www.dabeaz.com/>`_, who then later built `PLY <http://www.dabeaz.com/ply/>`_ on which mappyfile was originally based. 
@@ -108,28 +108,28 @@ Accessing Values
 ++++++++++++++++
 
 .. literalinclude:: examples/api/accessing_values_test.py
-	:language: python
-	:dedent: 4
-	:start-after: # START OF API EXAMPLE
-	:end-before: # END OF API EXAMPLE
+    :language: python
+    :dedent: 4
+    :start-after: # START OF API EXAMPLE
+    :end-before: # END OF API EXAMPLE
 
 Query
 +++++
 
 .. literalinclude:: examples/api/search_test.py
-	:language: python
-	:dedent: 4
-	:start-after: # START OF API EXAMPLE
-	:end-before: # END OF API EXAMPLE
-	
+    :language: python
+    :dedent: 4
+    :start-after: # START OF API EXAMPLE
+    :end-before: # END OF API EXAMPLE
+    
 Modifying Values
 ++++++++++++++++
 
 .. literalinclude:: examples/api/modifying_values_test.py
-	:language: python
-	:dedent: 4
-	:start-after: # START OF API EXAMPLE
-	:end-before: # END OF API EXAMPLE
+    :language: python
+    :dedent: 4
+    :start-after: # START OF API EXAMPLE
+    :end-before: # END OF API EXAMPLE
 
 Adding Items
 ++++++++++++
@@ -137,24 +137,18 @@ Adding Items
 Adding a new layer:
 
 .. literalinclude:: examples/api/adding_values_test.py
-	:language: python
-	:dedent: 4
-	:start-after: # START OF ADD LAYER EXAMPLE
-	:end-before: # END OF ADD LAYER EXAMPLE
+    :language: python
+    :dedent: 4
+    :start-after: # START OF ADD LAYER EXAMPLE
+    :end-before: # END OF ADD LAYER EXAMPLE
 
 Adding a new class to a layer:
 
 .. literalinclude:: examples/api/adding_values_test.py
-	:language: python
-	:dedent: 4
-	:start-after: # START OF ADD CLASS EXAMPLE
-	:end-before: # END OF ADD CLASS EXAMPLE
-   
-Future Development
-------------------
-
-+ Enable MapServer to accept a "Mapfile" as a stream: https://github.com/mapserver/mapserver/issues/4031
-+ Read MapFiles from URLs
+    :language: python
+    :dedent: 4
+    :start-after: # START OF ADD CLASS EXAMPLE
+    :end-before: # END OF ADD CLASS EXAMPLE
 
 .. include:: HISTORY.rst
 
