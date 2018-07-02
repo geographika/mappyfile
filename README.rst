@@ -1,7 +1,7 @@
 mappyfile
 =========
 
-| |Version| |Build Status| |Docs|
+| |Version| |Docs| |Build Status| |Appveyor Build Status|
 
 A pure Python MapFile parser for working with MapServer, built using `Lark <https://github.com/erezsh/lark>`_
 
@@ -76,6 +76,7 @@ Contributors
 
 * Julien Enselme `@jenselme <https://github.com/jenselme>`_
 * Loïc Gasser `@loicgasser <https://github.com/loicgasser>`_
+* Ian Turton `@ianturton <https://github.com/ianturton>`_
 
 ..
     .. include:: docs/HISTORY.rst
@@ -83,8 +84,11 @@ Contributors
 .. |Version| image:: https://img.shields.io/pypi/v/mappyfile.svg
    :target: https://pypi.python.org/pypi/mappyfile
 
+.. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
+   :target: http://mappyfile.readthedocs.io/en/latest/
+
 .. |Build Status| image:: https://travis-ci.org/geographika/mappyfile.svg?branch=master
    :target: https://travis-ci.org/geographika/mappyfile
 
-.. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
-   :target: http://mappyfile.readthedocs.io/en/latest/
+.. |Appveyor Build Status| image:: https://ci.appveyor.com/api/projects/status/mk33l07478gfytwh?svg=true
+   :target: https://ci.appveyor.com/project/SethG/mappyfile
