@@ -85,7 +85,7 @@ A later post listed the benefits of this approach:
 
     Sean Gillies - `Declarative Maps`_
 
-The concept of the Mapfile as a DSL has been implemented a few times. A Python `Mapfile builder`_ written by Norman Vine used an XML approach.
+The concept of the Mapfile as a DSL has been implemented a few times. A Python `Mapfile builder`_ written by Allan Doyle used an XML approach.
 
 More recently the Node module `node-mapserv`_ provides support for declarative mapfile programming. 
 As the author notes: 
