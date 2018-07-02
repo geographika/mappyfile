@@ -35,11 +35,35 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
     """
     Load a Mapfile from the supplied filename into a Python dictionary
 
-    :param string fn: The path to the Mapfile, or partial Mapfile
-    :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
-    :param boolean include_comments: Include or discard comment strings from
-                                     the Mapfile - *experimental*
-    :param boolean include_position: Include the position of the Mapfile tokens in the output
+    Parameters
+    ----------
+
+    fn: string
+        The path to the Mapfile, or partial Mapfile
+    expand_includes: boolean
+        Load any ``INCLUDE`` files in the MapFile
+    include_comments: boolean
+         Include or discard comment strings from the Mapfile - *experimental*
+    include_position: boolean
+         Include the position of the Mapfile tokens in the output
+
+    Returns
+    -------
+    dict
+        A Python dictionary representing the Mapfile in the mappyfile format
+
+    Example
+    -------
+
+    To open a Mapfile from a filename and return it as a dictionary object::
+
+        d = mappyfile.open('mymap.map')
+
+    Notes
+    -----
+
+    Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object. 
+
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments)
@@ -54,11 +78,35 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
     """
     Load a Mapfile from a file-like object
 
-    :param fp: A file-like object
-    :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
-    :param boolean include_comments: Include or discard comment strings from
-                                     the Mapfile - *experimental*
-    :param boolean include_position: Include the position of the Mapfile tokens in the output
+    Parameters
+    ----------
+
+    fp: file
+        A file-like object
+    expand_includes: boolean
+        Load any ``INCLUDE`` files in the MapFile
+    include_comments: boolean
+         Include or discard comment strings from the Mapfile - *experimental*
+    include_position: boolean
+         Include the position of the Mapfile tokens in the output
+
+    Returns
+    -------
+    dict
+        A Python dictionary representing the Mapfile in the mappyfile format
+
+    Example
+    -------
+
+    To open a Mapfile from a file and return it as a dictionary object::
+
+        with open('mymap.map') as fp:
+            d = mappyfile.load(fp)
+
+    Notes
+    -----
+
+    Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object. 
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments)
@@ -73,11 +121,33 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
     """
     Load a Mapfile from a string
 
-    :param string s: The Mapfile, or partial Mapfile, text
-    :param boolean expand_includes: Load any ``INCLUDE`` files in the MapFile
-    :param boolean include_comments: Include or discard comment strings from
-                                     the Mapfile - *experimental*
-    :param boolean include_position: Include the position of the Mapfile tokens in the output
+    Parameters
+    ----------
+
+    s: string
+        The Mapfile, or partial Mapfile, text
+    expand_includes: boolean
+        Load any ``INCLUDE`` files in the MapFile
+    include_comments: boolean
+         Include or discard comment strings from the Mapfile - *experimental*
+    include_position: boolean
+         Include the position of the Mapfile tokens in the output
+
+    Returns
+    -------
+    dict
+        A Python dictionary representing the Mapfile in the mappyfile format
+
+    Example
+    -------
+
+    To open a Mapfile from a string and return it as a dictionary object::
+
+        s = '''MAP NAME "TEST" END'''
+
+        d = mappyfile.loads(s)
+        assert d["name"] == "TEST"
+
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments)
@@ -173,17 +243,82 @@ def findall(lst, key, value):
 def findunique(lst, key):
     """
     Find all unique key values for items in lst.
-    For example find all ``GROUP`` values in a ``LAYER``'s ``CLASS``es
 
-    :param list lst: A list of composite dictionaries e.g. ``layers``, ``classes``
-    :param string key: The key name to search each dictionary in the list
+    Parameters
+    ----------
+
+    lst: list
+         A list of composite dictionaries e.g. ``layers``, ``classes``
+    key: string
+        The key name to search each dictionary in the list
+
+    Example
+    -------
+
+    To find all ``GROUP`` values for ``CLASS`` in a ``LAYER``::
+
+        s = '''
+        LAYER
+            CLASS
+                GROUP "group1"
+                NAME "Class1"
+                COLOR 0 0 0
+            END
+            CLASS
+                GROUP "group2"
+                NAME "Class2"
+                COLOR 0 0 0
+            END
+            CLASS
+                GROUP "group1"
+                NAME "Class3"
+                COLOR 0 0 0
+            END
+        END
+        '''
+
+        d = mappyfile.loads(s)
+        groups = mappyfile.findunique(d["classes"], "group")
+        assert groups == ["group1", "group2"]
     """
     return sorted(set([item[key.lower()] for item in lst]))
 
 
 def findkey(d, *keys):
     """
-    Get an object in the dict based on a list of keys and/or indexes
+    Get a value from a dictionary based on a list of keys and/or list indexes
+
+    Parameters
+    ----------
+
+    d: dict
+        A Python dictionary
+    keys: list
+        A list of key names
+
+    Example
+    -------
+
+    To find the value of the first class in the first layer in a Mapfile::
+
+            s = '''
+            MAP
+                LAYER
+                    NAME "Layer1"
+                    TYPE POLYGON
+                    CLASS
+                        NAME "Class1"
+                        COLOR 0 0 255
+                    END
+                END
+            END
+            '''
+
+            d = mappyfile.loads(s)
+
+            pth = ["layers", 0, "classes", 0]
+            cmp = mappyfile.findkey(d, *pth)
+            assert cmp["name"] == "Class1"
     """
     if keys:
         keys = list(keys)
@@ -193,11 +328,39 @@ def findkey(d, *keys):
         return d
 
 
+def validate(d):
+    """
+    Validate a mappyfile dictionary by using the Mapfile schema
+    
+    :param dictionary d: A Python dictionary based on the the mappyfile schema
+    """
+    v = Validator()
+    return v.validate(d)
+
+
 def update(d1, d2):
     """
     Update dict d1 with properties from d2
-    Also allows deletion of objects with a special "__delete__" key
+
+    Note
+    ----
+
+    Allows deletion of objects with a special "__delete__" key
     For any list of dicts new items can be added when updating
+
+    Parameters
+    ----------
+
+        d1: dict
+            A Python dictionary
+        d2: dict
+            A Python dictionary that will be used to update any keys with the same name in d1
+
+    Returns
+    -------
+    dict
+        The updated dictionary
+
     """
     NoneType = type(None)
 
@@ -247,8 +410,3 @@ def _pprint(d, indent, spacer, quote, newlinechar):
     pp = PrettyPrinter(indent=indent, spacer=spacer,
                        quote=quote, newlinechar=newlinechar)
     return pp.pprint(d)
-
-
-def validate(d):
-    v = Validator()
-    return v.validate(d)

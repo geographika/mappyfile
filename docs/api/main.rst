@@ -1,7 +1,10 @@
 mappyfile API
--------------
+=============
 
-This page lists the top-level mappfile API. 
+This page lists the top-level mappyfile API. 
+
+Mapfile Reader and Writer Functions
+-----------------------------------
 
 .. automodule:: mappyfile
 
@@ -17,6 +20,18 @@ This page lists the top-level mappfile API.
 
     .. autofunction:: save
 
+
+Dictionary Helper Functions
+---------------------------
+
+.. automodule:: mappyfile
+
     .. autofunction:: find
 
     .. autofunction:: findall
+
+    .. autofunction:: findunique
+
+    .. autofunction:: findkey
+
+    .. autofunction:: update
