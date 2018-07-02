@@ -161,7 +161,11 @@ class Parser(object):
 
     def load(self, fp):
         text = fp.read()
-        return self.parse(text)
+        if os.path.isfile(fp.name):
+            fn = fp.name # name is a read-only attribute and may not be present on all file-like objects.
+        else:
+            fn = None
+        return self.parse(text, fn)
 
     def open_file(self, fn):
         try:

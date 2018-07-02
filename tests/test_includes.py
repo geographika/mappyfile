@@ -15,6 +15,7 @@ def test_includes():
 
     d = (m.transform(ast))  # works
     print(mappyfile.dumps(d))
+    assert d["name"] == "include_test"
 
 
 def test_include_from_string():
@@ -105,6 +106,16 @@ def test_two_includes():
     assert(output == expected)
 
 
+def test_include_from_filehandle():
+    p = Parser()
+    fn = './tests/samples/include1.map'
+
+    with open(fn) as f:
+        d = mappyfile.load(f)
+        assert d["name"] == "include_test"
+        print(mappyfile.dumps(d))
+
+
 def run_tests():
     pytest.main(["tests/test_includes.py"])
 
@@ -113,5 +124,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
     # run_tests()
-    test_include_from_string()
+    test_include_from_filehandle()
     print("Done!")
