@@ -86,3 +86,15 @@ Prospector
 
     prospector > prospector.log
 
+Documentation
+-------------
+
+To build the Sphinx documentation:
+
+.. code-block:: bat
+
+    cd /D %MAPPYFILE_PATH%\docs
+    make.bat html
+    cd _build\html
+    index.html
+
