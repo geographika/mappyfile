@@ -62,7 +62,7 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
     Notes
     -----
 
-    Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object. 
+    Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
 
     """
     p = Parser(expand_includes=expand_includes,
@@ -106,7 +106,7 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
     Notes
     -----
 
-    Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object. 
+    Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments)
@@ -331,7 +331,7 @@ def findkey(d, *keys):
 def validate(d):
     """
     Validate a mappyfile dictionary by using the Mapfile schema
-    
+
     :param dictionary d: A Python dictionary based on the the mappyfile schema
     """
     v = Validator()

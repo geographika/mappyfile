@@ -162,7 +162,7 @@ class Parser(object):
     def load(self, fp):
         text = fp.read()
         if os.path.isfile(fp.name):
-            fn = fp.name # name is a read-only attribute and may not be present on all file-like objects.
+            fn = fp.name  # name is a read-only attribute and may not be present on all file-like objects.
         else:
             fn = None
         return self.parse(text, fn)

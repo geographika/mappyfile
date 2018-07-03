@@ -107,7 +107,7 @@ def test_two_includes():
 
 
 def test_include_from_filehandle():
-    p = Parser()
+
     fn = './tests/samples/include1.map'
 
     with open(fn) as f:
