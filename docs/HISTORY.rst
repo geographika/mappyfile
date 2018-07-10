@@ -1,12 +1,16 @@
 Releases
 --------
 
-0.7.1 (XX/XX/2018)
+0.7.1 (10/07/2018)
 ++++++++++++++++++
 
 + **Breaking Change** ``utils.dictfind`` renamed ``utils.findkey``
-+ new update function - allowing for easier creation of Mapfiles using YAML
++ new dictionary update function - allowing for easier creation of Mapfiles using YAML
 + allow any custom hidden metadata tags of the form ``__property__`` to be used in dicts for custom processing
++ Schema validation updates including RANGEITEM and CLUSTER
++ Appveyor builds added
++ `#56 <https://github.com/geographika/mappyfile/issues/56>`_ Can't parse expressions with a : in them
++ `#54 <https://github.com/geographika/mappyfile/issues/54>`_ fix windows cwd name issue in includes - thanks @ianturton
 
 0.7.0 (04/04/2018)
 ++++++++++++++++++
