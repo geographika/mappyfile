@@ -1,6 +1,11 @@
 Releases
 --------
 
+0.7.2 (unreleased)
+++++++++++++++++++
+
++ **Breaking Change** ``mappyfile.findall`` returns a list rather than a generator
+
 0.7.1 (10/07/2018)
 ++++++++++++++++++
 

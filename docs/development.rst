@@ -95,6 +95,5 @@ To build the Sphinx documentation:
 
     cd /D %MAPPYFILE_PATH%\docs
     make.bat html
-    cd _build\html
-    index.html
+    _build/html/index.html
 

@@ -191,7 +191,7 @@ Grammar File
 
 The full Mapfile grammar is shown below. 
 
-.. literalinclude:: ../mappyfile/mapfile.g
+.. literalinclude:: ../mappyfile/mapfile.lalr.g
    :language: javascript
 
 ..
