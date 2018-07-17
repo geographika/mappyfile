@@ -64,6 +64,41 @@ def test_dump():
     assert d["name"] == "TEST"
 
 
+def test_dumps():
+
+    s = '''MAP NAME "TEST" END'''
+
+    d = mappyfile.loads(s)
+    output = mappyfile.dumps(d, indent=1, spacer="\t", newlinechar=" ")
+    print(output)
+    assert output == 'MAP 	NAME "TEST" END'
+
+
+def test_find():
+
+    s = """
+    MAP
+        LAYER
+            NAME "Layer1"
+            TYPE POLYGON
+        END
+        LAYER
+            NAME "Layer2"
+            TYPE POLYGON
+            CLASS
+                NAME "Class1"
+                COLOR 0 0 -8
+            END
+        END
+    END
+    """
+
+    d = mappyfile.loads(s)
+    cmp = mappyfile.find(d["layers"], "name", "Layer2")
+
+    assert cmp["name"] == "Layer2"
+
+
 def test_findkey():
 
     s = """
@@ -92,6 +127,39 @@ def test_findkey():
     pth = ["layers", 1, "classes", 0]
     cmp = mappyfile.findkey(d, *pth)
     assert cmp["name"] == "Class1"
+
+
+def test_findall():
+
+    s = """
+    MAP
+        LAYER
+            NAME "Layer1"
+            TYPE POLYGON
+            GROUP "test"
+        END
+        LAYER
+            NAME "Layer2"
+            TYPE POLYGON
+            GROUP "1test"
+        END
+        LAYER
+            NAME "Layer3"
+            TYPE POLYGON
+            GROUP "test2"
+        END
+        LAYER
+            NAME "Layer4"
+            TYPE POLYGON
+            GROUP "test"
+        END
+    END
+    """
+
+    d = mappyfile.loads(s)
+    layers = mappyfile.findall(d["layers"], "group", "test")
+    assert len(layers) == 2
+    assert layers[0]["name"] == "Layer1"
 
 
 def test_update():
@@ -230,6 +298,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     run_tests()
-    # test_update_list_second_item()
-    # test_update_add_item()
+    # test_dumps()
     print("Done!")

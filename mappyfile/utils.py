@@ -33,7 +33,7 @@ def deprecated(func):
 
 def open(fn, expand_includes=True, include_comments=False, include_position=False):
     """
-    Load a Mapfile from the supplied filename into a Python dictionary
+    Load a Mapfile from the supplied filename into a Python dictionary.
 
     Parameters
     ----------
@@ -49,6 +49,7 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
 
     Returns
     -------
+
     dict
         A Python dictionary representing the Mapfile in the mappyfile format
 
@@ -76,7 +77,7 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
 
 def load(fp, expand_includes=True, include_position=False, include_comments=False):
     """
-    Load a Mapfile from a file-like object
+    Load a Mapfile from an open file or file-like object.
 
     Parameters
     ----------
@@ -92,6 +93,7 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
 
     Returns
     -------
+
     dict
         A Python dictionary representing the Mapfile in the mappyfile format
 
@@ -135,6 +137,7 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
 
     Returns
     -------
+
     dict
         A Python dictionary representing the Mapfile in the mappyfile format
 
@@ -162,14 +165,35 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
     Write d (the Mapfile dictionary) as a JSON formatted stream to fp
 
-    :param dictionary d: A Python dictionary based on the the mappyfile schema
-    :param fp: A file-like object
-    :param integer indent: The number of ``spacer`` characters to indent structures in
-                           the Mapfile
-    :param string spacer: The character to use for indenting structures in the Mapfile. Typically
-                          spaces or tab characters (``\\t``)
-    :param string quote: The quote character to use in the Mapfile (double or single quotes)
-    :param string newlinechar: The character to to insert newlines in the Mapfile
+    Parameters
+    ----------
+
+    d: dict
+        A Python dictionary based on the the mappyfile schema
+    fp: file
+        A file-like object
+    indent: int
+        The number of ``spacer`` characters to indent structures in the Mapfile
+    spacer: string
+        The character to use for indenting structures in the Mapfile. Typically
+        spaces or tab characters (``\\t``)
+    quote: string
+        The quote character to use in the Mapfile (double or single quotes)
+    newlinechar: string
+        The character to to insert newlines in the Mapfile
+
+    Example
+    -------
+
+    To open a Mapfile from a string, and then dump it back out to an open file,
+    using 2 spaces for indentation, and single-quotes for properties::
+
+        s = '''MAP NAME "TEST" END'''
+
+        d = mappyfile.loads(s)
+        with open(fn, "w") as f:
+            mappyfile.dump(d, f, indent=2, quote="'")
+
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)
     fp.write(map_string)
@@ -187,14 +211,39 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
     Write a Mapfile dictionary to a file.
 
-    :param dictionary d: A Python dictionary based on the the mappyfile schema
-    :param string output_file: The output filename
-    :param integer indent: The number of ``spacer`` characters to indent structures in
-                           the Mapfile
-    :param string spacer: The character to use for indenting structures in the Mapfile. Typically
-                          spaces or tab characters (``\\t``)
-    :param string quote: The quote character to use in the Mapfile (double or single quotes)
-    :param string newlinechar: The character to to insert newlines in the Mapfile
+    Parameters
+    ----------
+
+    d: dict
+        A Python dictionary based on the the mappyfile schema
+    output_file: string
+        The output filename
+    indent: int
+        The number of ``spacer`` characters to indent structures in the Mapfile
+    spacer: string
+        The character to use for indenting structures in the Mapfile. Typically
+        spaces or tab characters (``\\t``)
+    quote: string
+        The quote character to use in the Mapfile (double or single quotes)
+    newlinechar: string
+        The character to to insert newlines in the Mapfile
+
+    Returns
+    -------
+
+    string
+          The output_file passed into the function
+
+    Example
+    -------
+
+    To open a Mapfile from a string, and then save it to a file::
+
+        s = '''MAP NAME "TEST" END'''
+
+        d = mappyfile.loads(s)
+        fn = r"C:\Data\mymap.map"
+        mappyfile.save(d, fn)
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)
     _save(output_file, map_string)
@@ -205,13 +254,34 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
     Output a Mapfile dictionary as a string
 
-    :param dictionary d: A Python dictionary based on the the mappyfile schema
-    :param integer indent: The number of ``spacer`` characters to indent structures in
-                           the Mapfile
-    :param string spacer: The character to use for indenting structures in the Mapfile. Typically
-                          spaces or tab characters (``\\t``)
-    :param string quote: The quote character to use in the Mapfile (double or single quotes)
-    :param string newlinechar: The character to to insert newlines in the Mapfile
+    d: dict
+        A Python dictionary based on the the mappyfile schema
+    indent: int
+        The number of ``spacer`` characters to indent structures in the Mapfile
+    spacer: string
+        The character to use for indenting structures in the Mapfile. Typically
+        spaces or tab characters (``\\t``)
+    quote: string
+        The quote character to use in the Mapfile (double or single quotes)
+    newlinechar: string
+        The character to to insert newlines in the Mapfile
+
+    Returns
+    -------
+
+    string
+          The Mapfile as a string
+
+    Example
+    -------
+
+    To open a Mapfile from a string, and then print it back out
+    as a string using tabs::
+
+        s = '''MAP NAME "TEST" END'''
+
+        d = mappyfile.loads(s)
+        print(mappyfile.dumps(d, indent=1, spacer="\\t"))
     """
     return _pprint(d, indent, spacer, quote, newlinechar)
 
@@ -220,9 +290,47 @@ def find(lst, key, value):
     """
     Find an item in a list of dicts using a key and a value
 
-    :param list lst: A list of composite dictionaries e.g. ``layers``, ``classes``
-    :param string key: The key name to search each dictionary in the list
-    :param value: The value to search for
+    Parameters
+    ----------
+
+    list: list
+        A list of composite dictionaries e.g. ``layers``, ``classes``
+    key: string
+        The key name to search each dictionary in the list
+    key: value
+        The value to search for
+
+    Returns
+    -------
+
+    dict
+        The first composite dictionary object with a key that matches the value
+
+    Example
+    -------
+
+    To find the ``LAYER`` in a list of layers with ``NAME`` set to ``Layer2``::
+
+        s = '''
+        MAP
+            LAYER
+                NAME "Layer1"
+                TYPE POLYGON
+            END
+            LAYER
+                NAME "Layer2"
+                TYPE POLYGON
+                CLASS
+                    NAME "Class1"
+                    COLOR 0 0 -8
+                END
+            END
+        END
+        '''
+
+        d = mappyfile.loads(s)
+        cmp = mappyfile.find(d["layers"], "name", "Layer2")
+        assert cmp["name"] == "Layer2"
     """
     return next((item for item in lst if item[key.lower()] == value), None)
 
@@ -230,14 +338,59 @@ def find(lst, key, value):
 def findall(lst, key, value):
     """
     Find all items in lst where key matches value.
-    For example find all ``LAYER``s in a ``MAP`` where ``GROUP`` equals ``VALUE``
+    For example find all ``LAYER`` s in a ``MAP`` where ``GROUP`` equals ``VALUE``
 
-    :param list lst: A list of composite dictionaries e.g. ``layers``, ``classes``
-    :param string key: The key name to search each dictionary in the list
-    :param value: The value to search for
+    Parameters
+    ----------
+
+    list: list
+        A list of composite dictionaries e.g. ``layers``, ``classes``
+    key: string
+        The key name to search each dictionary in the list
+    key: value
+        The value to search for
+
+    Returns
+    -------
+
+    list
+        A Python list containing the matching composite dictionaries
+
+    Example
+    -------
+
+    To find all ``LAYER`` s with ``GROUP`` set to ``test``::
+
+        s = '''
+        MAP
+            LAYER
+                NAME "Layer1"
+                TYPE POLYGON
+                GROUP "test"
+            END
+            LAYER
+                NAME "Layer2"
+                TYPE POLYGON
+                GROUP "test1"
+            END
+            LAYER
+                NAME "Layer3"
+                TYPE POLYGON
+                GROUP "test2"
+            END
+            LAYER
+                NAME "Layer4"
+                TYPE POLYGON
+                GROUP "test"
+            END
+        END
+        '''
+
+        d = mappyfile.loads(s)
+        layers = mappyfile.findall(d["layers"], "group", "test")
+        assert len(layers) == 2
     """
-    possible_values = ("'%s'" % value, '"%s"' % value)
-    return (item for item in lst if item[key.lower()] in possible_values)
+    return [item for item in lst if item[key.lower()] in value]
 
 
 def findunique(lst, key):
@@ -251,6 +404,12 @@ def findunique(lst, key):
          A list of composite dictionaries e.g. ``layers``, ``classes``
     key: string
         The key name to search each dictionary in the list
+
+    Returns
+    -------
+
+    list
+        A sorted Python list of unique keys in the list
 
     Example
     -------
@@ -286,7 +445,7 @@ def findunique(lst, key):
 
 def findkey(d, *keys):
     """
-    Get a value from a dictionary based on a list of keys and/or list indexes
+    Get a value from a dictionary based on a list of keys and/or list indexes.
 
     Parameters
     ----------
@@ -294,31 +453,37 @@ def findkey(d, *keys):
     d: dict
         A Python dictionary
     keys: list
-        A list of key names
+        A list of key names, or list indexes
+
+    Returns
+    -------
+
+    dict
+        The composite dictionary object at the path specified by the keys
 
     Example
     -------
 
-    To find the value of the first class in the first layer in a Mapfile::
+    To return the value of the first class of the first layer in a Mapfile::
 
-            s = '''
-            MAP
-                LAYER
-                    NAME "Layer1"
-                    TYPE POLYGON
-                    CLASS
-                        NAME "Class1"
-                        COLOR 0 0 255
-                    END
+        s = '''
+        MAP
+            LAYER
+                NAME "Layer1"
+                TYPE POLYGON
+                CLASS
+                    NAME "Class1"
+                    COLOR 0 0 255
                 END
             END
-            '''
+        END
+        '''
 
-            d = mappyfile.loads(s)
+        d = mappyfile.loads(s)
 
-            pth = ["layers", 0, "classes", 0]
-            cmp = mappyfile.findkey(d, *pth)
-            assert cmp["name"] == "Class1"
+        pth = ["layers", 0, "classes", 0]
+        cls1 = mappyfile.findkey(d, *pth)
+        assert cls1["name"] == "Class1"
     """
     if keys:
         keys = list(keys)
@@ -328,16 +493,6 @@ def findkey(d, *keys):
         return d
 
 
-def validate(d):
-    """
-    Validate a mappyfile dictionary by using the Mapfile schema
-
-    :param dictionary d: A Python dictionary based on the the mappyfile schema
-    """
-    v = Validator()
-    return v.validate(d)
-
-
 def update(d1, d2):
     """
     Update dict d1 with properties from d2
@@ -345,19 +500,20 @@ def update(d1, d2):
     Note
     ----
 
-    Allows deletion of objects with a special "__delete__" key
+    Allows deletion of objects with a special ``__delete__`` key
     For any list of dicts new items can be added when updating
 
     Parameters
     ----------
 
-        d1: dict
-            A Python dictionary
-        d2: dict
-            A Python dictionary that will be used to update any keys with the same name in d1
+    d1: dict
+        A Python dictionary
+    d2: dict
+        A Python dictionary that will be used to update any keys with the same name in d1
 
     Returns
     -------
+
     dict
         The updated dictionary
 
@@ -399,6 +555,17 @@ def update(d1, d2):
             else:
                 d1[k] = v
     return d1
+
+
+def validate(d):
+    """
+    Validate a mappyfile dictionary by using the Mapfile schema
+
+    d: dict
+        A Python dictionary based on the the mappyfile schema
+    """
+    v = Validator()
+    return v.validate(d)
 
 
 def _save(output_file, map_string):
