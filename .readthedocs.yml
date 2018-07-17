@@ -1,8 +1,8 @@
 # see http://docs.readthedocs.io/en/latest/yaml-config.html
 
 build:
-    image: latest
+    image: 2.0
 
 python:
-  version: 3.6
+  version: 3.5
   setup_py_install: true
