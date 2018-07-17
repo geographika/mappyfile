@@ -204,7 +204,6 @@
     <Content Include="notes.private.txt" />
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
-    <Content Include="requirements.txt" />
     <Content Include="setup.cfg">
       <SubType>Code</SubType>
     </Content>
