@@ -6,7 +6,7 @@ import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
-from lark.common import UnexpectedToken
+from lark import UnexpectedToken
 from mappyfile.validator import Validator
 
 

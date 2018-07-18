@@ -5,8 +5,7 @@ import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
-from lark.common import UnexpectedToken  # inherits from ParseError
-# from lark.lexer import UnexpectedInput
+from lark import UnexpectedToken  # inherits from ParseError
 
 
 def output(s):
@@ -58,7 +57,7 @@ END"""
     except UnexpectedToken as ex:
         print(ex.__dict__)
         assert(ex.line == 4)
-        assert(ex.column == 0)
+        assert(ex.column == 1)
         assert(str(ex.token) == 'END')
 
 
@@ -81,7 +80,7 @@ END"""
     except UnexpectedToken as ex:
         print(ex.__dict__)
         assert(ex.line == 7)
-        assert(ex.column == 0)
+        assert(ex.column == 1)
         assert(str(ex.token) == 'END')
 
 

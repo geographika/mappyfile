@@ -2,8 +2,7 @@ import os
 import sys
 import logging
 from io import open
-from lark import Lark, ParseError, Tree
-from lark.lexer import UnexpectedInput, Token
+from lark import Lark, ParseError, Tree, UnexpectedInput
 
 
 PY2 = sys.version_info[0] < 3
@@ -136,28 +135,29 @@ class Parser(object):
     def _assign_comments(self, _tree, prev_end_line):
 
         for node in _tree.children:
+            if not isinstance(node, Tree):
+                continue
+
             try:
-                line = node.line
+                line = node.meta.line
             except AttributeError:
                 assert not node.children
                 continue
 
-            if isinstance(node, Token):
-                continue
             if node.data not in ("composite", "attr", "string_pair"):
                 if isinstance(node, Tree):
                     self._assign_comments(node, prev_end_line)
                     continue
 
-            node.header_comments = self._get_comments(prev_end_line, line)
-            if node.line == node.end_line:
+            node.meta.header_comments = self._get_comments(prev_end_line, line)
+            if node.meta.line == node.meta.end_line:
                 # node is on a single line, so check for inline comments
-                node.inline_comments = self._get_comments(line, line + 1)
-                prev_end_line = node.end_line + 1
+                node.meta.inline_comments = self._get_comments(line, line + 1)
+                prev_end_line = node.meta.end_line + 1
             else:
                 if isinstance(node, Tree):
                     self._assign_comments(node, line)
-                prev_end_line = node.end_line
+                prev_end_line = node.meta.end_line
 
     def load(self, fp):
         text = fp.read()

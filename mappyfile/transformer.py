@@ -6,8 +6,7 @@ Python dict structure
 from __future__ import unicode_literals
 import sys
 from collections import OrderedDict
-from lark import Transformer
-from lark.tree import Transformer_NoRecurse
+from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES
@@ -591,27 +590,29 @@ class MapfileTransformer(Transformer):
         return v
 
 
-class CommentsTransformer(Transformer_NoRecurse):
+class CommentsTransformer(Transformer_InPlace):
 
     def __init__(self, mapfile_todict):
         self._mapfile_todict = mapfile_todict
 
-    def get_comments(self, tree):
+    def get_comments(self, meta):
         all_comments = []
 
-        if hasattr(tree, 'inline_comments'):
-            all_comments += tree.inline_comments
+        if hasattr(meta, 'inline_comments'):
+            all_comments += meta.inline_comments
 
-        if hasattr(tree, 'header_comments'):
-            all_comments += tree.header_comments
+        if hasattr(meta, 'header_comments'):
+            all_comments += meta.header_comments
 
         return all_comments
 
+    @v_args(tree=True)
     def _save_attr_comments(self, tree):
         d = self._mapfile_todict.transform(tree)
-        d["__comments__"] = self.get_comments(tree)
+        d["__comments__"] = self.get_comments(tree.meta)
         return d
 
+    @v_args(tree=True)
     def _save_composite_comments(self, tree):
         d = self._mapfile_todict.transform(tree)
 
@@ -620,7 +621,7 @@ class CommentsTransformer(Transformer_NoRecurse):
         if "__comments__" not in d:
             d["__comments__"] = OrderedDict()
 
-        comments = self.get_comments(tree)
+        comments = self.get_comments(tree.meta)
         if comments:
             d["__comments__"]["__type__"] = comments
 
@@ -631,7 +632,7 @@ class CommentsTransformer(Transformer_NoRecurse):
                 md_keys = [k for k in d.keys() if k not in ["__type__", "__comments__", "__position__"]]
                 assert len(string_pairs) == len(md_keys)
                 for k, sp in zip(md_keys, string_pairs):
-                    key_comments = self.get_comments(sp)
+                    key_comments = self.get_comments(sp.meta)
                     d["__comments__"][k] = key_comments
 
         return d
