@@ -36,6 +36,9 @@ setup(name='mappyfile',
       author_email='sethg@geographika.co.uk',
       license='MIT',
       packages=['mappyfile'],
-      # dependency_links=["http://github.com/erezsh/lark/tarball/master#egg=package-1.0"],
       install_requires=['lark-parser==0.6.2', 'jsonschema >=2.0, <3.0', 'jsonref==0.1'],
-      zip_safe=False)
+      zip_safe=False,
+      entry_points = {
+        'console_scripts': ['mappyfile=mappyfile.cli:main'],
+    }
+)
