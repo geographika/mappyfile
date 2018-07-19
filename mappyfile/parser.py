@@ -66,7 +66,7 @@ class Parser(object):
                 try:
                     include_text = self.open_file(inc_file_path)
                 except IOError as ex:
-                    log.warning("Include file '%s' not found", inc_file_path)
+                    log.warning("Include file '%s' not found in '%s'", inc_file_path, fn)
                     raise ex
                 # recursively load any further includes
                 includes[idx] = self.load_includes(include_text, fn=fn, _nested_includes=_nested_includes+1)
@@ -196,6 +196,9 @@ class Parser(object):
                 self.assign_comments(tree, self._comments)
             return tree
         except (ParseError, UnexpectedInput) as ex:
-            log.error("Parsing of Mapfile unsuccessful")
+            if fn:
+                log.error("Parsing of {} unsuccessful".format(fn))
+            else:
+                log.error("Parsing of Mapfile unsuccessful")
             log.info(ex)
             raise
