@@ -99,6 +99,9 @@ class Validator(object):
         path is the path to the error object, it can be empty if the error is in the root object
         http://python-jsonschema.readthedocs.io/en/latest/errors/#jsonschema.exceptions.ValidationError.absolute_path
         It can also reference an object in a list e.g. [u'layers', 0]
+
+        Unfortunately it is not currently possible to get the name of the failing property from the
+        JSONSchema error object, even though it is in the error message - see https://github.com/Julian/jsonschema/issues/119
         """
 
         if not path:
@@ -113,7 +116,7 @@ class Validator(object):
             key = path[-1]
             d = utils.findkey(rootdict, *path[:-1])
 
-        error_message = "ERROR: Invalid value for {}".format(key.upper())
+        error_message = "ERROR: Invalid value in {}".format(key.upper())
 
         # add a comment to the dict structure
 
