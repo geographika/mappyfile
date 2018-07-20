@@ -6,8 +6,10 @@ Python dict structure
 from __future__ import unicode_literals
 import sys
 from collections import OrderedDict
+from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
+
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES
 from mappyfile.ordereddict import CaseInsensitiveOrderedDict
@@ -27,6 +29,7 @@ class MapfileToDict(object):
         self.include_comments = include_comments
 
     def transform(self, tree):
+        tree = Canonize().transform(tree)
 
         self.mapfile_transformer = MapfileTransformer(include_position=self.include_position,
                                                       include_comments=self.include_comments)
@@ -36,6 +39,16 @@ class MapfileToDict(object):
             tree = comments_transformer.transform(tree)
 
         return self.mapfile_transformer.transform(tree)
+
+
+class Canonize(Transformer_InPlace):
+    @v_args(tree=True)
+    def symbolset(self, tree):
+        composite_type = Tree('composite_type', [Token('symbolset', 'symbolset')])
+
+        tree.data = 'composite'
+        tree.children.insert(0, composite_type)
+        return tree
 
 
 class MapfileTransformer(Transformer):

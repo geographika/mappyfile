@@ -42,7 +42,6 @@ def test_symbolset_include():
     assert(output(s, schema_name="map") == exp)
 
 
-@pytest.mark.xfail
 def test_symbolset_file():
     s = u"""
     SYMBOLSET

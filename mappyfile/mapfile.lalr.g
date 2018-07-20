@@ -1,4 +1,5 @@
-start: composite+
+start: "SYMBOLSET"i composite_body _END   -> symbolset
+     | composite+
 
 composite: composite_type composite_body _END
        | metadata
@@ -95,9 +96,7 @@ func_params: value ("," value)*
             | "SCALETOKEN"i
             | "STYLE"i
             | "WEB"i
-            | SYMBOL
-
-SYMBOL: "SYMBOL"i
+            | "SYMBOL"i
 
 AUTO: "AUTO"i
 PATH: /([a-z0-9_]*\.*\/|[a-z0-9_]+[.\/])[a-z0-9_\/\.-]+/i
