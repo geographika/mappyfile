@@ -6,6 +6,12 @@ import mappyfile
 import click
 
 
+def get_mapfiles(mapfiles):
+
+    all_mapfiles = [mf for sublist in mapfiles for mf in glob.glob(sublist) if not os.path.isdir(mf)]
+    return all_mapfiles
+
+
 def configure_logging(verbosity):
     """
     Configure logging level
@@ -40,35 +46,34 @@ def main(ctx, verbose, quiet):
 
 
 @main.command(short_help="Validate a Mapfile against a schema")
-@click.argument('mapfiles',  nargs=-1, type=click.Path()) # exists=True
+@click.argument('mapfiles', nargs=-1, type=click.Path()) # exists=True
 @click.option('--no-expand', is_flag=True, default=False)
 @click.pass_context
 def validate(ctx, mapfiles, no_expand):
     """
     mappyfile validate C:\Temp\valid.map
+    mappyfile validate C:\Temp\*.map D:\GitHub\mappyfile\tests\mapfiles\*.map --no-expand
     """
-    all_mapfiles =  [mf for sublist in mapfiles for mf in glob.glob(sublist) if not os.path.isdir(mf)]
+
+    all_mapfiles = get_mapfiles(mapfiles)
 
     if len(all_mapfiles) == 0:
-        click.echo("No Mapfiles found in the following locations: {}!".format(",".join(mapfiles)))
+        click.echo("No Mapfiles found at the following paths: {}".format(",".join(mapfiles)))
         return
 
     validation_count = 0
 
     for fn in all_mapfiles:
         fn = click.format_filename(fn)
-        if not os.path.isfile(fn):
-            click.echo("{} does not exist!".format(fn))
+        d = mappyfile.open(fn, expand_includes=not no_expand, include_position=True)
+        validation_messages = mappyfile.validate(d)
+        if validation_messages:
+            for v in validation_messages:
+                v["fn"] = fn
+                msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(**v)
+                click.echo(msg)
         else:
-            d = mappyfile.open(fn, expand_includes=not no_expand, include_position=True)
-            validation_messages = mappyfile.validate(d)
-            if validation_messages:
-                for v in validation_messages:
-                    v["fn"] = fn
-                    msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(**v)
-                    click.echo(msg)
-            else:
-                click.echo("{} validated successfully".format(fn))
-                validation_count += 1
+            click.echo("{} validated successfully".format(fn))
+            validation_count += 1
 
-    click.echo("{} file(s) validated".format(validation_count))
+    click.echo("{} file(s) validated ({} successfully)".format(len(all_mapfiles), validation_count))
