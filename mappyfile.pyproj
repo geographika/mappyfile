@@ -10,9 +10,7 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_pprint.py</StartupFile>
-  </PropertyGroup>
+</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
@@ -66,6 +64,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="docs\api\main.rst" />
+    <Content Include="docs\client.rst">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\comments.rst" />
     <Content Include="docs\development.rst" />
     <Content Include="docs\examples\animation\animated_buffer.map" />
@@ -282,7 +283,7 @@
     <Content Include="tests\mapfiles\performance\run3-py36\map6.map.txt" />
     <Content Include="tests\mapfiles\performance\run3-py36\map7.map.txt" />
     <Content Include="tests\mapfiles\performance\run3-py36\ReadMe.txt" />
-    <Content Include="tests\samples\connection.map" />
+    <Content Include="tests\samples\connection.incl" />
     <Content Include="tests\samples\include1_nested_path.map" />
     <Content Include="tests\samples\include1_recursive.map" />
     <Content Include="tests\samples\include2_recursive.map" />
@@ -299,6 +300,9 @@
     <Content Include="tests\samples\include3.map" />
     <Content Include="tests\samples\include2.map" />
     <Content Include="tests\samples\include1.map" />
+    <Content Include="tests\samples\pmapper_demo.map">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tests\sample_maps\256color_overdose.map" />
     <Content Include="tests\sample_maps\256color_overdose_cmt.map" />
     <Content Include="tests\sample_maps\256color_overdose_res.map" />
@@ -635,6 +639,9 @@
     <Compile Include="docs\scripts\xsdschema.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="mappyfile\cli.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyfile\linter.py">
       <SubType>Code</SubType>
     </Compile>
@@ -696,6 +703,7 @@
     </Compile>
     <Compile Include="tests\test_transformer.py" />
     <Compile Include="tests\test_linter.py" />
+    <Compile Include="tests\test_cli.py" />
     <Compile Include="tests\test_utils.py" />
     <Compile Include="tests\test_validation.py">
       <SubType>Code</SubType>
@@ -705,25 +713,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
-      <Id>{fad84a32-0226-4532-a164-c8103b59a949}</Id>
-      <Version>2.7</Version>
-      <Description>mappyfile (Python 64-bit 2.7)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
-    <Interpreter Include="C:\VirtualEnvs\mappyfile3\">
-      <Id>mappyfile3</Id>
-      <Version>3.6</Version>
-      <Description>mappyfile3 (Python 3.6 (64-bit))</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>X64</Architecture>
-    </Interpreter>
     <Interpreter Include="C:\VirtualEnvs\mappyfile\">
       <Id>mappyfile</Id>
       <Version>2.7</Version>
