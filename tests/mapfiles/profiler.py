@@ -6,22 +6,9 @@ import os
 import mappyfile
 
 
-PY2 = sys.version_info[0] < 3
-
-
 def parse(mf):
     m = mappyfile.open(mf, expand_includes=False)
     s = mappyfile.dumps(m)
-
-    # if PY2:
-    #     s = mappyfile.dumps(m)
-    #     f = tempfile.NamedTemporaryFile(delete=False)
-    #     f.write(s.encode("utf-8"))
-    # else:
-    #     f = tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8")
-    #     mappyfile.dump(m, f)
-
-    # f.close()
     return s
 
 
@@ -54,6 +41,6 @@ def run(test_name):
 
 
 if __name__ == "__main__":
-    test_name = "run2-py37"
+    test_name = "run3-py27"
     run(test_name)
     print("Done!")

@@ -10,8 +10,8 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_includes.py</StartupFile>
+    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
+    <StartupFile>tests\mapfiles\profiler.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,10 +42,12 @@
     <Folder Include="tests\" />
     <Folder Include="tests\mapfiles\" />
     <Folder Include="tests\mapfiles\performance\" />
-    <Folder Include="tests\mapfiles\performance\run2-py37\" />
+    <Folder Include="D:\GitHub\mappyfile\tests\mapfiles\performance\run3-py36\" />
+    <Folder Include="tests\mapfiles\performance\run3-py27\" />
+    <Folder Include="D:\GitHub\mappyfile\tests\mapfiles\performance\run2-py36\" />
     <Folder Include="tests\mapfiles\performance\run2-py27\" />
     <Folder Include="tests\mapfiles\performance\run1-py27\" />
-    <Folder Include="tests\mapfiles\performance\run1-py37\" />
+    <Folder Include="D:\GitHub\mappyfile\tests\mapfiles\performance\run1-py36\" />
     <Folder Include="tests\samples\" />
     <Folder Include="tests\samples\layers\" />
     <Folder Include="tests\samples\mapfile_include\" />
@@ -232,15 +234,15 @@
     <Content Include="tests\mapfiles\performance\run1-py27\map6.map.txt" />
     <Content Include="tests\mapfiles\performance\run1-py27\map7.map.txt" />
     <Content Include="tests\mapfiles\performance\run1-py27\ReadMe.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\itasca.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\large_map1.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\large_map2.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\large_map3.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\map4.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\map5.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\map6.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\map7.map.txt" />
-    <Content Include="tests\mapfiles\performance\run1-py37\ReadMe.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run1-py36\ReadMe.txt" />
     <Content Include="tests\mapfiles\performance\run2-py27\itasca.map.txt" />
     <Content Include="tests\mapfiles\performance\run2-py27\large_map1.map.txt" />
     <Content Include="tests\mapfiles\performance\run2-py27\large_map2.map.txt" />
@@ -250,15 +252,33 @@
     <Content Include="tests\mapfiles\performance\run2-py27\map6.map.txt" />
     <Content Include="tests\mapfiles\performance\run2-py27\map7.map.txt" />
     <Content Include="tests\mapfiles\performance\run2-py27\ReadMe.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\itasca.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\large_map1.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\large_map2.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\large_map3.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\map4.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\map5.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\map6.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\map7.map.txt" />
-    <Content Include="tests\mapfiles\performance\run2-py37\ReadMe.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run2-py36\ReadMe.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py27\ReadMe.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\itasca.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\large_map1.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\large_map2.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\large_map3.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\map4.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\map5.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\map6.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\map7.map.txt" />
+    <Content Include="tests\mapfiles\performance\run3-py36\ReadMe.txt" />
     <Content Include="tests\samples\connection.map" />
     <Content Include="tests\samples\include1_nested_path.map" />
     <Content Include="tests\samples\include1_recursive.map" />
