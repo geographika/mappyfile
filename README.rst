@@ -93,5 +93,5 @@ Contributors
 .. |Appveyor Build Status| image:: https://ci.appveyor.com/api/projects/status/mk33l07478gfytwh?svg=true
    :target: https://ci.appveyor.com/project/SethG/mappyfile
 
-.. |Coveralls| .. image:: https://coveralls.io/repos/github/geographika/mappyfile/badge.svg?branch=master
+.. |Coveralls| image:: https://coveralls.io/repos/github/geographika/mappyfile/badge.svg?branch=master
     :target: https://coveralls.io/github/geographika/mappyfile?branch=master
