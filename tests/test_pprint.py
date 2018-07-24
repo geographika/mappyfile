@@ -296,7 +296,6 @@ def test_auto_projection():
     assert(s == "MAP PROJECTION AUTO END END")
 
 
-
 def test_single_string_projection():
     d = {
     "projection": "init=epsg:4326",

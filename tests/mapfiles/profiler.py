@@ -1,4 +1,3 @@
-import sys
 import cProfile
 import pstats
 import glob
