@@ -62,7 +62,7 @@ class Parser(object):
                 inc_file_path = self._get_include_filename(l)
 
                 if not os.path.isabs(inc_file_path):
-                    inc_file_path = os.path.join(os.path.dirname(fn), inc_file_path)
+                    inc_file_path = os.path.abspath(os.path.join(os.path.dirname(fn), inc_file_path))
                 try:
                     include_text = self.open_file(inc_file_path)
                 except IOError as ex:
