@@ -296,6 +296,19 @@ def test_auto_projection():
     assert(s == "MAP PROJECTION AUTO END END")
 
 
+
+def test_single_string_projection():
+    d = {
+    "projection": "init=epsg:4326",
+    "__type__": "map"
+    }
+
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
+    s = pp.pprint(d)
+    print(s)
+    assert(s == "MAP PROJECTION 'init=epsg:4326' END END")
+
+
 def test_print_boolean():
     d = {
         "transform": True,
@@ -375,6 +388,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    # test_get_ref_attribute_properties()
-    run_tests()
+    test_single_string_projection()
+    # run_tests()
     print("Done!")

@@ -211,7 +211,11 @@ class PrettyPrinter(object):
 
         lines = [self.add_start_line(key, level)]
 
-        if len(lst) == 1 and lst[0].upper() == "AUTO":
+        if self.quoter.is_string(lst):
+            val = self.quoter.add_quotes(lst)
+            # the value has been manually set to a single string projection
+            lines.append(u"{}{}".format(self.whitespace(level, 2), val))
+        elif len(lst) == 1 and lst[0].upper() == "AUTO":
             lines.append(u"{}{}".format(self.whitespace(level, 2), "AUTO"))
         else:
             for v in lst:
