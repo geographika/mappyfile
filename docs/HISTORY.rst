@@ -1,10 +1,14 @@
 Releases
 --------
 
-0.7.2 (unreleased)
+0.7.2 (24/07/2018)
 ++++++++++++++++++
 
-+ **Breaking Change** ``mappyfile.findall`` returns a list rather than a generator
++ Update of Lark parser to 0.6.2 and associated changes - thanks @erezsh
++ ``mappyfile.findall`` returns a list rather than a generator
++ ``SYMBOLSET`` files now supported (both parsing and transforming)
++ `#63 <https://github.com/geographika/mappyfile/issues/63>`_ - Set the PROJECTION value correctly for single strings
++ `#61 <https://github.com/geographika/mappyfile/issues/61>`_ - Remove quotes in mappyfile.findall()
 
 0.7.1 (10/07/2018)
 ++++++++++++++++++
