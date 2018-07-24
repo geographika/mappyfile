@@ -8,12 +8,11 @@ python:
     - "pypy"
     - "pypy3"
 install:
-    - pip install -r requirements-dev.txt
-    - pip install tox-travis flake8 coveralls
+    - pip install tox-travis coveralls
 script:
     - tox
-    - coverage run --source mappyfile -m py.test
-    - coverage report -m
+    #- coverage run --source mappyfile -m py.test
+    #- coverage report -m
 
 after_success:
     - coveralls
