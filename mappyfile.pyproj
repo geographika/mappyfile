@@ -43,11 +43,14 @@
     <Folder Include="tests\mapfiles\" />
     <Folder Include="tests\mapfiles\performance\" />
     <Folder Include="D:\GitHub\mappyfile\tests\mapfiles\performance\run3-py36\" />
+    <Folder Include="tests\mapfiles\performance\run1-py36\" />
+    <Folder Include="tests\mapfiles\performance\run2-py36\" />
     <Folder Include="tests\mapfiles\performance\run3-py27\" />
     <Folder Include="D:\GitHub\mappyfile\tests\mapfiles\performance\run2-py36\" />
     <Folder Include="tests\mapfiles\performance\run2-py27\" />
     <Folder Include="tests\mapfiles\performance\run1-py27\" />
     <Folder Include="D:\GitHub\mappyfile\tests\mapfiles\performance\run1-py36\" />
+    <Folder Include="tests\mapfiles\performance\run3-py36\" />
     <Folder Include="tests\samples\" />
     <Folder Include="tests\samples\layers\" />
     <Folder Include="tests\samples\mapfile_include\" />
