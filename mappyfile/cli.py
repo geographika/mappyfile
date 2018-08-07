@@ -1,5 +1,6 @@
 import sys
 import os
+import codecs
 import glob
 import logging
 import mappyfile
@@ -45,14 +46,63 @@ def main(ctx, verbose, quiet):
     ctx.obj['verbosity'] = verbosity
 
 
-@main.command(short_help="Validate a Mapfile against a schema")
-@click.argument('mapfiles', nargs=-1, type=click.Path()) # exists=True
-@click.option('--no-expand', is_flag=True, default=False)
+@main.command(short_help="Format a Mapfile")
+@click.argument('input-mapfile', nargs=1, type=click.Path(exists=True))
+@click.argument('output-mapfile',  nargs=1, type=click.Path())
+@click.option('--indent', default=4, show_default=True, help="The number of spacer characters to indent structures in the Mapfile")
+@click.option('--spacer', default=" ", help="The character to use for indenting structures in the Mapfile")
+@click.option('--quote', default='"', help="The quote character to use in the Mapfile (double or single quotes). Ensure these are escaped e.g. \\\" or \\' [default: \\\"]")
+@click.option('--newlinechar', default='\n', help="The character used to insert newlines in the Mapfile [default: \\n]")
+@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile")
+@click.option('--comments/--no-comments', default=False, show_default=True, help="Keep Mapfile comments in the output (experimental)")
 @click.pass_context
-def validate(ctx, mapfiles, no_expand):
+def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinechar, expand, comments):
     """
-    mappyfile validate C:\Temp\valid.map
-    mappyfile validate C:\Temp\*.map D:\GitHub\mappyfile\tests\mapfiles\*.map --no-expand
+    Format a the input-mapfile and save as output-mapfile. Note output-mapfile will be 
+    overwritten if it already exists. 
+    
+    Example of formatting a single Mapfile:
+
+        mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map
+
+    Example of formatting a single Mapfile with single quotes and tabs for indentation:
+
+        mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map --quote=\\' --indent=1 --spacer=\t
+
+    Example of formatting a single Mapfile without expanding includes, but including comments:
+
+        mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map --no-expand --comments
+    """
+
+    quote = codecs.decode(quote, 'unicode_escape') # ensure \t is handled as a tab
+    spacer = codecs.decode(spacer, 'unicode_escape') # ensure \t is handled as a tab
+    newlinechar = codecs.decode(newlinechar, 'unicode_escape') # ensure \n is handled as a newline
+
+    d = mappyfile.open(input_mapfile, expand_includes=expand, include_comments=comments, include_position=True)
+    mappyfile.save(d, output_mapfile, indent=indent, spacer=spacer, quote=quote, newlinechar=newlinechar)
+    sys.exit(0)
+
+
+@main.command(short_help="Validate Mapfile(s) against a schema")
+@click.argument('mapfiles', nargs=-1, type=click.Path())
+@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile")
+@click.pass_context
+def validate(ctx, mapfiles, expand):
+    """
+    Validate Mapfile(s) against the Mapfile schema
+
+    The MAPFILES argument is a list of paths, either to individual Mapfiles, or a folders containing Mapfiles. 
+    Wildcards are supported (natively on Linux, and up to one level deep on Windows).
+    Validation errors are reported to the console. The program returns the error count - this will be 0 if no
+    validation errors are encountered. 
+
+    Example of validating a single Mapfile:
+
+        mappyfile validate C:/Temp/valid.map
+
+    Example of validating two folders containing Mapfiles, without expanding INCLUDES:
+
+        mappyfile validate C:/Temp/*.map D:/GitHub/mappyfile/tests/mapfiles/*.map --no-expand
     """
 
     all_mapfiles = get_mapfiles(mapfiles)
@@ -62,18 +112,26 @@ def validate(ctx, mapfiles, no_expand):
         return
 
     validation_count = 0
+    errors = 0
 
     for fn in all_mapfiles:
         fn = click.format_filename(fn)
-        d = mappyfile.open(fn, expand_includes=not no_expand, include_position=True)
+        d = mappyfile.open(fn, expand_includes=expand, include_position=True)
+
+        import json
+        with open(r"C:\temp\d.json", "w") as f:
+            f.write(json.dumps(d, indent=4))
+
         validation_messages = mappyfile.validate(d)
         if validation_messages:
             for v in validation_messages:
                 v["fn"] = fn
                 msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(**v)
                 click.echo(msg)
+                errors += 1
         else:
             click.echo("{} validated successfully".format(fn))
             validation_count += 1
 
     click.echo("{} file(s) validated ({} successfully)".format(len(all_mapfiles), validation_count))
+    sys.exit(errors)
