@@ -406,6 +406,40 @@ END"""
     print(mappyfile.dumps(d))
 
 
+def test_line_position_mutlilines():
+
+    s = """MAP
+    NAME "sample"
+    LAYER
+        NAME "test"
+        STATUS DEFAULT
+        DATA "SELECT GEOM
+        FROM
+        TABLE"
+        TYPE LINEX
+    END
+END"""
+
+    p = Parser()
+    m = MapfileToDict()
+
+    ast = p.parse(s)
+    print(ast)
+
+    d = mappyfile.loads(s, include_position=True)
+    v = Validator()
+    errors = v.validate(d, add_comments=True)
+    print(json.dumps(d, indent=4))
+    # print(errors)
+    for e in errors:
+        print(e)
+    assert(len(errors) == 1)
+    err = errors[0]
+    assert(err["line"] == 9)
+    assert(err["column"] == 9)
+    print(mappyfile.dumps(d))
+
+
 def run_tests():
     """
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -418,5 +452,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_add_comments()
+    test_line_position_mutlilines()
     print("Done!")
