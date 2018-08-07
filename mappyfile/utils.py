@@ -180,7 +180,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     quote: string
         The quote character to use in the Mapfile (double or single quotes)
     newlinechar: string
-        The character to to insert newlines in the Mapfile
+        The character used to insert newlines in the Mapfile
 
     Example
     -------
@@ -226,7 +226,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     quote: string
         The quote character to use in the Mapfile (double or single quotes)
     newlinechar: string
-        The character to to insert newlines in the Mapfile
+        The character used to insert newlines in the Mapfile
 
     Returns
     -------
@@ -264,7 +264,7 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     quote: string
         The quote character to use in the Mapfile (double or single quotes)
     newlinechar: string
-        The character to to insert newlines in the Mapfile
+        The character used to insert newlines in the Mapfile
 
     Returns
     -------
