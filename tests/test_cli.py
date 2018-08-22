@@ -16,7 +16,6 @@ def test_get_mapfiles():
     os.remove(tf.name)
 
 
-
 def run_tests():
     pytest.main(["tests/test_cli.py"])
 

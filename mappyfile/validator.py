@@ -101,7 +101,8 @@ class Validator(object):
         It can also reference an object in a list e.g. [u'layers', 0]
 
         Unfortunately it is not currently possible to get the name of the failing property from the
-        JSONSchema error object, even though it is in the error message - see https://github.com/Julian/jsonschema/issues/119
+        JSONSchema error object, even though it is in the error message.
+        See https://github.com/Julian/jsonschema/issues/119
         """
 
         if not path:

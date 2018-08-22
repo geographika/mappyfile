@@ -30,6 +30,8 @@ def configure_logging(verbosity):
 
 
 logger = logging.getLogger(__name__)
+
+
 # The CLI command group.
 @click.group(help="Command line interface for the mappyfile package")
 @click.option('--verbose', '-v', count=True, help="Increase verbosity")
@@ -49,18 +51,18 @@ def main(ctx, verbose, quiet):
 @main.command(short_help="Format a Mapfile")
 @click.argument('input-mapfile', nargs=1, type=click.Path(exists=True))
 @click.argument('output-mapfile',  nargs=1, type=click.Path())
-@click.option('--indent', default=4, show_default=True, help="The number of spacer characters to indent structures in the Mapfile")
+@click.option('--indent', default=4, show_default=True, help="The number of spacer characters to indent structures in the Mapfile") # noqa
 @click.option('--spacer', default=" ", help="The character to use for indenting structures in the Mapfile")
-@click.option('--quote', default='"', help="The quote character to use in the Mapfile (double or single quotes). Ensure these are escaped e.g. \\\" or \\' [default: \\\"]")
+@click.option('--quote', default='"', help="The quote character to use in the Mapfile (double or single quotes). Ensure these are escaped e.g. \\\" or \\' [default: \\\"]") # noqa
 @click.option('--newlinechar', default='\n', help="The character used to insert newlines in the Mapfile [default: \\n]")
-@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile")
-@click.option('--comments/--no-comments', default=False, show_default=True, help="Keep Mapfile comments in the output (experimental)")
+@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile") # noqa
+@click.option('--comments/--no-comments', default=False, show_default=True, help="Keep Mapfile comments in the output (experimental)") # noqa
 @click.pass_context
 def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinechar, expand, comments):
     """
-    Format a the input-mapfile and save as output-mapfile. Note output-mapfile will be 
-    overwritten if it already exists. 
-    
+    Format a the input-mapfile and save as output-mapfile. Note output-mapfile will be
+    overwritten if it already exists.
+
     Example of formatting a single Mapfile:
 
         mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map
@@ -74,9 +76,9 @@ def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinecha
         mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map --no-expand --comments
     """
 
-    quote = codecs.decode(quote, 'unicode_escape') # ensure \t is handled as a tab
-    spacer = codecs.decode(spacer, 'unicode_escape') # ensure \t is handled as a tab
-    newlinechar = codecs.decode(newlinechar, 'unicode_escape') # ensure \n is handled as a newline
+    quote = codecs.decode(quote, 'unicode_escape')  # ensure \t is handled as a tab
+    spacer = codecs.decode(spacer, 'unicode_escape')  # ensure \t is handled as a tab
+    newlinechar = codecs.decode(newlinechar, 'unicode_escape')  # ensure \n is handled as a newline
 
     d = mappyfile.open(input_mapfile, expand_includes=expand, include_comments=comments, include_position=True)
     mappyfile.save(d, output_mapfile, indent=indent, spacer=spacer, quote=quote, newlinechar=newlinechar)
@@ -85,16 +87,16 @@ def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinecha
 
 @main.command(short_help="Validate Mapfile(s) against a schema")
 @click.argument('mapfiles', nargs=-1, type=click.Path())
-@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile")
+@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile") # noqa
 @click.pass_context
 def validate(ctx, mapfiles, expand):
     """
     Validate Mapfile(s) against the Mapfile schema
 
-    The MAPFILES argument is a list of paths, either to individual Mapfiles, or a folders containing Mapfiles. 
+    The MAPFILES argument is a list of paths, either to individual Mapfiles, or a folders containing Mapfiles.
     Wildcards are supported (natively on Linux, and up to one level deep on Windows).
     Validation errors are reported to the console. The program returns the error count - this will be 0 if no
-    validation errors are encountered. 
+    validation errors are encountered.
 
     Example of validating a single Mapfile:
 

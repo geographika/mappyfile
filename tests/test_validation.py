@@ -421,8 +421,6 @@ def test_line_position_mutlilines():
 END"""
 
     p = Parser()
-    m = MapfileToDict()
-
     ast = p.parse(s)
     print(ast)
 
