@@ -254,6 +254,9 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
     Output a Mapfile dictionary as a string
 
+    Parameters
+    ----------
+
     d: dict
         A Python dictionary based on the the mappyfile schema
     indent: int
@@ -560,6 +563,9 @@ def update(d1, d2):
 def validate(d):
     """
     Validate a mappyfile dictionary by using the Mapfile schema
+
+    Parameters
+    ----------
 
     d: dict
         A Python dictionary based on the the mappyfile schema
