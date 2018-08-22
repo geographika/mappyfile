@@ -1,7 +1,7 @@
 mappyfile
 =========
 
-| |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| 
+| |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| |Downloads|
 
 A pure Python MapFile parser for working with MapServer, built using `Lark <https://github.com/erezsh/lark>`_
 
@@ -95,3 +95,6 @@ Contributors
 
 .. |Coveralls| image:: https://coveralls.io/repos/github/geographika/mappyfile/badge.svg?branch=master
     :target: https://coveralls.io/github/geographika/mappyfile?branch=master
+
+.. |Downloads| image:: http://pepy.tech/badge/mappyfile
+    :target: http://pepy.tech/project/mappyfile
