@@ -118,10 +118,6 @@ def validate(ctx, mapfiles, expand):
         fn = click.format_filename(fn)
         d = mappyfile.open(fn, expand_includes=expand, include_position=True)
 
-        import json
-        with open(r"C:\temp\d.json", "w") as f:
-            f.write(json.dumps(d, indent=4))
-
         validation_messages = mappyfile.validate(d)
         if validation_messages:
             for v in validation_messages:
