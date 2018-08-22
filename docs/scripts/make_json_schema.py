@@ -21,7 +21,7 @@ document = {
 }
 
 import os
-d = r"D:\GitHub\mappyfile\mappyfile\schemas"
+d = r"D:/GitHub/mappyfile/mappyfile/schemas"
 os.chdir(d)
 fn = "map.json"
 
@@ -31,7 +31,7 @@ with open(fn) as f:
 
 jsn = jsonref.dumps(j, indent=4, sort_keys=False)
 
-with open(r"D:\Temp\mapfile.json", "w") as f:
+with open("../../docs/schemas/mapfile.json", "w") as f:
     f.write(jsonref.dumps(j, indent=4, sort_keys=False))
 
 ## The JsonRef.replace_refs class method will return a copy of the document

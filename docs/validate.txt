@@ -1,0 +1,24 @@
+Usage: mappyfile validate [OPTIONS] [MAPFILES]...
+
+  Validate Mapfile(s) against the Mapfile schema
+
+  The MAPFILES argument is a list of paths, either to individual Mapfiles,
+  or a folders containing Mapfiles.  Wildcards are supported (natively on
+  Linux, and up to one level deep on Windows). Validation errors are
+  reported to the console. The program returns the error count - this will
+  be 0 if no validation errors are encountered.
+
+  Example of validating a single Mapfile:
+
+      mappyfile validate C:/Temp/valid.map
+
+  Example of validating two folders containing Mapfiles, without expanding
+  INCLUDES:
+
+      mappyfile validate C:/Temp/*.map
+      D:/GitHub/mappyfile/tests/mapfiles/*.map --no-expand
+
+Options:
+  --expand / --no-expand  Expand any INCLUDE directives found in the Mapfile
+                          [default: True]
+  --help                  Show this message and exit.

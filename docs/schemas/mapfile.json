@@ -1,0 +1,2806 @@
+{
+    "additionalProperties": false, 
+    "type": "object", 
+    "$schema": "http://json-schema.org/schema#", 
+    "patternProperties": {
+        "^__[a-z]+__$": {}
+    }, 
+    "properties": {
+        "projection": {
+            "oneOf": [
+                {
+                    "minItems": 1, 
+                    "items": {
+                        "type": "string"
+                    }, 
+                    "type": "array"
+                }, 
+                {
+                    "enum": [
+                        "auto"
+                    ]
+                }
+            ]
+        }, 
+        "reference": {
+            "type": "object"
+        }, 
+        "defresolution": {
+            "type": "integer"
+        }, 
+        "symbols": {
+            "items": {
+                "additionalProperties": false, 
+                "type": "object", 
+                "patternProperties": {
+                    "^__[a-z]+__$": {}
+                }, 
+                "properties": {
+                    "include": {
+                        "items": {
+                            "type": "string"
+                        }, 
+                        "type": "array"
+                    }, 
+                    "anchorpoint": {
+                        "minItems": 2, 
+                        "items": [
+                            {
+                                "minimum": 0, 
+                                "type": "number", 
+                                "maximum": 1
+                            }
+                        ], 
+                        "type": "array", 
+                        "maxItems": 2
+                    }, 
+                    "name": {
+                        "type": "string"
+                    }, 
+                    "__type__": {
+                        "enum": [
+                            "symbol"
+                        ]
+                    }, 
+                    "image": {
+                        "type": "string"
+                    }, 
+                    "character": {
+                        "minLength": 1, 
+                        "type": "string", 
+                        "maxLength": 1
+                    }, 
+                    "antialias": {
+                        "type": "boolean"
+                    }, 
+                    "points": {
+                        "items": {
+                            "items": {
+                                "minItems": 2, 
+                                "type": "number", 
+                                "maxItems": 2
+                            }, 
+                            "type": "array"
+                        }, 
+                        "type": "array"
+                    }, 
+                    "backgroundcolor": {
+                        "oneOf": [
+                            {
+                                "minItems": 3, 
+                                "items": {
+                                    "minimum": -1, 
+                                    "type": "number", 
+                                    "maximum": 255
+                                }, 
+                                "type": "array", 
+                                "maxItems": 3
+                            }, 
+                            {
+                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                "type": "string", 
+                                "example": "#aa33cc"
+                            }
+                        ]
+                    }, 
+                    "font": {
+                        "type": "string"
+                    }, 
+                    "type": {
+                        "enum": [
+                            "ellipse", 
+                            "hatch", 
+                            "pixmap", 
+                            "svg", 
+                            "truetype", 
+                            "vector"
+                        ]
+                    }, 
+                    "transparent": {
+                        "type": "integer"
+                    }, 
+                    "filled": {
+                        "type": "boolean"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "outputformats": {
+            "items": {
+                "type": "object"
+            }, 
+            "type": "array"
+        }, 
+        "transparent": {
+            "enum": [
+                "on", 
+                "off"
+            ], 
+            "type": "string"
+        }, 
+        "imagetype": {
+            "type": "string"
+        }, 
+        "size": {
+            "minItems": 2, 
+            "items": {
+                "type": "integer"
+            }, 
+            "type": "array", 
+            "maxItems": 2
+        }, 
+        "layers": {
+            "items": {
+                "additionalProperties": false, 
+                "type": "object", 
+                "patternProperties": {
+                    "^__[a-z]+__$": {}
+                }, 
+                "properties": {
+                    "toleranceunits": {
+                        "enum": [
+                            "pixels", 
+                            "feet", 
+                            "inches", 
+                            "kilometers", 
+                            "meters", 
+                            "miles", 
+                            "nauticalmiles", 
+                            "dd"
+                        ]
+                    }, 
+                    "tilesrs": {
+                        "type": "string"
+                    }, 
+                    "opacity": {
+                        "type": "integer"
+                    }, 
+                    "features": {
+                        "items": {
+                            "additionalProperties": false, 
+                            "type": "object", 
+                            "patternProperties": {
+                                "^__[a-z]+__$": {}
+                            }, 
+                            "properties": {
+                                "items": {
+                                    "type": "string"
+                                }, 
+                                "__type__": {
+                                    "enum": [
+                                        "feature"
+                                    ]
+                                }, 
+                                "points": {
+                                    "oneOf": [
+                                        {
+                                            "items": {
+                                                "items": {
+                                                    "items": {
+                                                        "minItems": 2, 
+                                                        "type": "number", 
+                                                        "maxItems": 2
+                                                    }, 
+                                                    "type": "array"
+                                                }, 
+                                                "type": "array"
+                                            }, 
+                                            "type": "array"
+                                        }, 
+                                        {
+                                            "items": {
+                                                "items": {
+                                                    "minItems": 2, 
+                                                    "type": "number", 
+                                                    "maxItems": 2
+                                                }, 
+                                                "type": "array"
+                                            }, 
+                                            "type": "array"
+                                        }
+                                    ]
+                                }, 
+                                "text": {
+                                    "type": "string"
+                                }, 
+                                "include": {
+                                    "items": {
+                                        "type": "string"
+                                    }, 
+                                    "type": "array"
+                                }, 
+                                "wkt": {
+                                    "type": "string"
+                                }
+                            }
+                        }, 
+                        "type": "array"
+                    }, 
+                    "labelitem": {
+                        "type": "string"
+                    }, 
+                    "encoding": {
+                        "type": "string"
+                    }, 
+                    "maxfeatures": {
+                        "type": "integer"
+                    }, 
+                    "maxscaledenom": {
+                        "type": "number"
+                    }, 
+                    "maxscale": {
+                        "type": "number", 
+                        "metadata": {
+                            "deprecated": true, 
+                            "maxVersion": 5.0
+                        }
+                    }, 
+                    "connectiontype": {
+                        "enum": [
+                            "contour", 
+                            "kerneldensity", 
+                            "local", 
+                            "ogr", 
+                            "oraclespatial", 
+                            "plugin", 
+                            "postgis", 
+                            "sde", 
+                            "union", 
+                            "uvraster", 
+                            "wfs", 
+                            "wms", 
+                            "mygis"
+                        ]
+                    }, 
+                    "labelminscale": {
+                        "type": "number", 
+                        "metadata": {
+                            "deprecated": true, 
+                            "minVersion": 0, 
+                            "maxVersion": 5.0
+                        }
+                    }, 
+                    "cluster": {
+                        "type": "object"
+                    }, 
+                    "minscaledenom": {
+                        "type": "number"
+                    }, 
+                    "projection": {
+                        "oneOf": [
+                            {
+                                "minItems": 1, 
+                                "items": {
+                                    "type": "string"
+                                }, 
+                                "type": "array"
+                            }, 
+                            {
+                                "enum": [
+                                    "auto"
+                                ]
+                            }
+                        ]
+                    }, 
+                    "postlabelcache": {
+                        "type": "boolean"
+                    }, 
+                    "labelmaxscale": {
+                        "type": "number", 
+                        "metadata": {
+                            "deprecated": true, 
+                            "minVersion": 0, 
+                            "maxVersion": 5.0
+                        }
+                    }, 
+                    "group": {
+                        "type": "string"
+                    }, 
+                    "dump": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            }, 
+                            {
+                                "enum": [
+                                    "on", 
+                                    "off"
+                                ], 
+                                "type": "string"
+                            }
+                        ]
+                    }, 
+                    "footer": {
+                        "type": "string"
+                    }, 
+                    "filteritem": {
+                        "type": "string"
+                    }, 
+                    "mingeowidth": {
+                        "type": "number"
+                    }, 
+                    "labelrequires": {
+                        "type": "string"
+                    }, 
+                    "__type__": {
+                        "enum": [
+                            "layer"
+                        ]
+                    }, 
+                    "transform": {
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            }, 
+                            {
+                                "enum": [
+                                    "ul", 
+                                    "uc", 
+                                    "ur", 
+                                    "cl", 
+                                    "cc", 
+                                    "cr", 
+                                    "ll", 
+                                    "lc", 
+                                    "lr"
+                                ]
+                            }
+                        ]
+                    }, 
+                    "labelcache": {
+                        "enum": [
+                            "on", 
+                            "off"
+                        ], 
+                        "type": "string"
+                    }, 
+                    "labelangleitem": {
+                        "type": "string"
+                    }, 
+                    "metadata": {
+                        "additionalProperties": true, 
+                        "type": "object", 
+                        "properties": {}
+                    }, 
+                    "classgroup": {
+                        "type": "string"
+                    }, 
+                    "template": {
+                        "type": "string"
+                    }, 
+                    "units": {
+                        "enum": [
+                            "dd", 
+                            "feet", 
+                            "inches", 
+                            "kilometers", 
+                            "meters", 
+                            "miles", 
+                            "nauticalmiles", 
+                            "percentages", 
+                            "pixels"
+                        ]
+                    }, 
+                    "geomtransform": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            }, 
+                            {
+                                "pattern": "^\\((.*?)\\)$", 
+                                "type": "string"
+                            }
+                        ]
+                    }, 
+                    "include": {
+                        "items": {
+                            "type": "string"
+                        }, 
+                        "type": "array"
+                    }, 
+                    "type": {
+                        "enum": [
+                            "chart", 
+                            "circle", 
+                            "line", 
+                            "point", 
+                            "polygon", 
+                            "raster", 
+                            "query", 
+                            "annotation"
+                        ]
+                    }, 
+                    "labelmaxscaledenom": {
+                        "type": "number"
+                    }, 
+                    "status": {
+                        "enum": [
+                            "on", 
+                            "off", 
+                            "default"
+                        ], 
+                        "type": "string"
+                    }, 
+                    "utfdata": {
+                        "type": "string"
+                    }, 
+                    "processing": {
+                        "items": {
+                            "type": "string"
+                        }, 
+                        "type": "array"
+                    }, 
+                    "classitem": {
+                        "type": "string"
+                    }, 
+                    "header": {
+                        "type": "string"
+                    }, 
+                    "symbolscaledenom": {
+                        "type": "number"
+                    }, 
+                    "scaletokens": {
+                        "items": {
+                            "additionalProperties": false, 
+                            "type": "object", 
+                            "patternProperties": {
+                                "^__[a-z]+__$": {}
+                            }, 
+                            "properties": {
+                                "__type__": {
+                                    "enum": [
+                                        "scaletoken"
+                                    ]
+                                }, 
+                                "include": {
+                                    "items": {
+                                        "type": "string"
+                                    }, 
+                                    "type": "array"
+                                }, 
+                                "values": {
+                                    "additionalProperties": true, 
+                                    "type": "object", 
+                                    "properties": {}
+                                }, 
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }, 
+                        "type": "array"
+                    }, 
+                    "plugin": {
+                        "type": "string"
+                    }, 
+                    "grid": {
+                        "additionalProperties": false, 
+                        "type": "object", 
+                        "patternProperties": {
+                            "^__[a-z]+__$": {}
+                        }, 
+                        "properties": {
+                            "minarcs": {
+                                "default": 16, 
+                                "type": "number"
+                            }, 
+                            "include": {
+                                "items": {
+                                    "type": "string"
+                                }, 
+                                "type": "array"
+                            }, 
+                            "labelformat": {
+                                "additionalProperties": true, 
+                                "enum": [
+                                    "dd", 
+                                    "ddmm", 
+                                    "ddmmss"
+                                ], 
+                                "type": "string"
+                            }, 
+                            "__type__": {
+                                "enum": [
+                                    "grid"
+                                ]
+                            }, 
+                            "maxinterval": {
+                                "type": "number"
+                            }, 
+                            "minsubdivide": {
+                                "type": "number"
+                            }, 
+                            "mininterval": {
+                                "type": "number"
+                            }, 
+                            "maxsubdivide": {
+                                "default": 256, 
+                                "type": "number"
+                            }, 
+                            "maxarcs": {
+                                "type": "number"
+                            }
+                        }
+                    }, 
+                    "extent": {
+                        "minItems": 4, 
+                        "items": {
+                            "type": "number"
+                        }, 
+                        "type": "array", 
+                        "maxItems": 4
+                    }, 
+                    "tileitem": {
+                        "type": "string"
+                    }, 
+                    "minscale": {
+                        "type": "number", 
+                        "metadata": {
+                            "deprecated": true, 
+                            "minVersion": 0, 
+                            "maxVersion": 5.0
+                        }
+                    }, 
+                    "labelminscaledenom": {
+                        "type": "number"
+                    }, 
+                    "data": {
+                        "type": "string"
+                    }, 
+                    "utfitem": {
+                        "type": "string"
+                    }, 
+                    "maxgeowidth": {
+                        "type": "number"
+                    }, 
+                    "join": {
+                        "type": "object"
+                    }, 
+                    "name": {
+                        "type": "string"
+                    }, 
+                    "__comments__": {
+                        "type": "object"
+                    }, 
+                    "sizeunits": {
+                        "enum": [
+                            "feet", 
+                            "inches", 
+                            "kilometers", 
+                            "meters", 
+                            "miles", 
+                            "nauticalmiles", 
+                            "pixels"
+                        ]
+                    }, 
+                    "tolerance": {
+                        "type": "number"
+                    }, 
+                    "styleitem": {
+                        "type": "string"
+                    }, 
+                    "mask": {
+                        "type": "string"
+                    }, 
+                    "offsite": {
+                        "oneOf": [
+                            {
+                                "minItems": 3, 
+                                "items": {
+                                    "minimum": -1, 
+                                    "type": "number", 
+                                    "maximum": 255
+                                }, 
+                                "type": "array", 
+                                "maxItems": 3
+                            }, 
+                            {
+                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                "type": "string", 
+                                "example": "#aa33cc"
+                            }
+                        ]
+                    }, 
+                    "filter": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            }, 
+                            {
+                                "pattern": "^\\((.*?)\\)$", 
+                                "type": "string", 
+                                "description": "expression"
+                            }, 
+                            {
+                                "pattern": "^/(.*?)/$", 
+                                "type": "string", 
+                                "description": "regex"
+                            }
+                        ]
+                    }, 
+                    "connection": {
+                        "type": "string"
+                    }, 
+                    "classes": {
+                        "items": {
+                            "additionalProperties": false, 
+                            "type": "object", 
+                            "patternProperties": {
+                                "^__[a-z]+__$": {}
+                            }, 
+                            "properties": {
+                                "size": {
+                                    "type": "integer"
+                                }, 
+                                "status": {
+                                    "enum": [
+                                        "on", 
+                                        "off"
+                                    ], 
+                                    "type": "string"
+                                }, 
+                                "color": {
+                                    "oneOf": [
+                                        {
+                                            "minItems": 3, 
+                                            "items": {
+                                                "minimum": -1, 
+                                                "type": "number", 
+                                                "maximum": 255
+                                            }, 
+                                            "type": "array", 
+                                            "maxItems": 3
+                                        }, 
+                                        {
+                                            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                            "type": "string", 
+                                            "example": "#aa33cc"
+                                        }
+                                    ]
+                                }, 
+                                "text": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        }, 
+                                        {
+                                            "pattern": "^\\((.*?)\\)$", 
+                                            "type": "string", 
+                                            "description": "expression"
+                                        }, 
+                                        {
+                                            "pattern": "^/(.*?)/$", 
+                                            "type": "string", 
+                                            "description": "regex"
+                                        }
+                                    ]
+                                }, 
+                                "labels": {
+                                    "items": {
+                                        "additionalProperties": false, 
+                                        "type": "object", 
+                                        "patternProperties": {
+                                            "^__[a-z]+__$": {}
+                                        }, 
+                                        "properties": {
+                                            "size": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "integer"
+                                                    }, 
+                                                    {
+                                                        "additionalProperties": false, 
+                                                        "enum": [
+                                                            "tiny", 
+                                                            "small", 
+                                                            "medium", 
+                                                            "large", 
+                                                            "giant"
+                                                        ], 
+                                                        "type": "string"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "force": {
+                                                "type": "boolean"
+                                            }, 
+                                            "encoding": {
+                                                "type": "string"
+                                            }, 
+                                            "color": {
+                                                "oneOf": [
+                                                    {
+                                                        "oneOf": [
+                                                            {
+                                                                "minItems": 3, 
+                                                                "items": {
+                                                                    "minimum": -1, 
+                                                                    "type": "number", 
+                                                                    "maximum": 255
+                                                                }, 
+                                                                "type": "array", 
+                                                                "maxItems": 3
+                                                            }, 
+                                                            {
+                                                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                "type": "string", 
+                                                                "example": "#aa33cc"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "text": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\((.*?)\\)$", 
+                                                        "type": "string", 
+                                                        "description": "expression"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^/(.*?)/$", 
+                                                        "type": "string", 
+                                                        "description": "regex"
+                                                    }
+                                                ]
+                                            }, 
+                                            "minsize": {
+                                                "type": "integer"
+                                            }, 
+                                            "repeatdistance": {
+                                                "default": 0, 
+                                                "type": "integer"
+                                            }, 
+                                            "wrap": {
+                                                "minLength": 1, 
+                                                "type": "string", 
+                                                "maxLength": 1
+                                            }, 
+                                            "font": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "string"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "minscaledenom": {
+                                                "type": "number"
+                                            }, 
+                                            "outlinecolor": {
+                                                "oneOf": [
+                                                    {
+                                                        "oneOf": [
+                                                            {
+                                                                "minItems": 3, 
+                                                                "items": {
+                                                                    "minimum": -1, 
+                                                                    "type": "number", 
+                                                                    "maximum": 255
+                                                                }, 
+                                                                "type": "array", 
+                                                                "maxItems": 3
+                                                            }, 
+                                                            {
+                                                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                "type": "string", 
+                                                                "example": "#aa33cc"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "angle": {
+                                                "oneOf": [
+                                                    {
+                                                        "additionalProperties": false, 
+                                                        "enum": [
+                                                            "auto", 
+                                                            "auto2", 
+                                                            "follow"
+                                                        ], 
+                                                        "type": "string"
+                                                    }, 
+                                                    {
+                                                        "type": "number"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "__type__": {
+                                                "enum": [
+                                                    "label"
+                                                ]
+                                            }, 
+                                            "partials": {
+                                                "type": "boolean"
+                                            }, 
+                                            "priority": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "integer"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "maxsize": {
+                                                "type": "integer"
+                                            }, 
+                                            "mindistance": {
+                                                "type": "integer"
+                                            }, 
+                                            "outlinewidth": {
+                                                "type": "integer"
+                                            }, 
+                                            "include": {
+                                                "items": {
+                                                    "type": "string"
+                                                }, 
+                                                "type": "array"
+                                            }, 
+                                            "type": {
+                                                "additionalProperties": false, 
+                                                "enum": [
+                                                    "bitmap", 
+                                                    "truetype"
+                                                ], 
+                                                "type": "string"
+                                            }, 
+                                            "styles": {
+                                                "items": {
+                                                    "additionalProperties": false, 
+                                                    "type": "object", 
+                                                    "patternProperties": {
+                                                        "^__[a-z]+__$": {}
+                                                    }, 
+                                                    "properties": {
+                                                        "polaroffset": {
+                                                            "items": {
+                                                                "minItems": 2, 
+                                                                "oneOf": [
+                                                                    {
+                                                                        "type": "number"
+                                                                    }, 
+                                                                    {
+                                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                                        "type": "string", 
+                                                                        "description": "attribute"
+                                                                    }
+                                                                ], 
+                                                                "maxItems": 2
+                                                            }, 
+                                                            "type": "array"
+                                                        }, 
+                                                        "color": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "oneOf": [
+                                                                        {
+                                                                            "minItems": 3, 
+                                                                            "items": {
+                                                                                "minimum": -1, 
+                                                                                "type": "number", 
+                                                                                "maximum": 255
+                                                                            }, 
+                                                                            "type": "array", 
+                                                                            "maxItems": 3
+                                                                        }, 
+                                                                        {
+                                                                            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                            "type": "string", 
+                                                                            "example": "#aa33cc"
+                                                                        }
+                                                                    ]
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "minwidth": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "minscaledenom": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "size": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "number"
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "angle": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "number"
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }, 
+                                                                {
+                                                                    "enum": [
+                                                                        "auto"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "maxwidth": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "linecap": {
+                                                            "enum": [
+                                                                "butt", 
+                                                                "round", 
+                                                                "square"
+                                                            ]
+                                                        }, 
+                                                        "__type__": {
+                                                            "enum": [
+                                                                "style"
+                                                            ]
+                                                        }, 
+                                                        "width": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "number"
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "maxsize": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "geomtransform": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "enum": [
+                                                                        "bbox", 
+                                                                        "centroid", 
+                                                                        "end", 
+                                                                        "labelpnt", 
+                                                                        "labelpoly", 
+                                                                        "start", 
+                                                                        "vertices"
+                                                                    ]
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\((.*?)\\)$", 
+                                                                    "type": "string", 
+                                                                    "description": "expression"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "outlinewidth": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "number"
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "include": {
+                                                            "items": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "type": "array"
+                                                        }, 
+                                                        "opacity": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "integer"
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "symbol": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "string"
+                                                                }, 
+                                                                {
+                                                                    "type": "number"
+                                                                }, 
+                                                                {
+                                                                    "additionalProperties": false, 
+                                                                    "type": "object", 
+                                                                    "patternProperties": {
+                                                                        "^__[a-z]+__$": {}
+                                                                    }, 
+                                                                    "properties": {
+                                                                        "include": {
+                                                                            "items": {
+                                                                                "type": "string"
+                                                                            }, 
+                                                                            "type": "array"
+                                                                        }, 
+                                                                        "anchorpoint": {
+                                                                            "minItems": 2, 
+                                                                            "items": [
+                                                                                {
+                                                                                    "minimum": 0, 
+                                                                                    "type": "number", 
+                                                                                    "maximum": 1
+                                                                                }
+                                                                            ], 
+                                                                            "type": "array", 
+                                                                            "maxItems": 2
+                                                                        }, 
+                                                                        "name": {
+                                                                            "type": "string"
+                                                                        }, 
+                                                                        "__type__": {
+                                                                            "enum": [
+                                                                                "symbol"
+                                                                            ]
+                                                                        }, 
+                                                                        "image": {
+                                                                            "type": "string"
+                                                                        }, 
+                                                                        "character": {
+                                                                            "minLength": 1, 
+                                                                            "type": "string", 
+                                                                            "maxLength": 1
+                                                                        }, 
+                                                                        "antialias": {
+                                                                            "type": "boolean"
+                                                                        }, 
+                                                                        "points": {
+                                                                            "items": {
+                                                                                "items": {
+                                                                                    "minItems": 2, 
+                                                                                    "type": "number", 
+                                                                                    "maxItems": 2
+                                                                                }, 
+                                                                                "type": "array"
+                                                                            }, 
+                                                                            "type": "array"
+                                                                        }, 
+                                                                        "backgroundcolor": {
+                                                                            "oneOf": [
+                                                                                {
+                                                                                    "minItems": 3, 
+                                                                                    "items": {
+                                                                                        "minimum": -1, 
+                                                                                        "type": "number", 
+                                                                                        "maximum": 255
+                                                                                    }, 
+                                                                                    "type": "array", 
+                                                                                    "maxItems": 3
+                                                                                }, 
+                                                                                {
+                                                                                    "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                                    "type": "string", 
+                                                                                    "example": "#aa33cc"
+                                                                                }
+                                                                            ]
+                                                                        }, 
+                                                                        "font": {
+                                                                            "type": "string"
+                                                                        }, 
+                                                                        "type": {
+                                                                            "enum": [
+                                                                                "ellipse", 
+                                                                                "hatch", 
+                                                                                "pixmap", 
+                                                                                "svg", 
+                                                                                "truetype", 
+                                                                                "vector"
+                                                                            ]
+                                                                        }, 
+                                                                        "transparent": {
+                                                                            "type": "integer"
+                                                                        }, 
+                                                                        "filled": {
+                                                                            "type": "boolean"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "linejoinmaxsize": {
+                                                            "type": "integer"
+                                                        }, 
+                                                        "antialias": {
+                                                            "type": "boolean"
+                                                        }, 
+                                                        "gap": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "backgroundcolor": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "minItems": 3, 
+                                                                    "items": {
+                                                                        "minimum": -1, 
+                                                                        "type": "number", 
+                                                                        "maximum": 255
+                                                                    }, 
+                                                                    "type": "array", 
+                                                                    "maxItems": 3
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                    "type": "string", 
+                                                                    "example": "#aa33cc"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "offset": {
+                                                            "minItems": 2, 
+                                                            "items": {
+                                                                "type": "number"
+                                                            }, 
+                                                            "type": "array", 
+                                                            "maxItems": 2
+                                                        }, 
+                                                        "linejoin": {
+                                                            "enum": [
+                                                                "round", 
+                                                                "miter", 
+                                                                "bevel", 
+                                                                "none"
+                                                            ]
+                                                        }, 
+                                                        "rangeitem": {
+                                                            "pattern": "^\\[(.*?)\\]$", 
+                                                            "type": "string", 
+                                                            "description": "attribute"
+                                                        }, 
+                                                        "colorrange": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "minItems": 6, 
+                                                                    "items": {
+                                                                        "type": "integer"
+                                                                    }, 
+                                                                    "type": "array", 
+                                                                    "maxItems": 6
+                                                                }, 
+                                                                {
+                                                                    "minItems": 2, 
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "type": "array", 
+                                                                    "maxItems": 2
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        "minsize": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "initialgap": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "datarange": {
+                                                            "minItems": 2, 
+                                                            "items": {
+                                                                "type": "number"
+                                                            }, 
+                                                            "type": "array", 
+                                                            "maxItems": 2
+                                                        }, 
+                                                        "maxscaledenom": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "angleitem": {
+                                                            "type": "string"
+                                                        }, 
+                                                        "pattern": {
+                                                            "items": {
+                                                                "items": {
+                                                                    "minItems": 2, 
+                                                                    "type": "number", 
+                                                                    "maxItems": 2
+                                                                }, 
+                                                                "type": "array"
+                                                            }, 
+                                                            "type": "array"
+                                                        }, 
+                                                        "outlinecolor": {
+                                                            "oneOf": [
+                                                                {
+                                                                    "oneOf": [
+                                                                        {
+                                                                            "minItems": 3, 
+                                                                            "items": {
+                                                                                "minimum": -1, 
+                                                                                "type": "number", 
+                                                                                "maximum": 255
+                                                                            }, 
+                                                                            "type": "array", 
+                                                                            "maxItems": 3
+                                                                        }, 
+                                                                        {
+                                                                            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                            "type": "string", 
+                                                                            "example": "#aa33cc"
+                                                                        }
+                                                                    ]
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }, 
+                                                "type": "array"
+                                            }, 
+                                            "buffer": {
+                                                "type": "integer"
+                                            }, 
+                                            "antialias": {
+                                                "type": "boolean"
+                                            }, 
+                                            "shadowcolor": {
+                                                "oneOf": [
+                                                    {
+                                                        "minItems": 3, 
+                                                        "items": {
+                                                            "minimum": -1, 
+                                                            "type": "number", 
+                                                            "maximum": 255
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 3
+                                                    }, 
+                                                    {
+                                                        "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                        "type": "string", 
+                                                        "example": "#aa33cc"
+                                                    }
+                                                ]
+                                            }, 
+                                            "backgroundcolor": {
+                                                "oneOf": [
+                                                    {
+                                                        "minItems": 3, 
+                                                        "items": {
+                                                            "minimum": -1, 
+                                                            "type": "number", 
+                                                            "maximum": 255
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 3
+                                                    }, 
+                                                    {
+                                                        "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                        "type": "string", 
+                                                        "example": "#aa33cc"
+                                                    }
+                                                ]
+                                            }, 
+                                            "offset": {
+                                                "minItems": 2, 
+                                                "items": {
+                                                    "type": "number"
+                                                }, 
+                                                "type": "array", 
+                                                "maxItems": 2
+                                            }, 
+                                            "minfeaturesize": {
+                                                "oneOf": [
+                                                    {
+                                                        "enum": [
+                                                            "auto"
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "type": "integer"
+                                                    }
+                                                ]
+                                            }, 
+                                            "maxoverlapangle": {
+                                                "type": "number"
+                                            }, 
+                                            "shadowsize": {
+                                                "oneOf": [
+                                                    {
+                                                        "minItems": 2, 
+                                                        "items": {
+                                                            "type": "integer"
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 2
+                                                    }, 
+                                                    {
+                                                        "minItems": 2, 
+                                                        "items": [
+                                                            {
+                                                                "type": "integer"
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }
+                                                        ], 
+                                                        "type": "array", 
+                                                        "maxItems": 2
+                                                    }
+                                                ]
+                                            }, 
+                                            "align": {
+                                                "additionalProperties": false, 
+                                                "enum": [
+                                                    "left", 
+                                                    "center", 
+                                                    "right"
+                                                ], 
+                                                "type": "string"
+                                            }, 
+                                            "maxscaledenom": {
+                                                "type": "number"
+                                            }, 
+                                            "maxlength": {
+                                                "type": "integer"
+                                            }, 
+                                            "position": {
+                                                "oneOf": [
+                                                    {
+                                                        "enum": [
+                                                            "auto"
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "enum": [
+                                                            "ul", 
+                                                            "uc", 
+                                                            "ur", 
+                                                            "cl", 
+                                                            "cc", 
+                                                            "cr", 
+                                                            "ll", 
+                                                            "lc", 
+                                                            "lr"
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            "expression": {
+                                                "anyOf": [
+                                                    {
+                                                        "type": "string"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\((.*?)\\)$", 
+                                                        "type": "string", 
+                                                        "description": "expression"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^/(.*?)/$", 
+                                                        "type": "string", 
+                                                        "description": "regex"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }, 
+                                    "type": "array"
+                                }, 
+                                "maxscale": {
+                                    "deprecated": true, 
+                                    "type": "number"
+                                }, 
+                                "minsize": {
+                                    "type": "integer"
+                                }, 
+                                "minscaledenom": {
+                                    "type": "number"
+                                }, 
+                                "outlinecolor": {
+                                    "oneOf": [
+                                        {
+                                            "minItems": 3, 
+                                            "items": {
+                                                "minimum": -1, 
+                                                "type": "number", 
+                                                "maximum": 255
+                                            }, 
+                                            "type": "array", 
+                                            "maxItems": 3
+                                        }, 
+                                        {
+                                            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                            "type": "string", 
+                                            "example": "#aa33cc"
+                                        }
+                                    ]
+                                }, 
+                                "group": {
+                                    "type": "string"
+                                }, 
+                                "title": {
+                                    "type": "string", 
+                                    "description": "missing"
+                                }, 
+                                "__type__": {
+                                    "enum": [
+                                        "class"
+                                    ]
+                                }, 
+                                "maxsize": {
+                                    "type": "integer"
+                                }, 
+                                "template": {
+                                    "type": "string", 
+                                    "description": "filename"
+                                }, 
+                                "include": {
+                                    "items": {
+                                        "type": "string"
+                                    }, 
+                                    "type": "array"
+                                }, 
+                                "leader": {
+                                    "additionalProperties": false, 
+                                    "type": "object", 
+                                    "patternProperties": {
+                                        "^__[a-z]+__$": {}
+                                    }, 
+                                    "properties": {
+                                        "styles": {
+                                            "minItems": 1, 
+                                            "items": {
+                                                "additionalProperties": false, 
+                                                "type": "object", 
+                                                "patternProperties": {
+                                                    "^__[a-z]+__$": {}
+                                                }, 
+                                                "properties": {
+                                                    "polaroffset": {
+                                                        "items": {
+                                                            "minItems": 2, 
+                                                            "oneOf": [
+                                                                {
+                                                                    "type": "number"
+                                                                }, 
+                                                                {
+                                                                    "pattern": "^\\[(.*?)\\]$", 
+                                                                    "type": "string", 
+                                                                    "description": "attribute"
+                                                                }
+                                                            ], 
+                                                            "maxItems": 2
+                                                        }, 
+                                                        "type": "array"
+                                                    }, 
+                                                    "color": {
+                                                        "oneOf": [
+                                                            {
+                                                                "oneOf": [
+                                                                    {
+                                                                        "minItems": 3, 
+                                                                        "items": {
+                                                                            "minimum": -1, 
+                                                                            "type": "number", 
+                                                                            "maximum": 255
+                                                                        }, 
+                                                                        "type": "array", 
+                                                                        "maxItems": 3
+                                                                    }, 
+                                                                    {
+                                                                        "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                        "type": "string", 
+                                                                        "example": "#aa33cc"
+                                                                    }
+                                                                ]
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "minwidth": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "minscaledenom": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "size": {
+                                                        "oneOf": [
+                                                            {
+                                                                "type": "number"
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "angle": {
+                                                        "oneOf": [
+                                                            {
+                                                                "type": "number"
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }, 
+                                                            {
+                                                                "enum": [
+                                                                    "auto"
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "maxwidth": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "linecap": {
+                                                        "enum": [
+                                                            "butt", 
+                                                            "round", 
+                                                            "square"
+                                                        ]
+                                                    }, 
+                                                    "__type__": {
+                                                        "enum": [
+                                                            "style"
+                                                        ]
+                                                    }, 
+                                                    "width": {
+                                                        "oneOf": [
+                                                            {
+                                                                "type": "number"
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "maxsize": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "geomtransform": {
+                                                        "oneOf": [
+                                                            {
+                                                                "enum": [
+                                                                    "bbox", 
+                                                                    "centroid", 
+                                                                    "end", 
+                                                                    "labelpnt", 
+                                                                    "labelpoly", 
+                                                                    "start", 
+                                                                    "vertices"
+                                                                ]
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\((.*?)\\)$", 
+                                                                "type": "string", 
+                                                                "description": "expression"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "outlinewidth": {
+                                                        "oneOf": [
+                                                            {
+                                                                "type": "number"
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "include": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        }, 
+                                                        "type": "array"
+                                                    }, 
+                                                    "opacity": {
+                                                        "oneOf": [
+                                                            {
+                                                                "type": "integer"
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "symbol": {
+                                                        "oneOf": [
+                                                            {
+                                                                "type": "string"
+                                                            }, 
+                                                            {
+                                                                "type": "number"
+                                                            }, 
+                                                            {
+                                                                "additionalProperties": false, 
+                                                                "type": "object", 
+                                                                "patternProperties": {
+                                                                    "^__[a-z]+__$": {}
+                                                                }, 
+                                                                "properties": {
+                                                                    "include": {
+                                                                        "items": {
+                                                                            "type": "string"
+                                                                        }, 
+                                                                        "type": "array"
+                                                                    }, 
+                                                                    "anchorpoint": {
+                                                                        "minItems": 2, 
+                                                                        "items": [
+                                                                            {
+                                                                                "minimum": 0, 
+                                                                                "type": "number", 
+                                                                                "maximum": 1
+                                                                            }
+                                                                        ], 
+                                                                        "type": "array", 
+                                                                        "maxItems": 2
+                                                                    }, 
+                                                                    "name": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "__type__": {
+                                                                        "enum": [
+                                                                            "symbol"
+                                                                        ]
+                                                                    }, 
+                                                                    "image": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "character": {
+                                                                        "minLength": 1, 
+                                                                        "type": "string", 
+                                                                        "maxLength": 1
+                                                                    }, 
+                                                                    "antialias": {
+                                                                        "type": "boolean"
+                                                                    }, 
+                                                                    "points": {
+                                                                        "items": {
+                                                                            "items": {
+                                                                                "minItems": 2, 
+                                                                                "type": "number", 
+                                                                                "maxItems": 2
+                                                                            }, 
+                                                                            "type": "array"
+                                                                        }, 
+                                                                        "type": "array"
+                                                                    }, 
+                                                                    "backgroundcolor": {
+                                                                        "oneOf": [
+                                                                            {
+                                                                                "minItems": 3, 
+                                                                                "items": {
+                                                                                    "minimum": -1, 
+                                                                                    "type": "number", 
+                                                                                    "maximum": 255
+                                                                                }, 
+                                                                                "type": "array", 
+                                                                                "maxItems": 3
+                                                                            }, 
+                                                                            {
+                                                                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                                "type": "string", 
+                                                                                "example": "#aa33cc"
+                                                                            }
+                                                                        ]
+                                                                    }, 
+                                                                    "font": {
+                                                                        "type": "string"
+                                                                    }, 
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "ellipse", 
+                                                                            "hatch", 
+                                                                            "pixmap", 
+                                                                            "svg", 
+                                                                            "truetype", 
+                                                                            "vector"
+                                                                        ]
+                                                                    }, 
+                                                                    "transparent": {
+                                                                        "type": "integer"
+                                                                    }, 
+                                                                    "filled": {
+                                                                        "type": "boolean"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "linejoinmaxsize": {
+                                                        "type": "integer"
+                                                    }, 
+                                                    "antialias": {
+                                                        "type": "boolean"
+                                                    }, 
+                                                    "gap": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "backgroundcolor": {
+                                                        "oneOf": [
+                                                            {
+                                                                "minItems": 3, 
+                                                                "items": {
+                                                                    "minimum": -1, 
+                                                                    "type": "number", 
+                                                                    "maximum": 255
+                                                                }, 
+                                                                "type": "array", 
+                                                                "maxItems": 3
+                                                            }, 
+                                                            {
+                                                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                "type": "string", 
+                                                                "example": "#aa33cc"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "offset": {
+                                                        "minItems": 2, 
+                                                        "items": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 2
+                                                    }, 
+                                                    "linejoin": {
+                                                        "enum": [
+                                                            "round", 
+                                                            "miter", 
+                                                            "bevel", 
+                                                            "none"
+                                                        ]
+                                                    }, 
+                                                    "rangeitem": {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }, 
+                                                    "colorrange": {
+                                                        "oneOf": [
+                                                            {
+                                                                "minItems": 6, 
+                                                                "items": {
+                                                                    "type": "integer"
+                                                                }, 
+                                                                "type": "array", 
+                                                                "maxItems": 6
+                                                            }, 
+                                                            {
+                                                                "minItems": 2, 
+                                                                "items": {
+                                                                    "type": "string"
+                                                                }, 
+                                                                "type": "array", 
+                                                                "maxItems": 2
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    "minsize": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "initialgap": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "datarange": {
+                                                        "minItems": 2, 
+                                                        "items": {
+                                                            "type": "number"
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 2
+                                                    }, 
+                                                    "maxscaledenom": {
+                                                        "type": "number"
+                                                    }, 
+                                                    "angleitem": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "pattern": {
+                                                        "items": {
+                                                            "items": {
+                                                                "minItems": 2, 
+                                                                "type": "number", 
+                                                                "maxItems": 2
+                                                            }, 
+                                                            "type": "array"
+                                                        }, 
+                                                        "type": "array"
+                                                    }, 
+                                                    "outlinecolor": {
+                                                        "oneOf": [
+                                                            {
+                                                                "oneOf": [
+                                                                    {
+                                                                        "minItems": 3, 
+                                                                        "items": {
+                                                                            "minimum": -1, 
+                                                                            "type": "number", 
+                                                                            "maximum": 255
+                                                                        }, 
+                                                                        "type": "array", 
+                                                                        "maxItems": 3
+                                                                    }, 
+                                                                    {
+                                                                        "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                        "type": "string", 
+                                                                        "example": "#aa33cc"
+                                                                    }
+                                                                ]
+                                                            }, 
+                                                            {
+                                                                "pattern": "^\\[(.*?)\\]$", 
+                                                                "type": "string", 
+                                                                "description": "attribute"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }, 
+                                            "type": "array", 
+                                            "maxItems": 1
+                                        }, 
+                                        "__type__": {
+                                            "enum": [
+                                                "leader"
+                                            ]
+                                        }, 
+                                        "include": {
+                                            "items": {
+                                                "type": "string"
+                                            }, 
+                                            "type": "array"
+                                        }, 
+                                        "maxdistance": {
+                                            "type": "integer"
+                                        }, 
+                                        "gridstep": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }, 
+                                "styles": {
+                                    "items": {
+                                        "additionalProperties": false, 
+                                        "type": "object", 
+                                        "patternProperties": {
+                                            "^__[a-z]+__$": {}
+                                        }, 
+                                        "properties": {
+                                            "polaroffset": {
+                                                "items": {
+                                                    "minItems": 2, 
+                                                    "oneOf": [
+                                                        {
+                                                            "type": "number"
+                                                        }, 
+                                                        {
+                                                            "pattern": "^\\[(.*?)\\]$", 
+                                                            "type": "string", 
+                                                            "description": "attribute"
+                                                        }
+                                                    ], 
+                                                    "maxItems": 2
+                                                }, 
+                                                "type": "array"
+                                            }, 
+                                            "color": {
+                                                "oneOf": [
+                                                    {
+                                                        "oneOf": [
+                                                            {
+                                                                "minItems": 3, 
+                                                                "items": {
+                                                                    "minimum": -1, 
+                                                                    "type": "number", 
+                                                                    "maximum": 255
+                                                                }, 
+                                                                "type": "array", 
+                                                                "maxItems": 3
+                                                            }, 
+                                                            {
+                                                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                "type": "string", 
+                                                                "example": "#aa33cc"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "minwidth": {
+                                                "type": "number"
+                                            }, 
+                                            "minscaledenom": {
+                                                "type": "number"
+                                            }, 
+                                            "size": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "number"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "angle": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "number"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }, 
+                                                    {
+                                                        "enum": [
+                                                            "auto"
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            "maxwidth": {
+                                                "type": "number"
+                                            }, 
+                                            "linecap": {
+                                                "enum": [
+                                                    "butt", 
+                                                    "round", 
+                                                    "square"
+                                                ]
+                                            }, 
+                                            "__type__": {
+                                                "enum": [
+                                                    "style"
+                                                ]
+                                            }, 
+                                            "width": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "number"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "maxsize": {
+                                                "type": "number"
+                                            }, 
+                                            "geomtransform": {
+                                                "oneOf": [
+                                                    {
+                                                        "enum": [
+                                                            "bbox", 
+                                                            "centroid", 
+                                                            "end", 
+                                                            "labelpnt", 
+                                                            "labelpoly", 
+                                                            "start", 
+                                                            "vertices"
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\((.*?)\\)$", 
+                                                        "type": "string", 
+                                                        "description": "expression"
+                                                    }
+                                                ]
+                                            }, 
+                                            "outlinewidth": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "number"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "include": {
+                                                "items": {
+                                                    "type": "string"
+                                                }, 
+                                                "type": "array"
+                                            }, 
+                                            "opacity": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "integer"
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }, 
+                                            "symbol": {
+                                                "oneOf": [
+                                                    {
+                                                        "type": "string"
+                                                    }, 
+                                                    {
+                                                        "type": "number"
+                                                    }, 
+                                                    {
+                                                        "additionalProperties": false, 
+                                                        "type": "object", 
+                                                        "patternProperties": {
+                                                            "^__[a-z]+__$": {}
+                                                        }, 
+                                                        "properties": {
+                                                            "include": {
+                                                                "items": {
+                                                                    "type": "string"
+                                                                }, 
+                                                                "type": "array"
+                                                            }, 
+                                                            "anchorpoint": {
+                                                                "minItems": 2, 
+                                                                "items": [
+                                                                    {
+                                                                        "minimum": 0, 
+                                                                        "type": "number", 
+                                                                        "maximum": 1
+                                                                    }
+                                                                ], 
+                                                                "type": "array", 
+                                                                "maxItems": 2
+                                                            }, 
+                                                            "name": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "__type__": {
+                                                                "enum": [
+                                                                    "symbol"
+                                                                ]
+                                                            }, 
+                                                            "image": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "character": {
+                                                                "minLength": 1, 
+                                                                "type": "string", 
+                                                                "maxLength": 1
+                                                            }, 
+                                                            "antialias": {
+                                                                "type": "boolean"
+                                                            }, 
+                                                            "points": {
+                                                                "items": {
+                                                                    "items": {
+                                                                        "minItems": 2, 
+                                                                        "type": "number", 
+                                                                        "maxItems": 2
+                                                                    }, 
+                                                                    "type": "array"
+                                                                }, 
+                                                                "type": "array"
+                                                            }, 
+                                                            "backgroundcolor": {
+                                                                "oneOf": [
+                                                                    {
+                                                                        "minItems": 3, 
+                                                                        "items": {
+                                                                            "minimum": -1, 
+                                                                            "type": "number", 
+                                                                            "maximum": 255
+                                                                        }, 
+                                                                        "type": "array", 
+                                                                        "maxItems": 3
+                                                                    }, 
+                                                                    {
+                                                                        "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                        "type": "string", 
+                                                                        "example": "#aa33cc"
+                                                                    }
+                                                                ]
+                                                            }, 
+                                                            "font": {
+                                                                "type": "string"
+                                                            }, 
+                                                            "type": {
+                                                                "enum": [
+                                                                    "ellipse", 
+                                                                    "hatch", 
+                                                                    "pixmap", 
+                                                                    "svg", 
+                                                                    "truetype", 
+                                                                    "vector"
+                                                                ]
+                                                            }, 
+                                                            "transparent": {
+                                                                "type": "integer"
+                                                            }, 
+                                                            "filled": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }, 
+                                            "linejoinmaxsize": {
+                                                "type": "integer"
+                                            }, 
+                                            "antialias": {
+                                                "type": "boolean"
+                                            }, 
+                                            "gap": {
+                                                "type": "number"
+                                            }, 
+                                            "backgroundcolor": {
+                                                "oneOf": [
+                                                    {
+                                                        "minItems": 3, 
+                                                        "items": {
+                                                            "minimum": -1, 
+                                                            "type": "number", 
+                                                            "maximum": 255
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 3
+                                                    }, 
+                                                    {
+                                                        "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                        "type": "string", 
+                                                        "example": "#aa33cc"
+                                                    }
+                                                ]
+                                            }, 
+                                            "offset": {
+                                                "minItems": 2, 
+                                                "items": {
+                                                    "type": "number"
+                                                }, 
+                                                "type": "array", 
+                                                "maxItems": 2
+                                            }, 
+                                            "linejoin": {
+                                                "enum": [
+                                                    "round", 
+                                                    "miter", 
+                                                    "bevel", 
+                                                    "none"
+                                                ]
+                                            }, 
+                                            "rangeitem": {
+                                                "pattern": "^\\[(.*?)\\]$", 
+                                                "type": "string", 
+                                                "description": "attribute"
+                                            }, 
+                                            "colorrange": {
+                                                "oneOf": [
+                                                    {
+                                                        "minItems": 6, 
+                                                        "items": {
+                                                            "type": "integer"
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 6
+                                                    }, 
+                                                    {
+                                                        "minItems": 2, 
+                                                        "items": {
+                                                            "type": "string"
+                                                        }, 
+                                                        "type": "array", 
+                                                        "maxItems": 2
+                                                    }
+                                                ]
+                                            }, 
+                                            "minsize": {
+                                                "type": "number"
+                                            }, 
+                                            "initialgap": {
+                                                "type": "number"
+                                            }, 
+                                            "datarange": {
+                                                "minItems": 2, 
+                                                "items": {
+                                                    "type": "number"
+                                                }, 
+                                                "type": "array", 
+                                                "maxItems": 2
+                                            }, 
+                                            "maxscaledenom": {
+                                                "type": "number"
+                                            }, 
+                                            "angleitem": {
+                                                "type": "string"
+                                            }, 
+                                            "pattern": {
+                                                "items": {
+                                                    "items": {
+                                                        "minItems": 2, 
+                                                        "type": "number", 
+                                                        "maxItems": 2
+                                                    }, 
+                                                    "type": "array"
+                                                }, 
+                                                "type": "array"
+                                            }, 
+                                            "outlinecolor": {
+                                                "oneOf": [
+                                                    {
+                                                        "oneOf": [
+                                                            {
+                                                                "minItems": 3, 
+                                                                "items": {
+                                                                    "minimum": -1, 
+                                                                    "type": "number", 
+                                                                    "maximum": 255
+                                                                }, 
+                                                                "type": "array", 
+                                                                "maxItems": 3
+                                                            }, 
+                                                            {
+                                                                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                                "type": "string", 
+                                                                "example": "#aa33cc"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "pattern": "^\\[(.*?)\\]$", 
+                                                        "type": "string", 
+                                                        "description": "attribute"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }, 
+                                    "type": "array"
+                                }, 
+                                "keyimage": {
+                                    "type": "string", 
+                                    "description": "filename"
+                                }, 
+                                "symbol": {
+                                    "oneOf": [
+                                        {
+                                            "type": "string"
+                                        }, 
+                                        {
+                                            "type": "number"
+                                        }, 
+                                        {
+                                            "additionalProperties": false, 
+                                            "type": "object", 
+                                            "patternProperties": {
+                                                "^__[a-z]+__$": {}
+                                            }, 
+                                            "properties": {
+                                                "include": {
+                                                    "items": {
+                                                        "type": "string"
+                                                    }, 
+                                                    "type": "array"
+                                                }, 
+                                                "anchorpoint": {
+                                                    "minItems": 2, 
+                                                    "items": [
+                                                        {
+                                                            "minimum": 0, 
+                                                            "type": "number", 
+                                                            "maximum": 1
+                                                        }
+                                                    ], 
+                                                    "type": "array", 
+                                                    "maxItems": 2
+                                                }, 
+                                                "name": {
+                                                    "type": "string"
+                                                }, 
+                                                "__type__": {
+                                                    "enum": [
+                                                        "symbol"
+                                                    ]
+                                                }, 
+                                                "image": {
+                                                    "type": "string"
+                                                }, 
+                                                "character": {
+                                                    "minLength": 1, 
+                                                    "type": "string", 
+                                                    "maxLength": 1
+                                                }, 
+                                                "antialias": {
+                                                    "type": "boolean"
+                                                }, 
+                                                "points": {
+                                                    "items": {
+                                                        "items": {
+                                                            "minItems": 2, 
+                                                            "type": "number", 
+                                                            "maxItems": 2
+                                                        }, 
+                                                        "type": "array"
+                                                    }, 
+                                                    "type": "array"
+                                                }, 
+                                                "backgroundcolor": {
+                                                    "oneOf": [
+                                                        {
+                                                            "minItems": 3, 
+                                                            "items": {
+                                                                "minimum": -1, 
+                                                                "type": "number", 
+                                                                "maximum": 255
+                                                            }, 
+                                                            "type": "array", 
+                                                            "maxItems": 3
+                                                        }, 
+                                                        {
+                                                            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                                            "type": "string", 
+                                                            "example": "#aa33cc"
+                                                        }
+                                                    ]
+                                                }, 
+                                                "font": {
+                                                    "type": "string"
+                                                }, 
+                                                "type": {
+                                                    "enum": [
+                                                        "ellipse", 
+                                                        "hatch", 
+                                                        "pixmap", 
+                                                        "svg", 
+                                                        "truetype", 
+                                                        "vector"
+                                                    ]
+                                                }, 
+                                                "transparent": {
+                                                    "type": "integer"
+                                                }, 
+                                                "filled": {
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }, 
+                                "backgroundcolor": {
+                                    "oneOf": [
+                                        {
+                                            "minItems": 3, 
+                                            "items": {
+                                                "minimum": -1, 
+                                                "type": "number", 
+                                                "maximum": 255
+                                            }, 
+                                            "type": "array", 
+                                            "maxItems": 3
+                                        }, 
+                                        {
+                                            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                                            "type": "string", 
+                                            "example": "#aa33cc"
+                                        }
+                                    ]
+                                }, 
+                                "minscale": {
+                                    "deprecated": true, 
+                                    "type": "number"
+                                }, 
+                                "name": {
+                                    "type": "string"
+                                }, 
+                                "maxscaledenom": {
+                                    "type": "number"
+                                }, 
+                                "debug": {
+                                    "enum": [
+                                        "on", 
+                                        "off"
+                                    ], 
+                                    "type": "string"
+                                }, 
+                                "validation": {
+                                    "additionalProperties": true, 
+                                    "type": "object", 
+                                    "properties": {}
+                                }, 
+                                "expression": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        }, 
+                                        {
+                                            "pattern": "^\\((.*?)\\)$", 
+                                            "type": "string", 
+                                            "description": "expression"
+                                        }, 
+                                        {
+                                            "pattern": "^/(.*?)/$", 
+                                            "type": "string", 
+                                            "description": "regex"
+                                        }
+                                    ]
+                                }
+                            }
+                        }, 
+                        "type": "array"
+                    }, 
+                    "labelsizeitem": {
+                        "type": "string"
+                    }, 
+                    "transparency": {
+                        "oneOf": [
+                            {
+                                "type": "integer"
+                            }, 
+                            {
+                                "enum": [
+                                    "alpha"
+                                ]
+                            }
+                        ]
+                    }, 
+                    "__position__": {
+                        "type": "object"
+                    }, 
+                    "debug": {
+                        "enum": [
+                            "on", 
+                            "off", 
+                            0, 
+                            1, 
+                            2, 
+                            3, 
+                            4, 
+                            5
+                        ]
+                    }, 
+                    "composites": {
+                        "items": {
+                            "additionalProperties": false, 
+                            "type": "object", 
+                            "patternProperties": {
+                                "^__[a-z]+__$": {}
+                            }, 
+                            "properties": {
+                                "opacity": {
+                                    "type": "integer"
+                                }, 
+                                "include": {
+                                    "items": {
+                                        "type": "string"
+                                    }, 
+                                    "type": "array"
+                                }, 
+                                "__type__": {
+                                    "enum": [
+                                        "composite"
+                                    ]
+                                }, 
+                                "compop": {
+                                    "type": "string"
+                                }
+                            }
+                        }, 
+                        "type": "array"
+                    }, 
+                    "validation": {
+                        "additionalProperties": true, 
+                        "type": "object", 
+                        "properties": {}
+                    }, 
+                    "requires": {
+                        "type": "string"
+                    }, 
+                    "tileindex": {
+                        "type": "string"
+                    }
+                }
+            }, 
+            "type": "array"
+        }, 
+        "web": {
+            "type": "object"
+        }, 
+        "angle": {
+            "type": "number"
+        }, 
+        "__type__": {
+            "type": "string"
+        }, 
+        "interlace": {
+            "enum": [
+                "on", 
+                "off"
+            ], 
+            "type": "string"
+        }, 
+        "symbolset": {
+            "type": "string"
+        }, 
+        "maxsize": {
+            "type": "integer"
+        }, 
+        "units": {
+            "enum": [
+                "dd", 
+                "feet", 
+                "inches", 
+                "kilometers", 
+                "meters", 
+                "miles", 
+                "nauticalmiles"
+            ]
+        }, 
+        "include": {
+            "items": {
+                "type": "string"
+            }, 
+            "type": "array"
+        }, 
+        "config": {
+            "additionalProperties": true, 
+            "type": "object", 
+            "properties": {
+                "MS_NONSQUARE": {
+                    "enum": [
+                        "YES", 
+                        "NO"
+                    ], 
+                    "type": "string"
+                }, 
+                "ON_MISSING_DATA": {
+                    "enum": [
+                        "FAIL", 
+                        "LOG", 
+                        "IGNORE"
+                    ], 
+                    "type": "string"
+                }, 
+                "CGI_CONTEXT_URL": {
+                    "type": "string"
+                }, 
+                "MS_ERRORFILE": {
+                    "type": "string"
+                }, 
+                "PROJ_LIB": {
+                    "type": "string"
+                }, 
+                "MS_ENCRYPTION_KEY": {
+                    "type": "string"
+                }
+            }
+        }, 
+        "fontset": {
+            "type": "string"
+        }, 
+        "status": {
+            "enum": [
+                "on", 
+                "off"
+            ], 
+            "type": "string"
+        }, 
+        "scalebar": {
+            "type": "object"
+        }, 
+        "shapepath": {
+            "type": "string"
+        }, 
+        "extent": {
+            "minItems": 4, 
+            "items": {
+                "type": "number"
+            }, 
+            "type": "array", 
+            "maxItems": 4
+        }, 
+        "scaledenom": {
+            "type": "number"
+        }, 
+        "name": {
+            "type": "string"
+        }, 
+        "querymap": {
+            "additionalProperties": false, 
+            "type": "object", 
+            "patternProperties": {
+                "^__[a-z]+__$": {}
+            }, 
+            "properties": {
+                "status": {
+                    "enum": [
+                        "on", 
+                        "off"
+                    ], 
+                    "type": "string"
+                }, 
+                "style": {
+                    "additionalProperties": false, 
+                    "enum": [
+                        "normal", 
+                        "hilite", 
+                        "selected"
+                    ], 
+                    "type": "string"
+                }, 
+                "color": {
+                    "oneOf": [
+                        {
+                            "minItems": 3, 
+                            "items": {
+                                "minimum": -1, 
+                                "type": "number", 
+                                "maximum": 255
+                            }, 
+                            "type": "array", 
+                            "maxItems": 3
+                        }, 
+                        {
+                            "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                            "type": "string", 
+                            "example": "#aa33cc"
+                        }
+                    ]
+                }, 
+                "__type__": {
+                    "enum": [
+                        "querymap"
+                    ]
+                }, 
+                "include": {
+                    "items": {
+                        "type": "string"
+                    }, 
+                    "type": "array"
+                }, 
+                "size": {
+                    "minItems": 2, 
+                    "items": {
+                        "type": "integer"
+                    }, 
+                    "type": "array", 
+                    "maxItems": 2
+                }
+            }
+        }, 
+        "imagecolor": {
+            "oneOf": [
+                {
+                    "minItems": 3, 
+                    "items": {
+                        "minimum": -1, 
+                        "type": "number", 
+                        "maximum": 255
+                    }, 
+                    "type": "array", 
+                    "maxItems": 3
+                }, 
+                {
+                    "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", 
+                    "type": "string", 
+                    "example": "#aa33cc"
+                }
+            ]
+        }, 
+        "datapattern": {
+            "type": "string"
+        }, 
+        "legend": {
+            "type": "object"
+        }, 
+        "imagequality": {
+            "type": "integer"
+        }, 
+        "debug": {
+            "enum": [
+                "on", 
+                "off", 
+                0, 
+                1, 
+                2, 
+                3, 
+                4, 
+                5
+            ]
+        }, 
+        "resolution": {
+            "type": "integer"
+        }, 
+        "templatepattern": {
+            "type": "string"
+        }
+    }
+}

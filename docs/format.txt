@@ -1,0 +1,36 @@
+Usage: mappyfile format [OPTIONS] INPUT_MAPFILE OUTPUT_MAPFILE
+
+  Format a the input-mapfile and save as output-mapfile. Note output-mapfile
+  will be  overwritten if it already exists.
+
+  Example of formatting a single Mapfile:
+
+      mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map
+
+  Example of formatting a single Mapfile with single quotes and tabs for
+  indentation:
+
+      mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map
+      --quote=\' --indent=1 --spacer=
+
+  Example of formatting a single Mapfile without expanding includes, but
+  including comments:
+
+      mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map --no-
+      expand --comments
+
+Options:
+  --indent INTEGER            The number of spacer characters to indent
+                              structures in the Mapfile  [default: 4]
+  --spacer TEXT               The character to use for indenting structures in
+                              the Mapfile
+  --quote TEXT                The quote character to use in the Mapfile
+                              (double or single quotes). Ensure these are
+                              escaped e.g. \" or \' [default: \"]
+  --newlinechar TEXT          The character used to insert newlines in the
+                              Mapfile [default: \n]
+  --expand / --no-expand      Expand any INCLUDE directives found in the
+                              Mapfile  [default: True]
+  --comments / --no-comments  Keep Mapfile comments in the output
+                              (experimental)  [default: False]
+  --help                      Show this message and exit.

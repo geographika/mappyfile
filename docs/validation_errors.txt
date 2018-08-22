@@ -1,0 +1,4 @@
+C:/Temp/map1.map validated successfully
+C:/Temp/map2.map validated successfully
+C:/Temp/map3.map (Line: 16 Column: 3) ERROR: Invalid value in TYPE - u'polyline' is not one of [u'chart', u'circle', u'line', u'point', u'polygon', u'raster', u'query', u'annotation']
+3 file(s) validated (2 successfully)
