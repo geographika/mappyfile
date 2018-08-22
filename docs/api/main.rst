@@ -1,3 +1,5 @@
+.. _mappyfile-api:
+
 mappyfile API
 =============
 
@@ -23,9 +25,15 @@ These are functions used to open and write Mapfiles to files and strings.
 
     .. autofunction:: loads
 
+.. _api-dump:
+
     .. autofunction:: dump
 
+.. _api-dumps:
+
     .. autofunction:: dumps
+
+.. _api-save:
 
     .. autofunction:: save
 
@@ -69,5 +77,7 @@ Mapfile schema.
 + :func:`mappyfile.validate`
 
 .. automodule:: mappyfile
+
+.. _api-validate:
 
     .. autofunction:: validate
