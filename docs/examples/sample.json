@@ -1,30 +1,30 @@
 {
+    "__type__": "map", 
     "extent": [
         -180, 
         -90, 
         180, 
         90
     ], 
-    "name": "'MyMap'", 
+    "name": "MyMap", 
     "web": {
+        "__type__": "web", 
         "metadata": {
-            "'wms_enable_request'": "'*'", 
-            "'wms_feature_info_mime_type'": "'text/html'", 
+            "wms_enable_request": "*", 
+            "wms_feature_info_mime_type": "text/html", 
             "__type__": "metadata"
-        }, 
-        "__type__": "web"
+        }
     }, 
-    "projections": [
-        [
-            "\"init=epsg:4326\""
-        ]
+    "projection": [
+        "init=epsg:4326"
     ], 
     "layers": [
         {
+            "__type__": "layer", 
             "processing": [
-                "'BANDS=1'", 
-                "'CONTOUR_ITEM=elevation'", 
-                "'CONTOUR_INTERVAL=20'"
+                "BANDS=1", 
+                "CONTOUR_ITEM=elevation", 
+                "CONTOUR_INTERVAL=20"
             ], 
             "extent": [
                 -180, 
@@ -32,12 +32,10 @@
                 180, 
                 90
             ], 
-            "name": "'rgb'", 
+            "name": "rgb", 
             "type": "RASTER", 
-            "data": "'../data/raster/bluemarble.tif'", 
-            "template": "'raster.template.html'", 
-            "__type__": "layer"
+            "data": "../data/raster/bluemarble.tif", 
+            "template": "raster.template.html"
         }
-    ], 
-    "__type__": "map"
+    ]
 }

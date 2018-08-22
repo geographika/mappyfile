@@ -1,7 +1,7 @@
 Development Notes
 =================
 
-Run the following before all:
+Run the following before any of the following tasks:
 
 .. code-block:: bat
 

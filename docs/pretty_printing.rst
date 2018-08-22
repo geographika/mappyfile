@@ -3,17 +3,19 @@
 Pretty Printing
 ===============
 
-Taking an input similar to below:
+*Please note this page is currently a draft and subject to further updates.*
+
+A Mapfile with inconsistent formatting such as the example below:
 
 .. literalinclude:: examples/before.map
    :language: mapfile
 
-The following code will output a nicely formatted version. 
+Can be converted using mappyfile to a nicely formatted version using the code below
 
 .. literalinclude:: examples/pretty_printing.py
    :language: python
 
-Result:
+The result:
 
 .. literalinclude:: examples/after.map
    :language: mapfile

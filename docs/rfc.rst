@@ -8,7 +8,7 @@ MS RFC 123: Mapfile JSON Schema
 :Author: Seth Girvin
 :Contact: sethg@geographika.co.uk
 :Status: Proposed
-:Version: MapServer 7.0
+:Version: MapServer 7.4
 
 1. Introduction and Background
 ==============================
@@ -290,7 +290,7 @@ aims to enhance the hand-written documentation rather than replace it.
 ===================
 
 JavaScript-based validator?
-Select version. Default to latest (7.0). 
+Select version. Default to latest (7.2). 
 
 5. Implementation Details
 =========================

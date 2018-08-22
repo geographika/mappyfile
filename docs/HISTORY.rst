@@ -1,6 +1,14 @@
 Releases
 --------
 
+0.7.3 (23/08/2018)
+++++++++++++++++++
+
++ Two new CLI programs - ``format`` and ``validate``
++ Update of Lark parser to 0.6.4 (fixes some validation line number issues)
++ Improvements to validation log messages
++ Normalise include paths
+
 0.7.2 (24/07/2018)
 ++++++++++++++++++
 

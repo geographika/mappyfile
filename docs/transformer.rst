@@ -1,8 +1,10 @@
 Transforming
 ============
 
-Once mappyfile has parsed a Mapfile, it uses a transformer to transform it into a dict object. This allows a familiar API to edit
-the Mapfile further. 
+*Please note this page is currently a draft and subject to further updates.*
+
+Once mappyfile has parsed a Mapfile, it uses a transformer to transform it into a Python dictionary. This allows a Python developer
+a familiar data structure with which to edit the Mapfile further. 
 
 For example taking the Mapfile below:
 
@@ -13,12 +15,12 @@ The following code can be used to see the dictionary structure (represented here
 
 .. literalinclude:: examples/sample_json.py
    :language: python
-	
+
 Output:
 
 .. literalinclude:: examples/sample.json
    :language: json
-    
+
 Notes on the above:
 
 + Objects that can have multiple instances in a Mapfile will be stored in lists (order is important).

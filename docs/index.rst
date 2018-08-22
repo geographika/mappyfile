@@ -17,15 +17,16 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     :numbered:
     :titlesonly:
 
-    parser.rst
-    transformer.rst
-    pretty_printing.rst
+    Parsing (draft) <parser.rst>
+    Tranforming (draft) <transformer.rst>
+    Pretty Printing (draft) <pretty_printing.rst>
     validation.rst
     schemas.rst
     grammar.rst
     python_integration.rst
     client.rst
     api/main.rst
+    development.rst
 
 .. image:: images/class_parsed.png
 
@@ -49,6 +50,8 @@ by MapServer to generate map images. mappyfile is a possible alternative to usin
 + **MapScript** is an alternative to the CGI application of mapserv that allows you to 
   program the MapServer object API in many languages.
 
+The diagram below shows the different elements of mappyfile, and how they are used to modify a Mapfile:
+
 .. image:: images/mappyfile_modules.png
 
 Why?
@@ -64,7 +67,8 @@ number of issues that resulted in the development of mappyfile:
 + When running on Windows any Python libraries using C/C++ require them to be built with the MS C/C++ VS2008 compiler, this means no applications using MapScript
   can take advantage of performance improvements in the MS C/C++ 2015 compiler
 + You need to create an empty log file or MapServer won't open the map (or get "msSetErrorFile(): General error message. Failed to open MS_ERRORFILE" errors)
-+ MapScript is not available through PyPI - the last version was uploaded in 2010 - https://pypi.python.org/pypi/mapscript/5.6.3.0
++ MapScript is not available through PyPI - the last version was uploaded in 2010 - https://pypi.python.org/pypi/mapscript/5.6.3.0 **UPDATE** mapscript wheels 
+ for MapServer 7.2 on Windows are now available
 + It is necessary to set the working directory so that MapServer includes are found (this also applies to mappyfile, but there is no need to os.chdir
   and change the working directory for your script or application)
 + The MapScript API is not particularly "Pythonic"
@@ -157,7 +161,6 @@ Development Roadmap
 
 Future development plans, leading to a v1.0 release include:
 
-+ Add in a command line interface and scripts
 + Setup an easy way to plug in "linters" to check various Mapfile settings and rules (e.g. configured correctly for WFS)
 + Produce schemas for different versions of MapServer, and allow Mapfiles to be validated against a specific version
 + Create a Jupyter Notebook demonstrating mappyfile usage

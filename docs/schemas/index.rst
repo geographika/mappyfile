@@ -1,5 +1,0 @@
-Schemas Documentation
-=====================
-.. toctree::
-	:titlesonly:
-
