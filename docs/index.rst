@@ -24,7 +24,7 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     schemas.rst
     grammar.rst
     python_integration.rst
-
+    client.rst
     api/main.rst
 
 .. image:: images/class_parsed.png
@@ -38,7 +38,7 @@ mappyfile can then transform the AST into a dictionary structure, containing key
 Python programmers. This structure can be edited directly. Alternatively new objects can be added by parsing further Mapfile text and inserting into the 
 dictionary structure. mappyfile also includes a "pretty printer" to export this dictionary structure back to a Mapfile, with keyword formatting and indentation. 
 
-mappyfile assumes knowledge of the Mapfile format - a `domain specific language (DSL) <https://en.wikipedia.org/wiki/Domain-specific_language>`_ used
+*mappyfile* assumes knowledge of the Mapfile format - a `domain specific language (DSL) <https://en.wikipedia.org/wiki/Domain-specific_language>`_ used
 by MapServer to generate map images. mappyfile is a possible alternative to using MapScript. The definitions of these (from the 
 `MapServer glossary <http://mapserver.org/el/glossary.html>`_) are shown below:
 
@@ -48,6 +48,8 @@ by MapServer to generate map images. mappyfile is a possible alternative to usin
 
 + **MapScript** is an alternative to the CGI application of mapserv that allows you to 
   program the MapServer object API in many languages.
+
+.. image:: images/mappyfile_modules.png
 
 Why?
 ----
@@ -102,7 +104,7 @@ PLY is an implementation of lex and yacc parsing tools for Python - the tools Ma
 Code Examples
 -------------
 
-This section details the basic use of the ``mappyfile`` library. 
+This section details the basic use of the ``mappyfile`` library. For all functionality and examples see the :ref:`mappyfile-api` documentation. 
 
 Accessing Values
 ++++++++++++++++

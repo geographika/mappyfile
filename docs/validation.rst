@@ -1,8 +1,6 @@
 Validation
 ==========
 
-**Please note this part of the library is currently experimental.**
-
 Approach
 --------
 

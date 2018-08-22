@@ -10,7 +10,9 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-</PropertyGroup>
+    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
+    <StartupFile>misc\test.py</StartupFile>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
@@ -103,6 +105,7 @@
     <Content Include="docs\schemas\leader.rst" />
     <Content Include="docs\schemas\legend.rst" />
     <Content Include="docs\schemas\map.rst" />
+    <Content Include="docs\schemas\mapfile.json" />
     <Content Include="docs\schemas\metadata.rst" />
     <Content Include="docs\schemas\onoff.rst" />
     <Content Include="docs\schemas\outputformat.rst" />
@@ -667,10 +670,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\docs_parser.py" />
-    <Compile Include="misc\make_json_schema.py">
+    <Compile Include="docs\scripts\make_json_schema.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\shapefile_fields.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="misc\test.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\test_docs_parser.py" />

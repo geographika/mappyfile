@@ -7,6 +7,7 @@ Run the following before all:
 
     set VIRTUALENV=C:\VirtualEnvs\mappyfile
     echo set VIRTUALENV=C:\VirtualEnvs\mappyfile3
+
     %VIRTUALENV%\Scripts\activate
     echo set MAPPYFILE_PATH=C:\Code\mappyfile
     set MAPPYFILE_PATH=D:\GitHub\mappyfile
@@ -62,7 +63,7 @@ To update from master. https://github.com/erezsh/lark/
 
 .. code-block:: bat
 
-    pip install git+git://github.com/erezsh/lark@master
+    pip install git+git://github.com/erezsh/lark@master -U
 
 Linting
 -------
@@ -95,5 +96,5 @@ To build the Sphinx documentation:
 
     cd /D %MAPPYFILE_PATH%\docs
     make.bat html
-    _build/html/index.html
+    "_build/html/index.html"
 
