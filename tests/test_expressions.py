@@ -309,6 +309,19 @@ def test_divide_expression():
     assert(output(s) == exp)
 
 
+def test_modulo_expression():
+    """
+    Not currently documented at http://mapserver.org/mapfile/expressions.html
+    """
+    s = """
+    CLASS
+        EXPRESSION  ( ([height] % 50) = 0 )
+    END
+    """
+    exp = "CLASS EXPRESSION ( ( [height] % 50 ) = 0 ) END"
+    assert(output(s) == exp)
+
+
 def test_escaped_string():
     """
     http://mapserver.org/mapfile/expressions.html#quotes-escaping-in-strings
@@ -365,6 +378,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_negation()
+    test_modulo_expression()
     # run_tests()
     print("Done!")
