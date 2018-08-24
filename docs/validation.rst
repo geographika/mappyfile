@@ -10,11 +10,12 @@ For details on creating JSON schemas see the excellent documentation `here <http
 What is Validated?
 ------------------
 
-Each of the Mapfile keywords has a limited set of allowed values. For example a ``LAYER``s ``UNIT`` setting must be one of the strings 
+Each of the Mapfile keywords has a limited set of allowed values. For example a `UNIT`` setting for a ``LAYER`` must be one of the strings 
 in the list below:
 
 .. code-block:: json
 
+    {
     "units": {
         "enum": [
             "dd", 
@@ -28,6 +29,7 @@ in the list below:
             "pixels"
         ]
     }
+    }
 
 If the Mapfile contains a value not in this list then an error will be raised. 
 
@@ -36,6 +38,7 @@ property:
 
 .. code-block:: json
 
+    {
     "color": {
         "oneOf": [
             {
@@ -54,6 +57,7 @@ property:
                 "example": "#aa33cc"
             }
         ]
+    }
     }
 
 How to Validate
