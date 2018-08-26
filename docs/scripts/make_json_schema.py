@@ -9,33 +9,54 @@ SET "output_folder=D:\GitHub\mappyfile\docs\schemas\"
 jsonschema2rst %input_folder% %output_folder%
 
 """
-
+import os
 from pprint import pprint
 import jsonref
 from jsonref import JsonRef
 
-# Sample JSON data, like from json.load
-document = {
-    "data": ["a", "b", "c"],
-    "reference": {"$ref": "#/data/1"}
-}
+def get_full_schema(schema_dir):
+    print(schema_dir)
+    os.chdir(schema_dir)
+    fn = "map.json"
 
-import os
-d = r"D:/GitHub/mappyfile/mappyfile/schemas"
-os.chdir(d)
-fn = "map.json"
+    uri = "file:///{}/".format(schema_dir)
 
-uri = "file:///D:/GitHub/mappyfile/mappyfile/schemas/"
-with open(fn) as f:
-    j = jsonref.load(f, base_uri=uri)
+    with open(fn) as f:
+        j = jsonref.load(f, base_uri=uri)
 
-jsn = jsonref.dumps(j, indent=4, sort_keys=False)
+    jsn = jsonref.dumps(j, indent=4, sort_keys=False)
+    full_schema = jsonref.dumps(j, indent=4, sort_keys=False)
+    with open(r"C:\Temp\mapfile.json", "w") as f:
+        f.write(full_schema)
 
-with open("../../docs/schemas/mapfile.json", "w") as f:
-    f.write(jsonref.dumps(j, indent=4, sort_keys=False))
+    return full_schema
 
-## The JsonRef.replace_refs class method will return a copy of the document
-## with refs replaced by :class:`JsonRef` objects
-#pprint(JsonRef.replace_refs(document))
+# create_versioned_schema
 
-print("Done!")
+def update_schema(full_schema):
+    if isinstance(obj, dict):
+        for k in obj.keys():
+            if k == bad:
+                del obj[k]
+            else:
+                update_schema(obj[k], bad)
+    elif isinstance(obj, list):
+        for i in reversed(range(len(obj))):
+            if obj[i] == bad:
+                del obj[i]
+            else:
+                update_schema(obj[i], bad)
+
+    else:
+        # neither a dict nor a list, do nothing
+        pass
+
+def main(schema_dir):
+    full_schema = get_full_schema(schema_dir)
+    update_schema(full_schema)
+
+if __name__ == "__main__":
+    project_dir = os.path.dirname(os.path.dirname(__file__))
+    schema_dir = os.path.join(project_dir, "mappyfile", "schemas")
+    main(schema_dir)
+    print("Done!")
