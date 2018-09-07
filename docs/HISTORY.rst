@@ -1,6 +1,12 @@
 Releases
 --------
 
+0.7.4 (07/09/2018)
+++++++++++++++++++
+
++ Support for modulus operator
++ Allow custom transformers to be used with kwargs
+
 0.7.3 (23/08/2018)
 ++++++++++++++++++
 
