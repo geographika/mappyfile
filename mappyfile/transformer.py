@@ -21,7 +21,7 @@ if PY2:
     str = unicode # NOQA
 
 
-class MapfileTransformer(object, Transformer):
+class MapfileTransformer(Transformer, object):
 
     def __init__(self, include_position=False, include_comments=False):
         self.quoter = Quoter()
