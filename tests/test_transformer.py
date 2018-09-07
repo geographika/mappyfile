@@ -1,7 +1,7 @@
 import json
 import pytest
 from mappyfile.parser import Parser
-from mappyfile.transformer import MapfileToDict
+from mappyfile.transformer import MapfileToDict, MapfileTransformer
 
 
 def test_processing_directive():
@@ -351,12 +351,50 @@ def test_token_positions():
     print(json.dumps(d, indent=4))
 
 
+def test_kwargs():
+
+    m = MapfileToDict(custom_param="custom")
+    assert "custom_param" in m.kwargs
+
+
+def test_custom_transformer():
+    """
+    Check a custom transformer can be used with MapfileToDict, and any custom
+    parameters can be passed on to this transformer (useful for plugins)
+    """
+
+    class CustomTransformer(MapfileTransformer):
+
+        def __init__(self, include_position=False, include_comments=False, **kwargs):
+            self.custom_param = kwargs["custom_param"]
+            super(CustomTransformer, self).__init__(include_position, include_comments)
+
+    m = MapfileToDict(transformerClass=CustomTransformer, custom_param="custom")
+
+    s = """
+    MAP
+        SIZE 600 600
+        LAYER
+            NAME "Test"
+            TYPE POLYGON
+        END
+    END
+    """
+    p = Parser()
+    ast = p.parse(s)
+
+    d = m.transform(ast)
+    print(d)
+    assert m.mapfile_transformer.__class__.__name__ == "CustomTransformer"
+    assert m.mapfile_transformer.custom_param == "custom"
+
+
 def run_tests():
     # pytest.main(["tests/test_transformer.py::test_config_directive"])
     pytest.main(["tests/test_transformer.py"])
 
 
 if __name__ == '__main__':
-    # test_empty_config_directive()
+    # test_custom_transformer()
     run_tests()
     print("Done!")

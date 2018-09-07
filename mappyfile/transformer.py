@@ -21,37 +21,7 @@ if PY2:
     str = unicode # NOQA
 
 
-class MapfileToDict(object):
-
-    def __init__(self, include_position=False, include_comments=False):
-        self.quoter = Quoter()
-        self.include_position = include_position
-        self.include_comments = include_comments
-
-    def transform(self, tree):
-        tree = Canonize().transform(tree)
-
-        self.mapfile_transformer = MapfileTransformer(include_position=self.include_position,
-                                                      include_comments=self.include_comments)
-
-        if self.include_comments:
-            comments_transformer = CommentsTransformer(self.mapfile_transformer)
-            tree = comments_transformer.transform(tree)
-
-        return self.mapfile_transformer.transform(tree)
-
-
-class Canonize(Transformer_InPlace):
-    @v_args(tree=True)
-    def symbolset(self, tree):
-        composite_type = Tree('composite_type', [Token('symbolset', 'symbolset')])
-
-        tree.data = 'composite'
-        tree.children.insert(0, composite_type)
-        return tree
-
-
-class MapfileTransformer(Transformer):
+class MapfileTransformer(object, Transformer):
 
     def __init__(self, include_position=False, include_comments=False):
         self.quoter = Quoter()
@@ -97,6 +67,7 @@ class MapfileTransformer(Transformer):
     def flatten(self, values):
 
         flat_list = []
+
         for v in values:
             if isinstance(v, Token):
                 flat_list.append(v)
@@ -105,7 +76,7 @@ class MapfileTransformer(Transformer):
             elif isinstance(v, tuple):
                 flat_list += v
             elif isinstance(v, dict):
-                assert("__tokens__" in v)
+                assert "__tokens__" in v
                 flat_list += v["__tokens__"]
             else:
                 raise ValueError("Attribute value type not supported", v)
@@ -135,7 +106,7 @@ class MapfileTransformer(Transformer):
 
     def get_single_key(self, d):
         keys = list(d.keys())  # convert to list for py3
-        assert(len(keys) == 1)
+        assert len(keys) == 1
         return keys[0]
 
     def composite_body(self, t):
@@ -246,7 +217,7 @@ class MapfileTransformer(Transformer):
                         pd[key_name].append(pos)
 
                 else:
-                    assert(len(d.items()) == 1)
+                    assert len(d.items()) == 1
                     if self.include_position:
                         # hoist position details to composite
                         pd[key_name] = pos
@@ -267,7 +238,7 @@ class MapfileTransformer(Transformer):
         if not isinstance(t, Token):
             #  handle ambiguities
             t = t[0]
-            assert(t.value.lower() in ("symbol", "style"))
+            assert t.value.lower() in ("symbol", "style")
 
         return t
 
@@ -277,7 +248,7 @@ class MapfileTransformer(Transformer):
 
         if isinstance(key_token, (list, tuple)):
             key_token = key_token[0]
-            assert(self.key_name(key_token) in ("style", "symbol"))
+            assert self.key_name(key_token) in ("style", "symbol")
 
         key_name = self.key_name(key_token)
         value_tokens = tokens[1:]
@@ -285,7 +256,7 @@ class MapfileTransformer(Transformer):
         if isinstance(value_tokens[0], (list, tuple)):
             # for any multi-part attributes they will be lists or tuples
             # e.g. int_pair, rgb etc.
-            assert(len(value_tokens) == 1)
+            assert len(value_tokens) == 1
             value_tokens = value_tokens[0]
 
         pd = self.create_position_dict(key_token, value_tokens)
@@ -294,7 +265,7 @@ class MapfileTransformer(Transformer):
 
         if len(value_tokens) > 1:
             if key_name == "config":
-                assert(len(value_tokens) == 2)
+                assert len(value_tokens) == 2
                 values = {value_tokens[0].value: value_tokens[1].value}
             else:
                 # list of values
@@ -319,11 +290,11 @@ class MapfileTransformer(Transformer):
         Return the key and contents of a KEY..END block
         for PATTERN, POINTS, and PROJECTION
         """
-        assert(len(tokens) >= 2)
+        assert len(tokens) >= 2
         key = tokens[0]
 
-        assert(key.value.lower() == name)
-        assert(tokens[-1].value.lower() == "end")
+        assert key.value.lower() == name
+        assert tokens[-1].value.lower() == "end"
 
         if len(tokens) == 2:
             body = []  # empty TYPE..END block
@@ -379,7 +350,7 @@ class MapfileTransformer(Transformer):
 
     def config(self, t):
         # process this as a separate rule
-        assert(len(t) == 3)
+        assert len(t) == 3
         key = t[1].value.lower()  # store all subkeys in lowercase
         value = t[2].value
         t[1].value = self.clean_string(key)
@@ -424,7 +395,7 @@ class MapfileTransformer(Transformer):
     # for expressions
 
     def comparison(self, t):
-        assert(len(t) == 3)
+        assert len(t) == 3
         parts = [str(p.value) for p in t]
         v = " ".join(parts)
 
@@ -433,12 +404,12 @@ class MapfileTransformer(Transformer):
         return t[0]
 
     def and_test(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         t[0].value = "( {} AND {} )".format(t[0].value, t[1].value)
         return t[0]
 
     def or_test(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         t[0].value = "( {} OR {} )".format(t[0].value, t[1].value)
         return t[0]
 
@@ -461,27 +432,27 @@ class MapfileTransformer(Transformer):
         return t[0]
 
     def add(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         t[0].value = "{} + {}".format(t[0].value, t[1].value)
         return t[0]
 
     def sub(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         t[0].value = "{} - {}".format(t[0].value, t[1].value)
         return t[0]
 
     def div(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         t[0].value = "{} / {}".format(t[0].value, t[1].value)
         return t[0]
 
     def mul(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         t[0].value = "{} * {}".format(t[0].value, t[1].value)
         return t[0]
 
     def power(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         t[0].value = "{} ^ {}".format(t[0].value, t[1].value)
         return t[0]
 
@@ -512,13 +483,13 @@ class MapfileTransformer(Transformer):
         return params
 
     def attr_bind(self, t):
-        assert(len(t) == 1)
+        assert len(t) == 1
         t = t[0]
         t.value = "[{}]".format(t.value)
         return t
 
     def extent(self, t):
-        assert(len(t) == 4)
+        assert len(t) == 4
         return t
 
     def color(self, t):
@@ -572,15 +543,15 @@ class MapfileTransformer(Transformer):
         return r, g, b
 
     def attr_bind_pair(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         return t
 
     def colorrange(self, t):
-        assert(len(t) == 6)
+        assert len(t) == 6
         return t
 
     def hexcolorrange(self, t):
-        assert(len(t) == 2)
+        assert len(t) == 2
         return t
 
     def hexcolor(self, t):
@@ -652,3 +623,36 @@ class CommentsTransformer(Transformer_InPlace):
 
     attr = _save_attr_comments
     composite = _save_composite_comments
+
+
+class MapfileToDict(object):
+
+    def __init__(self, include_position=False, include_comments=False,
+                 transformerClass=MapfileTransformer, **kwargs):
+
+        self.include_position = include_position
+        self.include_comments = include_comments
+        self.transformerClass = transformerClass
+        self.kwargs = kwargs
+
+    def transform(self, tree):
+        tree = Canonize().transform(tree)
+
+        self.mapfile_transformer = self.transformerClass(include_position=self.include_position,
+                                                         include_comments=self.include_comments, **self.kwargs)
+
+        if self.include_comments:
+            comments_transformer = CommentsTransformer(self.mapfile_transformer)
+            tree = comments_transformer.transform(tree)
+
+        return self.mapfile_transformer.transform(tree)
+
+
+class Canonize(Transformer_InPlace):
+    @v_args(tree=True)
+    def symbolset(self, tree):
+        composite_type = Tree('composite_type', [Token('symbolset', 'symbolset')])
+
+        tree.data = 'composite'
+        tree.children.insert(0, composite_type)
+        return tree

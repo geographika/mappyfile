@@ -11,7 +11,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>misc\test.py</StartupFile>
+    <StartupFile>tests\test_snippets.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -666,9 +666,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\__init__.py" />
-    <Compile Include="misc\colours_plugin.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="misc\colours_plugin2.py" />
     <Compile Include="misc\docs_parser.py" />
     <Compile Include="docs\scripts\make_json_schema.py">
       <SubType>Code</SubType>
