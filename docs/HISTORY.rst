@@ -1,6 +1,12 @@
 Releases
 --------
 
+0.7.5 (14/09/2018)
+++++++++++++++++++
+
++ Save tokens for value lists
++ Update README and fix example code
+
 0.7.4 (07/09/2018)
 ++++++++++++++++++
 
