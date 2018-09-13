@@ -270,6 +270,7 @@ class MapfileTransformer(Transformer, object):
             else:
                 # list of values
                 values = [v.value for v in value_tokens]
+                d["__tokens__"] = [key_token] + [t for t in value_tokens]
         else:
             # single value
             value_token = value_tokens[0]
