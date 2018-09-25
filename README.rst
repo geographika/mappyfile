@@ -3,7 +3,7 @@ mappyfile
 
 | |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| |Downloads|
 
-A pure Python MapFile parser for working with MapServer, built using `Lark <https://github.com/erezsh/lark>`_
+A pure Python parser for working with MapServer MapFiles, built using `Lark <https://github.com/erezsh/lark>`_
 
 An online formatter demonstrating the libraries capabilities can be found at: http://mappyfile.geographika.net/
 
@@ -31,16 +31,18 @@ This will also install its required dependences Lark (lark-parser), and jsonsche
 Documentation
 -------------
 
-Documentation at http://mappyfile.readthedocs.io/en/latest/
+Full documentation is available at http://mappyfile.readthedocs.io/en/latest/
 
 Usage
 -----
+
+From within Python scripts:
 
 .. code-block:: python
 
     import mappyfile
 
-    mapfile = mappyfile.load("./docs/examples/raster.map")
+    mapfile = mappyfile.open("./docs/examples/raster.map")
     
     # update the map name
     mapfile["name"] = "MyNewMap"
@@ -60,10 +62,23 @@ Usage
     END
     """
 
-    new_layer = mappyfile.loads(new_layer_string)
-    layers.insert(0, new_layer) # can insert the new layer at any index
+    layers = mapfile["layers"]
 
-    print(mappyfile.dumps(mapfile))
+    new_layer = mappyfile.loads(new_layer_string)
+
+    layers.insert(0, new_layer) # insert the new layer at any index in the Mapfile
+
+    for l in layers:
+        print("{} {}".format(l["name"], l["type"]))
+
+    print(mappyfile.dumps(mapfile, indent=1, spacer="\t"))
+
+Two command line tools are available - ``format`` and ``validate``:
+
+.. code-block:: bat
+
+    mappyfile format raster.map formatted_raster.map
+    mappyfile validate D:\ms-ogc-workshop\ms4w\apps\ms-ogc-workshop\**\*.map
 
 Authors
 -------

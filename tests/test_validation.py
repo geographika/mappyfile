@@ -195,6 +195,26 @@ def test_hexcolor_validation_fail():
     assert(len(errors) == 1)
 
 
+def test_hexcolor_validation_translucence():
+    """
+    See https://github.com/geographika/mappyfile/issues/65
+    """
+
+    s = """
+    MAP
+        LAYER
+            CLASS
+                STYLE
+                    COLOR '#FF00FFCC'
+                END
+            END
+        END
+    END
+    """
+    errors = validate(s)
+    assert(len(errors) == 0)
+
+
 def test_nested_validation():
     s = """
     MAP
@@ -450,5 +470,6 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_line_position_mutlilines()
+    test_hexcolor_validation()
+    test_hexcolor_validation_translucence()
     print("Done!")
