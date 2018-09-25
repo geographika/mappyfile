@@ -179,6 +179,29 @@ END"""
     assert s == expected
 
 
+def xtest_cstyle_comment():
+    """
+    Following test throws an exception:
+    UnexpectedToken: Unexpected token Token(REGEXP1, u'/*\n        C-style comment 2\n        */') at line 6, column 9.
+    """
+    txt = """
+    /*
+    C-style comment 1
+    */
+    MAP
+        /*
+        C-style comment 2
+        */
+        NAME "Test" # name comment
+    END
+    
+    """
+    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    print(json.dumps(d, indent=4))
+    s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
+    print(s)
+
+
 def run_tests():
     pytest.main(["-s", "tests/test_comments.py"])
 
@@ -186,6 +209,7 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.DEBUG)
-    # test_metadata_comment()
-    run_tests()
+    test_comment_parsing()
+    xtest_cstyle_comment()
+    # run_tests()
     print("Done!")
