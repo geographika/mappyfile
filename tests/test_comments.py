@@ -194,7 +194,6 @@ def xtest_cstyle_comment():
         */
         NAME "Test" # name comment
     END
-    
     """
     d = mappyfile.loads(txt, include_comments=True, include_position=False)
     print(json.dumps(d, indent=4))
