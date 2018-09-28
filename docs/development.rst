@@ -63,7 +63,7 @@ To update from master. https://github.com/erezsh/lark/
 
 .. code-block:: bat
 
-    pip install git+git://github.com/erezsh/lark@master -U
+    pip install git+git://github.com/lark-parser/lark@master -U
 
 Linting
 -------
