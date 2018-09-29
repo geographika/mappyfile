@@ -1,6 +1,8 @@
 import logging
 import json
 import inspect
+import tempfile
+import pickle
 import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
@@ -119,6 +121,33 @@ def test_update_case_sensitive_ordered_dict():
     assert(d["a"] == "goodbye")
 
 
+def test_pickling():
+    """
+    See issue #68
+    """
+
+    s = """
+    MAP
+        NAME "Test"
+        LAYER
+            NAME "Layer1"
+            CLASS
+                NAME "Class1"
+            END
+        END
+    END
+    """
+
+    d = get_dict(s)
+    tf1 = tempfile.NamedTemporaryFile(delete=False)
+    pickle.dump(d, tf1)
+    tf1.close()
+    with open(tf1.name) as tf2:
+        d2 = pickle.load(tf2)
+
+    assert d2["layers"][0]["classes"][0]["name"] == "Class1"
+
+
 def run_tests():
     # pytest.main(["tests/test_ordereddict.py::test_dict"])
     pytest.main(["tests/test_ordereddict.py"])
@@ -127,5 +156,6 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     # run_tests()
-    test_update_case_sensitive_ordered_dict()
+    # test_update_case_sensitive_ordered_dict()
+    test_pickling()
     print("Done!")
