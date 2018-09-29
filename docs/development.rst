@@ -22,7 +22,7 @@ Run from the root of the mappyfile project folder:
 
     set MAPPYFILE_PATH=D:\GitHub\mappyfile
     set VIRTUALENV=C:\VirtualEnvs\mappyfile3
-    cd /D "\Python36\Scripts"
+    cd /D "C:\Python36\Scripts"
     pip install virtualenv
     virtualenv %VIRTUALENV%
     %VIRTUALENV%\Scripts\activate
