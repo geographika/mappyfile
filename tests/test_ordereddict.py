@@ -142,7 +142,8 @@ def test_pickling():
     tf1 = tempfile.NamedTemporaryFile(delete=False)
     pickle.dump(d, tf1)
     tf1.close()
-    with open(tf1.name) as tf2:
+
+    with open(tf1.name, "rb") as tf2:
         d2 = pickle.load(tf2)
 
     assert d2["layers"][0]["classes"][0]["name"] == "Class1"
