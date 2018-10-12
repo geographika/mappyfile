@@ -199,14 +199,6 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     fp.write(map_string)
 
 
-@deprecated
-def write(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
-    """
-    Write a Mapfile dictionary to a file. The save function should now be used.
-    """
-    return save(d, output_file, indent, spacer, quote, newlinechar)
-
-
 def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
     """
     Write a Mapfile dictionary to a file.
