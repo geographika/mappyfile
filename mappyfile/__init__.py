@@ -3,7 +3,7 @@ import pkg_resources
 import sys
 from types import ModuleType
 # allow high-level functions to be accessed directly from the mappyfile module
-from mappyfile.utils import open, load, loads, find, findall, findunique, dumps, dump, save, write
+from mappyfile.utils import open, load, loads, find, findall, findunique, dumps, dump, save
 from mappyfile.utils import findkey, update, validate
 
 __version__ = "0.7.5"

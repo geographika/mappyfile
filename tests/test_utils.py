@@ -37,20 +37,6 @@ def test_loads():
     assert d["name"] == "TEST"
 
 
-def test_write():
-
-    s = """MAP NAME "TEST" END"""
-    fn = tempfile.mktemp()
-    d = mappyfile.loads(s)
-    mappyfile.write(d, fn)
-    d = mappyfile.open(fn)
-    assert d["name"] == "TEST"
-
-    mappyfile.write(d, fn, indent=2, spacer="\t", quote="'", newlinechar="")
-    d = mappyfile.open(fn)
-    assert d["name"] == "TEST"
-
-
 def test_dump():
 
     s = """MAP NAME "TEST" END"""
