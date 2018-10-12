@@ -146,6 +146,7 @@ def test_comment_parsing():
     m = MapfileToDict(include_position=False, include_comments=True)
     ast = p.parse(s)
     print(p._comments)
+    assert len(p._comments) == 5
     print(ast.pretty())
     d = m.transform(ast)      # transform the rest
     print(json.dumps(d, indent=4))
@@ -179,12 +180,48 @@ END"""
     assert s == expected
 
 
-def xtest_cstyle_comment():
+def test_cstyle_comment():
+    s = """
+    MAP
+        /*
+        C-style comment 1
+        */
+        NAME "Test"
+    END
     """
-    Following test throws an exception:
+    d = mappyfile.loads(s, include_comments=True, include_position=False)
+    p = Parser(include_comments=True)
+    m = MapfileToDict(include_position=False, include_comments=True)
+    ast = p.parse(s)
+    print(p._comments)
+    print(ast.pretty())
+    d = m.transform(ast)      # transform the rest
+    print(json.dumps(d, indent=4))
+
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
+    s = pp.pprint(d)
+    print(s)
+    assert len(p._comments) == 1
+
+
+def test_cstyle_comment_start():
+    """
+    CCOMMENT and REGEXP1.2 could cause ambiguities?
+    Without adding priorities the following error may occur
+
     UnexpectedToken: Unexpected token Token(REGEXP1, u'/*\n        C-style comment 2\n        */') at line 6, column 9.
+
+    The following snippet will produce an invalid Mapfile, as the start of the CCOMMENT is commented out with the #
+    Users will have to be careful when including comments in the output
+
+    MAP
+    NAME 'Test' # name comment /*
+            C-style comment 2
+            */
+    END
+
     """
-    txt = """
+    s = """
     /*
     C-style comment 1
     */
@@ -195,10 +232,19 @@ def xtest_cstyle_comment():
         NAME "Test" # name comment
     END
     """
-    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    d = mappyfile.loads(s, include_comments=True, include_position=False)
+    p = Parser(include_comments=True)
+    m = MapfileToDict(include_position=False, include_comments=True)
+    ast = p.parse(s)
+    print(p._comments)
+    print(ast.pretty())
+    d = m.transform(ast)  # transform the rest
     print(json.dumps(d, indent=4))
-    s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
+
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
+    s = pp.pprint(d)
     print(s)
+    assert len(p._comments) == 3
 
 
 def run_tests():
@@ -208,7 +254,7 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.DEBUG)
-    test_comment_parsing()
-    xtest_cstyle_comment()
+    # test_comment_parsing()
+    test_cstyle_comment_start()
     # run_tests()
     print("Done!")

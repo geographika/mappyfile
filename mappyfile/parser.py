@@ -28,7 +28,8 @@ class Parser(object):
     def _create_lalr_parser(self):
         grammar_text = self.load_grammar("mapfile.lalr.g")
         if self.include_comments:
-            extra_args = dict(propagate_positions=True, lexer_callbacks={'COMMENT': self._comments.append})
+            callbacks = {'COMMENT': self._comments.append, 'CCOMMENT': self._comments.append}
+            extra_args = dict(propagate_positions=True, lexer_callbacks=callbacks)
         else:
             extra_args = {}
         return Lark(grammar_text, parser="lalr", lexer="contextual", **extra_args)

@@ -129,7 +129,7 @@ REGEXP2: /\\\\.*?\\\\i?/
 RUNTIME_VAR: /%.*?%/
 
 COMMENT: /\#[^\n]*/
-CCOMMENT: /(?s)\/[*].*?[*]\//
+CCOMMENT.3: /(?s)\/[*].*?[*]\//
 
 _END: "END"i
 
