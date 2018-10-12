@@ -1,6 +1,15 @@
 Releases
 --------
 
+0.7.6 (13/10/2018)
+++++++++++++++++++
+
++ Deprecated ``write`` function removed from the API and codebase
++ Update OFFSET validation to allow attribute bindings - see https://github.com/mapserver/docs/pull/256
++ `#68 <https://github.com/geographika/mappyfile/issues/68>`_ - Support pickling of DefaultOrderedDict in Python3
++ `#67 <https://github.com/geographika/mappyfile/issues/67>`_ - Fix deprecation warnings for grammar regular expressions in Python 3.6
++ `#65 <https://github.com/geographika/mappyfile/issues/65>`_ - Handle hexadecimal color translucence
+
 0.7.5 (14/09/2018)
 ++++++++++++++++++
 
