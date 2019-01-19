@@ -380,6 +380,21 @@ def test_map_layers_props():
     assert(props["type"] == "array")
 
 
+def test_end_comment():
+    s = "MAP LAYER TYPE POINT NAME 'Test' END END"
+    ast = mappyfile.loads(s)
+    pp = PrettyPrinter(indent=4, quote='"', newlinechar="\n", end_comment=True)
+    res = pp.pprint(ast)
+    print(res)
+    exp = """MAP
+    LAYER
+        TYPE POINT
+        NAME "Test"
+    END # LAYER
+END # MAP"""
+    assert res == exp
+
+
 def run_tests():
     # pytest.main(["tests/test_pprint.py::test_format_list"])
     pytest.main(["tests/test_pprint.py"])
@@ -387,6 +402,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    test_single_string_projection()
+    test_end_comment()
     # run_tests()
     print("Done!")

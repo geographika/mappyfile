@@ -101,7 +101,7 @@ class Quoter(object):
 
 
 class PrettyPrinter(object):
-    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n"):
+    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
         """
         Option use "\t" for spacer with an indent of 1
         """
@@ -110,8 +110,9 @@ class PrettyPrinter(object):
 
         self.indent = indent
         self.spacer = spacer * self.indent
-        self.newlinechar = newlinechar
         self.quoter = Quoter(quote)
+        self.newlinechar = newlinechar
+        self.end_comment = end_comment
         self.end = u"END"
         self.validator = Validator()
 
@@ -138,8 +139,11 @@ class PrettyPrinter(object):
     def add_start_line(self, key, level):
         return self.whitespace(level, 1) + key.upper()
 
-    def add_end_line(self, level, indent):
-        return self.whitespace(level, indent) + self.end
+    def add_end_line(self, level, indent, key):
+        end_line = self.whitespace(level, indent) + self.end
+        if self.end_comment:
+            end_line = "{} # {}".format(end_line, key.upper())
+        return end_line
 
     def __format_line(self, spacer, key, value):
 
@@ -163,7 +167,7 @@ class PrettyPrinter(object):
 
         lines += [self.add_start_line(key, level)]
         lines += self.process_dict(d, level, comments)
-        lines.append(self.add_end_line(level, 1))
+        lines.append(self.add_end_line(level, 1, key))
 
         return lines
 
@@ -222,7 +226,7 @@ class PrettyPrinter(object):
                 v = self.quoter.add_quotes(v)
                 lines.append(u"{}{}".format(self.whitespace(level, 2), v))
 
-        lines.append(self.add_end_line(level, 1))
+        lines.append(self.add_end_line(level, 1, key))
         return lines
 
     def format_pair_list(self, key, pair_list, level):
@@ -236,7 +240,7 @@ class PrettyPrinter(object):
         pairs = ["{}{} {}".format(list_spacer, p[0], p[1]) for p in pair_list]
         lines += pairs
 
-        lines.append(self.add_end_line(level, 1))
+        lines.append(self.add_end_line(level, 1, key))
 
         return lines
 
@@ -499,6 +503,6 @@ class PrettyPrinter(object):
 
         if not is_hidden:
             # close the container block with an END
-            lines.append(self.add_end_line(level, 0))
+            lines.append(self.add_end_line(level, 0, type_))
 
         return lines
