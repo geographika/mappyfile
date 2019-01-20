@@ -101,7 +101,7 @@ def test_style_pattern_fail():
 
 
 def run_tests():
-    """
+    r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
     #stdin_get_value = sys.stdin.read
     Or get AttributeError: '_ReplInput' object has no attribute 'read'

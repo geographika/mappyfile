@@ -49,7 +49,7 @@ def test_class_expression1():
 
 
 def test_class_expression2():
-    """
+    r"""
     shp2img -m C:\Temp\msautotest\query\text.tmp.map  -l text_test002 -o c:\temp\tmp_onl0lk.png
     """
     s = '''
@@ -368,7 +368,7 @@ def test_class_expression_oddname():
 
 
 def run_tests():
-    """
+    r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
     #stdin_get_value = sys.stdin.read
     Or get AttributeError: '_ReplInput' object has no attribute 'read'

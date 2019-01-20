@@ -234,7 +234,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         s = '''MAP NAME "TEST" END'''
 
         d = mappyfile.loads(s)
-        fn = r"C:\Data\mymap.map"
+        fn = "C:/Data/mymap.map"
         mappyfile.save(d, fn)
     """
     map_string = _pprint(d, indent, spacer, quote, newlinechar)

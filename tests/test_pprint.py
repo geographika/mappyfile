@@ -16,7 +16,7 @@ import mappyfile
 
 
 def test_nested_quotes():
-    """
+    r"""
     If values contain quotes then make sure they are escaped
     shp2img -m C:\Temp\msautotest\misc\ogr_vrtconnect.tmp.map
     """
