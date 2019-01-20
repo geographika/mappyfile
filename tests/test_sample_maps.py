@@ -30,6 +30,7 @@ def test_all_maps():
                 assert(len(errors) == 0)
             except AssertionError as ex:
                 logging.warning("Validation errors in %s ", fn)
+                logging.error(ex)
                 logging.warning(errors)
         except (BaseException, UnexpectedToken) as ex:
             logging.warning("Cannot process %s ", fn)
