@@ -71,6 +71,7 @@
     </Content>
     <Content Include="docs\comments.rst" />
     <Content Include="docs\development.rst" />
+    <Content Include="docs\editing.rst" />
     <Content Include="docs\examples\animation\animated_buffer.map" />
     <Content Include="docs\examples\geometry\geometry.map" />
     <Content Include="docs\grammar.rst" />
@@ -97,7 +98,6 @@
     <Content Include="docs\_static\widget.js" />
     <Content Include="LICENSE" />
     <Content Include="docs\.gitignore" />
-    <Content Include="docs\converting_from_mapscript.rst" />
     <Content Include="docs\examples\after.map" />
     <Content Include="docs\examples\before.map" />
     <Content Include="docs\examples\raster.map" />
