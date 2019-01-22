@@ -487,7 +487,7 @@ class PrettyPrinter(object):
 
             elif attr == "projection":
                 lines += self.process_projection(attr, value, level)
-            elif attr in ("processing", "formatoption", "include"):
+            elif attr in REPEATED_KEYS:
                 lines += self.process_repeated_list(attr, value, level)
             elif attr == "points":
                 lines += self.format_repeated_pair_list(attr, value, level)
