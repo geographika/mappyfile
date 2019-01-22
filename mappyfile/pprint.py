@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 import sys
 import logging
 import numbers
-from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES
+from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 from mappyfile.validator import Validator
 
 log = logging.getLogger("mappyfile")
@@ -480,7 +480,7 @@ class PrettyPrinter(object):
                     lines += self._format(v, level + 1)
             elif attr == "pattern":
                 lines += self.format_pair_list(attr, value, level)
-            elif attr in ("metadata", "validation", "values"):
+            elif attr in REPEATED_KEYS:
                 # metadata and values are also composites
                 # but will be processed here
                 lines += self.process_key_dict(attr, value, level)

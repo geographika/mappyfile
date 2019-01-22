@@ -824,6 +824,38 @@ def test_buffer_expression():
     assert(output(s, schema_name="style") == exp)
 
 
+def test_multiple_layer_data():
+
+    s = u"""
+    LAYER
+        DATA "dataset1"
+        DATA "dataset2"
+    END
+    """
+
+    print(output(s, schema_name="layer"))
+    exp = u"LAYER DATA 'dataset1' DATA 'dataset2' END"
+    assert(output(s, schema_name="layer") == exp)
+
+
+def test_single_layer_data():
+
+    s = u"""
+    LAYER
+        DATA "dataset1"
+    END
+    """
+    import mappyfile
+    jsn = mappyfile.loads(s)
+    print(json.dumps(jsn, indent=4))
+    jsn["data"][0] = "dataset1"
+    print(mappyfile.dumps(jsn))
+
+    print(output(s, schema_name="layer"))
+    exp = u"LAYER DATA 'dataset1' END"
+    assert(output(s, schema_name="layer") == exp)
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py

@@ -48,7 +48,10 @@
       "enum": [ "contour", "kerneldensity", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
     },
     "data": {
-      "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "debug": {
       "$ref": "debug.json"
