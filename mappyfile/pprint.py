@@ -480,7 +480,7 @@ class PrettyPrinter(object):
                     lines += self._format(v, level + 1)
             elif attr == "pattern":
                 lines += self.format_pair_list(attr, value, level)
-            elif attr in REPEATED_KEYS:
+            elif attr in ("metadata", "validation", "values"):
                 # metadata and values are also composites
                 # but will be processed here
                 lines += self.process_key_dict(attr, value, level)
