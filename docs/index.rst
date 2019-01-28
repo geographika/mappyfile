@@ -166,6 +166,7 @@ Future development plans, leading to a v1.0 release include:
 + Create a Jupyter Notebook demonstrating mappyfile usage
 + Add a plugins page to the docs
 + Add an example of creating Mapfiles using YAML
++ Create a new ``prune`` function to remove redundant default settings from a Mapfile
 
 .. include:: HISTORY.rst
 
