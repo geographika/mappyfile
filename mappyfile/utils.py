@@ -161,7 +161,7 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
     return d
 
 
-def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
+def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
     """
     Write d (the Mapfile dictionary) as a JSON formatted stream to fp
 
@@ -181,6 +181,9 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         The quote character to use in the Mapfile (double or single quotes)
     newlinechar: string
         The character used to insert newlines in the Mapfile
+    end_comment: bool
+        Add a comment with the block type at each closing END
+        statement e.g. END # MAP
 
     Example
     -------
@@ -195,11 +198,11 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n"):
             mappyfile.dump(d, f, indent=2, quote="'")
 
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar)
+    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment)
     fp.write(map_string)
 
 
-def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
+def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
     """
     Write a Mapfile dictionary to a file.
 
@@ -219,6 +222,9 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         The quote character to use in the Mapfile (double or single quotes)
     newlinechar: string
         The character used to insert newlines in the Mapfile
+    end_comment: bool
+        Add a comment with the block type at each closing END
+        statement e.g. END # MAP
 
     Returns
     -------
@@ -234,15 +240,15 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         s = '''MAP NAME "TEST" END'''
 
         d = mappyfile.loads(s)
-        fn = r"C:\Data\mymap.map"
+        fn = "C:/Data/mymap.map"
         mappyfile.save(d, fn)
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar)
+    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment)
     _save(output_file, map_string)
     return output_file
 
 
-def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
+def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
     """
     Output a Mapfile dictionary as a string
 
@@ -260,6 +266,9 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         The quote character to use in the Mapfile (double or single quotes)
     newlinechar: string
         The character used to insert newlines in the Mapfile
+    end_comment: bool
+        Add a comment with the block type at each closing END
+        statement e.g. END # MAP
 
     Returns
     -------
@@ -278,7 +287,7 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n"):
         d = mappyfile.loads(s)
         print(mappyfile.dumps(d, indent=1, spacer="\\t"))
     """
-    return _pprint(d, indent, spacer, quote, newlinechar)
+    return _pprint(d, indent, spacer, quote, newlinechar, end_comment)
 
 
 def find(lst, key, value):
@@ -571,7 +580,8 @@ def _save(output_file, map_string):
         f.write(map_string)
 
 
-def _pprint(d, indent, spacer, quote, newlinechar):
+def _pprint(d, indent, spacer, quote, newlinechar, end_comment):
     pp = PrettyPrinter(indent=indent, spacer=spacer,
-                       quote=quote, newlinechar=newlinechar)
+                       quote=quote, newlinechar=newlinechar,
+                       end_comment=end_comment)
     return pp.pprint(d)

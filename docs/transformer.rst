@@ -3,8 +3,9 @@ Transforming
 
 *Please note this page is currently a draft and subject to further updates.*
 
-Once mappyfile has parsed a Mapfile, it uses a transformer to transform it into a Python dictionary. This allows a Python developer
-a familiar data structure with which to edit the Mapfile further. 
+mappyfile parses a Mapfile and turns it into a Abstract Syntax Tree (AST). The mappyfile
+transformer class then turns this tree into a Python dictionary. This provides the Python developer
+with a familiar data structure that can be used to edit the Mapfile further. 
 
 For example taking the Mapfile below:
 
@@ -46,16 +47,21 @@ Notes on the above:
     ], 
   
 
+Python dictionaries map closely to JSON data structures, which means the Mapfile dictionary 
+structure can be formalised into a JSONSchema. 
+
 Mappyfile Additions
 -------------------
 
-Hidden containers - these containers are not outputted as part of the pprint. They are used to store objects of the same type 
-e.g. LAYERs, CLASSes, STYLEs
+In order to ensure that no information is lost when inputting and outputting a Mapfile,
+mappyfile makes use of hidden properties to store additional data. This data is
+not outputted as part of the pprint. For example a hidden property is used to store objects of the 
+same type e.g. LAYERs, CLASSes, STYLEs
 
 ..
     + Could make use of https://github.com/bcj/AttrDict to allow property-like access to dictionary objects (see proposed API examples below)?
 
 ..
-    To viiew output
+    To view output
     import json
-    print(json.dumps(mapfile, indent=4))	
+    print(json.dumps(mapfile, indent=4))

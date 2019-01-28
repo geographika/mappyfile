@@ -60,6 +60,16 @@ def test_dumps():
     assert output == 'MAP 	NAME "TEST" END'
 
 
+def test_dump_with_end_comments():
+
+    s = '''MAP NAME "TEST" END'''
+
+    d = mappyfile.loads(s)
+    output = mappyfile.dumps(d, indent=1, spacer="\t", newlinechar=" ", end_comment=True)
+    print(output)
+    assert output == 'MAP 	NAME "TEST" END # MAP'
+
+
 def test_find():
 
     s = """

@@ -71,11 +71,6 @@ def test_symbolset_file():
 
 
 def run_tests():
-    """
-    Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
-    #stdin_get_value = sys.stdin.read
-    Or get AttributeError: '_ReplInput' object has no attribute 'read'
-    """
     pytest.main(["tests/test_symbolset.py"])
 
 

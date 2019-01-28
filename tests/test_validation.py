@@ -114,13 +114,6 @@ def main():
     print(d)
     # s = schema["definitions"]["map"]["properties"]["status"]
 
-    """
-    if validator.validate(d):
-        name = "test"
-        output_folder = r"D:\Temp"
-        create_image(name, d, output_folder=output_folder)
-    """
-
 
 def to_dict(s):
     p = Parser()
@@ -459,11 +452,6 @@ END"""
 
 
 def run_tests():
-    """
-    Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
-    #stdin_get_value = sys.stdin.read
-    Or get AttributeError: '_ReplInput' object has no attribute 'read'
-    """
     pytest.main(["tests/test_validation.py"])
 
 

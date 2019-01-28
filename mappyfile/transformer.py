@@ -11,7 +11,7 @@ from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
 
 
-from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES
+from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 from mappyfile.ordereddict import CaseInsensitiveOrderedDict
 from mappyfile.pprint import Quoter
 
@@ -205,7 +205,7 @@ class MapfileTransformer(Transformer, object):
                                 pd[key_name] = [existing_pos]
                             pd[key_name].append(pos)
 
-                elif key_name in ("processing", "formatoption", "include"):
+                elif key_name in REPEATED_KEYS:
                     if key_name not in composite_dict:
                         composite_dict[key_name] = []
 

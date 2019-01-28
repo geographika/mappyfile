@@ -1,19 +1,55 @@
+Editing a Mapfile
+=================
+
+
+Data Clauses
+------------
+
+Some Mapfile keywords can be repeated several times within the same parent block. These 
+keywords are ``PROCESSING``, ``FORMATOPTION``, ``INCLUDE``, and ``DATA``. 
+
+MS RFC 86: Scale-dependant String Substitutions
+
+.. code-block:: mapfile
+
+    LAYER
+      SCALETOKEN
+        NAME "%priority%"
+        VALUES
+          "0" "1"
+          "1000" "2"
+          "10000" "3"
+        END
+      END
+      DATA "the_geom from mytable_%priority%"  #data comes from a specific table
+      DATA "/path/to/roads_%priority%.shp"  #data comes from a specific shapefile
+      DATA "the_geom_%priority% from roads" #data comes from a specific column in the table
+      DATA "the_geom_%priority% from (select * from roads where priority > %priority%) as foo" #data is filtered
+    END
+
 Converting from MapScript
 =========================
 
-This page has some side-by-side examples of Python MapScript code, and its mappyfile equivalent. The simple examples have little difference between them. 
-The power of mappyfile becomes more apparent with the more complicated Mapfile manipulations. 
+This section has some side-by-side examples of Python MapScript code, and its mappyfile equivalent. 
+The simple examples have little difference between them. The power of mappyfile becomes more apparent with the more complicated Mapfile manipulations. 
 
-As mappyfile is simply working with text, you don't have to worry that paths referenced in the Mapfile exist on the local machine. 
-This is particularly useful when updating an existing local Mapfile to deploy on a production server. 
+As mappyfile is simply working with text, you don't have to worry that paths referenced in the Mapfile 
+exist on the local machine. This is particularly useful when updating an existing local Mapfile to deploy 
+on a production server. 
 
 Updating a Metadata Value
 +++++++++++++++++++++++++
 
+Note some of the Python MapScript API has been modified since v7.2 to better match and work
+with mappyfile. 
+
 .. code-block:: python
 
-    # mapscript
+    # mapscript - standard MapScript API
     mymap.setMetaData("ows_title", "My WMS Map")
+
+    # mapscript - new hash table API - added as a convenience to the Python MapScript bindings only
+    mymap["metadata"]["ows_title"] = "My WMS Map"
 
     # mappyfile
     mymap["metadata"]["ows_title"] = "My WMS Map"

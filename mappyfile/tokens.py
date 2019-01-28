@@ -334,5 +334,5 @@ ows_enable_request
 ms_errorfile
 """.split()) | COMPOSITE_NAMES
 
-# processing and formatoption can be added mutliple times to a composite type
-REPEATED_KEYS = ('processing', 'formatoption', 'include')
+# some keywords can be added multiple times to a composite type
+REPEATED_KEYS = ('processing', 'formatoption', 'include', 'data')
