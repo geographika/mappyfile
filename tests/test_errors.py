@@ -78,10 +78,9 @@ END"""
     try:
         p.parse(s)
     except UnexpectedToken as ex:
-        print(ex.__dict__)
         assert(ex.line == 7)
         assert(ex.column == 1)
-        assert(str(ex.token) == 'END')
+        assert(ex.token.type == "$END")
 
 
 @pytest.mark.xfail
