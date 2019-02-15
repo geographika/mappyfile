@@ -99,7 +99,7 @@ def get_values(text):
     and return ['r', 'g', 'b']
     """
 
-    res = re.findall("\[(.*?)\]", text)
+    res = re.findall(r"\[(.*?)\]", text)
     values = []
 
     for r in res:

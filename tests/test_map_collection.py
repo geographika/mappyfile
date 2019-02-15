@@ -52,7 +52,7 @@ def output(fn):
 
 def test_maps():
     sample_dir = os.path.join(os.path.dirname(__file__), "mapfiles")
-    pth = sample_dir + '/**/*.map'
+    pth = sample_dir + r'/**/*.map'
     mapfiles = glob2.glob(pth)
     mapfiles = [f for f in mapfiles if "basemaps" not in f]
 
