@@ -1,6 +1,11 @@
 Releases
 --------
 
+0.7.7 (Work in Progress)
+++++++++++++++++++++++++
+
++ Update code to work with Lark 0.6.6 (see #71)
+
 0.7.6 (13/10/2018)
 ++++++++++++++++++
 
