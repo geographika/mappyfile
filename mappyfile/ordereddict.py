@@ -1,6 +1,12 @@
-from collections import OrderedDict, Callable
+from collections import OrderedDict
 import copy
 import sys
+
+
+try:
+    from collections.abc import Callable  # noqa
+except ImportError:
+    from collections import Callable  # noqa
 
 
 PY2 = sys.version_info[0] < 3
