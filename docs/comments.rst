@@ -9,7 +9,7 @@ There are currently 2 comment tokens in the grammar:
 .. code-block:: bat
 
     COMMENT: /\#[^\n]*/
-    CCOMMENT: /\/(?s)[*].*?[*]\//
+    CCOMMENT.3: /\/[*].*?[*]\//s
 
 Questions
 +++++++++
