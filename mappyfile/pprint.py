@@ -101,7 +101,7 @@ class Quoter(object):
 
 
 class PrettyPrinter(object):
-    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
+    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
         """
         Option use "\t" for spacer with an indent of 1
         """

@@ -15,7 +15,7 @@ log = logging.getLogger("mappyfile")
 
 class Parser(object):
 
-    def __init__(self, expand_includes=True, include_comments=False):
+    def __init__(self, expand_includes=True, include_comments=False, **kwargs):
         self.expand_includes = expand_includes
         self.include_comments = include_comments
         self._comments = []

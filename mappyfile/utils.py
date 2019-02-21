@@ -31,7 +31,7 @@ def deprecated(func):
     return new_func
 
 
-def open(fn, expand_includes=True, include_comments=False, include_position=False):
+def open(fn, expand_includes=True, include_comments=False, include_position=False, **kwargs):
     """
     Load a Mapfile from the supplied filename into a Python dictionary.
 
@@ -67,15 +67,15 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
 
     """
     p = Parser(expand_includes=expand_includes,
-               include_comments=include_comments)
+               include_comments=include_comments, **kwargs)
     ast = p.parse_file(fn)
     m = MapfileToDict(include_position=include_position,
-                      include_comments=include_comments)
+                      include_comments=include_comments, **kwargs)
     d = m.transform(ast)
     return d
 
 
-def load(fp, expand_includes=True, include_position=False, include_comments=False):
+def load(fp, expand_includes=True, include_position=False, include_comments=False, **kwargs):
     """
     Load a Mapfile from an open file or file-like object.
 
@@ -111,15 +111,15 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
     Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
     """
     p = Parser(expand_includes=expand_includes,
-               include_comments=include_comments)
+               include_comments=include_comments, **kwargs)
     ast = p.load(fp)
     m = MapfileToDict(include_position=include_position,
-                      include_comments=include_comments)
+                      include_comments=include_comments, **kwargs)
     d = m.transform(ast)
     return d
 
 
-def loads(s, expand_includes=True, include_position=False, include_comments=False):
+def loads(s, expand_includes=True, include_position=False, include_comments=False, **kwargs):
     """
     Load a Mapfile from a string
 
@@ -153,10 +153,10 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
 
     """
     p = Parser(expand_includes=expand_includes,
-               include_comments=include_comments)
+               include_comments=include_comments, **kwargs)
     ast = p.parse(s)
     m = MapfileToDict(include_position=include_position,
-                      include_comments=include_comments)
+                      include_comments=include_comments, **kwargs)
     d = m.transform(ast)
     return d
 
@@ -202,7 +202,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
     fp.write(map_string)
 
 
-def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
+def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
     """
     Write a Mapfile dictionary to a file.
 
@@ -248,7 +248,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
     return output_file
 
 
-def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
+def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
     """
     Output a Mapfile dictionary as a string
 
@@ -287,7 +287,7 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
         d = mappyfile.loads(s)
         print(mappyfile.dumps(d, indent=1, spacer="\\t"))
     """
-    return _pprint(d, indent, spacer, quote, newlinechar, end_comment)
+    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, **kwargs)
 
 
 def find(lst, key, value):
@@ -580,8 +580,8 @@ def _save(output_file, map_string):
         f.write(map_string)
 
 
-def _pprint(d, indent, spacer, quote, newlinechar, end_comment):
+def _pprint(d, indent, spacer, quote, newlinechar, end_comment, **kwargs):
     pp = PrettyPrinter(indent=indent, spacer=spacer,
                        quote=quote, newlinechar=newlinechar,
-                       end_comment=end_comment)
+                       end_comment=end_comment, **kwargs)
     return pp.pprint(d)
