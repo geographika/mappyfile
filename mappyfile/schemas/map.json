@@ -42,7 +42,10 @@
       "$ref": "debug.json"
     },
     "defresolution": {
-      "type": "integer"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.6
+      }
     },
     "extent": {
       "$ref": "extent.json"
@@ -94,7 +97,7 @@
       "type": "object"
     },
     "resolution": {
-      "type": "integer"
+      "type": "number"
     },
     "scaledenom": {
       "type": "number"
