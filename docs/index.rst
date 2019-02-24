@@ -19,7 +19,7 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
 
     Parsing (draft) <parser.rst>
     Transforming (draft) <transformer.rst>
-    Pretty Printing (draft) <pretty_printing.rst>
+    Pretty Printing <pretty_printing.rst>
     validation.rst
     schemas.rst
     grammar.rst
@@ -68,7 +68,7 @@ number of issues that resulted in the development of mappyfile:
   can take advantage of performance improvements in the MS C/C++ 2015 compiler
 + You need to create an empty log file or MapServer won't open the map (or get "msSetErrorFile(): General error message. Failed to open MS_ERRORFILE" errors)
 + MapScript is not available through PyPI - the last version was uploaded in 2010 - https://pypi.python.org/pypi/mapscript/5.6.3.0 **UPDATE** mapscript wheels 
- for MapServer 7.2 on Windows are now available
+  for MapServer 7.2 on Windows are now available
 + It is necessary to set the working directory so that MapServer includes are found (this also applies to mappyfile, but there is no need to os.chdir
   and change the working directory for your script or application)
 + The MapScript API is not particularly "Pythonic"

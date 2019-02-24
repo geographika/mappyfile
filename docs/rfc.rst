@@ -286,6 +286,8 @@ duplication between the two.
 It is important the long-form text can be easily edited and examples added, so this approach
 aims to enhance the hand-written documentation rather than replace it. 
 
+This would avoid issues such as https://github.com/mapserver/mapserver/issues/5748
+
 4. Online Validator
 ===================
 

@@ -1,7 +1,6 @@
 Editing a Mapfile
 =================
 
-
 Data Clauses
 ------------
 

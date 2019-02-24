@@ -1,10 +1,14 @@
 Releases
 --------
 
-0.7.7 (Work in Progress)
-++++++++++++++++++++++++
+0.7.7 24/02/2019
+++++++++++++++++
 
 + Update code to work with Lark 0.6.6 (see #71)
++ New end_comment option for pprint - Add a comment with the block type at each closing END statement e.g. END # MAP 
+  (see request `#69 <https://github.com/geographika/mappyfile/issues/69>`_)
++ Add ``**kwargs`` to main API to allow greater flexibility with plugins
++ Fix DeprecationWarnings relating to Python 3.7.2 (thanks @tigerfoot for the report)
 
 0.7.6 (13/10/2018)
 ++++++++++++++++++
