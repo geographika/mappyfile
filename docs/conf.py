@@ -54,7 +54,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'mappyfile'
-copyright = u'2018, Seth Girvin'
+copyright = u'2019, Seth Girvin'
 author = u'Seth Girvin'
 
 # The version info for the project you're documenting, acts as replacement for
