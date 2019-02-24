@@ -1,4 +1,5 @@
 import logging
+import os
 import tempfile
 import mappyfile
 import pytest
@@ -45,6 +46,20 @@ def test_dump():
         mappyfile.dump(d, fp)
 
     with open(fp.name) as fp:
+        d = mappyfile.load(fp)
+
+    assert d["name"] == "TEST"
+
+
+def test_save():
+
+    s = """MAP NAME "TEST" END"""
+    d = mappyfile.loads(s)
+
+    output_file = os.path.join(tempfile.mkdtemp(), 'test_mapfile.map')
+    mappyfile.save(d, output_file)
+
+    with open(output_file) as fp:
         d = mappyfile.load(fp)
 
     assert d["name"] == "TEST"
