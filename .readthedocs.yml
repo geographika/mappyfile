@@ -4,5 +4,5 @@ build:
     image: 2.0
 
 python:
-  version: 3.5
+  version: 3.7
   setup_py_install: true
