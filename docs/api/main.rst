@@ -5,6 +5,8 @@ mappyfile API
 
 This page lists the top-level mappyfile API. 
 
+.. mapfile-reader-writer-api:
+
 Mapfile Reader and Writer Functions
 -----------------------------------
 
