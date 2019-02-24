@@ -163,7 +163,7 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
 
 def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
     """
-    Write d (the Mapfile dictionary) as a JSON formatted stream to fp
+    Write d (the Mapfile dictionary) as a formatted stream to fp
 
     Parameters
     ----------
@@ -204,7 +204,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
 
 def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
     """
-    Write a Mapfile dictionary to a file.
+    Write a dictionary to an output Mapfile on disk
 
     Parameters
     ----------
