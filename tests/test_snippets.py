@@ -176,6 +176,32 @@ def test_metadata():
     assert(output(s, schema_name="metadata") == exp)
 
 
+def test_metadata_uppercase():
+
+    s = """
+    METADATA
+        'WMS_TITLE' 'Test simple wms'
+    END
+    """
+    exp = """METADATA 'wms_title' 'Test simple wms' END"""
+    assert(output(s, schema_name="metadata") == exp)
+
+
+def test_duplicated_metadata_keys():
+    """
+    The second key will be used
+    """
+
+    s = """
+    METADATA
+        'wms_title' 'Test simple wms'
+        'wms_title' 'Test simple wms2'
+    END
+    """
+    exp = """METADATA 'wms_title' 'Test simple wms2' END"""
+    assert(output(s, schema_name="metadata") == exp)
+
+
 def test_metadata_unquoted():
     """
     The METADATA block doesn't need quotes
@@ -868,6 +894,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_font_symbol()
+    test_metadata_uppercase()
     # run_tests()
     print("Done!")

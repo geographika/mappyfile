@@ -180,6 +180,55 @@ END"""
     assert s == expected
 
 
+def test_metadata_duplicated_key_comment():
+
+    txt = """METADATA
+        'wms_title' 'Title1' # title1
+        'wms_title' 'Title2' # title2
+END"""
+    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
+    expected = """METADATA
+'wms_title' 'Title2' # title2
+END"""
+
+    assert s == expected
+
+
+def test_metadata_mixed_case_comment():
+
+    txt = """
+    METADATA
+        'wms_TITLE' 'Title1' # title1
+    END
+    """
+
+    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
+    expected = """METADATA
+'wms_title' 'Title1' # title1
+END"""
+
+    assert s == expected
+
+
+def test_metadata_unquoted_comment():
+
+    txt = """
+    METADATA
+      WMS_TITLE "Minor Civil Divisions" # comment
+    END
+    """
+
+    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    s = mappyfile.dumps(d, indent=0, quote='"', newlinechar="\n")
+    expected = """METADATA
+"wms_title" "Minor Civil Divisions" # comment
+END"""
+
+    assert s == expected
+
+
 def test_cstyle_comment():
     s = """
     MAP
@@ -255,6 +304,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.DEBUG)
     # test_comment_parsing()
-    test_cstyle_comment_start()
+    test_metadata_mixed_case_comment()
     # run_tests()
     print("Done!")

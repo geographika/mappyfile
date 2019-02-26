@@ -5,6 +5,7 @@ Python dict structure
 
 from __future__ import unicode_literals
 import sys
+import logging
 from collections import OrderedDict
 from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
@@ -19,6 +20,9 @@ from mappyfile.pprint import Quoter
 PY2 = sys.version_info[0] < 3
 if PY2:
     str = unicode # NOQA
+
+
+log = logging.getLogger("mappyfile")
 
 
 class MapfileTransformer(Transformer, object):
@@ -323,7 +327,14 @@ class MapfileTransformer(Transformer, object):
         d = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
 
         for t in body:
-            d[self.clean_string(t[0].value)] = self.clean_string(t[1].value)
+            k = self.clean_string(t[0].value).lower()
+            v = self.clean_string(t[1].value)
+
+            if k in d.keys():
+                log.warning("A duplicate key ({}) was found in {}. Only the last value ({}) will be used. ".format(
+                            k, type_, v))
+
+            d[k] = v
 
         if self.include_position:
             pd = self.create_position_dict(key, body)
@@ -591,6 +602,33 @@ class CommentsTransformer(Transformer_InPlace):
 
         return all_comments
 
+    def add_metadata_comments(self, d, metadata):
+        """
+        Any duplicate keys will be replaced with the last duplicate along with comments
+        """
+
+        if len(metadata) > 2:
+            string_pairs = metadata[1:-1]  # get all metadata pairs
+            for sp in string_pairs:
+                # get the raw metadata key
+
+                if isinstance(sp.children[0], Token):
+                    token = sp.children[0]
+                    assert token.type == "UNQUOTED_STRING"
+                    key = token.value
+                else:
+                    # quoted string (double or single)
+                    token = sp.children[0].children[0]
+                    key = token.value
+
+                # clean it to match the dict key
+                key = self._mapfile_todict.clean_string(key).lower()
+                assert key in d.keys()
+                key_comments = self.get_comments(sp.meta)
+                d["__comments__"][key] = key_comments
+
+        return d
+
     @v_args(tree=True)
     def _save_attr_comments(self, tree):
         d = self._mapfile_todict.transform(tree)
@@ -612,13 +650,7 @@ class CommentsTransformer(Transformer_InPlace):
 
         if d["__type__"] == "metadata":
             md = tree.children[0].children
-            if len(md) > 2:
-                string_pairs = md[1:-1]
-                md_keys = [k for k in d.keys() if k not in ["__type__", "__comments__", "__position__"]]
-                assert len(string_pairs) == len(md_keys)
-                for k, sp in zip(md_keys, string_pairs):
-                    key_comments = self.get_comments(sp.meta)
-                    d["__comments__"][k] = key_comments
+            self.add_metadata_comments(d, md)
 
         return d
 

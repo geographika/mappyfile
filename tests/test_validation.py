@@ -451,6 +451,26 @@ END"""
     print(mappyfile.dumps(d))
 
 
+def test_root_position():
+    """
+    Check the root objects position is found correctly
+    """
+
+    s = """
+    MAP
+        METADATA
+            "wms_title"    "Toronto Landsat 5 TM"
+        END
+    END
+    """
+
+    d = mappyfile.loads(s, include_position=True)
+    v = Validator()
+    assert d["__position__"]["line"] == 2
+    errors = v.validate(d, add_comments=True)
+    assert len(errors) == 1
+
+
 def run_tests():
     pytest.main(["tests/test_validation.py"])
 
@@ -458,6 +478,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_hexcolor_validation()
-    test_hexcolor_validation_translucence()
+    test_root_position()
     print("Done!")
