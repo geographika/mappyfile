@@ -1,6 +1,14 @@
 Releases
 --------
 
+0.8.1 27/02/2019
+++++++++++++++++
+
++ Fix comments on root objects in a MapFile
++ Fix issues with duplicated METADATA keys and comments
++ Fix ReadTheDocs build
++ Add more sample MapFiles for testing to the project
+
 0.8.0 24/02/2019
 ++++++++++++++++
 
