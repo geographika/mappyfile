@@ -134,7 +134,12 @@ class Validator(object):
         # include position details
 
         if "__position__" in d:
-            pd = d["__position__"][key]
+            if not path:
+                # position for the root object is stored in the root of the dict
+                pd = d["__position__"]
+            else:
+                pd = d["__position__"][key]
+
             error_message["line"] = pd.get("line")
             error_message["column"] = pd.get("column")
 
