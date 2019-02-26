@@ -11,7 +11,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_pprint.py</StartupFile>
+    <StartupFile>tests\test_comments.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include=".gitmodules" />
     <Content Include=".pypirc" />
     <Content Include=".readthedocs.yml" />
     <Content Include=".travis.yml" />
@@ -112,7 +113,7 @@
     <Content Include="docs\make.bat" />
     <Content Include="docs\Makefile" />
     <Content Include="docs\parser.rst" />
-    <Content Include="docs\performance.rst" />
+    <Content Include="docs\performance.txt" />
     <Content Include="docs\pretty_printing.rst" />
     <Content Include="docs\sample_dict.json">
       <SubType>Code</SubType>
