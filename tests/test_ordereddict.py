@@ -158,6 +158,7 @@ def test_deepcopy():
     d['__type__'] = 'layer'
 
     c = deepcopy(d)
+    assert c['__type__'] == 'layer'
 
 
 def run_tests():
