@@ -1,5 +1,6 @@
 import logging
 import json
+from copy import deepcopy
 import inspect
 import tempfile
 import pickle
@@ -149,6 +150,16 @@ def test_pickling():
     assert d2["layers"][0]["classes"][0]["name"] == "Class1"
 
 
+def test_deepcopy():
+    """
+    See issue #73
+    """
+    d = DefaultOrderedDict()
+    d['__type__'] = 'layer'
+
+    c = deepcopy(d)
+
+
 def run_tests():
     # pytest.main(["tests/test_ordereddict.py::test_dict"])
     pytest.main(["tests/test_ordereddict.py"])
@@ -158,5 +169,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     # run_tests()
     # test_update_case_sensitive_ordered_dict()
-    test_pickling()
+    test_deepcopy()
     print("Done!")
