@@ -114,6 +114,13 @@ def test_non_ascii():
     print(mappyfile.dumps(d))
 
 
+def test_unicode_map():
+    with open('./tests/samples/unicode.map', "r") as mf_file:
+        mf = mappyfile.load(mf_file)
+
+    print(mappyfile.dumps(mf))
+
+
 def run_tests():
     pytest.main(["tests/test_sample_maps.py"])
 

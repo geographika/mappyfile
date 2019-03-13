@@ -163,7 +163,9 @@ class Parser(object):
     def load(self, fp):
         text = fp.read()
         if os.path.isfile(fp.name):
-            fn = fp.name  # name is a read-only attribute and may not be present on all file-like objects.
+            # name is a read-only attribute and may not be present on
+            # all file-like objects.
+            fn = fp.name
         else:
             fn = None
         return self.parse(text, fn)
@@ -186,7 +188,11 @@ class Parser(object):
         Parse the Mapfile
         """
 
-        text = str(text)
+        if PY2 and not isinstance(text, unicode):
+            # specify Unicode for Python 2.7
+            text = unicode(text, 'UTF-8')
+        else:
+            text = str(text)
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 

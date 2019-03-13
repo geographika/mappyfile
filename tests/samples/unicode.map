@@ -1,0 +1,23 @@
+		CLASS
+
+			NAME 'Enw’r stryd ddynodedig'
+
+			EXPRESSION /^Designated street.*$/
+
+			STYLE
+
+				#SYMBOL 'line'
+
+				COLOR 255 0 0#red
+
+				OPACITY 100
+
+				OUTLINECOLOR 255 0 0
+
+				WIDTH 2
+
+			END
+
+			
+
+		END
