@@ -83,7 +83,7 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
     ----------
 
     fp: file
-        A file-like object
+        A file-like object - as with all Mapfiles this should be encoded in "utf-8"
     expand_includes: boolean
         Load any ``INCLUDE`` files in the MapFile
     include_comments: boolean

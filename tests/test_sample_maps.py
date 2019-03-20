@@ -114,6 +114,14 @@ def test_non_ascii():
     print(mappyfile.dumps(d))
 
 
+def test_unicode_map():
+
+    with open('./tests/samples/unicode.map', "r", encoding="utf-8") as mf_file:
+        mf = mappyfile.load(mf_file)
+
+    print(mappyfile.dumps(mf))
+
+
 def run_tests():
     pytest.main(["tests/test_sample_maps.py"])
 
@@ -121,6 +129,6 @@ def run_tests():
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger('mappyfile').setLevel(logging.INFO)
-    run_tests()
-    # test_includes()
+    # run_tests()
+    test_unicode_map()
     print("Done!")

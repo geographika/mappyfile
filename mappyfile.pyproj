@@ -10,7 +10,7 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
     <StartupFile>tests\test_comments.py</StartupFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -271,6 +271,7 @@
     <Content Include="tests\samples\pmapper_demo.map">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="tests\samples\unicode.map" />
     <Content Include="tests\sample_maps\256color_overdose.map" />
     <Content Include="tests\sample_maps\256color_overdose_cmt.map" />
     <Content Include="tests\sample_maps\256color_overdose_res.map" />

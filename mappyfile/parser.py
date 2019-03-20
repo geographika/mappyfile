@@ -186,7 +186,7 @@ class Parser(object):
         Parse the Mapfile
         """
 
-        text = str(text)
+        text = str(text) # ensure the input is a unicode string
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 
