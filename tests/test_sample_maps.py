@@ -116,7 +116,7 @@ def test_non_ascii():
 
 def test_unicode_map():
 
-    with open('./tests/samples/unicode.map', "r", encoding="utf-8") as mf_file:
+    with open('./tests/samples/unicode.map', "r") as mf_file:
         mf = mappyfile.load(mf_file)
 
     print(mappyfile.dumps(mf))

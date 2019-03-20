@@ -6,8 +6,6 @@ from lark import Lark, ParseError, Tree, UnexpectedInput
 
 
 PY2 = sys.version_info[0] < 3
-if PY2:
-    str = unicode # NOQA
 
 
 log = logging.getLogger("mappyfile")
@@ -186,7 +184,10 @@ class Parser(object):
         Parse the Mapfile
         """
 
-        text = str(text) # ensure the input is a unicode string
+        if PY2 and not isinstance(text, unicode):
+            # specify Unicode for Python 2.7
+            text = unicode(text, 'utf-8')
+
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 
