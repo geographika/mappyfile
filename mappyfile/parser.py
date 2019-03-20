@@ -6,6 +6,8 @@ from lark import Lark, ParseError, Tree, UnexpectedInput
 
 
 PY2 = sys.version_info[0] < 3
+if not PY2:
+    unicode = str # NOQA
 
 
 log = logging.getLogger("mappyfile")
