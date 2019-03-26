@@ -14,7 +14,6 @@ COMPOSITE_NAMES = frozenset("""
     class
     classitem
     classgroup
-    cluster
     color
     compfilter
     composite
@@ -191,6 +190,7 @@ COMPOSITE_NAMES = frozenset("""
 """.split())
 
 SINGLETON_COMPOSITE_NAMES = frozenset("""
+    cluster
     grid
     leader
     legend

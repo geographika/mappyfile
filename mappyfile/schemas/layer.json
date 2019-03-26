@@ -33,7 +33,7 @@
       "type": "string"
     },
     "cluster": {
-      "type": "object"
+      "$ref": "cluster.json"
     },
     "composites": {
       "type": "array",
