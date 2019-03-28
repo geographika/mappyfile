@@ -10,8 +10,13 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
     <StartupFile>tests\test_comments.py</StartupFile>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+    <Environment>PATH=C:\MapServer\bin;%PATH%
+PROJ_LIB=C:\MapServer\bin\proj\SHARE
+</Environment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -172,6 +177,9 @@
     <Content Include="mappyfile\schemas\rgb.json" />
     <Content Include="mappyfile\schemas\layer.json" />
     <Content Include="mappyfile\schemas\map.json" />
+    <Content Include="misc\mapscript_test.py">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="misc\shapefile_layer.map">
       <SubType>Code</SubType>
     </Content>
