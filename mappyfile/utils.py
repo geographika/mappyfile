@@ -570,6 +570,13 @@ def validate(d):
 
     d: dict
         A Python dictionary based on the the mappyfile schema
+
+    Returns
+    -------
+
+    list
+          A list containing validation errors
+
     """
     v = Validator()
     return v.validate(d)
