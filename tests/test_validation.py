@@ -471,6 +471,47 @@ def test_root_position():
     assert len(errors) == 1
 
 
+def test_cluster_validation():
+
+    s = u"""
+    MAP
+        LAYER
+            CLUSTER
+                MAXDISTANCE 50
+                REGION "ELLIPSE"
+            END
+        END
+    END
+    """
+
+    d = mappyfile.loads(s, include_position=True)
+    v = Validator()
+    assert d["__position__"]["line"] == 2
+    errors = v.validate(d, add_comments=True)
+    print(mappyfile.dumps(d))
+    assert len(errors) == 0
+
+
+def test_cluster_validation_fail():
+
+    s = u"""
+    MAP
+        LAYER
+            CLUSTER
+                MAXDISTANCE 50
+                REGION "ELLIPSEZ"
+            END
+        END
+    END
+    """
+
+    d = mappyfile.loads(s, include_position=True)
+    v = Validator()
+    errors = v.validate(d, add_comments=True)
+    print(mappyfile.dumps(d))
+    assert len(errors) == 1
+
+
 def run_tests():
     pytest.main(["tests/test_validation.py"])
 
@@ -478,5 +519,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_root_position()
+    test_cluster_validation_fail()
     print("Done!")

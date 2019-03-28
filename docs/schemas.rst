@@ -18,6 +18,17 @@ PSC (Project Steering Committee). Further details on the schema are outlined in 
 
     .. include:: schemas/layer.rst
 
+Notes
+-----
+
+``enum`` is used to check attribute keywords, and output them without quotes by the pretty printer. The ``CLUSTER`` ``REGION`` keyword
+is a fixed list, but has to be a string and output in quotes, therefore the following construct is used:
+
+.. code-block:: json
+
+    "type": "string",
+    "pattern": "^rectangle$"
+
 ..
     For docs: https://github.com/inspirehep/jsonschema2rst
     Could have different schema for different purposes, e.g. a valid WMS schema. 

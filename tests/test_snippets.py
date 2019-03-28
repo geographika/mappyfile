@@ -4,6 +4,7 @@ import logging
 import json
 import inspect
 import pytest
+import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
@@ -871,7 +872,6 @@ def test_single_layer_data():
         DATA "dataset1"
     END
     """
-    import mappyfile
     jsn = mappyfile.loads(s)
     print(json.dumps(jsn, indent=4))
     jsn["data"][0] = "dataset1"
@@ -879,6 +879,40 @@ def test_single_layer_data():
 
     print(output(s, schema_name="layer"))
     exp = u"LAYER DATA 'dataset1' END"
+    assert(output(s, schema_name="layer") == exp)
+
+
+def test_cluster():
+
+    s = u"""
+    LAYER
+        CLUSTER
+            MAXDISTANCE 50
+            REGION "ELLIPSE"
+        END
+    END
+    """
+    print(output(s, schema_name="layer"))
+    exp = u"LAYER CLUSTER MAXDISTANCE 50 REGION 'ELLIPSE' END END"
+    assert(output(s, schema_name="layer") == exp)
+
+
+def test_cluster2():
+    """
+    Technically this is not correct and should not parse as the region
+    type should be in quotes. MapServer will throw an
+    a Symbol definition error. Parsing error near (ELLIPSE)
+    """
+    s = u"""
+    LAYER
+        CLUSTER
+            MAXDISTANCE 50
+            REGION ELLIPSE
+        END
+    END
+    """
+    print(output(s, schema_name="layer"))
+    exp = u"LAYER CLUSTER MAXDISTANCE 50 REGION 'ELLIPSE' END END"
     assert(output(s, schema_name="layer") == exp)
 
 
@@ -894,6 +928,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_metadata_uppercase()
+    test_cluster2()
     # run_tests()
     print("Done!")

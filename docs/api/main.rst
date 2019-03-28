@@ -74,7 +74,7 @@ Summary
 +++++++
 
 These are functions used to validate Mapfiles, and ensure the match the 
-Mapfile schema. 
+Mapfile schema. See :ref:`validation-docs` for further details. 
 
 + :func:`mappyfile.validate`
 

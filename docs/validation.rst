@@ -142,3 +142,4 @@ include line positions.
     Check that layer, map, and group names are unique or get wrong legends etc.
 
     Only layers of TYPE POINT are supported for a layer with CLUSTER set
+    "enum": [ "ellipse", "rectangle" ] - if add these they are converted to strings without quotes

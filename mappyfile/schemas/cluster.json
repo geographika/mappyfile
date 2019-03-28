@@ -18,7 +18,16 @@
       "type": "number"
     },
     "region": {
-      "enum": [ "ellipse", "rectange" ]
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^rectangle$"
+        },
+        {
+          "type": "string",
+          "pattern": "^ellipse$"
+        }
+      ]
     },
     "buffer": {
       "type": "number"
