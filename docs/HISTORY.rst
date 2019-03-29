@@ -1,6 +1,14 @@
 Releases
 --------
 
+0.8.2 29/03/2019
+++++++++++++++++
+
++ `#74 <https://github.com/geographika/mappyfile/issues/74>`_ - Map files containing Unicode can fail in mappyfile.load with 
+  python2.7 thanks @iantuton
++ `#73 <https://github.com/geographika/mappyfile/issues/73>`_ - Deepcopy not working (Python3 >=3.5) - thanks @guardeivid
++ Add support for CLUSTER keyword along with schema changes and tests
+
 0.8.1 27/02/2019
 ++++++++++++++++
 
