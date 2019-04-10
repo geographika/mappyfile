@@ -58,7 +58,7 @@ expression: "(" or_test ")"
 ?and_test : (and_test ("AND"i|"&&"))? comparison
 ?comparison: (comparison compare_op)? sum
 !compare_op: ">=" | "<" | "=*" | "==" | "=" | "!=" | "~" | "~*" | ">" | "%"
-| "<=" | "IN"i | "NE"i | "EQ"i | "LE"i | "LT"i | "GE"i | "GT"i
+| "<=" | "IN"i | "NE"i | "EQ"i | "LE"i | "LT"i | "GE"i | "GT"i | "LIKE"i
 
 ?sum: product
     | sum "+" product -> add
