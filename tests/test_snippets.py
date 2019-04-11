@@ -303,7 +303,7 @@ def test_filter():
     exp = "LAYER TYPE POINT NAME 'filters_test002' FILTER 'aitkin'i END"
     assert(output(s, schema_name="layer") == exp)
 
-    
+
 def test_like_filter():
     s = """
     LAYER
@@ -316,7 +316,7 @@ def test_like_filter():
     exp = r"""LAYER TYPE POINT NAME 'filters_test003' FILTER ( "blpu_classification_code" LIKE 'RI%' ) END"""
     assert(output(s, schema_name="layer") == exp)
 
-    
+
 def test_regex():
     s = r"""
     LAYER
