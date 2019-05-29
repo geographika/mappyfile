@@ -13,7 +13,7 @@ pytest-cov
 tox
 virtualenv
 jsonschema
-jsonref==0.1
+jsonref==0.2
 glob2
 coveralls
 sphinx
