@@ -2,7 +2,7 @@ colorama
 docutils
 flake8
 click
-lark-parser==0.6.6
+lark-parser==0.7.1
 # git+git://github.com/erezsh/lark.git#egg=lark
 pluggy
 py
