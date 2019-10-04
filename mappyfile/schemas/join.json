@@ -45,6 +45,11 @@
       "type": "string",
       "enum": [ "one-to-one", "one-to-many" ],
       "additionalProperties": false
+    },
+    "connectiontype": {
+      "type": "string",
+      "enum": [ "csv", "mysql", "postgresql" ],
+      "additionalProperties": false
     }
   }
 }
