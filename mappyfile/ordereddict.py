@@ -90,10 +90,7 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
         return super(CaseInsensitiveOrderedDict, self).__contains__(self.__class__._k(key))
 
     def has_key(self, key):
-        if PY2:
-            return super(CaseInsensitiveOrderedDict, self).has_key(self.__class__._k(key))
-        else:
-            return self.__class__._k(key) in super(CaseInsensitiveOrderedDict, self)
+        return key in self
 
     def pop(self, key, *args, **kwargs):
         return super(CaseInsensitiveOrderedDict, self).pop(self.__class__._k(key), *args, **kwargs)
