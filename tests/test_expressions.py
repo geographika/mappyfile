@@ -367,6 +367,37 @@ def test_class_expression_oddname():
     assert(output(s) == exp)
 
 
+def test_class_not_expression_brackets():
+    """
+    See issue #85 - coding of NOT logical expressions #85
+    Each expression should be bracketed independently and any NOT
+    clause should be outside the brackets
+    """
+    s = '''
+    CLASS
+      EXPRESSION (("[TIME]" eq 'NOW') AND NOT ("[TYPE]" ~ "(something|completely|different)"))
+    END
+    '''
+    exp = '''CLASS EXPRESSION ( ( "[TIME]" eq 'NOW' ) AND NOT ( "[TYPE]" ~ "(something|completely|different)" ) ) END'''
+    print(output(s))
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_class_not_expression_no_brackets():
+    """
+    See issue #85 - coding of NOT logical expressions #85
+    This parses successfully in MapServer but not in mappyfile
+    """
+    s = '''
+    CLASS
+      EXPRESSION ("[TIME]" eq 'NOW' AND NOT "[TYPE]" ~ "(something|completely|different)")
+    END
+    '''
+    exp = "CLASS TEXT ([area:ian]) END"
+    assert(output(s) == exp)
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -378,6 +409,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_modulo_expression()
+    test_class_not_expression_brackets()
     # run_tests()
     print("Done!")
