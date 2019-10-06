@@ -161,8 +161,8 @@ def test_copy():
 def test_has_key():
     d = CaseInsensitiveOrderedDict()
     d["key1"] = "val1"
-    assert d.has_key("key1")
-    assert d.has_key("key2") == False
+    assert "key1" in d
+    assert "key2" not in d
 
 
 def test_pop():
