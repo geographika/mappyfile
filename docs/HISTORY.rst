@@ -1,6 +1,18 @@
 Releases
 --------
 
+0.8.3 06/10/2019
+++++++++++++++++
+
++ Update to lark-parser 0.7.7
++ Update to jsonref 0.2
++ Add automated releases to GitHub using Appveyor
++ Add automated releases to PyPI using Appveyor
++ Add missing CLASS properties to JSON schema
++ Additional tests for CaseInsensitiveOrderedDict and EXPRESSIONs
++ `#37 <https://github.com/geographika/mappyfile/issues/37>`_ - LIKE not recognised in FILTER - thanks @ianturton for fix
++ `#87 <https://github.com/geographika/mappyfile/pull/87>`_ - JSON schema add join tag- thanks @hugbe8 for fix
+
 0.8.2 29/03/2019
 ++++++++++++++++
 

@@ -6,7 +6,7 @@ from types import ModuleType
 from mappyfile.utils import open, load, loads, find, findall, findunique, dumps, dump, save
 from mappyfile.utils import findkey, update, validate
 
-__version__ = "0.8.2"
+__version__ = "0.8.3"
 
 __all__ = ['open', 'load', 'loads', 'find', 'findall', 'findunique', 'dumps', 'dump', 'save',
            'findkey', 'update', 'validate']
