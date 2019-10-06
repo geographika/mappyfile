@@ -9,6 +9,11 @@ For DOT languge see http://www.graphviz.org/doc/info/attrs.html
 cd C:\Program Files (x86)\Graphviz2.38\bin
 dot -Tpng D:\GitHub\mappyfile\mapfile_classes.dot -o outfile.png
 outfile.png
+
+For Entity Relationship diagrams:
+
+https://graphviz.readthedocs.io/en/stable/examples.html#er-py
+
 """
 
 import os

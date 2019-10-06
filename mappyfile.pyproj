@@ -11,7 +11,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_comments.py</StartupFile>
+    <StartupFile>docs\scripts\mapscript_diagrams.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -93,6 +93,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\images\tree_no_terminals.png" />
     <Content Include="docs\python_integration.rst" />
     <Content Include="docs\rfc.rst" />
+    <Content Include="docs\rules.rst">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\schemas.rst" />
     <Content Include="docs\schemas\mapfile.json" />
     <Content Include="docs\testing.rst" />
@@ -177,9 +180,10 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="mappyfile\schemas\rgb.json" />
     <Content Include="mappyfile\schemas\layer.json" />
     <Content Include="mappyfile\schemas\map.json" />
-    <Content Include="misc\mapscript_test.py">
+    <Content Include="misc\mapscript_loading.py">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="misc\mode-mapfile.js" />
     <Content Include="misc\shapefile_layer.map">
       <SubType>Code</SubType>
     </Content>
@@ -592,6 +596,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\examples\geometry\geometry.py" />
+    <Compile Include="docs\scripts\mapscript_diagrams.py" />
     <Compile Include="docs\scripts\class_diagrams.py">
       <SubType>Code</SubType>
     </Compile>
@@ -616,6 +621,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\examples\api\search_test.py" />
+    <Compile Include="docs\scripts\runsub.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="docs\scripts\xsdschema.py">
       <SubType>Code</SubType>
     </Compile>
@@ -643,15 +651,11 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mappyfile\__init__.py" />
-    <Compile Include="misc\colours_plugin2.py" />
     <Compile Include="misc\docs_parser.py" />
     <Compile Include="docs\scripts\make_json_schema.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\shapefile_fields.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="misc\test.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\test_docs_parser.py" />
