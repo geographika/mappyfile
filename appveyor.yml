@@ -3,6 +3,11 @@
 
 environment:
 
+  global:
+    TWINE_USERNAME: geographika
+    TWINE_PASSWORD:
+      secure: 6yuYlaTUIL8SRBakWTke8w==
+
   matrix:
 
     - PYTHON: "C:\\Python27"
@@ -27,3 +32,19 @@ test_script:
   - "pytest"
   - "flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*"
   - "flake8 mappyfile --max-line-length=120"
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: 1FJ9ZyG2q5HxxYFSdC6HUA8+mjE9dKd55qPc6i2NZCRaOSDVog0tsoclT3e7N1sG
+  draft: true
+  on:
+    branch: master                 # release from master branch only
+    APPVEYOR_REPO_TAG: true        # deploy on tag push only
+
+artifacts:
+  - path: 'dist\*.whl'
+    name: wheel
+
+deploy_script:
+  - ps: if ($env:APPVEYOR_REPO_TAG -eq $TRUE) { pip install twine; twine upload dist/* }
