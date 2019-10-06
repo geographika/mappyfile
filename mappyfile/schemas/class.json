@@ -52,6 +52,12 @@
     "maxsize": {
       "type": "integer"
     },
+    "metadata": {
+      "$ref": "metadata.json"
+    },
+    "minfeaturesize": {
+      "type": "number"
+    },
     "minscale": {
       "type": "number",
       "deprecated": true
@@ -101,8 +107,7 @@
       "$ref": "expression.json"
     },
     "title": {
-      "type": "string",
-      "description": "missing"
+      "type": "string"
     },
     "validation": {
       "$ref": "validation.json"
