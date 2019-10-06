@@ -107,8 +107,11 @@
     "header": {
       "type": "string"
     },
-    "join": {
-      "type": "object"
+    "joins": {
+      "type": "array",
+      "items": {
+        "$ref": "join.json"
+      }
     },
     "labelangleitem": {
       "type": "string"
