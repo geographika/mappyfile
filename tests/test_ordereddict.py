@@ -150,6 +150,29 @@ def test_pickling():
     assert d2["layers"][0]["classes"][0]["name"] == "Class1"
 
 
+def test_copy():
+    d = CaseInsensitiveOrderedDict()
+    d["key1"] = "val1"
+    c = d.copy()
+    c["key1"] = "val2"
+    assert d["key1"] == "val1"
+
+
+def test_has_key():
+    d = CaseInsensitiveOrderedDict()
+    d["key1"] = "val1"
+    assert d.has_key("key1")
+    assert d.has_key("key2") == False
+
+
+def test_pop():
+    d = CaseInsensitiveOrderedDict()
+    d["key1"] = "val1"
+    v = d.pop("key1")
+    assert v == "val1"
+    assert len(d.keys()) == 0
+
+
 def test_deepcopy():
     """
     See issue #73
@@ -170,5 +193,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     # run_tests()
     # test_update_case_sensitive_ordered_dict()
-    test_deepcopy()
+    test_pop()
     print("Done!")
