@@ -278,7 +278,7 @@ class PrettyPrinter(object):
 
         if key in ("layers", "classes", "styles", "symbols", "labels",
                    "outputformats", "features", "scaletokens",
-                   "composites") and isinstance(val, list):
+                   "composites", "joins") and isinstance(val, list):
             return True
         else:
             return False
