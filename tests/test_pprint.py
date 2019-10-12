@@ -320,6 +320,22 @@ def test_print_boolean():
     assert(s == "LAYER TRANSFORM TRUE END")
 
 
+def test_join():
+    d = {
+        "__type__": "layer",
+       "name": "Joined",
+       "joins": [{
+            "__type__": "join",
+            "name": "table_join"
+                }]
+        }
+
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
+    s = pp.pprint(d)
+    print(s)
+    assert(s == "LAYER NAME 'Joined' JOIN NAME 'table_join' END")
+
+
 def test_class_list():
 
     d1 = {
@@ -402,6 +418,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    test_end_comment()
+    test_join()
     # run_tests()
     print("Done!")
