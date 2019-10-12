@@ -333,7 +333,7 @@ def test_join():
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     s = pp.pprint(d)
     print(s)
-    assert(s == "LAYER NAME 'Joined' JOIN NAME 'table_join' END")
+    assert(s == "LAYER NAME 'Joined' JOIN NAME 'table_join' END END")
 
 
 def test_class_list():
