@@ -323,11 +323,11 @@ def test_print_boolean():
 def test_join():
     d = {
         "__type__": "layer",
-       "name": "Joined",
-       "joins": [{
+        "name": "Joined",
+        "joins": [{
             "__type__": "join",
             "name": "table_join"
-                }]
+        }]
         }
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
