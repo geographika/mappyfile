@@ -13,8 +13,8 @@
 # version exception
 # RUN_PARMS: wms_version_exception.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1" > [RESULT]
 # RUN_PARMS: wms_version_exception_xml.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1&EXCEPTIONS=XML" > [RESULT]
-# RUN_PARMS: wms_version_exception_inimage.png [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1&EXCEPTIONS=INIMAGE" > [RESULT_DEMIME]
-# RUN_PARMS: wms_version_exception_blank.png [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1&EXCEPTIONS=BLANK" > [RESULT_DEMIME]
+# RUN_PARMS: wms_version_exception_inimage.png [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1&EXCEPTIONS=INIMAGE" > [RESULT]
+# RUN_PARMS: wms_version_exception_blank.png [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1&EXCEPTIONS=BLANK" > [RESULT]
 #
 # Capabilities updatesequence (less than)
 # RUN_PARMS: wms_caps_updatesequence.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities&updatesequence=15" > [RESULT_DEVERSION]
@@ -73,10 +73,10 @@ SIZE 400 300
 EXTENT -67.5725 42 -58.9275 48.5
 UNITS DD
 IMAGECOLOR 255 255 255
-SHAPEPATH ./data
+SHAPEPATH data
 SYMBOLSET etc/symbols.sym
 FONTSET etc/fonts.txt
-
+DEBUG 5
 
 OUTPUTFORMAT
   NAME GDPNG
@@ -129,7 +129,7 @@ END
 
 PROJECTION
   "init=epsg:4326"
-  #"init=./data/epsg2:42304"
+  #"init=data/epsg2:42304"
 END
 
 
@@ -138,6 +138,7 @@ END
 #
 
 LAYER
+  DEBUG 5  
   NAME road
   DATA road
   TEMPLATE "ttt"
@@ -150,7 +151,7 @@ LAYER
   TYPE LINE
   STATUS ON
   PROJECTION
-    "init=./data/epsg2:42304"
+    "init=data/epsg2:42304"
   END
 
   DUMP TRUE

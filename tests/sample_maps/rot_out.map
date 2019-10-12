@@ -1,36 +1,43 @@
 #
-# Test rotated output maps with a vector layer.
-#   
-# REQUIRES: OUTPUT=PNG SUPPORTS=PROJ
+# Test support for generating a rotated output map.
+#
+# REQUIRES: SUPPORTS=PROJ
 #
 MAP
 
+NAME TEST
 STATUS ON
-EXTENT 478300 4762880 481650 4765610
-SIZE 400 300
-ANGLE 30 
+SIZE 500 500
+EXTENT 0.5 0.5 399.5 299.5
+IMAGECOLOR 255 255 0
+ANGLE 15
 
 IMAGETYPE png
 
-PROJECTION 
+PROJECTION
   "+proj=utm +zone=11 +datum=WGS84"
 END
 
-LAYER
-  NAME shppoly
-  TYPE polygon
-  DATA "data/shppoly/poly"
-  STATUS default
-  CLASSITEM "AREA"
-  CLASS
-    NAME "test1"
-    COLOR 0 255 0
-    OUTLINECOLOR 255 0 0
-  END
+SCALEBAR
+  STATUS EMBED
+#  POSTLABELCACHE TRUE
+  SIZE 200 10
+  UNITS METERS
+END
 
-  PROJECTION 
+#
+# Start of layer definitions
+#
+
+LAYER
+  NAME grid1
+  TYPE raster
+  STATUS default
+  DATA data/grid.gif
+
+  PROJECTION
     "+proj=utm +zone=11 +datum=WGS84"
   END
 END
 
-END
+END # of map file
