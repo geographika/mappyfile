@@ -333,7 +333,7 @@ def test_join():
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
     d = collections.OrderedDict(sorted(d.items()))
     s = pp.pprint(d)
-    assert(s == "LAYER NAME 'Joined' JOIN NAME 'table_join' END END")
+    assert(s == "LAYER JOIN NAME 'table_join' END NAME 'Joined' END")
 
 
 def test_class_list():
