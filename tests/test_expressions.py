@@ -356,6 +356,14 @@ def test_list_expression_alt():
     exp = "CLASS EXPRESSION {2_Klass,Rte2etr} END"
     assert(output(s) == exp)
 
+    s = """
+    CLASS
+        EXPRESSION {2_Klass,class with space}
+    END
+    """
+    exp = "CLASS EXPRESSION {2_Klass,class with space} END"
+    assert(output(s) == exp)
+
 
 def test_class_expression_oddname():
     s = '''
