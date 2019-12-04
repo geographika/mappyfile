@@ -390,7 +390,10 @@ class PrettyPrinter(object):
             new_values = []
 
             for v in value:
-                if not isinstance(v, numbers.Number):
+                if attr == "polaroffset":
+                    # don't add quotes to the fields list of polaroffset
+                    v = self.quoter.escape_quotes(v)
+                elif not isinstance(v, numbers.Number):
                     v = self.quoter.add_quotes(v)
                 new_values.append(v)
 
