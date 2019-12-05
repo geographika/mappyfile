@@ -116,8 +116,9 @@ INT: /[0-9]+(?![_a-zA-Z])/
 
 // UNQUOTED_STRING: /[a-z_][a-z0-9_\-]*/i
 // UNQUOTED_STRING: /[a-z0-9_\-:]+/i
+// UNQUOTED_STRING_SPACE: /[a-z0-9_\-: ]+/i
 UNQUOTED_STRING: /[\w_\-:]+/i
-UNQUOTED_STRING_SPACE: /[a-z0-9_\-: ]+/i
+UNQUOTED_STRING_SPACE: /[\w_\-: ]+/i
 DOUBLE_QUOTED_STRING: "\"" ("\\\""|/[^"]/)* "\"" "i"?
 SINGLE_QUOTED_STRING: "'" ("\\'"|/[^']/)* "'" "i"?
 ESCAPED_STRING: /`.*?`i?/
