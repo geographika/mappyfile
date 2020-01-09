@@ -929,6 +929,23 @@ def test_cluster2():
     assert(output(s, schema_name="layer") == exp)
 
 
+@pytest.mark.xfail
+def test_outputformat_unquoted_keyword():
+
+    s = u"""
+    MAP
+        OUTPUTFORMAT
+          NAME grid
+          IMAGEMODE INT16
+        END
+    END
+    """
+
+    print(output(s, schema_name="map"))
+    exp = u"MAP OUTPUTFORMAT NAME 'grid' IMAGEMODE INT16 END END"
+    assert(output(s, schema_name="map") == exp)
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -941,6 +958,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_cluster2()
+    test_outputformat_unquoted_keyword()
     # run_tests()
     print("Done!")
