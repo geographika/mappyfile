@@ -54,7 +54,7 @@ def test_dump():
 
 def test_stringio():
 
-    s = """MAP NAME "TEST" END"""
+    s = u"""MAP NAME "TEST" END"""
     ip = io.StringIO(s)
 
     d = mappyfile.load(ip)
