@@ -407,6 +407,7 @@ def test_class_not_expression_no_brackets():
     assert(output(s) == exp)
 
 
+@pytest.mark.xfail
 def test_unquoted_unicode_string():
     """
     See pull request #92 - French unquoted string
