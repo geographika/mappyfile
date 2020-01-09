@@ -402,7 +402,21 @@ def test_class_not_expression_no_brackets():
       EXPRESSION ("[TIME]" eq 'NOW' AND NOT "[TYPE]" ~ "(something|completely|different)")
     END
     '''
-    exp = "CLASS TEXT ([area:ian]) END"
+    exp = '''CLASS EXPRESSION ( ( "[TIME]" eq 'NOW' ) AND NOT ( "[TYPE]" ~ "(something|completely|different)" ) ) END'''
+    assert(output(s) == exp)
+
+
+@pytest.mark.xfail
+def test_unquoted_unicode_string():
+    """
+    See pull request #92 - French unquoted string
+    """
+    s = '''
+    CLASS
+      EXPRESSION {Aérodrome,Aéroport,Héliport}
+    END
+    '''
+    exp = '''CLASS EXPRESSION {Aérodrome,Aéroport,Héliport} END'''
     assert(output(s) == exp)
 
 
@@ -417,6 +431,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_class_not_expression_brackets()
+    test_unquoted_unicode_string()
     # run_tests()
     print("Done!")
