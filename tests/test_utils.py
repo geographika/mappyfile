@@ -1,5 +1,6 @@
 import logging
 import os
+import io
 import tempfile
 import mappyfile
 import pytest
@@ -47,6 +48,16 @@ def test_dump():
 
     with open(fp.name) as fp:
         d = mappyfile.load(fp)
+
+    assert d["name"] == "TEST"
+
+
+def test_stringio():
+
+    s = """MAP NAME "TEST" END"""
+    ip = io.StringIO(buffer)
+
+    d = mappyfile.load(ip)
 
     assert d["name"] == "TEST"
 
