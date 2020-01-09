@@ -753,7 +753,7 @@ def test_polaroffset():
         POLAROFFSET [length_2] [rotation]
     END"""
 
-    exp = "STYLE SYMBOL 'arrowhead' COLOR 0 0 0 ANGLE [rotation] POLAROFFSET '[length_2]' '[rotation]' END"
+    exp = "STYLE SYMBOL 'arrowhead' COLOR 0 0 0 ANGLE [rotation] POLAROFFSET [length_2] [rotation] END"
     print(output(s, schema_name="style"))
     assert(output(s, schema_name="style") == exp)
 
@@ -958,6 +958,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_outputformat_unquoted_keyword()
+    test_polaroffset()
     # run_tests()
     print("Done!")
