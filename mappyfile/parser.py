@@ -171,7 +171,8 @@ class Parser(object):
     def open_file(self, fn):
         try:
             # specify Unicode for Python 2.7
-            return open(fn, "r", encoding="utf-8").read()
+            with open(fn, "r", encoding="utf-8") as f:
+                return f.read()
         except UnicodeDecodeError as ex:
             log.debug(ex)
             log.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format.", fn)
