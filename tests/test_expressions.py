@@ -418,8 +418,6 @@ def test_unquoted_unicode_string():
     END
     '''
 
-    #s = unicode(s, 'utf-8')
-    print(s)
     exp = u'''CLASS EXPRESSION {Aérodrome,Aéroport,Héliport,Base spatiale} END'''
     assert(output(s) == exp)
 
