@@ -4,6 +4,6 @@
   },
   "additionalProperties": true,
   "metadata": {
-    "minVersion": 8.0
+    "minVersion": 7.6
   }
 }
