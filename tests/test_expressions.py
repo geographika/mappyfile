@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import json
 import inspect
@@ -406,17 +407,19 @@ def test_class_not_expression_no_brackets():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_unquoted_unicode_string():
     """
     See pull request #92 - French unquoted string
     """
     s = '''
     CLASS
-      EXPRESSION {Aérodrome,Aéroport,Héliport}
+      EXPRESSION {Aérodrome,Aéroport,Héliport,Base spatiale}
     END
     '''
-    exp = '''CLASS EXPRESSION {Aérodrome,Aéroport,Héliport} END'''
+
+    #s = unicode(s, 'utf-8')
+    print(s)
+    exp = u'''CLASS EXPRESSION {Aérodrome,Aéroport,Héliport,Base spatiale} END'''
     assert(output(s) == exp)
 
 
