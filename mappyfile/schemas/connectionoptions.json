@@ -1,0 +1,9 @@
+{
+  "type": "object",
+  "properties": {
+  },
+  "additionalProperties": true,
+  "metadata": {
+    "minVersion": 8.0
+  }
+}

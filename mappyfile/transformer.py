@@ -346,6 +346,13 @@ class MapfileTransformer(Transformer, object):
         # composites function works the same way
         return d
 
+    def connectionoptions(self, tokens):
+        """
+        Create a dict for the connectionoptions items
+        """
+
+        return self.process_value_pairs(tokens, "connectionoptions")
+
     def metadata(self, tokens):
         """
         Create a dict for the metadata items

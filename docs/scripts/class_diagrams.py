@@ -59,6 +59,7 @@ def main(gviz_path, layer_only=False):
     graph = pydot.Dot(graph_type='digraph', rankdir="TB")
     
     layer_children = {'CLASS': {'LABEL': {'STYLE': {}},
+               'CONNECTIONOPTIONS': {},
                'LEADER': {'STYLE': {}},
                'STYLE': {},
                'VALIDATION': {}},

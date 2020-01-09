@@ -5,13 +5,13 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c0748363-1c92-4ed1-8aec-6a098456f29a</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <SearchPath>.</SearchPath>
+    <SearchPath></SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>docs\scripts\mapscript_diagrams.py</StartupFile>
+    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
+    <StartupFile>tests\test_snippets.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -137,6 +137,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="mappyfile\schemas\expression.json">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="mappyfile\schemas\connectionoptions.json" />
     <Content Include="mappyfile\schemas\points.json" />
     <Content Include="mappyfile\schemas\web.json" />
     <Content Include="mappyfile\schemas\validation.json" />
@@ -700,8 +701,8 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
   <ItemGroup>
     <Interpreter Include="C:\VirtualEnvs\mappyfile3\">
       <Id>mappyfile3</Id>
-      <Version>3.6</Version>
-      <Description>mappyfile3 (Python 3.6 (64-bit))</Description>
+      <Version>3.7</Version>
+      <Description>mappyfile3 (Python 3.7 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>

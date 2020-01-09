@@ -4,6 +4,7 @@ start: "SYMBOLSET"i composite_body _END   -> symbolset
 composite: composite_type composite_body _END
        | metadata
        | validation
+       | connectionoptions
 
 composite_body: _composite_item*
 _composite_item: (composite|attr|points|projection|pattern|values|config)
@@ -17,6 +18,7 @@ _composite_item: (composite|attr|points|projection|pattern|values|config)
 !values: "VALUES"i string_pair* _END
 !metadata: "METADATA"i string_pair* _END
 !validation: "VALIDATION"i string_pair* _END
+!connectionoptions: "CONNECTIONOPTIONS"i string_pair* _END
 
 attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING)
 //attr: (UNQUOTED_STRING | SYMBOL) (value | UNQUOTED_STRING)

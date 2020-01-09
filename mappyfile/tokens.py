@@ -191,6 +191,7 @@ COMPOSITE_NAMES = frozenset("""
 
 SINGLETON_COMPOSITE_NAMES = frozenset("""
     cluster
+    connectionoptions
     grid
     leader
     legend

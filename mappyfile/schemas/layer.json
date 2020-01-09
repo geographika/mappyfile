@@ -44,6 +44,9 @@
     "connection": {
       "type": "string"
     },
+    "connectionoptions": {
+      "$ref": "connectionoptions.json"
+    },
     "connectiontype": {
       "enum": [ "contour", "kerneldensity", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
     },
