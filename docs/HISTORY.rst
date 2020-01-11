@@ -1,6 +1,16 @@
 Releases
 --------
 
+0.8.4 11/01/2020
+++++++++++++++++
+
++ Update to lark-parser 0.7.8
++ `#95 <https://github.com/geographika/mappyfile/pull/95>`_ - Allow Mapfile input from ``io.StringIO`` as well 
+  as from a file - thanks @ianturton for pull request
++ `#93 <https://github.com/geographika/mappyfile/issues/93>`_ - fix to ensure Mapfiles are closed after reading
++ `#89 <https://github.com/geographika/mappyfile/issues/89>`_ - List expressions with spaces in the attributes fail to 
+  parse - thanks @ianturton for fix
+
 0.8.3 06/10/2019
 ++++++++++++++++
 
