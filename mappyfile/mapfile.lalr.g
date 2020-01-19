@@ -66,10 +66,14 @@ expression: "(" or_test ")"
     | sum "+" product -> add
     | sum "-" product -> sub
 
-?product: atom
-    | product "*" atom -> mul
-    | product "/" atom -> div
-    | product "^" atom -> power
+?product: unary_expr
+    | product "*" unary_expr -> mul
+    | product "/" unary_expr -> div
+    | product "^" unary_expr -> power
+
+?unary_expr: atom
+    | "-" unary_expr -> neg
+    | "+" unary_expr
 
 ?atom: (func_call | value)
 // ?multiply: (multiply "*")? (func_call | value)
