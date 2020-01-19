@@ -392,7 +392,6 @@ def test_class_not_expression_brackets():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_class_not_expression_no_brackets():
     """
     See issue #85 - coding of NOT logical expressions #85
