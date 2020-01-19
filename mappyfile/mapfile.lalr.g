@@ -54,7 +54,7 @@ num_pair: (int|float) (int|float)
 
 attr_bind: "[" UNQUOTED_STRING "]"
 
-not_expression: ("!"|"NOT"i) expression
+not_expression: ("!"|"NOT"i) comparison
 expression: "(" or_test ")"
 ?or_test : (or_test ("OR"i|"||"))? and_test
 ?and_test : (and_test ("AND"i|"&&"))? comparison
