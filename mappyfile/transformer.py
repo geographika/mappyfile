@@ -475,6 +475,11 @@ class MapfileTransformer(Transformer, object):
         t[0].value = "{} ^ {}".format(t[0].value, t[1].value)
         return t[0]
 
+    def neg(self, t):
+        assert len(t) == 1
+        t[0].value = "-{}".format(t[0].value)
+        return t[0]
+
     def runtime_var(self, t):
         v = t[0]
         return v

@@ -272,7 +272,6 @@ def test_multiply():
     assert(output(s) == exp)
 
 
-@pytest.mark.xfail
 def test_negation():
     """
     TODO - check the exact syntax for this
@@ -283,6 +282,16 @@ def test_negation():
     END
     """
     exp = "CLASS EXPRESSION (-[field1]) END"
+    assert(output(s) == exp)
+
+def test_pointless_plus():
+    # Based on test_negation
+    s = """
+    CLASS
+        EXPRESSION (+[field1])
+    END
+    """
+    exp = "CLASS EXPRESSION ([field1]) END"
     assert(output(s) == exp)
 
 
