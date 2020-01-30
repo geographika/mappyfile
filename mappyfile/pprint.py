@@ -459,6 +459,7 @@ class PrettyPrinter(object):
     def _format(self, composite, level=0):
 
         lines = []
+        type_ = None
 
         # get any comments associated with the composite
         comments = composite.get("__comments__", {})
@@ -498,6 +499,8 @@ class PrettyPrinter(object):
                 lines += self._format(value, level + 1)  # recursively add the child class
             else:
                 # standard key value pair
+                if not type_:
+                    raise UnboundLocalError("The Mapfile object is missing a __type__ attribute") 
                 line = self.process_attribute(type_, attr, value, level)
                 line += self.process_attribute_comment(comments, attr)
                 lines.append(line)
