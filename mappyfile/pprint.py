@@ -500,7 +500,7 @@ class PrettyPrinter(object):
             else:
                 # standard key value pair
                 if not type_:
-                    raise UnboundLocalError("The Mapfile object is missing a __type__ attribute") 
+                    raise UnboundLocalError("The Mapfile object is missing a __type__ attribute")
                 line = self.process_attribute(type_, attr, value, level)
                 line += self.process_attribute_comment(comments, attr)
                 lines.append(line)
