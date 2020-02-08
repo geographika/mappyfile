@@ -284,6 +284,7 @@ def test_negation():
     exp = "CLASS EXPRESSION (-[field1]) END"
     assert(output(s) == exp)
 
+
 def test_pointless_plus():
     # Based on test_negation
     s = """
