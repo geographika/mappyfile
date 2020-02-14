@@ -3,9 +3,12 @@
 # Authors: Seth Girvin
 #          Jason Kirtland [1]
 #          Zach Kelling [2]
+#          m000 [3],[4]
 #
 # [1] http://code.activestate.com/recipes/523034-emulate-collectionsdefaultdict/
 # [2] http://stackoverflow.com/a/6190500/562769
+# [3] https://stackoverflow.com/users/277172/m000
+# [4] https://stackoverflow.com/a/32888599/179520
 #
 # Copyright (c) 2020 Seth Girvin
 #
