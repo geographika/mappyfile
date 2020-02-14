@@ -72,6 +72,10 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="appveyor.yml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="code-of-conduct.md" />
+    <Content Include="CONTRIBUTING.md">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\api\main.rst" />
     <Content Include="docs\client.rst">
       <SubType>Code</SubType>

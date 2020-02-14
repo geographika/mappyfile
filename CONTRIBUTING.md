@@ -14,7 +14,7 @@ mappyfile has the following modes of contribution:
 ## Code of Conduct
 
 Contributors to this project are expected to act respectfully toward others in accordance with the 
-[Code of Conduct](https://github.com/geographika/mappyfile/code-of-conduct.md).
+[Code of Conduct](https://github.com/geographika/mappyfile/blob/master/code-of-conduct.md).
 
 ## Submitting Bugs
 
