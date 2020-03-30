@@ -36,7 +36,7 @@ setup(name='mappyfile',
       author_email='sethg@geographika.co.uk',
       license='MIT',
       packages=['mappyfile'],
-      install_requires=['lark-parser==0.7.8', 'jsonschema >=2.0', 'jsonref==0.2', 'click'],
+      install_requires=['lark-parser==0.8.5', 'jsonschema >=2.0', 'jsonref==0.2', 'click'],
       zip_safe=False,
       entry_points = {
         'console_scripts': ['mappyfile=mappyfile.cli:main'],
