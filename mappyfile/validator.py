@@ -31,7 +31,6 @@ import json
 import os
 import sys
 from collections import OrderedDict
-import math
 import logging
 import jsonschema
 import jsonref
@@ -89,7 +88,7 @@ class Validator(object):
             if "metadata" in v:
                 md = v["metadata"]
                 min_version = md.get("minVersion", 0.0)
-                max_version = md.get("maxVersion", math.inf)
+                max_version = md.get("maxVersion", 1000.0)
                 if version < min_version or version > max_version:
                     del properties[k]
 
@@ -225,7 +224,7 @@ class Validator(object):
             jsn_schema["properties"] = self.get_versioned_schema(properties, version)
             validator = jsonschema.Draft4Validator(schema=jsn_schema)
         else:
-            validator = self.get_schema_validator(schema_name, version)
+            validator = self.get_schema_validator(schema_name)
 
         error_messages = []
 
