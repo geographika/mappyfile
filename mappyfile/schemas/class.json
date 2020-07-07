@@ -18,7 +18,15 @@
       "$ref": "color.json"
     },
     "color": {
-      "$ref": "color.json"
+      "allOf": [
+        {
+          "$ref": "color.json"
+        }
+      ],
+      "metadata": {
+        "deprecated": true,
+        "maxVersion": 7.6
+      }
     },
     "debug": {
       "$ref": "onoff.json"

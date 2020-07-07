@@ -512,6 +512,27 @@ def test_cluster_validation_fail():
     assert len(errors) == 1
 
 
+def test_version_warnings():
+
+    s = """MAP
+    NAME "sample"
+    LAYER
+        NAME "test"
+        TYPE LINE
+        CLASS
+            #MADEUP True
+            COLOR 0 0 0
+        END
+    END
+END"""
+
+    d = mappyfile.loads(s, include_position=False)
+    v = Validator()
+    errors = v.validate(d, add_comments=True, version=8.0)
+    print(errors)
+    print(json.dumps(d, indent=4))
+
+
 def run_tests():
     pytest.main(["tests/test_validation.py"])
 
@@ -520,4 +541,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
     test_cluster_validation_fail()
+    test_version_warnings()
     print("Done!")

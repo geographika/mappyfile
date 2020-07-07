@@ -31,6 +31,7 @@ import json
 import os
 import sys
 from collections import OrderedDict
+import math
 import logging
 import jsonschema
 import jsonref
@@ -81,6 +82,24 @@ class Validator(object):
             raise IOError("The file %s does not exist" % schema_file)
 
         return schema_file
+
+    def get_versioned_schema(self, properties, version):
+
+        for k, v in list(properties.items()):
+            if "metadata" in v:
+                md = v["metadata"]
+                min_version = md.get("minVersion", 0.0)
+                max_version = md.get("maxVersion", math.inf)
+                if version < min_version or version > max_version:
+                    del properties[k]
+
+            if "items" in v:
+                if "properties" in v["items"]:
+                    # make sure the original dict is updated
+                    child_properties = properties[k]["items"]["properties"]
+                    self.get_versioned_schema(child_properties, version)
+
+        return properties
 
     def get_schema_validator(self, schema_name):
         """
@@ -195,11 +214,18 @@ class Validator(object):
 
         return error_messages
 
-    def validate(self, value, add_comments=False, schema_name="map"):
+    def validate(self, value, add_comments=False, schema_name="map", version=None):
         """
         verbose - also return the jsonschema error details
         """
-        validator = self.get_schema_validator(schema_name)
+        if version:
+            jsn_schema = self.get_expanded_schema(schema_name)
+            # remove any properties based on minVersion and maxVersion
+            properties = jsn_schema["properties"]
+            jsn_schema["properties"] = self.get_versioned_schema(properties, version)
+            validator = jsonschema.Draft4Validator(schema=jsn_schema)
+        else:
+            validator = self.get_schema_validator(schema_name, version)
 
         error_messages = []
 
