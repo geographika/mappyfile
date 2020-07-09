@@ -590,15 +590,19 @@ def update(d1, d2):
     return d1
 
 
-def validate(d):
+def validate(d, version=None):
     """
-    Validate a mappyfile dictionary by using the Mapfile schema
+    Validate a mappyfile dictionary by using the Mapfile schema.
+    An optional version number can be used to specify a specific
+    a Mapfile is valid for a specific MapServer version.
 
     Parameters
     ----------
 
     d: dict
         A Python dictionary based on the the mappyfile schema
+   version: float
+        The MapServer version number used to validate the Mapfile
 
     Returns
     -------
@@ -608,7 +612,7 @@ def validate(d):
 
     """
     v = Validator()
-    return v.validate(d)
+    return v.validate(d, version=version)
 
 
 def _save(output_file, map_string):

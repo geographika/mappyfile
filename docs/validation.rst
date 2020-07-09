@@ -83,7 +83,7 @@ Mapfile validation can either be run using the :ref:`cli`, or directly in Python
 
     d = mappyfile.loads(s, include_position=True)
     v = Validator()
-    errors = v.validate(d, add_comments=True)
+    errors = v.validate(d, add_comments=True, version=7.6)
     for e in errors:
         print(e)
 
@@ -95,6 +95,32 @@ Outputs the following:
 
 The ``include_position`` parameter can be set to ``True`` when loading a Mapfile (or Mapfile snippet), so that any validation errors
 include line positions. 
+
+The optional ``version`` parameter can be used to validate the Mapfile against a specific 
+version of MapServer. 
+
+..
+    If a ``$ref`` is used then all other properties are ignored. 
+
+        You will always use $ref as the only key in an object: any other keys you put 
+        there will be ignored by the validator.
+
+    See https://json-schema.org/understanding-json-schema/structuring.html#reuse
+
+    .. code-block:: json
+
+        "color": {
+          "allOf": [
+            {
+              "$ref": "color.json"
+            }
+          ],
+          "metadata": {
+            "deprecated": true,
+            "maxVersion": 7.6
+          }
+        },
+
 
 ..
     Some keywords when missing will raise errors when trying to generate a map, for example if a ``MAP`` has no ``SIZE``:

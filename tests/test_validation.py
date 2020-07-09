@@ -530,7 +530,7 @@ END"""
     v = Validator()
     errors = v.validate(d, add_comments=True, version=8.0)
     print(errors)
-    print(json.dumps(d, indent=4))
+    assert len(errors) == 1
 
 
 def run_tests():
