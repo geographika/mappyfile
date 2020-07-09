@@ -89,14 +89,14 @@ def main(msautotest_fld, create_new_copy=True):
 
         output_file = fn.replace(msautotest_fld, msautotest_copy)
         try:
-            mappyfile.utils.write(d, output_file)
+            mappyfile.save(d, output_file)
         except Exception:
             logging.warning(json.dumps(d, indent=4))
             logging.warning("%s could not be successfully re-written", fn)
             raise
 
         # now try reading it again
-        print(json.dumps(d, indent=4))
+        # print(json.dumps(d, indent=4))
         d = parse_mapfile(parser, transformer, pp, output_file)
 
         errors = v.validate(d, add_comments=True)
@@ -106,6 +106,6 @@ def main(msautotest_fld, create_new_copy=True):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    fld = r"C:\Temp\mapserver\msautotest"
-    main(fld, False)
+    fld = r"D:\GitHub\mapserver\msautotest"
+    main(fld, create_new_copy=False)
     print("Done!")
