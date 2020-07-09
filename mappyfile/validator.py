@@ -181,7 +181,7 @@ class Validator(object):
         # include position details
 
         if "__position__" in d:
-            if not path:
+            if not path or key not in d["__position__"]:
                 # position for the root object is stored in the root of the dict
                 pd = d["__position__"]
             else:

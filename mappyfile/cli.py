@@ -117,8 +117,9 @@ def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinecha
 @main.command(short_help="Validate Mapfile(s) against a schema")
 @click.argument('mapfiles', nargs=-1, type=click.Path())
 @click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile") # noqa
+@click.option('--version', default=7.6, show_default=True, help="The MapServer version number used to validate the Mapfile") # noqa
 @click.pass_context
-def validate(ctx, mapfiles, expand):
+def validate(ctx, mapfiles, expand, version):
     """
     Validate Mapfile(s) against the Mapfile schema
 
@@ -147,9 +148,14 @@ def validate(ctx, mapfiles, expand):
 
     for fn in all_mapfiles:
         fn = click.format_filename(fn)
-        d = mappyfile.open(fn, expand_includes=expand, include_position=True)
+        try:
+            d = mappyfile.open(fn, expand_includes=expand, include_position=True)
+        except Exception as ex:
+            logger.exception(ex)
+            click.echo("{} failed to parse successfully".format(fn))
+            continue
 
-        validation_messages = mappyfile.validate(d)
+        validation_messages = mappyfile.validate(d, version)
         if validation_messages:
             for v in validation_messages:
                 v["fn"] = fn
