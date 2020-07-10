@@ -15,9 +15,21 @@
       }
     },
     "align": {
-      "type": "string",
-      "enum": [ "left", "center", "right" ],
-      "additionalProperties": false
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [ "left", "center", "right" ],
+          "additionalProperties": false
+        },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
+        }
+      ],
+      "metadata": {
+        "minVersion": 5.4
+      }
     },
     "angle": {
       "oneOf": [
@@ -106,12 +118,26 @@
       "type": "integer"
     },
     "offset": {
-      "type": "array",
-      "items": {
-        "type": "number"
-      },
-      "minItems": 2,
-      "maxItems": 2
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\[(.*?)\\]$",
+            "description": "attribute"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      ]
     },
     "outlinecolor": {
       "oneOf": [
@@ -184,7 +210,7 @@
       ]
     },
     "size": {
-      "oneOf": [
+      "anyOf": [
         {
           "type": "integer"
         },
@@ -197,6 +223,9 @@
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute"
+        },
+        {
+          "$ref": "expression.json"
         }
       ]
     },

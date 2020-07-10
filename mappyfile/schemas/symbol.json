@@ -33,9 +33,18 @@
       "$ref": "color.json"
     },
     "character": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 1
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1
+        },
+        {
+          "pattern": "^&#[0-9]+;$",
+          "example": "&#10140;",
+          "type": "string"
+        }
+      ]
     },
     "filled": {
       "type": "boolean"
