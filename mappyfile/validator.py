@@ -82,21 +82,44 @@ class Validator(object):
 
         return schema_file
 
+    def is_valid_for_version(self, d, version):
+        """
+        Check if the dict object has a metadata dict
+        and if it does then check if the supplied
+        version is valid against and minVersion or maxVersion
+        values
+        """
+        if "metadata" in d:
+            md = d["metadata"]
+            min_version = md.get("minVersion", 0.0)
+            max_version = md.get("maxVersion", 1000.0)
+            if version < min_version or version > max_version:
+                return False
+
+        return True
+
     def get_versioned_schema(self, properties, version):
+        """
+        For a dict object recursively check each child object
+        to see if it is valid for the supplied version
+        """
+        keys_copy = list(properties.keys())
 
-        for k, v in list(properties.items()):
-            if "metadata" in v:
-                md = v["metadata"]
-                min_version = md.get("minVersion", 0.0)
-                max_version = md.get("maxVersion", 1000.0)
-                if version < min_version or version > max_version:
-                    del properties[k]
-
-            if "items" in v:
-                if "properties" in v["items"]:
-                    # make sure the original dict is updated
-                    child_properties = properties[k]["items"]["properties"]
-                    self.get_versioned_schema(child_properties, version)
+        for key in keys_copy:
+            v = properties[key]
+            if isinstance(v, dict):
+                if self.is_valid_for_version(v, version) == False:
+                    del properties[key]
+                self.get_versioned_schema(v, version)
+            elif isinstance(v, list):
+                valid_list = []
+                for props in v:
+                    if isinstance(props, dict):
+                        if self.is_valid_for_version(props, version) != False:
+                            valid_list.append(props)
+                    else:
+                        valid_list.append(props)
+                properties[key] = valid_list
 
         return properties
 

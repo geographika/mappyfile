@@ -86,7 +86,17 @@
       ]
     },
     "force": {
-      "type": "boolean"
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "enum": [ "group" ],
+          "metadata": {
+            "minVersion": 6.2
+          }
+        }
+      ]
     },
     "maxlength": {
       "type": "integer"
