@@ -539,13 +539,13 @@ def test_keyword_versioning():
   "type": "object",
   "properties": {
     "__type__": {
-      "enum": [ "label" ]
+      "enum": ["label"]
     },
     "align": {
       "oneOf": [
         {
           "type": "string",
-          "enum": [ "left", "center", "right" ],
+          "enum": ["left", "center", "right"],
           "additionalProperties": False
         },
         {
@@ -567,6 +567,7 @@ def test_keyword_versioning():
     print(json.dumps(properties, indent=4))
     assert "align" not in properties["properties"].keys()
 
+
 def test_property_versioning():
 
     properties = {
@@ -574,7 +575,7 @@ def test_property_versioning():
       "oneOf": [
         {"type": "boolean"},
         {
-          "enum": [ "group" ],
+          "enum": ["group"],
           "metadata": {
             "minVersion": 6.2
           }

@@ -108,14 +108,14 @@ class Validator(object):
         for key in keys_copy:
             v = properties[key]
             if isinstance(v, dict):
-                if self.is_valid_for_version(v, version) == False:
+                if self.is_valid_for_version(v, version) is False:
                     del properties[key]
                 self.get_versioned_schema(v, version)
             elif isinstance(v, list):
                 valid_list = []
                 for props in v:
                     if isinstance(props, dict):
-                        if self.is_valid_for_version(props, version) != False:
+                        if self.is_valid_for_version(props, version) is True:
                             valid_list.append(props)
                     else:
                         valid_list.append(props)
