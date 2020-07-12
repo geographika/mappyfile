@@ -533,6 +533,63 @@ END"""
     assert len(errors) == 1
 
 
+def test_keyword_versioning():
+
+    properties = {
+  "type": "object",
+  "properties": {
+    "__type__": {
+      "enum": [ "label" ]
+    },
+    "align": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [ "left", "center", "right" ],
+          "additionalProperties": False
+        },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
+        }
+      ],
+      "metadata": {
+        "minVersion": 5.4
+      }
+    }
+  }
+}
+
+    v = Validator()
+    assert "align" in properties["properties"].keys()
+    properties = v.get_versioned_schema(properties, 5.2)
+    print(json.dumps(properties, indent=4))
+    assert "align" not in properties["properties"].keys()
+
+def test_property_versioning():
+
+    properties = {
+      "force": {
+      "oneOf": [
+        {"type": "boolean"},
+        {
+          "enum": [ "group" ],
+          "metadata": {
+            "minVersion": 6.2
+          }
+        }]
+      }
+    }
+
+    v = Validator()
+    assert "enum" in properties["force"]["oneOf"][1].keys()
+    assert len(properties["force"]["oneOf"]) == 2
+    properties = v.get_versioned_schema(properties, 6.0)
+    print(json.dumps(properties, indent=4))
+    assert len(properties["force"]["oneOf"]) == 1
+
+
 def run_tests():
     pytest.main(["tests/test_validation.py"])
 
@@ -540,6 +597,7 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_cluster_validation_fail()
+    test_property_versioning()
     test_version_warnings()
+    test_keyword_versioning()
     print("Done!")
