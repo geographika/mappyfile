@@ -329,7 +329,7 @@
       }
     },
     "text": {
-      "allOf": [
+      "oneOf": [
         {
           "$ref": "expression.json"
         }

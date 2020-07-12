@@ -73,7 +73,11 @@
       "type": "string"
     },
     "interlace": {
-      "type": "boolean",
+      "oneOf": [
+        {
+          "$ref": "onoff.json"
+        }
+      ],
       "metadata": {
         "maxVersion": 7.6
       }
