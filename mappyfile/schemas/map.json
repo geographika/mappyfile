@@ -39,7 +39,14 @@
       "type": "string"
     },
     "debug": {
-      "$ref": "debug.json"
+      "allOf": [
+        {
+          "$ref": "debug.json"
+        }
+      ],
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "defresolution": {
       "type": "number",
@@ -57,13 +64,19 @@
       "$ref": "color.json"
     },
     "imagequality": {
-      "type": "integer"
+      "type": "integer",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "imagetype": {
       "type": "string"
     },
     "interlace": {
-      "$ref": "onoff.json"
+      "type": "boolean",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "layers": {
       "type": "array",
@@ -133,7 +146,14 @@
       "type": "string"
     },
     "transparent": {
-      "$ref": "onoff.json"
+      "allOf": [
+        {
+          "$ref": "onoff.json"
+        }
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "units": {
       "$ref": "units.json"

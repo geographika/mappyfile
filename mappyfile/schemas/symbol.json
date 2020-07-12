@@ -24,10 +24,16 @@
         }
       ],
       "minItems": 2,
-      "maxItems": 2
+      "maxItems": 2,
+      "metadata": {
+        "minVersion": 6.2
+      }
     },
     "antialias": {
-      "type": "boolean"
+      "type": "boolean",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "backgroundcolor": {
       "$ref": "color.json"
@@ -62,7 +68,10 @@
       "$ref": "points.json"
     },
     "transparent": {
-      "type": "integer"
+      "type": "integer",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "type": {
       "enum": [ "ellipse", "hatch", "pixmap", "svg", "truetype", "vector" ]

@@ -16,7 +16,10 @@
     },
     "browseformat": {
       "type": "string",
-      "description": "mime-type"
+      "description": "mime-type",
+      "metadata": {
+        "minVersion": 4.8
+      }
     },
     "empty": {
       "type": "string"
@@ -42,18 +45,26 @@
     },
     "legendformat": {
       "type": "string",
-      "description": "mime-type"
+      "description": "mime-type",
+      "metadata": {
+        "minVersion": 4.8
+      }
     },
     "log": {
       "type": "string",
       "description": "filename"
     },
     "maxscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "maxscale": {
       "type": "number",
-      "deprecated": true
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "maxtemplate": {
       "type": "string"
@@ -62,11 +73,16 @@
       "$ref": "metadata.json"
     },
     "minscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "minscale": {
       "type": "number",
-      "deprecated": true
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "mintemplate": {
       "type": "string"
@@ -80,7 +96,10 @@
     },
     "temppath": {
       "type": "url",
-      "description": "path"
+      "description": "path",
+      "metadata": {
+        "minVersion": 6.0
+      }
     },
     "validation": {
       "$ref": "validation.json"

@@ -33,19 +33,36 @@
       "type": "string"
     },
     "cluster": {
-      "$ref": "cluster.json"
+      "allOf": [
+        {
+          "$ref": "cluster.json"
+        }
+      ],
+      "metadata": {
+        "minVersion": 6.0
+      }
     },
     "composites": {
       "type": "array",
       "items": {
         "$ref": "composite.json"
+      },
+      "metadata": {
+        "minVersion": 7.0
       }
     },
     "connection": {
       "type": "string"
     },
     "connectionoptions": {
-      "$ref": "connectionoptions.json"
+      "allOf": [
+        {
+          "$ref": "connectionoptions.json"
+        }
+      ],
+      "metadata": {
+        "minVersion": 7.6
+      }
     },
     "connectiontype": {
       "enum": [ "contour", "kerneldensity", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
@@ -57,7 +74,14 @@
       }
     },
     "debug": {
-      "$ref": "debug.json"
+      "allOf": [
+        {
+          "$ref": "debug.json"
+        }
+      ],
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "dump": {
       "oneOf": [
@@ -67,10 +91,16 @@
         {
           "$ref": "onoff.json"
         }
-      ]
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "encoding": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "minVersion": 7.0
+      }
     },
     "extent": {
       "$ref": "extent.json"
@@ -99,7 +129,10 @@
           "type": "string",
           "pattern": "^\\((.*?)\\)$"
         }
-      ]
+      ],
+      "metadata": {
+        "minVersion": 6.4
+      }
     },
     "grid": {
       "$ref": "grid.json"
@@ -117,7 +150,10 @@
       }
     },
     "labelangleitem": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "maxVersion": 5.6
+      }
     },
     "labelcache": {
       "$ref": "onoff.json"
@@ -128,47 +164,60 @@
     "labelmaxscale": {
       "type": "number",
       "metadata": {
-        "deprecated": true,
-        "minVersion": 0,
         "maxVersion": 5.0
       }
     },
     "labelminscale": {
       "type": "number",
       "metadata": {
-        "deprecated": true,
-        "minVersion": 0,
         "maxVersion": 5.0
       }
     },
     "labelmaxscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "labelminscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "labelrequires": {
       "type": "string"
     },
     "labelsizeitem": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "maxVersion": 5.0
+      }
     },
     "mask": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "minVersion": 6.2
+      }
     },
     "maxfeatures": {
       "type": "integer"
     },
     "maxgeowidth": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.4
+      }
     },
     "maxscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "maxscale": {
       "type": "number",
       "metadata": {
-        "deprecated": true,
         "maxVersion": 5.0
       }
     },
@@ -176,16 +225,20 @@
       "$ref": "metadata.json"
     },
     "mingeowidth": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.4
+      }
     },
     "minscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "minscale": {
       "type": "number",
       "metadata": {
-        "deprecated": true,
-        "minVersion": 0,
         "maxVersion": 5.0
       }
     },
@@ -196,7 +249,10 @@
       "$ref": "color.json"
     },
     "opacity": {
-      "type": "integer"
+      "type": "integer",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "plugin": {
       "type": "string"
@@ -220,6 +276,9 @@
       "type": "array",
       "items": {
         "$ref": "scaletoken.json"
+      },
+      "metadata": {
+        "minVersion": 6.4
       }
     },
     "sizeunits": {
@@ -261,7 +320,10 @@
         {
           "enum": [ "alpha" ]
         }
-      ]
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "transform": {
       "oneOf": [
@@ -280,10 +342,16 @@
       "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentages", "pixels" ]
     },
     "utfdata": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "minVersion": 7.0
+      }
     },
     "utfitem": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "minVersion": 7.0
+      }
     },
     "validation": {
       "$ref": "validation.json"

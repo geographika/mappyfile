@@ -17,7 +17,10 @@
     "align": {
       "type": "string",
       "enum": [ "left", "center", "right" ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "metadata": {
+        "minVersion": 5.2
+      }
     },
     "backgroundcolor": {
       "$ref": "color.json"
@@ -29,7 +32,10 @@
       "$ref": "color.json"
     },
     "interlace": {
-      "type": "boolean"
+      "type": "boolean",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "intervals": {
       "type": "integer"
@@ -62,7 +68,14 @@
       "type": "integer"
     },
     "transparent": {
-      "$ref": "onoff.json"
+      "allOf": [
+        {
+          "$ref": "onoff.json"
+        }
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "units": {
       "$ref": "sizeunits.json"
@@ -102,12 +115,11 @@
       "minItems": 2,
       "maxItems": 2,
       "metadata": {
-        "minVersion": 7.02
+        "minVersion": 7.2
       }
     },
     "outlinecolor": {
       "$ref": "color.json"
     }
-
   }
 }

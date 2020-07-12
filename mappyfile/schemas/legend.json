@@ -18,10 +18,16 @@
       "$ref": "color.json"
     },
     "interlace": {
-      "$ref": "onoff.json"
+      "allOf": [
+        {
+          "$ref": "onoff.json"
+        }
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "keysize": {
-
       "type": "array",
       "items": {
         "type": "integer"
@@ -59,7 +65,14 @@
       "description": "filename"
     },
     "transparent": {
-      "$ref": "onoff.json"
+      "allOf": [
+        {
+          "$ref": "onoff.json"
+        }
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     }
   }
 }

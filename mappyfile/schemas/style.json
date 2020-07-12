@@ -28,13 +28,26 @@
       ]
     },
     "angleitem": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "antialias": {
-      "type": "boolean"
+      "type": "boolean",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "backgroundcolor": {
-      "$ref": "color.json"
+      "allOf": [
+        {
+          "$ref": "color.json"
+        }
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "color": {
       "oneOf": [
@@ -42,7 +55,10 @@
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
+          "description": "attribute",
+          "metadata": {
+            "minVersion": 5.0
+          }
         }
       ]
     },
@@ -75,7 +91,10 @@
       "maxItems": 2
     },
     "gap": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 6.0
+      }
     },
     "geomtransform": {
       "oneOf": [
@@ -87,23 +106,40 @@
           "pattern": "^\\((.*?)\\)$",
           "description": "expression"
         }
-      ]
+      ],
+      "metadata": {
+        "minVersion": 5.4
+      }
     },
     "initialgap": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 6.2
+      }
     },
     "linecap": {
-      "enum": [ "butt", "round", "square" ]
+      "enum": [ "butt", "round", "square" ],
+      "metadata": {
+        "minVersion": 6.0
+      }
     },
     "linejoin": {
-      "enum": [ "round", "miter", "bevel", "none" ]
+      "enum": [ "round", "miter", "bevel", "none" ],
+      "metadata": {
+        "minVersion": 6.0
+      }
     },
     "linejoinmaxsize": {
-      "type": "integer"
+      "type": "integer",
+      "metadata": {
+        "minVersion": 6.0
+      }
     },
-
     "maxscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "maxsize": {
       "type": "number"
@@ -143,7 +179,10 @@
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
+          "description": "attribute",
+          "metadata": {
+            "minVersion": 5.6
+          }
         }
       ]
     },
@@ -153,7 +192,10 @@
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
+          "description": "attribute",
+          "metadata": {
+            "minVersion": 5.0
+          }
         }
       ]
     },
@@ -165,10 +207,20 @@
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute"
         }
-      ]
+      ],
+      "metadata": {
+        "minVersion": 5.4
+      }
     },
     "pattern": {
-      "$ref": "points.json"
+      "allOf": [
+        {
+          "$ref": "points.json"
+        }
+      ],
+      "metadata": {
+        "minVersion": 6.0
+      }
     },
     "polaroffset": {
       "type": "array",
@@ -185,6 +237,9 @@
         ],
         "minItems": 2,
         "maxItems": 2
+      },
+      "metadata": {
+        "minVersion": 6.2
       }
     },
     "rangeitem": {
@@ -200,7 +255,10 @@
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
+          "description": "attribute",
+          "metadata": {
+            "minVersion": 5.0
+          }
         }
       ]
     },
@@ -225,7 +283,10 @@
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
+          "description": "attribute",
+          "metadata": {
+            "minVersion": 5.4
+          }
         }
       ]
     }

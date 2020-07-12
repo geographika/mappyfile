@@ -15,7 +15,14 @@
       }
     },
     "backgroundcolor": {
-      "$ref": "color.json"
+      "allOf": [
+        {
+          "$ref": "color.json"
+        }
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "color": {
       "allOf": [
@@ -24,7 +31,6 @@
         }
       ],
       "metadata": {
-        "deprecated": true,
         "maxVersion": 7.6
       }
     },
@@ -48,17 +54,32 @@
       }
     },
     "leader": {
-      "$ref": "leader.json"
+      "allOf": [
+        {
+          "$ref": "leader.json"
+        }
+      ],
+      "metadata": {
+        "minVersion": 6.2
+      }
     },
     "maxscale": {
       "type": "number",
-      "deprecated": true
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "maxscaledenom": {
-      "type": "number"
+      "type": "number",
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "maxsize": {
-      "type": "integer"
+      "type": "integer",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "metadata": {
       "$ref": "metadata.json"
@@ -68,22 +89,37 @@
     },
     "minscale": {
       "type": "number",
-      "deprecated": true
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "minscaledenom": {
       "type": "number"
     },
     "minsize": {
-      "type": "integer"
+      "type": "integer",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "name": {
       "type": "string"
     },
     "outlinecolor": {
-      "$ref": "color.json"
+      "allOf": [
+        {
+          "$ref": "color.json"
+        }
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "size": {
-      "type": "integer"
+      "type": "integer",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "status": {
       "$ref": "onoff.json"
@@ -92,6 +128,9 @@
       "type": "array",
       "items": {
         "$ref": "style.json"
+      },
+      "metadata": {
+        "minVersion": 4.0
       }
     },
     "symbol": {
@@ -105,7 +144,10 @@
         {
           "$ref": "symbol.json"
         }
-      ]
+      ],
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "template": {
       "type": "string",
