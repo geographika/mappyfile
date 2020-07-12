@@ -44,8 +44,8 @@ validate
 The ``validate`` command can be used to check values used in a Mapfile are valid, by comparing its contents to the Mapfile
 schema. It has the same parameters as the :ref:`validate <api-validate>` function. 
 
-mappyfile also allow validation against different versions of MapServer, for example validating Mapfiles 
-for MapServer 7.0, or for 7.2. 
+mappyfile also allows validation against different versions of MapServer, for example validating Mapfiles 
+for MapServer 7.0, or for 7.6. 
 
 .. note::
 
