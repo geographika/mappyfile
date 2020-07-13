@@ -158,13 +158,6 @@ class PrettyPrinter(object):
     def whitespace(self, level, indent):
         return self.spacer * (level + indent)
 
-    def singular(self, s):
-        if s == 'points':
-            return s
-        elif s.endswith('es'):
-            return s[:-2]
-        return s[:-1]
-
     def add_start_line(self, key, level):
         return self.whitespace(level, 1) + key.upper()
 
