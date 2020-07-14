@@ -208,6 +208,25 @@ def test_metadata():
     assert(s == "MAP METADATA 'MS_ENABLE_MODES' '!*' 'WMS_ENABLE_REQUEST' '*' END END")
 
 
+def test_connectionoptions():
+
+    values = {
+            "FLATTEN_NESTED_ATTRIBUTES": "YES"
+        }
+
+    d = {
+        "connectionoptions": values,
+        "__type__": "layer"
+    }
+
+    d = collections.OrderedDict(sorted(d.items()))
+
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
+    s = pp.pprint(d)
+    print(s)
+    assert(s == "LAYER CONNECTIONOPTIONS 'FLATTEN_NESTED_ATTRIBUTES' 'YES' END END")
+
+
 def test_config():
 
     cd = {
@@ -418,6 +437,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    test_join()
+    test_connectionoptions()
     # run_tests()
     print("Done!")
