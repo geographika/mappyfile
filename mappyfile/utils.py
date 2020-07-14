@@ -615,9 +615,9 @@ def validate(d, version=None):
     return v.validate(d, version=version)
 
 
-def _save(output_file, map_string):
+def _save(output_file, string):
     with codecs.open(output_file, "w", encoding="utf-8") as f:
-        f.write(map_string)
+        f.write(string)
 
 
 def _pprint(d, indent, spacer, quote, newlinechar, end_comment, **kwargs):

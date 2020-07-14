@@ -98,7 +98,22 @@ class Validator(object):
 
         return True
 
-    def get_versioned_schema(self, properties, version):
+    def get_versioned_schema(self, version=None, schema_name="map"):
+        """
+        Get a fully expanded JSON schema for a specific MapServer
+        version. Optionally provide a schema_name to return an expanded
+        subsection of the full schema.
+        """
+        jsn_schema = self.get_expanded_schema(schema_name)
+
+        if version:
+            # remove any properties based on minVersion and maxVersion
+            properties = jsn_schema["properties"]
+            jsn_schema["properties"] = self.get_versioned_properties(properties, version)
+
+        return jsn_schema
+
+    def get_versioned_properties(self, properties, version):
         """
         For a dict object recursively check each child object
         to see if it is valid for the supplied version
@@ -110,7 +125,7 @@ class Validator(object):
             if isinstance(v, dict):
                 if self.is_valid_for_version(v, version) is False:
                     del properties[key]
-                self.get_versioned_schema(v, version)
+                self.get_versioned_properties(v, version)
             elif isinstance(v, list):
                 valid_list = []
                 for props in v:
@@ -241,10 +256,7 @@ class Validator(object):
         verbose - also return the jsonschema error details
         """
         if version:
-            jsn_schema = self.get_expanded_schema(schema_name)
-            # remove any properties based on minVersion and maxVersion
-            properties = jsn_schema["properties"]
-            jsn_schema["properties"] = self.get_versioned_schema(properties, version)
+            jsn_schema = self.get_versioned_schema(version, schema_name)
             validator = jsonschema.Draft4Validator(schema=jsn_schema)
         else:
             validator = self.get_schema_validator(schema_name)

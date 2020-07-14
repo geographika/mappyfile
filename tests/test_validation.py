@@ -563,7 +563,7 @@ def test_keyword_versioning():
 
     v = Validator()
     assert "align" in properties["properties"].keys()
-    properties = v.get_versioned_schema(properties, 5.2)
+    properties = v.get_versioned_properties(properties, 5.2)
     print(json.dumps(properties, indent=4))
     assert "align" not in properties["properties"].keys()
 
@@ -586,9 +586,17 @@ def test_property_versioning():
     v = Validator()
     assert "enum" in properties["force"]["oneOf"][1].keys()
     assert len(properties["force"]["oneOf"]) == 2
-    properties = v.get_versioned_schema(properties, 6.0)
+    properties = v.get_versioned_properties(properties, 6.0)
     print(json.dumps(properties, indent=4))
     assert len(properties["force"]["oneOf"]) == 1
+
+
+def test_get_versioned_schema():
+
+    validator = Validator()
+    jsn = validator.get_versioned_schema(7.6)
+    # print(json.dumps(jsn, indent=4))
+    assert "defresolution" in jsn["properties"].keys()
 
 
 def run_tests():
@@ -601,4 +609,5 @@ if __name__ == "__main__":
     test_property_versioning()
     test_version_warnings()
     test_keyword_versioning()
+    test_get_versioned_schema()
     print("Done!")

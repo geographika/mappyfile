@@ -30,10 +30,12 @@
 import sys
 import os
 import codecs
+import json
 import glob
 import logging
-import mappyfile
 import click
+import mappyfile
+from mappyfile.validator import Validator
 
 
 def get_mapfiles(mapfiles):
@@ -79,7 +81,7 @@ def main(ctx, verbose, quiet):
 
 @main.command(short_help="Format a Mapfile")
 @click.argument('input-mapfile', nargs=1, type=click.Path(exists=True))
-@click.argument('output-mapfile',  nargs=1, type=click.Path())
+@click.argument('output-mapfile', nargs=1, type=click.Path())
 @click.option('--indent', default=4, show_default=True, help="The number of spacer characters to indent structures in the Mapfile") # noqa
 @click.option('--spacer', default=" ", help="The character to use for indenting structures in the Mapfile")
 @click.option('--quote', default='"', help="The quote character to use in the Mapfile (double or single quotes). Ensure these are escaped e.g. \\\" or \\' [default: \\\"]") # noqa
@@ -168,3 +170,29 @@ def validate(ctx, mapfiles, expand, version):
 
     click.echo("{} file(s) validated ({} successfully)".format(len(all_mapfiles), validation_count))
     sys.exit(errors)
+
+
+@main.command(short_help="Export a Mapfile Schema")
+@click.argument('output_file', nargs=1, type=click.Path())
+@click.option('--version', type=click.FLOAT, help="The MapServer version number used to validate the Mapfile") # noqa
+@click.pass_context
+def schema(ctx, output_file, version=None):
+    """
+    Save the Mapfile schema to a file. Set the version parameter to output a specific version.
+    Note output-file will be overwritten if it already exists.
+
+    Examples:
+
+        mappyfile schema C:/Temp/mapfile-schema.json
+
+    Example of a specific version:
+
+        mappyfile schema C:/Temp/mapfile-schema-7-6.json --version=7.6
+    """
+    validator = Validator()
+    jsn = validator.get_versioned_schema(version)
+
+    with codecs.open(output_file, "w", encoding="utf-8") as f:
+        f.write(json.dumps(jsn, sort_keys=True, indent=4))
+
+    sys.exit(0)

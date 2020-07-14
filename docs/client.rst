@@ -99,3 +99,17 @@ To display the command's help text run the following:
     mode con:cols=200
     mappyfile validate --help > docs/validate.txt
     mappyfile validate C:/Temp/*.map > docs/validation_errors.txt
+
+.. _client-schema:
+
+schema
+------
+
+Save the Mapfile schema to a file. Set the version parameter to output a specific version.
+
+.. code-block:: bat
+
+    mappyfile schema --help
+
+.. literalinclude:: format.txt
+    :language: console
