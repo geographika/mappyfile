@@ -1,6 +1,23 @@
 Releases
 --------
 
+0.9.0 14/07/2020
+++++++++++++++++
+
++ Schemas updated to include ``minVersion`` and ``maxVersion`` metadata to define which Mapfile keywords are valid
+  for different versions of MapServer
++ A new ``schema`` command line tool to export Mapfile schemas for different versions of MapServer
++ Allow Mapfile validation based on a specific version of MapServer
++ Add better error message when incorrect dicts are passed to printer 
++ Update to lark-parser 0.9.0
++ `#109 <https://github.com/geographika/mappyfile/pull/109>`_ - Add validation based on MapServer version
++ `#96 <https://github.com/geographika/mappyfile/issues/96>`_ - Unquoted Unicode strings cause parsing errors
++ `#102 <https://github.com/geographika/mappyfile/pull/102>`_ - Added support for accented-latin in unquoted strings (Issue #96) - thanks @erezsh
++ `#97 <https://github.com/geographika/mappyfile/issues/97>`_ - Allow for negative expressions
++ `#101 <https://github.com/geographika/mappyfile/pull/101>`_ - Fix for issue #97 (unary negation) - thanks @erezsh
++ `#85 <https://github.com/geographika/mappyfile/issues/85>`_ - Coding of NOT logical expression
++ `#100 <https://github.com/geographika/mappyfile/pull/100>`_ - Allowing non-bracketed NOT expression (Issue #85) - thanks @erezsh
+
 0.8.4 11/01/2020
 ++++++++++++++++
 

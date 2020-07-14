@@ -73,12 +73,13 @@ From within Python scripts:
 
     print(mappyfile.dumps(mapfile, indent=1, spacer="\t"))
 
-Two command line tools are available - ``format`` and ``validate``:
+Three command line tools are available - ``format``, ``validate``, and ``schema``:
 
 .. code-block:: bat
 
     mappyfile format raster.map formatted_raster.map
     mappyfile validate D:\ms-ogc-workshop\ms4w\apps\ms-ogc-workshop\**\*.map
+    mappyfile schema mapfile-schema-7-6.json --version=7.6
 
 Authors
 -------

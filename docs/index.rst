@@ -162,7 +162,6 @@ Development Roadmap
 Future development plans, leading to a v1.0 release include:
 
 + Setup an easy way to plug in "linters" to check various Mapfile settings and rules (e.g. configured correctly for WFS)
-+ Produce schemas for different versions of MapServer, and allow Mapfiles to be validated against a specific version
 + Create a Jupyter Notebook demonstrating mappyfile usage
 + Add a plugins page to the docs
 + Add an example of creating Mapfiles using YAML

@@ -96,6 +96,7 @@ To build the Sphinx documentation:
 .. code-block:: bat
 
     cd /D %MAPPYFILE_PATH%\docs
+    pip install sphinx -U
     make.bat html
     "_build/html/index.html"
 

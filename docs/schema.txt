@@ -1,0 +1,17 @@
+Usage: mappyfile schema [OPTIONS] OUTPUT_FILE
+
+  Save the Mapfile schema to a file. Set the version parameter to output a
+  specific version. Note output-file will be overwritten if it already
+  exists.
+
+  Examples:
+
+      mappyfile schema C:/Temp/mapfile-schema.json
+
+  Example of a specific version:
+
+      mappyfile schema C:/Temp/mapfile-schema-7-6.json --version=7.6
+
+Options:
+  --version FLOAT  The MapServer version number used to validate the Mapfile
+  --help           Show this message and exit.
