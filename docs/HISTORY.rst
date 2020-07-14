@@ -8,7 +8,10 @@ Releases
   for different versions of MapServer
 + A new ``schema`` command line tool to export Mapfile schemas for different versions of MapServer
 + Allow Mapfile validation based on a specific version of MapServer
-+ Add better error message when incorrect dicts are passed to printer 
++ Add better error message when incorrect dicts are passed to printer
++ Add py38 to continuous integration testing
++ Add command line scripts to continuous integration testing
++ Fix ``CONNECTIONOPTIONS`` formatted output
 + Update to lark-parser 0.9.0
 + `#109 <https://github.com/geographika/mappyfile/pull/109>`_ - Add validation based on MapServer version
 + `#96 <https://github.com/geographika/mappyfile/issues/96>`_ - Unquoted Unicode strings cause parsing errors
