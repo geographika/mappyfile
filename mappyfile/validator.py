@@ -98,6 +98,50 @@ class Validator(object):
 
         return True
 
+    def is_default_value(self, d):
+        """
+        Check if the dict object has a metadata dict
+        and if it does then check if the supplied
+        version is valid against and minVersion or maxVersion
+        values
+        """
+        if "metadata" in d:
+            md = d["metadata"]
+            default = md.get("default", None)
+            print(default)
+            print(d[key])
+            #max_version = md.get("maxVersion", 1000.0)
+            #if version < min_version or version > max_version:
+            #    return False
+            return True
+
+        return False
+
+    def remove_default_properties(self, properties):
+        """
+        For a dict object recursively check each child object
+        to see if it is valid for the supplied version
+        """
+        keys_copy = list(properties.keys())
+
+        for key in keys_copy:
+            v = properties[key]
+            if isinstance(v, dict):
+                if self.is_default_value(v) is True:
+                    del properties[key]
+                self.remove_default_properties(v)
+            elif isinstance(v, list):
+                valid_list = []
+                for props in v:
+                    if isinstance(props, dict):
+                        if self.is_default_value(props) is False:
+                            valid_list.append(props)
+                    else:
+                        valid_list.append(props)
+                properties[key] = valid_list
+
+        return properties
+
     def get_versioned_schema(self, version=None, schema_name="map"):
         """
         Get a fully expanded JSON schema for a specific MapServer
@@ -289,3 +333,9 @@ class Validator(object):
             jsn_schema = self.expanded_schemas[schema_name]
 
         return jsn_schema
+
+    def prune(self, value, schema_name="map"):
+        jsn_schema = self.get_versioned_schema(None, schema_name)
+        lowercase_dict = self.convert_lowercase(value)
+        self.remove_default_properties(lowercase_dict)
+        pass

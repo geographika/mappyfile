@@ -12,7 +12,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_snippets.py</StartupFile>
+    <StartupFile>tests\test_prune.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -96,6 +96,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\images\tree_inlining.png" />
     <Content Include="docs\images\tree_noinlining.png" />
     <Content Include="docs\images\tree_no_terminals.png" />
+    <Content Include="docs\prune.rst">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\python_integration.rst" />
     <Content Include="docs\rfc.rst" />
     <Content Include="docs\rules.rst">
@@ -696,6 +699,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Compile Include="tests\test_linter.py" />
     <Compile Include="tests\test_cli.py" />
     <Compile Include="tests\test_utils.py" />
+    <Compile Include="tests\test_prune.py" />
     <Compile Include="tests\test_validation.py">
       <SubType>Code</SubType>
     </Compile>
