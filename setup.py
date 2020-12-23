@@ -42,7 +42,7 @@ setup(name='mappyfile',
             'lark-parser==0.11.1',
             'jsonschema >=2.0',
             'jsonref==0.2',
-            'click; python_version>="3.0.0"'
+            'click; python_version>="3.0.0"',
             'click < 8.0.0; python_version=="2.7"'
       ],
       zip_safe=False,
