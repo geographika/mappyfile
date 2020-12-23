@@ -599,6 +599,10 @@ class MapfileTransformer(Transformer, object):
         assert len(t) == 2
         return t
 
+    def attr_mixed_pair(self, t):
+        assert len(t) == 2
+        return t
+
     def colorrange(self, t):
         assert len(t) == 6
         return t
