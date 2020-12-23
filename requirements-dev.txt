@@ -1,8 +1,6 @@
 colorama
 docutils
 flake8
-click
-lark-parser==0.11.1
 # git+git://github.com/erezsh/lark.git#egg=lark
 pluggy
 py
@@ -12,8 +10,6 @@ pytest
 pytest-cov
 tox
 virtualenv
-jsonschema
-jsonref==0.2
 glob2
 coveralls
 sphinx
