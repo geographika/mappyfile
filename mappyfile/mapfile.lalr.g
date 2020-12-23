@@ -55,7 +55,7 @@ attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING)
 
 ?value: string | int | float | expression | not_expression | attr_bind | path
 | regexp | runtime_var | list | NULL | true | false | extent | rgb | hexcolor
-| colorrange | hexcolorrange | num_pair | attr_bind_pair | _attr_keyword
+| colorrange | hexcolorrange | num_pair | attr_bind_pair | attr_mixed_pair | _attr_keyword
 
 int: SIGNED_INT
 int_pair: int int
@@ -72,6 +72,7 @@ string: DOUBLE_QUOTED_STRING | SINGLE_QUOTED_STRING | ESCAPED_STRING
 string_pair: (string|UNQUOTED_STRING) (string|UNQUOTED_STRING)
 
 attr_bind_pair: attr_bind attr_bind
+attr_mixed_pair: attr_bind (int|float) | (int|float) attr_bind
 float: SIGNED_FLOAT
 float_pair: float float
 path: PATH

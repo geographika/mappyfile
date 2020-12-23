@@ -164,6 +164,33 @@ def test_style_pattern5():
     assert(output(s, schema_name="style") == exp)
 
 
+def test_style_offset_mixed():
+    """
+    Test an attribute and numerical pair for a STYLE OFFSET
+    See https://github.com/geographika/mappyfile/issues/114
+    """
+    s = """
+    STYLE
+        OFFSET [attribute] -999
+    END
+    """
+    exp = "STYLE OFFSET [attribute] -999 END"
+    assert(output(s, schema_name="style") == exp)
+
+
+def test_style_offset_mixed2():
+    """
+    As above but reversed
+    """
+    s = """
+    STYLE
+        OFFSET -999 [attribute]
+    END
+    """
+    exp = "STYLE OFFSET -999 [attribute] END"
+    assert(output(s, schema_name="style") == exp)
+
+
 def test_metadata():
     """
     Parse metadata directly
@@ -958,6 +985,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_font_symbol()
+    test_style_offset_mixed2()
     # run_tests()
     print("Done!")
