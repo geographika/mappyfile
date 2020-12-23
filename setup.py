@@ -39,8 +39,8 @@ setup(name='mappyfile',
       license='MIT',
       packages=['mappyfile'],
       install_requires=[
-            'lark-parser==0.11.1',
-            'jsonschema >=2.0',
+            'lark-parser>=0.9.0',
+            'jsonschema>=2.0',
             'jsonref==0.2',
             'click; python_version>="3.0.0"',
             'click < 8.0.0; python_version=="2.7"'
