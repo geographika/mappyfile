@@ -1,6 +1,14 @@
 Releases
 --------
 
+0.9.1 23/12/2020
+++++++++++++++++
+
++ Allow any version of lark-parser > 0.9 to be used
++ Fixes for requirements for Python 2.7
++ `#115 <https://github.com/geographika/mappyfile/pull/115>`_ - Fix for issue #109 (OFFSET numeric and attribute pairs)
++ `#109 <https://github.com/geographika/mappyfile/isses/109>`_ - Style OFFSET: mixed attribute and numerical value fail to parse
+
 0.9.0 14/07/2020
 ++++++++++++++++
 
