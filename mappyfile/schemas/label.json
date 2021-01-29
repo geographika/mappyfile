@@ -117,10 +117,7 @@
       }
     },
     "font": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
+      "anyOf": [
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
@@ -128,6 +125,9 @@
           "metadata": {
             "minVersion": 5.6
           }
+        },
+        {
+          "type": "string"
         }
       ]
     },
@@ -234,6 +234,11 @@
         { "enum": [ "auto" ] },
         {
           "$ref": "position.json"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\[(.*?)\\]$",
+          "description": "attribute"
         }
       ]
     },

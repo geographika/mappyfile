@@ -842,6 +842,27 @@ def test_label_position_uc():
     assert(output(s, schema_name="label") == exp)
 
 
+def test_label_attribute_properties():
+    """
+    See https://github.com/geographika/mappyfile/issues/118
+    Required allowing [property] names to be added for FONT, POSITION
+    """
+
+    s = """
+    LABEL
+        FONT [FONTNAME]
+        TYPE truetype
+        COLOR [TXTCLR]
+        SIZE [FONTSIZE]
+        ANGLE [TRIKT]
+        POSITION [MSPOS]
+        OUTLINECOLOR [OLNCLR]
+    END
+    """
+    exp = "LABEL FONT [FONTNAME] TYPE TRUETYPE COLOR [TXTCLR] SIZE [FONTSIZE] ANGLE [TRIKT] POSITION [MSPOS] OUTLINECOLOR [OLNCLR] END"
+    assert(output(s, schema_name="label") == exp)
+
+
 def test_style_geotransform():
     """
     GEOMTRANSFORM "end" (since END is used to end objects in the map file, end must be embedded in quotes)
@@ -985,6 +1006,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_style_offset_mixed2()
+    test_label_attribute_properties()
     # run_tests()
     print("Done!")
