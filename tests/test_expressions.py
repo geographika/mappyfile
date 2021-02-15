@@ -430,6 +430,20 @@ def test_unquoted_unicode_string():
     assert(output(s) == exp)
 
 
+def test_list_with_apostrophe():
+    """
+    See https://github.com/geographika/mappyfile/issues/120
+    """
+    s = '''
+    CLASS
+      EXPRESSION {bla,d'apostrophe}
+    END
+    '''
+
+    exp = u'''CLASS EXPRESSION {bla,d'apostrophe} END'''
+    assert(output(s) == exp)
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -441,6 +455,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_unquoted_unicode_string()
+    test_list_with_apostrophe()
     # run_tests()
     print("Done!")
