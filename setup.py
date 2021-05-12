@@ -46,7 +46,7 @@ setup(name='mappyfile',
             'jsonschema>=2.0',
             'jsonref==0.2',
             'click; python_version>="3.0.0"',
-            'click < 8.0.0; python_version=="2.7"'
+            'click < 9.0.0; python_version=="2.7"'
       ],
       zip_safe=False,
       entry_points = {
