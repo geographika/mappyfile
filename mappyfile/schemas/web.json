@@ -52,7 +52,10 @@
     },
     "log": {
       "type": "string",
-      "description": "filename"
+      "description": "filename",
+      "metadata": {
+        "maxVersion": 8.0
+      }
     },
     "maxscaledenom": {
       "type": "number",

@@ -322,7 +322,7 @@
             }
           ],
           "metadata": {
-            "maxVersion": 7.6
+            "minVersion": 7.6
           }
         }
       ]

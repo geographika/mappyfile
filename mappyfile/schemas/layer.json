@@ -65,7 +65,7 @@
       }
     },
     "connectiontype": {
-      "enum": [ "contour", "kerneldensity", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
+      "enum": [ "contour", "kerneldensity", "idw", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis" ]
     },
     "data": {
       "type": "array",

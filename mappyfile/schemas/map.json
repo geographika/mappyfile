@@ -90,7 +90,7 @@
       }
     },
     "legend": {
-      "type": "object"
+      "$ref": "legend.json"
     },
     "maxsize": {
       "type": "integer"
@@ -101,7 +101,8 @@
     "outputformats": {
       "type": "array",
       "items": {
-        "type": "object"
+        "type": "object",
+        "$ref": "outputformat.json"
       }
     },
     "projection": {
@@ -111,7 +112,7 @@
       "$ref": "querymap.json"
     },
     "reference": {
-      "type": "object"
+      "$ref": "reference.json"
     },
     "resolution": {
       "type": "number"
@@ -120,7 +121,7 @@
       "type": "number"
     },
     "scalebar": {
-      "type": "object"
+      "$ref": "scalebar.json"
     },
     "shapepath": {
       "type": "string"
@@ -163,7 +164,7 @@
       "$ref": "units.json"
     },
     "web": {
-      "type": "object"
+      "$ref": "web.json"
     },
     "__type__": {
       "type": "string"

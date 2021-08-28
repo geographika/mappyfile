@@ -44,8 +44,13 @@
       "minItems": 2,
       "maxItems": 2
     },
-    "label": {
-      "$ref": "label.json"
+    "labels": {
+      "type": "array",
+      "items": {
+        "$ref": "label.json"
+      },
+      "minItems": 0,
+      "maxItems": 1
     },
     "outlinecolor": {
       "$ref": "color.json"
