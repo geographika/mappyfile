@@ -1,6 +1,19 @@
 Releases
 --------
 
+0.9.2 28/08/2021
+++++++++++++++++
+
++ Add the "idw" to ``LAYER` ``CONNECIONTYPE``
++ Correct "minVersion" of ``LABEL`` ``EXPRESSION``
++ Add validation to ``LEGEND`` ``LABELS``
++ Add correct validation for ``MAP`` ``LEGEND`` and ``OUTPUTFORMAT``
++ Add "byte" to ``OUTPUTFORMAT`` ``IMAGEMODE``
++ Add "maxVersion" to ``WEB`` ``LOG``
++ `#120 <https://github.com/geographika/mappyfile/issues/120>`_ - Expression list element with apostrophe throws error
++ `#118 <https://github.com/geographika/mappyfile/issues/118>`_ - LABEL -> FONT and LABEL -> POSITION gives errors in validate when attributes are used
++ `#114 <https://github.com/geographika/mappyfile/issues/114>`_ - Style OFFSET: mixed attribute and numerical value fail to parse
+
 0.9.1 23/12/2020
 ++++++++++++++++
 
