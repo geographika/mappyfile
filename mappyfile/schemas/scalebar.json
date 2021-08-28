@@ -72,10 +72,7 @@
         {
           "$ref": "onoff.json"
         }
-      ],
-      "metadata": {
-        "maxVersion": 7.6
-      }
+      ]
     },
     "units": {
       "$ref": "sizeunits.json"
