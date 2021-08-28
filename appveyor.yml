@@ -53,4 +53,4 @@ artifacts:
     name: wheel
 
 deploy_script:
-  - ps: if ($env:APPVEYOR_REPO_TAG -eq $TRUE) { pip install -qq twine; twine upload --skip-existing dist/* }
+  - ps: if (($env:APPVEYOR_REPO_TAG -eq $TRUE) -and ($Env:windir -ne "C:\\Python27-x64") { pip install -qq twine; twine upload --skip-existing dist/* }
