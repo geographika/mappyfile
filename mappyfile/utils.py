@@ -60,7 +60,7 @@ def deprecated(func):
     return new_func
 
 
-def open(fn, expand_includes=True, include_comments=False, include_position=False, **kwargs):
+def open(fn, output_o_trace=False, expand_includes=True, include_comments=False, include_position=False, **kwargs):
     """
     Load a Mapfile from the supplied filename into a Python dictionary.
 
@@ -69,6 +69,8 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
 
     fn: string
         The path to the Mapfile, or partial Mapfile
+    output_o_trace: boolean
+        To include a trace of origin include files in the output: tuple (dict, list)
     expand_includes: boolean
         Load any ``INCLUDE`` files in the MapFile
     include_comments: boolean
@@ -81,6 +83,9 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
 
     dict
         A Python dictionary representing the Mapfile in the mappyfile format
+
+    trace_o_incl*
+        A trace of the origin of lines for include files, use to find the original location of an error
 
     Example
     -------
@@ -97,11 +102,17 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
     """
     p = Parser(expand_includes=expand_includes,
                include_comments=include_comments, **kwargs)
-    ast = p.parse_file(fn)
+    ast, trace_o_incl = p.parse_file(fn)
     m = MapfileToDict(include_position=include_position,
-                      include_comments=include_comments, **kwargs)
+                      include_comments=include_comments,
+                      trace_o_incl=trace_o_incl,
+                       **kwargs)
+                       
     d = m.transform(ast)
-    return d
+    if output_o_trace == True:
+        return d, trace_o_incl
+    else:
+        return d
 
 
 def load(fp, expand_includes=True, include_position=False, include_comments=False, **kwargs):
@@ -590,7 +601,7 @@ def update(d1, d2):
     return d1
 
 
-def validate(d, version=None):
+def validate(d, *trace_o_incl, version=None):
     """
     Validate a mappyfile dictionary by using the Mapfile schema.
     An optional version number can be used to specify a specific
@@ -601,7 +612,9 @@ def validate(d, version=None):
 
     d: dict
         A Python dictionary based on the the mappyfile schema
-   version: float
+    trace_o_incl: list (optional)
+        A trace of the origin of lines for include files, use to find the original location of an error
+    version: float
         The MapServer version number used to validate the Mapfile
 
     Returns
@@ -612,7 +625,9 @@ def validate(d, version=None):
 
     """
     v = Validator()
-    return v.validate(d, version=version)
+    if not trace_o_incl:
+        trace_o_incl = None
+    return v.validate(d, trace_o_incl, version=version)
 
 
 def _save(output_file, string):

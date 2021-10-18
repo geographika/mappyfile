@@ -52,7 +52,9 @@ class Parser(object):
 
     def load_grammar(self, grammar_file):
         gf = os.path.join(os.path.dirname(__file__), grammar_file)
-        return open(gf).read()
+        # fix to ensure Mapfiles are closed after reading
+        with open(gf) as f:
+            return f.read()
 
     def _create_lalr_parser(self):
         grammar_text = self.load_grammar("mapfile.lalr.g")
@@ -77,10 +79,14 @@ class Parser(object):
 
         return inc_file_path.strip("'").strip('"')
 
-    def load_includes(self, text, fn=None, _nested_includes=0):
+    def load_includes(self, text, fn=None, trace_o_incl=None, _nested_includes=0):
         # Per default use working directory of the process
         if fn is None:
             fn = os.getcwd() + os.sep
+
+        if not trace_o_incl and _nested_includes == 0:
+            trace_o_incl = []
+            trace_o_incl.append([fn])
 
         lines = text.split('\n')
         includes = {}
@@ -98,13 +104,15 @@ class Parser(object):
                 except IOError as ex:
                     log.warning("Include file '%s' not found in '%s'", inc_file_path, fn)
                     raise ex
-                # recursively load any further includes
-                includes[idx] = self.load_includes(include_text, fn=fn, _nested_includes=_nested_includes+1)
+                trace_o_incl[0].append(inc_file_path)
+                includes[idx], trace_o_incl = self.load_includes(include_text, fn=fn, trace_o_incl=trace_o_incl, _nested_includes=_nested_includes+1)
+            else:
+                trace_o_incl.append(len(trace_o_incl[0])-1)
 
         for idx, txt in includes.items():
             lines.pop(idx)  # remove the original include
             lines.insert(idx, txt)
-        return '\n'.join(lines)
+        return '\n'.join(lines), trace_o_incl
 
     def assign_comments(self, tree, comments):
         """
@@ -221,18 +229,34 @@ class Parser(object):
             text = unicode(text, 'utf-8')
 
         if self.expand_includes:
-            text = self.load_includes(text, fn=fn)
+            trace_o_incl = []
+            trace_o_incl.append([fn])
+            text, trace_o_incl = self.load_includes(text, fn=fn)
+        else:
+            trace_o_incl=None
 
         try:
             self._comments[:] = []  # clear any comments from a previous parse
             tree = self.lalr.parse(text)
             if self.include_comments:
                 self.assign_comments(tree, self._comments)
-            return tree
+            return tree, trace_o_incl
         except (ParseError, UnexpectedInput) as ex:
-            if fn:
-                log.error("Parsing of {} unsuccessful".format(fn))
-            else:
-                log.error("Parsing of Mapfile unsuccessful")
+            error_message = "Parsing of Mapfile unsuccessful"
+
+            # check the case where the lark parser does not stop on the error.
+            # In this case ex.line is on the end of the mapfile.
+            #   ex on tag STYLE: OUTLINECOLOR 128 128 128x
+            if trace_o_incl and ex.line < len(trace_o_incl) - 3:
+                #  position of error in file origin
+                trace = trace_o_incl[ex.line]
+                originFile = trace_o_incl[0][trace]
+                lineOrigin = trace_o_incl[1:ex.line].count(trace) + 1
+                error_message = "Parsing of {file} unsuccessful (Line: {line} Column: {column})".format(file = originFile, line = lineOrigin, column = ex.column)
+            elif fn:
+                error_message = "Parsing of {} unsuccessful".format(fn)
+
+            log.error(error_message)
             log.info(ex)
+
             raise

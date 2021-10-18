@@ -178,7 +178,7 @@ class Validator(object):
 
         return x
 
-    def create_message(self, rootdict, path, error, add_comments):
+    def create_message(self, rootdict, trace_o_incl, path, error, add_comments):
         """
         Add a validation comment to the dictionary
         path is the path to the error object, it can be empty if the error is in the root object
@@ -190,19 +190,36 @@ class Validator(object):
         See https://github.com/Julian/jsonschema/issues/119
         """
 
+        keyPathParent = None
         if not path:
             # error applies to the root type
             d = rootdict
             key = d["__type__"]
-        elif isinstance(path[-1], int):
-            # the error is on an object in a list
-            d = utils.findkey(rootdict, *path)
-            key = d["__type__"]
         else:
-            key = path[-1]
-            d = utils.findkey(rootdict, *path[:-1])
+            if isinstance(path[-1], int):
+                # the error is on an object in a list
+                d = utils.findkey(rootdict, *path)
+                key = d["__type__"]
+            else:
+                key = path[-1]
+                d = utils.findkey(rootdict, *path[:-1])
 
-        error_message = "ERROR: Invalid value in {}".format(key.upper())
+            # get the site of the parent key
+            l = len(path)
+            n = int(l / 2)
+            keyPathParent = []
+            for i in range(1, n + 1):
+                c = i * 2
+                keySource = utils.findkey(rootdict, *path[:c])
+                if (keySource.get('name', None) != None):
+                    keyPathParent.append(str(keySource["__type__"] + " name: " + keySource["name"]))
+                elif (keySource.get('text', None) != None):
+                    keyPathParent.append(str(keySource["__type__"] + " text: " + keySource["text"]))
+                else:
+                    keyPathParent.append(str(keySource["__type__"]))
+
+        # add the site of the parent key
+        error_message = "ERROR: Invalid value in {}, parent path: {}".format(key.upper(), keyPathParent)
 
         # add a comment to the dict structure
 
@@ -225,33 +242,41 @@ class Validator(object):
             else:
                 pd = d["__position__"][key]
 
-            error_message["line"] = pd.get("line")
-            error_message["column"] = pd.get("column")
+            if trace_o_incl:
+                trace = trace_o_incl[pd.get("line")]
+                originFile = trace_o_incl[0][trace]
+                lineOrigin = trace_o_incl[1:pd.get("line")].count(trace) + 1
+                error_message["line"] = lineOrigin
+                error_message["column"] = pd.get("column")
+                error_message["file"] = originFile
+            else:
+                error_message["line"] = pd.get("line")
+                error_message["column"] = pd.get("column")
 
         return error_message
 
-    def get_error_messages(self, d, errors, add_comments):
+    def get_error_messages(self, d, trace_o_incl, errors, add_comments):
 
         error_messages = []
 
         for error in errors:
             pth = error.absolute_path
             pth = list(pth)  # convert deque to list
-            em = self.create_message(d, pth, error, add_comments)
+            em = self.create_message(d, trace_o_incl, pth, error, add_comments)
             error_messages.append(em)
 
         return error_messages
 
-    def _validate(self, d, validator, add_comments, schema_name):
+    def _validate(self, d, trace_o_incl, validator, add_comments, schema_name):
         lowercase_dict = self.convert_lowercase(d)
         jsn = json.loads(json.dumps(lowercase_dict), object_pairs_hook=OrderedDict)
 
         errors = list(validator.iter_errors(jsn))
-        error_messages = self.get_error_messages(d, errors, add_comments)
+        error_messages = self.get_error_messages(d, trace_o_incl, errors, add_comments)
 
         return error_messages
 
-    def validate(self, value, add_comments=False, schema_name="map", version=None):
+    def validate(self, value, trace_o_incl=None, add_comments=False, schema_name="map", version=None):
         """
         verbose - also return the jsonschema error details
         """
@@ -265,9 +290,9 @@ class Validator(object):
 
         if isinstance(value, list):
             for d in value:
-                error_messages += self._validate(d, validator, add_comments, schema_name)
+                error_messages += self._validate(d, trace_o_incl, validator, add_comments, schema_name)
         else:
-            error_messages = self._validate(value, validator, add_comments, schema_name)
+            error_messages = self._validate(value, trace_o_incl, validator, add_comments, schema_name)
 
         return error_messages
 
