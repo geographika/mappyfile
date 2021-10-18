@@ -156,7 +156,7 @@ def validate(ctx, mapfiles, expand, version):
     for fn in all_mapfiles:
         fn = click.format_filename(fn)
         try:
-            d, trace_o_incl = mappyfile.open(fn, True, expand_includes=expand, include_position=True)
+            d, trace_o_incl = mappyfile.open(fn, output_trace=True, expand_includes=expand, include_position=True)
         except Exception as ex:
             logger.exception(ex)
             click.echo("{} failed to parse successfully".format(fn))
