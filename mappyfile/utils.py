@@ -601,7 +601,7 @@ def update(d1, d2):
     return d1
 
 
-def validate(d, *trace_o_incl, version=None):
+def validate(d, trace_o_incl=None, version=None):
     """
     Validate a mappyfile dictionary by using the Mapfile schema.
     An optional version number can be used to specify a specific
@@ -612,7 +612,7 @@ def validate(d, *trace_o_incl, version=None):
 
     d: dict
         A Python dictionary based on the the mappyfile schema
-    trace_o_incl: list (optional)
+    trace_o_incl: list
         A trace of the origin of lines for include files, use to find the original location of an error
     version: float
         The MapServer version number used to validate the Mapfile
@@ -625,8 +625,6 @@ def validate(d, *trace_o_incl, version=None):
 
     """
     v = Validator()
-    if not trace_o_incl:
-        trace_o_incl = None
     return v.validate(d, trace_o_incl, version=version)
 
 
