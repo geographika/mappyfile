@@ -2,7 +2,7 @@
 #
 # Authors: Seth Girvin
 #
-# Copyright (c) 2020 Seth Girvin
+# Copyright (c) 2021 Seth Girvin
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation
