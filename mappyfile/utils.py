@@ -656,7 +656,7 @@ def create(type, version=None):
     d = OrderedDict()
     d["__type__"] = type
 
-    properties = schema["properties"].items()
+    properties = sorted(schema["properties"].items())
 
     for k, v in properties:
         if "default" in v:
