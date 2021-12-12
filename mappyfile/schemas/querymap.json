@@ -18,6 +18,7 @@
       "$ref": "color.json"
     },
     "size": {
+      "default": [ -1, -1 ],
       "type": "array",
       "items": {
         "type": "integer"
@@ -26,9 +27,11 @@
       "maxItems": 2
     },
     "status": {
+      "default": "off",
       "$ref": "onoff.json"
     },
     "style": {
+      "default": "hilite",
       "type": "string",
       "enum": [ "normal", "hilite", "selected" ],
       "additionalProperties": false

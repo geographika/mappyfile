@@ -4,6 +4,7 @@
   "patternProperties": {
     "^__[a-z]+__$": {}
   },
+  "required": [ "type" ],
   "properties": {
     "__type__": {
       "enum": [ "layer" ]
@@ -285,6 +286,7 @@
       "enum": [ "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "pixels" ]
     },
     "status": {
+      "default": "off",
       "type": "string",
       "enum": [ "on", "off", "default" ]
     },
@@ -301,6 +303,7 @@
       "type": "string"
     },
     "tileitem": {
+      "default": "location",
       "type": "string"
     },
     "tilesrs": {
@@ -339,6 +342,7 @@
       "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query", "annotation" ]
     },
     "units": {
+      "default": "meters",
       "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentages", "pixels" ]
     },
     "utfdata": {

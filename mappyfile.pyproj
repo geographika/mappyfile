@@ -12,7 +12,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_map_collection.py</StartupFile>
+    <StartupFile>tests\test_utils.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -197,6 +197,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     </Content>
     <Content Include="mappyfile\schemas\connectionoptions.json" />
     <Content Include="mappyfile\schemas\points.json" />
+    <Content Include="mappyfile\schemas\symbolset.json" />
     <Content Include="mappyfile\schemas\web.json" />
     <Content Include="mappyfile\schemas\validation.json" />
     <Content Include="mappyfile\schemas\metadata.json" />

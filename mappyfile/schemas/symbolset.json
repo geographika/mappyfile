@@ -1,9 +1,17 @@
 {
+  "$schema": "http://json-schema.org/schema#",
   "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^__[a-z]+__$": {}
+  },
   "properties": {
-    "type": "array",
-    "items": {
-      "$ref": "symbol.json"
+    "symbols": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "symbol.json"
+      }
     }
   }
 }

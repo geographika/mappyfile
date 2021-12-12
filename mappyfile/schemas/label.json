@@ -32,6 +32,7 @@
       }
     },
     "angle": {
+      "default":  0,
       "oneOf": [
         {
           "type": "string",
@@ -52,7 +53,8 @@
       ]
     },
     "antialias": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "backgroundcolor": {
       "allOf": [
@@ -75,17 +77,19 @@
       }
     },
     "backgroundshadowsize": {
+      "default": false,
       "allOf": [
         {
           "$ref": "points.json"
         }
       ],
       "metadata": {
-        "minVersion": 6.0
+        "maxVersion": 6.0
       }
     },
     "buffer": {
-      "type": "integer"
+      "type": "integer",
+      "deafult":  0
     },
     "color": {
       "oneOf": [
@@ -132,6 +136,7 @@
       ]
     },
     "force": {
+      "default": false,
       "oneOf": [
         {
           "type": "boolean"
@@ -151,6 +156,7 @@
       }
     },
     "maxoverlapangle": {
+      "default":  22.5,
       "type": "number",
       "metadata": {
         "minVersion": 6.0
@@ -163,7 +169,8 @@
       }
     },
     "maxsize": {
-      "type": "integer"
+      "type": "integer",
+      "default": 256
     },
     "mindistance": {
       "type": "integer"
@@ -183,9 +190,11 @@
       }
     },
     "minsize": {
-      "type": "integer"
+      "type": "integer",
+      "default": 4
     },
     "offset": {
+      "default": [ 0, 0 ],
       "oneOf": [
         {
           "type": "array",
@@ -224,12 +233,15 @@
       ]
     },
     "outlinewidth": {
-      "type": "integer"
+      "type": "integer",
+      "default": 1
     },
     "partials": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "position": {
+      "default":  "cc",
       "oneOf": [
         { "enum": [ "auto" ] },
         {
@@ -243,6 +255,7 @@
       ]
     },
     "priority": {
+      "default": 1,
       "oneOf": [
         {
           "type": "integer"
@@ -268,6 +281,7 @@
       "$ref": "color.json"
     },
     "shadowsize": {
+      "default": [ 1, 1 ],
       "oneOf": [
         {
           "type": "array",
@@ -298,6 +312,7 @@
       ]
     },
     "size": {
+      "default": 10,
       "anyOf": [
         {
           "type": "integer"

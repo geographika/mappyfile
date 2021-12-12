@@ -16,6 +16,7 @@
     },
     "anchorpoint": {
       "type": "array",
+      "default": [ 0.5, 0.5 ],
       "items": [
         {
           "type": "number",
@@ -31,6 +32,7 @@
     },
     "antialias": {
       "type": "boolean",
+      "default": false,
       "metadata": {
         "maxVersion": 7.6
       }
@@ -53,7 +55,8 @@
       ]
     },
     "filled": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "font": {
       "type": "string"

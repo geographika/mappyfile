@@ -38,6 +38,7 @@
       }
     },
     "intervals": {
+      "default": 4,
       "type": "integer"
     },
     "labels": {
@@ -58,6 +59,7 @@
       "type": "boolean"
     },
     "size": {
+      "default": [ 200, 3 ],
       "type": "array",
       "items": {
         "type": "integer"
@@ -66,6 +68,7 @@
       "maxItems": 2
     },
     "status": {
+      "deafult": "off",
       "type": "string",
       "enum": [ "on", "off", "embed" ]
     },
@@ -80,6 +83,7 @@
       ]
     },
     "units": {
+      "default": "miles",
       "$ref": "sizeunits.json"
     },
     "extent": {
