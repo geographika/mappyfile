@@ -330,7 +330,8 @@ def test_create_label():
     d = mappyfile.utils.create("label")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     print(output)
-    assert output == "LABEL SHADOWSIZE 1 1 REPEATDISTANCE 0 OFFSET 0 0 POSITION CC SIZE 10 END"
+    assert output == "LABEL PRIORITY 1 MAXOVERLAPANGLE 22.5 FORCE FALSE SHADOWSIZE 1 1 POSITION CC MAXSIZE 256 ANTIALIAS FALSE "\
+                     "MINSIZE 4 PARTIALS FALSE REPEATDISTANCE 0 OFFSET 0 0 ANGLE 0 OUTLINEWIDTH 1 BACKGROUNDSHADOWSIZE FALSE SIZE 10 END"
 
 
 def test_create_symbol():
@@ -373,5 +374,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_create_symbol_v6()
+    test_create_label()
     print("Done!")
