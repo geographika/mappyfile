@@ -18,6 +18,7 @@ These are functions used to open and write Mapfiles to files and strings.
 + :func:`mappyfile.dump`
 + :func:`mappyfile.dumps`
 + :func:`mappyfile.save`
++ :func:`mappyfile.create`
 
 .. automodule:: mappyfile
 
@@ -38,6 +39,10 @@ These are functions used to open and write Mapfiles to files and strings.
 .. _api-save:
 
     .. autofunction:: save
+
+.. _api-create:
+
+    .. autofunction:: create
 
 
 Dictionary Helper Functions

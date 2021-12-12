@@ -33,12 +33,12 @@ import sys
 from types import ModuleType
 # allow high-level functions to be accessed directly from the mappyfile module
 from mappyfile.utils import open, load, loads, find, findall, findunique, dumps, dump, save
-from mappyfile.utils import findkey, update, validate
+from mappyfile.utils import findkey, update, validate, create
 
 __version__ = "0.9.2"
 
 __all__ = ['open', 'load', 'loads', 'find', 'findall', 'findunique', 'dumps', 'dump', 'save',
-           'findkey', 'update', 'validate']
+           'findkey', 'update', 'validate', 'create']
 
 
 plugins = ModuleType('mappyfile.plugins')
