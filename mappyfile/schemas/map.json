@@ -16,7 +16,8 @@
       }
     },
     "angle": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "config": {
       "type": "object",
@@ -29,6 +30,7 @@
         },
         "ON_MISSING_DATA": {
           "type": "string",
+          "default": "FAIL",
           "enum": [ "FAIL", "LOG", "IGNORE" ]
         },
         "PROJ_LIB": { "type": "string" }
@@ -39,6 +41,7 @@
       "type": "string"
     },
     "debug": {
+      "default": 0,
       "allOf": [
         {
           "$ref": "debug.json"
@@ -50,6 +53,7 @@
     },
     "defresolution": {
       "type": "number",
+      "default": 72,
       "metadata": {
         "minVersion": 5.6
       }
@@ -70,6 +74,7 @@
       }
     },
     "imagetype": {
+      "default": "png",
       "type": "string"
     },
     "interlace": {
@@ -93,9 +98,11 @@
       "$ref": "legend.json"
     },
     "maxsize": {
+      "default": 4096,
       "type": "integer"
     },
     "name": {
+      "default": "MS",
       "type": "string"
     },
     "outputformats": {
@@ -115,6 +122,7 @@
       "$ref": "reference.json"
     },
     "resolution": {
+      "default": 72,
       "type": "number"
     },
     "scaledenom": {
@@ -127,6 +135,7 @@
       "type": "string"
     },
     "size": {
+      "default": [ -1, -1 ],
       "type": "array",
       "items": {
         "type": "integer"
@@ -135,6 +144,7 @@
       "maxItems": 2
     },
     "status": {
+      "default": "on",
       "$ref": "onoff.json"
     },
     "symbolset": {
@@ -161,6 +171,7 @@
       }
     },
     "units": {
+      "default": "meters",
       "$ref": "units.json"
     },
     "web": {

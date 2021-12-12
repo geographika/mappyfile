@@ -98,7 +98,7 @@
       "type": "string"
     },
     "temppath": {
-      "type": "url",
+      "type": "string",
       "description": "path",
       "metadata": {
         "minVersion": 6.0

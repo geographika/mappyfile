@@ -28,6 +28,7 @@
       }
     },
     "keysize": {
+      "default": [ 20, 10 ],
       "type": "array",
       "items": {
         "type": "integer"
@@ -36,7 +37,7 @@
       "maxItems": 2
     },
     "keyspacing": {
-
+      "default": [ 5, 5 ],
       "type": "array",
       "items": {
         "type": "integer"
@@ -62,6 +63,7 @@
       "type": "boolean"
     },
     "status": {
+      "default": "off",
       "type": "string",
       "enum": [ "on", "off", "embed" ]
     },
