@@ -317,21 +317,22 @@ def test_create_map():
     d = mappyfile.utils.create("map")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     print(output)
-    assert output == "MAP ANGLE 0 NAME 'MS' DEFRESOLUTION 72 MAXSIZE 4096 DEBUG 0 RESOLUTION 72 IMAGETYPE 'png' SIZE -1 -1 END"
+    assert output == "MAP ANGLE 0 DEBUG 0 DEFRESOLUTION 72 IMAGETYPE 'png' MAXSIZE 4096 NAME 'MS' RESOLUTION 72 SIZE -1 -1 END"
 
 
 def test_create_layer():
     d = mappyfile.utils.create("layer")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
-    assert output == "LAYER UNITS METERS STATUS OFF TILEITEM 'location' END"
+    print(output)
+    assert output == "LAYER STATUS OFF TILEITEM 'location' UNITS METERS END"
 
 
 def test_create_label():
     d = mappyfile.utils.create("label")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     print(output)
-    assert output == "LABEL PRIORITY 1 MAXOVERLAPANGLE 22.5 FORCE FALSE SHADOWSIZE 1 1 POSITION CC MAXSIZE 256 ANTIALIAS FALSE "\
-                     "MINSIZE 4 PARTIALS FALSE REPEATDISTANCE 0 OFFSET 0 0 ANGLE 0 OUTLINEWIDTH 1 BACKGROUNDSHADOWSIZE FALSE SIZE 10 END"
+    assert output == "LABEL ANGLE 0 ANTIALIAS FALSE BACKGROUNDSHADOWSIZE FALSE FORCE FALSE MAXOVERLAPANGLE 22.5 MAXSIZE 256 MINSIZE 4 "\
+                     "OFFSET 0 0 OUTLINEWIDTH 1 PARTIALS FALSE POSITION CC PRIORITY 1 REPEATDISTANCE 0 SHADOWSIZE 1 1 SIZE 10 END"
 
 
 def test_create_symbol():
@@ -374,5 +375,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_create_label()
+    test_create_layer()
     print("Done!")

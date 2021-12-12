@@ -13,6 +13,14 @@ PSC (Project Steering Committee). Further details on the schema are outlined in 
 Exporting the Schema
 ++++++++++++++++++++
 
+The schema can be exported via the command-line using the following syntax:
+
+.. code-block:: bat
+
+    mappyfile schema mapfile-schema-7-6.json --version=7.6
+
+The schema can be exported using Python, as shown in the example below:
+
 .. code-block:: python
 
     import json

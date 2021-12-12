@@ -31,6 +31,7 @@ from __future__ import unicode_literals
 import codecs
 import warnings
 import functools
+from collections import OrderedDict
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
@@ -652,7 +653,8 @@ def create(type, version=None):
     except IOError:
         raise SyntaxError("The mappyfile type '{}' does not exist!".format(type))
 
-    d = {"__type__": type}
+    d = OrderedDict()
+    d["__type__"] = type
 
     properties = schema["properties"].items()
 
