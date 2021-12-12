@@ -196,6 +196,7 @@ def test_hexcolor_validation_translucence():
     s = """
     MAP
         LAYER
+            TYPE POINT
             CLASS
                 STYLE
                     COLOR '#FF00FFCC'
@@ -476,6 +477,7 @@ def test_cluster_validation():
     s = u"""
     MAP
         LAYER
+            TYPE POINT
             CLUSTER
                 MAXDISTANCE 50
                 REGION "ELLIPSE"
@@ -497,6 +499,7 @@ def test_cluster_validation_fail():
     s = u"""
     MAP
         LAYER
+            TYPE POINT
             CLUSTER
                 MAXDISTANCE 50
                 REGION "ELLIPSEZ"
