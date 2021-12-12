@@ -916,13 +916,14 @@ def test_multiple_layer_data():
 
     s = u"""
     LAYER
+        TYPE POINT
         DATA "dataset1"
         DATA "dataset2"
     END
     """
 
     print(output(s, schema_name="layer"))
-    exp = u"LAYER DATA 'dataset1' DATA 'dataset2' END"
+    exp = u"LAYER TYPE POINT DATA 'dataset1' DATA 'dataset2' END"
     assert(output(s, schema_name="layer") == exp)
 
 
@@ -930,6 +931,7 @@ def test_single_layer_data():
 
     s = u"""
     LAYER
+        TYPE POINT
         DATA "dataset1"
     END
     """
@@ -939,7 +941,7 @@ def test_single_layer_data():
     print(mappyfile.dumps(jsn))
 
     print(output(s, schema_name="layer"))
-    exp = u"LAYER DATA 'dataset1' END"
+    exp = u"LAYER TYPE POINT DATA 'dataset1' END"
     assert(output(s, schema_name="layer") == exp)
 
 
@@ -947,6 +949,7 @@ def test_cluster():
 
     s = u"""
     LAYER
+        TYPE POINT
         CLUSTER
             MAXDISTANCE 50
             REGION "ELLIPSE"
@@ -954,7 +957,7 @@ def test_cluster():
     END
     """
     print(output(s, schema_name="layer"))
-    exp = u"LAYER CLUSTER MAXDISTANCE 50 REGION 'ELLIPSE' END END"
+    exp = u"LAYER TYPE POINT CLUSTER MAXDISTANCE 50 REGION 'ELLIPSE' END END"
     assert(output(s, schema_name="layer") == exp)
 
 
@@ -966,6 +969,7 @@ def test_cluster2():
     """
     s = u"""
     LAYER
+        TYPE POINT
         CLUSTER
             MAXDISTANCE 50
             REGION ELLIPSE
@@ -973,7 +977,7 @@ def test_cluster2():
     END
     """
     print(output(s, schema_name="layer"))
-    exp = u"LAYER CLUSTER MAXDISTANCE 50 REGION 'ELLIPSE' END END"
+    exp = u"LAYER TYPE POINT CLUSTER MAXDISTANCE 50 REGION 'ELLIPSE' END END"
     assert(output(s, schema_name="layer") == exp)
 
 

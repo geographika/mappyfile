@@ -625,3 +625,39 @@ def _pprint(d, indent, spacer, quote, newlinechar, end_comment, **kwargs):
                        quote=quote, newlinechar=newlinechar,
                        end_comment=end_comment, **kwargs)
     return pp.pprint(d)
+
+
+def create(type, version=None):
+    """
+    Create a new mappyfile object, using MapServer defaults (if any).
+
+    Parameters
+    ----------
+
+    s: type
+        The mappyfile type to be stored in the __type__ property
+
+    Returns
+    -------
+
+    dict
+        A Python dictionary representing the Mapfile object in the mappyfile format
+    """
+
+    # get the schema for this type
+
+    v = Validator()
+    try:
+        schema = v.get_versioned_schema(version=version, schema_name=type)
+    except IOError:
+        raise SyntaxError("The mappyfile type '{}' does not exist!".format(type))
+
+    d = {"__type__": type}
+
+    properties = schema["properties"].items()
+
+    for k, v in properties:
+        if "default" in v:
+            d[k] = v["default"]
+
+    return d

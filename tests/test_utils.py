@@ -313,12 +313,65 @@ def test_findunique():
     assert groups == ["group1", "group2"]
 
 
+def test_create_map():
+    d = mappyfile.utils.create("map")
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    print(output)
+    assert output == "MAP ANGLE 0 NAME 'MS' DEFRESOLUTION 72 MAXSIZE 4096 DEBUG 0 RESOLUTION 72 IMAGETYPE 'png' SIZE -1 -1 END"
+
+
+def test_create_layer():
+    d = mappyfile.utils.create("layer")
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    assert output == "LAYER UNITS METERS STATUS OFF TILEITEM 'location' END"
+
+
+def test_create_label():
+    d = mappyfile.utils.create("label")
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    print(output)
+    assert output == "LABEL SHADOWSIZE 1 1 REPEATDISTANCE 0 OFFSET 0 0 POSITION CC SIZE 10 END"
+
+
+def test_create_symbol():
+    d = mappyfile.utils.create("symbol")
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    print(output)
+    assert output == "SYMBOL ANCHORPOINT 0.5 0.5 ANTIALIAS FALSE FILLED FALSE END"
+
+
+def test_create_symbol_v6():
+    d = mappyfile.utils.create("symbol", version=6.0)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    print(output)
+    assert output == "SYMBOL ANTIALIAS FALSE FILLED FALSE END"
+
+
+def test_create_symbol_v8():
+    d = mappyfile.utils.create("symbol", version=8.0)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    print(output)
+    assert output == "SYMBOL ANCHORPOINT 0.5 0.5 FILLED FALSE END"
+
+
+def test_create_missing():
+
+    error_raised = False
+    try:
+        mappyfile.utils.create("missing")
+    except SyntaxError:
+        # raise
+        error_raised = True
+
+    assert error_raised is True
+
+
 def run_tests():
     pytest.main(["tests/test_utils.py"])
 
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
-    # test_dumps()
+    # run_tests()
+    test_create_symbol_v6()
     print("Done!")
