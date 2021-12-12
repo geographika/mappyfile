@@ -73,6 +73,7 @@ Linting
 
     flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*
     flake8 mappyfile --max-line-length=120
+    flake8 docs/scripts --max-line-length=120
 
 Or to export to file:
 
