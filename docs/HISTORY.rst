@@ -1,6 +1,12 @@
 Releases
 --------
 
+0.9.3 13/12/2021
+++++++++++++++++
+
++ Adds a new ``mappyfile.create`` function to allow creation of Mapfile objects with default values
++ Update the Mapfile schema to include ``default`` values for keywords
+
 0.9.2 28/08/2021
 ++++++++++++++++
 
