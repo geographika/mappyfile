@@ -373,6 +373,10 @@ class PrettyPrinter(object):
             return str(value).upper()
 
         if any(i in ["enum"] for i in attr_props):
+
+            if isinstance(value, dict) and not value:
+                raise ValueError("The property {} has an empty dictionary as a value".format(attr))
+
             if not isinstance(value, numbers.Number):
                 return value.upper()  # value is from a set list, no need for quote
             else:

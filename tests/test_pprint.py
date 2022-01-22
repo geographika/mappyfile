@@ -12,6 +12,7 @@ import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter, Quoter
 from mappyfile.transformer import MapfileToDict
+from mappyfile.ordereddict import DefaultOrderedDict
 import mappyfile
 
 
@@ -430,6 +431,29 @@ END # MAP"""
     assert res == exp
 
 
+def test_empty_composite():
+    s = "MAP LAYER TYPE POINT NAME 'Test' END END"
+    ast = mappyfile.loads(s)
+    lyr = ast["layers"][0]
+
+    # as we are using DefaultOrderedDict then checks like this example
+    # will create an empty dictionary object
+    if lyr["connectiontype"]:
+        pass
+
+    assert isinstance(lyr["connectiontype"], DefaultOrderedDict)
+
+    pp = PrettyPrinter(indent=4, quote='"', newlinechar="\n", end_comment=True)
+    error_thrown = False
+
+    try:
+        pp.pprint(ast)
+    except ValueError:
+        error_thrown = True
+
+    assert error_thrown
+
+
 def run_tests():
     # pytest.main(["tests/test_pprint.py::test_format_list"])
     pytest.main(["tests/test_pprint.py"])
@@ -437,6 +461,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    test_connectionoptions()
+    test_empty_composite()
     # run_tests()
     print("Done!")
