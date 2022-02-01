@@ -26,9 +26,8 @@ install:
 
 build_script:
   - pip install -U setuptools
-  - pip install wheel
-  - python setup.py bdist_wheel --universal
-  - python setup.py sdist
+  - pip install build
+  - python -m build --sdist --wheel
 
 test_script:
   - pytest
