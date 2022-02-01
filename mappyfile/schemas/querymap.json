@@ -21,7 +21,8 @@
       "default": [ -1, -1 ],
       "type": "array",
       "items": {
-        "type": "integer"
+        "type": "integer",
+        "minimum":  -1
       },
       "minItems": 2,
       "maxItems": 2

@@ -59,6 +59,7 @@
     },
     "maxscaledenom": {
       "type": "number",
+      "minimum":  0,
       "metadata": {
         "minVersion": 5.0
       }
@@ -77,6 +78,7 @@
     },
     "minscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.0
       }

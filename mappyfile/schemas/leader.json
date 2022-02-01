@@ -15,7 +15,8 @@
       }
     },
     "gridstep": {
-      "type": "integer"
+      "type": "integer",
+      "exclusiveMinimum": 0
     },
     "maxdistance": {
       "type": "integer"

@@ -27,7 +27,8 @@
     "marker": {
       "oneOf": [
         {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0
         },
         {
           "type": "string"
@@ -35,13 +36,16 @@
       ]
     },
     "markersize": {
-      "type": "integer"
+      "type": "integer",
+      "exclusiveMinimum": 0
     },
     "minboxsize": {
-      "type": "integer"
+      "type": "integer",
+      "exclusiveMinimum": 0
     },
     "maxboxsize": {
-      "type": "integer"
+      "type": "integer",
+      "exclusiveMinimum": 0
     },
     "outlinecolor": {
       "$ref": "color.json"
@@ -49,7 +53,8 @@
     "size": {
       "type": "array",
       "items": {
-        "type": "integer"
+        "type": "integer",
+        "minimum": 5
       },
       "minItems": 2,
       "maxItems": 2
