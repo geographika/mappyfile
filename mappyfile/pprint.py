@@ -170,7 +170,7 @@ class PrettyPrinter(object):
             end_line = "{} # {}".format(end_line, key.upper())
         return end_line
 
-    def __format_line(self, spacer, key, value, aligned_max_indent = 1):
+    def __format_line(self, spacer, key, value, aligned_max_indent = len(key) + 1):
         indent = " " * (aligned_max_indent - len(key))
         tmpl = u"{spacer}{key}{indent}{value}"
         d = {
