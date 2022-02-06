@@ -232,7 +232,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
     fp.write(map_string)
 
 
-def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
+def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, align_values=False, **kwargs):
     """
     Write a dictionary to an output Mapfile on disk
 
@@ -255,7 +255,9 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
     end_comment: bool
         Add a comment with the block type at each closing END
         statement e.g. END # MAP
-
+    align_values: bool
+        Aligns the values in the same column for better readability. The column is 
+        multiple of indent and determined by the longest key.
     Returns
     -------
 
@@ -273,7 +275,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
         fn = "C:/Data/mymap.map"
         mappyfile.save(d, fn)
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment)
+    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values)
     _save(output_file, map_string)
     return output_file
 
@@ -621,10 +623,10 @@ def _save(output_file, string):
         f.write(string)
 
 
-def _pprint(d, indent, spacer, quote, newlinechar, end_comment, **kwargs):
+def _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, **kwargs):
     pp = PrettyPrinter(indent=indent, spacer=spacer,
                        quote=quote, newlinechar=newlinechar,
-                       end_comment=end_comment, **kwargs)
+                       end_comment=end_comment, align_values=align_values, **kwargs)
     return pp.pprint(d)
 
 

@@ -130,7 +130,7 @@ class Quoter(object):
 
 
 class PrettyPrinter(object):
-    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
+    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, align_values=False, **kwargs):
         """
         Option use "\t" for spacer with an indent of 1
         """
@@ -144,6 +144,7 @@ class PrettyPrinter(object):
         self.end_comment = end_comment
         self.end = u"END"
         self.validator = Validator()
+        self.align_values = align_values
 
     def __is_metadata(self, key):
         """
@@ -156,7 +157,32 @@ class PrettyPrinter(object):
             return False
     
     def compute_aligned_max_indent(self, max_key_length):
-        return int((int(max_key_length / self.indent) + 1) * self.indent)
+        """
+        Computes the indentation as a multiple of self.indent for aligning 
+        values at the same column based on the maximum key length.
+        Example:
+        key         value1
+        longkey     value2
+        longestkey  value3 <-- column at 12, indent of 4, determined by "longestkey"
+        """
+        indent = max(1, self.indent)
+        return int((int(max_key_length / indent) + 1) * indent)
+
+    def compute_max_key_length(self, composite):
+        """
+        Computes the maximum length of all keys (non-recursive) in the passed
+        composite.
+        """
+        length = 0
+        for attr, value in composite.items():
+            attr_length = len(attr)
+            if (not self.__is_metadata(attr) and
+                not attr in ("metadata", "validation", "values", "connectionoptions") and
+                not self.is_hidden_container(attr, value) and not attr == "pattern" and
+                not attr == "projection" and not attr == "points" and
+                not attr == "config" and not self.is_composite(value)):
+                length = max(length, attr_length)
+        return length
 
     def whitespace(self, level, indent):
         return self.spacer * (level + indent)
@@ -170,7 +196,9 @@ class PrettyPrinter(object):
             end_line = "{} # {}".format(end_line, key.upper())
         return end_line
 
-    def __format_line(self, spacer, key, value, aligned_max_indent = len(key) + 1):
+    def __format_line(self, spacer, key, value, aligned_max_indent = 0):
+        if ((aligned_max_indent == None) or (aligned_max_indent == 0)):
+            aligned_max_indent = len(key) + 1
         indent = " " * (aligned_max_indent - len(key))
         tmpl = u"{spacer}{key}{indent}{value}"
         d = {
@@ -203,14 +231,10 @@ class PrettyPrinter(object):
         """
         lines = []
 
-        length = 0
-        for k, v in d.items():
-            if not self.__is_metadata(k):
-                qk = self.quoter.add_quotes(k)
-                if (len(qk) > length):
-                    length = len(qk)
-        
-        aligned_max_indent = self.compute_aligned_max_indent(length)
+        aligned_max_indent = 0
+        if (self.align_values):
+            max_key_length = self.compute_max_key_length(d) + 2 # add length of quotes
+            aligned_max_indent = self.compute_aligned_max_indent(max_key_length)
 
         for k, v in d.items():
             if not self.__is_metadata(k):
@@ -510,21 +534,10 @@ class PrettyPrinter(object):
             s = self.whitespace(level, 0) + type_.upper()
             lines.append(s)
 
-        length = 0
-        for attr, value in composite.items():
-            if (
-                not self.__is_metadata(attr) and
-                not self.is_hidden_container(attr, value) and
-                not attr == "pattern" and
-                not attr in ("metadata", "validation", "values", "connectionoptions") and
-                not attr == "projection" and
-                # not attr in REPEATED_KEYS and
-                not attr == "points" and
-                not attr == "config" and
-                    not self.is_composite(value)):
-                if len(attr) > length:
-                    length = len(attr)
-        aligned_max_indent = self.compute_aligned_max_indent(length)
+        aligned_max_indent = 0
+        if (self.align_values):
+            max_key_length = self.compute_max_key_length(composite)
+            aligned_max_indent = self.compute_aligned_max_indent(max_key_length)
 
         for attr, value in composite.items():
             if self.__is_metadata(attr):
