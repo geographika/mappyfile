@@ -31,7 +31,7 @@ from __future__ import unicode_literals
 import sys
 import logging
 import numbers
-from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
+from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS, COMPLEX_TYPES
 from mappyfile.validator import Validator
 
 log = logging.getLogger("mappyfile")
@@ -130,8 +130,7 @@ class Quoter(object):
 
 
 class PrettyPrinter(object):
-    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-                 align_values=False, **kwargs):
+    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, align_values=False, separate_complex_types=False, **kwargs):
         """
         Option use "\t" for spacer with an indent of 1
         """
@@ -146,6 +145,7 @@ class PrettyPrinter(object):
         self.end = u"END"
         self.validator = Validator()
         self.align_values = align_values
+        self.separate_complex_types = separate_complex_types
 
     def __is_metadata(self, key):
         """
@@ -186,6 +186,13 @@ class PrettyPrinter(object):
                 length = max(length, attr_length)
 
         return length
+
+    def separate_complex(self, composite):
+        if not self.separate_complex_types:
+            return 
+        for key in list(composite.keys()):
+            if self.is_complex_type(composite, key):
+                composite.move_to_end(key)
 
     def whitespace(self, level, indent):
         return self.spacer * (level + indent)
@@ -331,6 +338,9 @@ class PrettyPrinter(object):
             return True
         else:
             return False
+
+    def is_complex_type(self, composite, key):
+        return key in COMPLEX_TYPES or self.is_composite(key) or self.is_hidden_container(key, composite[key])
 
     def is_hidden_container(self, key, val):
         """
@@ -538,9 +548,11 @@ class PrettyPrinter(object):
             lines.append(s)
 
         aligned_max_indent = 0
-        if (self.align_values):
+        if self.align_values:
             max_key_length = self.compute_max_key_length(composite)
             aligned_max_indent = self.compute_aligned_max_indent(max_key_length)
+
+        self.separate_complex(composite)
 
         for attr, value in composite.items():
             if self.__is_metadata(attr):

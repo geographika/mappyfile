@@ -27,6 +27,37 @@
 #
 # =================================================================
 
+# Types, that require an "END"
+COMPLEX_TYPES = frozenset("""
+    symbolset
+    projection
+    points
+    pattern
+    values
+    metadata
+    validation
+    connectionoptions
+    class
+    cluster
+    composite
+    feature
+    grid
+    join
+    label
+    leader
+    legend
+    map
+    outputformat
+    querymap
+    reference
+    scalebar
+    scaletoken
+    style
+    web
+    layer
+    """.split())
+    #symbol # is only relevant in first level and covered by hidden_container
+
 COMPOSITE_NAMES = frozenset("""
     align
     anchorpoint
