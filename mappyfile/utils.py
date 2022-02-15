@@ -236,7 +236,8 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
     fp.write(map_string)
 
 
-def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, align_values=False, separate_complex_types=False, **kwargs):
+def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
+         align_values=False, separate_complex_types=False, **kwargs):
     """
     Write a dictionary to an output Mapfile on disk
 
@@ -260,7 +261,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
         Add a comment with the block type at each closing END
         statement e.g. END # MAP
     align_values: bool
-        Aligns the values in the same column for better readability. The column is 
+        Aligns the values in the same column for better readability. The column is
         multiple of indent and determined by the longest key.
     separate_complex_types: bool
         Groups composites (complex mapserver definitions with "END") together at the end.
@@ -638,7 +639,7 @@ def _save(output_file, string):
 def _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types, **kwargs):
     pp = PrettyPrinter(indent=indent, spacer=spacer,
                        quote=quote, newlinechar=newlinechar,
-                       end_comment=end_comment, align_values=align_values, 
+                       end_comment=end_comment, align_values=align_values,
                        separate_complex_types=separate_complex_types, **kwargs)
     return pp.pprint(d)
 

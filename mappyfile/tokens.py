@@ -55,8 +55,8 @@ COMPLEX_TYPES = frozenset("""
     style
     web
     layer
+    symbol
     """.split())
-    #symbol # is only relevant in first level and covered by hidden_container
 
 COMPOSITE_NAMES = frozenset("""
     align
