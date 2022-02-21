@@ -22,7 +22,7 @@ install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
   - "python -m pip install --upgrade pip"
   - "pip install -r requirements-dev.txt"
-  - pip install
+  - pip install .
 
 build_script:
   - pip install -U setuptools
@@ -32,7 +32,7 @@ build_script:
   - python -m build --sdist
 
 test_script:
-  - pytest
+  - python -m pytest  # for unknown reason running pytest directly fails on Python 3.7 and above
   - "flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*"
   - flake8 mappyfile --max-line-length=120
   - mappyfile schema mapfile-schema.json
@@ -41,13 +41,13 @@ test_script:
   - mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
 
 deploy:
-  provider: GitHub
-  auth_token:
-    secure: 1FJ9ZyG2q5HxxYFSdC6HUA8+mjE9dKd55qPc6i2NZCRaOSDVog0tsoclT3e7N1sG
-  draft: true
-  on:
-    branch: master                 # release from master branch only
-    APPVEYOR_REPO_TAG: true        # deploy on tag push only
+  - provider: GitHub
+    auth_token:
+      secure: 1FJ9ZyG2q5HxxYFSdC6HUA8+mjE9dKd55qPc6i2NZCRaOSDVog0tsoclT3e7N1sG
+    draft: true
+    on:
+      branch: master                 # release from master branch only
+      APPVEYOR_REPO_TAG: true        # deploy on tag push only
 
 artifacts:
   - path: 'dist\*.whl'
@@ -55,3 +55,7 @@ artifacts:
 
 deploy_script:
   - ps: if (($env:APPVEYOR_REPO_TAG -eq $TRUE) -and ($Env:PYTHON -ne "C:\\Python27-x64")) { pip install -qq twine; twine upload --skip-existing dist/* }
+
+# Uncomment to enable debugging on the server
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))  
