@@ -37,6 +37,7 @@ jobs:
           mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
       - name: Upload coverage data to coveralls.io
         run: coveralls --service=github
+        if: ${{ matrix.python-version != 2.7 }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
