@@ -37,12 +37,13 @@ jobs:
           mappyfile validate tests/sample_maps/256_overlay_res.map
           mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
       - name: Upload coverage data to coveralls.io
-        run: coveralls --service=github
+        run: coveralls
         if: ${{ matrix.python-version != 2.7 }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
           COVERALLS_PARALLEL: true
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
 
   # see https://github.com/marketplace/actions/coveralls-github-action
   # we can't use coveralls-github-action as it doesn't support xml output
@@ -56,6 +57,6 @@ jobs:
     - name: Finished
       run: |
         pip3 install --upgrade coveralls
-        coveralls --service=github --finish
+        coveralls --finish
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
