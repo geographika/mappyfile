@@ -1,4 +1,4 @@
-name: Python package
+name: Test Python package
 
 on: [push]
 
@@ -16,10 +16,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+      - name: Install project and dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+          python setup.py install
       - name: Lint with flake8
         run: |
           flake8 mappyfile --max-line-length=120
