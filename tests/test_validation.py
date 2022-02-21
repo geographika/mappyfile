@@ -12,7 +12,7 @@ import pytest
 try:
     from urllib.parse import urlsplit
 except ImportError:
-     from urlparse import urlsplit
+    from urlparse import urlsplit
 
 DLL_LOCATION = r"C:\MapServer\bin"
 
