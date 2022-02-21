@@ -176,12 +176,14 @@
     },
     "labelmaxscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.0
       }
     },
     "labelminscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.0
       }
@@ -202,16 +204,19 @@
       }
     },
     "maxfeatures": {
-      "type": "integer"
+      "type": "integer",
+      "exclusiveMinimum": 0
     },
     "maxgeowidth": {
       "type": "number",
+      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
     },
     "maxscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.0
       }
@@ -225,14 +230,20 @@
     "metadata": {
       "$ref": "metadata.json"
     },
+    "minfeaturesize": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
     "mingeowidth": {
       "type": "number",
+      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
     },
     "minscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.0
       }
@@ -294,7 +305,11 @@
       "type": "string"
     },
     "symbolscaledenom": {
-      "type": "number"
+      "type": "number",
+      "minimum": 1,
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "template": {
       "type": "string"
@@ -310,7 +325,8 @@
       "type": "string"
     },
     "tolerance": {
-      "type": "number"
+      "type": "number",
+      "exclusiveMinimum": 0
     },
     "toleranceunits": {
       "enum": [ "pixels", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "dd" ]

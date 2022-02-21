@@ -31,7 +31,9 @@
       "default": [ 20, 10 ],
       "type": "array",
       "items": {
-        "type": "integer"
+        "type": "integer",
+        "minimum": 5,
+        "maximum": 200
       },
       "minItems": 2,
       "maxItems": 2
@@ -40,7 +42,9 @@
       "default": [ 5, 5 ],
       "type": "array",
       "items": {
-        "type": "integer"
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 50
       },
       "minItems": 2,
       "maxItems": 2

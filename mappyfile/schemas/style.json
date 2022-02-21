@@ -35,6 +35,7 @@
     },
     "antialias": {
       "type": "boolean",
+      "default": false,
       "metadata": {
         "maxVersion": 7.6
       }
@@ -113,6 +114,7 @@
     },
     "initialgap": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 6.2
       }
@@ -131,30 +133,42 @@
     },
     "linejoinmaxsize": {
       "type": "integer",
+      "exclusiveMinimum": 0,
+      "default": 3,
       "metadata": {
         "minVersion": 6.0
       }
     },
     "maxscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.0
       }
     },
     "maxsize": {
-      "type": "number"
+      "type": "number",
+      "default": 500,
+      "exclusiveMinimum": 0
     },
     "maxwidth": {
-      "type": "number"
+      "type": "number",
+      "default": 32,
+      "exclusiveMinimum": 0
     },
     "minscaledenom": {
-      "type": "number"
+      "type": "number",
+      "minimum": 0
     },
     "minsize": {
-      "type": "number"
+      "type": "number",
+      "default": 0,
+      "minimum": 0
     },
     "minwidth": {
-      "type": "number"
+      "type": "number",
+      "default": 0,
+      "minimum": 0
     },
     "offset": {
       "type": "array",
@@ -201,7 +215,11 @@
     },
     "outlinewidth": {
       "oneOf": [
-        { "type": "number" },
+        {
+          "type": "number",
+          "default": 0,
+          "minimum": 0
+        },
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
@@ -250,7 +268,8 @@
     "size": {
       "oneOf": [
         {
-          "type": "number"
+          "type": "number",
+          "exclusiveMinimum": 0
         },
         {
           "type": "string",
@@ -268,7 +287,8 @@
           "type": "string"
         },
         {
-          "type": "number"
+          "type": "number",
+          "minimum": 0
         },
         {
           "$ref": "symbol.json"
@@ -278,7 +298,9 @@
     "width": {
       "oneOf": [
         {
-          "type": "number"
+          "type": "number",
+          "default": 1.0,
+          "minimum": 0
         },
         {
           "type": "string",

@@ -40,7 +40,9 @@
           "additionalProperties": false
         },
         {
-          "type": "number"
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
         },
         {
           "type": "string",
@@ -89,7 +91,7 @@
     },
     "buffer": {
       "type": "integer",
-      "deafult":  0
+      "default": 0
     },
     "color": {
       "oneOf": [
@@ -151,46 +153,55 @@
     },
     "maxlength": {
       "type": "integer",
+      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
     },
     "maxoverlapangle": {
-      "default":  22.5,
+      "default": 22.5,
       "type": "number",
+      "minimum": 0,
+      "maximum": 0,
       "metadata": {
         "minVersion": 6.0
       }
     },
     "maxscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
     },
     "maxsize": {
       "type": "integer",
-      "default": 256
+      "default": 256,
+      "exclusiveMinimum": 0
     },
     "mindistance": {
-      "type": "integer"
+      "type": "integer",
+      "exclusiveMinimum": 0
     },
     "minfeaturesize": {
       "oneOf": [
         { "enum": [ "auto" ] },
         {
-          "type": "integer"
+          "type": "integer",
+          "exclusiveMinimum": 0
         }
       ]
     },
     "minscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
     },
     "minsize": {
       "type": "integer",
+      "exclusiveMinimum": 0,
       "default": 4
     },
     "offset": {
@@ -234,6 +245,7 @@
     },
     "outlinewidth": {
       "type": "integer",
+      "exclusiveMinimum": 0,
       "default": 1
     },
     "partials": {
@@ -256,6 +268,8 @@
     },
     "priority": {
       "default": 1,
+      "minimum": 1,
+      "maximum":  10,
       "oneOf": [
         {
           "type": "integer"
@@ -273,6 +287,7 @@
     "repeatdistance": {
       "type": "integer",
       "default": 0,
+      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.6
       }
@@ -313,6 +328,7 @@
     },
     "size": {
       "default": 10,
+      "exclusiveMinimum": 1,
       "anyOf": [
         {
           "type": "integer"

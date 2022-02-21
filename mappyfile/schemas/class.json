@@ -35,7 +35,12 @@
       }
     },
     "debug": {
-      "$ref": "onoff.json"
+      "default": 0,
+      "allOf": [
+        {
+          "$ref": "debug.json"
+        }
+      ]
     },
     "expression": {
       "$ref": "expression.json"
@@ -71,6 +76,7 @@
     },
     "maxscaledenom": {
       "type": "number",
+      "minimum": 0,
       "metadata": {
         "minVersion": 5.0
       }
@@ -85,7 +91,8 @@
       "$ref": "metadata.json"
     },
     "minfeaturesize": {
-      "type": "number"
+      "type": "number",
+      "exclusiveMinimum": 0
     },
     "minscale": {
       "type": "number",
@@ -94,7 +101,11 @@
       }
     },
     "minscaledenom": {
-      "type": "number"
+      "type": "number",
+      "minimum": 0,
+      "metadata": {
+        "minVersion": 5.0
+      }
     },
     "minsize": {
       "type": "integer",

@@ -331,7 +331,7 @@ def test_create_label():
     d = mappyfile.utils.create("label")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     print(output)
-    assert output == "LABEL ANGLE 0 ANTIALIAS FALSE BACKGROUNDSHADOWSIZE FALSE FORCE FALSE MAXOVERLAPANGLE 22.5 MAXSIZE 256 MINSIZE 4 "\
+    assert output == "LABEL ANGLE 0 ANTIALIAS FALSE BACKGROUNDSHADOWSIZE FALSE BUFFER 0 FORCE FALSE MAXOVERLAPANGLE 22.5 MAXSIZE 256 MINSIZE 4 "\
                      "OFFSET 0 0 OUTLINEWIDTH 1 PARTIALS FALSE POSITION CC PRIORITY 1 REPEATDISTANCE 0 SHADOWSIZE 1 1 SIZE 10 END"
 
 
@@ -374,6 +374,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
-    # test_create_layer()
+    # run_tests()
+    test_create_label()
     print("Done!")

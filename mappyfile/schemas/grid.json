@@ -21,23 +21,29 @@
     },
     "minarcs": {
       "type": "number",
-      "default": 16
+      "default": 16,
+      "exclusiveMinimum": 0
     },
     "maxarcs": {
-      "type": "number"
+      "type": "number",
+      "exclusiveMinimum": 0
     },
     "mininterval": {
-      "type": "number"
+      "type": "number",
+      "exclusiveMinimum": 0
     },
     "maxinterval": {
-      "type": "number"
+      "type": "number",
+      "exclusiveMinimum": 0
     },
     "minsubdivide": {
-      "type": "number"
+      "type": "number",
+      "exclusiveMinimum": 0
     },
     "maxsubdivide": {
       "type": "number",
-      "default": 256
+      "default": 256,
+      "exclusiveMinimum": 0
     }
   }
 }

@@ -72,6 +72,8 @@
     },
     "transparent": {
       "type": "integer",
+      "minimum": 0,
+      "maximum": 255,
       "metadata": {
         "maxVersion": 7.6
       }

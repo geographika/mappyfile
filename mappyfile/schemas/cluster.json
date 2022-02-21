@@ -15,7 +15,9 @@
       }
     },
     "maxdistance": {
-      "type": "number"
+      "type": "number",
+      "default": 10,
+      "exclusiveMinimum": 0
     },
     "region": {
       "oneOf": [
@@ -30,7 +32,8 @@
       ]
     },
     "buffer": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "group": {
       "$ref": "expression.json"
