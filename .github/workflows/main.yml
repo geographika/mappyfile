@@ -35,7 +35,7 @@ jobs:
         run: |
           pytest --ignore=tests/mapfiles --cov mappyfile --cov-report= docs/examples/api/ misc/ tests/
       - name: Upload coverage data to coveralls.io
-        run: coveralls
+        run: coveralls -v
         if: ${{ matrix.python-version != 2.7 }}
         env:
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
@@ -55,6 +55,6 @@ jobs:
     - name: Finished
       run: |
         pip3 install --upgrade coveralls
-        coveralls --finish
+        coveralls --finish -v
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
