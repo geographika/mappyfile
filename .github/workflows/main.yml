@@ -31,12 +31,15 @@ jobs:
           mappyfile schema mapfile-schema-7-6.json --version=7.6
           mappyfile validate tests/sample_maps/256_overlay_res.map
           mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
+      - name: Test API examples
+        run: |
+          pytest docs/examples/api/
       - name: Test with pytest
         run: |
           pytest --ignore=tests/mapfiles --cov mappyfile --cov-report= tests/
       - name: Upload coverage data to coveralls.io
         run: |
-          coveralls -v
+          coveralls
         if: ${{ matrix.python-version != 2.7 }}
         env:
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
