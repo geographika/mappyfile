@@ -130,7 +130,7 @@ class Quoter(object):
 
 
 class PrettyPrinter(object):
-    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
+    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, align_values=False, **kwargs):
         """
         Option use "\t" for spacer with an indent of 1
         """
@@ -144,6 +144,7 @@ class PrettyPrinter(object):
         self.end_comment = end_comment
         self.end = u"END"
         self.validator = Validator()
+        self.align_values = align_values
 
     def __is_metadata(self, key):
         """
@@ -154,6 +155,34 @@ class PrettyPrinter(object):
             return True
         else:
             return False
+    
+    def compute_aligned_max_indent(self, max_key_length):
+        """
+        Computes the indentation as a multiple of self.indent for aligning 
+        values at the same column based on the maximum key length.
+        Example:
+        key         value1
+        longkey     value2
+        longestkey  value3 <-- column at 12, indent of 4, determined by "longestkey"
+        """
+        indent = max(1, self.indent)
+        return int((int(max_key_length / indent) + 1) * indent)
+
+    def compute_max_key_length(self, composite):
+        """
+        Computes the maximum length of all keys (non-recursive) in the passed
+        composite.
+        """
+        length = 0
+        for attr, value in composite.items():
+            attr_length = len(attr)
+            if (not self.__is_metadata(attr) and
+                not attr in ("metadata", "validation", "values", "connectionoptions") and
+                not self.is_hidden_container(attr, value) and not attr == "pattern" and
+                not attr == "projection" and not attr == "points" and
+                not attr == "config" and not self.is_composite(value)):
+                length = max(length, attr_length)
+        return length
 
     def whitespace(self, level, indent):
         return self.spacer * (level + indent)
@@ -167,13 +196,16 @@ class PrettyPrinter(object):
             end_line = "{} # {}".format(end_line, key.upper())
         return end_line
 
-    def __format_line(self, spacer, key, value):
-
-        tmpl = u"{spacer}{key} {value}"
+    def __format_line(self, spacer, key, value, aligned_max_indent = 0):
+        if ((aligned_max_indent == None) or (aligned_max_indent == 0)):
+            aligned_max_indent = len(key) + 1
+        indent = " " * (aligned_max_indent - len(key))
+        tmpl = u"{spacer}{key}{indent}{value}"
         d = {
             "spacer": spacer,
             "key": key,
-            "value": value
+            "value": value,
+            "indent": indent
         }
         return tmpl.format(**d)
 
@@ -199,11 +231,16 @@ class PrettyPrinter(object):
         """
         lines = []
 
+        aligned_max_indent = 0
+        if (self.align_values):
+            max_key_length = self.compute_max_key_length(d) + 2 # add length of quotes
+            aligned_max_indent = self.compute_aligned_max_indent(max_key_length)
+
         for k, v in d.items():
             if not self.__is_metadata(k):
                 qk = self.quoter.add_quotes(k)
                 qv = self.quoter.add_quotes(v)
-                line = self.__format_line(self.whitespace(level, 2), qk, qv)
+                line = self.__format_line(self.whitespace(level, 2), qk, qv, aligned_max_indent)
                 line += self.process_attribute_comment(comments, k)
                 lines.append(line)
 
@@ -220,7 +257,7 @@ class PrettyPrinter(object):
             lines.append(self.__format_line(self.whitespace(level, 1), k, v))
         return lines
 
-    def process_repeated_list(self, key, lst, level):
+    def process_repeated_list(self, key, lst, level, aligned_max_indent = 1):
         """
         Process blocks of repeated keys e.g. FORMATOPTION
         """
@@ -229,7 +266,7 @@ class PrettyPrinter(object):
         for v in lst:
             k = key.upper()
             v = self.quoter.add_quotes(v)
-            lines.append(self.__format_line(self.whitespace(level, 1), k, v))
+            lines.append(self.__format_line(self.whitespace(level, 1), k, v, aligned_max_indent))
 
         return lines
 
@@ -427,15 +464,14 @@ class PrettyPrinter(object):
 
         return value
 
-    def process_attribute(self, type_, attr, value, level):
+    def process_attribute(self, type_, attr, value, level, aligned_max_indent = 1):
         """
         Process one of the main composite types (see the type_ value)
         """
 
         attr_props = self.get_attribute_properties(type_, attr)
         value = self.format_value(attr, attr_props, value)
-        line = self.__format_line(self.whitespace(level, 1), attr.upper(), value)
-
+        line = self.__format_line(self.whitespace(level, 1), attr.upper(), value, aligned_max_indent)
         return line
 
     def format_comment(self, spacer, value):
@@ -498,6 +534,11 @@ class PrettyPrinter(object):
             s = self.whitespace(level, 0) + type_.upper()
             lines.append(s)
 
+        aligned_max_indent = 0
+        if (self.align_values):
+            max_key_length = self.compute_max_key_length(composite)
+            aligned_max_indent = self.compute_aligned_max_indent(max_key_length)
+
         for attr, value in composite.items():
             if self.__is_metadata(attr):
                 # skip hidden attributes
@@ -516,7 +557,7 @@ class PrettyPrinter(object):
             elif attr == "projection":
                 lines += self.process_projection(attr, value, level)
             elif attr in REPEATED_KEYS:
-                lines += self.process_repeated_list(attr, value, level)
+                lines += self.process_repeated_list(attr, value, level, aligned_max_indent)
             elif attr == "points":
                 lines += self.format_repeated_pair_list(attr, value, level)
             elif attr == "config":
@@ -527,7 +568,7 @@ class PrettyPrinter(object):
                 # standard key value pair
                 if not type_:
                     raise UnboundLocalError("The Mapfile object is missing a __type__ attribute")
-                line = self.process_attribute(type_, attr, value, level)
+                line = self.process_attribute(type_, attr, value, level, aligned_max_indent)
                 line += self.process_attribute_comment(comments, attr)
                 lines.append(line)
 

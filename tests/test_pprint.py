@@ -453,6 +453,25 @@ def test_empty_composite():
 
     assert error_thrown
 
+def test_align_values():
+    mapfile = """
+    MAP
+        EXTENT 0 0 100 100
+        DEBUG on
+        NAME Test
+        shapepath "test/path"
+    END
+    """
+    ast = mappyfile.loads(mapfile)
+    pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n", align_values=True)
+    s = pp.pprint(ast)
+    
+    aligned_indexes = set()
+    for line in s.splitlines():
+        words = line.split()
+        if len(words) > 1:
+            aligned_indexes.add(line.index(words[1]))
+    assert len(aligned_indexes) == 1
 
 def run_tests():
     # pytest.main(["tests/test_pprint.py::test_format_list"])
