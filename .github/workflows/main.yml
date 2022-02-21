@@ -27,7 +27,7 @@ jobs:
           flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*
       - name: Test with pytest
         run: |
-          pytest --ignore=tests/mapfiles --cov mappyfile --cov-report xml  docs/examples/api/ misc/ tests/
+          pytest --ignore=tests/mapfiles --cov mappyfile docs/examples/api/ misc/ tests/
           # https://pytest-cov.readthedocs.io/en/latest/reporting.html
       - name: Command line tests
         run: |
