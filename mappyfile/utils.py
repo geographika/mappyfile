@@ -191,7 +191,8 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
     return d
 
 
-def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False):
+def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
+         align_values=False):
     """
     Write d (the Mapfile dictionary) as a formatted stream to fp
 
@@ -214,6 +215,9 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
     end_comment: bool
         Add a comment with the block type at each closing END
         statement e.g. END # MAP
+    align_values: bool
+        Aligns the values in the same column for better readability. The column is
+        multiple of indent and determined by the longest key
 
     Example
     -------
@@ -228,11 +232,12 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
             mappyfile.dump(d, f, indent=2, quote="'")
 
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment)
+    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values)
     fp.write(map_string)
 
 
-def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, align_values=False, **kwargs):
+def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
+         align_values=False, **kwargs):
     """
     Write a dictionary to an output Mapfile on disk
 
@@ -256,8 +261,8 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
         Add a comment with the block type at each closing END
         statement e.g. END # MAP
     align_values: bool
-        Aligns the values in the same column for better readability. The column is 
-        multiple of indent and determined by the longest key.
+        Aligns the values in the same column for better readability. The column is
+        multiple of indent and determined by the longest key
     Returns
     -------
 
@@ -280,7 +285,8 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
     return output_file
 
 
-def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, **kwargs):
+def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
+          align_values=False, **kwargs):
     """
     Output a Mapfile dictionary as a string
 
@@ -301,6 +307,9 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
     end_comment: bool
         Add a comment with the block type at each closing END
         statement e.g. END # MAP
+    align_values: bool
+        Aligns the values in the same column for better readability. The column is
+        multiple of indent and determined by the longest key
 
     Returns
     -------
@@ -319,7 +328,7 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
         d = mappyfile.loads(s)
         print(mappyfile.dumps(d, indent=1, spacer="\\t"))
     """
-    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, **kwargs)
+    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, **kwargs)
 
 
 def find(lst, key, value):

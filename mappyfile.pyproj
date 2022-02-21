@@ -12,7 +12,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_pprint.py</StartupFile>
+    <StartupFile>tests\test_utils.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -120,7 +120,6 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include=".gitmodules" />
     <Content Include=".pypirc" />
     <Content Include=".readthedocs.yml" />
-    <Content Include=".travis.yml" />
     <Content Include="appveyor.yml">
       <SubType>Code</SubType>
     </Content>
@@ -1143,8 +1142,8 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
   <ItemGroup>
     <Interpreter Include="C:\VirtualEnvs\mappyfile3\">
       <Id>mappyfile3</Id>
-      <Version>3.10</Version>
-      <Description>mappyfile3 (Python 3.10 (64-bit))</Description>
+      <Version>3.7</Version>
+      <Description>mappyfile3 (Python 3.7 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>

@@ -130,7 +130,8 @@ class Quoter(object):
 
 
 class PrettyPrinter(object):
-    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False, align_values=False, **kwargs):
+    def __init__(self, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
+                 align_values=False, **kwargs):
         """
         Option use "\t" for spacer with an indent of 1
         """
@@ -155,10 +156,10 @@ class PrettyPrinter(object):
             return True
         else:
             return False
-    
+
     def compute_aligned_max_indent(self, max_key_length):
         """
-        Computes the indentation as a multiple of self.indent for aligning 
+        Computes the indentation as a multiple of self.indent for aligning
         values at the same column based on the maximum key length.
         Example:
         key         value1
@@ -177,11 +178,13 @@ class PrettyPrinter(object):
         for attr, value in composite.items():
             attr_length = len(attr)
             if (not self.__is_metadata(attr) and
-                not attr in ("metadata", "validation", "values", "connectionoptions") and
-                not self.is_hidden_container(attr, value) and not attr == "pattern" and
-                not attr == "projection" and not attr == "points" and
-                not attr == "config" and not self.is_composite(value)):
+                    attr not in ("metadata", "validation", "values", "connectionoptions") and
+                    not self.is_hidden_container(attr, value) and not attr == "pattern" and
+                    not attr == "projection" and not attr == "points" and
+                    not attr == "config" and
+                    not self.is_composite(value)):
                 length = max(length, attr_length)
+
         return length
 
     def whitespace(self, level, indent):
@@ -196,8 +199,8 @@ class PrettyPrinter(object):
             end_line = "{} # {}".format(end_line, key.upper())
         return end_line
 
-    def __format_line(self, spacer, key, value, aligned_max_indent = 0):
-        if ((aligned_max_indent == None) or (aligned_max_indent == 0)):
+    def __format_line(self, spacer, key, value, aligned_max_indent=0):
+        if ((aligned_max_indent is None) or (aligned_max_indent == 0)):
             aligned_max_indent = len(key) + 1
         indent = " " * (aligned_max_indent - len(key))
         tmpl = u"{spacer}{key}{indent}{value}"
@@ -233,7 +236,7 @@ class PrettyPrinter(object):
 
         aligned_max_indent = 0
         if (self.align_values):
-            max_key_length = self.compute_max_key_length(d) + 2 # add length of quotes
+            max_key_length = self.compute_max_key_length(d) + 2  # add length of quotes
             aligned_max_indent = self.compute_aligned_max_indent(max_key_length)
 
         for k, v in d.items():
@@ -257,7 +260,7 @@ class PrettyPrinter(object):
             lines.append(self.__format_line(self.whitespace(level, 1), k, v))
         return lines
 
-    def process_repeated_list(self, key, lst, level, aligned_max_indent = 1):
+    def process_repeated_list(self, key, lst, level, aligned_max_indent=1):
         """
         Process blocks of repeated keys e.g. FORMATOPTION
         """
@@ -464,7 +467,7 @@ class PrettyPrinter(object):
 
         return value
 
-    def process_attribute(self, type_, attr, value, level, aligned_max_indent = 1):
+    def process_attribute(self, type_, attr, value, level, aligned_max_indent=1):
         """
         Process one of the main composite types (see the type_ value)
         """
