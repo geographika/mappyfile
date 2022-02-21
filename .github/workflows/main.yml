@@ -33,9 +33,11 @@ jobs:
           mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
       - name: Test with pytest
         run: |
-          pytest --ignore=tests/mapfiles --cov mappyfile --cov-report= docs/examples/api/ misc/ tests/
-      - name: Upload coverage data to coveralls.io
-        run: coveralls -v
+          pytest --ignore=tests/mapfiles --cov mappyfile --cov-report= tests/
+      - name: Run pytest and upload coverage data to coveralls.io
+        run: |
+          pytest --ignore=tests/mapfiles --cov mappyfile --cov-report= tests/
+          coveralls -v
         if: ${{ matrix.python-version != 2.7 }}
         env:
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
@@ -55,6 +57,6 @@ jobs:
     - name: Finished
       run: |
         pip3 install --upgrade coveralls
-        coveralls --finish -v
+        coveralls --finish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
