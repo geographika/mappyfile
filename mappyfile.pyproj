@@ -31,6 +31,8 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include=".github\" />
+    <Folder Include=".github\workflows\" />
     <Folder Include="docs\" />
     <Folder Include="docs\examples\animation\" />
     <Folder Include="docs\examples\api\" />
@@ -112,6 +114,8 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Folder Include="tests\sample_maps\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".github\dependabot.yml" />
+    <Content Include=".github\workflows\main.yml" />
     <Content Include=".gitignore" />
     <Content Include=".gitmodules" />
     <Content Include=".pypirc" />
