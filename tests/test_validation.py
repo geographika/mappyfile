@@ -9,6 +9,11 @@ from mappyfile.pprint import PrettyPrinter
 from subprocess import Popen, PIPE, STDOUT
 import pytest
 
+try:
+    from urllib.parse import urlsplit
+except ImportError:
+    from urlparse import urlsplit
+
 DLL_LOCATION = r"C:\MapServer\bin"
 
 
@@ -276,7 +281,6 @@ def test_lowercase():
 
 
 def test_ref_path():
-    from jsonschema.compat import urlsplit
     url = "file:////home/user/mappyfile/mappyfile/schemas/"
     scheme, netloc, path, query, fragment = urlsplit(url)
     print(scheme, netloc, path, query, fragment)

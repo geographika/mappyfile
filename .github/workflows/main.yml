@@ -25,23 +25,27 @@ jobs:
         run: |
           flake8 mappyfile --max-line-length=120
           flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*
-      - name: Test with pytest
-        run: |
-          pytest --ignore=tests/mapfiles --cov mappyfile --cov-report xml  docs/examples/api/ misc/ tests/
-          # https://pytest-cov.readthedocs.io/en/latest/reporting.html
       - name: Command line tests
         run: |
           mappyfile schema mapfile-schema.json
           mappyfile schema mapfile-schema-7-6.json --version=7.6
           mappyfile validate tests/sample_maps/256_overlay_res.map
           mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
+      - name: Test API examples
+        run: |
+          pytest docs/examples/api/
+      - name: Test with pytest
+        run: |
+          pytest --ignore=tests/mapfiles --cov mappyfile --cov-report= tests/
       - name: Upload coverage data to coveralls.io
-        run: coveralls --service=github
+        run: |
+          coveralls
         if: ${{ matrix.python-version != 2.7 }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
           COVERALLS_PARALLEL: true
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
 
   # see https://github.com/marketplace/actions/coveralls-github-action
   # we can't use coveralls-github-action as it doesn't support xml output
@@ -55,6 +59,6 @@ jobs:
     - name: Finished
       run: |
         pip3 install --upgrade coveralls
-        coveralls --service=github --finish
+        coveralls --finish
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
