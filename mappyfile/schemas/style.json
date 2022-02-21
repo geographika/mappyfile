@@ -100,7 +100,7 @@
     "geomtransform": {
       "oneOf": [
         {
-          "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "start", "vertices" ]
+          "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "labelcenter", "start", "vertices" ]
         },
         {
           "type": "string",
