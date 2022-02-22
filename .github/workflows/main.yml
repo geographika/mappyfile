@@ -89,7 +89,7 @@ jobs:
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com" # user id of the Github Actions account/bot
         git config --local user.name "github-actions[bot]"
-        git diff-index --quiet HEAD || git commit -m "Update schemas"
+        git commit -a -m "Update schemas" || true # don't fail on empty commits
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
