@@ -2,8 +2,6 @@ http://mapserver.org/mapfile/cluster.html
 Should be expression only
 FILTER [string]
 
-Also CLUSTER not in alphabetical order
-
 http://mapserver.org/mapfile/label.html
 PRIORITY [integer]|[item_name]|[attribute]
 What is item_name? Same as attribute?
@@ -35,21 +33,6 @@ Both missing?
 http://mapserver.org/mapfile/layer.html
 FILTER should also have expression as an option
 
-DUMP [true|false] but also ON OFF in tests. 
-msautotest\gdal\tileindexmixedsrs4.map
-
-
-http://mapserver.org/mapfile/class.html
-No TITLE keyword
-
-msautotest\wxs\wms_legend.map
-
-  CLASS
-    NAME "Roads 2 74"   
-    TITLE "Roads 2 74"   
-    EXPRESSION "74"
-
-
 For expressions, is this valid?
 
 EXPRESSION (true)
@@ -69,7 +52,5 @@ TRANSPARENT - http://mapserver.org/mapfile/outputformat.html
     END
 
 INCLUDEs must be in quotes or end of file errors in MapServer
-
-CLUSTER schema - http://mapserver.org/mapfile/cluster.html#mapfile-parameters need to add
 
 GetLegendGraphic - need CLASS name for it to appear

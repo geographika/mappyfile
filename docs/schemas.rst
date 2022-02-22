@@ -3,9 +3,14 @@
 Mapfile Schema
 ==============
 
-The full Mapfile schema is shown below. It can also be downloaded directly from this link - :download:`mapfile.json <schemas/mapfile.json>`. 
+The full Mapfile schema can be downloaded directly from this link - :download:`mapfile.json <schemas/mapfile-latest.json>`. 
 The schema stores ``minVersion`` and ``maxVersion`` properties in a ``metadata`` object for each keyword. This allow Mapfiles to be validated against
 older or newer releases of MapServer to see if they are still valid. 
+
+Other versions available online are:
+
++ :download:`mapfile.json <schemas/mapfile-schema-8-0.json>`
++ :download:`mapfile.json <schemas/mapfile-schema-7-6.json>`
 
 The Mapfile schema shown below is planned to be proposed as an official Mapfile language schema, subject to voting by the MapServer
 PSC (Project Steering Committee). Further details on the schema are outlined in the draft RFC (Request for Comment) at :ref:`rfc123`. 
@@ -33,6 +38,10 @@ The schema can be exported using Python, as shown in the example below:
 Creating a Mappyfile Object with Defaults
 +++++++++++++++++++++++++++++++++++++++++
 
+If MapServer uses default values for an object, the `create` function can be used to create
+a new object using these defaults. For example to output a `MAP` object with default settings
+run the following code:
+
 .. code-block:: python
 
     import json
@@ -42,14 +51,20 @@ Creating a Mappyfile Object with Defaults
     print(json.dumps(m, indent=4, sort_keys=True))
     mappyfile.dumps(m)
 
+This outputs the following:
 
-.. literalinclude:: schemas/mapfile.json
-    :language: json
+.. code-block:: mapfile
 
-..
-    .. include:: schemas/map.rst
-
-    .. include:: schemas/layer.rst
+    MAP
+        ANGLE 0
+        DEBUG 0
+        DEFRESOLUTION 72
+        IMAGETYPE "png"
+        MAXSIZE 4096
+        NAME "MS"
+        RESOLUTION 72
+        SIZE -1 -1
+    END
 
 Notes
 -----
