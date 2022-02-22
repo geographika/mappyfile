@@ -936,6 +936,7 @@
                                                                         "end",
                                                                         "labelpnt",
                                                                         "labelpoly",
+                                                                        "labelcenter",
                                                                         "start",
                                                                         "vertices"
                                                                     ]
@@ -1526,6 +1527,7 @@
                                                                             "end",
                                                                             "labelpnt",
                                                                             "labelpoly",
+                                                                            "labelcenter",
                                                                             "start",
                                                                             "vertices"
                                                                         ]
@@ -2147,6 +2149,7 @@
                                                             "end",
                                                             "labelpnt",
                                                             "labelpoly",
+                                                            "labelcenter",
                                                             "start",
                                                             "vertices"
                                                         ]
@@ -4234,6 +4237,7 @@
                                                         "end",
                                                         "labelpnt",
                                                         "labelpoly",
+                                                        "labelcenter",
                                                         "start",
                                                         "vertices"
                                                     ]
@@ -5773,6 +5777,7 @@
                                                         "end",
                                                         "labelpnt",
                                                         "labelpoly",
+                                                        "labelcenter",
                                                         "start",
                                                         "vertices"
                                                     ]
