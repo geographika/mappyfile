@@ -156,7 +156,8 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     </Content>
     <Content Include="docs\schema.txt" />
     <Content Include="docs\schemas.rst" />
-    <Content Include="docs\schemas\mapfile.json" />
+    <Content Include="docs\schemas\mapfile-schema-7-6.json" />
+    <Content Include="docs\schemas\mapfile-schema-8-0.json" />
     <Content Include="docs\testing.rst" />
     <Content Include="docs\validate.txt" />
     <Content Include="docs\validation.rst" />
