@@ -8,12 +8,6 @@
         "__type__": {
             "type": "string"
         },
-        "angle": {
-            "default": 0,
-            "maximum": 360,
-            "minimum": -360,
-            "type": "number"
-        },
         "config": {
             "additionalProperties": true,
             "properties": {

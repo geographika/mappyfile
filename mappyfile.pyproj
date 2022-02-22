@@ -154,8 +154,8 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\rules.rst">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="docs\schema.txt" />
     <Content Include="docs\schemas.rst" />
+    <Content Include="docs\schemas\mapfile-latest.json" />
     <Content Include="docs\schemas\mapfile-schema-7-6.json" />
     <Content Include="docs\schemas\mapfile-schema-8-0.json" />
     <Content Include="docs\testing.rst" />
