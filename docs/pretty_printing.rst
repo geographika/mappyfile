@@ -33,6 +33,7 @@ The formatting of the Mapfile output can be configured with several options:
 + **quote** - the quote character to use in the Mapfile (double or single quotes)
 + **newlinechar** - the character used to insert newlines in the Mapfile
 + **end_comment** - add a comment with the block type at each closing END statement e.g. END # MAP
++ **align_values** - aligns the values in the same column for better readability. The column is multiple of indent and determined by the longest key
 
 .. warning::
 
@@ -54,10 +55,14 @@ blocks of the Mapfile:
 
 This example adds the block type to its closing ``END`` tag:
 
+.. code-block:: python
+
     s = '''MAP NAME "TEST" LAYER NAME "Layer1" END END'''
     d = mappyfile.loads(s)
     output = mappyfile.dumps(d, end_comment=True)
     print(output)
+
+Output:
 
 .. code-block:: mapfile
 
@@ -77,6 +82,40 @@ This example surrounds all attributes with single quotes, and writes the Mapfile
     d = mappyfile.loads(s)
     output_file = os.path.join(tempfile.mkdtemp(), 'test_mapfile.map')
     mappyfile.save(d, output_file)
+
+This example left-aligns all the key values of an object:
+
+.. code-block:: python
+
+    s = '''MAP NAME "MyMap"
+        OUTPUTFORMAT
+        NAME "png"
+        DRIVER AGG/PNG
+        MIMETYPE "image/png"
+        IMAGEMODE RGB
+        EXTENSION "png"
+        FORMATOPTION "GAMMA=0.75"
+        END
+        END'''
+    d = mappyfile.loads(s)
+    output = mappyfile.dumps(d, align_values=True)
+    print(output)
+
+Output:
+
+.. code-block:: mapfile
+
+    MAP
+        NAME    "MyMap"
+        OUTPUTFORMAT
+            NAME            "png"
+            DRIVER          "AGG/PNG"
+            MIMETYPE        "image/png"
+            IMAGEMODE       RGB
+            EXTENSION       "png"
+            FORMATOPTION    "GAMMA=0.75"
+        END
+    END
 
 This example writes a Mapfile to an open file object using the ``dump`` function:
 
