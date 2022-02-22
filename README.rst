@@ -93,6 +93,7 @@ Contributors
 * Julien Enselme `@jenselme <https://github.com/jenselme>`_
 * Loïc Gasser `@loicgasser <https://github.com/loicgasser>`_
 * Ian Turton `@ianturton <https://github.com/ianturton>`_
+* `@thorag76 <https://github.com/thorag76>`_
 
 ..
     .. include:: docs/HISTORY.rst
