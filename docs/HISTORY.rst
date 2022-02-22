@@ -1,6 +1,17 @@
 Releases
 --------
 
+0.9.4 22/02/2022
+++++++++++++++++
+
++ `#137 <https://github.com/geographika/mappyfile/issues/137>`_ - Checking mapfile dict properties creates invalid empty dictionaries
++ `#119 <https://github.com/geographika/mappyfile/issues/119>`_ - STYLE GEOMTRANSFORM 'labelcenter'
++ `#143 <https://github.com/geographika/mappyfile/pull/143>`_ - Automate schema building
++ `#142 <https://github.com/geographika/mappyfile/pull/142>`_ - Allow newer versions of jsonschema for py3
++ `#141 <https://github.com/geographika/mappyfile/pull/141>`_ - Update and fix Continuous Integration
++ `#139 <https://github.com/geographika/mappyfile/pull/139>`_ - Feature: align values in column
++ `#138 <https://github.com/geographika/mappyfile/pull/138>`_ - Update schema based on new Mapfile validation rules
+
 0.9.3 13/12/2021
 ++++++++++++++++
 
