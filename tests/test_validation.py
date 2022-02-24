@@ -619,13 +619,10 @@ END"""
     d = mappyfile.loads(s, include_position=False)
     v = Validator()
     errors = v.validate(d, add_comments=True, version=6.0)
-    print(errors)
     assert len(errors) == 1
 
     d = mappyfile.loads(s, include_position=False)
-    #v = Validator()
     errors = v.validate(d, add_comments=True, version=7.0)
-    print(errors)
     assert len(errors) == 0
 
 
