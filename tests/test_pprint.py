@@ -474,6 +474,7 @@ def test_align_values():
             aligned_indexes.add(line.index(words[1]))
     assert len(aligned_indexes) == 1
 
+
 def test_separate_complex_types():
     s = """
     MAP
@@ -500,6 +501,7 @@ def test_separate_complex_types():
     assert s.index("DEBUG ") < s.index("LAYER\n")
     assert s.index("CLASSITEM ") < s.index("CLASS\n")
     assert s.index("GROUP") < s.index("STYLE\n")
+
 
 def run_tests():
     # pytest.main(["tests/test_pprint.py::test_format_list"])

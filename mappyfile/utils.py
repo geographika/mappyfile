@@ -192,7 +192,7 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
 
 
 def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-         align_values=False):
+         align_values=False, separate_complex_types=False):
     """
     Write d (the Mapfile dictionary) as a formatted stream to fp
 
@@ -218,6 +218,9 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
     align_values: bool
         Aligns the values in the same column for better readability. The column is
         multiple of indent and determined by the longest key
+    separate_complex_types: bool
+        Groups composites (complex mapserver definitions with "END") together at the end.
+        Keeps the given order except that all simple key-value pairs appear before composites.
 
     Example
     -------
@@ -232,7 +235,7 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
             mappyfile.dump(d, f, indent=2, quote="'")
 
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values)
+    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types)
     fp.write(map_string)
 
 
@@ -290,7 +293,7 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
 
 
 def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-          align_values=False, **kwargs):
+          align_values=False, separate_complex_types=False, **kwargs):
     """
     Output a Mapfile dictionary as a string
 
@@ -314,6 +317,9 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
     align_values: bool
         Aligns the values in the same column for better readability. The column is
         multiple of indent and determined by the longest key
+    separate_complex_types: bool
+        Groups composites (complex mapserver definitions with "END") together at the end.
+        Keeps the given order except that all simple key-value pairs appear before composites.
 
     Returns
     -------
@@ -332,7 +338,7 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
         d = mappyfile.loads(s)
         print(mappyfile.dumps(d, indent=1, spacer="\\t"))
     """
-    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, **kwargs)
+    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types, **kwargs)
 
 
 def find(lst, key, value):
