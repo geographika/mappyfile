@@ -28,6 +28,7 @@
 # =================================================================
 
 from __future__ import unicode_literals
+import sys
 import codecs
 import warnings
 import functools
@@ -192,7 +193,7 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
 
 
 def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-         align_values=False):
+         align_values=False, separate_complex_types=False):
     """
     Write d (the Mapfile dictionary) as a formatted stream to fp
 
@@ -218,6 +219,9 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
     align_values: bool
         Aligns the values in the same column for better readability. The column is
         multiple of indent and determined by the longest key
+    separate_complex_types: bool
+        Groups composites (complex mapserver definitions with "END") together at the end.
+        Keeps the given order except that all simple key-value pairs appear before composites.
 
     Example
     -------
@@ -232,12 +236,12 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
             mappyfile.dump(d, f, indent=2, quote="'")
 
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values)
+    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types)
     fp.write(map_string)
 
 
 def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-         align_values=False, **kwargs):
+         align_values=False, separate_complex_types=False, **kwargs):
     """
     Write a dictionary to an output Mapfile on disk
 
@@ -262,7 +266,11 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
         statement e.g. END # MAP
     align_values: bool
         Aligns the values in the same column for better readability. The column is
-        multiple of indent and determined by the longest key
+        multiple of indent and determined by the longest key.
+    separate_complex_types: bool
+        Groups composites (complex mapserver definitions with "END") together at the end.
+        Keeps the given order except that all simple key-value pairs appear before composites.
+
     Returns
     -------
 
@@ -280,13 +288,13 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
         fn = "C:/Data/mymap.map"
         mappyfile.save(d, fn)
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values)
+    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types)
     _save(output_file, map_string)
     return output_file
 
 
 def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-          align_values=False, **kwargs):
+          align_values=False, separate_complex_types=False, **kwargs):
     """
     Output a Mapfile dictionary as a string
 
@@ -310,6 +318,9 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
     align_values: bool
         Aligns the values in the same column for better readability. The column is
         multiple of indent and determined by the longest key
+    separate_complex_types: bool
+        Groups composites (complex mapserver definitions with "END") together at the end.
+        Keeps the given order except that all simple key-value pairs appear before composites.
 
     Returns
     -------
@@ -328,7 +339,7 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
         d = mappyfile.loads(s)
         print(mappyfile.dumps(d, indent=1, spacer="\\t"))
     """
-    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, **kwargs)
+    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types, **kwargs)
 
 
 def find(lst, key, value):
@@ -632,10 +643,11 @@ def _save(output_file, string):
         f.write(string)
 
 
-def _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, **kwargs):
+def _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types, **kwargs):
     pp = PrettyPrinter(indent=indent, spacer=spacer,
                        quote=quote, newlinechar=newlinechar,
-                       end_comment=end_comment, align_values=align_values, **kwargs)
+                       end_comment=end_comment, align_values=align_values,
+                       separate_complex_types=separate_complex_types, **kwargs)
     return pp.pprint(d)
 
 
@@ -674,3 +686,15 @@ def create(type, version=None):
             d[k] = v["default"]
 
     return d
+
+
+def dict_move_to_end(ordered_dict, key):
+
+    if sys.version_info[0] < 3:
+        # mappyfile requires Python >= 2.7,
+        # so this should be safe
+        val = ordered_dict[key]
+        del ordered_dict[key]
+        ordered_dict[key] = val
+    else:
+        ordered_dict.move_to_end(key)

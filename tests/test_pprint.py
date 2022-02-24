@@ -475,6 +475,34 @@ def test_align_values():
     assert len(aligned_indexes) == 1
 
 
+def test_separate_complex_types():
+    s = """
+    MAP
+        EXTENT 0 0 100 100
+        shapepath "test/path"
+        LAYER
+            CLASS
+                EXPRESSION "Field"
+                STYLE
+                    SIZE [sizefield]
+                END
+                GROUP 'group1'
+            END
+            CLASSITEM "Test"
+        END
+        DEBUG on
+        NAME Test
+    END
+    """
+    ast = mappyfile.loads(s)
+    pp = PrettyPrinter(indent=4, quote="'", newlinechar="\n", separate_complex_types=True)
+    s = pp.pprint(ast)
+    assert s.index("NAME ") < s.index("LAYER\n")
+    assert s.index("DEBUG ") < s.index("LAYER\n")
+    assert s.index("CLASSITEM ") < s.index("CLASS\n")
+    assert s.index("GROUP") < s.index("STYLE\n")
+
+
 def run_tests():
     # pytest.main(["tests/test_pprint.py::test_format_list"])
     pytest.main(["tests/test_pprint.py"])
