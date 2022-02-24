@@ -101,32 +101,6 @@ class DefaultOrderedDict(OrderedDict):
         return 'DefaultOrderedDict(%s, %s)' % (self.default_factory,
                                                OrderedDict.__repr__(self))
 
-    # copied from Python 3.10.2 sources to fix missing method in Python 2.7
-    def move_to_end(self, key, last=True):
-        '''Move an existing element to the end (or beginning if last is false).
-
-        Raise KeyError if the element does not exist.
-        '''
-        link = self.__map[key]
-        link_prev = link.prev
-        link_next = link.next
-        soft_link = link_next.prev
-        link_prev.next = link_next
-        link_next.prev = link_prev
-        root = self.__root
-        if last:
-            last = root.prev
-            link.prev = last
-            link.next = root
-            root.prev = soft_link
-            last.next = link
-        else:
-            first = root.next
-            link.prev = root
-            link.next = first
-            first.prev = soft_link
-            root.next = link
-
 
 class CaseInsensitiveOrderedDict(DefaultOrderedDict):
     """
