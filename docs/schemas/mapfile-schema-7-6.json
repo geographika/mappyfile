@@ -2718,6 +2718,9 @@
                     "composites": {
                         "items": {
                             "additionalProperties": false,
+                            "metadata": {
+                                "minVersion": 7.0
+                            },
                             "patternProperties": {
                                 "^__[a-z]+__$": {}
                             },
@@ -2727,8 +2730,40 @@
                                         "composite"
                                     ]
                                 },
-                                "compop": {
+                                "compfilter": {
                                     "type": "string"
+                                },
+                                "compop": {
+                                    "enum": [
+                                        "clear",
+                                        "color-burn",
+                                        "color-dodge",
+                                        "contrast",
+                                        "darken",
+                                        "difference",
+                                        "dst",
+                                        "dst-atop",
+                                        "dst-in",
+                                        "dst-out",
+                                        "dst-over",
+                                        "exclusion",
+                                        "hard-light",
+                                        "invert",
+                                        "invert-rgb",
+                                        "lighten",
+                                        "minus",
+                                        "multiply",
+                                        "overlay",
+                                        "plus",
+                                        "screen",
+                                        "soft-light",
+                                        "src",
+                                        "src-atop",
+                                        "src-in",
+                                        "src-out",
+                                        "src-over",
+                                        "xor"
+                                    ]
                                 },
                                 "include": {
                                     "items": {
