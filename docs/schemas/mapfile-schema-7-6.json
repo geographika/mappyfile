@@ -2718,9 +2718,6 @@
                     "composites": {
                         "items": {
                             "additionalProperties": false,
-                            "metadata": {
-                                "minVersion": 7.0
-                            },
                             "patternProperties": {
                                 "^__[a-z]+__$": {}
                             },
