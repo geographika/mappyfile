@@ -598,6 +598,37 @@ def test_property_versioning():
     assert len(properties["force"]["oneOf"]) == 1
 
 
+def test_object_versioning():
+    """
+    Exclude whole objects if they were added in a
+    later version of MapServer
+    """
+
+    s = """MAP
+    NAME "sample"
+    LAYER
+        TYPE POLYGON
+        COMPOSITE
+            COMPOP "lighten"
+            OPACITY 50
+            COMPFILTER "blur(10)"
+        END
+    END
+END"""
+
+    d = mappyfile.loads(s, include_position=False)
+    v = Validator()
+    errors = v.validate(d, add_comments=True, version=6.0)
+    print(errors)
+    assert len(errors) == 1
+
+    d = mappyfile.loads(s, include_position=False)
+    #v = Validator()
+    errors = v.validate(d, add_comments=True, version=7.0)
+    print(errors)
+    assert len(errors) == 0
+
+
 def test_get_versioned_schema():
 
     validator = Validator()
@@ -613,8 +644,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_property_versioning()
-    test_version_warnings()
-    test_keyword_versioning()
-    test_get_versioned_schema()
+    test_object_versioning()
     print("Done!")

@@ -104,7 +104,7 @@ class Validator(object):
         version. Optionally provide a schema_name to return an expanded
         subsection of the full schema.
         """
-        jsn_schema = self.get_expanded_schema(schema_name)
+        jsn_schema = self.get_expanded_schema(schema_name, version)
 
         if version:
             # remove any properties based on minVersion and maxVersion
@@ -271,11 +271,18 @@ class Validator(object):
 
         return error_messages
 
-    def get_expanded_schema(self, schema_name):
+    def get_expanded_schema(self, schema_name, version=None):
         """
         Return a schema file with all $ref properties expanded
         """
-        if schema_name not in self.expanded_schemas:
+
+        # ensure we cache per version to handle validator reuse
+        if version is not None:
+            cache_schema_name = schema_name + str(version)
+        else:
+            cache_schema_name = schema_name
+
+        if cache_schema_name not in self.expanded_schemas:
             fn = self.get_schema_file(schema_name)
             schemas_folder = self.get_schemas_folder()
             base_uri = self.get_schema_path(schemas_folder)
@@ -284,8 +291,8 @@ class Validator(object):
                 jsn_schema = jsonref.load(f, base_uri=base_uri)
 
                 # cache the schema for future use
-                self.expanded_schemas[schema_name] = jsn_schema
+                self.expanded_schemas[cache_schema_name] = jsn_schema
         else:
-            jsn_schema = self.expanded_schemas[schema_name]
+            jsn_schema = self.expanded_schemas[cache_schema_name]
 
         return jsn_schema

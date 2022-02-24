@@ -4,9 +4,6 @@
   "patternProperties": {
     "^__[a-z]+__$": {}
   },
-  "metadata": {
-    "minVersion": 7.0
-  },
   "properties": {
     "__type__": {
       "enum": [ "composite" ]
