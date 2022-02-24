@@ -33,6 +33,7 @@ import logging
 import numbers
 from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS, COMPLEX_TYPES
 from mappyfile.validator import Validator
+import mappyfile as utils
 
 log = logging.getLogger("mappyfile")
 
@@ -192,7 +193,7 @@ class PrettyPrinter(object):
             return
         for key in list(composite.keys()):
             if self.is_complex_type(composite, key, level):
-                composite.move_to_end(key)
+                utils.dict_move_to_end(composite, key)
 
     def whitespace(self, level, indent):
         return self.spacer * (level + indent)

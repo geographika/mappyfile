@@ -173,6 +173,3 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
         for k in list(self.keys()):
             v = super(CaseInsensitiveOrderedDict, self).pop(k)
             self.__setitem__(k, v)
-
-    def move_to_end(self, key, last=True):
-        super(CaseInsensitiveOrderedDict, self).move_to_end(self.__class__._k(key), last)
