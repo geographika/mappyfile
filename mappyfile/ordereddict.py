@@ -80,7 +80,7 @@ class DefaultOrderedDict(OrderedDict):
             raise KeyError(key)
 
         if key in OBJECT_LIST_KEYS:
-            # create empty lists for 
+            # create empty lists for keys of object lists such as "layers"
             self[key] = value = []
         else:
             self[key] = value = self.default_factory()
