@@ -31,7 +31,8 @@ from __future__ import unicode_literals
 import sys
 import logging
 import numbers
-from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS, COMPLEX_TYPES
+from mappyfile.tokens import COMPOSITE_NAMES, SINGLETON_COMPOSITE_NAMES, \
+                             REPEATED_KEYS, COMPLEX_TYPES, OBJECT_LIST_KEYS
 from mappyfile.validator import Validator
 import mappyfile as utils
 
@@ -352,9 +353,7 @@ class PrettyPrinter(object):
         values are a list
         """
 
-        if key in ("layers", "classes", "styles", "symbols", "labels",
-                   "outputformats", "features", "scaletokens",
-                   "composites", "joins") and isinstance(val, list):
+        if key in OBJECT_LIST_KEYS and isinstance(val, list):
             return True
         else:
             return False

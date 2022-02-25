@@ -5,6 +5,7 @@ import inspect
 import tempfile
 import pickle
 import pytest
+import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
@@ -184,6 +185,31 @@ def test_deepcopy():
     assert c['__type__'] == 'layer'
 
 
+def test_adding_layers():
+    """
+    Test adding layers to an existing collection
+    """
+    m = mappyfile.loads("MAP LAYER TYPE POLYGON NAME 'TEST' END END")
+    l = mappyfile.loads("LAYER TYPE POLYGON NAME 'TEST' END")
+
+    assert len(m["layers"]) == 1
+    m["layers"].insert(0, l)
+    assert len(m["layers"]) == 2
+
+
+def test_adding_layers_to_empty():
+    """
+    Test adding layers when the layers object has not yet been created
+    """
+    m = mappyfile.loads("MAP END")
+    l = mappyfile.loads("LAYER TYPE POLYGON NAME 'TEST' END")
+
+    assert len(m["layers"]) == 0
+    m["layers"].insert(0, l)
+    assert len(m["layers"]) == 1
+    print(mappyfile.dumps(m))
+
+
 def run_tests():
     # pytest.main(["tests/test_ordereddict.py::test_dict"])
     pytest.main(["tests/test_ordereddict.py"])
@@ -193,5 +219,5 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
     # run_tests()
     # test_update_case_sensitive_ordered_dict()
-    test_pop()
+    test_adding_layers_to_empty()
     print("Done!")

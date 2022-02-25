@@ -38,6 +38,7 @@
 from collections import OrderedDict
 import copy
 import sys
+from mappyfile.tokens import OBJECT_LIST_KEYS
 
 
 try:
@@ -77,7 +78,12 @@ class DefaultOrderedDict(OrderedDict):
     def __missing__(self, key):
         if self.default_factory is None:
             raise KeyError(key)
-        self[key] = value = self.default_factory()
+
+        if key in OBJECT_LIST_KEYS:
+            # create empty lists for 
+            self[key] = value = []
+        else:
+            self[key] = value = self.default_factory()
         return value
 
     def __reduce__(self):

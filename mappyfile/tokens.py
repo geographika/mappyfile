@@ -395,3 +395,18 @@ ms_errorfile
 
 # some keywords can be added multiple times to a composite type
 REPEATED_KEYS = ('processing', 'formatoption', 'include', 'data')
+
+# these are keywords used in the schema to store collections of composite objects
+# for example lists of lyaers
+OBJECT_LIST_KEYS = frozenset("""
+layers
+classes
+styles
+symbols
+labels
+outputformats
+features
+scaletokens
+composites
+joins
+""".split())
