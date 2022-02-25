@@ -190,10 +190,10 @@ def test_adding_layers():
     Test adding layers to an existing collection
     """
     m = mappyfile.loads("MAP LAYER TYPE POLYGON NAME 'TEST' END END")
-    l = mappyfile.loads("LAYER TYPE POLYGON NAME 'TEST' END")
+    lyr = mappyfile.loads("LAYER TYPE POLYGON NAME 'TEST' END")
 
     assert len(m["layers"]) == 1
-    m["layers"].insert(0, l)
+    m["layers"].insert(0, lyr)
     assert len(m["layers"]) == 2
 
 
@@ -202,10 +202,10 @@ def test_adding_layers_to_empty():
     Test adding layers when the layers object has not yet been created
     """
     m = mappyfile.loads("MAP END")
-    l = mappyfile.loads("LAYER TYPE POLYGON NAME 'TEST' END")
+    lyr = mappyfile.loads("LAYER TYPE POLYGON NAME 'TEST' END")
 
     assert len(m["layers"]) == 0
-    m["layers"].insert(0, l)
+    m["layers"].insert(0, lyr)
     assert len(m["layers"]) == 1
     print(mappyfile.dumps(m))
 
