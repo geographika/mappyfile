@@ -34,6 +34,8 @@ The formatting of the Mapfile output can be configured with several options:
 + **newlinechar** - the character used to insert newlines in the Mapfile
 + **end_comment** - add a comment with the block type at each closing END statement e.g. END # MAP
 + **align_values** - aligns the values in the same column for better readability. The column is multiple of indent and determined by the longest key
++ **separate_complex_types** - groups composites (complex mapserver definitions with "END") together at the end. Keeps the given order except 
+  that all simple key-value pairs appear before composites.
 
 .. warning::
 
@@ -114,6 +116,54 @@ Output:
             IMAGEMODE       RGB
             EXTENSION       "png"
             FORMATOPTION    "GAMMA=0.75"
+        END
+    END
+
+This example moves all the simple key/value pairs of an object to the start of a declaration,
+and the complex types to the end:
+
+.. code-block:: python
+
+    s = '''MAP
+    WEB
+        METADATA
+            "wms_enable_request"            "*"
+            "wms_feature_info_mime_type"    "text/html"
+        END
+    END
+    EXTENT  -180 -90 180 90    
+    OUTPUTFORMAT
+        NAME            "png"
+        DRIVER          "AGG/PNG"
+        MIMETYPE        "image/png"
+        IMAGEMODE       RGB
+        EXTENSION       "png"
+    END
+    NAME    "MyMap"
+    END'''
+    d = mappyfile.loads(s)
+    output = mappyfile.dumps(d, separate_complex_types=True)
+    print(output)
+
+Output:
+
+.. code-block:: mapfile
+
+    MAP
+        EXTENT -180 -90 180 90
+        NAME "MyMap"
+        WEB
+            METADATA
+                "wms_enable_request" "*"
+                "wms_feature_info_mime_type" "text/html"
+            END
+        END
+        OUTPUTFORMAT
+            NAME "png"
+            DRIVER "AGG/PNG"
+            MIMETYPE "image/png"
+            IMAGEMODE RGB
+            EXTENSION "png"
         END
     END
 
