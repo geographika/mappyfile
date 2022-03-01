@@ -1,6 +1,15 @@
 Releases
 --------
 
+0.9.5 01/03/2022
+++++++++++++++++
+
++ `#147 <https://github.com/geographika/mappyfile/pull/147>`_ - Create list objects for containers when modifying dicts
++ `#146 <https://github.com/geographika/mappyfile/pull/146>`_ - Add COMPOSITE validation
++ `#145 <https://github.com/geographika/mappyfile/issues/145>`_ - layers.insert fails with dict error
++ `#144 <https://github.com/geographika/mappyfile/issues/144>`_ - Invalid value in COMPOSITE - 'compfilter'
++ `#140 <https://github.com/geographika/mappyfile/pull/140>`_ - New feature: group complex types at the end
+
 0.9.4 22/02/2022
 ++++++++++++++++
 
