@@ -44,7 +44,14 @@
       "type": "string"
     },
     "transparent": {
-      "$ref": "onoff.json"
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "onoff.json"
+        }
+      ]
     }
   }
 }
