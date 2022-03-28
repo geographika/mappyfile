@@ -4821,11 +4821,18 @@
                         "type": "string"
                     },
                     "transparent": {
-                        "enum": [
-                            "on",
-                            "off"
-                        ],
-                        "type": "string"
+                        "oneOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "enum": [
+                                    "on",
+                                    "off"
+                                ],
+                                "type": "string"
+                            }
+                        ]
                     }
                 },
                 "type": "object"
