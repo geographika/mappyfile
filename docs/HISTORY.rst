@@ -1,6 +1,12 @@
 Releases
 --------
 
+0.9.6 29/03/2022
+++++++++++++++++
+
++ Schema fixes for GRID LABELFORMAT and set max versions for MAP DATAPATTERN and TEMPLATEPATTERN
++ Allow TRUE/FALSE values for OUTPUTFORMAT TRANSPARENT
+
 0.9.5 01/03/2022
 ++++++++++++++++
 

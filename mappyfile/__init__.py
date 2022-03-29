@@ -35,7 +35,7 @@ from types import ModuleType
 from mappyfile.utils import open, load, loads, find, findall, findunique, dumps, dump, save
 from mappyfile.utils import findkey, update, validate, create, dict_move_to_end
 
-__version__ = "0.9.5"
+__version__ = "0.9.6"
 
 __all__ = ['open', 'load', 'loads', 'find', 'findall', 'findunique', 'dumps', 'dump', 'save',
            'findkey', 'update', 'validate', 'create', 'dict_move_to_end']
