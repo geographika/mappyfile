@@ -6,7 +6,9 @@
     },
     "properties": {
         "__type__": {
-            "type": "string"
+            "enum": [
+                "map"
+            ]
         },
         "angle": {
             "default": 0,
@@ -47,9 +49,6 @@
                 }
             },
             "type": "object"
-        },
-        "datapattern": {
-            "type": "string"
         },
         "debug": {
             "allOf": [
@@ -2542,13 +2541,18 @@
                                 "type": "array"
                             },
                             "labelformat": {
-                                "additionalProperties": true,
-                                "enum": [
-                                    "dd",
-                                    "ddmm",
-                                    "ddmmss"
-                                ],
-                                "type": "string"
+                                "oneOf": [
+                                    {
+                                        "type": "string"
+                                    },
+                                    {
+                                        "enum": [
+                                            "dd",
+                                            "ddmm",
+                                            "ddmmss"
+                                        ]
+                                    }
+                                ]
                             },
                             "maxarcs": {
                                 "exclusiveMinimum": 0,
@@ -5626,9 +5630,6 @@
             "type": "array"
         },
         "symbolset": {
-            "type": "string"
-        },
-        "templatepattern": {
             "type": "string"
         },
         "units": {
