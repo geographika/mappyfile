@@ -40,7 +40,10 @@
       "additionalProperties": true
     },
     "datapattern": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "debug": {
       "default": 0,
@@ -169,7 +172,10 @@
       }
     },
     "templatepattern": {
-      "type": "string"
+      "type": "string",
+      "metadata": {
+        "maxVersion": 7.6
+      }
     },
     "transparent": {
       "allOf": [
@@ -187,9 +193,6 @@
     },
     "web": {
       "$ref": "web.json"
-    },
-    "__type__": {
-      "type": "string"
     }
   }
 }

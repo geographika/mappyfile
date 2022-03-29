@@ -15,9 +15,14 @@
       }
     },
     "labelformat": {
-      "type": "string",
-      "enum": [ "dd", "ddmm", "ddmmss" ],
-      "additionalProperties": true
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "enum": [ "dd", "ddmm", "ddmmss" ]
+        }
+      ]
     },
     "minarcs": {
       "type": "number",
