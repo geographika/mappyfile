@@ -56,10 +56,11 @@ log = logging.getLogger("mappyfile")
 
 class MapfileTransformer(Transformer, object):
 
-    def __init__(self, include_position=False, include_comments=False):
+    def __init__(self, include_position=False, include_comments=False, trace_o_incl=None):
         self.quoter = Quoter()
         self.include_position = include_position
         self.include_comments = include_comments
+        self.trace_o_incl = trace_o_incl
 
     def key_name(self, token):
         return token.value.lower()
@@ -360,8 +361,15 @@ class MapfileTransformer(Transformer, object):
             v = self.clean_string(t[1].value)
 
             if k in d.keys():
-                log.warning("A duplicate key ({}) was found in {}. Only the last value ({}) will be used. ".format(
-                            k, type_, v))
+                if self.trace_o_incl:
+                    trace = self.trace_o_incl[key.line]
+                    originFile = self.trace_o_incl[0][trace]
+                    lineOrigin = self.trace_o_incl[1:key.line].count(trace) + 1
+                    log.warning("A duplicate key ({}) was found in {}. Only the last value ({}) will be used. File: {}, parent key {}, approximate parent key line {}".format(
+                                k, type_, v, originFile, key_name.upper(), lineOrigin))
+                else:
+                    log.warning("A duplicate key ({}) was found in {}. Only the last value ({}) will be used. Line of parent key of parent in file {} ".format(
+                        k, type_, v, key.line))
 
             d[k] = v
 
@@ -705,11 +713,12 @@ class CommentsTransformer(Transformer_InPlace):
 
 class MapfileToDict(object):
 
-    def __init__(self, include_position=False, include_comments=False,
+    def __init__(self, include_position=False, include_comments=False, trace_o_incl=None,
                  transformerClass=MapfileTransformer, **kwargs):
 
         self.include_position = include_position
         self.include_comments = include_comments
+        self.trace_o_incl = trace_o_incl
         self.transformerClass = transformerClass
         self.kwargs = kwargs
 
@@ -717,7 +726,8 @@ class MapfileToDict(object):
         tree = Canonize().transform(tree)
 
         self.mapfile_transformer = self.transformerClass(include_position=self.include_position,
-                                                         include_comments=self.include_comments, **self.kwargs)
+                                                         include_comments=self.include_comments,
+                                                         trace_o_incl=self.trace_o_incl , **self.kwargs)
 
         if self.include_comments:
             comments_transformer = CommentsTransformer(self.mapfile_transformer)

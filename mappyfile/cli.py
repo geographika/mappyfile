@@ -36,6 +36,7 @@ import logging
 import click
 import mappyfile
 from mappyfile.validator import Validator
+from sys import argv
 
 
 def get_mapfiles(mapfiles):
@@ -57,7 +58,11 @@ def configure_logging(verbosity):
     None
     """
     log_level = max(10, 30 - 10 * verbosity)
-    logging.basicConfig(stream=sys.stderr, level=log_level)
+    # use stdout for output librairie Warning (ex: ... >> output.txt)
+    if log_level < 40:
+        logging.basicConfig(stream=sys.stdout, level=log_level)
+    else:
+        logging.basicConfig(stream=sys.stderr, level=log_level)
 
 
 logger = logging.getLogger(__name__)
@@ -111,7 +116,7 @@ def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinecha
     spacer = codecs.decode(spacer, 'unicode_escape')  # ensure \t is handled as a tab
     newlinechar = codecs.decode(newlinechar, 'unicode_escape')  # ensure \n is handled as a newline
 
-    d = mappyfile.open(input_mapfile, expand_includes=expand, include_comments=comments, include_position=True)
+    d, trace_o_incl = mappyfile.open(input_mapfile, expand_includes=expand, include_comments=comments, include_position=True)
     mappyfile.save(d, output_mapfile, indent=indent, spacer=spacer, quote=quote, newlinechar=newlinechar)
     sys.exit(0)
 
@@ -151,17 +156,17 @@ def validate(ctx, mapfiles, expand, version):
     for fn in all_mapfiles:
         fn = click.format_filename(fn)
         try:
-            d = mappyfile.open(fn, expand_includes=expand, include_position=True)
+            d, trace_o_incl = mappyfile.open(fn, output_trace=True, expand_includes=expand, include_position=True)
         except Exception as ex:
             logger.exception(ex)
             click.echo("{} failed to parse successfully".format(fn))
             continue
 
-        validation_messages = mappyfile.validate(d, version)
+        validation_messages = mappyfile.validate(d, trace_o_incl, version)
         if validation_messages:
             for v in validation_messages:
                 v["fn"] = fn
-                msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(**v)
+                msg = "{fn} (File: {file} Line: {line} Column: {column}) {message} - {error}".format(**v)
                 click.echo(msg)
                 errors += 1
         else:
@@ -171,6 +176,11 @@ def validate(ctx, mapfiles, expand, version):
     click.echo("{} file(s) validated ({} successfully)".format(len(all_mapfiles), validation_count))
     sys.exit(errors)
 
+if __name__ == '__main__':
+    if getattr(sys, 'frozen', False):
+        main(argv[1:])
+    else:
+        main()
 
 @main.command(short_help="Export a Mapfile Schema")
 @click.argument('output_file', nargs=1, type=click.Path())
