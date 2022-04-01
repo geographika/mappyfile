@@ -52,7 +52,10 @@ class Parser(object):
 
     def load_grammar(self, grammar_file):
         gf = os.path.join(os.path.dirname(__file__), grammar_file)
-        return open(gf).read()
+        with open(gf) as f:
+            grammar = f.read()
+
+        return grammar
 
     def _create_lalr_parser(self):
         grammar_text = self.load_grammar("mapfile.lalr.g")
