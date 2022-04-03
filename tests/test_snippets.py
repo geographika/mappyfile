@@ -998,6 +998,34 @@ def test_outputformat_unquoted_keyword():
     assert(output(s, schema_name="map") == exp)
 
 
+def test_multiple_composites():
+    """
+    See https://github.com/geographika/mappyfile/issues/150
+    """
+
+    s = u"""
+    LAYER
+        NAME "point-symbol-test"
+        TYPE POINT
+        COMPOSITE
+            COMPFILTER "blacken()"
+            COMPFILTER "translate(-6,-5)"
+            COMPFILTER "blur(7)"
+            COMPOP "soft-light"
+            OPACITY 50
+        END
+        COMPOSITE
+            OPACITY 100
+        END
+    END
+    """
+
+    print(output(s, schema_name="layer"))
+    exp = u"LAYER NAME 'point-symbol-test' TYPE POINT COMPOSITE COMPFILTER 'blacken()' " \
+    "COMPFILTER 'translate(-6,-5)' COMPFILTER 'blur(7)' COMPOP 'soft-light' OPACITY 50 END COMPOSITE OPACITY 100 END END"
+    assert(output(s, schema_name="layer") == exp)
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -1010,6 +1038,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_label_attribute_properties()
+    test_multiple_composites()
     # run_tests()
     print("Done!")

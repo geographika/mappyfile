@@ -431,7 +431,10 @@ class PrettyPrinter(object):
                 raise ValueError("The property {} has an empty dictionary as a value".format(attr))
 
             if not isinstance(value, numbers.Number):
-                return value.upper()  # value is from a set list, no need for quote
+                if attr == "compop":
+                    return self.quoter.add_quotes(value)
+                else:
+                    return value.upper()  # value is from a set list, no need for quote
             else:
                 return value
 
