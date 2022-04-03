@@ -1,6 +1,14 @@
 Releases
 --------
 
+0.9.7 03/04/2022
+++++++++++++++++
+
++ Fix ""ResourceWarning: unclosed"" when reading mapfile.lalr.g in Python 3.10
++ `#151 <https://github.com/geographika/mappyfile/pull/151>`_ - Updates for COMPOSITE blocks
++ `#150 <https://github.com/geographika/mappyfile/issues/150>`_ - Unknown COMPOP "SOFT-LIGHT" and error with several
+   lines with COMPFILTER with validate
+
 0.9.6 29/03/2022
 ++++++++++++++++
 
