@@ -998,7 +998,7 @@ def test_outputformat_unquoted_keyword():
     assert(output(s, schema_name="map") == exp)
 
 
-def test_multiple_composites():
+def test_multiple_compfilters():
     """
     See https://github.com/geographika/mappyfile/issues/150
     """
@@ -1038,6 +1038,6 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_multiple_composites()
+    test_multiple_compfilters()
     # run_tests()
     print("Done!")
