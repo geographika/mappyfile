@@ -2804,7 +2804,10 @@
                                     ]
                                 },
                                 "compfilter": {
-                                    "type": "string"
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
                                 },
                                 "compop": {
                                     "enum": [
@@ -2836,7 +2839,8 @@
                                         "src-out",
                                         "src-over",
                                         "xor"
-                                    ]
+                                    ],
+                                    "type": "string"
                                 },
                                 "include": {
                                     "items": {

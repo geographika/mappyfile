@@ -20,9 +20,13 @@
       "maximum": 100
     },
     "compfilter": {
-      "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "compop": {
+      "type": "string",
       "enum": [
         "clear",
         "color-burn",
