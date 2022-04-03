@@ -10,10 +10,10 @@ environment:
 
   matrix:
 
-    - PYTHON: "C:\\Python27-x64"
-    - PYTHON: "C:\\Python36"
-    - PYTHON: "C:\\Python37-x64"
     - PYTHON: "C:\\Python38-x64"
+    - PYTHON: "C:\\Python37-x64"
+    - PYTHON: "C:\\Python36"
+    - PYTHON: "C:\\Python27-x64"
 
 install:
   # Note that you must use the environment variable %PYTHON% to refer to
