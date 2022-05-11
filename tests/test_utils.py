@@ -315,6 +315,7 @@ def test_findunique():
     groups = mappyfile.findunique(d["classes"], "non-existent")
     assert groups == []
 
+
 def test_create_map():
     d = mappyfile.utils.create("map")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
