@@ -496,7 +496,7 @@ def findunique(lst, key):
         groups = mappyfile.findunique(d["classes"], "group")
         assert groups == ["group1", "group2"]
     """
-    return sorted(set([item[key.lower()] for item in lst]))
+    return sorted(set([item.get(key.lower(), None) for item in lst]) - {None, })
 
 
 def findkey(d, *keys):
