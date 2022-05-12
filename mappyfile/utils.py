@@ -451,7 +451,8 @@ def findall(lst, key, value):
 
 def findunique(lst, key):
     """
-    Find all unique key values for items in lst.
+    Find all unique key values for items in lst. If no
+    items with the key are found an empty list is returned.
 
     Parameters
     ----------
