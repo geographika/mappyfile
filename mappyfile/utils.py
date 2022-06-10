@@ -614,11 +614,13 @@ def update(d1, d2):
     return d1
 
 
-def validate(d, version=None):
+def validate(d, schema_name="map", version=None):
     """
     Validate a mappyfile dictionary by using the Mapfile schema.
     An optional version number can be used to specify a specific
     a Mapfile is valid for a specific MapServer version.
+    A schema name can also be set so individual layers, classes, and
+    styles can be validated indepentally from a map.
 
     Parameters
     ----------
@@ -627,6 +629,8 @@ def validate(d, version=None):
         A Python dictionary based on the the mappyfile schema
    version: float
         The MapServer version number used to validate the Mapfile
+   schema_name: string
+        The MapServer schema to use for validating the dict e.g. "map", "layer", "class"
 
     Returns
     -------
@@ -636,7 +640,7 @@ def validate(d, version=None):
 
     """
     v = Validator()
-    return v.validate(d, version=version)
+    return v.validate(d, schema_name=schema_name, version=version)
 
 
 def _save(output_file, string):

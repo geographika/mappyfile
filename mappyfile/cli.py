@@ -120,8 +120,9 @@ def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinecha
 @click.argument('mapfiles', nargs=-1, type=click.Path())
 @click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile") # noqa
 @click.option('--version', default=7.6, show_default=True, help="The MapServer version number used to validate the Mapfile") # noqa
+@click.option('--partials', default=False, show_default=True, help="Allow validation of partial Mapfiles, for example a file containing a LAYER definition") # noqa
 @click.pass_context
-def validate(ctx, mapfiles, expand, version):
+def validate(ctx, mapfiles, expand, version, partials):
     """
     Validate Mapfile(s) against the Mapfile schema
 
@@ -157,7 +158,19 @@ def validate(ctx, mapfiles, expand, version):
             click.echo("{} failed to parse successfully".format(fn))
             continue
 
-        validation_messages = mappyfile.validate(d, version)
+        if partials is True:
+            # handle files which contain individual Mapfile classes such as LAYER, CLASS etc.
+            if isinstance(d, dict):
+                schema_name = d.get("__type__", "map")
+                validation_messages = mappyfile.validate(d, schema_name=schema_name, version=version)
+            elif isinstance(d, list):
+                validation_messages = []
+                for v in d:
+                    schema_name = v.get("__type__", "map")
+                    validation_messages += mappyfile.validate(v, schema_name=schema_name, version=version)
+        else:
+            validation_messages = mappyfile.validate(d, schema_name="map", version=version)
+
         if validation_messages:
             for v in validation_messages:
                 v["fn"] = fn
