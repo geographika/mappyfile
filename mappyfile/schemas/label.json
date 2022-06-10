@@ -162,7 +162,7 @@
       "default": 22.5,
       "type": "number",
       "minimum": 0,
-      "maximum": 0,
+      "maximum": 360,
       "metadata": {
         "minVersion": 6.0
       }

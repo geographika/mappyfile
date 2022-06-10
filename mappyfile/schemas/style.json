@@ -261,9 +261,7 @@
       }
     },
     "rangeitem": {
-      "type": "string",
-      "pattern": "^\\[(.*?)\\]$",
-      "description": "attribute"
+      "type": "string"
     },
     "size": {
       "oneOf": [

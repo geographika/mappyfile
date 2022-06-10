@@ -116,6 +116,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
   <ItemGroup>
     <Content Include=".github\dependabot.yml" />
     <Content Include=".github\workflows\main.yml" />
+    <Content Include=".github\workflows\schemas.yml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include=".gitignore" />
     <Content Include=".gitmodules" />
     <Content Include=".pypirc" />

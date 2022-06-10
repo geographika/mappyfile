@@ -15,7 +15,7 @@
       }
     },
     "labelformat": {
-      "oneOf": [
+      "anyOf": [
         {
           "type": "string"
         },
