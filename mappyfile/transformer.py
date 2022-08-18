@@ -39,6 +39,7 @@ from collections import OrderedDict
 from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
+import lark_cython
 
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
@@ -102,7 +103,7 @@ class MapfileTransformer(Transformer, object):
         flat_list = []
 
         for v in values:
-            if isinstance(v, Token):
+            if isinstance(v, Token) or isinstance(v, lark_cython.Token):
                 flat_list.append(v)
             elif isinstance(v, list):
                 flat_list += v
@@ -417,8 +418,8 @@ class MapfileTransformer(Transformer, object):
         projection_strings = [self.clean_string(v.value) for v in body]
 
         key_token = tokens[0]
-        value_token = tokens[1]  # take the first string as the default token
-        value_token.value = projection_strings
+        v = tokens[1]  # take the first string as the default token
+        value_token = Token.new_borrow_pos(v.type, projection_strings, v)
         tokens = (key_token, value_token)
 
         return self.attr(tokens)
@@ -555,23 +556,19 @@ class MapfileTransformer(Transformer, object):
 
     def true(self, t):
         v = t[0]
-        v.value = True
-        return v
+        return Token.new_borrow_pos(v.type, True, v)
 
     def false(self, t):
         v = t[0]
-        v.value = False
-        return v
+        return Token.new_borrow_pos(v.type, False, v)
 
     def int(self, t):
         v = t[0]
-        v.value = int(v.value)
-        return v
+        return Token.new_borrow_pos(v.type, int(v.value), v)
 
     def float(self, t):
         v = t[0]
-        v.value = float(v.value)
-        return v
+        return Token.new_borrow_pos(v.type, float(v.value), v)
 
     def bare_string(self, t):
         return t[0]
