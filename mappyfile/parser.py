@@ -32,7 +32,13 @@ import sys
 import logging
 from io import open
 from lark import Lark, ParseError, Tree, UnexpectedInput
-import lark_cython
+
+
+try:
+    import lark_cython
+    HAS_CYTHON = True
+except ImportError:
+    HAS_CYTHON = False
 
 
 PY2 = sys.version_info[0] < 3
@@ -65,7 +71,11 @@ class Parser(object):
             extra_args = dict(propagate_positions=True, lexer_callbacks=callbacks)
         else:
             extra_args = {}
-        return Lark(grammar_text, parser="lalr", lexer="contextual", _plugins=lark_cython.plugins, **extra_args)
+
+        if HAS_CYTHON is True:
+            extra_args["_plugins"] = lark_cython.plugins
+
+        return Lark(grammar_text, parser="lalr", lexer="contextual", **extra_args)
 
     def _get_include_filename(self, line):
 
