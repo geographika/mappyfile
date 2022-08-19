@@ -39,7 +39,7 @@ setup(name='mappyfile',
       license='MIT',
       packages=['mappyfile'],
       install_requires=[
-            'lark-parser>=0.11.3',
+            'lark>=1.1.2',
             'lark_cython',
             # pyrsistent is a dependency of jsonschema but py2 is not
             # supported beyond 0.16.0
