@@ -39,7 +39,19 @@ from collections import OrderedDict
 from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
-import lark_cython
+
+
+try:
+    import lark_cython
+    HAS_CYTHON = True
+except ImportError:
+    HAS_CYTHON = False
+
+
+if HAS_CYTHON is True:
+    TOKEN_TYPES = (Token, lark_cython.Token)
+else:
+    TOKEN_TYPES = (Token)
 
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
@@ -103,7 +115,7 @@ class MapfileTransformer(Transformer, object):
         flat_list = []
 
         for v in values:
-            if isinstance(v, Token) or isinstance(v, lark_cython.Token):
+            if isinstance(v, TOKEN_TYPES):
                 flat_list.append(v)
             elif isinstance(v, list):
                 flat_list += v
@@ -419,7 +431,13 @@ class MapfileTransformer(Transformer, object):
 
         key_token = tokens[0]
         v = tokens[1]  # take the first string as the default token
-        value_token = Token.new_borrow_pos(v.type, projection_strings, v)
+
+        if HAS_CYTHON:
+            value_token = Token.new_borrow_pos(v.type, projection_strings, v)
+        else:
+            v.value = projection_strings
+            value_token = v
+
         tokens = (key_token, value_token)
 
         return self.attr(tokens)
@@ -556,19 +574,35 @@ class MapfileTransformer(Transformer, object):
 
     def true(self, t):
         v = t[0]
-        return Token.new_borrow_pos(v.type, True, v)
+        if HAS_CYTHON:
+            return Token.new_borrow_pos(v.type, True, v)
+        else:
+            v.value = True
+            return v
 
     def false(self, t):
         v = t[0]
-        return Token.new_borrow_pos(v.type, False, v)
+        if HAS_CYTHON:
+            return Token.new_borrow_pos(v.type, False, v)
+        else:
+            v.value = False
+            return v
 
     def int(self, t):
         v = t[0]
-        return Token.new_borrow_pos(v.type, int(v.value), v)
+        if HAS_CYTHON:
+            return Token.new_borrow_pos(v.type, int(v.value), v)
+        else:
+            v.value = int(v.value)
+            return v
 
     def float(self, t):
         v = t[0]
-        return Token.new_borrow_pos(v.type, float(v.value), v)
+        if HAS_CYTHON:
+            return Token.new_borrow_pos(v.type, float(v.value), v)
+        else:
+            v.value = float(v.value)
+            return v
 
     def bare_string(self, t):
         return t[0]
