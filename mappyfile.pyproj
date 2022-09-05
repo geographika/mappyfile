@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
     <StartupFile>tests\test_snippets.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
@@ -1040,6 +1040,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="docs\examples\geometry\geometry.py" />
+    <Compile Include="docs\scripts\benchmarks.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="docs\scripts\class_diagrams.py">
       <SubType>Code</SubType>
     </Compile>
@@ -1144,6 +1147,15 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="C:\VirtualEnvs\mappyfile3\">
+      <Id>mappyfile3</Id>
+      <Version>3.10</Version>
+      <Description>mappyfile3 (Python 3.10 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="C:\VirtualEnvs\mappyfile\">
       <Id>mappyfile</Id>
       <Version>2.7</Version>
