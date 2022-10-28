@@ -45,7 +45,7 @@ setup(name='mappyfile',
             'pyrsistent<0.17.0; python_version=="2.7"',
             'jsonschema>=2.0, <=3.2.0; python_version=="2.7"',
             'jsonschema>=2.0; python_version>="3.0.0"',
-            'jsonref==0.2',
+            'jsonref==1.0.0',
             'click; python_version>="3.0.0"',
             'click < 8.0.0; python_version=="2.7"'
       ],
