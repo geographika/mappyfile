@@ -42,7 +42,7 @@ setup(name='mappyfile',
             'lark-parser>=0.11.3',
             # pyrsistent is a dependency of jsonschema but py2 is not
             # supported beyond 0.16.0
-            'pyrsistent<0.17.0; python_version=="2.7"',
+            'pyrsistent<0.20.0; python_version=="2.7"',
             'jsonschema>=2.0, <=3.2.0; python_version=="2.7"',
             'jsonschema>=2.0; python_version>="3.0.0"',
             'jsonref==0.2',
