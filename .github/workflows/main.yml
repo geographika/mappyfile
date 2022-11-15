@@ -30,7 +30,7 @@ jobs:
       - name: Lint with flake8
         run: |
           flake8 mappyfile --max-line-length=120
-          flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*
+          flake8 --ignore=E501,E121,E122,E123,E126,E127,E128,E275 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*
       - name: Command line tests
         run: |
           mappyfile schema mapfile-schema.json

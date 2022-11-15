@@ -33,7 +33,7 @@ build_script:
 
 test_script:
   - python -m pytest  # for unknown reason running pytest directly fails on Python 3.7 and above
-  - "flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*"
+  - "flake8 --ignore=E501,E121,E122,E123,E126,E127,E128,E275 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*"
   - flake8 mappyfile --max-line-length=120
   - mappyfile schema mapfile-schema.json
   - mappyfile schema mapfile-schema-7-6.json --version=7.6
