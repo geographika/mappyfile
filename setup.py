@@ -30,7 +30,7 @@ setup(name='mappyfile',
           'Topic :: Software Development :: Build Tools'
       ],
       package_data={
-          '': ['*.g'],
+          '': ['*.lark'],
           'mappyfile': ['schemas/*.json']
       },
       url='http://github.com/geographika/mappyfile',

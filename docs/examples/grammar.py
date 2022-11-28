@@ -13,7 +13,7 @@ def main(s, out_fn):
     graphviz_setup()
     project_root = os.path.normpath(os.path.join(os.path.dirname(__file__), "../../"))
     fld = os.path.normpath(project_root + "./mappyfile")
-    gf = os.path.join(fld, "mapfile.lalr.g")
+    gf = os.path.join(fld, "mapfile.lark")
     grammar_text = open(gf).read()
 
     g = Lark(grammar_text, parser="lalr", lexer="contextual")
