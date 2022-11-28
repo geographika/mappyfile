@@ -50,21 +50,14 @@ class Parser(object):
         self._comments = []
         self.lalr = self._create_lalr_parser()
 
-    def load_grammar(self, grammar_file):
-        gf = os.path.join(os.path.dirname(__file__), grammar_file)
-        with open(gf) as f:
-            grammar = f.read()
-
-        return grammar
-
     def _create_lalr_parser(self):
-        grammar_text = self.load_grammar("mapfile.lark")
         if self.include_comments:
             callbacks = {'COMMENT': self._comments.append, 'CCOMMENT': self._comments.append}
             extra_args = dict(propagate_positions=True, lexer_callbacks=callbacks)
         else:
             extra_args = {}
-        return Lark(grammar_text, parser="lalr", lexer="contextual", **extra_args)
+
+        return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", lexer="contextual", **extra_args)
 
     def _get_include_filename(self, line):
 
