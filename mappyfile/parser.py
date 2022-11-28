@@ -33,6 +33,11 @@ import logging
 from io import open
 from lark import Lark, ParseError, Tree, UnexpectedInput
 
+try:
+    import lark_cython
+except ImportError:
+    lark_cython = None
+
 
 PY2 = sys.version_info[0] < 3
 if not PY2:
@@ -51,13 +56,16 @@ class Parser(object):
         self.lalr = self._create_lalr_parser()
 
     def _create_lalr_parser(self):
+        extra_args = {}
+
+        if lark_cython:
+            extra_args['_plugins'] = lark_cython.plugins
+
         if self.include_comments:
             callbacks = {'COMMENT': self._comments.append, 'CCOMMENT': self._comments.append}
-            extra_args = dict(propagate_positions=True, lexer_callbacks=callbacks)
-        else:
-            extra_args = {}
+            extra_args.update(dict(propagate_positions=True, lexer_callbacks=callbacks))
 
-        return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", lexer="contextual", **extra_args)
+        return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
 
     def _get_include_filename(self, line):
 

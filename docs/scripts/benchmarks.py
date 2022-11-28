@@ -1,23 +1,21 @@
 """
-python -m timeit "import mappyfile; mappyfile.open(r'D:\GitHub\mappyfile\tests\mapfiles\large_map1.map')"
+python -m timeit -n 10 -s "import mappyfile" "mappyfile.open(r'tests/mapfiles/large_map1.map')"
 
 With lark_cython:
-
-    1 loop, best of 5: 322 msec per loop
+    10 loops, best of 5: 245 msec per loop
 
 With lark:
-
-    1 loop, best of 5: 373 msec per loop
+    10 loops, best of 5: 274 msec per loop
 
 """
 import timeit
 import mappyfile
 
-t = timeit.timeit(stmt="mappyfile.open(mf)",
-setup="import mappyfile; mf=r'D:/GitHub/mappyfile/tests/mapfiles/large_map1.map'", number=10)
+N = 100
 
-# 34.8 s with lark_cython
-# 38.5 without
-print(t)
+t = timeit.timeit(stmt="mappyfile.open(mf)",
+setup="import mappyfile; mf=r'tests/mapfiles/large_map1.map'", number=N)
+
+print(t / N)
 
 
