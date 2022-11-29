@@ -5,7 +5,7 @@ For a great introduction to Lark, the general purpose parsing library used by ma
 `Lark reference page <https://github.com/erezsh/lark/blob/master/docs/reference.md>`_. 
 
 The full Mapfile grammar file is shown at the end of this page. The latest version can be seen `here on 
-GitHub <https://github.com/geographika/mappyfile/blob/master/mappyfile/mapfile.lalr.g>`_. 
+GitHub <https://github.com/geographika/mappyfile/blob/master/mappyfile/mapfile.lark>`_. 
 
 A Simple Example
 ----------------
@@ -191,7 +191,7 @@ Grammar File
 
 The full Mapfile grammar is shown below. 
 
-.. literalinclude:: ../mappyfile/mapfile.lalr.g
+.. literalinclude:: ../mappyfile/mapfile.lark
    :language: javascript
 
 ..

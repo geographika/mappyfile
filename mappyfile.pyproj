@@ -198,7 +198,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
-    <Content Include="mappyfile\mapfile.lalr.g" />
+    <Content Include="mappyfile\mapfile.lark" />
     <Content Include="mappyfile\schemas\expression.json">
       <SubType>Code</SubType>
     </Content>
