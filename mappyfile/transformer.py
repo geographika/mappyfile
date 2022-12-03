@@ -281,7 +281,7 @@ class MapfileTransformer(Transformer, object):
 
         if isinstance(key_token, (list, tuple)):
             key_token = key_token[0]
-            assert self.key_name(key_token) in ("style", "symbol")
+            assert self.key_name(key_token) in ("style", "symbol"), self.key_name(key_token)
 
         key_name = self.key_name(key_token)
         value_tokens = tokens[1:]

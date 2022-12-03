@@ -687,7 +687,6 @@ def test_symbol_style():
     assert(output(s, schema_name="style") == exp)
 
 
-@pytest.mark.xfail
 def test_symbol_style2():
     """
     barb_warm is not in quotes
@@ -700,8 +699,9 @@ def test_symbol_style2():
         SIZE 8
     END
     """
-    exp = "STYLE SYMBOL 'barb_warm' END"
-    assert(output(s, schema_name="style") == exp)
+    exp = "STYLE SYMBOL 'barb_warm' GAP -45 SIZE 8 END"
+    res = output(s, schema_name="style")
+    assert(res == exp)
 
 
 def test_extent():
@@ -981,9 +981,7 @@ def test_cluster2():
     assert(output(s, schema_name="layer") == exp)
 
 
-@pytest.mark.xfail
 def test_outputformat_unquoted_keyword():
-
     s = u"""
     MAP
         OUTPUTFORMAT
@@ -993,7 +991,6 @@ def test_outputformat_unquoted_keyword():
     END
     """
 
-    print(output(s, schema_name="map"))
     exp = u"MAP OUTPUTFORMAT NAME 'grid' IMAGEMODE INT16 END END"
     assert(output(s, schema_name="map") == exp)
 
