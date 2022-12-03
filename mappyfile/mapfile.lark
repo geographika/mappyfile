@@ -49,9 +49,8 @@ _composite_item: (composite|attr|points|projection|pattern|values|config)
 !validation: "VALIDATION"i string_pair* _END
 !connectionoptions: "CONNECTIONOPTIONS"i string_pair* _END
 
-attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING)
-//attr: (UNQUOTED_STRING | SYMBOL) (value | UNQUOTED_STRING)
-// SYMBOL is listed in composite_type but is also an attribute name
+attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)
+%declare UNQUOTED_STRING_VALUE  // generated using the interactive parser. See issues #48, #98
 
 ?value: string | int | float | expression | not_expression | attr_bind | path
 | regexp | runtime_var | list | NULL | true | false | extent | rgb | hexcolor
