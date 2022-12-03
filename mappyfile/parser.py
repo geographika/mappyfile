@@ -46,7 +46,9 @@ if not PY2:
 
 log = logging.getLogger("mappyfile")
 
-SYMBOL_ATTRIBUTES = {'ANCHORPOINT', 'ANTIALIAS', 'FILLED', 'FONT', 'IMAGE', 'NAME', 'COLOR', 'TYPE', 'FONT', 'CHARACTER', 'POINTS', 'TRANSPARENT'}
+SYMBOL_ATTRIBUTES = {'ANCHORPOINT', 'ANTIALIAS', 'FILLED', 'FONT', 'IMAGE', 'NAME',
+                     'COLOR', 'TYPE', 'FONT', 'CHARACTER', 'POINTS', 'TRANSPARENT'}
+
 
 class Parser(object):
 
