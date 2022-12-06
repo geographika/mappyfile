@@ -39,7 +39,19 @@ from collections import OrderedDict
 from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
+from .parser import lark_cython
 
+if lark_cython:
+    TOKEN_TYPES = (Token, lark_cython.Token)
+
+    def update_token_value(t, value):
+        return Token.new_borrow_pos(t.type, value, t)
+else:
+    TOKEN_TYPES = Token
+
+    def update_token_value(t, value):
+        t.value = value
+        return t
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 from mappyfile.ordereddict import CaseInsensitiveOrderedDict
@@ -102,7 +114,7 @@ class MapfileTransformer(Transformer, object):
         flat_list = []
 
         for v in values:
-            if isinstance(v, Token):
+            if isinstance(v, TOKEN_TYPES):
                 flat_list.append(v)
             elif isinstance(v, list):
                 flat_list += v
@@ -268,7 +280,7 @@ class MapfileTransformer(Transformer, object):
 
     def attr_name(self, tokens):
         t = tokens[0]
-        if not isinstance(t, Token):
+        if not isinstance(t, TOKEN_TYPES):
             #  handle ambiguities
             t = t[0]
             assert t.value.lower() in ("symbol", "style")
@@ -418,7 +430,7 @@ class MapfileTransformer(Transformer, object):
 
         key_token = tokens[0]
         value_token = tokens[1]  # take the first string as the default token
-        value_token.value = projection_strings
+        value_token = update_token_value(value_token, projection_strings)
         tokens = (key_token, value_token)
 
         return self.attr(tokens)
@@ -555,23 +567,19 @@ class MapfileTransformer(Transformer, object):
 
     def true(self, t):
         v = t[0]
-        v.value = True
-        return v
+        return update_token_value(v, True)
 
     def false(self, t):
         v = t[0]
-        v.value = False
-        return v
+        return update_token_value(v, False)
 
     def int(self, t):
         v = t[0]
-        v.value = int(v.value)
-        return v
+        return update_token_value(v, int(v.value))
 
     def float(self, t):
         v = t[0]
-        v.value = float(v.value)
-        return v
+        return update_token_value(v, float(v.value))
 
     def bare_string(self, t):
         return t[0]
@@ -657,7 +665,7 @@ class CommentsTransformer(Transformer_InPlace):
             for sp in string_pairs:
                 # get the raw metadata key
 
-                if isinstance(sp.children[0], Token):
+                if isinstance(sp.children[0], TOKEN_TYPES):
                     token = sp.children[0]
                     assert token.type == "UNQUOTED_STRING"
                     key = token.value
