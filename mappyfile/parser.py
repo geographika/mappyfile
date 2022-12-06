@@ -46,6 +46,9 @@ if not PY2:
 
 log = logging.getLogger("mappyfile")
 
+SYMBOL_ATTRIBUTES = {'ANCHORPOINT', 'ANTIALIAS', 'FILLED', 'FONT', 'IMAGE', 'NAME',
+                     'COLOR', 'TYPE', 'FONT', 'CHARACTER', 'POINTS', 'TRANSPARENT'}
+
 
 class Parser(object):
 
@@ -229,7 +232,18 @@ class Parser(object):
 
         try:
             self._comments[:] = []  # clear any comments from a previous parse
-            tree = self.lalr.parse(text)
+            ip = self.lalr.parse_interactive(text)
+            for t in ip.iter_parse():
+                if t.type == 'UNQUOTED_STRING':
+                    # Unquoted strings after SYMBOL can only be values, not attributes
+                    if ip.parser_state.value_stack[-1] == 'SYMBOL' and t.value.upper() not in SYMBOL_ATTRIBUTES:
+                        t.type = 'UNQUOTED_STRING_VALUE'
+                elif t.type == 'GRID':
+                    # Unquoted 'GRID' coming after NAME is always a value, not a composite type
+                    if ip.parser_state.value_stack[-1] == 'NAME':
+                        t.type = 'UNQUOTED_STRING_VALUE'
+
+            tree = ip.resume_parse()
             if self.include_comments:
                 self.assign_comments(tree, self._comments)
             return tree
