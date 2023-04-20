@@ -1019,8 +1019,32 @@ def test_multiple_compfilters():
 
     print(output(s, schema_name="layer"))
     exp = u"LAYER NAME 'point-symbol-test' TYPE POINT COMPOSITE COMPFILTER 'blacken()' " \
-    "COMPFILTER 'translate(-6,-5)' COMPFILTER 'blur(7)' COMPOP 'soft-light' OPACITY 50 END COMPOSITE OPACITY 100 END END"
+        "COMPFILTER 'translate(-6,-5)' COMPFILTER 'blur(7)' COMPOP 'soft-light' OPACITY 50 END COMPOSITE OPACITY 100 END END"
     assert(output(s, schema_name="layer") == exp)
+
+
+def test_multiple_leader_styles():
+    """
+    See https://github.com/geographika/mappyfile/issues/150
+    """
+
+    s = u"""
+LEADER
+    GRIDSTEP 10
+    MAXDISTANCE 100
+    STYLE
+        COLOR 255 255 255
+        WIDTH 3
+    END
+    STYLE
+        COLOR 80 80 80
+        WIDTH 1
+    END
+END"""
+
+    print(output(s, schema_name="leader"))
+    exp = u"LEADER GRIDSTEP 10 MAXDISTANCE 100 STYLE COLOR 255 255 255 WIDTH 3 END STYLE COLOR 80 80 80 WIDTH 1 END END"
+    assert(output(s, schema_name="leader") == exp)
 
 
 def run_tests():
@@ -1035,6 +1059,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
-    test_multiple_compfilters()
+    # test_multiple_compfilters()
+    test_multiple_leader_styles()
     # run_tests()
     print("Done!")
