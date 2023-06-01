@@ -264,7 +264,8 @@
       "type": "string"
     },
     "size": {
-      "oneOf": [
+      "exclusiveMinimum": 1,
+      "anyOf": [
         {
           "type": "number",
           "exclusiveMinimum": 0
