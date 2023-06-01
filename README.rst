@@ -3,9 +3,11 @@ mappyfile
 
 | |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| |Downloads|
 
-A pure Python parser for working with MapServer MapFiles, built using `Lark <https://github.com/erezsh/lark>`_
+A pure Python parser for working with `MapServer <https://mapserver.org>`_ MapFiles, built using `Lark <https://github.com/lark-parser/lark>`_
 
-An online formatter demonstrating the libraries capabilities can be found at: http://mappyfile.geographika.net/
+mappyfile is used for formatting and validation in https://app.mapserverstudio.net/, and can be tested for free on any
+of your Mapfiles. If you find mappyfile useful please consider signing up for a professional account at 
+https://mapserverstudio.net/. This will help to fund maintenance and further development of both mappyfile and MapServer.
 
 A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.foss4g.org/2017/Home>`_ - slides are available 
 `for download here </docs/_static/foss4ge2017_mappyfile_sgirvin.pdf>`_.
