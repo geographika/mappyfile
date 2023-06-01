@@ -276,6 +276,16 @@
           "metadata": {
             "minVersion": 5.0
           }
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "expression.json"
+            }
+          ],
+          "metadata": {
+            "minVersion": 8.2
+          }
         }
       ]
     },

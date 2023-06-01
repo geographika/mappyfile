@@ -32,7 +32,7 @@
       }
     },
     "angle": {
-      "default":  0,
+      "default": 0,
       "oneOf": [
         {
           "type": "string",
@@ -253,7 +253,7 @@
       "default": false
     },
     "position": {
-      "default":  "cc",
+      "default": "cc",
       "oneOf": [
         { "enum": [ "auto" ] },
         {
@@ -269,7 +269,7 @@
     "priority": {
       "default": 1,
       "minimum": 1,
-      "maximum":  10,
+      "maximum": 10,
       "oneOf": [
         {
           "type": "integer"
@@ -278,6 +278,16 @@
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute"
+        },
+        {
+          "allOf": [
+            {
+              "$ref": "expression.json"
+            }
+          ],
+          "metadata": {
+            "minVersion": 8.2
+          }
         }
       ],
       "metadata": {
