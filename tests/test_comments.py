@@ -20,7 +20,7 @@ def test_comment():
 NAME 'Test' # Test comment
 END"""
     print(s)
-    assert(s == exp)
+    assert s == exp
 
 
 def test_double_comment():
@@ -40,7 +40,7 @@ NAME 'Test' # Name comment
 TYPE POLYGON # Type comment
 END"""
     print(s)
-    assert(s == exp)
+    assert s == exp
 
 
 def test_header_comment():
@@ -61,7 +61,7 @@ def test_header_comment():
 LAYER
 NAME 'Test'
 END"""
-    assert(s == exp)
+    assert s == exp
 
 
 def test_header_list_comments():
@@ -80,27 +80,25 @@ def test_header_list_comments():
 LAYER
 NAME 'Test'
 END"""
-    assert(s == exp)
+    assert s == exp
 
 
 def test_example_comment_dict():
-
     d = {
-    "__type__": "map",
-    "__comments__": {
-        "__type__": ["# Map comment 1",
-        "# Map comment 2"]
-        },
-    "name": "Test",
-    "layers": [{
-            "__type__": "layer",
-            "__comments__": {
-                "__type__": "# Layer comment",
-                "type": ["# This is a polygon!", "# Another comment"]
-            },
-            "type": "POLYGON"
-        }]
-}
+        "__type__": "map",
+        "__comments__": {"__type__": ["# Map comment 1", "# Map comment 2"]},
+        "name": "Test",
+        "layers": [
+            {
+                "__type__": "layer",
+                "__comments__": {
+                    "__type__": "# Layer comment",
+                    "type": ["# This is a polygon!", "# Another comment"],
+                },
+                "type": "POLYGON",
+            }
+        ],
+    }
     pp = PrettyPrinter(indent=4, quote="'", newlinechar="\n")
     s = pp.pprint(d)
     print(s)
@@ -130,7 +128,6 @@ def test_header_comment2():
 
 
 def test_comment_parsing():
-
     s = """
     # Map comment 1
     # Map comment 2
@@ -148,7 +145,7 @@ def test_comment_parsing():
     print(p._comments)
     assert len(p._comments) == 5
     print(ast.pretty())
-    d = m.transform(ast)      # transform the rest
+    d = m.transform(ast)  # transform the rest
     print(json.dumps(d, indent=4))
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
@@ -157,7 +154,6 @@ def test_comment_parsing():
 
 
 def test_metadata_comment():
-
     txt = """MAP
     # metadata comment
     # on two lines
@@ -181,7 +177,6 @@ END"""
 
 
 def test_metadata_duplicated_key_comment():
-
     txt = """METADATA
         'wms_title' 'Title1' # title1
         'wms_title' 'Title2' # title2
@@ -196,7 +191,6 @@ END"""
 
 
 def test_metadata_mixed_case_comment():
-
     txt = """
     METADATA
         'wms_TITLE' 'Title1' # title1
@@ -213,7 +207,6 @@ END"""
 
 
 def test_metadata_unquoted_comment():
-
     txt = """
     METADATA
       WMS_TITLE "Minor Civil Divisions" # comment
@@ -244,7 +237,7 @@ def test_cstyle_comment():
     ast = p.parse(s)
     print(p._comments)
     print(ast.pretty())
-    d = m.transform(ast)      # transform the rest
+    d = m.transform(ast)  # transform the rest
     print(json.dumps(d, indent=4))
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
@@ -300,9 +293,9 @@ def run_tests():
     pytest.main(["-s", "tests/test_comments.py"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    logging.getLogger('mappyfile').setLevel(logging.DEBUG)
+    logging.getLogger("mappyfile").setLevel(logging.DEBUG)
     # test_comment_parsing()
     test_metadata_mixed_case_comment()
     # run_tests()

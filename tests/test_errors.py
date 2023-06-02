@@ -56,9 +56,9 @@ END"""
         p.parse(s)
     except UnexpectedToken as ex:
         print(ex.__dict__)
-        assert(ex.line == 4)
-        assert(ex.column == 1)
-        assert(str(ex.token) == 'END')
+        assert ex.line == 4
+        assert ex.column == 1
+        assert str(ex.token) == "END"
 
 
 def test_missing_end():
@@ -78,9 +78,9 @@ END"""
     try:
         p.parse(s)
     except UnexpectedToken as ex:
-        assert(ex.line == 7)
-        assert(ex.column == 1)
-        assert(ex.token.type == "$END")
+        assert ex.line == 7
+        assert ex.column == 1
+        assert ex.token.type == "$END"
 
 
 @pytest.mark.xfail
@@ -96,7 +96,7 @@ def test_style_pattern_fail():
     END
     """
     exp = "STYLE PATTERN 6 4 2 4 6 END END"
-    assert(output(s, schema_name="style") == exp)
+    assert output(s, schema_name="style") == exp
 
 
 def run_tests():
@@ -109,7 +109,7 @@ def run_tests():
     pytest.main(["tests/test_errors.py"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     run_tests()
     print("Done!")

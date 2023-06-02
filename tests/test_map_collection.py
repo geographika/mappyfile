@@ -26,7 +26,7 @@ def output(fn):
         logging.debug("Number of layers: {}".format(len(d["layers"])))
 
         errors = v.validate(d, add_comments=True)
-        assert(len(errors) == 0)
+        assert len(errors) == 0
 
     except Exception as ex:
         logging.exception(ex)
@@ -47,12 +47,12 @@ def output(fn):
         d = m.transform(ast)
 
         errors = v.validate(d)
-        assert(len(errors) == 0)
+        assert len(errors) == 0
 
 
 def test_maps():
     sample_dir = os.path.join(os.path.dirname(__file__), "mapfiles")
-    pth = sample_dir + r'/**/*.map'
+    pth = sample_dir + r"/**/*.map"
     mapfiles = glob2.glob(pth)
     mapfiles = [f for f in mapfiles if "basemaps" not in f]
 

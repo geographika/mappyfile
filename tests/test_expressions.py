@@ -32,7 +32,7 @@ def output(s):
 def check_result(s):
     try:
         s2 = output(s)
-        assert(s == s2)
+        assert s == s2
     except AssertionError:
         logging.info(s)
         logging.info(s2)
@@ -40,36 +40,36 @@ def check_result(s):
 
 
 def test_class_expression1():
-    s = '''
+    s = """
     CLASS
       TEXT ([area])
     END
-    '''
+    """
     exp = "CLASS TEXT ([area]) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_class_expression2():
     r"""
     shp2img -m C:\Temp\msautotest\query\text.tmp.map  -l text_test002 -o c:\temp\tmp_onl0lk.png
     """
-    s = '''
+    s = """
     CLASS
       TEXT ("[area]")
     END
-    '''
+    """
     exp = 'CLASS TEXT ("[area]") END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_complex_class_expression():
-    s = '''
+    s = """
     CLASS
       TEXT ("Area is: " + tostring([area],"%.2f"))
     END
-    '''
-    exp = '''CLASS TEXT ("Area is: " + (tostring([area],"%.2f"))) END'''
-    assert(output(s) == exp)
+    """
+    exp = """CLASS TEXT ("Area is: " + (tostring([area],"%.2f"))) END"""
+    assert output(s) == exp
 
 
 def test_or_expressions():
@@ -77,63 +77,63 @@ def test_or_expressions():
     See http://www.mapserver.org/mapfile/expressions.html#expressions
     """
 
-    s = '''
+    s = """
     CLASS
         EXPRESSION ("[style_class]" = "10" OR "[style_class]" = "20")
     END
-    '''
+    """
 
     exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) OR ( "[style_class]" = "20" ) ) END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
-    s = '''
+    s = """
     CLASS
         EXPRESSION ("[style_class]" = "10" || "[style_class]" = "20")
     END
-    '''
+    """
 
     exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) OR ( "[style_class]" = "20" ) ) END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_and_expressions():
-    s = '''
+    s = """
     CLASS
         EXPRESSION ("[style_class]" = "10" AND "[style_class]" = "20")
     END
-    '''
+    """
 
     exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) AND ( "[style_class]" = "20" ) ) END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
-    s = '''
+    s = """
     CLASS
         EXPRESSION ("[style_class]" = "10" && "[style_class]" = "20")
     END
-    '''
+    """
 
     exp = 'CLASS EXPRESSION ( ( "[style_class]" = "10" ) AND ( "[style_class]" = "20" ) ) END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_not_expressions():
-    s = '''
+    s = """
     CLASS
         EXPRESSION NOT("[style_class]" = "20")
     END
-    '''
+    """
 
     exp = 'CLASS EXPRESSION NOT ( "[style_class]" = "20" ) END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
-    s = '''
+    s = """
     CLASS
         EXPRESSION !("[style_class]" = "20")
     END
-    '''
+    """
 
     exp = 'CLASS EXPRESSION NOT ( "[style_class]" = "20" ) END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_runtime_expression():
@@ -144,7 +144,7 @@ def test_runtime_expression():
     """
     exp = "CLASS EXPRESSION ( [EPPL_Q100_] = %eppl% ) END"
     # print(output(s))
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_ne_comparison():
@@ -159,7 +159,7 @@ def test_ne_comparison():
     END
     """
     exp = 'CLASS EXPRESSION ( "[building]" NE NULL ) END'
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_eq_comparison():
@@ -174,7 +174,7 @@ def test_eq_comparison():
     """
     exp = 'CLASS EXPRESSION ( "[building]" eq NULL ) END'
     # print(output(s))
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_expression():
@@ -190,7 +190,7 @@ def test_expression():
     END
     """
     exp = "CLASS EXPRESSION ( '[construct]' ~* /Br.*$/ ) STYLE ANGLE 360 END END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_list_expression():
@@ -203,7 +203,7 @@ def test_list_expression():
     END
     """
     exp = "CLASS EXPRESSION /NS_Bahn|NS_BahnAuto/ END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_numerical_operator_ge_expression():
@@ -213,7 +213,7 @@ def test_numerical_operator_ge_expression():
     END
     """
     exp = "CLASS EXPRESSION ( [power] ge 10000 ) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_numerical_operator_gt_expression():
@@ -223,7 +223,7 @@ def test_numerical_operator_gt_expression():
     END
     """
     exp = "CLASS EXPRESSION ( [power] gt 10000 ) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_numerical_operator_le_expression():
@@ -233,7 +233,7 @@ def test_numerical_operator_le_expression():
     END
     """
     exp = "CLASS EXPRESSION ( [power] le 100 ) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_numerical_operator_lt_expression():
@@ -243,7 +243,7 @@ def test_numerical_operator_lt_expression():
     END
     """
     exp = "CLASS EXPRESSION ( [power] lt 100 ) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_divide():
@@ -259,7 +259,7 @@ def test_divide():
     END
     """
     exp = "CLASS EXPRESSION ([field1] / [field2]) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_multiply():
@@ -269,7 +269,7 @@ def test_multiply():
     END
     """
     exp = "CLASS EXPRESSION ([field1] * [field2]) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_negation():
@@ -282,7 +282,7 @@ def test_negation():
     END
     """
     exp = "CLASS EXPRESSION (-[field1]) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_pointless_plus():
@@ -293,7 +293,7 @@ def test_pointless_plus():
     END
     """
     exp = "CLASS EXPRESSION ([field1]) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_power():
@@ -303,7 +303,7 @@ def test_power():
     END
     """
     exp = "CLASS EXPRESSION ([field1] ^ [field2]) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_divide_expression():
@@ -317,7 +317,7 @@ def test_divide_expression():
     END
     """
     exp = "CLASS EXPRESSION ( [field1] / [field2] > 0.1 ) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_modulo_expression():
@@ -330,7 +330,7 @@ def test_modulo_expression():
     END
     """
     exp = "CLASS EXPRESSION ( ( [height] % 50 ) = 0 ) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_escaped_string():
@@ -346,7 +346,7 @@ def test_escaped_string():
     END
     """
     exp = """CLASS EXPRESSION 'National \\"hero\\" statue' END"""
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_list_expression_alt():
@@ -365,7 +365,7 @@ def test_list_expression_alt():
     END
     """
     exp = "CLASS EXPRESSION {2_Klass,Rte2etr} END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
     s = """
     CLASS
@@ -373,17 +373,17 @@ def test_list_expression_alt():
     END
     """
     exp = "CLASS EXPRESSION {2_Klass,class with space} END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_class_expression_oddname():
-    s = '''
+    s = """
     CLASS
       TEXT ([area:ian])
     END
-    '''
+    """
     exp = "CLASS TEXT ([area:ian]) END"
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_class_not_expression_brackets():
@@ -392,14 +392,14 @@ def test_class_not_expression_brackets():
     Each expression should be bracketed independently and any NOT
     clause should be outside the brackets
     """
-    s = '''
+    s = """
     CLASS
       EXPRESSION (("[TIME]" eq 'NOW') AND NOT ("[TYPE]" ~ "(something|completely|different)"))
     END
-    '''
-    exp = '''CLASS EXPRESSION ( ( "[TIME]" eq 'NOW' ) AND NOT ( "[TYPE]" ~ "(something|completely|different)" ) ) END'''
+    """
+    exp = """CLASS EXPRESSION ( ( "[TIME]" eq 'NOW' ) AND NOT ( "[TYPE]" ~ "(something|completely|different)" ) ) END"""
     print(output(s))
-    assert(output(s) == exp)
+    assert output(s) == exp
 
 
 def test_class_not_expression_no_brackets():
@@ -407,41 +407,41 @@ def test_class_not_expression_no_brackets():
     See issue #85 - coding of NOT logical expressions #85
     This parses successfully in MapServer but not in mappyfile
     """
-    s = '''
+    s = """
     CLASS
       EXPRESSION ("[TIME]" eq 'NOW' AND NOT "[TYPE]" ~ "(something|completely|different)")
     END
-    '''
-    exp = '''CLASS EXPRESSION ( ( "[TIME]" eq 'NOW' ) AND NOT ( "[TYPE]" ~ "(something|completely|different)" ) ) END'''
-    assert(output(s) == exp)
+    """
+    exp = """CLASS EXPRESSION ( ( "[TIME]" eq 'NOW' ) AND NOT ( "[TYPE]" ~ "(something|completely|different)" ) ) END"""
+    assert output(s) == exp
 
 
 def test_unquoted_unicode_string():
     """
     See pull request #92 - French unquoted string
     """
-    s = '''
+    s = """
     CLASS
       EXPRESSION {Aérodrome,Aéroport,Héliport,Base spatiale}
     END
-    '''
+    """
 
-    exp = u'''CLASS EXPRESSION {Aérodrome,Aéroport,Héliport,Base spatiale} END'''
-    assert(output(s) == exp)
+    exp = """CLASS EXPRESSION {Aérodrome,Aéroport,Héliport,Base spatiale} END"""
+    assert output(s) == exp
 
 
 def test_list_with_apostrophe():
     """
     See https://github.com/geographika/mappyfile/issues/120
     """
-    s = '''
+    s = """
     CLASS
       EXPRESSION {bla,d'apostrophe}
     END
-    '''
+    """
 
-    exp = u'''CLASS EXPRESSION {bla,d'apostrophe} END'''
-    assert(output(s) == exp)
+    exp = """CLASS EXPRESSION {bla,d'apostrophe} END"""
+    assert output(s) == exp
 
 
 def run_tests():
@@ -453,7 +453,7 @@ def run_tests():
     pytest.main(["tests/test_expressions.py"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     test_list_with_apostrophe()
     # run_tests()

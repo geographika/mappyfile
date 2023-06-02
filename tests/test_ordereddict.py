@@ -30,14 +30,12 @@ def get_dict(s):
 
 
 def output(d):
-
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     s = pp.pprint(d)
     logging.debug(s)
 
 
 def test_dict():
-
     d = DefaultOrderedDict()
     d["key"] = ["value"]
 
@@ -45,7 +43,6 @@ def test_dict():
 
 
 def test_config_directive():
-
     s = """
     MAP
         NAME 'ConfigMap'
@@ -60,15 +57,16 @@ def test_config_directive():
     d["name"] = "NewName"
 
     print(d["name"])
-    assert(d["name"] == "NewName")  # "'ConfigMap'")
+    assert d["name"] == "NewName"  # "'ConfigMap'")
 
-    print(d["CONFIG"])  # even though this key is now lower-case it will correctly return (as DefaultOrderedDict calls key.lower())
-    assert(d["config"]["PROJ_DEBUg"] == "OFF")
+    print(
+        d["CONFIG"]
+    )  # even though this key is now lower-case it will correctly return (as DefaultOrderedDict calls key.lower())
+    assert d["config"]["PROJ_DEBUg"] == "OFF"
     output(d)
 
 
 def test_debug():
-
     s = """
     MAP
         DEBUG ON
@@ -83,26 +81,23 @@ def test_debug():
 
 
 def test_false_value():
-
     d = DefaultOrderedDict(DefaultOrderedDict)
     d["key"] = False
     print(json.dumps(d, indent=4))
-    assert(d["key"] is False)
+    assert d["key"] is False
 
 
 def test_case_sensitive_ordered_dict():
-
     d = CaseInsensitiveOrderedDict()
     d["KeY1"] = 1
     d["KEY2"] = 2
     d["key3"] = 3
 
     print(json.dumps(d, indent=4))
-    assert(d["kEy2"] == 2)
+    assert d["kEy2"] == 2
 
 
 def test_update_case_sensitive_ordered_dict():
-
     d = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
 
     d["b"] = "hello"
@@ -120,7 +115,7 @@ def test_update_case_sensitive_ordered_dict():
     d.update(red=1, blue=2)
 
     print(json.dumps(d, indent=4))
-    assert(d["a"] == "goodbye")
+    assert d["a"] == "goodbye"
 
 
 def test_pickling():
@@ -179,10 +174,10 @@ def test_deepcopy():
     See issue #73
     """
     d = DefaultOrderedDict()
-    d['__type__'] = 'layer'
+    d["__type__"] = "layer"
 
     c = deepcopy(d)
-    assert c['__type__'] == 'layer'
+    assert c["__type__"] == "layer"
 
 
 def test_adding_layers():
@@ -215,7 +210,7 @@ def run_tests():
     pytest.main(["tests/test_ordereddict.py"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # run_tests()
     # test_update_case_sensitive_ordered_dict()

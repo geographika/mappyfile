@@ -10,10 +10,10 @@ from mappyfile.pprint import PrettyPrinter
 def test_includes():
     p = Parser()
 
-    ast = p.parse_file('./tests/samples/include1.map')
+    ast = p.parse_file("./tests/samples/include1.map")
     m = MapfileToDict()
 
-    d = (m.transform(ast))  # works
+    d = m.transform(ast)  # works
     print(mappyfile.dumps(d))
     assert d["name"] == "include_test"
 
@@ -34,16 +34,16 @@ def test_include_from_string():
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     output = pp.pprint(d)
     expected = "MAP NAME 'test' END"
-    assert(output == expected)
+    assert output == expected
 
 
 def test_includes_nested_path():
     p = Parser()
 
-    ast = p.parse_file('./tests/samples/include1_nested_path.map')
+    ast = p.parse_file("./tests/samples/include1_nested_path.map")
     m = MapfileToDict()
 
-    d = (m.transform(ast))  # works
+    d = m.transform(ast)  # works
     print(mappyfile.dumps(d))
 
 
@@ -55,10 +55,10 @@ def test_includes_relative_path():
     """
     p = Parser()
 
-    ast = p.parse_file('./tests/samples/include4.map')
+    ast = p.parse_file("./tests/samples/include4.map")
     m = MapfileToDict()
 
-    d = (m.transform(ast))  # works
+    d = m.transform(ast)  # works
     print(mappyfile.dumps(d))
 
 
@@ -66,9 +66,9 @@ def test_includes_max_recursion():
     p = Parser()
 
     with pytest.raises(Exception) as excinfo:
-        p.parse_file('./tests/samples/include1_recursive.map')
+        p.parse_file("./tests/samples/include1_recursive.map")
 
-    assert('Maximum nested include exceeded' in str(excinfo.value))
+    assert "Maximum nested include exceeded" in str(excinfo.value)
 
 
 def test_includes_no_expand():
@@ -86,7 +86,7 @@ def test_includes_no_expand():
     output = pp.pprint(d)
 
     expected = "MAP INCLUDE 'includes/mymapfile.map' END"
-    assert(output == expected)
+    assert output == expected
 
 
 def test_two_includes():
@@ -103,12 +103,11 @@ def test_two_includes():
     output = pp.pprint(d)
     print(output)
     expected = "MAP INCLUDE 'include1.txt' INCLUDE 'include2.txt' END"
-    assert(output == expected)
+    assert output == expected
 
 
 def test_include_from_filehandle():
-
-    fn = './tests/samples/include1.map'
+    fn = "./tests/samples/include1.map"
 
     with open(fn) as f:
         d = mappyfile.load(f)
@@ -120,9 +119,9 @@ def run_tests():
     pytest.main(["tests/test_includes.py"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    logging.getLogger('mappyfile').setLevel(logging.INFO)
+    logging.getLogger("mappyfile").setLevel(logging.INFO)
     # run_tests()
     test_include_from_filehandle()
     print("Done!")

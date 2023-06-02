@@ -6,7 +6,6 @@ import pytest
 
 
 def test_get_mapfiles():
-
     tf = tempfile.NamedTemporaryFile(suffix=".map")
     print(tf.name)
 
