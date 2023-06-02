@@ -22,7 +22,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: "3.10"
     - name: Install project and dependencies
       run: |
         pip install .
@@ -31,6 +31,7 @@ jobs:
         mappyfile schema docs/schemas/mapfile-latest.json
         mappyfile schema docs/schemas/mapfile-schema-7-6.json --version=7.6
         mappyfile schema docs/schemas/mapfile-schema-8-0.json --version=8.0
+        mappyfile schema docs/schemas/mapfile-schema-8-2.json --version=8.2
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com" # user id of the Github Actions account/bot
