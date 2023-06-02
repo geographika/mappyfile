@@ -41,17 +41,28 @@ except ImportError:
 
 PY2 = sys.version_info[0] < 3
 if not PY2:
-    unicode = str # NOQA
+    unicode = str  # NOQA
 
 
 log = logging.getLogger("mappyfile")
 
-SYMBOL_ATTRIBUTES = {'ANCHORPOINT', 'ANTIALIAS', 'FILLED', 'FONT', 'IMAGE', 'NAME',
-                     'COLOR', 'TYPE', 'FONT', 'CHARACTER', 'POINTS', 'TRANSPARENT'}
+SYMBOL_ATTRIBUTES = {
+    "ANCHORPOINT",
+    "ANTIALIAS",
+    "FILLED",
+    "FONT",
+    "IMAGE",
+    "NAME",
+    "COLOR",
+    "TYPE",
+    "FONT",
+    "CHARACTER",
+    "POINTS",
+    "TRANSPARENT",
+}
 
 
 class Parser(object):
-
     def __init__(self, expand_includes=True, include_comments=False, **kwargs):
         self.expand_includes = expand_includes
         self.include_comments = include_comments
@@ -62,24 +73,28 @@ class Parser(object):
         extra_args = {}
 
         if lark_cython:
-            extra_args['_plugins'] = lark_cython.plugins
+            extra_args["_plugins"] = lark_cython.plugins
 
         if self.include_comments:
-            callbacks = {'COMMENT': self._comments.append, 'CCOMMENT': self._comments.append}
+            callbacks = {
+                "COMMENT": self._comments.append,
+                "CCOMMENT": self._comments.append,
+            }
             extra_args.update(dict(propagate_positions=True, lexer_callbacks=callbacks))
 
         return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
 
     def _get_include_filename(self, line):
-
         if "#" in line:
             # remove any comments on the same line
             line = line.split("#")[0]
 
         include_pairs = line.split()
         if len(include_pairs) > 2:
-            log.warning("Multiple include files have been found on the same line. "
-                        "Only the first will be used. ")
+            log.warning(
+                "Multiple include files have been found on the same line. "
+                "Only the first will be used. "
+            )
         inc_file_path = include_pairs[1]
 
         return inc_file_path.strip("'").strip('"')
@@ -89,7 +104,7 @@ class Parser(object):
         if fn is None:
             fn = os.getcwd() + os.sep
 
-        lines = text.split('\n')
+        lines = text.split("\n")
         includes = {}
         for idx, l in enumerate(lines):
             if l.strip().lower().startswith("include"):
@@ -99,19 +114,25 @@ class Parser(object):
                 inc_file_path = self._get_include_filename(l)
 
                 if not os.path.isabs(inc_file_path):
-                    inc_file_path = os.path.abspath(os.path.join(os.path.dirname(fn), inc_file_path))
+                    inc_file_path = os.path.abspath(
+                        os.path.join(os.path.dirname(fn), inc_file_path)
+                    )
                 try:
                     include_text = self.open_file(inc_file_path)
                 except IOError as ex:
-                    log.warning("Include file '%s' not found in '%s'", inc_file_path, fn)
+                    log.warning(
+                        "Include file '%s' not found in '%s'", inc_file_path, fn
+                    )
                     raise ex
                 # recursively load any further includes
-                includes[idx] = self.load_includes(include_text, fn=fn, _nested_includes=_nested_includes+1)
+                includes[idx] = self.load_includes(
+                    include_text, fn=fn, _nested_includes=_nested_includes + 1
+                )
 
         for idx, txt in includes.items():
             lines.pop(idx)  # remove the original include
             lines.insert(idx, txt)
-        return '\n'.join(lines)
+        return "\n".join(lines)
 
     def assign_comments(self, tree, comments):
         """
@@ -152,7 +173,6 @@ class Parser(object):
         self._assign_comments(tree, 0)
 
     def _get_comments(self, from_line, to_line):
-
         idx = self.idx
         comments = self.comments
 
@@ -162,7 +182,7 @@ class Parser(object):
         from_idx = idx[from_line]
 
         if to_line < len(idx):
-            associated_comments = comments[from_idx:idx[to_line]]
+            associated_comments = comments[from_idx : idx[to_line]]
         else:
             # get all remaining comments
             associated_comments = comments[from_idx:]
@@ -170,7 +190,6 @@ class Parser(object):
         return associated_comments
 
     def _assign_comments(self, _tree, prev_end_line):
-
         for node in _tree.children:
             if not isinstance(node, Tree):
                 continue
@@ -198,8 +217,10 @@ class Parser(object):
 
     def load(self, fp):
         text = fp.read()
-        if hasattr(fp, 'name'):
-            fn = fp.name  # name is a read-only attribute and may not be present on all file-like objects.
+        if hasattr(fp, "name"):
+            fn = (
+                fp.name
+            )  # name is a read-only attribute and may not be present on all file-like objects.
         else:
             fn = None
         return self.parse(text, fn)
@@ -211,7 +232,10 @@ class Parser(object):
                 return f.read()
         except UnicodeDecodeError as ex:
             log.debug(ex)
-            log.error("Please check the encoding for %s. All Mapfiles should be in utf-8 format.", fn)
+            log.error(
+                "Please check the encoding for %s. All Mapfiles should be in utf-8 format.",
+                fn,
+            )
             raise
 
     def parse_file(self, fn):
@@ -225,7 +249,7 @@ class Parser(object):
 
         if PY2 and not isinstance(text, unicode):
             # specify Unicode for Python 2.7
-            text = unicode(text, 'utf-8')
+            text = unicode(text, "utf-8")
 
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
@@ -234,14 +258,17 @@ class Parser(object):
             self._comments[:] = []  # clear any comments from a previous parse
             ip = self.lalr.parse_interactive(text)
             for t in ip.iter_parse():
-                if t.type == 'UNQUOTED_STRING':
+                if t.type == "UNQUOTED_STRING":
                     # Unquoted strings after SYMBOL can only be values, not attributes
-                    if ip.parser_state.value_stack[-1] == 'SYMBOL' and t.value.upper() not in SYMBOL_ATTRIBUTES:
-                        t.type = 'UNQUOTED_STRING_VALUE'
-                elif t.type == 'GRID':
+                    if (
+                        ip.parser_state.value_stack[-1] == "SYMBOL"
+                        and t.value.upper() not in SYMBOL_ATTRIBUTES
+                    ):
+                        t.type = "UNQUOTED_STRING_VALUE"
+                elif t.type == "GRID":
                     # Unquoted 'GRID' coming after NAME is always a value, not a composite type
-                    if ip.parser_state.value_stack[-1] == 'NAME':
-                        t.type = 'UNQUOTED_STRING_VALUE'
+                    if ip.parser_state.value_stack[-1] == "NAME":
+                        t.type = "UNQUOTED_STRING_VALUE"
 
             tree = ip.resume_parse()
             if self.include_comments:

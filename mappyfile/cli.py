@@ -39,8 +39,9 @@ from mappyfile.validator import Validator
 
 
 def get_mapfiles(mapfiles):
-
-    all_mapfiles = [mf for sublist in mapfiles for mf in glob.glob(sublist) if not os.path.isdir(mf)]
+    all_mapfiles = [
+        mf for sublist in mapfiles for mf in glob.glob(sublist) if not os.path.isdir(mf)
+    ]
     return all_mapfiles
 
 
@@ -65,9 +66,9 @@ logger = logging.getLogger(__name__)
 
 # The CLI command group.
 @click.group(help="Command line interface for the mappyfile package")
-@click.option('--verbose', '-v', count=True, help="Increase verbosity")
-@click.option('--quiet', '-q', count=True, help="Decrease verbosity")
-@click.version_option(version=mappyfile.__version__, message='%(version)s')
+@click.option("--verbose", "-v", count=True, help="Increase verbosity")
+@click.option("--quiet", "-q", count=True, help="Decrease verbosity")
+@click.version_option(version=mappyfile.__version__, message="%(version)s")
 @click.pass_context
 def main(ctx, verbose, quiet):
     """
@@ -76,20 +77,57 @@ def main(ctx, verbose, quiet):
     verbosity = verbose - quiet
     configure_logging(verbosity)
     ctx.obj = {}
-    ctx.obj['verbosity'] = verbosity
+    ctx.obj["verbosity"] = verbosity
 
 
 @main.command(short_help="Format a Mapfile")
-@click.argument('input-mapfile', nargs=1, type=click.Path(exists=True))
-@click.argument('output-mapfile', nargs=1, type=click.Path())
-@click.option('--indent', default=4, show_default=True, help="The number of spacer characters to indent structures in the Mapfile") # noqa
-@click.option('--spacer', default=" ", help="The character to use for indenting structures in the Mapfile")
-@click.option('--quote', default='"', help="The quote character to use in the Mapfile (double or single quotes). Ensure these are escaped e.g. \\\" or \\' [default: \\\"]") # noqa
-@click.option('--newlinechar', default='\n', help="The character used to insert newlines in the Mapfile [default: \\n]")
-@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile") # noqa
-@click.option('--comments/--no-comments', default=False, show_default=True, help="Keep Mapfile comments in the output (experimental)") # noqa
+@click.argument("input-mapfile", nargs=1, type=click.Path(exists=True))
+@click.argument("output-mapfile", nargs=1, type=click.Path())
+@click.option(
+    "--indent",
+    default=4,
+    show_default=True,
+    help="The number of spacer characters to indent structures in the Mapfile",
+)  # noqa
+@click.option(
+    "--spacer",
+    default=" ",
+    help="The character to use for indenting structures in the Mapfile",
+)
+@click.option(
+    "--quote",
+    default='"',
+    help='The quote character to use in the Mapfile (double or single quotes). Ensure these are escaped e.g. \\" or \\\' [default: \\"]',
+)  # noqa
+@click.option(
+    "--newlinechar",
+    default="\n",
+    help="The character used to insert newlines in the Mapfile [default: \\n]",
+)
+@click.option(
+    "--expand/--no-expand",
+    default=True,
+    show_default=True,
+    help="Expand any INCLUDE directives found in the Mapfile",
+)  # noqa
+@click.option(
+    "--comments/--no-comments",
+    default=False,
+    show_default=True,
+    help="Keep Mapfile comments in the output (experimental)",
+)  # noqa
 @click.pass_context
-def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinechar, expand, comments):
+def format(
+    ctx,
+    input_mapfile,
+    output_mapfile,
+    indent,
+    spacer,
+    quote,
+    newlinechar,
+    expand,
+    comments,
+):
     """
     Format a the input-mapfile and save as output-mapfile. Note output-mapfile will be
     overwritten if it already exists.
@@ -107,19 +145,43 @@ def format(ctx, input_mapfile, output_mapfile, indent, spacer, quote, newlinecha
         mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map --no-expand --comments
     """
 
-    quote = codecs.decode(quote, 'unicode_escape')  # ensure \t is handled as a tab
-    spacer = codecs.decode(spacer, 'unicode_escape')  # ensure \t is handled as a tab
-    newlinechar = codecs.decode(newlinechar, 'unicode_escape')  # ensure \n is handled as a newline
+    quote = codecs.decode(quote, "unicode_escape")  # ensure \t is handled as a tab
+    spacer = codecs.decode(spacer, "unicode_escape")  # ensure \t is handled as a tab
+    newlinechar = codecs.decode(
+        newlinechar, "unicode_escape"
+    )  # ensure \n is handled as a newline
 
-    d = mappyfile.open(input_mapfile, expand_includes=expand, include_comments=comments, include_position=True)
-    mappyfile.save(d, output_mapfile, indent=indent, spacer=spacer, quote=quote, newlinechar=newlinechar)
+    d = mappyfile.open(
+        input_mapfile,
+        expand_includes=expand,
+        include_comments=comments,
+        include_position=True,
+    )
+    mappyfile.save(
+        d,
+        output_mapfile,
+        indent=indent,
+        spacer=spacer,
+        quote=quote,
+        newlinechar=newlinechar,
+    )
     sys.exit(0)
 
 
 @main.command(short_help="Validate Mapfile(s) against a schema")
-@click.argument('mapfiles', nargs=-1, type=click.Path())
-@click.option('--expand/--no-expand', default=True, show_default=True, help="Expand any INCLUDE directives found in the Mapfile") # noqa
-@click.option('--version', default=7.6, show_default=True, help="The MapServer version number used to validate the Mapfile") # noqa
+@click.argument("mapfiles", nargs=-1, type=click.Path())
+@click.option(
+    "--expand/--no-expand",
+    default=True,
+    show_default=True,
+    help="Expand any INCLUDE directives found in the Mapfile",
+)  # noqa
+@click.option(
+    "--version",
+    default=7.6,
+    show_default=True,
+    help="The MapServer version number used to validate the Mapfile",
+)  # noqa
 @click.pass_context
 def validate(ctx, mapfiles, expand, version):
     """
@@ -142,7 +204,9 @@ def validate(ctx, mapfiles, expand, version):
     all_mapfiles = get_mapfiles(mapfiles)
 
     if len(all_mapfiles) == 0:
-        click.echo("No Mapfiles found at the following paths: {}".format(",".join(mapfiles)))
+        click.echo(
+            "No Mapfiles found at the following paths: {}".format(",".join(mapfiles))
+        )
         return
 
     validation_count = 0
@@ -161,20 +225,30 @@ def validate(ctx, mapfiles, expand, version):
         if validation_messages:
             for v in validation_messages:
                 v["fn"] = fn
-                msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(**v)
+                msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(
+                    **v
+                )
                 click.echo(msg)
                 errors += 1
         else:
             click.echo("{} validated successfully".format(fn))
             validation_count += 1
 
-    click.echo("{} file(s) validated ({} successfully)".format(len(all_mapfiles), validation_count))
+    click.echo(
+        "{} file(s) validated ({} successfully)".format(
+            len(all_mapfiles), validation_count
+        )
+    )
     sys.exit(errors)
 
 
 @main.command(short_help="Export a Mapfile Schema")
-@click.argument('output_file', nargs=1, type=click.Path())
-@click.option('--version', type=click.FLOAT, help="The MapServer version number used to validate the Mapfile") # noqa
+@click.argument("output_file", nargs=1, type=click.Path())
+@click.option(
+    "--version",
+    type=click.FLOAT,
+    help="The MapServer version number used to validate the Mapfile",
+)  # noqa
 @click.pass_context
 def schema(ctx, output_file, version=None):
     """

@@ -46,12 +46,14 @@ if lark_cython:
 
     def update_token_value(t, value):
         return Token.new_borrow_pos(t.type, value, t)
+
 else:
     TOKEN_TYPES = Token
 
     def update_token_value(t, value):
         t.value = value
         return t
+
 
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 from mappyfile.ordereddict import CaseInsensitiveOrderedDict
@@ -60,14 +62,13 @@ from mappyfile.pprint import Quoter
 
 PY2 = sys.version_info[0] < 3
 if PY2:
-    str = unicode # NOQA
+    str = unicode  # NOQA
 
 
 log = logging.getLogger("mappyfile")
 
 
 class MapfileTransformer(Transformer, object):
-
     def __init__(self, include_position=False, include_comments=False):
         self.quoter = Quoter()
         self.include_position = include_position
@@ -89,7 +90,9 @@ class MapfileTransformer(Transformer, object):
                 key_token = composite_dict[1]
                 key_name = key_token.value.lower()
                 composites_position = self.get_position_dict(composite_dict)
-                composites_position[key_name] = self.create_position_dict(key_token, None)
+                composites_position[key_name] = self.create_position_dict(
+                    key_token, None
+                )
 
             composites.append(composite_dict)
 
@@ -101,7 +104,6 @@ class MapfileTransformer(Transformer, object):
             return composites
 
     def get_position_dict(self, d):
-
         if "__position__" in d:
             position_dict = d["__position__"]
         else:
@@ -110,7 +112,6 @@ class MapfileTransformer(Transformer, object):
         return position_dict
 
     def flatten(self, values):
-
         flat_list = []
 
         for v in values:
@@ -129,14 +130,12 @@ class MapfileTransformer(Transformer, object):
         return flat_list
 
     def plural(self, s):
-
-        if s.endswith('s'):
-            return s + 'es'
+        if s.endswith("s"):
+            return s + "es"
         else:
-            return s + 's'
+            return s + "s"
 
     def create_position_dict(self, key_token, values):
-
         line, column = key_token.line, key_token.column
         d = OrderedDict()
         d["line"] = line
@@ -202,7 +201,9 @@ class MapfileTransformer(Transformer, object):
             else:
                 #  simple attribute
                 pos = d.pop("__position__")
-                d.pop("__tokens__", None)  # tokens are no longer needed now we have the positions
+                d.pop(
+                    "__tokens__", None
+                )  # tokens are no longer needed now we have the positions
                 comments = d.pop("__comments__", None)
 
                 key_name = self.get_single_key(d)
@@ -211,7 +212,9 @@ class MapfileTransformer(Transformer, object):
                     # there may be several config dicts - one for each setting
                     if key_name not in composite_dict:
                         # create an initial OrderedDict
-                        composite_dict[key_name] = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
+                        composite_dict[key_name] = CaseInsensitiveOrderedDict(
+                            CaseInsensitiveOrderedDict
+                        )
                     # populate the existing config dict
                     cfg_dict = composite_dict[key_name]
                     cfg_dict.update(d[key_name])
@@ -232,7 +235,9 @@ class MapfileTransformer(Transformer, object):
                         existing_points = composite_dict[key_name]
 
                         def depth(L):
-                            return isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+                            return (
+                                isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+                            )
 
                         if depth(existing_points) == 2:
                             composite_dict[key_name] = [existing_points]
@@ -275,7 +280,6 @@ class MapfileTransformer(Transformer, object):
         return composite_dict
 
     def clean_string(self, val):
-
         return self.quoter.remove_quotes(val)
 
     def attr_name(self, tokens):
@@ -288,12 +292,13 @@ class MapfileTransformer(Transformer, object):
         return t
 
     def attr(self, tokens):
-
         key_token = tokens[0]
 
         if isinstance(key_token, (list, tuple)):
             key_token = key_token[0]
-            assert self.key_name(key_token) in ("style", "symbol"), self.key_name(key_token)
+            assert self.key_name(key_token) in ("style", "symbol"), self.key_name(
+                key_token
+            )
 
         key_name = self.key_name(key_token)
         value_tokens = tokens[1:]
@@ -372,8 +377,11 @@ class MapfileTransformer(Transformer, object):
             v = self.clean_string(t[1].value)
 
             if k in d.keys():
-                log.warning("A duplicate key ({}) was found in {}. Only the last value ({}) will be used. ".format(
-                            k, type_, v))
+                log.warning(
+                    "A duplicate key ({}) was found in {}. Only the last value ({}) will be used. ".format(
+                        k, type_, v
+                    )
+                )
 
             d[k] = v
 
@@ -424,7 +432,6 @@ class MapfileTransformer(Transformer, object):
         return self.process_value_pairs(tokens, "validation")
 
     def projection(self, tokens):
-
         key, body = self.check_composite_tokens("projection", tokens)
         projection_strings = [self.clean_string(v.value) for v in body]
 
@@ -483,8 +490,9 @@ class MapfileTransformer(Transformer, object):
         return v
 
     def expression(self, t):
-
-        exp = " ".join([str(v.value) for v in t])  # convert to string for boolean expressions e.g. (true)
+        exp = " ".join(
+            [str(v.value) for v in t]
+        )  # convert to string for boolean expressions e.g. (true)
 
         if not self.quoter.in_parenthesis(exp):
             t[0].value = "({})".format(exp)
@@ -640,17 +648,16 @@ class MapfileTransformer(Transformer, object):
 
 
 class CommentsTransformer(Transformer_InPlace):
-
     def __init__(self, mapfile_todict):
         self._mapfile_todict = mapfile_todict
 
     def get_comments(self, meta):
         all_comments = []
 
-        if hasattr(meta, 'inline_comments'):
+        if hasattr(meta, "inline_comments"):
             all_comments += meta.inline_comments
 
-        if hasattr(meta, 'header_comments'):
+        if hasattr(meta, "header_comments"):
             all_comments += meta.header_comments
 
         return all_comments
@@ -712,10 +719,13 @@ class CommentsTransformer(Transformer_InPlace):
 
 
 class MapfileToDict(object):
-
-    def __init__(self, include_position=False, include_comments=False,
-                 transformerClass=MapfileTransformer, **kwargs):
-
+    def __init__(
+        self,
+        include_position=False,
+        include_comments=False,
+        transformerClass=MapfileTransformer,
+        **kwargs
+    ):
         self.include_position = include_position
         self.include_comments = include_comments
         self.transformerClass = transformerClass
@@ -724,8 +734,11 @@ class MapfileToDict(object):
     def transform(self, tree):
         tree = Canonize().transform(tree)
 
-        self.mapfile_transformer = self.transformerClass(include_position=self.include_position,
-                                                         include_comments=self.include_comments, **self.kwargs)
+        self.mapfile_transformer = self.transformerClass(
+            include_position=self.include_position,
+            include_comments=self.include_comments,
+            **self.kwargs
+        )
 
         if self.include_comments:
             comments_transformer = CommentsTransformer(self.mapfile_transformer)
@@ -737,8 +750,8 @@ class MapfileToDict(object):
 class Canonize(Transformer_InPlace):
     @v_args(tree=True)
     def symbolset(self, tree):
-        composite_type = Tree('composite_type', [Token('symbolset', 'symbolset')])
+        composite_type = Tree("composite_type", [Token("symbolset", "symbolset")])
 
-        tree.data = 'composite'
+        tree.data = "composite"
         tree.children.insert(0, composite_type)
         return tree
