@@ -1,6 +1,8 @@
 # see https://www.appveyor.com/docs/windows-images-software/#python
 # and https://packaging.python.org/guides/supporting-windows-using-appveyor/
 
+image: Visual Studio 2019
+
 environment:
 
   global:
@@ -10,9 +12,10 @@ environment:
 
   matrix:
 
-    - PYTHON: "C:\\Python38-x64"
-    - PYTHON: "C:\\Python37-x64"
-    - PYTHON: "C:\\Python36"
+    - PYTHON: "C:\\Python311-x64"
+    - PYTHON: "C:\\Python310-x64"
+    - PYTHON: "C:\\Python39-x64"
+    - PYTHON: "C:\\Python38"
 
 install:
   # Note that you must use the environment variable %PYTHON% to refer to
@@ -32,10 +35,9 @@ build_script:
 
 test_script:
   - python -m pytest  # for unknown reason running pytest directly fails on Python 3.7 and above
-  - "flake8 --ignore=E501,E121,E122,E123,E126,E127,E128,E275 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*"
-  - flake8 mappyfile --max-line-length=120
+  - "flake8 ."
   - mappyfile schema mapfile-schema.json
-  - mappyfile schema mapfile-schema-7-6.json --version=7.6
+  - mappyfile schema mapfile-schema-8-0.json --version=8.0
   - mappyfile validate tests/sample_maps/256_overlay_res.map
   - mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
 
@@ -53,7 +55,7 @@ artifacts:
     name: wheel
 
 deploy_script:
-  - ps: if (($env:APPVEYOR_REPO_TAG -eq $TRUE) -and ($Env:PYTHON -ne "C:\\Python27-x64")) { pip install -qq twine; twine upload --skip-existing dist/* }
+  - ps: if ($env:APPVEYOR_REPO_TAG -eq $TRUE) { pip install -qq twine; twine upload --skip-existing dist/* }
 
 # Uncomment to enable debugging on the server
 #on_finish:

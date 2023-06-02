@@ -22,6 +22,20 @@
 
 import mappyfile
 
+import re
+from pygments.lexer import RegexLexer, combined, include
+from pygments.token import (
+    Text,
+    Punctuation,
+    Generic,
+    Keyword,
+    Name,
+    Number,
+    String,
+    Comment,
+    Operator,
+)
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -436,11 +450,6 @@ epub_exclude_files = ["search.html"]
 #
 # epub_use_index = True
 
-from pygments.lexer import RegexLexer, bygroups, combined, include
-from pygments.token import *
-from pygments import highlight
-from pygments.formatters import HtmlFormatter
-
 
 class WKTLexer(RegexLexer):
     name = "wkt"
@@ -464,8 +473,6 @@ class WKTLexer(RegexLexer):
         ]
     }
 
-
-import re
 
 builtins = (
     r"(ANNOTATION|"

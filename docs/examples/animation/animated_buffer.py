@@ -1,10 +1,12 @@
-import os, sys
+import os
+import sys
 from shapely.geometry import LineString
 import mappyfile
 from PIL import Image
+from helper import create_image
+
 
 sys.path.append(os.path.abspath("./docs/examples"))
-from helper import create_image
 
 
 def create_frame(mapfile, line, dist):
