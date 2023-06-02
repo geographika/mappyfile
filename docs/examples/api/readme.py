@@ -1,7 +1,7 @@
 import mappyfile
 
 mapfile = mappyfile.open("./docs/examples/raster.map")
-    
+
 # update the map name
 mapfile["name"] = "MyNewMap"
 
@@ -24,7 +24,7 @@ layers = mapfile["layers"]
 
 new_layer = mappyfile.loads(new_layer_string)
 
-layers.insert(0, new_layer) # insert the new layer at any index in the Mapfile
+layers.insert(0, new_layer)  # insert the new layer at any index in the Mapfile
 
 for l in layers:
     print("{} {}".format(l["name"], l["type"]))

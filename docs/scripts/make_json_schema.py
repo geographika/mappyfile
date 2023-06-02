@@ -17,7 +17,6 @@ from mappyfile.validator import Validator
 
 
 def check_schema(fn):
-
     print(fn)
 
     with open(fn) as f:
@@ -26,13 +25,12 @@ def check_schema(fn):
 
 
 def save_full_schema(output_file):
-
     validator = Validator()
 
     # check individual schema files
 
     fld = validator.get_schemas_folder()
-    jsn_files = glob.glob(fld + '/*.json')
+    jsn_files = glob.glob(fld + "/*.json")
 
     for fn in jsn_files:
         check_schema(fn)

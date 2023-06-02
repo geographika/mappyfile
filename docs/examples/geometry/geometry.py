@@ -3,12 +3,13 @@ from copy import deepcopy
 from shapely.geometry import LineString
 import mappyfile
 import sys, os
+
 sys.path.append(os.path.abspath("./docs/examples"))
 
 from helper import create_image
 
-def dilation(mapfile):
 
+def dilation(mapfile):
     line = LineString([(0, 0), (1, 1), (0, 2), (2, 2), (3, 1), (1, 0)])
     ll = mappyfile.find(mapfile["layers"], "name", "line")
     ll["features"][0]["wkt"] = line.wkt
@@ -19,6 +20,7 @@ def dilation(mapfile):
 
     mapfile["extent"] = " ".join(map(str, dilated.buffer(0.8).bounds))
     return dilated
+
 
 def erosion(mapfile, dilated):
     """
@@ -34,7 +36,7 @@ def erosion(mapfile, dilated):
     # so any modification are made to this layer only
     pl2 = deepcopy(pl)
 
-    pl2["name"] = "newpolygon"       
+    pl2["name"] = "newpolygon"
     mapfile["layers"].append(pl2)
 
     dilated = dilated.buffer(-0.3)
@@ -43,6 +45,7 @@ def erosion(mapfile, dilated):
     style = pl["classes"][0]["styles"][0]
     style["color"] = "#999999"
     style["outlinecolor"] = "#b2b2b2"
+
 
 def main():
     mf = "./docs/examples/geometry/geometry.map"
@@ -56,6 +59,7 @@ def main():
 
     erosion(mapfile, dilated)
     create_image("erosion", mapfile, output_folder=output_folder)
+
 
 if __name__ == "__main__":
     main()

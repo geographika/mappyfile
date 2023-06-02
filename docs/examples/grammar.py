@@ -5,8 +5,9 @@ from lark.tree import pydot__tree_to_png
 
 GVIZ_PATH = r"C:\Program Files (x86)\Graphviz2.38\bin"
 
+
 def graphviz_setup():
-    os.environ['PATH'] = GVIZ_PATH + ';' + os.environ['PATH']
+    os.environ["PATH"] = GVIZ_PATH + ";" + os.environ["PATH"]
 
 
 def main(s, out_fn):
@@ -22,7 +23,8 @@ def main(s, out_fn):
     pydot__tree_to_png(t, os.path.join(project_root, "docs/images", out_fn))
     print(t.pretty())
 
+
 s = "MAP NAME 'Test' END"
 # main(s, "tree.png")
-main(s, "tree_no_terminals.png") # remove ! from !composite_type rule
+main(s, "tree_no_terminals.png")  # remove ! from !composite_type rule
 print("Done!")
