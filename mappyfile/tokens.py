@@ -28,7 +28,8 @@
 # =================================================================
 
 # Types, that require an "END"
-COMPLEX_TYPES = frozenset("""
+COMPLEX_TYPES = frozenset(
+    """
     symbolset
     projection
     points
@@ -56,9 +57,11 @@ COMPLEX_TYPES = frozenset("""
     web
     layer
     symbol
-    """.split())
+    """.split()
+)
 
-COMPOSITE_NAMES = frozenset("""
+COMPOSITE_NAMES = frozenset(
+    """
     align
     anchorpoint
     angle
@@ -245,9 +248,11 @@ COMPOSITE_NAMES = frozenset("""
     width
     wkt
     wrap
-""".split())
+""".split()
+)
 
-SINGLETON_COMPOSITE_NAMES = frozenset("""
+SINGLETON_COMPOSITE_NAMES = frozenset(
+    """
     cluster
     connectionoptions
     grid
@@ -262,9 +267,12 @@ SINGLETON_COMPOSITE_NAMES = frozenset("""
     validation
     values
     web
-""".split())
+""".split()
+)
 
-ATTRIBUTE_NAMES = frozenset("""
+ATTRIBUTE_NAMES = (
+    frozenset(
+        """
 area
 length
 tostring
@@ -391,14 +399,18 @@ ows_onlineresource
 ows_srs
 ows_enable_request
 ms_errorfile
-""".split()) | COMPOSITE_NAMES
+""".split()
+    )
+    | COMPOSITE_NAMES
+)
 
 # some keywords can be added multiple times to a composite type
-REPEATED_KEYS = ('processing', 'formatoption', 'include', 'data', 'compfilter')
+REPEATED_KEYS = ("processing", "formatoption", "include", "data", "compfilter")
 
 # these are keywords used in the schema to store collections of composite objects
 # for example lists of layers
-OBJECT_LIST_KEYS = frozenset("""
+OBJECT_LIST_KEYS = frozenset(
+    """
 layers
 classes
 styles
@@ -409,4 +421,5 @@ features
 scaletokens
 composites
 joins
-""".split())
+""".split()
+)

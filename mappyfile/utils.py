@@ -51,18 +51,24 @@ def deprecated(func):
     as deprecated. It will result in a warning being emitted
     when the function is used.
     """
+
     @functools.wraps(func)
     def new_func(*args, **kwargs):
-        warnings.simplefilter('always', DeprecationWarning)  # turn off filter
-        warnings.warn("Call to deprecated function {}.".format(func.__name__),
-                      category=DeprecationWarning,
-                      stacklevel=2)
-        warnings.simplefilter('default', DeprecationWarning)  # reset filter
+        warnings.simplefilter("always", DeprecationWarning)  # turn off filter
+        warnings.warn(
+            "Call to deprecated function {}.".format(func.__name__),
+            category=DeprecationWarning,
+            stacklevel=2,
+        )
+        warnings.simplefilter("default", DeprecationWarning)  # reset filter
         return func(*args, **kwargs)
+
     return new_func
 
 
-def open(fn, expand_includes=True, include_comments=False, include_position=False, **kwargs):
+def open(
+    fn, expand_includes=True, include_comments=False, include_position=False, **kwargs
+):
     """
     Load a Mapfile from the supplied filename into a Python dictionary.
 
@@ -97,16 +103,20 @@ def open(fn, expand_includes=True, include_comments=False, include_position=Fals
     Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
 
     """
-    p = Parser(expand_includes=expand_includes,
-               include_comments=include_comments, **kwargs)
+    p = Parser(
+        expand_includes=expand_includes, include_comments=include_comments, **kwargs
+    )
     ast = p.parse_file(fn)
-    m = MapfileToDict(include_position=include_position,
-                      include_comments=include_comments, **kwargs)
+    m = MapfileToDict(
+        include_position=include_position, include_comments=include_comments, **kwargs
+    )
     d = m.transform(ast)
     return d
 
 
-def load(fp, expand_includes=True, include_position=False, include_comments=False, **kwargs):
+def load(
+    fp, expand_includes=True, include_position=False, include_comments=False, **kwargs
+):
     """
     Load a Mapfile from an open file or file-like object.
 
@@ -141,16 +151,20 @@ def load(fp, expand_includes=True, include_position=False, include_comments=Fals
 
     Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
     """
-    p = Parser(expand_includes=expand_includes,
-               include_comments=include_comments, **kwargs)
+    p = Parser(
+        expand_includes=expand_includes, include_comments=include_comments, **kwargs
+    )
     ast = p.load(fp)
-    m = MapfileToDict(include_position=include_position,
-                      include_comments=include_comments, **kwargs)
+    m = MapfileToDict(
+        include_position=include_position, include_comments=include_comments, **kwargs
+    )
     d = m.transform(ast)
     return d
 
 
-def loads(s, expand_includes=True, include_position=False, include_comments=False, **kwargs):
+def loads(
+    s, expand_includes=True, include_position=False, include_comments=False, **kwargs
+):
     """
     Load a Mapfile from a string
 
@@ -183,17 +197,28 @@ def loads(s, expand_includes=True, include_position=False, include_comments=Fals
         assert d["name"] == "TEST"
 
     """
-    p = Parser(expand_includes=expand_includes,
-               include_comments=include_comments, **kwargs)
+    p = Parser(
+        expand_includes=expand_includes, include_comments=include_comments, **kwargs
+    )
     ast = p.parse(s)
-    m = MapfileToDict(include_position=include_position,
-                      include_comments=include_comments, **kwargs)
+    m = MapfileToDict(
+        include_position=include_position, include_comments=include_comments, **kwargs
+    )
     d = m.transform(ast)
     return d
 
 
-def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-         align_values=False, separate_complex_types=False):
+def dump(
+    d,
+    fp,
+    indent=4,
+    spacer=" ",
+    quote='"',
+    newlinechar="\n",
+    end_comment=False,
+    align_values=False,
+    separate_complex_types=False,
+):
     """
     Write d (the Mapfile dictionary) as a formatted stream to fp
 
@@ -236,12 +261,31 @@ def dump(d, fp, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=F
             mappyfile.dump(d, f, indent=2, quote="'")
 
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types)
+    map_string = _pprint(
+        d,
+        indent,
+        spacer,
+        quote,
+        newlinechar,
+        end_comment,
+        align_values,
+        separate_complex_types,
+    )
     fp.write(map_string)
 
 
-def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-         align_values=False, separate_complex_types=False, **kwargs):
+def save(
+    d,
+    output_file,
+    indent=4,
+    spacer=" ",
+    quote='"',
+    newlinechar="\n",
+    end_comment=False,
+    align_values=False,
+    separate_complex_types=False,
+    **kwargs
+):
     """
     Write a dictionary to an output Mapfile on disk
 
@@ -288,13 +332,31 @@ def save(d, output_file, indent=4, spacer=" ", quote='"', newlinechar="\n", end_
         fn = "C:/Data/mymap.map"
         mappyfile.save(d, fn)
     """
-    map_string = _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types)
+    map_string = _pprint(
+        d,
+        indent,
+        spacer,
+        quote,
+        newlinechar,
+        end_comment,
+        align_values,
+        separate_complex_types,
+    )
     _save(output_file, map_string)
     return output_file
 
 
-def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=False,
-          align_values=False, separate_complex_types=False, **kwargs):
+def dumps(
+    d,
+    indent=4,
+    spacer=" ",
+    quote='"',
+    newlinechar="\n",
+    end_comment=False,
+    align_values=False,
+    separate_complex_types=False,
+    **kwargs
+):
     """
     Output a Mapfile dictionary as a string
 
@@ -339,7 +401,17 @@ def dumps(d, indent=4, spacer=" ", quote='"', newlinechar="\n", end_comment=Fals
         d = mappyfile.loads(s)
         print(mappyfile.dumps(d, indent=1, spacer="\\t"))
     """
-    return _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types, **kwargs)
+    return _pprint(
+        d,
+        indent,
+        spacer,
+        quote,
+        newlinechar,
+        end_comment,
+        align_values,
+        separate_complex_types,
+        **kwargs
+    )
 
 
 def find(lst, key, value):
@@ -497,7 +569,12 @@ def findunique(lst, key):
         groups = mappyfile.findunique(d["classes"], "group")
         assert groups == ["group1", "group2"]
     """
-    return sorted(set([item.get(key.lower(), None) for item in lst]) - {None, })
+    return sorted(
+        set([item.get(key.lower(), None) for item in lst])
+        - {
+            None,
+        }
+    )
 
 
 def findkey(d, *keys):
@@ -587,14 +664,18 @@ def update(d1, d2):
                 del d1[k]
             else:
                 d1[k] = update(d1.get(k, {}), v)
-        elif isinstance(v, (tuple, list)) and all(isinstance(li, (NoneType, dict)) for li in v):
+        elif isinstance(v, (tuple, list)) and all(
+            isinstance(li, (NoneType, dict)) for li in v
+        ):
             # a list of dicts and/or NoneType
             orig_list = d1.get(k, [])
             new_list = []
             pairs = list(zip_longest(orig_list, v, fillvalue=None))
             for orig_item, new_item in pairs:
                 if orig_item is None:
-                    orig_item = {}  # can't use {} for fillvalue as only one dict created/modified!
+                    orig_item = (
+                        {}
+                    )  # can't use {} for fillvalue as only one dict created/modified!
                 if new_item is None:
                     new_item = {}
 
@@ -616,23 +697,23 @@ def update(d1, d2):
 
 def validate(d, version=None):
     """
-    Validate a mappyfile dictionary by using the Mapfile schema.
-    An optional version number can be used to specify a specific
-    a Mapfile is valid for a specific MapServer version.
+     Validate a mappyfile dictionary by using the Mapfile schema.
+     An optional version number can be used to specify a specific
+     a Mapfile is valid for a specific MapServer version.
 
-    Parameters
-    ----------
+     Parameters
+     ----------
 
-    d: dict
-        A Python dictionary based on the the mappyfile schema
-   version: float
-        The MapServer version number used to validate the Mapfile
+     d: dict
+         A Python dictionary based on the the mappyfile schema
+    version: float
+         The MapServer version number used to validate the Mapfile
 
-    Returns
-    -------
+     Returns
+     -------
 
-    list
-          A list containing validation errors
+     list
+           A list containing validation errors
 
     """
     v = Validator()
@@ -644,11 +725,27 @@ def _save(output_file, string):
         f.write(string)
 
 
-def _pprint(d, indent, spacer, quote, newlinechar, end_comment, align_values, separate_complex_types, **kwargs):
-    pp = PrettyPrinter(indent=indent, spacer=spacer,
-                       quote=quote, newlinechar=newlinechar,
-                       end_comment=end_comment, align_values=align_values,
-                       separate_complex_types=separate_complex_types, **kwargs)
+def _pprint(
+    d,
+    indent,
+    spacer,
+    quote,
+    newlinechar,
+    end_comment,
+    align_values,
+    separate_complex_types,
+    **kwargs
+):
+    pp = PrettyPrinter(
+        indent=indent,
+        spacer=spacer,
+        quote=quote,
+        newlinechar=newlinechar,
+        end_comment=end_comment,
+        align_values=align_values,
+        separate_complex_types=separate_complex_types,
+        **kwargs
+    )
     return pp.pprint(d)
 
 
@@ -690,7 +787,6 @@ def create(type, version=None):
 
 
 def dict_move_to_end(ordered_dict, key):
-
     if sys.version_info[0] < 3:
         # mappyfile requires Python >= 2.7,
         # so this should be safe

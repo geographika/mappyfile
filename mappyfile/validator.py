@@ -40,11 +40,10 @@ log = logging.getLogger("mappyfile")
 
 PY2 = sys.version_info[0] < 3
 if PY2:
-    str = unicode # NOQA
+    str = unicode  # NOQA
 
 
 class Validator(object):
-
     def __init__(self):
         self.schemas = {}
         self.expanded_schemas = {}
@@ -72,7 +71,6 @@ class Validator(object):
         return os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
 
     def get_schema_file(self, schema_name):
-
         schema_name += ".json"
         schemas_folder = self.get_schemas_folder()
         schema_file = os.path.join(schemas_folder, schema_name)
@@ -109,7 +107,9 @@ class Validator(object):
         if version:
             # remove any properties based on minVersion and maxVersion
             properties = jsn_schema["properties"]
-            jsn_schema["properties"] = self.get_versioned_properties(properties, version)
+            jsn_schema["properties"] = self.get_versioned_properties(
+                properties, version
+            )
 
         return jsn_schema
 
@@ -167,11 +167,12 @@ class Validator(object):
         return validator
 
     def convert_lowercase(self, x):
-
         if isinstance(x, list):
             return [self.convert_lowercase(v) for v in x]
         elif isinstance(x, dict):
-            return OrderedDict((k.lower(), self.convert_lowercase(v)) for k, v in x.items())
+            return OrderedDict(
+                (k.lower(), self.convert_lowercase(v)) for k, v in x.items()
+            )
         else:
             if isinstance(x, (str, bytes)):
                 x = x.lower()
@@ -212,8 +213,7 @@ class Validator(object):
 
             d["__comments__"][key] = "# {}".format(error_message)
 
-        error_message = {"error": error.message,
-                         "message": error_message}
+        error_message = {"error": error.message, "message": error_message}
 
         # add in details of the error line, when Mapfile was parsed to
         # include position details
@@ -231,7 +231,6 @@ class Validator(object):
         return error_message
 
     def get_error_messages(self, d, errors, add_comments):
-
         error_messages = []
 
         for error in errors:
@@ -265,7 +264,9 @@ class Validator(object):
 
         if isinstance(value, list):
             for d in value:
-                error_messages += self._validate(d, validator, add_comments, schema_name)
+                error_messages += self._validate(
+                    d, validator, add_comments, schema_name
+                )
         else:
             error_messages = self._validate(value, validator, add_comments, schema_name)
 
