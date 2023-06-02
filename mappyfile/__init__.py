@@ -28,7 +28,7 @@
 # =================================================================
 
 import logging
-import pkg_resources
+import importlib.metadata
 import sys
 from types import ModuleType
 
@@ -69,7 +69,7 @@ __all__ = [
 plugins = ModuleType("mappyfile.plugins")
 sys.modules["mappyfile.plugins"] = plugins
 
-for ep in pkg_resources.iter_entry_points(group="mappyfile.plugins"):
+for ep in importlib.metadata.entry_points(group="mappyfile.plugins"):
     setattr(plugins, ep.name, ep.load())
 
 # Set default logging handler to avoid "No handler found" warnings.
