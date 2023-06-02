@@ -12,7 +12,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_snippets.py</StartupFile>
+    <StartupFile>tests\test_validation.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -114,6 +114,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Folder Include="tests\sample_maps\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".flake8" />
     <Content Include=".github\dependabot.yml" />
     <Content Include=".github\workflows\main.yml" />
     <Content Include=".github\workflows\schemas.yml">
@@ -255,11 +256,13 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Content>
     <Content Include="notes.private.txt" />
+    <Content Include="pytest.ini" />
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
     <Content Include="setup.cfg">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="style.png" />
     <Content Include="tests\errors_lark.log" />
     <Content Include="tests\issues.txt" />
     <Content Include="tests\mapfiles\basemaps\.gitignore" />
@@ -1031,6 +1034,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="tests\sample_maps\wms_uvraster_lonwrap180.map" />
     <Content Include="tests\sample_maps\wms_uvraster_map_reprojection.map" />
     <Content Include="tox.ini" />
+    <Content Include="tree.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="docs\conf.py" />

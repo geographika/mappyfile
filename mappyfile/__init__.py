@@ -28,7 +28,8 @@
 # =================================================================
 
 import logging
-import pkg_resources
+import importlib.metadata
+from logging import NullHandler
 import sys
 from types import ModuleType
 
@@ -69,18 +70,13 @@ __all__ = [
 plugins = ModuleType("mappyfile.plugins")
 sys.modules["mappyfile.plugins"] = plugins
 
-for ep in pkg_resources.iter_entry_points(group="mappyfile.plugins"):
-    setattr(plugins, ep.name, ep.load())
+if sys.version_info >= (3, 10):
+    plugins = importlib.metadata.entry_points(group="mappyfile.plugins")
+else:
+    plugins = importlib.metadata.entry_points().get("mappyfile.plugins", [])
+
+for plugin in plugins:
+    setattr(plugins, plugin.name, plugin.load())
 
 # Set default logging handler to avoid "No handler found" warnings.
-
-try:  # Python 2.7+
-    from logging import NullHandler
-except ImportError:
-
-    class NullHandler(logging.Handler):
-        def emit(self, record):
-            pass
-
-
 logging.getLogger("mappyfile").addHandler(NullHandler())

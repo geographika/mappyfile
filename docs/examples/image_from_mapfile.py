@@ -1,5 +1,7 @@
 from subprocess import Popen, PIPE
-import tempfile, logging, os
+import tempfile
+import logging
+import os
 
 
 def create_image_from_map(map_file, dll_location):
@@ -11,7 +13,7 @@ def create_image_from_map(map_file, dll_location):
     params = ["shp2img", "-m", map_file, "-i", "png", "-o", of.name]
 
     os.environ["PATH"] = dll_location + ";" + os.environ["PATH"]
-    os.environ["PROJ_LIB"] = os.path.join(dll_location, "proj\SHARE")
+    os.environ["PROJ_LIB"] = os.path.join(dll_location, r"proj\SHARE")
 
     logging.debug(" ".join(params))
 

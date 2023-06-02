@@ -1,0 +1,9 @@
+[flake8]
+max-line-length = 160
+extend-ignore = E203,W503
+exclude =
+    build,
+    dist,
+    misc,
+    tests/mapfiles
+    docs/_build

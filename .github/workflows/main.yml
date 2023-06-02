@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
     - master
+    - dev
 
 jobs:
   test:
@@ -14,7 +15,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.8, 3.9, "3.10", "3.11"]
 
     steps:
       - uses: actions/checkout@v2
@@ -29,8 +30,7 @@ jobs:
           pip install .
       - name: Lint with flake8
         run: |
-          flake8 mappyfile --max-line-length=120
-          flake8 --ignore=E501,E121,E122,E123,E126,E127,E128,E275 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*
+          flake8 .
       - name: Command line tests
         run: |
           mappyfile schema mapfile-schema.json
@@ -46,7 +46,6 @@ jobs:
       - name: Upload coverage data to coveralls.io
         run: |
           coveralls
-        if: ${{ matrix.python-version != 2.7 }}
         env:
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
           COVERALLS_PARALLEL: true

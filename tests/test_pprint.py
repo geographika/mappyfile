@@ -27,7 +27,7 @@ def test_nested_quotes():
         TYPE polygon
         CONNECTIONTYPE OGR
         CONNECTION '<OGRVRTDataSource><OGRVRTLayer name="poly"><SrcDataSource relativeToVRT="0">data/shppoly</SrcDataSource><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>'
-    END"""
+    END"""  # noqa: E501
 
     ast = mappyfile.loads(s)
     pp = PrettyPrinter(indent=0, quote='"', newlinechar=" ")  # expected

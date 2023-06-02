@@ -54,19 +54,19 @@ def test_class():
     # multiple classes
     # define all classes in a single string TODO - allow on single line
     classes = """
-    CLASS 
-	    NAME 'The World' 
-	    STYLE 
+    CLASS
+        NAME 'The World'
+        STYLE
         OUTLINECOLOR 0 255 0
         END
     END
-	CLASS 
-	    NAME 'Roads' 
-	    STYLE
+    CLASS
+        NAME 'Roads'
+        STYLE
         OUTLINECOLOR 0 0 0
         END
     END
-	"""
+    """
     # parse the string and replace the existing classes for the layer
     layer["classes"] = mappyfile.loads(classes)
     print(mappyfile.dumps(mapfile))
