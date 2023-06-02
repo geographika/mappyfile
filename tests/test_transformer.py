@@ -5,7 +5,6 @@ from mappyfile.transformer import MapfileToDict, MapfileTransformer
 
 
 def test_processing_directive():
-
     s = """
     LAYER
         NAME 'ProcessingLayer'
@@ -20,11 +19,10 @@ def test_processing_directive():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(len(d["processing"]) == 3)
+    assert len(d["processing"]) == 3
 
 
 def test_config_directive():
-
     s = """
     MAP
         NAME 'ConfigMap'
@@ -39,7 +37,7 @@ def test_config_directive():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(len(d["config"]) == 3)
+    assert len(d["config"]) == 3
 
 
 def test_empty_config_directive():
@@ -60,12 +58,11 @@ def test_empty_config_directive():
     d = t.transform(ast)
     d["config"]["ms_errorfile"] = "stderr"
     print(json.dumps(d, indent=4))
-    assert(d["config"]["ms_errorfile"] == "stderr")
-    assert(d["config"]["MS_ERRORFILE"] == "stderr")
+    assert d["config"]["ms_errorfile"] == "stderr"
+    assert d["config"]["MS_ERRORFILE"] == "stderr"
 
 
 def test_metadata():
-
     s = """
     MAP
         METADATA
@@ -79,14 +76,13 @@ def test_metadata():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(d["metadata"]["wms_enable_request"] == "*")
-    assert(d["metadata"]["MS_ENABLE_MODES"] == "!*")
-    assert(d["metadata"]["wms_ENABLE_request"] == "*")
-    assert(d["metadata"]["MS_enable_MODES"] == "!*")
+    assert d["metadata"]["wms_enable_request"] == "*"
+    assert d["metadata"]["MS_ENABLE_MODES"] == "!*"
+    assert d["metadata"]["wms_ENABLE_request"] == "*"
+    assert d["metadata"]["MS_enable_MODES"] == "!*"
 
 
 def test_scaletoken():
-
     s = """
     SCALETOKEN
         NAME "%border%"
@@ -105,12 +101,11 @@ def test_scaletoken():
     print(d)
     print(json.dumps(d, indent=4))
     # print(dict(d["metadata"]))
-    assert(d["__type__"] == "scaletoken")
-    assert(d["values"]["0"] == "ON")
+    assert d["__type__"] == "scaletoken"
+    assert d["values"]["0"] == "ON"
 
 
 def test_layerlist():
-
     s = """
     MAP
         LAYER
@@ -131,12 +126,11 @@ def test_layerlist():
     print(d)
     print(json.dumps(d, indent=4))
     # print(dict(d["metadata"]))
-    assert(len(d["layers"]) == 2)
-    assert(d["layers"][0]["name"] == "Layer1")
+    assert len(d["layers"]) == 2
+    assert d["layers"][0]["name"] == "Layer1"
 
 
 def test_expression():
-
     s = """
     CLASS
         TEXT ([area])
@@ -153,14 +147,13 @@ def test_expression():
     d = t.transform(ast)
     print(d)
     print(json.dumps(d, indent=4))
-    assert(d[0]["text"] == "([area])")
-    assert(d[0]["expression"] == "([area])")
-    assert(d[1]["text"] == "(\"[area]\")")
-    assert(d[1]["expression"] == "(\"[area]\")")
+    assert d[0]["text"] == "([area])"
+    assert d[0]["expression"] == "([area])"
+    assert d[1]["text"] == '("[area]")'
+    assert d[1]["expression"] == '("[area]")'
 
 
 def test_or_expression():
-
     s = """
     CLASS
         EXPRESSION (([val] = 'A') OR ([val] = 'B'))
@@ -172,11 +165,10 @@ def test_or_expression():
     d = t.transform(ast)
     print(d)
     print(json.dumps(d, indent=4))
-    assert(d["expression"] == "( ( [val] = 'A' ) OR ( [val] = 'B' ) )")
+    assert d["expression"] == "( ( [val] = 'A' ) OR ( [val] = 'B' ) )"
 
 
 def test_projection():
-
     s = """
     MAP
         PROJECTION
@@ -195,11 +187,10 @@ def test_projection():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(len(d["projection"]) == 7)
+    assert len(d["projection"]) == 7
 
 
 def test_auto_projection():
-
     s = """
     MAP
         PROJECTION
@@ -212,11 +203,10 @@ def test_auto_projection():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(len(d["projection"]) == 1)
+    assert len(d["projection"]) == 1
 
 
 def test_points():
-
     s = """
     FEATURE
         POINTS 1 1 50 50 1 50 1 1 END
@@ -228,14 +218,13 @@ def test_points():
     t = MapfileToDict(include_position=True)
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(len(d["points"]) == 2)
-    assert(len(d["points"][0]) == 4)
-    assert(len(d["points"][0][0]) == 2)
-    assert(d["points"][0][0][0] == 1)
+    assert len(d["points"]) == 2
+    assert len(d["points"][0]) == 4
+    assert len(d["points"][0][0]) == 2
+    assert d["points"][0][0][0] == 1
 
 
 def test_pattern():
-
     s = """
     STYLE
         PATTERN 10 1 50 50 1 50 1 1 END
@@ -246,13 +235,12 @@ def test_pattern():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(len(d["pattern"]) == 4)
-    assert(len(d["pattern"][0]) == 2)
-    assert(d["pattern"][0][0] == 10)
+    assert len(d["pattern"]) == 4
+    assert len(d["pattern"][0]) == 2
+    assert d["pattern"][0][0] == 10
 
 
 def test_oneline_label():
-
     s = """
     label
       type truetype size 8 font "default"
@@ -263,14 +251,13 @@ def test_oneline_label():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(d["type"] == "truetype")
-    assert(d["size"] == 8)
-    assert(d["font"] == "default")
-    assert(d["__type__"] == "label")
+    assert d["type"] == "truetype"
+    assert d["size"] == 8
+    assert d["font"] == "default"
+    assert d["__type__"] == "label"
 
 
 def test_boolean():
-
     s = """
     LAYER
         TRANSFORM TRUE
@@ -282,7 +269,7 @@ def test_boolean():
     t = MapfileToDict()
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(d["transform"])
+    assert d["transform"]
 
 
 @pytest.mark.xfail
@@ -310,7 +297,7 @@ def test_multiple_layer_projection():
     t = MapfileToDict(include_position=True)
     d = t.transform(ast)
     print(json.dumps(d, indent=4))
-    assert(len(d["projection"]) == 1)
+    assert len(d["projection"]) == 1
 
     p = Parser()
     m = MapfileToDict()
@@ -321,12 +308,12 @@ def test_multiple_layer_projection():
     print(json.dumps(d, indent=4))
 
     from mappyfile.validator import Validator
+
     v = Validator()
     return v.validate(d)
 
 
 def test_token_positions():
-
     s = """
     MAP
         SIZE 600 600
@@ -352,7 +339,6 @@ def test_token_positions():
 
 
 def test_kwargs():
-
     m = MapfileToDict(custom_param="custom")
     assert "custom_param" in m.kwargs
 
@@ -364,7 +350,6 @@ def test_custom_transformer():
     """
 
     class CustomTransformer(MapfileTransformer):
-
         def __init__(self, include_position=False, include_comments=False, **kwargs):
             self.custom_param = kwargs["custom_param"]
             super(CustomTransformer, self).__init__(include_position, include_comments)
@@ -394,7 +379,7 @@ def run_tests():
     pytest.main(["tests/test_transformer.py"])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # test_custom_transformer()
     run_tests()
     print("Done!")

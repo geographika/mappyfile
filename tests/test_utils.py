@@ -7,8 +7,7 @@ import pytest
 
 
 def test_open():
-
-    fn = './tests/sample_maps/256_overlay_res.map'
+    fn = "./tests/sample_maps/256_overlay_res.map"
     d = mappyfile.open(fn)
     assert d["name"] == "TEST"
 
@@ -23,7 +22,6 @@ def test_open():
 
 
 def test_loads():
-
     s = """MAP NAME "TEST" END"""
 
     d = mappyfile.loads(s)
@@ -40,7 +38,6 @@ def test_loads():
 
 
 def test_dump():
-
     s = """MAP NAME "TEST" END"""
     d = mappyfile.loads(s)
     with tempfile.NamedTemporaryFile(mode="w+", delete=False) as fp:
@@ -53,8 +50,7 @@ def test_dump():
 
 
 def test_stringio():
-
-    s = u"""MAP NAME "TEST" END"""
+    s = """MAP NAME "TEST" END"""
     ip = io.StringIO(s)
 
     d = mappyfile.load(ip)
@@ -63,11 +59,10 @@ def test_stringio():
 
 
 def test_save():
-
     s = """MAP NAME "TEST" END"""
     d = mappyfile.loads(s)
 
-    output_file = os.path.join(tempfile.mkdtemp(), 'test_mapfile.map')
+    output_file = os.path.join(tempfile.mkdtemp(), "test_mapfile.map")
     mappyfile.save(d, output_file)
 
     with open(output_file) as fp:
@@ -77,8 +72,7 @@ def test_save():
 
 
 def test_dumps():
-
-    s = '''MAP NAME "TEST" END'''
+    s = """MAP NAME "TEST" END"""
 
     d = mappyfile.loads(s)
     output = mappyfile.dumps(d, indent=1, spacer="\t", newlinechar=" ")
@@ -87,17 +81,17 @@ def test_dumps():
 
 
 def test_dump_with_end_comments():
-
-    s = '''MAP NAME "TEST" END'''
+    s = """MAP NAME "TEST" END"""
 
     d = mappyfile.loads(s)
-    output = mappyfile.dumps(d, indent=1, spacer="\t", newlinechar=" ", end_comment=True)
+    output = mappyfile.dumps(
+        d, indent=1, spacer="\t", newlinechar=" ", end_comment=True
+    )
     print(output)
     assert output == 'MAP 	NAME "TEST" END # MAP'
 
 
 def test_find():
-
     s = """
     MAP
         LAYER
@@ -122,7 +116,6 @@ def test_find():
 
 
 def test_findkey():
-
     s = """
     MAP
         LAYER
@@ -152,7 +145,6 @@ def test_findkey():
 
 
 def test_findall():
-
     s = """
     MAP
         LAYER
@@ -233,7 +225,11 @@ def test_update():
 
 
 def test_update_list():
-    d1 = {"__type__": "layer", "name": "Unrated", "styles": [{"__type__": "style", "color": "#888888"}]}
+    d1 = {
+        "__type__": "layer",
+        "name": "Unrated",
+        "styles": [{"__type__": "style", "color": "#888888"}],
+    }
     d2 = {"name": "Unrated", "styles": [{"color": [255, 255, 0]}]}
     d = mappyfile.update(d1, d2)
     output = mappyfile.dumps(d)
@@ -243,7 +239,14 @@ def test_update_list():
 
 def test_update_list_second_item():
     # test that a None type can be passed
-    d1 = {"__type__": "layer", "name": "Unrated", "styles": [{"__type__": "style", "color": "#888888"}, {"__type__": "style", "color": "#888888"}]}
+    d1 = {
+        "__type__": "layer",
+        "name": "Unrated",
+        "styles": [
+            {"__type__": "style", "color": "#888888"},
+            {"__type__": "style", "color": "#888888"},
+        ],
+    }
     d2 = {"name": "Unrated", "styles": [None, {"color": [255, 255, 0]}]}
     d = mappyfile.update(d1, d2)
     output = mappyfile.dumps(d)
@@ -252,7 +255,11 @@ def test_update_list_second_item():
 
 
 def test_update_delete():
-    d1 = {"__type__": "layer", "name": "Unrated", "styles": [{"__type__": "style", "color": "#888888"}]}
+    d1 = {
+        "__type__": "layer",
+        "name": "Unrated",
+        "styles": [{"__type__": "style", "color": "#888888"}],
+    }
     d2 = {"name": "Unrated", "styles": [{"__delete__": True}]}
     d = mappyfile.update(d1, d2)
     output = mappyfile.dumps(d)
@@ -261,7 +268,11 @@ def test_update_delete():
 
 
 def test_update_delete_dict():
-    d1 = {"__type__": "layer", "name": "Unrated", "metadata": {"__type__": "metadata", "key1": "val1"}}
+    d1 = {
+        "__type__": "layer",
+        "name": "Unrated",
+        "metadata": {"__type__": "metadata", "key1": "val1"},
+    }
     print(mappyfile.dumps(d1))
     d2 = {"metadata": {"__delete__": True}}
     d = mappyfile.update(d1, d2)
@@ -271,7 +282,11 @@ def test_update_delete_dict():
 
 
 def test_update_delete_root_object():
-    d1 = {"__type__": "layer", "name": "Unrated", "styles": [{"__type__": "style", "color": "#888888"}]}
+    d1 = {
+        "__type__": "layer",
+        "name": "Unrated",
+        "styles": [{"__type__": "style", "color": "#888888"}],
+    }
     d2 = {"__delete__": True}
     d = mappyfile.update(d1, d2)
     output = mappyfile.dumps(d)
@@ -279,8 +294,15 @@ def test_update_delete_root_object():
 
 
 def test_update_add_item():
-    d1 = {"__type__": "layer", "name": "Unrated", "styles": [{"__type__": "style", "color": "#888888"}]}
-    d2 = {"name": "Unrated", "styles": [None, {"__type__": "style", "color": [0, 0, 255]}]}
+    d1 = {
+        "__type__": "layer",
+        "name": "Unrated",
+        "styles": [{"__type__": "style", "color": "#888888"}],
+    }
+    d2 = {
+        "name": "Unrated",
+        "styles": [None, {"__type__": "style", "color": [0, 0, 255]}],
+    }
     d = mappyfile.update(d1, d2)
     output = mappyfile.dumps(d)
     print(output)
@@ -320,7 +342,10 @@ def test_create_map():
     d = mappyfile.utils.create("map")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     print(output)
-    assert output == "MAP ANGLE 0 DEBUG 0 DEFRESOLUTION 72 IMAGETYPE 'png' MAXSIZE 4096 NAME 'MS' RESOLUTION 72 SIZE -1 -1 END"
+    assert (
+        output
+        == "MAP ANGLE 0 DEBUG 0 DEFRESOLUTION 72 IMAGETYPE 'png' MAXSIZE 4096 NAME 'MS' RESOLUTION 72 SIZE -1 -1 END"
+    )
 
 
 def test_create_layer():
@@ -334,8 +359,11 @@ def test_create_label():
     d = mappyfile.utils.create("label")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     print(output)
-    assert output == "LABEL ANGLE 0 ANTIALIAS FALSE BACKGROUNDSHADOWSIZE FALSE BUFFER 0 FORCE FALSE MAXOVERLAPANGLE 22.5 MAXSIZE 256 MINSIZE 4 "\
-                     "OFFSET 0 0 OUTLINEWIDTH 1 PARTIALS FALSE POSITION CC PRIORITY 1 REPEATDISTANCE 0 SHADOWSIZE 1 1 SIZE 10 END"
+    assert (
+        output
+        == "LABEL ANGLE 0 ANTIALIAS FALSE BACKGROUNDSHADOWSIZE FALSE BUFFER 0 FORCE FALSE MAXOVERLAPANGLE 22.5 MAXSIZE 256 MINSIZE 4 "
+        "OFFSET 0 0 OUTLINEWIDTH 1 PARTIALS FALSE POSITION CC PRIORITY 1 REPEATDISTANCE 0 SHADOWSIZE 1 1 SIZE 10 END"
+    )
 
 
 def test_create_symbol():
@@ -360,7 +388,6 @@ def test_create_symbol_v8():
 
 
 def test_create_missing():
-
     error_raised = False
     try:
         mappyfile.utils.create("missing")

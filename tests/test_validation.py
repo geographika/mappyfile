@@ -18,7 +18,6 @@ DLL_LOCATION = r"C:\MapServer\bin"
 
 
 def create_image(name, mapfile, output_folder, format="png"):
-
     out_map = os.path.join(output_folder, "%s.map" % name)
     mappyfile.write(mapfile, out_map)
 
@@ -28,7 +27,6 @@ def create_image(name, mapfile, output_folder, format="png"):
 
 
 def _create_image_from_map(map_file, out_img, format):
-
     out_img += ".%s" % format
 
     params = [
@@ -41,18 +39,19 @@ def _create_image_from_map(map_file, out_img, format):
         out_img,
         "-s",
         256,
-        256]  # ,  # "-e", "0 0 5 5"
+        256,
+    ]  # ,  # "-e", "0 0 5 5"
     params = [str(p) for p in params]
     logging.info(" ".join(params))
 
-    os.environ['PATH'] = DLL_LOCATION + ';' + os.environ['PATH']
+    os.environ["PATH"] = DLL_LOCATION + ";" + os.environ["PATH"]
 
     p = Popen(params, stdout=PIPE, stderr=STDOUT)
 
     errors = []
 
     with p.stdout:
-        for line in iter(p.stdout.readline, b''):
+        for line in iter(p.stdout.readline, b""):
             errors.append(line)
 
     p.wait()  # wait for the subprocess to exit
@@ -150,7 +149,7 @@ def test_config_validation():
     END
     """
     errors = validate(s)
-    assert(len(errors) == 0)
+    assert len(errors) == 0
 
 
 def test_color_validation():
@@ -160,7 +159,7 @@ def test_color_validation():
     END
     """
     errors = validate(s)
-    assert(len(errors) == 0)
+    assert len(errors) == 0
 
 
 def test_color_validation_fail():
@@ -170,7 +169,7 @@ def test_color_validation_fail():
     END
     """
     errors = validate(s)
-    assert(len(errors) == 1)
+    assert len(errors) == 1
 
 
 def test_hexcolor_validation():
@@ -180,7 +179,7 @@ def test_hexcolor_validation():
     END
     """
     errors = validate(s)
-    assert(len(errors) == 0)
+    assert len(errors) == 0
 
 
 def test_hexcolor_validation_fail():
@@ -190,7 +189,7 @@ def test_hexcolor_validation_fail():
     END
     """
     errors = validate(s)
-    assert(len(errors) == 1)
+    assert len(errors) == 1
 
 
 def test_hexcolor_validation_translucence():
@@ -211,7 +210,7 @@ def test_hexcolor_validation_translucence():
     END
     """
     errors = validate(s)
-    assert(len(errors) == 0)
+    assert len(errors) == 0
 
 
 def test_nested_validation():
@@ -225,11 +224,10 @@ def test_nested_validation():
     """
     errors = validate(s)
     print(errors)
-    assert(len(errors) == 1)
+    assert len(errors) == 1
 
 
 def test_lowercase():
-
     s = """
     MAP
         NAME 'blah'
@@ -276,7 +274,7 @@ def test_lowercase():
     print(json.dumps(d, indent=4))
     errors = validate(s)
     print(errors)
-    assert(len(errors) == 0)
+    assert len(errors) == 0
     # deepcopy crashes on (u'config', OrderedDict([('ON_MISSING_DATA', Token(NAME, 'FAIL'))]))
 
 
@@ -284,13 +282,13 @@ def test_ref_path():
     url = "file:////home/user/mappyfile/mappyfile/schemas/"
     scheme, netloc, path, query, fragment = urlsplit(url)
     print(scheme, netloc, path, query, fragment)
-    assert(scheme == "file")
+    assert scheme == "file"
 
     url = "file:///D:/GitHub/mappyfile/mappyfile/schemas/"
 
     scheme, netloc, path, query, fragment = urlsplit(url)
     print(scheme, netloc, path, query, fragment)
-    assert(scheme == "file")
+    assert scheme == "file"
 
 
 def test_add_comments():
@@ -330,11 +328,11 @@ def test_deref():
 
     print(json.dumps(jsn_schema, indent=4))
     print(jsn_schema["properties"]["filter"])
-    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
+    assert list(jsn_schema["properties"]["filter"].keys())[0] == "$ref"
     deref_schema = v.get_expanded_schema(schema_name)
     print(json.dumps(deref_schema, indent=4))
     print(deref_schema["properties"]["filter"])
-    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
+    assert list(deref_schema["properties"]["filter"].keys())[0] == "anyOf"
 
 
 def test_cached_schema():
@@ -345,12 +343,12 @@ def test_cached_schema():
     schema_name = "cluster"
     validator = v.get_schema_validator(schema_name)
     jsn_schema = validator.schema
-    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
+    assert list(jsn_schema["properties"]["filter"].keys())[0] == "$ref"
 
     # get the schame again
     validator = v.get_schema_validator(schema_name)
     jsn_schema = validator.schema
-    assert(list(jsn_schema["properties"]["filter"].keys())[0] == "$ref")
+    assert list(jsn_schema["properties"]["filter"].keys())[0] == "$ref"
 
 
 def test_cached_expanded_schema():
@@ -361,11 +359,11 @@ def test_cached_expanded_schema():
     schema_name = "cluster"
 
     deref_schema = v.get_expanded_schema(schema_name)
-    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
+    assert list(deref_schema["properties"]["filter"].keys())[0] == "anyOf"
 
     # get the schame again
     deref_schema = v.get_expanded_schema(schema_name)
-    assert(list(deref_schema["properties"]["filter"].keys())[0] == "anyOf")
+    assert list(deref_schema["properties"]["filter"].keys())[0] == "anyOf"
 
 
 def test_extra_property_validation():
@@ -385,11 +383,10 @@ def test_extra_property_validation():
     v = Validator()
     errors = v.validate(d, add_comments=True)
     print(errors)
-    assert(len(errors) == 1)
+    assert len(errors) == 1
 
 
 def test_double_error():
-
     s = """MAP
     NAME "sample"
     STATUS ON
@@ -420,12 +417,11 @@ END"""
     # print(errors)
     for e in errors:
         print(e)
-    assert(len(errors) == 2)
+    assert len(errors) == 2
     print(mappyfile.dumps(d))
 
 
 def test_line_position_mutlilines():
-
     s = """MAP
     NAME "sample"
     LAYER
@@ -449,10 +445,10 @@ END"""
     # print(errors)
     for e in errors:
         print(e)
-    assert(len(errors) == 1)
+    assert len(errors) == 1
     err = errors[0]
-    assert(err["line"] == 9)
-    assert(err["column"] == 9)
+    assert err["line"] == 9
+    assert err["column"] == 9
     print(mappyfile.dumps(d))
 
 
@@ -477,8 +473,7 @@ def test_root_position():
 
 
 def test_cluster_validation():
-
-    s = u"""
+    s = """
     MAP
         LAYER
             TYPE POINT
@@ -499,8 +494,7 @@ def test_cluster_validation():
 
 
 def test_cluster_validation_fail():
-
-    s = u"""
+    s = """
     MAP
         LAYER
             TYPE POINT
@@ -520,7 +514,6 @@ def test_cluster_validation_fail():
 
 
 def test_version_warnings():
-
     s = """MAP
     NAME "sample"
     LAYER
@@ -541,32 +534,27 @@ END"""
 
 
 def test_keyword_versioning():
-
     properties = {
-  "type": "object",
-  "properties": {
-    "__type__": {
-      "enum": ["label"]
-    },
-    "align": {
-      "oneOf": [
-        {
-          "type": "string",
-          "enum": ["left", "center", "right"],
-          "additionalProperties": False
+        "type": "object",
+        "properties": {
+            "__type__": {"enum": ["label"]},
+            "align": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "enum": ["left", "center", "right"],
+                        "additionalProperties": False,
+                    },
+                    {
+                        "type": "string",
+                        "pattern": "^\\[(.*?)\\]$",
+                        "description": "attribute",
+                    },
+                ],
+                "metadata": {"minVersion": 5.4},
+            },
         },
-        {
-          "type": "string",
-          "pattern": "^\\[(.*?)\\]$",
-          "description": "attribute"
-        }
-      ],
-      "metadata": {
-        "minVersion": 5.4
-      }
     }
-  }
-}
 
     v = Validator()
     assert "align" in properties["properties"].keys()
@@ -576,18 +564,13 @@ def test_keyword_versioning():
 
 
 def test_property_versioning():
-
     properties = {
-      "force": {
-      "oneOf": [
-        {"type": "boolean"},
-        {
-          "enum": ["group"],
-          "metadata": {
-            "minVersion": 6.2
-          }
-        }]
-      }
+        "force": {
+            "oneOf": [
+                {"type": "boolean"},
+                {"enum": ["group"], "metadata": {"minVersion": 6.2}},
+            ]
+        }
     }
 
     v = Validator()
@@ -627,7 +610,6 @@ END"""
 
 
 def test_get_versioned_schema():
-
     validator = Validator()
     jsn = validator.get_versioned_schema(7.6)
     # print(json.dumps(jsn, indent=4))

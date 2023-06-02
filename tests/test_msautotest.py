@@ -16,7 +16,6 @@ import mappyfile
 
 
 def create_copy(msautotest_fld, msautotest_copy):
-
     # first make a backup copy of msautotest
 
     if os.path.isdir(msautotest_copy):
@@ -51,8 +50,9 @@ def parse_mapfile(parser, transformer, pp, fn):
 
 
 def main(msautotest_fld, create_new_copy=True):
-
-    msautotest_copy = os.path.join(os.path.dirname(msautotest_fld), "msautotest_mappyfile")
+    msautotest_copy = os.path.join(
+        os.path.dirname(msautotest_fld), "msautotest_mappyfile"
+    )
 
     if create_new_copy:
         create_copy(msautotest_fld, msautotest_copy)
@@ -68,11 +68,15 @@ def main(msautotest_fld, create_new_copy=True):
     # transparent_layer.map has an extra END, see https://github.com/mapserver/mapserver/pull/5468
     # polyline_no_clip.map needs symbol names in quotes, and SYMBOL is ambiguous
 
-    ignore_list = ["polyline_no_clip.map",
-                   "poly-label-multiline-pos-auto.map", "poly-label-pos-auto.map",
-                   "embed_sb_rgba.map", "embed_sb_rgba_offset.map"]  # has attributes all on the same line
+    ignore_list = [
+        "polyline_no_clip.map",
+        "poly-label-multiline-pos-auto.map",
+        "poly-label-pos-auto.map",
+        "embed_sb_rgba.map",
+        "embed_sb_rgba_offset.map",
+    ]  # has attributes all on the same line
 
-    mapfiles = glob.glob(msautotest_fld + '/**/*.map')
+    mapfiles = glob.glob(msautotest_fld + "/**/*.map")
     mapfiles = [f for f in mapfiles if os.path.basename(f) not in ignore_list]
 
     # target_map = "polyline_no_clip.map"
@@ -81,7 +85,6 @@ def main(msautotest_fld, create_new_copy=True):
     v = Validator()
 
     for fn in mapfiles:
-
         d = parse_mapfile(parser, transformer, pp, fn)
         errors = v.validate(d, add_comments=True)
         if errors:
@@ -104,7 +107,7 @@ def main(msautotest_fld, create_new_copy=True):
             logging.warning("{} failed validation".format(fn))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     fld = r"D:\GitHub\mapserver\msautotest"
     main(fld, create_new_copy=False)
