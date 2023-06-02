@@ -21,13 +21,10 @@ setup(
         # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
         "Development Status :: 4 - Beta",
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Intended Audience :: Developers",
         "Topic :: Text Processing :: Linguistic",
         "Topic :: Software Development :: Build Tools",
@@ -41,14 +38,9 @@ setup(
     install_requires=[
         "lark>=1.1.5",
         "lark_cython>=0.0.14",
-        # pyrsistent is a dependency of jsonschema but py2 is not
-        # supported beyond 0.16.0
-        'pyrsistent<0.17.0; python_version=="2.7"',
-        'jsonschema>=2.0, <=3.2.0; python_version=="2.7"',
-        'jsonschema>=2.0; python_version>="3.0.0"',
+        "jsonschema>=2.0",
         "jsonref==0.2",
-        'click; python_version>="3.0.0"',
-        'click < 8.0.0; python_version=="2.7"',
+        "click"
     ],
     zip_safe=False,
     entry_points={
