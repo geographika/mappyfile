@@ -40,7 +40,7 @@ setup(
         "lark_cython>=0.0.14",
         "jsonschema>=2.0",
         "jsonref==0.2",
-        "click"
+        "click",
     ],
     zip_safe=False,
     entry_points={

@@ -29,6 +29,7 @@
 
 import logging
 import importlib.metadata
+from logging import NullHandler
 import sys
 from types import ModuleType
 
@@ -74,14 +75,4 @@ for ep in entry_points.select(group="mappyfile.plugins"):
     setattr(plugins, ep.name, ep.load())
 
 # Set default logging handler to avoid "No handler found" warnings.
-
-try:  # Python 2.7+
-    from logging import NullHandler
-except ImportError:
-
-    class NullHandler(logging.Handler):
-        def emit(self, record):
-            pass
-
-
 logging.getLogger("mappyfile").addHandler(NullHandler())

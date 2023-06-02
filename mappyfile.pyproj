@@ -256,6 +256,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Content>
     <Content Include="notes.private.txt" />
+    <Content Include="pytest.ini" />
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
     <Content Include="setup.cfg">
