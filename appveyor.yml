@@ -1,6 +1,8 @@
 # see https://www.appveyor.com/docs/windows-images-software/#python
 # and https://packaging.python.org/guides/supporting-windows-using-appveyor/
 
+image: Visual Studio 2019
+
 environment:
 
   global:

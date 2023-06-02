@@ -71,8 +71,10 @@ plugins = ModuleType("mappyfile.plugins")
 sys.modules["mappyfile.plugins"] = plugins
 
 entry_points = importlib.metadata.entry_points()
-for ep in entry_points.select(group="mappyfile.plugins"):
-    setattr(plugins, ep.name, ep.load())
+plugins = entry_points.get("mappyfile.plugins", [])
+
+for plugin in plugins:
+    setattr(plugins, plugin.name, plugin.load())
 
 # Set default logging handler to avoid "No handler found" warnings.
 logging.getLogger("mappyfile").addHandler(NullHandler())
