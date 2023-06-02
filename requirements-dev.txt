@@ -13,3 +13,4 @@ virtualenv
 glob2
 coveralls
 sphinx
+black

@@ -1,5 +1,6 @@
 import mappyfile
 
+
 def test():
     mapfile = mappyfile.open("./docs/examples/raster.map")
     # START OF API EXAMPLE
@@ -19,7 +20,7 @@ def test():
     # update the web metadata settings
 
     mapfile["web"]["metadata"]["wms_format"] = "image/png"
-    print(mappyfile.dumps(mapfile["web"])) # print out just the WEB section
+    print(mappyfile.dumps(mapfile["web"]))  # print out just the WEB section
 
     # alternatively we can parse the Mapfile syntax and load it directly
 
@@ -35,8 +36,8 @@ def test():
     print(mappyfile.dumps(mapfile))
 
     # END OF API EXAMPLE
-    assert(layer["name"] == "MyLayer")
-    assert(mapfile["web"]["metadata"]["wms_format"]  == "image/jpg")
+    assert layer["name"] == "MyLayer"
+    assert mapfile["web"]["metadata"]["wms_format"] == "image/jpg"
 
 
 if __name__ == "__main__":

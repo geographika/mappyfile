@@ -6,8 +6,8 @@ from PIL import Image
 sys.path.append(os.path.abspath("./docs/examples"))
 from helper import create_image
 
-def create_frame(mapfile, line, dist):
 
+def create_frame(mapfile, line, dist):
     # get the polygon layer
     pl = mappyfile.find(mapfile["layers"], "name", "polygon")
     # buffer the line
@@ -17,17 +17,17 @@ def create_frame(mapfile, line, dist):
     # create an image from this Mapfile
     return create_image("animation_%s" % str(dist), mapfile, format="gif")
 
-def create_frames(mapfile):
 
+def create_frames(mapfile):
     # increment in steps of 3 units from 1 to 35
     min_buffer = 1
     max_buffer = 35
-    step = 3 
+    step = 3
 
     # create a line
     line = LineString([(0, 0), (100, 100), (0, 200), (200, 200), (300, 100), (100, 0)])
     # set the map extent to this line
-    mapfile["extent"] = " ".join(map(str, line.buffer(max_buffer*2).bounds))
+    mapfile["extent"] = " ".join(map(str, line.buffer(max_buffer * 2).bounds))
 
     all_images = []
 
@@ -40,6 +40,7 @@ def create_frames(mapfile):
         all_images.append(create_frame(mapfile, line, dist))
 
     return all_images
+
 
 def create_animation(img_files):
     """
@@ -54,7 +55,14 @@ def create_animation(img_files):
         open_images.append(im)
 
     im = open_images[0]
-    im.save(r"C:\temp\animation.gif", save_all=True, append_images=open_images[1:], duration=120, loop=100, optimize=True)
+    im.save(
+        r"C:\temp\animation.gif",
+        save_all=True,
+        append_images=open_images[1:],
+        duration=120,
+        loop=100,
+        optimize=True,
+    )
 
 
 def main():
@@ -62,6 +70,7 @@ def main():
     mapfile = mappyfile.load(mf)
     img_files = create_frames(mapfile)
     create_animation(img_files)
+
 
 if __name__ == "__main__":
     main()

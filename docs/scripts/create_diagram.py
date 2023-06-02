@@ -5,7 +5,7 @@ GVIZ_PATH = r"C:\Program Files (x86)\Graphviz2.38\bin"
 
 
 def graphviz_setup():
-    os.environ['PATH'] = GVIZ_PATH + ';' + os.environ['PATH']
+    os.environ["PATH"] = GVIZ_PATH + ";" + os.environ["PATH"]
 
 
 def create_layer_diagram():
@@ -22,7 +22,7 @@ def create_layer_diagram():
     p = Parser()
     ast = p.parse(s)
 
-    of = './docs/images/class_parsed.png'
+    of = "./docs/images/class_parsed.png"
 
     ast.to_png_with_pydot(of)
 

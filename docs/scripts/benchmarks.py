@@ -13,9 +13,10 @@ import mappyfile
 
 N = 100
 
-t = timeit.timeit(stmt="mappyfile.open(mf)",
-setup="import mappyfile; mf=r'tests/mapfiles/large_map1.map'", number=N)
+t = timeit.timeit(
+    stmt="mappyfile.open(mf)",
+    setup="import mappyfile; mf=r'tests/mapfiles/large_map1.map'",
+    number=N,
+)
 
 print(t / N)
-
-

@@ -4,7 +4,8 @@ SET PATH=C:\MapServer\bin;%PATH%
 SET PROJ_LIB=C:\MapServer\bin\proj\SHARE
 """
 import mapscript
-s = u"""
+
+s = """
 MAP
     LAYER
         TYPE POINT

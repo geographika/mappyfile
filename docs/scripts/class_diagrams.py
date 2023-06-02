@@ -18,6 +18,7 @@ https://graphviz.readthedocs.io/en/stable/examples.html#er-py
 
 import os
 import pydot
+
 # import pprint
 
 
@@ -25,20 +26,26 @@ FONT = "Lucida Sans"
 
 
 def graphviz_setup(gviz_path):
-    os.environ['PATH'] = gviz_path + ";" + os.environ['PATH']
+    os.environ["PATH"] = gviz_path + ";" + os.environ["PATH"]
 
 
 def add_child(graph, child_id, child_label, parent_id, colour):
     """
     http://www.graphviz.org/doc/info/shapes.html#polygon
     """
-    node = pydot.Node(child_id, style="filled", fillcolor=colour, label=child_label, shape="polygon", fontname=FONT)
+    node = pydot.Node(
+        child_id,
+        style="filled",
+        fillcolor=colour,
+        label=child_label,
+        shape="polygon",
+        fontname=FONT,
+    )
     graph.add_node(node)
     graph.add_edge(pydot.Edge(parent_id, node))
 
 
 def add_children(graph, parent_id, d, level=0):
-
     blue = "#6b6bd1"
     white = "#fdfefd"
     green = "#33a333"
@@ -49,7 +56,7 @@ def add_children(graph, parent_id, d, level=0):
         child_label = class_
         child_id = parent_id + "_" + class_
         add_child(graph, child_id, child_label, parent_id, colour)
-        add_children(graph, child_id, children, level+1)
+        add_children(graph, child_id, children, level + 1)
 
 
 def save_file(graph, fn):
@@ -60,43 +67,42 @@ def save_file(graph, fn):
 
 
 def main(gviz_path, layer_only=False):
-
     graphviz_setup(gviz_path)
-    graph = pydot.Dot(graph_type='digraph', rankdir="TB")
+    graph = pydot.Dot(graph_type="digraph", rankdir="TB")
 
     layer_children = {
-            'CLASS': {
-                'LABEL': {'STYLE': {}},
-                'CONNECTIONOPTIONS': {},
-                'LEADER': {'STYLE': {}},
-                'STYLE': {},
-                'VALIDATION': {}
-            },
-            'CLUSTER': {},
-            'COMPOSITE': {},
-            'FEATURE': {'POINTS': {}},
-            'GRID': {},
-            'JOIN': {},
-            'METADATA': {},
-            'PROJECTION': {},
-            'SCALETOKEN': {'VALUES': {}},
-            'VALIDATION': {}
-     }
+        "CLASS": {
+            "LABEL": {"STYLE": {}},
+            "CONNECTIONOPTIONS": {},
+            "LEADER": {"STYLE": {}},
+            "STYLE": {},
+            "VALIDATION": {},
+        },
+        "CLUSTER": {},
+        "COMPOSITE": {},
+        "FEATURE": {"POINTS": {}},
+        "GRID": {},
+        "JOIN": {},
+        "METADATA": {},
+        "PROJECTION": {},
+        "SCALETOKEN": {"VALUES": {}},
+        "VALIDATION": {},
+    }
 
     # pprint.pprint(layer_children)
 
     classes = {
         "MAP": {
             "LAYER": layer_children,
-            'LEGEND': {'LABEL': {}},
-            'PROJECTION': {},
-            'QUERYMAP': {},
-            'REFERENCE': {},
-            'SCALEBAR': {'LABEL': {}},
-            'SYMBOL': {},
-            'WEB': {'METADATA': {}, 'VALIDATION': {}}
+            "LEGEND": {"LABEL": {}},
+            "PROJECTION": {},
+            "QUERYMAP": {},
+            "REFERENCE": {},
+            "SCALEBAR": {"LABEL": {}},
+            "SYMBOL": {},
+            "WEB": {"METADATA": {}, "VALIDATION": {}},
         }
-     }
+    }
 
     if layer_only:
         root = "LAYER"
@@ -104,9 +110,16 @@ def main(gviz_path, layer_only=False):
         fn = "layer_classes"
     else:
         fn = "map_classes"
-        root,  = classes.keys()
+        (root,) = classes.keys()
 
-    node = pydot.Node(root, style="filled", fillcolor="#33a333", label=root, fontname=FONT, shape="polygon")
+    node = pydot.Node(
+        root,
+        style="filled",
+        fillcolor="#33a333",
+        label=root,
+        fontname=FONT,
+        shape="polygon",
+    )
     graph.add_node(node)
     add_children(graph, root, classes[root])
     save_file(graph, fn)
