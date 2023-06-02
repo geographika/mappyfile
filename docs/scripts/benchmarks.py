@@ -9,7 +9,6 @@ With lark:
 
 """
 import timeit
-import mappyfile
 
 N = 100
 

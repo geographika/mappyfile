@@ -26,7 +26,7 @@ new_layer = mappyfile.loads(new_layer_string)
 
 layers.insert(0, new_layer)  # insert the new layer at any index in the Mapfile
 
-for l in layers:
-    print("{} {}".format(l["name"], l["type"]))
+for lyr in layers:
+    print("{} {}".format(lyr["name"], lyr["type"]))
 
 print(mappyfile.dumps(mapfile, indent=1, spacer="\t"))

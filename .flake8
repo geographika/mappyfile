@@ -3,5 +3,7 @@ max-line-length = 160
 extend-ignore = E203,W503
 exclude =
     build,
-    dist
+    dist,
+    misc,
+    tests/mapfiles
     docs/_build

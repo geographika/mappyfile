@@ -34,12 +34,8 @@ pip install xmltodict
 import logging
 import json
 from mappyfile.parser import Parser
-from mappyfile.pprint import PrettyPrinter
-from mappyfile.transformer import MapfileToDict, MapfileTransformer
+from mappyfile.transformer import MapfileTransformer
 from mappyfile.pprint import Quoter
-
-from lark.visitors import Transformer
-
 import xmltodict
 
 

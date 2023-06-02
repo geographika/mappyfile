@@ -2,11 +2,11 @@ import os
 from copy import deepcopy
 from shapely.geometry import LineString
 import mappyfile
-import sys, os
+import sys
+from helper import create_image
+
 
 sys.path.append(os.path.abspath("./docs/examples"))
-
-from helper import create_image
 
 
 def dilation(mapfile):
