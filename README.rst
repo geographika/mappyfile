@@ -3,7 +3,7 @@ mappyfile
 
 | |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| |Downloads|
 
-A pure Python parser for working with `MapServer <https://mapserver.org>`_ MapFiles, built using `Lark <https://github.com/lark-parser/lark>`_
+A pure Python parser for working with `MapServer <https://mapserver.org>`_ MapFiles, built using `Lark <https://github.com/lark-parser/lark>`__
 
 mappyfile is used for formatting and validation in https://app.mapserverstudio.net/, and can be tested for free on any
 of your Mapfiles. If you find mappyfile useful please consider signing up for a professional account at 
@@ -17,18 +17,19 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
 Requirements
 ------------
 
-* Python 2.7 or Python 3.x
+* Python Python 3.8 or higher
 
 Installation
 ------------
 
-mappyfile is available on PyPI (Python Package Index), and can be installed using pip:
+mappyfile is available on `PyPI <https://pypi.org/project/mappyfile/>`_ (the Python Package Index), and can be installed using pip:
 
 .. code-block:: console
 
     pip install mappyfile
 
-This will also install its required dependencies - Lark, and jsonschema. 
+This will also install its required dependencies - `Lark <https://github.com/lark-parser/lark>`__, and 
+`jsonschema <https://github.com/python-jsonschema/jsonschema>`_. 
 
 Documentation
 -------------
