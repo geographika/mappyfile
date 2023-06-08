@@ -67,8 +67,8 @@ __all__ = [
 ]
 
 
-plugins = ModuleType("mappyfile.plugins")
-sys.modules["mappyfile.plugins"] = plugins
+module = ModuleType("mappyfile.plugins")
+sys.modules["mappyfile.plugins"] = module
 
 if sys.version_info >= (3, 10):
     plugins = importlib.metadata.entry_points(group="mappyfile.plugins")
@@ -76,7 +76,7 @@ else:
     plugins = importlib.metadata.entry_points().get("mappyfile.plugins", [])
 
 for plugin in plugins:
-    setattr(plugins, plugin.name, plugin.load())
+    setattr(module, plugin.name, plugin.load())
 
 # Set default logging handler to avoid "No handler found" warnings.
 logging.getLogger("mappyfile").addHandler(NullHandler())
