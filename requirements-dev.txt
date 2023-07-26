@@ -13,3 +13,9 @@ glob2
 coveralls
 sphinx
 black
+mypy
+types-jsonschema
+
+# for demo scripts
+# Pillow
+shapely

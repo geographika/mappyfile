@@ -2,7 +2,12 @@ import os
 import sys
 from shapely.geometry import LineString
 import mappyfile
-from PIL import Image
+
+try:
+    from PIL import Image
+except ImportError:
+    raise
+
 from helper import create_image
 
 

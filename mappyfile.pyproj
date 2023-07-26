@@ -114,7 +114,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Folder Include="tests\sample_maps\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".black" />
     <Content Include=".flake8" />
+    <Content Include=".gitattributes" />
     <Content Include=".github\dependabot.yml" />
     <Content Include=".github\FUNDING.yml" />
     <Content Include=".github\workflows\main.yml" />
@@ -143,12 +145,20 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\examples\geometry\geometry.map" />
     <Content Include="docs\format.txt" />
     <Content Include="docs\grammar.rst" />
+    <Content Include="docs\images\animation.gif" />
+    <Content Include="docs\images\dilated.map" />
+    <Content Include="docs\images\dilated.png" />
+    <Content Include="docs\images\erosion.map" />
+    <Content Include="docs\images\erosion.png" />
     <Content Include="docs\images\layer_classes.dot" />
     <Content Include="docs\images\layer_classes.png" />
+    <Content Include="docs\images\mappyfile_modules.png" />
     <Content Include="docs\images\map_classes.dot" />
     <Content Include="docs\images\map_classes.png" />
     <Content Include="docs\HISTORY.rst" />
     <Content Include="docs\images\mapserver_git_switch.png" />
+    <Content Include="docs\images\regex.png" />
+    <Content Include="docs\images\shapely.jpg" />
     <Content Include="docs\images\tree.png" />
     <Content Include="docs\images\tree_inlining.png" />
     <Content Include="docs\images\tree_noinlining.png" />
@@ -252,7 +262,6 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="misc\mapscript_loading.py">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="misc\mode-mapfile.js" />
     <Content Include="misc\shapefile_layer.map">
       <SubType>Code</SubType>
     </Content>
@@ -260,6 +269,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="pytest.ini" />
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
+    <Content Include="run_local.ps1" />
     <Content Include="setup.cfg">
       <SubType>Code</SubType>
     </Content>
@@ -1109,6 +1119,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="misc\test_docs_parser.py" />
+    <Compile Include="misc\token_generator.py" />
     <Compile Include="misc\__init__.py" />
     <Compile Include="setup.py" />
     <Compile Include="tests\mapfiles\basemaps\generate_style.py" />

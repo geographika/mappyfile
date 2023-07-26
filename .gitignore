@@ -14,8 +14,9 @@ cache
 /.vs/mappyfile/v15/.suo
 /.tox
 /.eggs
-/.vs/config
+/.vs/*
 /.venv
 /.coverage
 /tests/mapfiles/large_map2.map
 /.vscode
+/mappyfile.pyproj.user
