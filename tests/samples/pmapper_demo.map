@@ -1,0 +1,373 @@
+# Adapt settings in map file <tt>pmapper_demo.map</tt> for the following tags to match settings
+# on your machine (see additionally MapServer documentation for detailed information):
+
+ # MAP
+   # SHAPEPATH 
+   # FONTSET
+   # SYMBOLSET
+  
+ # WEB
+   # IMAGEPATH  
+   # IMAGEURL    
+
+
+#
+# Start of map file  
+#
+MAP
+EXTENT  1988372 1400000 6411627 5400000 
+ 
+UNITS meters
+#EXTENT -15 30 40 70
+#UNITS dd
+SIZE 600 500
+SHAPEPATH "../../../../demodata"
+#SYMBOLSET "../demodata/symbols/symbols35.sym"   
+#FONTSET "../../../data/fonts/msfontset.txt" 
+RESOLUTION 96
+IMAGETYPE png
+INTERLACE OFF
+#CONFIG "PROJ_LIB" "C:/proj/nad/"
+PROJECTION
+  # ETRS-LAEA
+  #"init=epsg:3035"
+  "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs  no_defs"
+END  
+
+
+#
+# Image formates for GD
+#
+OUTPUTFORMAT
+  NAME "png"
+  DRIVER "GD/PNG"
+  MIMETYPE "image/png"
+  IMAGEMODE RGB
+  FORMATOPTION  "INTERLACE=OFF"
+  TRANSPARENT OFF
+  EXTENSION "png"
+END
+
+OUTPUTFORMAT
+  NAME "png8"
+  DRIVER "GD/PNG"
+  MIMETYPE "image/png"
+  IMAGEMODE PC256
+  FORMATOPTION  "INTERLACE=OFF"
+  TRANSPARENT OFF
+  EXTENSION "png"
+END
+
+OUTPUTFORMAT
+  NAME "jpeg"
+  DRIVER "GD/JPEG"
+  MIMETYPE "image/jpeg"
+  IMAGEMODE RGB
+  FORMATOPTION "QUALITY=70"
+  EXTENSION "jpg"
+END
+
+#
+# Image formates for AGG
+#
+OUTPUTFORMAT
+  # 24 bit PNG
+  NAME 'agg_png'
+  DRIVER AGG/PNG
+  IMAGEMODE RGB
+END
+
+OUTPUTFORMAT
+  # 32 bit PNG with alpha channel from transparency
+  NAME 'agg_pnga'
+  DRIVER AGG/PNG
+  IMAGEMODE RGBA
+END
+
+OUTPUTFORMAT
+  # 8 bit PNG
+  NAME 'agg_png8'  
+  DRIVER AGG/PNG
+  IMAGEMODE RGB
+  FORMATOPTION "QUANTIZE_FORCE=ON"
+  FORMATOPTION "QUANTIZE_DITHER=OFF"
+  FORMATOPTION "QUANTIZE_COLORS=256"
+END
+
+OUTPUTFORMAT
+  NAME 'agg_jpeg'
+  DRIVER AGG/JPEG
+  IMAGEMODE RGB
+END
+
+
+OUTPUTFORMAT
+  NAME GTiff
+  DRIVER "GDAL/GTiff"
+  MIMETYPE "image/tiff"
+  IMAGEMODE RGB
+  #FORMATOPTION "TFW=YES"
+  #FORMATOPTION "COMPRESS=PACKBITS"
+  EXTENSION "tif"
+END
+
+OUTPUTFORMAT
+  NAME imagemap
+  MIMETYPE "text/html"
+  FORMATOPTION "SKIPENDTAG=OFF"
+  DRIVER imagemap
+END
+
+#
+# Start of web interface definition
+#
+WEB
+  TEMPLATE "map.html"
+  IMAGEPATH "d:\webdoc\tmp"
+  IMAGEURL "/tmp/"
+  METADATA
+    #"MAPFILE_ENCODING" "ISO-8859-1" 
+    "ows_title"     "WMS Demo Server"  
+    "ows_onlineresource" "http://wms.yourserver.org?owskey=test&"   
+    "ows_srs"       "EPSG:3035 EPSG:4326"  
+  END  # Metadata
+END  # Web
+
+#
+# Start of Reference map definition
+#
+REFERENCE
+  EXTENT 1496247 1332616 7055632 5502154 #2200000 1400000 8000000 5400000
+  IMAGE "../../images/reference.png"
+  SIZE 199 149
+  COLOR -1 -1 -1
+  OUTLINECOLOR 255 0 0
+END  # Reference
+
+LEGEND
+END
+
+#
+# Start of ScaleBar definition
+#
+SCALEBAR
+  STATUS embed
+  TRANSPARENT off
+  INTERVALS 4
+  SIZE 200 3
+  UNITS kilometers
+  COLOR 250 250 250
+  OUTLINECOLOR 0 0 0
+  BACKGROUNDCOLOR 100 100 100
+  STYLE 0
+  POSTLABELCACHE true
+  LABEL
+    COLOR 0 0 90
+    #OUTLINECOLOR 200 200 200
+    SIZE small
+  END  # Label
+END  # Reference
+
+
+
+# SYMBOLS USED IN PMAPPER
+# - 'circle' always necessary (used e.g. for highlight)
+# - 'square' used in currecnt map file
+# Symbols can also be defined via tag SYMBOLSET (see above)
+Symbol
+  Name 'circle'
+  Type ELLIPSE
+  Filled TRUE
+  Points
+    1 1
+  END
+END 
+
+Symbol
+  Name 'square'
+  Type VECTOR
+  Filled TRUE
+  Points
+    0 1
+    0 0
+    1 0
+    1 1
+    0 1
+  END
+END
+
+
+#================== START OF LAYER SECTION =====================#
+
+
+LAYER
+  NAME "jpl_wms_global_mosaic"
+  TYPE RASTER
+  STATUS OFF
+  CONNECTION "http://wms.jpl.nasa.gov/wms.cgi?"
+  CONNECTIONTYPE WMS
+  PROJECTION
+    "init=epsg:4326"
+  END
+  METADATA
+    "DESCRIPTION"         "JPL Global Mosaic (WMS)"
+    "wms_name"            "global_mosaic_base"
+    "wms_style"           "visual"
+    "wms_server_version"  "1.1.1"
+    "wms_format"          "image/jpeg"
+    "ows_title"           "jpl_wms_global_mosaic"
+  END
+END
+
+
+
+#
+# LAYER DGM
+#
+LAYER
+  NAME "dem"
+  TYPE Raster
+  STATUS OFF
+  DATA 'europa_dem.jpg'
+  MINSCALE 3000000
+  PROJECTION
+    "init=epsg:4326"
+  END
+  METADATA
+    "DESCRIPTION"   "NGDC Shaded  relief"
+    "LEGENDICON"    "images/legend/dem.png"
+    "ows_title"     "dem"
+  END
+END
+
+
+
+ 
+#
+# Start of Layer Countries.shp
+#
+LAYER
+  NAME "countries"
+  TYPE polygon
+  DATA "countries"
+  TRANSPARENCY 30
+  PROJECTION
+    "init=epsg:4326"
+  END
+  METADATA 
+    "DESCRIPTION" "Countries"
+    "RESULT_FIELDS" "NAME,AREA_KM2"
+    "RESULT_HEADERS" "Name,Area"
+    "ows_title"      "countries"
+  END  # Metadata 
+  CLASS
+    Name 'Countries'
+    COLOR 200 254 199
+    OUTLINECOLOR 0 0 0
+    TEMPLATE void
+  END  # Class
+END  # Layer
+
+
+
+LAYER
+  NAME "cities10000eu" 
+  TYPE point
+  DATA "cities10000eu"
+  TOLERANCE 6
+  TOLERANCEUNITS pixels
+  LABELITEM "ASCIINAME"
+  LABELMAXSCALE 8000000
+  TEMPLATE void
+  PROJECTION
+    "init=epsg:4326"
+  END
+  METADATA 
+    "DESCRIPTION" "Cities"
+    "RESULT_FIELDS" "NAME, ISO2_CODE, POPULATION, GTOPO30"
+    "RESULT_HEADERS" "Name,Country,Inhabitants,Altitude"
+    "RESULT_HYPERLINK" "NAME"
+    "LAYER_ENCODING" "UTF-8"
+    "ows_title"      "cities1000"
+  END  # Metadata  
+  
+  CLASS
+    NAME "> 1'000'000"
+    EXPRESSION ([POPULATION] > 1000000)
+    COLOR 255 0 0 
+    OUTLINECOLOR 0 0 0 
+    SYMBOL 'square' 
+    SIZE 9
+
+  END  # Class
+  CLASS
+    NAME "500'000 - 1'000'000"
+    EXPRESSION ([POPULATION] <= 1000000 AND [POPULATION] > 500000)
+    COLOR 255 0 0
+    SYMBOL 'circle' 
+    SIZE 8
+    LABEL
+      POSITION "Auto"
+      COLOR 0 0 150 
+      BACKGROUNDCOLOR 255 255 128
+      BACKGROUNDSHADOWCOLOR 150 150 150
+      #BACKGROUNDSHADOWSIZE 2 2
+
+    END #Label  
+  END  # Class
+  CLASS
+    NAME "100'000 - 500'000"
+    EXPRESSION ([POPULATION] <= 500000 AND [POPULATION] > 100000)
+    COLOR 255 0 0
+    SYMBOL 'square' 
+    SIZE 5
+  END  # Class
+  CLASS
+    NAME "50'000 - 100'000"
+    EXPRESSION ([POPULATION] <= 100000 AND [POPULATION] > 50000)
+    COLOR 0 0 0
+    SYMBOL 'square' 
+    SIZE 4
+    #MAXSCALE 20000000
+  END  # Class
+  CLASS
+    NAME "10'000 - 50'000"
+    EXPRESSION ([POPULATION] <= 50000 AND [POPULATION] > 10000)
+    COLOR 100 100 100
+    SYMBOL 'circle' 
+    SIZE 3
+    #MAXSCALE 10000000
+  END  # Class
+
+END  # Layer
+
+
+#
+# Start of Layer Rivers.shp
+#
+LAYER
+  NAME "rivers"
+  TYPE line
+  DATA "rivers"
+  TOLERANCE 3
+  TOLERANCEUNITS pixels
+  PROJECTION
+    "init=epsg:4326"
+  END
+  METADATA 
+    "DESCRIPTION" "Rivers"
+    "RESULT_FIELDS" "NAME,LENGTH"
+    "RESULT_HEADERS" "Name,Length"
+    "ows_title"      "cities"
+  END  # Metadata 
+  CLASS
+    Name 'Rivers'
+    COLOR 0 0 255
+    TEMPLATE void
+  END  # Class
+END  # Layer
+
+
+
+
+END  #Map
