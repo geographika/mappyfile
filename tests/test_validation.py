@@ -8,11 +8,8 @@ from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 from subprocess import Popen, PIPE, STDOUT
 import pytest
+from urllib.parse import urlsplit
 
-try:
-    from urllib.parse import urlsplit
-except ImportError:
-    from urlparse import urlsplit
 
 DLL_LOCATION = r"C:\MapServer\bin"
 
