@@ -27,10 +27,13 @@
 #
 # =================================================================
 
+from __future__ import annotations
 import os
 import logging
 from io import open
 from lark import Lark, ParseError, Tree, UnexpectedInput
+from typing import Any
+
 
 try:
     import lark_cython
@@ -57,13 +60,15 @@ SYMBOL_ATTRIBUTES = {
 
 
 class Parser(object):
-    def __init__(self, expand_includes=True, include_comments=False, **kwargs):
+    def __init__(
+        self, expand_includes: bool = True, include_comments: bool = False, **kwargs
+    ):
         self.expand_includes = expand_includes
         self.include_comments = include_comments
-        self._comments = []
+        self._comments: list[Any] = []
         self.lalr = self._create_lalr_parser()
 
-    def _create_lalr_parser(self):
+    def _create_lalr_parser(self) -> Any:
         extra_args = {}
 
         if lark_cython:
@@ -78,7 +83,7 @@ class Parser(object):
 
         return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
 
-    def _get_include_filename(self, line):
+    def _get_include_filename(self, line: str) -> str:
         if "#" in line:
             # remove any comments on the same line
             line = line.split("#")[0]
@@ -93,7 +98,9 @@ class Parser(object):
 
         return inc_file_path.strip("'").strip('"')
 
-    def load_includes(self, text, fn=None, _nested_includes=0):
+    def load_includes(
+        self, text: str, fn: (str | None) = None, _nested_includes: int = 0
+    ) -> str:
         # Per default use working directory of the process
         if fn is None:
             fn = os.getcwd() + os.sep
@@ -128,7 +135,7 @@ class Parser(object):
             lines.insert(idx, txt)
         return "\n".join(lines)
 
-    def assign_comments(self, tree, comments):
+    def assign_comments(self, tree, comments: list[Any]) -> None:
         """
         Capture any comments in the tree
 
@@ -166,7 +173,7 @@ class Parser(object):
         self.idx = idx
         self._assign_comments(tree, 0)
 
-    def _get_comments(self, from_line, to_line):
+    def _get_comments(self, from_line: int, to_line: int) -> list[str]:
         idx = self.idx
         comments = self.comments
 
@@ -231,11 +238,11 @@ class Parser(object):
             )
             raise
 
-    def parse_file(self, fn):
+    def parse_file(self, fn: str):
         text = self.open_file(fn)
         return self.parse(text, fn=fn)
 
-    def parse(self, text, fn=None):
+    def parse(self, text: str, fn: (str | None) = None) -> Any:
         """
         Parse the Mapfile
         """
