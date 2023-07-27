@@ -28,7 +28,6 @@
 # =================================================================
 
 from __future__ import unicode_literals
-import sys
 import codecs
 import warnings
 import functools
@@ -37,11 +36,7 @@ from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.validator import Validator
-
-try:
-    from itertools import izip_longest as zip_longest  # py2
-except ImportError:
-    from itertools import zip_longest  # py3
+from itertools import zip_longest
 
 
 def deprecated(func):
@@ -787,11 +782,4 @@ def create(type, version=None):
 
 
 def dict_move_to_end(ordered_dict, key):
-    if sys.version_info[0] < 3:
-        # mappyfile requires Python >= 2.7,
-        # so this should be safe
-        val = ordered_dict[key]
-        del ordered_dict[key]
-        ordered_dict[key] = val
-    else:
-        ordered_dict.move_to_end(key)
+    ordered_dict.move_to_end(key)

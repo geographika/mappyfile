@@ -37,19 +37,8 @@
 
 from collections import OrderedDict
 import copy
-import sys
 from mappyfile.tokens import OBJECT_LIST_KEYS
-
-
-try:
-    from collections.abc import Callable  # noqa
-except ImportError:
-    from collections import Callable  # noqa
-
-
-PY2 = sys.version_info[0] < 3
-if PY2:
-    str = unicode  # NOQA
+from collections.abc import Callable
 
 
 class DefaultOrderedDict(OrderedDict):

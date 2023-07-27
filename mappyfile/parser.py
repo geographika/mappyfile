@@ -28,7 +28,6 @@
 # =================================================================
 
 import os
-import sys
 import logging
 from io import open
 from lark import Lark, ParseError, Tree, UnexpectedInput
@@ -37,11 +36,6 @@ try:
     import lark_cython
 except ImportError:
     lark_cython = None
-
-
-PY2 = sys.version_info[0] < 3
-if not PY2:
-    unicode = str  # NOQA
 
 
 log = logging.getLogger("mappyfile")
@@ -227,7 +221,6 @@ class Parser(object):
 
     def open_file(self, fn):
         try:
-            # specify Unicode for Python 2.7
             with open(fn, "r", encoding="utf-8") as f:
                 return f.read()
         except UnicodeDecodeError as ex:
@@ -246,10 +239,6 @@ class Parser(object):
         """
         Parse the Mapfile
         """
-
-        if PY2 and not isinstance(text, unicode):
-            # specify Unicode for Python 2.7
-            text = unicode(text, "utf-8")
 
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
