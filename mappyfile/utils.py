@@ -27,6 +27,7 @@
 #
 # =================================================================
 
+from __future__ import annotations
 import codecs
 import warnings
 import functools
