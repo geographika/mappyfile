@@ -31,6 +31,9 @@ jobs:
       - name: Lint with flake8
         run: |
           flake8 .
+      - name: Check types with mypy
+        run: |
+          mypy mappyfile tests docs/examples
       - name: Command line tests
         run: |
           mappyfile schema mapfile-schema.json

@@ -8,4 +8,4 @@ flake8 .
 mypy mappyfile tests
 
 # pytest
-pytest --doctest-modules
+pytest --doctest-modules --ignore=./docs/examples/pretty_printing.py

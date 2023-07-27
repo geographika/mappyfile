@@ -7,6 +7,16 @@ exclude = [
     'tests/mapfiles'
 ]
 
+[[tool.mypy.overrides]]
+module = [
+    'jsonref',
+    'glob2',
+    'lark_cython',
+    'PIL',
+    'shapely.geometry'
+]
+ignore_missing_imports = true
+
 # Flake8 does not currently support pyproject.toml
 # without an additional dependency
 # see https://pypi.org/project/Flake8-pyproject/
