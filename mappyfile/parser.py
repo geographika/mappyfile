@@ -32,7 +32,7 @@ import os
 import logging
 from io import open
 from lark import Lark, ParseError, Tree, UnexpectedInput
-from typing import Any
+from typing import Any, IO
 
 
 try:
@@ -135,7 +135,7 @@ class Parser(object):
             lines.insert(idx, txt)
         return "\n".join(lines)
 
-    def assign_comments(self, tree, comments: list[Any]) -> None:
+    def assign_comments(self, tree: Any, comments: list[Any]) -> None:
         """
         Capture any comments in the tree
 
@@ -173,7 +173,7 @@ class Parser(object):
         self.idx = idx
         self._assign_comments(tree, 0)
 
-    def _get_comments(self, from_line: int, to_line: int) -> list[str]:
+    def _get_comments(self, from_line: int, to_line: int) -> list[Any]:
         idx = self.idx
         comments = self.comments
 
@@ -190,7 +190,7 @@ class Parser(object):
 
         return associated_comments
 
-    def _assign_comments(self, _tree, prev_end_line):
+    def _assign_comments(self, _tree: Any, prev_end_line: int) -> None:
         for node in _tree.children:
             if not isinstance(node, Tree):
                 continue
@@ -206,17 +206,20 @@ class Parser(object):
                     self._assign_comments(node, prev_end_line)
                     continue
 
-            node.meta.header_comments = self._get_comments(prev_end_line, line)
+            # header_comments is a custom mappyfile property added to the meta object
+            node.meta.header_comments = self._get_comments(prev_end_line, line)  # type: ignore
+
             if node.meta.line == node.meta.end_line:
                 # node is on a single line, so check for inline comments
-                node.meta.inline_comments = self._get_comments(line, line + 1)
+                # and add them as a custom property to the Meta class of the node
+                node.meta.inline_comments = self._get_comments(line, line + 1)  # type: ignore
                 prev_end_line = node.meta.end_line + 1
             else:
                 if isinstance(node, Tree):
                     self._assign_comments(node, line)
                 prev_end_line = node.meta.end_line
 
-    def load(self, fp):
+    def load(self, fp: IO[str]) -> Any:
         text = fp.read()
         if hasattr(fp, "name"):
             fn = (
@@ -226,7 +229,7 @@ class Parser(object):
             fn = None
         return self.parse(text, fn)
 
-    def open_file(self, fn):
+    def open_file(self, fn: str):
         try:
             with open(fn, "r", encoding="utf-8") as f:
                 return f.read()
@@ -238,7 +241,7 @@ class Parser(object):
             )
             raise
 
-    def parse_file(self, fn: str):
+    def parse_file(self, fn: str) -> Any:
         text = self.open_file(fn)
         return self.parse(text, fn=fn)
 

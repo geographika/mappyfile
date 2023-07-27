@@ -648,10 +648,10 @@ class CommentsTransformer(Transformer_InPlace):
         all_comments = []
 
         if hasattr(meta, "inline_comments"):
-            all_comments += meta.inline_comments
+            all_comments += meta["inline_comments"]
 
         if hasattr(meta, "header_comments"):
-            all_comments += meta.header_comments
+            all_comments += meta["header_comments"]
 
         return all_comments
 

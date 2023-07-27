@@ -5,6 +5,8 @@ black .
 flake8 .
 
 # mypy --install-types
+# to find functions missing types
+# mypy --check-untyped-defs mappyfile
 mypy mappyfile tests
 
 # pytest

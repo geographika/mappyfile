@@ -45,7 +45,7 @@ def get_mapfiles(mapfiles):
     return all_mapfiles
 
 
-def configure_logging(verbosity):
+def configure_logging(verbosity: int):
     """
     Configure logging level
 
