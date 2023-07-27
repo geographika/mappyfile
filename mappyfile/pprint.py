@@ -27,8 +27,6 @@
 #
 # =================================================================
 
-from __future__ import unicode_literals
-import sys
 import logging
 import numbers
 from mappyfile.tokens import (
@@ -42,11 +40,6 @@ from mappyfile.validator import Validator
 import mappyfile as utils
 
 log = logging.getLogger("mappyfile")
-
-
-PY2 = sys.version_info[0] < 3
-if PY2:
-    str = unicode  # NOQA
 
 
 class Quoter(object):
@@ -92,8 +85,7 @@ class Quoter(object):
         return val
 
     def is_string(self, val):
-        # check for bytes as str is aliased to unicode in Python2
-        return isinstance(val, (bytes, str))
+        return isinstance(val, str)
 
     def remove_quotes(self, val):
         if isinstance(val, list):

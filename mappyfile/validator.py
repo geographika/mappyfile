@@ -29,7 +29,6 @@
 
 import json
 import os
-import sys
 from collections import OrderedDict
 import logging
 import jsonschema
@@ -37,10 +36,6 @@ import jsonref
 import mappyfile as utils
 
 log = logging.getLogger("mappyfile")
-
-PY2 = sys.version_info[0] < 3
-if PY2:
-    str = unicode  # NOQA
 
 
 class Validator(object):
