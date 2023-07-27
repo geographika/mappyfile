@@ -46,7 +46,7 @@ if lark_cython:
         return Token.new_borrow_pos(t.type, value, t)
 
 else:
-    TOKEN_TYPES = Token # type: ignore
+    TOKEN_TYPES = Token  # type: ignore
 
     def update_token_value(t, value):
         t.value = value

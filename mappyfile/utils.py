@@ -67,7 +67,7 @@ def open(
     expand_includes: bool = True,
     include_comments: bool = False,
     include_position: bool = False,
-    **kwargs
+    **kwargs,
 ) -> dict:
     """
     Load a Mapfile from the supplied filename into a Python dictionary.
@@ -119,7 +119,7 @@ def load(
     expand_includes: bool = True,
     include_position: bool = False,
     include_comments: bool = False,
-    **kwargs
+    **kwargs,
 ) -> dict:
     """
     Load a Mapfile from an open file or file-like object.
@@ -171,7 +171,7 @@ def loads(
     expand_includes: bool = True,
     include_position: bool = False,
     include_comments: bool = False,
-    **kwargs
+    **kwargs,
 ) -> dict:
     """
     Load a Mapfile from a string
@@ -292,7 +292,7 @@ def save(
     end_comment: bool = False,
     align_values: bool = False,
     separate_complex_types: bool = False,
-    **kwargs
+    **kwargs,
 ) -> str:
     """
     Write a dictionary to an output Mapfile on disk
@@ -363,7 +363,7 @@ def dumps(
     end_comment=False,
     align_values=False,
     separate_complex_types=False,
-    **kwargs
+    **kwargs,
 ):
     """
     Output a Mapfile dictionary as a string
@@ -418,7 +418,7 @@ def dumps(
         end_comment,
         align_values,
         separate_complex_types,
-        **kwargs
+        **kwargs,
     )
 
 
@@ -742,7 +742,7 @@ def _pprint(
     end_comment: bool,
     align_values: bool,
     separate_complex_types: bool,
-    **kwargs
+    **kwargs,
 ) -> str:
     pp = PrettyPrinter(
         indent=indent,
@@ -752,7 +752,7 @@ def _pprint(
         end_comment=end_comment,
         align_values=align_values,
         separate_complex_types=separate_complex_types,
-        **kwargs
+        **kwargs,
     )
     return pp.pprint(d)
 
