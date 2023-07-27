@@ -459,7 +459,9 @@ class PrettyPrinter(object):
                 if attr == "compop":
                     return self.quoter.add_quotes(str(value))
                 else:
-                    return str(value).upper()  # value is from a set list, no need for quote
+                    return str(
+                        value
+                    ).upper()  # value is from a set list, no need for quote
             else:
                 return value
 
