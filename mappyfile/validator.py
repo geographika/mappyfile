@@ -27,6 +27,7 @@
 #
 # =================================================================
 
+from __future__ import annotations
 import json
 import os
 from collections import OrderedDict
@@ -34,6 +35,8 @@ import logging
 import jsonschema
 import jsonref
 import mappyfile as utils
+from typing import Any
+
 
 log = logging.getLogger("mappyfile")
 
@@ -43,7 +46,7 @@ class Validator(object):
         self.schemas = {}
         self.expanded_schemas = {}
 
-    def get_schema_path(self, schemas_folder):
+    def get_schema_path(self, schemas_folder: str) -> str:
         """
         Return a file protocol URI e.g. file:///D:/mappyfile/mappyfile/schemas/ on Windows
         and file:////home/user/mappyfile/mappyfile/schemas/ on Linux
@@ -62,10 +65,10 @@ class Validator(object):
 
         return root_schema_path
 
-    def get_schemas_folder(self):
+    def get_schemas_folder(self) -> str:
         return os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
 
-    def get_schema_file(self, schema_name):
+    def get_schema_file(self, schema_name: str) -> str:
         schema_name += ".json"
         schemas_folder = self.get_schemas_folder()
         schema_file = os.path.join(schemas_folder, schema_name)
@@ -75,7 +78,7 @@ class Validator(object):
 
         return schema_file
 
-    def is_valid_for_version(self, d, version):
+    def is_valid_for_version(self, d: dict, version: float) -> bool:
         """
         Check if the dict object has a metadata dict
         and if it does then check if the supplied
@@ -91,7 +94,7 @@ class Validator(object):
 
         return True
 
-    def get_versioned_schema(self, version=None, schema_name="map"):
+    def get_versioned_schema(self, version: (float | None), schema_name: str = "map"):
         """
         Get a fully expanded JSON schema for a specific MapServer
         version. Optionally provide a schema_name to return an expanded
@@ -108,7 +111,7 @@ class Validator(object):
 
         return jsn_schema
 
-    def get_versioned_properties(self, properties, version):
+    def get_versioned_properties(self, properties: dict, version: float) -> dict:
         """
         For a dict object recursively check each child object
         to see if it is valid for the supplied version
@@ -133,7 +136,7 @@ class Validator(object):
 
         return properties
 
-    def get_schema_validator(self, schema_name):
+    def get_schema_validator(self, schema_name: str) -> jsonschema.Draft4Validator:
         """
         Had to remove the id property from map.json or it uses URLs for validation
         See various issues at https://github.com/Julian/jsonschema/pull/306
@@ -150,7 +153,7 @@ class Validator(object):
 
             schemas_folder = self.get_schemas_folder()
             root_schema_path = self.get_schema_path(schemas_folder)
-            resolver = jsonschema.RefResolver(root_schema_path, None)
+            resolver = jsonschema.RefResolver(root_schema_path, {})
             # cache the schema for future use
             self.schemas[schema_name] = (jsn_schema, resolver)
         else:
@@ -161,7 +164,7 @@ class Validator(object):
 
         return validator
 
-    def convert_lowercase(self, x):
+    def convert_lowercase(self, x: Any) -> Any:
         if isinstance(x, list):
             return [self.convert_lowercase(v) for v in x]
         elif isinstance(x, dict):
@@ -174,7 +177,9 @@ class Validator(object):
 
         return x
 
-    def create_message(self, rootdict, path, error, add_comments):
+    def create_message(
+        self, rootdict: dict, path: str, error, add_comments: bool
+    ) -> dict:
         """
         Add a validation comment to the dictionary
         path is the path to the error object, it can be empty if the error is in the root object
@@ -208,7 +213,7 @@ class Validator(object):
 
             d["__comments__"][key] = "# {}".format(error_message)
 
-        error_message = {"error": error.message, "message": error_message}
+        error_dict = {"error": error.message, "message": error_message}
 
         # add in details of the error line, when Mapfile was parsed to
         # include position details
@@ -220,12 +225,14 @@ class Validator(object):
             else:
                 pd = d["__position__"][key]
 
-            error_message["line"] = pd.get("line")
-            error_message["column"] = pd.get("column")
+            error_dict["line"] = pd.get("line")
+            error_dict["column"] = pd.get("column")
 
-        return error_message
+        return error_dict
 
-    def get_error_messages(self, d, errors, add_comments):
+    def get_error_messages(
+        self, d: dict, errors: list[Any], add_comments: bool
+    ) -> list[dict]:
         error_messages = []
 
         for error in errors:
@@ -236,7 +243,9 @@ class Validator(object):
 
         return error_messages
 
-    def _validate(self, d, validator, add_comments, schema_name):
+    def _get_errors(
+        self, d: dict, validator: jsonschema.Draft4Validator, add_comments: bool
+    ) -> list[dict]:
         lowercase_dict = self.convert_lowercase(d)
         jsn = json.loads(json.dumps(lowercase_dict), object_pairs_hook=OrderedDict)
 
@@ -245,7 +254,13 @@ class Validator(object):
 
         return error_messages
 
-    def validate(self, value, add_comments=False, schema_name="map", version=None):
+    def validate(
+        self,
+        value: Any,
+        add_comments: bool = False,
+        schema_name: str = "map",
+        version: (float | None) = None,
+    ):
         """
         verbose - also return the jsonschema error details
         """
@@ -259,15 +274,15 @@ class Validator(object):
 
         if isinstance(value, list):
             for d in value:
-                error_messages += self._validate(
-                    d, validator, add_comments, schema_name
-                )
+                error_messages += self._get_errors(d, validator, add_comments)
         else:
-            error_messages = self._validate(value, validator, add_comments, schema_name)
+            error_messages = self._get_errors(value, validator, add_comments)
 
         return error_messages
 
-    def get_expanded_schema(self, schema_name, version=None):
+    def get_expanded_schema(
+        self, schema_name: str, version: (float | None) = None
+    ) -> dict:
         """
         Return a schema file with all $ref properties expanded
         """
