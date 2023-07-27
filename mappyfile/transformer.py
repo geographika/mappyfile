@@ -312,7 +312,7 @@ class MapfileTransformer(Transformer, object):
                 values = {value_tokens[0].value: value_tokens[1].value}
             else:
                 # list of values
-                values = [v.value for v in value_tokens]
+                values = [v.value for v in value_tokens]  # type: ignore
                 d["__tokens__"] = [key_token] + [t for t in value_tokens]
         else:
             # single value

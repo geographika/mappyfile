@@ -301,13 +301,13 @@ def test_class_list():
     d1 = {"text": "([area])", "expression": "([area])", "__type__": "class"}
     d2 = {"text": '("[area]")', "expression": '("[area]")', "__type__": "class"}
 
-    d1 = collections.OrderedDict(sorted(d1.items()))
-    d2 = collections.OrderedDict(sorted(d2.items()))
+    od1 = collections.OrderedDict(sorted(d1.items()))
+    od2 = collections.OrderedDict(sorted(d2.items()))
 
-    classes = [d1, d2]
+    classes = [od1, od2]
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar=" ")
-    s = pp.pprint(classes)
+    s = pp.pprint(classes)  # type: ignore
     print(s)
     assert (
         s

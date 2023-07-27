@@ -38,7 +38,7 @@
 from collections import OrderedDict
 import copy
 from mappyfile.tokens import OBJECT_LIST_KEYS
-from collections.abc import Callable
+from typing import Callable, Any
 
 
 class DefaultOrderedDict(OrderedDict):
@@ -48,8 +48,8 @@ class DefaultOrderedDict(OrderedDict):
     Based on: http://code.activestate.com/recipes/523034-emulate-collectionsdefaultdict/
     """
 
-    def __init__(self, default_factory=None, *a, **kw):
-        if default_factory is not None and not isinstance(default_factory, Callable):
+    def __init__(self, default_factory: (Callable[..., Any] | None) = None, *a, **kw):
+        if default_factory is not None and not callable(default_factory):
             raise TypeError("First argument must be callable")
 
         OrderedDict.__init__(self, *a, **kw)
@@ -76,7 +76,7 @@ class DefaultOrderedDict(OrderedDict):
 
     def __reduce__(self):
         if self.default_factory is None:
-            args = tuple()
+            args: tuple = tuple()
         else:
             args = (self.default_factory,)
         return type(self), args, None, None, iter(self.items())

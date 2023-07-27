@@ -6,10 +6,11 @@ import mappyfile
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
 from mappyfile.parser import Parser
+from typing import Any
 
 
 def test_comment():
-    d = collections.OrderedDict()
+    d: dict[str, Any] = collections.OrderedDict()
     d["name"] = "Test"
     d["__type__"] = "layer"
     d["__comments__"] = {"name": "# Test comment"}
@@ -24,7 +25,7 @@ END"""
 
 
 def test_double_comment():
-    d = collections.OrderedDict()
+    d: dict[str, Any] = collections.OrderedDict()
     d["name"] = "Test"
     d["__type__"] = "layer"
     d["__comments__"] = {"name": "# Name comment", "type": "# Type comment"}
@@ -47,7 +48,7 @@ def test_header_comment():
     """
     __type__ is used as the key for any object-level comments
     """
-    d = collections.OrderedDict()
+    d: dict[str, Any] = collections.OrderedDict()
     d["name"] = "Test"
     d["__type__"] = "layer"
     d["__comments__"] = {"__type__": "# Layer comment"}
@@ -68,7 +69,7 @@ def test_header_list_comments():
     """
     __type__ is used as the key for any object-level comments
     """
-    d = collections.OrderedDict()
+    d: dict[str, Any] = collections.OrderedDict()
     d["name"] = "Test"
     d["__type__"] = "layer"
     d["__comments__"] = {"__type__": ["# Layer comment 1", "# Layer comment 2"]}
@@ -297,6 +298,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger("mappyfile").setLevel(logging.DEBUG)
     # test_comment_parsing()
-    test_metadata_mixed_case_comment()
+    test_comment()
     # run_tests()
     print("Done!")
