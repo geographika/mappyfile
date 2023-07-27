@@ -19,13 +19,14 @@ setup(
     long_description=readme(),
     classifiers=[
         # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Intended Audience :: Developers",
+        "Topic :: Scientific/Engineering :: GIS",
         "Topic :: Text Processing :: Linguistic",
         "Topic :: Software Development :: Build Tools",
     ],
@@ -37,11 +38,15 @@ setup(
     packages=["mappyfile"],
     install_requires=[
         "lark>=1.1.5",
-        "lark_cython>=0.0.14",
         "jsonschema>=2.0",
         "jsonref==0.2",
         "click",
     ],
+    extras_require={
+        "lark_cython": [
+            "lark_cython>=0.0.14",
+        ],
+    },
     zip_safe=False,
     entry_points={
         "console_scripts": ["mappyfile=mappyfile.cli:main"],
