@@ -28,7 +28,6 @@
 # =================================================================
 
 import os
-import sys
 import logging
 from io import open
 from lark import Lark, ParseError, Tree, UnexpectedInput

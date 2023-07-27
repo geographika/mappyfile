@@ -37,7 +37,6 @@
 
 from collections import OrderedDict
 import copy
-import sys
 from mappyfile.tokens import OBJECT_LIST_KEYS
 from collections.abc import Callable
 
