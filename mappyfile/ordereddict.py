@@ -38,7 +38,7 @@
 from collections import OrderedDict
 import copy
 from mappyfile.tokens import OBJECT_LIST_KEYS
-from typing import Callable, Any
+import json
 
 
 class DefaultOrderedDict(OrderedDict):
@@ -48,7 +48,7 @@ class DefaultOrderedDict(OrderedDict):
     Based on: http://code.activestate.com/recipes/523034-emulate-collectionsdefaultdict/
     """
 
-    def __init__(self, default_factory: (Callable[..., Any] | None) = None, *a, **kw):
+    def __init__(self, default_factory=None, *a, **kw):
         if default_factory is not None and not callable(default_factory):
             raise TypeError("First argument must be callable")
 
@@ -91,10 +91,10 @@ class DefaultOrderedDict(OrderedDict):
         return type(self)(self.default_factory, copy.deepcopy(list(self.items())))
 
     def __repr__(self):
-        return "DefaultOrderedDict(%s, %s)" % (
-            self.default_factory,
-            OrderedDict.__repr__(self),
-        )
+        """
+        Return a human-readable version of the dict contents
+        """
+        return json.dumps(self, indent=4)
 
 
 class CaseInsensitiveOrderedDict(DefaultOrderedDict):
@@ -104,7 +104,7 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
 
     @classmethod
     def _k(cls, key):
-        return key.lower() if isinstance(key, (bytes, str)) else key
+        return key.lower() if isinstance(key, str) else key
 
     def __init__(self, *args, **kwargs):
         super(CaseInsensitiveOrderedDict, self).__init__(*args, **kwargs)
