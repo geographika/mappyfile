@@ -96,7 +96,7 @@ def test_style_pattern_fail():
     END
     """
     exp = "STYLE PATTERN 6 4 2 4 6 END END"
-    assert output(s, schema_name="style") == exp
+    assert output(s) == exp
 
 
 def run_tests():

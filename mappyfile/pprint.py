@@ -27,6 +27,7 @@
 #
 # =================================================================
 
+from __future__ import annotations
 import logging
 import numbers
 from mappyfile.tokens import (
@@ -38,6 +39,8 @@ from mappyfile.tokens import (
 )
 from mappyfile.validator import Validator
 import mappyfile as utils
+from typing import Any
+
 
 log = logging.getLogger("mappyfile")
 
@@ -47,7 +50,7 @@ class Quoter(object):
     A class to handle adding and standardising quotes around strings
     """
 
-    def __init__(self, quote='"'):
+    def __init__(self, quote: str = '"'):
         assert quote == "'" or quote == '"'
 
         self.quote = quote
@@ -57,22 +60,22 @@ class Quoter(object):
         else:
             self.altquote = "'"
 
-    def add_quotes(self, val):
+    def add_quotes(self, val: str) -> str:
         return self._add_quotes(val, self.quote)
 
-    def add_altquotes(self, val):
+    def add_altquotes(self, val: str) -> str:
         return self._add_quotes(val, self.altquote)
 
-    def _add_quotes(self, val, quote):
+    def _add_quotes(self, val: str, quote: str) -> str:
         return "{}{}{}".format(quote, val, quote)
 
-    def in_quotes(self, val):
+    def in_quotes(self, val: str) -> bool:
         return self._in_quotes(val, self.quote) or self._in_quotes(val, self.altquote)
 
-    def _in_quotes(self, val, char):
+    def _in_quotes(self, val: str, char: str):
         return val.startswith(char) and val.endswith(char)
 
-    def escape_quotes(self, val):
+    def escape_quotes(self, val: Any) -> Any:
         """
         Escape any quotes in a value
         """
@@ -84,10 +87,10 @@ class Quoter(object):
 
         return val
 
-    def is_string(self, val):
+    def is_string(self, val: Any) -> bool:
         return isinstance(val, str)
 
-    def remove_quotes(self, val):
+    def remove_quotes(self, val: Any) -> Any:
         if isinstance(val, list):
             return list(map(self.remove_quotes, val))
 
@@ -99,23 +102,23 @@ class Quoter(object):
         else:
             return val
 
-    def in_brackets(self, val):
+    def in_brackets(self, val: str) -> bool:
         val = val.strip()
         return val.startswith("[") and val.endswith("]")
 
-    def in_parenthesis(self, val):
+    def in_parenthesis(self, val: str) -> bool:
         val = val.strip()
         return val.startswith("(") and val.endswith(")")
 
-    def in_braces(self, val):
+    def in_braces(self, val: str) -> bool:
         val = val.strip()
         return val.startswith("{") and val.endswith("}")
 
-    def in_slashes(self, val):
+    def in_slashes(self, val: str) -> bool:
         val = val.strip()
         return self._in_quotes(val, "/")
 
-    def standardise_quotes(self, val):
+    def standardise_quotes(self, val: str) -> str:
         """
         Change the quotes used to wrap a value to the pprint default
         E.g. "val" to 'val' or 'val' to "val"
@@ -130,14 +133,14 @@ class Quoter(object):
 class PrettyPrinter(object):
     def __init__(
         self,
-        indent=4,
-        spacer=" ",
-        quote='"',
-        newlinechar="\n",
-        end_comment=False,
-        align_values=False,
-        separate_complex_types=False,
-        **kwargs
+        indent: int = 4,
+        spacer: str = " ",
+        quote: str = '"',
+        newlinechar: str = "\n",
+        end_comment: bool = False,
+        align_values: bool = False,
+        separate_complex_types: bool = False,
+        **kwargs,
     ):
         """
         Option use "\t" for spacer with an indent of 1
@@ -155,7 +158,7 @@ class PrettyPrinter(object):
         self.align_values = align_values
         self.separate_complex_types = separate_complex_types
 
-    def __is_metadata(self, key):
+    def __is_metadata(self, key: str) -> bool:
         """
         Check to see if the property is hidden metadata
         e.g. "__type__", "__comments__", "__position__"
@@ -165,7 +168,7 @@ class PrettyPrinter(object):
         else:
             return False
 
-    def compute_aligned_max_indent(self, max_key_length):
+    def compute_aligned_max_indent(self, max_key_length: int) -> int:
         """
         Computes the indentation as a multiple of self.indent for aligning
         values at the same column based on the maximum key length.
@@ -177,7 +180,7 @@ class PrettyPrinter(object):
         indent = max(1, self.indent)
         return int((int(max_key_length / indent) + 1) * indent)
 
-    def compute_max_key_length(self, composite):
+    def compute_max_key_length(self, composite: dict) -> int:
         """
         Computes the maximum length of all keys (non-recursive) in the passed
         composite.
@@ -200,26 +203,28 @@ class PrettyPrinter(object):
 
         return length
 
-    def separate_complex(self, composite, level):
+    def separate_complex(self, composite: dict, level: int) -> None:
         if not self.separate_complex_types:
             return
         for key in list(composite.keys()):
             if self.is_complex_type(composite, key, level):
                 utils.dict_move_to_end(composite, key)
 
-    def whitespace(self, level, indent):
+    def whitespace(self, level: int, indent: int) -> str:
         return self.spacer * (level + indent)
 
-    def add_start_line(self, key, level):
+    def add_start_line(self, key: str, level: int) -> str:
         return self.whitespace(level, 1) + key.upper()
 
-    def add_end_line(self, level, indent, key):
+    def add_end_line(self, level: int, indent: int, key: str) -> str:
         end_line = self.whitespace(level, indent) + self.end
         if self.end_comment:
             end_line = "{} # {}".format(end_line, key.upper())
         return end_line
 
-    def __format_line(self, spacer, key, value, aligned_max_indent=0):
+    def __format_line(
+        self, spacer: str, key: str, value: Any, aligned_max_indent: int = 0
+    ) -> str:
         if (aligned_max_indent is None) or (aligned_max_indent == 0):
             aligned_max_indent = len(key) + 1
         indent = " " * (aligned_max_indent - len(key))
@@ -227,14 +232,14 @@ class PrettyPrinter(object):
         d = {"spacer": spacer, "key": key, "value": value, "indent": indent}
         return tmpl.format(**d)
 
-    def process_key_dict(self, key, d, level):
+    def process_key_dict(self, key: str, d: dict, level: int) -> list[str]:
         """
         Process key value dicts e.g. METADATA "key" "value"
         """
 
         # add any composite level comments
         comments = d.get("__comments__", {})
-        lines = []
+        lines: list[str] = []
         self._add_type_comment(level, comments, lines)
 
         lines += [self.add_start_line(key, level)]
@@ -243,7 +248,7 @@ class PrettyPrinter(object):
 
         return lines
 
-    def process_dict(self, d, level, comments):
+    def process_dict(self, d: dict, level: int, comments: dict) -> list[str]:
         """
         Process keys and values within a block
         """
@@ -266,7 +271,7 @@ class PrettyPrinter(object):
 
         return lines
 
-    def process_config_dict(self, key, d, level):
+    def process_config_dict(self, d: dict, level: int) -> list[str]:
         """
         Process the CONFIG block
         """
@@ -277,7 +282,9 @@ class PrettyPrinter(object):
             lines.append(self.__format_line(self.whitespace(level, 1), k, v))
         return lines
 
-    def process_repeated_list(self, key, lst, level, aligned_max_indent=1):
+    def process_repeated_list(
+        self, key: str, lst: list[str], level: int, aligned_max_indent: int = 1
+    ) -> list[str]:
         """
         Process blocks of repeated keys e.g. FORMATOPTION
         """
@@ -292,11 +299,11 @@ class PrettyPrinter(object):
 
         return lines
 
-    def process_projection(self, key, lst, level):
+    def process_projection(self, key, lst: (str | list[str]), level) -> list[str]:
         lines = [self.add_start_line(key, level)]
 
         if self.quoter.is_string(lst):
-            val = self.quoter.add_quotes(lst)
+            val = self.quoter.add_quotes(str(lst))
             # the value has been manually set to a single string projection
             lines.append("{}{}".format(self.whitespace(level, 2), val))
         elif len(lst) == 1 and lst[0].upper() == "AUTO":
@@ -309,7 +316,7 @@ class PrettyPrinter(object):
         lines.append(self.add_end_line(level, 1, key))
         return lines
 
-    def format_pair_list(self, key, pair_list, level):
+    def format_pair_list(self, key: str, pair_list: list[Any], level: int) -> list[str]:
         """
         Process lists of pairs (e.g. PATTERN block)
         """
@@ -324,7 +331,9 @@ class PrettyPrinter(object):
 
         return lines
 
-    def format_repeated_pair_list(self, key, root_list, level):
+    def format_repeated_pair_list(
+        self, key: str, root_list: list[Any], level: int
+    ) -> list[str]:
         """
         Process (possibly) repeated lists of pairs e.g. POINTs blocks
         """
@@ -343,13 +352,13 @@ class PrettyPrinter(object):
 
         return lines
 
-    def is_composite(self, val):
+    def is_composite(self, val: Any) -> bool:
         if isinstance(val, dict) and "__type__" in val:
             return True
         else:
             return False
 
-    def is_complex_type(self, composite, key, level):
+    def is_complex_type(self, composite: dict, key: str, level: int) -> bool:
         # symbol needs special treatment
         if key == "symbol" and level > 0:
             return False
@@ -359,7 +368,7 @@ class PrettyPrinter(object):
             or self.is_hidden_container(key, composite[key])
         )
 
-    def is_hidden_container(self, key, val):
+    def is_hidden_container(self, key: str, val: Any) -> bool:
         """
         The key is not one of the Mapfile keywords, and its
         values are a list
@@ -370,7 +379,7 @@ class PrettyPrinter(object):
         else:
             return False
 
-    def pprint(self, composites):
+    def pprint(self, composites: (dict | list[dict])) -> str:
         """
         Print out a nicely indented Mapfile
         """
@@ -394,7 +403,7 @@ class PrettyPrinter(object):
         result = str(self.newlinechar.join(lines))
         return result
 
-    def get_attribute_properties(self, type_, attr):
+    def get_attribute_properties(self, type_: str, attr: str) -> dict:
         jsn_schema = self.validator.get_expanded_schema(type_)
         props = jsn_schema["properties"]
 
@@ -433,7 +442,7 @@ class PrettyPrinter(object):
         else:
             return self.quoter.add_quotes(value)
 
-    def format_value(self, attr, attr_props, value):
+    def format_value(self, attr: str, attr_props, value: Any) -> Any:
         """
         TODO - refactor and add more specific tests (particularly for expressions)
         """
@@ -448,9 +457,11 @@ class PrettyPrinter(object):
 
             if not isinstance(value, numbers.Number):
                 if attr == "compop":
-                    return self.quoter.add_quotes(value)
+                    return self.quoter.add_quotes(str(value))
                 else:
-                    return value.upper()  # value is from a set list, no need for quote
+                    return str(
+                        value
+                    ).upper()  # value is from a set list, no need for quote
             else:
                 return value
 
@@ -508,7 +519,9 @@ class PrettyPrinter(object):
 
         return value
 
-    def process_attribute(self, type_, attr, value, level, aligned_max_indent=1):
+    def process_attribute(
+        self, type_: str, attr: str, value: Any, level: int, aligned_max_indent: int = 1
+    ) -> str:
         """
         Process one of the main composite types (see the type_ value)
         """
@@ -520,10 +533,10 @@ class PrettyPrinter(object):
         )
         return line
 
-    def format_comment(self, spacer, value):
+    def format_comment(self, spacer: str, value: str) -> str:
         return "{}{}".format(spacer, value)
 
-    def process_composite_comment(self, level, comments, key):
+    def process_composite_comment(self, level: int, comments: dict, key: str) -> str:
         """
         Process comments for composites such as MAP, LAYER etc.
         """
@@ -534,14 +547,14 @@ class PrettyPrinter(object):
             spacer = self.whitespace(level, 0)
 
             if isinstance(value, list):
-                comments = [self.format_comment(spacer, v) for v in value]
-                comment = self.newlinechar.join(comments)
+                comment_list = [self.format_comment(spacer, v) for v in value]
+                comment = self.newlinechar.join(comment_list)
             else:
                 comment = self.format_comment(spacer, value)
 
         return comment
 
-    def process_attribute_comment(self, comments, key):
+    def process_attribute_comment(self, comments: dict, key: str) -> str:
         if key not in comments:
             comment = ""
         else:
@@ -557,15 +570,15 @@ class PrettyPrinter(object):
 
         return comment
 
-    def _add_type_comment(self, level, comments, lines):
+    def _add_type_comment(self, level: int, comments: dict, lines: list[str]) -> None:
         comment = self.process_composite_comment(level, comments, "__type__")
 
         if comment:
             lines.append(str(comment))
 
-    def _format(self, composite, level=0):
-        lines = []
-        type_ = None
+    def _format(self, composite: dict, level: int = 0) -> list[str]:
+        lines: list[str] = []
+        type_ = ""
 
         # get any comments associated with the composite
         comments = composite.get("__comments__", {})
@@ -609,7 +622,7 @@ class PrettyPrinter(object):
             elif attr == "points":
                 lines += self.format_repeated_pair_list(attr, value, level)
             elif attr == "config":
-                lines += self.process_config_dict(attr, value, level)
+                lines += self.process_config_dict(value, level)
             elif self.is_composite(value):
                 lines += self._format(
                     value, level + 1

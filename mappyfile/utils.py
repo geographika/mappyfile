@@ -27,7 +27,7 @@
 #
 # =================================================================
 
-from __future__ import unicode_literals
+from __future__ import annotations
 import codecs
 import warnings
 import functools
@@ -37,6 +37,7 @@ from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.validator import Validator
 from itertools import zip_longest
+from typing import Any, IO
 
 
 def deprecated(func):
@@ -62,8 +63,12 @@ def deprecated(func):
 
 
 def open(
-    fn, expand_includes=True, include_comments=False, include_position=False, **kwargs
-):
+    fn: str,
+    expand_includes: bool = True,
+    include_comments: bool = False,
+    include_position: bool = False,
+    **kwargs,
+) -> dict:
     """
     Load a Mapfile from the supplied filename into a Python dictionary.
 
@@ -110,8 +115,12 @@ def open(
 
 
 def load(
-    fp, expand_includes=True, include_position=False, include_comments=False, **kwargs
-):
+    fp: IO[str],
+    expand_includes: bool = True,
+    include_position: bool = False,
+    include_comments: bool = False,
+    **kwargs,
+) -> dict:
     """
     Load a Mapfile from an open file or file-like object.
 
@@ -158,8 +167,12 @@ def load(
 
 
 def loads(
-    s, expand_includes=True, include_position=False, include_comments=False, **kwargs
-):
+    s: str,
+    expand_includes: bool = True,
+    include_position: bool = False,
+    include_comments: bool = False,
+    **kwargs,
+) -> dict:
     """
     Load a Mapfile from a string
 
@@ -204,15 +217,15 @@ def loads(
 
 
 def dump(
-    d,
-    fp,
-    indent=4,
-    spacer=" ",
-    quote='"',
-    newlinechar="\n",
-    end_comment=False,
-    align_values=False,
-    separate_complex_types=False,
+    d: dict,
+    fp: IO[str],
+    indent: int = 4,
+    spacer: str = " ",
+    quote: str = '"',
+    newlinechar: str = "\n",
+    end_comment: bool = False,
+    align_values: bool = False,
+    separate_complex_types: bool = False,
 ):
     """
     Write d (the Mapfile dictionary) as a formatted stream to fp
@@ -270,17 +283,17 @@ def dump(
 
 
 def save(
-    d,
-    output_file,
-    indent=4,
-    spacer=" ",
-    quote='"',
-    newlinechar="\n",
-    end_comment=False,
-    align_values=False,
-    separate_complex_types=False,
-    **kwargs
-):
+    d: dict,
+    output_file: str,
+    indent: int = 4,
+    spacer: str = " ",
+    quote: str = '"',
+    newlinechar: str = "\n",
+    end_comment: bool = False,
+    align_values: bool = False,
+    separate_complex_types: bool = False,
+    **kwargs,
+) -> str:
     """
     Write a dictionary to an output Mapfile on disk
 
@@ -342,16 +355,16 @@ def save(
 
 
 def dumps(
-    d,
-    indent=4,
-    spacer=" ",
-    quote='"',
-    newlinechar="\n",
-    end_comment=False,
-    align_values=False,
-    separate_complex_types=False,
-    **kwargs
-):
+    d: dict,
+    indent: int = 4,
+    spacer: str = " ",
+    quote: str = '"',
+    newlinechar: str = "\n",
+    end_comment: bool = False,
+    align_values: bool = False,
+    separate_complex_types: bool = False,
+    **kwargs,
+) -> str:
     """
     Output a Mapfile dictionary as a string
 
@@ -405,11 +418,11 @@ def dumps(
         end_comment,
         align_values,
         separate_complex_types,
-        **kwargs
+        **kwargs,
     )
 
 
-def find(lst, key, value):
+def find(lst: list[dict], key: str, value: Any) -> dict | None:
     """
     Find an item in a list of dicts using a key and a value
 
@@ -458,7 +471,7 @@ def find(lst, key, value):
     return next((item for item in lst if item[key.lower()] == value), None)
 
 
-def findall(lst, key, value):
+def findall(lst: list[dict], key: str, value: Any) -> list[dict]:
     """
     Find all items in lst where key matches value.
     For example find all ``LAYER`` s in a ``MAP`` where ``GROUP`` equals ``VALUE``
@@ -572,7 +585,7 @@ def findunique(lst, key):
     )
 
 
-def findkey(d, *keys):
+def findkey(d: dict, *keys: list[Any]) -> dict:
     """
     Get a value from a dictionary based on a list of keys and/or list indexes.
 
@@ -615,14 +628,14 @@ def findkey(d, *keys):
         assert cls1["name"] == "Class1"
     """
     if keys:
-        keys = list(keys)
-        key = keys.pop(0)
-        return findkey(d[key], *keys)
+        keys_list = list(keys)
+        search_key = keys_list.pop(0)
+        return findkey(d[search_key], *keys_list)
     else:
         return d
 
 
-def update(d1, d2):
+def update(d1: dict, d2: dict) -> dict:
     """
     Update dict d1 with properties from d2
 
@@ -660,7 +673,7 @@ def update(d1, d2):
             else:
                 d1[k] = update(d1.get(k, {}), v)
         elif isinstance(v, (tuple, list)) and all(
-            isinstance(li, (NoneType, dict)) for li in v
+            isinstance(li, (NoneType, dict)) for li in v  # type: ignore
         ):
             # a list of dicts and/or NoneType
             orig_list = d1.get(k, [])
@@ -690,7 +703,7 @@ def update(d1, d2):
     return d1
 
 
-def validate(d, version=None):
+def validate(d: dict, version: (float | None) = None) -> list:
     """
      Validate a mappyfile dictionary by using the Mapfile schema.
      An optional version number can be used to specify a specific
@@ -715,22 +728,22 @@ def validate(d, version=None):
     return v.validate(d, version=version)
 
 
-def _save(output_file, string):
+def _save(output_file: str, string: str) -> None:
     with codecs.open(output_file, "w", encoding="utf-8") as f:
         f.write(string)
 
 
 def _pprint(
-    d,
-    indent,
-    spacer,
-    quote,
-    newlinechar,
-    end_comment,
-    align_values,
-    separate_complex_types,
-    **kwargs
-):
+    d: dict,
+    indent: int,
+    spacer: str,
+    quote: str,
+    newlinechar: str,
+    end_comment: bool,
+    align_values: bool,
+    separate_complex_types: bool,
+    **kwargs,
+) -> str:
     pp = PrettyPrinter(
         indent=indent,
         spacer=spacer,
@@ -739,7 +752,7 @@ def _pprint(
         end_comment=end_comment,
         align_values=align_values,
         separate_complex_types=separate_complex_types,
-        **kwargs
+        **kwargs,
     )
     return pp.pprint(d)
 
@@ -774,9 +787,9 @@ def create(type, version=None):
 
     properties = sorted(schema["properties"].items())
 
-    for k, v in properties:
-        if "default" in v:
-            d[k] = v["default"]
+    for key, value in properties:
+        if "default" in value:
+            d[key] = value["default"]
 
     return d
 

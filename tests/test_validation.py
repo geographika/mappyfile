@@ -16,7 +16,7 @@ DLL_LOCATION = r"C:\MapServer\bin"
 
 def create_image(name, mapfile, output_folder, format="png"):
     out_map = os.path.join(output_folder, "%s.map" % name)
-    mappyfile.write(mapfile, out_map)
+    mappyfile.save(mapfile, out_map)
 
     out_img = os.path.join(output_folder, name)
 
@@ -47,9 +47,12 @@ def _create_image_from_map(map_file, out_img, format):
 
     errors = []
 
+    if p.stdout is None:
+        raise IOError("Cannot create stdout")
+
     with p.stdout:
         for line in iter(p.stdout.readline, b""):
-            errors.append(line)
+            errors.append(str(line))
 
     p.wait()  # wait for the subprocess to exit
 
@@ -531,7 +534,7 @@ END"""
 
 
 def test_keyword_versioning():
-    properties = {
+    properties: dict = {
         "type": "object",
         "properties": {
             "__type__": {"enum": ["label"]},
@@ -571,7 +574,7 @@ def test_property_versioning():
     }
 
     v = Validator()
-    assert "enum" in properties["force"]["oneOf"][1].keys()
+    assert "enum" in properties["force"]["oneOf"][1].keys()  # type: ignore
     assert len(properties["force"]["oneOf"]) == 2
     properties = v.get_versioned_properties(properties, 6.0)
     print(json.dumps(properties, indent=4))

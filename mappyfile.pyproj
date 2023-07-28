@@ -115,6 +115,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
   </ItemGroup>
   <ItemGroup>
     <Content Include=".black" />
+    <Content Include=".coveragerc" />
     <Content Include=".flake8" />
     <Content Include=".gitattributes" />
     <Content Include=".github\dependabot.yml" />
@@ -266,7 +267,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
       <SubType>Code</SubType>
     </Content>
     <Content Include="notes.private.txt" />
-    <Content Include="pytest.ini" />
+    <Content Include="pyproject.toml" />
     <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
     <Content Include="run_local.ps1" />

@@ -36,6 +36,7 @@ build_script:
 test_script:
   - python -m pytest  # for unknown reason running pytest directly fails on Python 3.7 and above
   - "flake8 ."
+  - mypy mappyfile tests docs/examples
   - mappyfile schema mapfile-schema.json
   - mappyfile schema mapfile-schema-8-0.json --version=8.0
   - mappyfile validate tests/sample_maps/256_overlay_res.map

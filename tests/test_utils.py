@@ -40,11 +40,12 @@ def test_loads():
 def test_dump():
     s = """MAP NAME "TEST" END"""
     d = mappyfile.loads(s)
+
     with tempfile.NamedTemporaryFile(mode="w+", delete=False) as fp:
         mappyfile.dump(d, fp)
 
-    with open(fp.name) as fp:
-        d = mappyfile.load(fp)
+    with open(fp.name) as fp2:
+        d = mappyfile.load(fp2)
 
     assert d["name"] == "TEST"
 
@@ -112,6 +113,7 @@ def test_find():
     d = mappyfile.loads(s)
     cmp = mappyfile.find(d["layers"], "name", "Layer2")
 
+    assert cmp is not None
     assert cmp["name"] == "Layer2"
 
 
@@ -136,11 +138,11 @@ def test_findkey():
     d = mappyfile.loads(s)
 
     pth = ["layers", 1]
-    cmp = mappyfile.findkey(d, *pth)
+    cmp = mappyfile.findkey(d, *pth)  # type: ignore
     assert cmp["name"] == "Layer2"
 
     pth = ["layers", 1, "classes", 0]
-    cmp = mappyfile.findkey(d, *pth)
+    cmp = mappyfile.findkey(d, *pth)  # type: ignore
     assert cmp["name"] == "Class1"
 
 

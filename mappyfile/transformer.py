@@ -32,12 +32,15 @@ Module to transform an AST (Abstract Syntax Tree) to a
 Python dict structure
 """
 
+from __future__ import annotations
 import logging
 from collections import OrderedDict
 from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
 from .parser import lark_cython
+from typing import Any
+
 
 if lark_cython:
     TOKEN_TYPES = (Token, lark_cython.Token)
@@ -46,7 +49,7 @@ if lark_cython:
         return Token.new_borrow_pos(t.type, value, t)
 
 else:
-    TOKEN_TYPES = Token
+    TOKEN_TYPES = Token  # type: ignore
 
     def update_token_value(t, value):
         t.value = value
@@ -62,12 +65,12 @@ log = logging.getLogger("mappyfile")
 
 
 class MapfileTransformer(Transformer, object):
-    def __init__(self, include_position=False, include_comments=False):
+    def __init__(self, include_position: bool = False, include_comments: bool = False):
         self.quoter = Quoter()
         self.include_position = include_position
         self.include_comments = include_comments
 
-    def key_name(self, token):
+    def key_name(self, token) -> str:
         return token.value.lower()
 
     def start(self, children):
@@ -96,7 +99,7 @@ class MapfileTransformer(Transformer, object):
         else:
             return composites
 
-    def get_position_dict(self, d):
+    def get_position_dict(self, d: dict) -> dict:
         if "__position__" in d:
             position_dict = d["__position__"]
         else:
@@ -104,7 +107,7 @@ class MapfileTransformer(Transformer, object):
 
         return position_dict
 
-    def flatten(self, values):
+    def flatten(self, values: list[Any]) -> list[Any]:
         flat_list = []
 
         for v in values:
@@ -122,13 +125,13 @@ class MapfileTransformer(Transformer, object):
 
         return flat_list
 
-    def plural(self, s):
+    def plural(self, s: str) -> str:
         if s.endswith("s"):
             return s + "es"
         else:
             return s + "s"
 
-    def create_position_dict(self, key_token, values):
+    def create_position_dict(self, key_token, values) -> dict:
         line, column = key_token.line, key_token.column
         d = OrderedDict()
         d["line"] = line
@@ -141,7 +144,7 @@ class MapfileTransformer(Transformer, object):
 
         return d
 
-    def get_single_key(self, d):
+    def get_single_key(self, d: dict):
         keys = list(d.keys())  # convert to list for py3
         assert len(keys) == 1
         return keys[0]
@@ -272,10 +275,10 @@ class MapfileTransformer(Transformer, object):
 
         return composite_dict
 
-    def clean_string(self, val):
+    def clean_string(self, val: str) -> str:
         return self.quoter.remove_quotes(val)
 
-    def attr_name(self, tokens):
+    def attr_name(self, tokens) -> str:
         t = tokens[0]
         if not isinstance(t, TOKEN_TYPES):
             #  handle ambiguities
@@ -284,7 +287,7 @@ class MapfileTransformer(Transformer, object):
 
         return t
 
-    def attr(self, tokens):
+    def attr(self, tokens) -> dict:
         key_token = tokens[0]
 
         if isinstance(key_token, (list, tuple)):
@@ -303,7 +306,7 @@ class MapfileTransformer(Transformer, object):
             value_tokens = value_tokens[0]
 
         pd = self.create_position_dict(key_token, value_tokens)
-        d = OrderedDict()
+        d: dict = OrderedDict()
         d["__position__"] = pd
 
         if len(value_tokens) > 1:
@@ -312,7 +315,7 @@ class MapfileTransformer(Transformer, object):
                 values = {value_tokens[0].value: value_tokens[1].value}
             else:
                 # list of values
-                values = [v.value for v in value_tokens]
+                values = [v.value for v in value_tokens]  # type: ignore
                 d["__tokens__"] = [key_token] + [t for t in value_tokens]
         else:
             # single value
@@ -323,13 +326,13 @@ class MapfileTransformer(Transformer, object):
             values = value_token.value
 
             if self.quoter.is_string(values):
-                values = self.clean_string(values)
+                values = self.clean_string(values)  # type: ignore
 
         d[key_name] = values
 
         return d
 
-    def check_composite_tokens(self, name, tokens):
+    def check_composite_tokens(self, name: str, tokens) -> tuple[str, list[Any]]:
         """
         Return the key and contents of a KEY..END block
         for PATTERN, POINTS, and PROJECTION
@@ -354,7 +357,7 @@ class MapfileTransformer(Transformer, object):
                 body_tokens.append(t)
         return key, body_tokens
 
-    def process_value_pairs(self, tokens, type_):
+    def process_value_pairs(self, tokens, type_) -> dict:
         """
         Metadata, Values, and Validation blocks can either
         have string pairs or attributes
@@ -717,7 +720,7 @@ class MapfileToDict(object):
         include_position=False,
         include_comments=False,
         transformerClass=MapfileTransformer,
-        **kwargs
+        **kwargs,
     ):
         self.include_position = include_position
         self.include_comments = include_comments
@@ -730,7 +733,7 @@ class MapfileToDict(object):
         self.mapfile_transformer = self.transformerClass(
             include_position=self.include_position,
             include_comments=self.include_comments,
-            **self.kwargs
+            **self.kwargs,
         )
 
         if self.include_comments:
