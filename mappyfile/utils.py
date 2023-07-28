@@ -635,7 +635,7 @@ def findkey(d: dict, *keys: list[Any]) -> dict:
         return d
 
 
-def update(d1: dict, d2: dict) -> dict:
+def update(d1: dict, d2: dict, overwrite: bool = True) -> dict:
     """
     Update dict d1 with properties from d2
 
@@ -652,6 +652,8 @@ def update(d1: dict, d2: dict) -> dict:
         A Python dictionary
     d2: dict
         A Python dictionary that will be used to update any keys with the same name in d1
+    overwrite: boolean
+        If a key already exists in the dictionary should its value be overwritten
 
     Returns
     -------
@@ -671,7 +673,7 @@ def update(d1: dict, d2: dict) -> dict:
                 # allow a __delete__ property to be set to delete objects
                 del d1[k]
             else:
-                d1[k] = update(d1.get(k, {}), v)
+                d1[k] = update(d1.get(k, {}), v, overwrite)
         elif isinstance(v, (tuple, list)) and all(
             isinstance(li, (NoneType, dict)) for li in v  # type: ignore
         ):
@@ -690,7 +692,7 @@ def update(d1: dict, d2: dict) -> dict:
                 if new_item.get("__delete__", False):
                     d = None  # orig_list.remove(orig_item) # remove the item to delete
                 else:
-                    d = update(orig_item, new_item)
+                    d = update(orig_item, new_item, overwrite)
 
                 if d is not None:
                     new_list.append(d)
@@ -699,7 +701,8 @@ def update(d1: dict, d2: dict) -> dict:
             if k in d1 and v == "__delete__":
                 del d1[k]
             else:
-                d1[k] = v
+                if overwrite is True or k not in d1:
+                    d1[k] = v
     return d1
 
 

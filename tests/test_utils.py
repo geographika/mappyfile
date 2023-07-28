@@ -223,7 +223,99 @@ def test_update():
     d = mappyfile.update(d1, d2)
 
     output = mappyfile.dumps(d)
-    print(output)
+
+    expected = """MAP
+    LAYER
+        NAME "Layer1"
+        TYPE POLYGON
+    END
+    LAYER
+        NAME "LayerNew"
+        TYPE POINT
+        CLASS
+            NAME "Class1"
+            COLOR 0 0 255
+        END
+        CLASS
+            NAME "Class2"
+            COLOR 0 0 0
+        END
+    END
+END"""
+
+    assert output == expected
+
+
+def test_update_no_overrides():
+    s1 = """
+    MAP
+        LAYER
+            NAME "Layer1"
+            TYPE POLYGON
+        END
+        LAYER
+            NAME "Layer2"
+            TYPE POLYGON
+            CLASS
+                NAME "Class1"
+                COLOR 255 255 0
+            END
+        END
+    END
+    """
+
+    d1 = mappyfile.loads(s1)
+
+    s2 = """
+    MAP
+        LAYER
+            NAME "Layer1"
+            TYPE POLYGON
+        END
+        LAYER
+            NAME "LayerNew"
+            TYPE POINT
+            CLASS
+                NAME "ClassNew"
+                COLOR 0 0 255
+                GROUP "group1"
+            END
+            CLASS
+                NAME "Class2"
+                COLOR 0 0 0
+                GROUP "group2"
+            END
+        END
+    END
+    """
+
+    d2 = mappyfile.loads(s2)
+    d = mappyfile.update(d1, d2, overwrite=False)
+
+    output = mappyfile.dumps(d)
+
+    expected = """MAP
+    LAYER
+        NAME "Layer1"
+        TYPE POLYGON
+    END
+    LAYER
+        NAME "Layer2"
+        TYPE POLYGON
+        CLASS
+            NAME "Class1"
+            COLOR 255 255 0
+            GROUP "group1"
+        END
+        CLASS
+            NAME "Class2"
+            COLOR 0 0 0
+            GROUP "group2"
+        END
+    END
+END"""
+
+    assert output == expected
 
 
 def test_update_list():
@@ -407,5 +499,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_create_label()
+    test_update_no_overrides()
     print("Done!")
