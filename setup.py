@@ -39,7 +39,7 @@ setup(
     install_requires=[
         "lark>=1.1.5",
         "jsonschema>=2.0",
-        "jsonref==0.2",
+        "jsonref==1.1.0",
         "click",
     ],
     extras_require={
