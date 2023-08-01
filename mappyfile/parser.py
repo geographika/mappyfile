@@ -154,12 +154,14 @@ class Parser(object):
                 if node.data in ("projection"):
                     line = node.meta.end_line
                 line_numbers = list(sorted(self.comments_dict.keys()))
+                comments = []
 
                 for line_number in line_numbers:
                     if line_number <= line:
-                        if not hasattr(node.meta, "comments"):
-                            node.meta.comments = []
-                        node.meta.comments.append(self.comments_dict.pop(line_number))
+                        comments.append(self.comments_dict.pop(line_number))
+
+                if comments:
+                    node.meta.comments = comments  # type: ignore
 
             if isinstance(node, Tree):
                 self._assign_comments(node)
