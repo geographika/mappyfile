@@ -299,8 +299,15 @@ class PrettyPrinter(object):
 
         return lines
 
-    def process_projection(self, key, lst: (str | list[str]), level) -> list[str]:
+    def process_projection(
+        self, key, lst: (str | list[str]), level: int, projection_comments: str
+    ) -> list[str]:
         lines = [self.add_start_line(key, level)]
+
+        if projection_comments:
+            lines.append(
+                "{}{}".format(self.whitespace(level, 2), projection_comments.strip())
+            )
 
         if self.quoter.is_string(lst):
             val = self.quoter.add_quotes(str(lst))
@@ -614,7 +621,10 @@ class PrettyPrinter(object):
                 lines += self.process_key_dict(attr, value, level)
 
             elif attr == "projection":
-                lines += self.process_projection(attr, value, level)
+                projection_comments = self.process_attribute_comment(comments, attr)
+                lines += self.process_projection(
+                    attr, value, level, projection_comments
+                )
             elif attr in REPEATED_KEYS:
                 lines += self.process_repeated_list(
                     attr, value, level, aligned_max_indent

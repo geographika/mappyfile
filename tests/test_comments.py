@@ -164,16 +164,43 @@ def test_metadata_comment():
     END
     END"""
     d = mappyfile.loads(txt, include_comments=True, include_position=False)
-    # print(json.dumps(d, indent=4))
     s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
-    # print(s)
     expected = """MAP
 # metadata comment
 # on two lines
 METADATA
-'wms_title' 'Test simple wms' # prop comment # another comment
+'wms_title' 'Test simple wms' # another comment # prop comment
 END
 END"""
+    assert s == expected
+
+
+def test_projection_comment():
+    txt = """MAP
+    PROJECTION # block comment
+        "init=epsg:3857" # inline comment
+    END
+    NAME "test"
+    # header comment
+    LAYER
+        NAME "test" # attr comment
+    END
+END"""
+
+    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
+    expected = """MAP
+PROJECTION
+# block comment # inline comment
+'init=epsg:3857'
+END
+NAME 'test'
+# header comment
+LAYER
+NAME 'test' # attr comment
+END
+END"""
+
     assert s == expected
 
 
@@ -286,7 +313,6 @@ def test_cstyle_comment_start():
 
     pp = PrettyPrinter(indent=0, quote="'", newlinechar="\n")
     s = pp.pprint(d)
-    print(s)
     assert len(p._comments) == 3
 
 
@@ -298,6 +324,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger("mappyfile").setLevel(logging.DEBUG)
     # test_comment_parsing()
-    test_comment()
-    # run_tests()
+    # test_metadata_comment()
+    run_tests()
     print("Done!")
