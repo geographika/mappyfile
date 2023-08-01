@@ -135,89 +135,34 @@ class Parser(object):
             lines.insert(idx, txt)
         return "\n".join(lines)
 
-    def assign_comments(self, tree: Any, comments: list[Any]) -> None:
-        """
-        Capture any comments in the tree
-
-        header_comments stores comments preceding a node
-
-        """
-        comments = list(comments)
-        comments.sort(key=lambda c: c.line)
-
-        idx_by_line = {0: 0}  # {line_no: comment_idx}
-
-        for i, c in enumerate(comments):
-            if c.line not in idx_by_line:
-                idx_by_line[c.line] = i
-
-        idx = []
-
-        # convert comment tokens to strings, and remove any line breaks
-        self.comments = [c.value.strip() for c in comments]
-        last_comment_line = max(idx_by_line.keys())
-
-        # make a list with an entry for each line
-        # number associated with a comment list index
-
-        for i in range(last_comment_line, 0, -1):
-            if i in idx_by_line:
-                # associate line with new comment
-                idx.append(idx_by_line[i])
-            else:
-                # associate line with following comment
-                idx.append(idx[-1])
-
-        idx.append(0)  # line numbers start from 1
-        idx.reverse()
-        self.idx = idx
-        self._assign_comments(tree, 0)
-
-    def _get_comments(self, from_line: int, to_line: int) -> list[Any]:
-        idx = self.idx
-        comments = self.comments
-
-        if from_line >= len(idx):
-            return []  # no more comments
-
-        from_idx = idx[from_line]
-
-        if to_line < len(idx):
-            associated_comments = comments[from_idx : idx[to_line]]
-        else:
-            # get all remaining comments
-            associated_comments = comments[from_idx:]
-
-        return associated_comments
-
-    def _assign_comments(self, _tree: Any, prev_end_line: int) -> None:
+    def _assign_comments(self, _tree: Any) -> None:
         for node in _tree.children:
             if not isinstance(node, Tree):
                 continue
 
-            try:
-                line = node.meta.line
-            except AttributeError:
-                assert not node.children
+            if not hasattr(node.meta, "line"):
                 continue
 
-            if node.data not in ("composite", "attr", "string_pair"):
-                if isinstance(node, Tree):
-                    self._assign_comments(node, prev_end_line)
-                    continue
+            line = node.meta.line
 
-            # header_comments is a custom mappyfile property added to the meta object
-            node.meta.header_comments = self._get_comments(prev_end_line, line)  # type: ignore
+            # when we encounter a new type that can have associated comments
+            # assign all comments up to that point in the Mapfile to the node
+            # for metadata we want to assign comments to the string_pair
+            if node.data in ("composite", "attr", "projection", "string_pair"):
+                # for projection blocks capture any comments within the block
 
-            if node.meta.line == node.meta.end_line:
-                # node is on a single line, so check for inline comments
-                # and add them as a custom property to the Meta class of the node
-                node.meta.inline_comments = self._get_comments(line, line + 1)  # type: ignore
-                prev_end_line = node.meta.end_line + 1
-            else:
-                if isinstance(node, Tree):
-                    self._assign_comments(node, line)
-                prev_end_line = node.meta.end_line
+                if node.data in ("projection"):
+                    line = node.meta.end_line
+                line_numbers = list(sorted(self.comments_dict.keys()))
+
+                for line_number in line_numbers:
+                    if line_number <= line:
+                        if not hasattr(node.meta, "comments"):
+                            node.meta.comments = []
+                        node.meta.comments.append(self.comments_dict.pop(line_number))
+
+            if isinstance(node, Tree):
+                self._assign_comments(node)
 
     def load(self, fp: IO[str]) -> Any:
         text = fp.read()
@@ -271,7 +216,12 @@ class Parser(object):
 
             tree = ip.resume_parse()
             if self.include_comments:
-                self.assign_comments(tree, self._comments)
+                self.comments_dict = {}
+                # create a dictionary using line numbers as keys, and comments as values
+                for c in self._comments:
+                    self.comments_dict[c.line] = c.value.strip()
+                self._assign_comments(tree)
+
             return tree
         except (ParseError, UnexpectedInput) as ex:
             if fn:

@@ -644,17 +644,20 @@ class MapfileTransformer(Transformer, object):
 
 
 class CommentsTransformer(Transformer_InPlace):
+    """
+    This is an additional transformer that is used to go through
+    all the nodes and take any of the custom node.meta.comment properties
+    and add these value to the node's corresponding dictionary
+    """
+
     def __init__(self, mapfile_todict):
         self._mapfile_todict = mapfile_todict
 
     def get_comments(self, meta):
         all_comments = []
 
-        if hasattr(meta, "inline_comments"):
-            all_comments += meta.inline_comments
-
-        if hasattr(meta, "header_comments"):
-            all_comments += meta.header_comments
+        if hasattr(meta, "comments"):
+            all_comments += meta.comments
 
         return all_comments
 
@@ -710,7 +713,18 @@ class CommentsTransformer(Transformer_InPlace):
 
         return d
 
+    @v_args(tree=True)
+    def _save_projection_comments(self, tree):
+        d = self._mapfile_todict.transform(tree)
+        comments = self.get_comments(tree.meta)
+        if comments:
+            d["__comments__"] = comments
+
+        return d
+
+    # below we assign callbacks to process comments for each of the following types
     attr = _save_attr_comments
+    projection = _save_projection_comments
     composite = _save_composite_comments
 
 
