@@ -177,6 +177,36 @@ END"""
     assert s == expected
 
 
+def test_projection_comment():
+    txt = """MAP
+    PROJECTION # block comment
+        "init=epsg:3857" # inline comment
+    END
+    NAME "test"
+    # header comment
+    LAYER
+        NAME "test"
+    END
+END"""
+
+    d = mappyfile.loads(txt, include_comments=True, include_position=False)
+    print(d)
+    s = mappyfile.dumps(d, indent=0, quote="'", newlinechar="\n")
+    # print(s)
+    expected = """MAP
+PROJECTION
+# inline comment # block comment
+'init=epsg:3857'
+END
+NAME 'test'
+LAYER
+NAME 'test'
+END
+END"""
+    print(s)
+    assert s == expected
+
+
 def test_metadata_duplicated_key_comment():
     txt = """METADATA
         'wms_title' 'Title1' # title1
@@ -298,6 +328,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger("mappyfile").setLevel(logging.DEBUG)
     # test_comment_parsing()
-    test_comment()
+    test_projection_comment()
     # run_tests()
     print("Done!")

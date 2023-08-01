@@ -428,7 +428,7 @@ class MapfileTransformer(Transformer, object):
         return self.process_value_pairs(tokens, "validation")
 
     def projection(self, tokens):
-        key, body = self.check_composite_tokens("projection", tokens)
+        _, body = self.check_composite_tokens("projection", tokens)
         projection_strings = [self.clean_string(v.value) for v in body]
 
         key_token = tokens[0]
@@ -439,7 +439,7 @@ class MapfileTransformer(Transformer, object):
         return self.attr(tokens)
 
     def process_pair_lists(self, key_name, tokens):
-        key, body = self.check_composite_tokens(key_name, tokens)
+        _, body = self.check_composite_tokens(key_name, tokens)
         pairs = [(v[0].value, v[1].value) for v in body]
 
         key_token = tokens[0]
@@ -647,6 +647,12 @@ class CommentsTransformer(Transformer_InPlace):
     def __init__(self, mapfile_todict):
         self._mapfile_todict = mapfile_todict
 
+    def __default__(self, tree):
+        for subtree in tree.children:
+            if isinstance(subtree, Tree):
+                assert not hasattr(subtree, 'parent')
+                subtree.parent = tree # proxy(tree)
+
     def get_comments(self, meta):
         all_comments = []
 
@@ -710,7 +716,17 @@ class CommentsTransformer(Transformer_InPlace):
 
         return d
 
+    @v_args(tree=True)
+    def _save_projection_comments(self, tree):
+        d = self._mapfile_todict.transform(tree)
+        comments = self.get_comments(tree.children[1].meta)
+        if comments:
+            d["__comments__"] = comments
+
+        return d
+
     attr = _save_attr_comments
+    projection = _save_projection_comments
     composite = _save_composite_comments
 
 

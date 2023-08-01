@@ -147,19 +147,27 @@ class Parser(object):
 
         idx_by_line = {0: 0}  # {line_no: comment_idx}
 
+        # enumerate through the comment tokens
+        # and store their Mapfile line number as a key
+        # with the index in the comment list as a value
+        # e.g. in the example {0: 0, 2: 0, 3: 1, 6: 2}
+        # line 3 in the Mapfile is associated with the comment at index 1
+        # in the comment list
         for i, c in enumerate(comments):
             if c.line not in idx_by_line:
                 idx_by_line[c.line] = i
 
-        idx = []
-
         # convert comment tokens to strings, and remove any line breaks
         self.comments = [c.value.strip() for c in comments]
+
+        # get the line of the last comment in the Mapfile
         last_comment_line = max(idx_by_line.keys())
+
+        idx = []
 
         # make a list with an entry for each line
         # number associated with a comment list index
-
+        # we go from the last comment line backwards
         for i in range(last_comment_line, 0, -1):
             if i in idx_by_line:
                 # associate line with new comment
@@ -169,11 +177,32 @@ class Parser(object):
                 idx.append(idx[-1])
 
         idx.append(0)  # line numbers start from 1
+        # we processed the Mapfile backwards, but now reverse it for readability
         idx.reverse()
+
+        # we now have a list representing lines in the Mapfile, with a value
+        # storing the index to its associated comment
+        # e.g. [0, 0, 0, 1, 2, 2, 2]
+        # lines 1-3 are associated with the first comment in self.comments
+        # lines 4 is associated with the second comment in self.comments
+        # etc.
+
         self.idx = idx
+        # now we can store the comments as properties on each of the nodes
+
+        log.debug(self.idx)
+        log.debug(self.comments)
+
         self._assign_comments(tree, 0)
 
     def _get_comments(self, from_line: int, to_line: int) -> list[Any]:
+        """
+        The self.comments property is a list of all comments found in the Mapfile
+        ['# comment1', '# comment2', '# comment3']
+
+        self.idx is in the form [0, 0, 0, 1, 2, 2, 2]
+
+        """
         idx = self.idx
         comments = self.comments
 
@@ -183,14 +212,22 @@ class Parser(object):
         from_idx = idx[from_line]
 
         if to_line < len(idx):
-            associated_comments = comments[from_idx : idx[to_line]]
+            to_idx = idx[to_line]
+            if from_idx == to_idx:
+                associated_comments = [comments[from_idx]]
+            else:
+                associated_comments = comments[from_idx:to_idx]
         else:
-            # get all remaining comments
+            # get all remaining comments in the Mapfile
             associated_comments = comments[from_idx:]
 
         return associated_comments
 
     def _assign_comments(self, _tree: Any, prev_end_line: int) -> None:
+        """
+        For each node in the tree assign any related comments
+        """
+
         for node in _tree.children:
             if not isinstance(node, Tree):
                 continue
@@ -201,23 +238,38 @@ class Parser(object):
                 assert not node.children
                 continue
 
-            if node.data not in ("composite", "attr", "string_pair"):
+            if node.data not in ("composite", "attr", "string_pair", "string"):
                 if isinstance(node, Tree):
+                    prev_end_line = node.meta.end_line
                     self._assign_comments(node, prev_end_line)
-                    continue
+                    continue  # move to next node
 
             # header_comments is a custom mappyfile property added to the meta object
-            node.meta.header_comments = self._get_comments(prev_end_line, line)  # type: ignore
+            # it is used to store comments preceding the object
+            log.debug(
+                f"Finding header comments between lines {prev_end_line} and {line} for {node.data}"
+            )
+            header_comments = self._get_comments(prev_end_line, line)
+            log.debug(f"{node.data} has associated header comments: {header_comments}")
+            node.meta.header_comments = header_comments
 
             if node.meta.line == node.meta.end_line:
                 # node is on a single line, so check for inline comments
                 # and add them as a custom property to the Meta class of the node
-                node.meta.inline_comments = self._get_comments(line, line + 1)  # type: ignore
+                log.debug(
+                    f"Finding inline comments between lines {prev_end_line} and {line} for {node.data}"
+                )
+                inline_comments = self._get_comments(line, line)
+                log.debug(
+                    f"{node.data} has associated inline comments: {inline_comments}"
+                )
+                node.meta.inline_comments = inline_comments  # type: ignore
                 prev_end_line = node.meta.end_line + 1
             else:
                 if isinstance(node, Tree):
                     self._assign_comments(node, line)
                 prev_end_line = node.meta.end_line
+
 
     def load(self, fp: IO[str]) -> Any:
         text = fp.read()
