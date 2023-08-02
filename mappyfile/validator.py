@@ -35,6 +35,8 @@ import logging
 import jsonschema
 import jsonref
 import mappyfile as utils
+from referencing import Registry, Resource
+from referencing.jsonschema import DRAFT4
 from typing import Any
 
 
@@ -69,7 +71,12 @@ class Validator(object):
         return os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
 
     def get_schema_file(self, schema_name: str) -> str:
-        schema_name += ".json"
+        file_extension = os.path.splitext(schema_name)[1]
+
+        # when loading from the schema files the ref already includes .json
+        if file_extension != ".json":
+            schema_name += ".json"
+
         schemas_folder = self.get_schemas_folder()
         schema_file = os.path.join(schemas_folder, schema_name)
 
@@ -77,6 +84,27 @@ class Validator(object):
             raise IOError("The file %s does not exist" % schema_file)
 
         return schema_file
+
+    def get_json_from_file(self, schema_name: str):
+        if schema_name not in self.schemas:
+            schema_file = self.get_schema_file(schema_name)
+            with open(schema_file) as f:
+                try:
+                    jsn_schema = json.load(f)
+                except ValueError as ex:
+                    log.error("Could not load %s", schema_file)
+                    raise ex
+
+            # cache the schema contents to avoid re-reading the file a second time
+            self.schemas[schema_name] = jsn_schema
+        else:
+            jsn_schema = self.schemas[schema_name]
+
+        return jsn_schema
+
+    def retrieve_from_filesystem(self, schema_name: str):
+        jsn_schema = self.get_json_from_file(schema_name)
+        return Resource.from_contents(jsn_schema, default_specification=DRAFT4)
 
     def is_valid_for_version(self, d: dict, version: float) -> bool:
         """
@@ -142,27 +170,15 @@ class Validator(object):
         """
         Had to remove the id property from map.json or it uses URLs for validation
         See various issues at https://github.com/Julian/jsonschema/pull/306
+        This is fixed in versions after Draft4
         """
 
-        if schema_name not in self.schemas:
-            schema_file = self.get_schema_file(schema_name)
-            with open(schema_file) as f:
-                try:
-                    jsn_schema = json.load(f)
-                except ValueError as ex:
-                    log.error("Could not load %s", schema_file)
-                    raise ex
+        jsn_schema = self.get_json_from_file(schema_name)
 
-            schemas_folder = self.get_schemas_folder()
-            root_schema_path = self.get_schema_path(schemas_folder)
-            resolver = jsonschema.RefResolver(root_schema_path, {})
-            # cache the schema for future use
-            self.schemas[schema_name] = (jsn_schema, resolver)
-        else:
-            jsn_schema, resolver = self.schemas[schema_name]
+        registry: Registry = Registry(retrieve=self.retrieve_from_filesystem)  # type: ignore
 
-        validator = jsonschema.Draft4Validator(schema=jsn_schema, resolver=resolver)
-        # validator.check_schema(jsn_schema) # check schema is valid
+        validator = jsonschema.Draft4Validator(schema=jsn_schema, registry=registry)  # type: ignore
+        # validator.check_schema(jsn_schema) # check schema is valid - commented out as for testing only
 
         return validator
 
