@@ -38,7 +38,7 @@ setup(
     packages=["mappyfile"],
     install_requires=[
         "lark>=1.1.5",
-        "jsonschema>=2.0",
+        "jsonschema>=4.0",
         "jsonref==1.1.0",
         "click",
     ],
