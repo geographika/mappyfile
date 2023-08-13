@@ -39,7 +39,7 @@ from mappyfile.tokens import (
 )
 from mappyfile.validator import Validator
 from mappyfile.quoter import Quoter
-import mappyfile as utils
+from mappyfile import dictutils
 from typing import Any
 
 
@@ -102,17 +102,24 @@ class PrettyPrinter:
         composite.
         """
         length = 0
+
+        ignore_list = (
+            "metadata",
+            "validation",
+            "values",
+            "connectionoptions",
+            "pattern",
+            "projection",
+            "points",
+            "config",
+        )
+
         for attr, value in composite.items():
             attr_length = len(attr)
             if (
                 not self.__is_metadata(attr)
-                and attr
-                not in ("metadata", "validation", "values", "connectionoptions")
+                and attr not in ignore_list
                 and not self.is_hidden_container(attr, value)
-                and not attr == "pattern"
-                and not attr == "projection"
-                and not attr == "points"
-                and not attr == "config"
                 and not self.is_composite(value)
             ):
                 length = max(length, attr_length)
@@ -124,7 +131,7 @@ class PrettyPrinter:
             return
         for key in list(composite.keys()):
             if self.is_complex_type(composite, key, level):
-                utils.dict_move_to_end(composite, key)
+                dictutils.dict_move_to_end(composite, key)
 
     def whitespace(self, level: int, indent: int) -> str:
         return self.spacer * (level + indent)

@@ -34,7 +34,7 @@ from collections import OrderedDict
 import logging
 import jsonschema
 import jsonref
-from mappyfile import utils
+from mappyfile import dictutils
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT4
 from typing import Any
@@ -216,11 +216,11 @@ class Validator:
             key = d["__type__"]
         elif isinstance(path[-1], int):
             # the error is on an object in a list
-            d = utils.findkey(rootdict, *path)
+            d = dictutils.findkey(rootdict, *path)
             key = d["__type__"]
         else:
             key = path[-1]
-            d = utils.findkey(rootdict, *path[:-1])
+            d = dictutils.findkey(rootdict, *path[:-1])
 
         error_message = f"ERROR: Invalid value in {key.upper()}"
 
