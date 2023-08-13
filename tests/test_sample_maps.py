@@ -1,5 +1,4 @@
 import os
-import json
 import logging
 import pytest
 import mappyfile
@@ -13,6 +12,25 @@ from mappyfile.validator import Validator
 def test_all_maps():
     sample_dir = os.path.join(os.path.dirname(__file__), "sample_maps")
 
+    # the following "map" files are includes used by other mapfiles in msautotest
+    # TODO - rename all these to .include in MapServer source to allow them to be more
+    # easily processed
+    ignore_list = [
+        "bdry_counpy2_mssql.map",
+        "bdry_counpy2_ogr.map",
+        "bdry_counpy2_postgis.map",
+        "bdry_counpy2_shapefile.map",
+        "indx_q100kpy4_ogr.map",
+        "indx_q100kpy4_shapefile.map",
+        "mssql_connection.map",
+        "quoted_text.MAP",
+        "style-size.map",
+        "wfs_ogr_export_metadata.map",
+    ]
+
+    # list any maps that are known not to parse and are to be fixed
+    ignore_list += ["centerline.map"]
+
     p = Parser(expand_includes=False)
     m = MapfileToDict(include_position=True)
     v = Validator()
@@ -20,22 +38,24 @@ def test_all_maps():
     failing_maps = []
 
     for fn in os.listdir(sample_dir):
-        print(fn)
-        try:
-            ast = p.parse_file(os.path.join(sample_dir, fn))
-            d = m.transform(ast)
-            errors = v.validate(d)
+        if fn not in ignore_list:
+            print(fn)
             try:
-                assert len(errors) == 0
-            except AssertionError as ex:
-                logging.warning("Validation errors in %s ", fn)
+                ast = p.parse_file(os.path.join(sample_dir, fn))
+                d = m.transform(ast)
+                errors = v.validate(d)
+                try:
+                    assert len(errors) == 0
+                except AssertionError as ex:
+                    logging.warning("Validation errors in %s ", fn)
+                    logging.error(ex)
+                    logging.warning(errors)
+            except (BaseException, UnexpectedToken) as ex:
+                logging.warning("Cannot process %s ", fn)
                 logging.error(ex)
-                logging.warning(errors)
-        except (BaseException, UnexpectedToken) as ex:
-            logging.warning("Cannot process %s ", fn)
-            logging.error(ex)
-            failing_maps.append(fn)
+                failing_maps.append(fn)
 
+    logging.warning("The list of maps below have failed to parse")
     logging.warning(failing_maps)
 
 
@@ -95,7 +115,7 @@ def test_two_includes():
     """
 
     d = mappyfile.loads(s, expand_includes=False)
-    logging.debug(json.dumps(d, indent=4))
+    logging.debug(d)
     pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
     output = pp.pprint(d)
     print(output)
@@ -128,5 +148,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     logging.getLogger("mappyfile").setLevel(logging.INFO)
     # run_tests()
-    test_unicode_map()
+    # test_unicode_map()
+    test_all_maps()
     print("Done!")

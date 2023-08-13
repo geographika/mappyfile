@@ -213,13 +213,14 @@ LAYER
     "init=epsg:3978"
   END
 
-  DUMP TRUE
   CLASSITEM "Name_e"
 
   CLASS
     NAME "Province"
-    COLOR 200 255 0
-    OUTLINECOLOR 120 120 120
+    STYLE
+        COLOR 200 255 0
+        OUTLINECOLOR 120 120 120
+    END
   END
 END # Layer
 
@@ -239,14 +240,16 @@ LAYER
     "init=epsg:3978"
   END
 
-  DUMP TRUE
   LabelItem "Name"
   CLASSITEM "Capital" 
 
   CLASS
     EXPRESSION /./  
-    SYMBOL 2
-    SIZE 8
+    STYLE
+        SYMBOL 2
+        SIZE 8
+        COLOR 0 0 0
+    END
     NAME "Cities"
     LABEL
       COLOR  0 0 0
@@ -257,7 +260,6 @@ LAYER
       PARTIALS FALSE
       OUTLINECOLOR 255 255 255			
     END 
-    COLOR 0 0 0
   END
 END # Layer
 

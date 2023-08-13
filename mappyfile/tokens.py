@@ -405,7 +405,7 @@ ms_errorfile
 )
 
 # some keywords can be added multiple times to a composite type
-REPEATED_KEYS = ("processing", "formatoption", "include", "data", "compfilter")
+REPEATED_KEYS = ("processing", "formatoption", "include", "compfilter")
 
 # these are keywords used in the schema to store collections of composite objects
 # for example lists of layers

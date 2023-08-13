@@ -1,5 +1,5 @@
-# RUN_PARMS: plb_embed_legend.png [SHP2IMG] -m [MAPFILE] -i png -o [RESULT]
-# RUN_PARMS: plb_embed_legend.cairo.png [SHP2IMG] -m [MAPFILE] -i cairopng -o [RESULT]
+# RUN_PARMS: plb_embed_legend.png [MAP2IMG] -m [MAPFILE] -i png -o [RESULT]
+# RUN_PARMS: plb_embed_legend.cairo.png [MAP2IMG] -m [MAPFILE] -i cairopng -o [RESULT]
 #
 #
 # Simple test of embedded legend support.
@@ -39,20 +39,26 @@ LAYER
   CLASS 
     NAME "Big"
     EXPRESSION ([AREA] >= 500000)
-    COLOR 255 0 0 
-    OUTLINECOLOR 0 0 0
+    STYLE
+        COLOR 255 0 0 
+        OUTLINECOLOR 0 0 0
+    END
   END
   CLASS 
     NAME "Medium"
     EXPRESSION ([AREA] >= 100000 and [AREA] < 500000)
-    COLOR 0 255 0
-    OUTLINECOLOR 0 0 0
+    STYLE
+        COLOR 0 255 0
+        OUTLINECOLOR 0 0 0
+    END
   END
   CLASS 
     NAME "Small"
     EXPRESSION ([AREA] < 100000)
-    COLOR 0 0 255
-    OUTLINECOLOR 0 0 0
+    STYLE
+        COLOR 0 0 255
+        OUTLINECOLOR 0 0 0
+    END
   END
 END
 

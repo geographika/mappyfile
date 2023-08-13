@@ -111,13 +111,13 @@ LAYER
     "init=./data/epsg2:42304"
   END
 
-  DUMP TRUE
-
   CLASSITEM "Name_e"
   CLASS
     NAME "Roads"
-    SYMBOL 0 
-    COLOR 220 0 0
+    STYLE
+        SYMBOL 0 
+        COLOR 220 0 0
+    END
   END
 END # Layer
 
@@ -128,6 +128,7 @@ LAYER
     "ows_title" "province"
     "ows_abstract" "province"
     "wfs_featureid" "NAME_E"
+    "ows_attribution_title" "MapServer"
   END
   TYPE POINT
   STATUS ON
@@ -136,13 +137,14 @@ LAYER
 #    "init=epsg:42304"
   END
 
-  DUMP TRUE
   CLASSITEM "Name_e"
 
   CLASS
     NAME "Province"
-    COLOR 200 255 0
-    OUTLINECOLOR 120 120 120
+    STYLE
+        COLOR 200 255 0
+        OUTLINECOLOR 120 120 120
+    END
   END
 END # Layer
 
@@ -160,7 +162,6 @@ LAYER
   PROJECTION
     "init=epsg:32611"
   END
-  DUMP TRUE
 END # Layer
 
 END # Map File

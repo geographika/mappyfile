@@ -14,7 +14,6 @@ IMAGETYPE png
 LAYER
   NAME shppoly
   TYPE polygon
-  DUMP TRUE
   TEMPLATE "junk.tmpl"
   CONNECTIONTYPE OGR
   CONNECTION "../misc/data/shppoly"
@@ -23,8 +22,10 @@ LAYER
   CLASSITEM "AREA"
   CLASS
     NAME "test1"
-    COLOR 0 255 0
-    OUTLINECOLOR 255 0 0
+    STYLE
+        COLOR 0 255 0
+        OUTLINECOLOR 255 0 0
+    END
   END
 END
 

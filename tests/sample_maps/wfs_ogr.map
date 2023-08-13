@@ -23,11 +23,11 @@
 # Generate dump streamed directly to GPX (test #4776)
 # RUN_PARMS: wfsogr10_gpx.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road&featureid=road.1521&OUTPUTFORMAT=OGRGPX" > [RESULT_DEVERSION]
 #
-# Generate dump to BNA in ZIP (test #4933)
-# RUN_PARMS: wfsogr10_bnazip.zip [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road&featureid=road.1521&OUTPUTFORMAT=OGRBNAZIP" > [RESULT_DEVERSION]
+# Generate dump to CSV in ZIP (test #4933)
+# RUN_PARMS: wfsogr10_csvzip.zip [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road&featureid=road.1521&OUTPUTFORMAT=OGRCSVZIP" > [RESULT_DEVERSION]
 #
-# Generate dump to SHAPEZIP
-# RUN_PARMS: wfsogr10_shapezip.zip [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road&featureid=road.1521&OUTPUTFORMAT=SHAPEZIP" > [RESULT]
+# Generate dump to SHAPEZIP, with HTTP headers
+# RUN_PARMS: wfsogr10_shapezip.zip.with_headers [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road&featureid=road.1521&OUTPUTFORMAT=SHAPEZIP" > [RESULT]
 #
 # Generate dump streamed directly to OGR GML from memory.
 # RUN_PARMS: wfsogr10_ogrgml.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road&featureid=road.1521&OUTPUTFORMAT=OGRGML" > [RESULT]
@@ -44,8 +44,11 @@
 # Test fetching from two layers with a filter.
 # RUN_PARMS: wfsogr10_twolayer.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace,road&OUTPUTFORMAT=MultiMIDMIF&FILTER=(<Filter><BBOX><PropertyName>POINT</PropertyName><Box+srsName=%22EPSG:4326%22><coordinates>-65.86,44.56+-65.76,44.68</coordinates></Box></BBOX></Filter>)(<Filter><BBOX><PropertyName>POINT</PropertyName><Box+srsName=%22EPSG:4326%22><coordinates>-65.86,44.56+-65.76,44.68</coordinates></Box></BBOX></Filter>)" > [RESULT]
 #
-# Test writing features with null numeric fields (#4633)
-# RUN_PARMS: wfsogr10_nullnumeric.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=withnullvalues&OUTPUTFORMAT=CSV" > [RESULT]
+# Test writing features with null numeric fields (#4633) and datetime (#6434)
+# RUN_PARMS: wfsogr10_nullnumeric.csv [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=withnullvalues&OUTPUTFORMAT=CSV" > [RESULT_DEMIME]
+#
+# Test writing features with null numeric fields (#4633) and datetime (#6434)
+# RUN_PARMS: wfsogr10_datetime.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=withnullvalues" > [RESULT_DEMIME]
 
 # WFS 1.1
 #
@@ -69,7 +72,7 @@
 # 
 # WMS 1.1 - GetFeatureInfo
 #
-# RUN_PARMS: wfsogr_wms_getfeatureinfo.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1.1.1&service=WMS&request=GetFeatureInfo&srs=EPSG:3978&bbox=2250000,-71000,2620000,496000&format=image/png&layers=road&width=500&height=300&query_layers=road&info_format=text/csv&x=141&y=91&radius=100" > [RESULT]
+# RUN_PARMS: wfsogr_wms_getfeatureinfo.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WMS&VERSION=1.1.1&service=WMS&request=GetFeatureInfo&srs=EPSG:3978&bbox=2250000,-71000,2620000,496000&format=image/png&layers=road&width=500&height=300&query_layers=road&info_format=text/csv&x=141&y=91&radius=100&STYLES=" > [RESULT]
 
 # WFS 1.1 - SortBy
 #
@@ -91,7 +94,7 @@
 #
 # Test wfs_additional_files_in_output
 # RUN_PARMS: wfsogr_addfiles_onelayer.txt [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road_with_addfiles&featureid=road_with_addfiles.1521&OUTPUTFORMAT=OGRGML" > [RESULT_DEVERSION]
-# RUN_PARMS: wfsogr_addfiles_onelayer.zip [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road_with_addfiles&featureid=road_with_addfiles.1521&OUTPUTFORMAT=OGRBNAZIP" > [RESULT_DEVERSION]
+# RUN_PARMS: wfsogr_addfiles_onelayer.zip [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road_with_addfiles&featureid=road_with_addfiles.1521&OUTPUTFORMAT=OGRCSVZIP" > [RESULT_DEVERSION]
 # RUN_PARMS: wfsogr_addfiles_twolayers.txt [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=road_with_addfiles,road2_with_addfiles&featureid=road_with_addfiles.1521,road2_with_addfiles.1521&OUTPUTFORMAT=OGRGML" > [RESULT_DEVERSION]
 
 MAP
@@ -151,12 +154,13 @@ OUTPUTFORMAT
 END
 
 OUTPUTFORMAT
-  NAME "OGRBNAZIP"
-  DRIVER "OGR/BNA"
-  MIMETYPE "application/zip; driver=ogr/bna"
+  NAME "OGRCSVZIP"
+  DRIVER "OGR/CSV"
+  MIMETYPE "application/zip; driver=ogr/csv"
+  FORMATOPTION "LCO:GEOMETRY=AS_WKT"
   FORMATOPTION "STORAGE=memory"
   FORMATOPTION "FORM=zip"
-  FORMATOPTION "FILENAME=result.bna.zip"
+  FORMATOPTION "FILENAME=result.csv.zip"
 END
 
 
@@ -245,7 +249,7 @@ LAYER
     "ows_title"         "road"
     "ows_description"   "road"
     "wfs_featureid"     "ROAD_ID" 
-    "wfs_getfeature_formatlist" "csv,csvstream,ogrgml,ogrgpx,ogrbnazip,ogrgmlstream,shapezip,midmif,multimidmif"
+    "wfs_getfeature_formatlist" "csv,csvstream,ogrgml,ogrgpx,ogrcsvzip,ogrgmlstream,shapezip,midmif,multimidmif"
     "gml_include_items" "all"
     "gml_exclude_items" "ROAD_"
     "gml_types"         "auto"
@@ -257,7 +261,6 @@ LAYER
   END
 
   TEMPLATE "wfs_ogr.map"
-  DUMP TRUE
 END # Layer
 
 LAYER
@@ -281,7 +284,6 @@ LAYER
     "init=epsg:3978"
   END
 
-  DUMP TRUE
 END # Layer
 
 # To test wfs_additional_files_in_output
@@ -292,7 +294,7 @@ LAYER
     "ows_title"         "road_with_addfiles"
     "ows_description"   "road_with_addfiles"
     "wfs_featureid"     "ROAD_ID" 
-    "wfs_getfeature_formatlist" "csv,csvstream,ogrgml,ogrgpx,ogrbnazip,ogrgmlstream,shapezip,midmif,multimidmif"
+    "wfs_getfeature_formatlist" "csv,csvstream,ogrgml,ogrgpx,ogrcsvzip,ogrgmlstream,shapezip,midmif,multimidmif"
     "wfs_additional_files_in_output" "wfs_ogr_common_addfile.txt,wfs_ogr_common_addfile.txt,addfiles/,addfiles,road_with_addfiles.txt"
     "gml_include_items" "all"
     "gml_exclude_items" "ROAD_"
@@ -305,7 +307,6 @@ LAYER
   END
 
   TEMPLATE "wfs_ogr.map"
-  DUMP TRUE
 END # Layer
 
 # To test wfs_additional_files_in_output
@@ -316,7 +317,7 @@ LAYER
     "ows_title"         "road2_with_addfiles"
     "ows_description"   "road2_with_addfiles"
     "wfs_featureid"     "ROAD_ID" 
-    "wfs_getfeature_formatlist" "csv,csvstream,ogrgml,ogrgpx,ogrbnazip,ogrgmlstream,shapezip,midmif,multimidmif"
+    "wfs_getfeature_formatlist" "csv,csvstream,ogrgml,ogrgpx,ogrcsvzip,ogrgmlstream,shapezip,midmif,multimidmif"
     "wfs_additional_files_in_output" "road2_with_addfiles.txt,nonexistingfile"
     "gml_include_items" "all"
     "gml_exclude_items" "ROAD_"
@@ -329,7 +330,6 @@ LAYER
   END
 
   TEMPLATE "wfs_ogr.map"
-  DUMP TRUE
 END # Layer
 
 LAYER
@@ -352,8 +352,6 @@ LAYER
   PROJECTION
     "init=epsg:27700"
   END
-
-  DUMP TRUE
 END
 
 LAYER
@@ -376,8 +374,6 @@ LAYER
   PROJECTION
     "init=epsg:27700"
   END
-
-  DUMP TRUE
 END
 
 END # Map File

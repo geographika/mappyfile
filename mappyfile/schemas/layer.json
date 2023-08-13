@@ -69,10 +69,7 @@
       "enum": [ "contour", "kerneldensity", "idw", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis", "flatgeobuf" ]
     },
     "data": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+      "type": "string"
     },
     "debug": {
       "allOf": [
@@ -355,7 +352,7 @@
       ]
     },
     "type": {
-      "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query", "annotation" ]
+      "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query", "annotation", "tileindex" ]
     },
     "units": {
       "default": "meters",

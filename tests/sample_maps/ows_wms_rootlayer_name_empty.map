@@ -50,13 +50,13 @@ LAYER
     "init=./data/epsg2:42304"
   END
 
-  DUMP TRUE
-
   CLASSITEM "Name_e"
   CLASS
     NAME "Roads"
-    SYMBOL 0 
-    COLOR 220 0 0
+    STYLE
+        SYMBOL 0 
+        COLOR 220 0 0
+    END
   END
 END # Layer
 
@@ -81,13 +81,13 @@ LAYER
     "init=./data/epsg2:42304"
   END
 
-  DUMP TRUE
-
   CLASSITEM "Name_e"
   CLASS
     NAME "Roads"
-    SYMBOL 0 
-    COLOR 220 0 0
+    STYLE
+        SYMBOL 0 
+        COLOR 220 0 0
+    END
   END
 END # Layer
 
@@ -110,13 +110,13 @@ LAYER
     "init=./data/epsg2:42304"
   END
 
-  DUMP TRUE
-
   CLASSITEM "Name_e"
   CLASS
     NAME "Roads"
-    SYMBOL 0 
-    COLOR 220 0 0
+    STYLE
+        SYMBOL 0 
+        COLOR 220 0 0
+    END
   END
 END # Layer
 
