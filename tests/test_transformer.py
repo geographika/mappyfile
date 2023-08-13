@@ -354,7 +354,7 @@ def test_custom_transformer():
             self.custom_param = kwargs["custom_param"]
             super(CustomTransformer, self).__init__(include_position, include_comments)
 
-    m = MapfileToDict(transformerClass=CustomTransformer, custom_param="custom")
+    m = MapfileToDict(transformer_class=CustomTransformer, custom_param="custom")
 
     s = """
     MAP

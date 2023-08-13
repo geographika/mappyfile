@@ -34,6 +34,7 @@ import sys
 from types import ModuleType
 
 # allow high-level functions to be accessed directly from the mappyfile module
+# pylint: disable=redefined-builtin
 from mappyfile.utils import (
     open,
     load,

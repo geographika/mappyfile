@@ -34,9 +34,7 @@
             ],
             "name": "rgb",
             "type": "RASTER",
-            "data": [
-                "../data/raster/bluemarble.tif"
-            ],
+            "data": "../data/raster/bluemarble.tif",
             "template": "raster.template.html"
         }
     ]

@@ -52,7 +52,7 @@ def deprecated(func):
     def new_func(*args, **kwargs):
         warnings.simplefilter("always", DeprecationWarning)  # turn off filter
         warnings.warn(
-            "Call to deprecated function {}.".format(func.__name__),
+            f"Call to deprecated function {func.__name__}.",
             category=DeprecationWarning,
             stacklevel=2,
         )
@@ -62,6 +62,7 @@ def deprecated(func):
     return new_func
 
 
+# pylint: disable=redefined-builtin
 def open(
     fn: str,
     expand_includes: bool = True,
@@ -216,6 +217,7 @@ def loads(
     return d
 
 
+# pylint: disable=too-many-arguments
 def dump(
     d: dict,
     fp: IO[str],
@@ -282,6 +284,7 @@ def dump(
     fp.write(map_string)
 
 
+# pylint: disable=too-many-arguments
 def save(
     d: dict,
     output_file: str,
@@ -292,7 +295,6 @@ def save(
     end_comment: bool = False,
     align_values: bool = False,
     separate_complex_types: bool = False,
-    **kwargs,
 ) -> str:
     """
     Write a dictionary to an output Mapfile on disk
@@ -354,6 +356,7 @@ def save(
     return output_file
 
 
+# pylint: disable=too-many-arguments
 def dumps(
     d: dict,
     indent: int = 4,
@@ -578,7 +581,7 @@ def findunique(lst, key):
         assert groups == ["group1", "group2"]
     """
     return sorted(
-        set([item.get(key.lower(), None) for item in lst])
+        set((item.get(key.lower(), None) for item in lst))
         - {
             None,
         }
@@ -631,8 +634,8 @@ def findkey(d: dict, *keys: list[Any]) -> dict:
         keys_list = list(keys)
         search_key = keys_list.pop(0)
         return findkey(d[search_key], *keys_list)
-    else:
-        return d
+
+    return d
 
 
 def update(d1: dict, d2: dict, overwrite: bool = True) -> dict:
@@ -662,7 +665,7 @@ def update(d1: dict, d2: dict, overwrite: bool = True) -> dict:
         The updated dictionary
 
     """
-    NoneType = type(None)
+    none_type = type(None)
 
     if d2.get("__delete__", False):
         return {}
@@ -675,9 +678,9 @@ def update(d1: dict, d2: dict, overwrite: bool = True) -> dict:
             else:
                 d1[k] = update(d1.get(k, {}), v, overwrite)
         elif isinstance(v, (tuple, list)) and all(
-            isinstance(li, (NoneType, dict)) for li in v  # type: ignore
+            isinstance(li, (none_type, dict)) for li in v  # type: ignore
         ):
-            # a list of dicts and/or NoneType
+            # a list of dicts and/or none_type
             orig_list = d1.get(k, [])
             new_list = []
             pairs = list(zip_longest(orig_list, v, fillvalue=None))
@@ -760,7 +763,7 @@ def _pprint(
     return pp.pprint(d)
 
 
-def create(type, version=None) -> dict:
+def create(type: str, version=None) -> dict:
     """
     Create a new mappyfile object, using MapServer defaults (if any).
 
@@ -782,8 +785,8 @@ def create(type, version=None) -> dict:
     v = Validator()
     try:
         schema = v.get_versioned_schema(version=version, schema_name=type)
-    except IOError:
-        raise SyntaxError("The mappyfile type '{}' does not exist!".format(type))
+    except IOError as exc:
+        raise SyntaxError("The mappyfile type '{type}' does not exist!") from exc
 
     d = DefaultOrderedDict()
     d["__type__"] = type

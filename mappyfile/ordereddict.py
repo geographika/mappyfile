@@ -107,57 +107,42 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
         return key.lower() if isinstance(key, str) else key
 
     def __init__(self, *args, **kwargs):
-        super(CaseInsensitiveOrderedDict, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self._convert_keys()
 
     def __getitem__(self, key):
-        return super(CaseInsensitiveOrderedDict, self).__getitem__(
-            self.__class__._k(key)
-        )
+        return super().__getitem__(self.__class__._k(key))
 
     def __setitem__(self, key, value):
-        super(CaseInsensitiveOrderedDict, self).__setitem__(
-            self.__class__._k(key), value
-        )
+        super().__setitem__(self.__class__._k(key), value)
 
     def __delitem__(self, key):
-        return super(CaseInsensitiveOrderedDict, self).__delitem__(
-            self.__class__._k(key)
-        )
+        return super().__delitem__(self.__class__._k(key))
 
     def __contains__(self, key):
-        return super(CaseInsensitiveOrderedDict, self).__contains__(
-            self.__class__._k(key)
-        )
+        return super().__contains__(self.__class__._k(key))
 
     def has_key(self, key):
         return key in self
 
     def pop(self, key, *args, **kwargs):
-        return super(CaseInsensitiveOrderedDict, self).pop(
-            self.__class__._k(key), *args, **kwargs
-        )
+        # pylint: disable=protected-access
+        return super().pop(self.__class__._k(key), *args, **kwargs)
 
     def get(self, key, *args, **kwargs):
-        return super(CaseInsensitiveOrderedDict, self).get(
-            self.__class__._k(key), *args, **kwargs
-        )
+        # pylint: disable=protected-access
+        return super().get(self.__class__._k(key), *args, **kwargs)
 
     def setdefault(self, key, *args, **kwargs):
-        return super(CaseInsensitiveOrderedDict, self).setdefault(
-            self.__class__._k(key), *args, **kwargs
-        )
+        # pylint: disable=protected-access
+        return super().setdefault(self.__class__._k(key), *args, **kwargs)
 
-    def update(self, E=None, **F):
-        if E is not None:
-            super(CaseInsensitiveOrderedDict, self).update(
-                self.__class__(CaseInsensitiveOrderedDict, E)
-            )
-        super(CaseInsensitiveOrderedDict, self).update(
-            self.__class__(CaseInsensitiveOrderedDict, **F)
-        )
+    def update(self, e=None, **f):
+        if e is not None:
+            super().update(self.__class__(CaseInsensitiveOrderedDict, e))
+        super().update(self.__class__(CaseInsensitiveOrderedDict, **f))
 
     def _convert_keys(self):
         for k in list(self.keys()):
-            v = super(CaseInsensitiveOrderedDict, self).pop(k)
+            v = super().pop(k)
             self.__setitem__(k, v)

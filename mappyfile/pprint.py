@@ -38,6 +38,7 @@ from mappyfile.tokens import (
     OBJECT_LIST_KEYS,
 )
 from mappyfile.validator import Validator
+from mappyfile.quoter import Quoter
 import mappyfile as utils
 from typing import Any
 
@@ -45,92 +46,8 @@ from typing import Any
 log = logging.getLogger("mappyfile")
 
 
-class Quoter(object):
-    """
-    A class to handle adding and standardising quotes around strings
-    """
-
-    def __init__(self, quote: str = '"'):
-        assert quote == "'" or quote == '"'
-
-        self.quote = quote
-
-        if self.quote == "'":
-            self.altquote = '"'
-        else:
-            self.altquote = "'"
-
-    def add_quotes(self, val: str) -> str:
-        return self._add_quotes(val, self.quote)
-
-    def add_altquotes(self, val: str) -> str:
-        return self._add_quotes(val, self.altquote)
-
-    def _add_quotes(self, val: str, quote: str) -> str:
-        return "{}{}{}".format(quote, val, quote)
-
-    def in_quotes(self, val: str) -> bool:
-        return self._in_quotes(val, self.quote) or self._in_quotes(val, self.altquote)
-
-    def _in_quotes(self, val: str, char: str):
-        return val.startswith(char) and val.endswith(char)
-
-    def escape_quotes(self, val: Any) -> Any:
-        """
-        Escape any quotes in a value
-        """
-        if self.is_string(val) and self._in_quotes(val, self.quote):
-            # make sure any previously escaped quotes are not re-escaped
-            middle = self.remove_quotes(val).replace("\\" + self.quote, self.quote)
-            middle = middle.replace(self.quote, "\\" + self.quote)
-            val = self.add_quotes(middle)
-
-        return val
-
-    def is_string(self, val: Any) -> bool:
-        return isinstance(val, str)
-
-    def remove_quotes(self, val: Any) -> Any:
-        if isinstance(val, list):
-            return list(map(self.remove_quotes, val))
-
-        if not self.is_string(val):
-            return val
-
-        if self.in_quotes(val):
-            return val[1:-1]
-        else:
-            return val
-
-    def in_brackets(self, val: str) -> bool:
-        val = val.strip()
-        return val.startswith("[") and val.endswith("]")
-
-    def in_parenthesis(self, val: str) -> bool:
-        val = val.strip()
-        return val.startswith("(") and val.endswith(")")
-
-    def in_braces(self, val: str) -> bool:
-        val = val.strip()
-        return val.startswith("{") and val.endswith("}")
-
-    def in_slashes(self, val: str) -> bool:
-        val = val.strip()
-        return self._in_quotes(val, "/")
-
-    def standardise_quotes(self, val: str) -> str:
-        """
-        Change the quotes used to wrap a value to the pprint default
-        E.g. "val" to 'val' or 'val' to "val"
-        """
-        if self._in_quotes(val, self.altquote):
-            middle = self.remove_quotes(val)
-            val = self.add_quotes(middle)
-
-        return self.escape_quotes(val)
-
-
-class PrettyPrinter(object):
+# pylint: disable=too-many-arguments
+class PrettyPrinter:
     def __init__(
         self,
         indent: int = 4,
@@ -140,13 +57,12 @@ class PrettyPrinter(object):
         end_comment: bool = False,
         align_values: bool = False,
         separate_complex_types: bool = False,
-        **kwargs,
     ):
         """
         Option use "\t" for spacer with an indent of 1
         """
 
-        assert quote == "'" or quote == '"'
+        assert quote in ("'", '"')
 
         self.indent = indent
         self.spacer = spacer * self.indent
@@ -165,8 +81,8 @@ class PrettyPrinter(object):
         """
         if key.startswith("__") and key.endswith("__"):
             return True
-        else:
-            return False
+
+        return False
 
     def compute_aligned_max_indent(self, max_key_length: int) -> int:
         """
@@ -219,7 +135,7 @@ class PrettyPrinter(object):
     def add_end_line(self, level: int, indent: int, key: str) -> str:
         end_line = self.whitespace(level, indent) + self.end
         if self.end_comment:
-            end_line = "{} # {}".format(end_line, key.upper())
+            end_line = f"{end_line} # {key.upper()}"
         return end_line
 
     def __format_line(
@@ -277,7 +193,8 @@ class PrettyPrinter(object):
         """
         lines = []
         for k, v in d.items():
-            k = "CONFIG {}".format(self.quoter.add_quotes(k.upper()))
+            cfg_val = self.quoter.add_quotes(k.upper())
+            k = f"CONFIG {cfg_val}"
             v = self.quoter.add_quotes(v)
             lines.append(self.__format_line(self.whitespace(level, 1), k, v))
         return lines
@@ -304,21 +221,21 @@ class PrettyPrinter(object):
     ) -> list[str]:
         lines = [self.add_start_line(key, level)]
 
+        whitespace = self.whitespace(level, 2)
+
         if projection_comments:
-            lines.append(
-                "{}{}".format(self.whitespace(level, 2), projection_comments.strip())
-            )
+            lines.append(f"{whitespace}{projection_comments.strip()}")
 
         if self.quoter.is_string(lst):
             val = self.quoter.add_quotes(str(lst))
             # the value has been manually set to a single string projection
-            lines.append("{}{}".format(self.whitespace(level, 2), val))
+            lines.append(f"{whitespace}{val}")
         elif len(lst) == 1 and lst[0].upper() == "AUTO":
-            lines.append("{}{}".format(self.whitespace(level, 2), "AUTO"))
+            lines.append(f"{whitespace}AUTO")
         else:
             for v in lst:
                 v = self.quoter.add_quotes(v)
-                lines.append("{}{}".format(self.whitespace(level, 2), v))
+                lines.append(f"{whitespace}{v}")
 
         lines.append(self.add_end_line(level, 1, key))
         return lines
@@ -331,7 +248,7 @@ class PrettyPrinter(object):
         lines = [self.add_start_line(key, level)]
 
         list_spacer = self.spacer * (level + 2)
-        pairs = ["{}{} {}".format(list_spacer, p[0], p[1]) for p in pair_list]
+        pairs = [f"{list_spacer}{p[0]} {p[1]}" for p in pair_list]
         lines += pairs
 
         lines.append(self.add_end_line(level, 1, key))
@@ -347,8 +264,8 @@ class PrettyPrinter(object):
 
         lines = []
 
-        def depth(L):
-            return isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+        def depth(iterable):
+            return isinstance(iterable, (tuple, list)) and max(map(depth, iterable)) + 1
 
         if depth(root_list) == 2:
             # single set of points only
@@ -362,8 +279,7 @@ class PrettyPrinter(object):
     def is_composite(self, val: Any) -> bool:
         if isinstance(val, dict) and "__type__" in val:
             return True
-        else:
-            return False
+        return False
 
     def is_complex_type(self, composite: dict, key: str, level: int) -> bool:
         # symbol needs special treatment
@@ -383,8 +299,7 @@ class PrettyPrinter(object):
 
         if key in OBJECT_LIST_KEYS and isinstance(val, list):
             return True
-        else:
-            return False
+        return False
 
     def pprint(self, composites: (dict | list[dict])) -> str:
         """
@@ -420,9 +335,7 @@ class PrettyPrinter(object):
             attr_props = props[attr]
         except KeyError as ex:
             log.error(
-                "The key '{}' was not found in the JSON schema for '{}'".format(
-                    attr, type_
-                )
+                "The key '%s' was not found in the JSON schema for '%s'", attr, type_
             )
             log.error(ex)
             return {}
@@ -438,16 +351,16 @@ class PrettyPrinter(object):
                 if value.lower() == "end":
                     # in GEOTRANSFORM "end" is an attribute value
                     return self.quoter.add_quotes(value)
-                else:
-                    return value.upper()
-            elif self.is_expression(option):
+                return value.upper()
+
+            if self.is_expression(option):
                 if value.endswith("'i") or value.endswith('"i'):
                     return value
 
         if self.quoter.in_slashes(value):
             return value
-        else:
-            return self.quoter.add_quotes(value)
+
+        return self.quoter.add_quotes(value)
 
     def format_value(self, attr: str, attr_props, value: Any) -> Any:
         """
@@ -459,18 +372,15 @@ class PrettyPrinter(object):
         if any(i in ["enum"] for i in attr_props):
             if isinstance(value, dict) and not value:
                 raise ValueError(
-                    "The property {} has an empty dictionary as a value".format(attr)
+                    f"The property {attr} has an empty dictionary as a value"
                 )
 
             if not isinstance(value, numbers.Number):
                 if attr == "compop":
                     return self.quoter.add_quotes(str(value))
-                else:
-                    return str(
-                        value
-                    ).upper()  # value is from a set list, no need for quote
-            else:
-                return value
+                return str(value).upper()  # value is from a set list, no need for quote
+
+            return value
 
         if (
             "type" in attr_props and attr_props["type"] == "string"
@@ -478,13 +388,13 @@ class PrettyPrinter(object):
             # check schemas for expressions and handle accordingly
             if self.is_expression(attr_props) and self.quoter.in_slashes(value):
                 return value
-            elif self.is_expression(attr_props) and (
+            if self.is_expression(attr_props) and (
                 value.endswith("'i") or value.endswith('"i')
             ):
                 # for case insensitive regex
                 return value
-            else:
-                return self.quoter.add_quotes(value)
+
+            return self.quoter.add_quotes(value)
 
         # expressions can be one of a string or an expression in brackets
         if any(
@@ -504,7 +414,7 @@ class PrettyPrinter(object):
                     # TEXT expressions are often "[field1]-[field2]" so need to leave quotes for these
                     pass
                 elif value.startswith("NOT ") and self.quoter.in_parenthesis(value[4:]):
-                    value = "NOT {}".format(value[4:])
+                    value = f"NOT {value[4:]}"
                 else:
                     value = self.check_options_list(options_list, value)
 
@@ -526,6 +436,7 @@ class PrettyPrinter(object):
 
         return value
 
+    # pylint: disable=too-many-arguments
     def process_attribute(
         self, type_: str, attr: str, value: Any, level: int, aligned_max_indent: int = 1
     ) -> str:
@@ -541,7 +452,7 @@ class PrettyPrinter(object):
         return line
 
     def format_comment(self, spacer: str, value: str) -> str:
-        return "{}{}".format(spacer, value)
+        return f"{spacer}{value}"
 
     def process_composite_comment(self, level: int, comments: dict, key: str) -> str:
         """
@@ -609,7 +520,8 @@ class PrettyPrinter(object):
             if self.__is_metadata(attr):
                 # skip hidden attributes
                 continue
-            elif self.is_hidden_container(attr, value):
+
+            if self.is_hidden_container(attr, value):
                 # now recursively print all the items in the container
                 for v in value:
                     lines += self._format(v, level + 1)
