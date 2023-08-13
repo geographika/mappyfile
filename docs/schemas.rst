@@ -18,11 +18,12 @@ PSC (Project Steering Committee). Further details on the schema are outlined in 
 Exporting the Schema
 ++++++++++++++++++++
 
-The schema can be exported via the command-line using the following syntax:
+The schema can be exported to a file via the command-line using the following syntax:
 
-.. code-block:: bat
+.. code-block:: ps1
 
-    mappyfile schema mapfile-schema-7-6.json --version=7.6
+    # exports to mapfile-schema-8-0.json
+    mappyfile schema mapfile-schema-8-0.json --version=8.0
 
 The schema can be exported using Python, as shown in the example below:
 
@@ -44,11 +45,10 @@ run the following code:
 
 .. code-block:: python
 
-    import json
     import mappyfile
 
     m = mappyfile.create("map", version=8.0)
-    print(json.dumps(m, indent=4, sort_keys=True))
+    print(m)
     mappyfile.dumps(m)
 
 This outputs the following:

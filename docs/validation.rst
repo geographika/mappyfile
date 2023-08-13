@@ -9,6 +9,9 @@ a full definition of the Mapfile language has been encoded in a JSON file - see 
 `jsonschema <https://pypi.python.org/pypi/jsonschema>`_ is used to validate a Mapfile by converting the transformed dictionary to JSON. 
 For details on creating JSON schemas see the excellent documentation `here <https://spacetelescope.github.io/understanding-json-schema/>`_. 
 
+`python-fastjsonschema <https://github.com/horejsek/python-fastjsonschema>`_ was also considered, but this does now allow multiple validation
+errors to be output - only the first error encountered - see `this link <https://github.com/horejsek/python-fastjsonschema/issues/36>`_. 
+
 What is Validated?
 ------------------
 

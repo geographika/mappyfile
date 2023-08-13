@@ -94,7 +94,7 @@ class DefaultOrderedDict(OrderedDict):
         """
         Return a human-readable version of the dict contents
         """
-        return json.dumps(self, indent=4)
+        return json.dumps(self, indent=4)  # sort_keys=True
 
 
 class CaseInsensitiveOrderedDict(DefaultOrderedDict):

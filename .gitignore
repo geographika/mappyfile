@@ -20,3 +20,4 @@ cache
 /tests/mapfiles/large_map2.map
 /.vscode
 /mappyfile.pyproj.user
+_build

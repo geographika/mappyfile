@@ -1,12 +1,23 @@
+"""
+Steps:
+
+1. Create a new run folder
+2. Run script as a command:
+
+cd D:/GitHub/mappyfile
+python ./tests/mapfiles/profiler.py run4-py310-cython
+"""
 import cProfile
 import pstats
 import glob
 import os
 import mappyfile
+import sys
 
 
 def parse(mf):
     m = mappyfile.open(mf, expand_includes=False)
+    mappyfile.validate(m)
     s = mappyfile.dumps(m)
     return s
 
@@ -28,10 +39,14 @@ def profile(mf, test_name):
     pr.enable()
     parse(mf)
     pr.disable()
+
+    output_folder = os.path.join(os.path.dirname(__file__), "performance", test_name)
+
+    if not os.path.exists(output_folder):
+        os.mkdir(output_folder)
+
     output_file = os.path.join(
-        os.path.dirname(__file__),
-        "performance",
-        test_name,
+        output_folder,
         "{}.txt".format(os.path.basename(mf)),
     )
     log_profile_output(pr, output_file)
@@ -63,7 +78,13 @@ def run(test_name):
 
 
 if __name__ == "__main__":
-    test_name = "run3-py27"
-    # run(test_name)
-    profile_test()
-    print("Done!")
+    # profile_test()
+
+    # Check if any command-line arguments were provided
+    if len(sys.argv) > 1:
+        # Print the first command-line argument (excluding the script filename)
+        test_name = sys.argv[1]
+        run(test_name)
+        print(f"Results output to {test_name} - done!")
+    else:
+        print("No command-line arguments provided.")

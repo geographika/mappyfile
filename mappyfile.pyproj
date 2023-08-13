@@ -18,6 +18,7 @@
     <Environment>PATH=C:\MapServer\bin;%PATH%
 PROJ_LIB=C:\MapServer\bin\proj\SHARE
 </Environment>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -163,7 +164,6 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\images\tree_inlining.png" />
     <Content Include="docs\images\tree_noinlining.png" />
     <Content Include="docs\images\tree_no_terminals.png" />
-    <Content Include="docs\parsing_decisions.txt" />
     <Content Include="docs\python_integration.rst" />
     <Content Include="docs\rfc.rst" />
     <Content Include="docs\rules.rst">
@@ -177,11 +177,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\validate.txt" />
     <Content Include="docs\validation.rst" />
     <Content Include="docs\validation_errors.txt" />
-    <Content Include="docs\xml.rst">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="docs\_static\foss4ge2017_mappyfile_sgirvin.pdf" />
-    <Content Include="docs\_static\widget.js" />
     <Content Include="LICENSE" />
     <Content Include="docs\.gitignore" />
     <Content Include="docs\examples\after.map" />
