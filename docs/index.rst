@@ -17,15 +17,18 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     :numbered:
     :titlesonly:
 
-    Parsing (draft) <parser.rst>
+    Parsing <parser.rst>
     Transforming (draft) <transformer.rst>
+    editing.rst
     Pretty Printing <pretty_printing.rst>
+    comments.rst
     validation.rst
     schemas.rst
     grammar.rst
     python_integration.rst
     client.rst
     api/main.rst
+    testing.rst
     development.rst
 
 .. image:: images/class_parsed.png

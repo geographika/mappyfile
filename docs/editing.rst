@@ -27,7 +27,7 @@ MS RFC 86: Scale-dependant String Substitutions
     END
 
 Converting from MapScript
-=========================
+-------------------------
 
 This section has some side-by-side examples of Python MapScript code, and its mappyfile equivalent. 
 The simple examples have little difference between them. The power of mappyfile becomes more apparent with the more complicated Mapfile manipulations. 

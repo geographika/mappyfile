@@ -1,103 +1,125 @@
 Development Notes
 =================
 
-Run the following before any of the following tasks:
+The development notes below assume a PowerShell prompt is being used on a Windows machine.
 
-.. code-block:: bat
+Run the following before any of the following tasks (once the virtual environment itself has been built):
 
-    set VIRTUALENV=C:\VirtualEnvs\mappyfile
-    echo set VIRTUALENV=C:\VirtualEnvs\mappyfile3
+.. code-block:: ps1
 
-    %VIRTUALENV%\Scripts\activate
-    echo set MAPPYFILE_PATH=C:\Code\mappyfile
-    set MAPPYFILE_PATH=D:\GitHub\mappyfile
-    cd /D %MAPPYFILE_PATH%
+    # update the following to your local paths
+    $VIRTUALENV="C:\VirtualEnvs\mappyfile3"
+    $MAPPYFILE_PATH="D:\GitHub\mappyfile"
+
+    .$VIRTUALENV\Scripts\activate.ps1
+    cd $MAPPYFILE_PATH
 
 Building the Dev Virtual Environment
 ------------------------------------
 
 Run from the root of the mappyfile project folder:
 
-.. code-block:: bat
+.. code-block:: ps1
 
-    set MAPPYFILE_PATH=D:\GitHub\mappyfile
-    set VIRTUALENV=C:\VirtualEnvs\mappyfile3
-    cd /D "C:\Python310\Scripts"
-    REM cd /D "C:\Python27\Scripts"
-    pip install virtualenv
-    virtualenv %VIRTUALENV%
-    %VIRTUALENV%\Scripts\activate
-    cd /D %MAPPYFILE_PATH%
+    $VIRTUALENV="C:\VirtualEnvs\mappyfile"
+    $MAPPYFILE_PATH="D:\GitHub\mappyfile"
+
+    cd "C:\Python310\Scripts"
+    .\pip install virtualenv
+    .\virtualenv $VIRTUALENV
+    .$VIRTUALENV\Scripts\activate.ps1
+    cd $MAPPYFILE_PATH
+    pip install -e .
     pip install -r requirements-dev.txt
 
 Testing Locally
 ---------------
 
-See also https://tox.readthedocs.io/en/latest/ (run with ``tox``).
+Ensure the development code has been deployed to a virtual environment as in the
+step above.
 
-First install the development code to a virtual environment:
+Then run from the root of the mappyfile project folder:
 
-.. code-block:: bat
-
-    pip install -e .
-
-Run from the root of the mappyfile project folder:
-
-.. code-block:: bat
+.. code-block:: ps1
 
     pytest
 
-To see which tests will run:
+To see a list of which tests will run, without actually running them:
 
-.. code-block:: bat
+.. code-block:: ps1
 
     pytest --collect-only
 
-For a single test file:
+To run a single test file:
+
+.. code-block:: ps1
 
     pytest tests/test_snippets.py
 
-Lark Update
------------
+To also include doctests:
 
-To update from master. https://github.com/erezsh/lark/
+.. code-block:: ps1
 
-.. code-block:: bat
-
-    pip install git+git://github.com/lark-parser/lark@master -U
+    pytest --doctest-modules --ignore=./docs/examples/pretty_printing.py
 
 Linting
 -------
 
-.. code-block:: bat
+.. code-block:: ps1
 
-    flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests --exclude=*/basemaps/*,*/ms-ogc-workshop/*
-    flake8 mappyfile --max-line-length=120
-    flake8 docs/scripts --max-line-length=120
+    flake8 .
 
 Or to export to file:
 
-.. code-block:: bat
+.. code-block:: ps1
 
-    flake8 --ignore=E501,E121,E122,E123,E126,E127,E128 tests > D:\Temp\lint.txt
-    flake8 mappyfile --max-line-length=120 > D:\Temp\lint.txt
+    flake8 . > D:\Temp\lint.txt
 
 Prospector
 ----------
 
-.. code-block:: bat
+.. code-block:: ps1
 
-    prospector > prospector.log
+    pip install prospector
+    prospector
+    # or just the main source code folder
+    prospector ./mappyfile
+
+Mypy
+----
+
+To run static type checking:
+
+.. code-block:: ps1
+
+    mypy mappyfile tests
+
 
 Documentation
 -------------
 
 To build the Sphinx documentation:
 
-.. code-block:: bat
+.. code-block:: ps1
 
-    cd /D %MAPPYFILE_PATH%\docs
+    cd $MAPPYFILE_PATH/docs
     pip install sphinx -U
-    make.bat html
+    .\make.bat html
     "_build/html/index.html"
 
+Alternatively:
+
+.. code-block:: ps1
+
+    sphinx-build -b html "$MAPPYFILE_PATH\docs" "$MAPPYFILE_PATH\_build"
+    # to force a rebuild of all files
+    sphinx-build -a -E -b html "$MAPPYFILE_PATH\docs" "$MAPPYFILE_PATH\_build"
+
+To run in a local browser:
+
+.. code-block:: ps1
+
+    .$VIRTUALENV\Scripts\activate.ps1
+    C:\Python310\python -m http.server --directory="$MAPPYFILE_PATH\_build" 57921
+
+    # open browser and go to http://localhost:57921

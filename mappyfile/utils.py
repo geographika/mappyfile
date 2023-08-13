@@ -31,7 +31,7 @@ from __future__ import annotations
 import codecs
 import warnings
 import functools
-from collections import OrderedDict
+from mappyfile.ordereddict import DefaultOrderedDict
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
@@ -708,23 +708,23 @@ def update(d1: dict, d2: dict, overwrite: bool = True) -> dict:
 
 def validate(d: dict, version: (float | None) = None) -> list:
     """
-     Validate a mappyfile dictionary by using the Mapfile schema.
-     An optional version number can be used to specify a specific
-     a Mapfile is valid for a specific MapServer version.
+    Validate a mappyfile dictionary by using the Mapfile schema.
+    An optional version number can be used to specify a specific
+    a Mapfile is valid for a specific MapServer version.
 
-     Parameters
-     ----------
+    Parameters
+    ----------
 
      d: dict
-         A Python dictionary based on the the mappyfile schema
+        A Python dictionary based on the the mappyfile schema
     version: float
-         The MapServer version number used to validate the Mapfile
+        The MapServer version number used to validate the Mapfile
 
-     Returns
-     -------
+    Returns
+    -------
 
-     list
-           A list containing validation errors
+    list
+        A list containing validation errors
 
     """
     v = Validator()
@@ -760,7 +760,7 @@ def _pprint(
     return pp.pprint(d)
 
 
-def create(type, version=None):
+def create(type, version=None) -> dict:
     """
     Create a new mappyfile object, using MapServer defaults (if any).
 
@@ -785,7 +785,7 @@ def create(type, version=None):
     except IOError:
         raise SyntaxError("The mappyfile type '{}' does not exist!".format(type))
 
-    d = OrderedDict()
+    d = DefaultOrderedDict()
     d["__type__"] = type
 
     properties = sorted(schema["properties"].items())

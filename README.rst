@@ -31,6 +31,10 @@ mappyfile is available on `PyPI <https://pypi.org/project/mappyfile/>`_ (the Pyt
 This will also install its required dependencies - `Lark <https://github.com/lark-parser/lark>`__, and 
 `jsonschema <https://github.com/python-jsonschema/jsonschema>`_. 
 
+.. code-block:: console
+
+    pip install mappyfile[lark_cython]
+
 Documentation
 -------------
 
@@ -98,17 +102,14 @@ Contributors
 * Ian Turton `@ianturton <https://github.com/ianturton>`_
 * `@thorag76 <https://github.com/thorag76>`_
 
-..
-    .. include:: docs/HISTORY.rst
-
 .. |Version| image:: https://img.shields.io/pypi/v/mappyfile.svg
    :target: https://pypi.python.org/pypi/mappyfile
 
 .. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat
    :target: http://mappyfile.readthedocs.io/en/latest/
 
-.. |Build Status| image:: https://travis-ci.org/geographika/mappyfile.svg?branch=master
-   :target: https://travis-ci.org/geographika/mappyfile
+.. |Build Status| image:: https://github.com/geographika/mappyfile/actions/workflows/main.yml/badge.svg
+   :target: https://github.com/geographika/mappyfile/actions/workflows/main.yml
 
 .. |Appveyor Build Status| image:: https://ci.appveyor.com/api/projects/status/mk33l07478gfytwh?svg=true
    :target: https://ci.appveyor.com/project/SethG/mappyfile

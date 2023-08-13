@@ -1,6 +1,39 @@
 Releases
 --------
 
+1.0.0 13/08/2023
+++++++++++++++++
+
++ All mappyfile dicts now have human readable output when displayed as a string:
+
+  .. code-block:: python
+
+    mf = mappyfile.open("./docs/examples/before.map")
+    print(mf)
+
+    # previous output
+    # DefaultOrderedDict(<class 'mappyfile.ordereddict.CaseInsensitiveOrderedDict'>, CaseInsensitiveOrderedDict([('__type__', 'map'),..
+
+    # new output
+    {
+        "__type__": "map",
+        "layers": [
+            {
+                "__type__": "layer",
+                "name": "Layer1",
+                "type": "POLYGON"
+            },
+
+Resolution of long-standing parsing issues, and all msautotest examples are now passed successfully:
+
++ `#48 <https://github.com/geographika/mappyfile/issues/48>`_ - SYMBOL ambiguity
++ `#98 <https://github.com/geographika/mappyfile/issues/98>`_ - Unquoted attribute names fail to parse
+
++ Updating of resolving JSON references due to deprecated ``jsonschema.RefResolver`` - see 
+  `this link <https://python-jsonschema.readthedocs.io/en/v4.18.4/referencing/#resolving-references-from-the-file-system>`_,
+  the associated JSONSchema `pull request <https://github.com/python-jsonschema/jsonschema/pull/1049>`_
+  and the `migration approach <https://python-jsonschema.readthedocs.io/en/stable/referencing/#migrating-from-refresolver>`_.
+
 0.9.7 03/04/2022
 ++++++++++++++++
 
@@ -52,7 +85,6 @@ Releases
 + Add "maxVersion" to ``WEB`` ``LOG``
 + `#120 <https://github.com/geographika/mappyfile/issues/120>`_ - Expression list element with apostrophe throws error
 + `#118 <https://github.com/geographika/mappyfile/issues/118>`_ - LABEL -> FONT and LABEL -> POSITION gives errors in validate when attributes are used
-+ `#114 <https://github.com/geographika/mappyfile/issues/114>`_ - Style OFFSET: mixed attribute and numerical value fail to parse
 
 0.9.1 23/12/2020
 ++++++++++++++++
@@ -60,7 +92,7 @@ Releases
 + Allow any version of lark-parser > 0.9 to be used
 + Fixes for requirements for Python 2.7
 + `#115 <https://github.com/geographika/mappyfile/pull/115>`_ - Fix for issue #109 (OFFSET numeric and attribute pairs)
-+ `#109 <https://github.com/geographika/mappyfile/isses/109>`_ - Style OFFSET: mixed attribute and numerical value fail to parse
++ `#114 <https://github.com/geographika/mappyfile/isses/114>`_ - Style OFFSET: mixed attribute and numerical value fail to parse
 
 0.9.0 14/07/2020
 ++++++++++++++++

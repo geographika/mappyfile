@@ -5,6 +5,11 @@ mappyfile API
 
 This page lists the top-level mappyfile API. 
 
+.. contents::
+    :local:
+    :backlinks: none
+    :depth: 2
+
 .. _mapfile-reader-writer-api:
 
 Mapfile Reader and Writer Functions
@@ -21,6 +26,7 @@ These are functions used to open and write Mapfiles to files and strings.
 + :func:`mappyfile.create`
 
 .. automodule:: mappyfile
+    :noindex:
 
     .. autofunction:: open
 
@@ -48,9 +54,6 @@ These are functions used to open and write Mapfiles to files and strings.
 Dictionary Helper Functions
 ---------------------------
 
-Summary
-+++++++
-
 These are functions to help work with the Mapfile dictionary structure,
 such as finding objects by keys. 
 
@@ -61,6 +64,7 @@ such as finding objects by keys.
 + :func:`mappyfile.update`
 
 .. automodule:: mappyfile
+    :noindex:
 
     .. autofunction:: find
 
@@ -75,16 +79,14 @@ such as finding objects by keys.
 Mapfile Validation Functions
 ----------------------------
 
-Summary
-+++++++
-
 These are functions used to validate Mapfiles, and ensure the match the 
 Mapfile schema. See :ref:`validation-docs` for further details. 
 
 + :func:`mappyfile.validate`
 
-.. automodule:: mappyfile
-
 .. _api-validate:
+
+.. automodule:: mappyfile
+    :noindex:
 
     .. autofunction:: validate
