@@ -1,7 +1,7 @@
-# RUN_PARMS: polygon-as-line-offset.png [SHP2IMG] -m [MAPFILE] -i png -o [RESULT]
-# RUN_PARMS: polygon-as-line-offset.pdf [SHP2IMG] -m [MAPFILE] -i pdf -o [RESULT]
-# RUN_PARMS: polygon-as-line-offset.svg [SHP2IMG] -m [MAPFILE] -i svg -o [RESULT]
-# RUN_PARMS: polygon-as-line-offset.cairo.png [SHP2IMG] -m [MAPFILE] -i cairopng -o [RESULT]
+# RUN_PARMS: polygon-as-line-offset.png [MAP2IMG] -m [MAPFILE] -i png -o [RESULT]
+# RUN_PARMS: polygon-as-line-offset.pdf [MAP2IMG] -m [MAPFILE] -i pdf -o [RESULT]
+# RUN_PARMS: polygon-as-line-offset.svg [MAP2IMG] -m [MAPFILE] -i svg -o [RESULT]
+# RUN_PARMS: polygon-as-line-offset.cairo.png [MAP2IMG] -m [MAPFILE] -i cairopng -o [RESULT]
 #
 #
 # entity-encoded text rendering test.
@@ -44,6 +44,16 @@ LAYER
         OUTLINECOLOR 180 0 0
         WIDTH 1
         GEOMTRANSFORM (buffer([shape], -1))
+    END
+    STYLE
+        OUTLINECOLOR 180 0 180
+        WIDTH 1
+        OFFSET 10 10
+    END
+    STYLE
+        OUTLINECOLOR 180 0 180
+        WIDTH 1
+        OFFSET -10 -10
     END
   END
 END

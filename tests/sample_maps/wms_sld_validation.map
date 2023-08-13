@@ -63,13 +63,14 @@ LAYER
     "init=epsg:3978"
   END
 
-  DUMP TRUE
   CLASSITEM "Name_e"
 
   CLASS
     NAME "Province"
-    COLOR 200 255 0
-    OUTLINECOLOR 120 120 120
+    STYLE
+        COLOR 200 255 0
+        OUTLINECOLOR 120 120 120
+    END
   END
 END # Layer
 
@@ -89,14 +90,16 @@ LAYER
     "init=epsg:3978"
   END
 
-  DUMP TRUE
   LabelItem "Name"
   CLASSITEM "Capital" 
 
   CLASS
     EXPRESSION /./  
-    SYMBOL 2
-    SIZE 8
+    STYLE
+      SYMBOL 2
+      SIZE 8
+      COLOR 0 0 0
+    END
     NAME "Cities"
     LABEL
       COLOR  0 0 0
@@ -107,7 +110,6 @@ LAYER
       PARTIALS FALSE
       OUTLINECOLOR 255 255 255			
     END 
-    COLOR 0 0 0
   END
 END # Layer
 
@@ -125,13 +127,13 @@ LAYER
     "init=epsg:3978"
   END
 
-  DUMP TRUE
-
   CLASSITEM "Name_e"
   CLASS
     NAME "Roads"
-    SYMBOL 0 
-    COLOR 220 0 0
+    STYLE
+      SYMBOL 0 
+      COLOR 220 0 0
+    END
   END
 END # Layer
 
@@ -149,15 +151,12 @@ LAYER
     "init=epsg:3978"
   END
 
-  DUMP TRUE
-
   CLASSITEM "Name_e"
   CLASSGROUP 'style_red'
   CLASS
     GROUP 'style_red'  
     NAME "Roads"  
     STYLE
-      
       COLOR 220 0 0
       WIDTH 16
     END
@@ -167,7 +166,6 @@ LAYER
     GROUP 'style_green' 
      NAME "Roads"   
     STYLE
-     
       COLOR 0 220 0
       WIDTH 8
     END
@@ -177,7 +175,6 @@ LAYER
     GROUP 'style_blue' 
      NAME "Roads"   
     STYLE
-     
       COLOR 0 0 220
       WIDTH 2
     END

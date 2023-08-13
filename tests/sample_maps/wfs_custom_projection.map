@@ -1,0 +1,70 @@
+#
+# Test WFS with a custom projection in a text file
+#
+# REQUIRES: OUTPUT=PNG SUPPORTS=WFS
+#
+#
+# GetFeature
+# RUN_PARMS: wfs_200_getfeature.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=road&srsName=epsg2:42304" > [RESULT_DEVERSION]
+
+MAP
+
+NAME WMS_CUSTOM_PROJECTION
+STATUS ON
+SIZE 400 300
+EXTENT -67.5725 42 -58.9275 48.5
+UNITS DD
+IMAGECOLOR 255 255 255
+SHAPEPATH ./data
+
+OUTPUTFORMAT
+  NAME GDPNG
+  DRIVER "GD/PNG"
+  MIMETYPE "image/png"
+  EXTENSION "png"
+END
+
+WEB
+
+ IMAGEPATH "/tmp/ms_tmp/"
+ IMAGEURL "/ms_tmp/"
+
+  METADATA
+    "wfs_title"		   "Test custom projection wms"
+    "wfs_onlineresource"   "http://localhost/path/to/wms_custom_projection?"
+    "wfs_srs"		   "EPSG:4326 epsg2:42304"
+    "ows_enable_request" "*" 
+  END
+END
+
+PROJECTION
+  "init=epsg:4326"
+END
+
+LAYER
+  NAME road
+  DATA road
+  TEMPLATE "ttt"
+  METADATA
+    "wfs_title"       "road"
+    # add in an additional custom code
+    "wfs_srs" "epsg2:42304 epsg2:3978"
+    "gml_include_items" "all"
+  END
+  TYPE LINE
+  STATUS ON
+  PROJECTION
+	"init=epsg2:42304"
+  END
+
+  CLASSITEM "Name_e"
+  CLASS
+    NAME "Roads"
+    STYLE
+        SYMBOL 0 
+        COLOR 220 0 0
+    END
+  END
+END # Layer
+
+END # Map File

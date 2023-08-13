@@ -1,7 +1,7 @@
-# RUN_PARMS: raster_simple.png [SHP2IMG] -m [MAPFILE] -i png -o [RESULT]
-# RUN_PARMS: raster_simple.pdf [SHP2IMG] -m [MAPFILE] -i pdf -o [RESULT]
-# RUN_PARMS: raster_simple.svg [SHP2IMG] -m [MAPFILE] -i svg -o [RESULT]
-# RUN_PARMS: raster_simple.cairo.png [SHP2IMG] -m [MAPFILE] -i cairopng -o [RESULT]
+# RUN_PARMS: raster_simple.png [MAP2IMG] -m [MAPFILE] -i png -o [RESULT]
+# RUN_PARMS: raster_simple.pdf [MAP2IMG] -m [MAPFILE] -i pdf -o [RESULT]
+# RUN_PARMS: raster_simple.svg [MAP2IMG] -m [MAPFILE] -i svg -o [RESULT]
+# RUN_PARMS: raster_simple.cairo.png [MAP2IMG] -m [MAPFILE] -i cairopng -o [RESULT]
 #
 #
 # Test use of 24bit images with a dummy class used to populate the legend.
@@ -31,6 +31,7 @@ LAYER
   STATUS default
   DATA ../gdal/data/rgba.tif
   PROCESSING "BANDS=1,2,3"
+  PROCESSING "USE_MASK_BAND=NO"
   CLASS
     KEYIMAGE "data/grid.gif"
   END

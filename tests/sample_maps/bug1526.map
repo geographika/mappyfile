@@ -3,7 +3,7 @@
 # processing very very small rectangles in msProjectRect() due to the
 # increment size rounding to zero against the base values.   The output
 # image is not intended to be interesting.  The important thing is that
-# shp2img complete, not hang. 
+# map2img complete, not hang. 
 #
 # REQUIRES: INPUT=SHAPE OUTPUT=PNG SUPPORTS=PROJ
 #
@@ -26,8 +26,10 @@ MAP
       "+proj=latlong +datum=WGS84"
     END
     CLASS
-      OUTLINECOLOR 255 0 0 
-      COLOR 0 255 0 
+      STYLE
+        OUTLINECOLOR 255 0 0 
+        COLOR 0 255 0 
+      END
     END
   END
 END

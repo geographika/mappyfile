@@ -2,7 +2,6 @@ import logging
 import os
 import cProfile
 import glob2
-import json
 import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
@@ -38,7 +37,7 @@ def output(fn):
         try:
             s = mappyfile.utils.dumps(d)
         except Exception:
-            logging.warning(json.dumps(d, indent=4))
+            logging.warning(d)
             logging.warning("%s could not be successfully re-written", fn)
             raise
 

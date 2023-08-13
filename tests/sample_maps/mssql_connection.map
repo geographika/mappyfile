@@ -1,0 +1,4 @@
+  CONNECTIONTYPE PLUGIN
+  PLUGIN "mssql"
+  CONNECTION "SERVER=(local)\SQL2019;DATABASE=msautotest;uid=sa;pwd=Password12!;"
+  STATUS OFF

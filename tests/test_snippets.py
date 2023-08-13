@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import json
 import inspect
 import pytest
 import mappyfile
@@ -25,7 +24,7 @@ def output(s, include_position=True, schema_name="map"):
     ast = p.parse(s)
     logging.debug(ast.pretty())
     d = m.transform(ast)
-    logging.debug(json.dumps(d, indent=4))
+    logging.debug(d)
     v = Validator()
     errors = v.validate(d, schema_name=schema_name)
     logging.error(errors)
@@ -890,20 +889,6 @@ def test_buffer_expression():
     assert output(s, schema_name="style") == exp
 
 
-def test_multiple_layer_data():
-    s = """
-    LAYER
-        TYPE POINT
-        DATA "dataset1"
-        DATA "dataset2"
-    END
-    """
-
-    print(output(s, schema_name="layer"))
-    exp = "LAYER TYPE POINT DATA 'dataset1' DATA 'dataset2' END"
-    assert output(s, schema_name="layer") == exp
-
-
 def test_single_layer_data():
     s = """
     LAYER
@@ -912,8 +897,8 @@ def test_single_layer_data():
     END
     """
     jsn = mappyfile.loads(s)
-    print(json.dumps(jsn, indent=4))
-    jsn["data"][0] = "dataset1"
+    print(jsn)
+    jsn["data"] = "dataset1"
     print(mappyfile.dumps(jsn))
 
     print(output(s, schema_name="layer"))
@@ -1024,6 +1009,20 @@ END"""
     assert output(s, schema_name="leader") == exp
 
 
+@pytest.mark.xfail
+def test_geomtransform_nested_function():
+    s = """
+LAYER
+    NAME 'centerline1'
+    TYPE LINE
+    GEOMTRANSFORM (centerline(densify([shape], 5)))
+END"""
+
+    print(output(s, schema_name="layer"))
+    exp = "LAYER NAME 'centerline1' TYPE LINE GEOMTRANSFORM (centerline(densify([shape],5))) END"
+    assert output(s, schema_name="leader") == exp
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -1037,6 +1036,6 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # test_multiple_compfilters()
-    test_multiple_leader_styles()
+    test_geomtransform_nested_function()
     # run_tests()
     print("Done!")

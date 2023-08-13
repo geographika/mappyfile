@@ -122,7 +122,6 @@ MAXSIZE 5000
 #CONFIG  "MS_ERRORFILE" "stderr"
 
 IMAGETYPE PNG
-TRANSPARENT OFF
 SHAPEPATH "data"
 
 OUTPUTFORMAT
@@ -206,7 +205,6 @@ LAYER
   NAME grey
   TYPE raster
   STATUS ON
-  DUMP TRUE
   TILEINDEX "wcs_index.shp"
   TILEITEM "location"
   MASK "mask"

@@ -2,7 +2,7 @@
 # RUN_PARMS: legend.cairo.png [MAPSERV] QUERY_STRING="map=[MAPFILE]&mode=legend&map.imagetype=cairopng" > [RESULT_DEMIME]
 # RUN_PARMS: legend.svg [MAPSERV] QUERY_STRING="map=[MAPFILE]&mode=legend&map.imagetype=svg" > [RESULT_DEMIME]
 # RUN_PARMS: legend.pdf [MAPSERV] QUERY_STRING="map=[MAPFILE]&mode=legend&map.imagetype=pdf" > [RESULT_DEMIME]
-
+# RUN_PARMS: legend_bad_imagetype.txt [MAPSERV] QUERY_STRING="map=[MAPFILE]&mode=legend&map.imagetype=bogus+image+type" > [RESULT_DEVERSION]
 #
 #
 # legend support.
@@ -112,8 +112,10 @@ LAYER
   STATUS default
   CLASS 
     NAME "line text+shape"
-    COLOR 255 0 0 
-    OUTLINECOLOR 0 0 0
+    STYLE
+        COLOR 255 0 0 
+        OUTLINECOLOR 0 0 0
+    END
     LABEL
       type truetype
       size 9
@@ -123,8 +125,10 @@ LAYER
   END
   CLASS 
     NAME "line labelpnt+shape"
-    COLOR 0 255 0
-    OUTLINECOLOR 0 0 0
+    STYLE
+        COLOR 0 255 0
+        OUTLINECOLOR 0 0 0
+    END
     LABEL
       type truetype
       size 9
@@ -182,8 +186,10 @@ LAYER
   STATUS default
   CLASS 
     NAME "poly text+shape"
-    COLOR 255 0 0 
-    OUTLINECOLOR 0 0 0
+    STYLE
+        COLOR 255 0 0 
+        OUTLINECOLOR 0 0 0
+    END
     LABEL
       type truetype
       size 9
@@ -193,8 +199,10 @@ LAYER
   END
   CLASS 
     NAME "poly labelpnt+shape"
-    COLOR 0 255 0
-    OUTLINECOLOR 0 0 0
+    STYLE
+        COLOR 0 255 0
+        OUTLINECOLOR 0 0 0
+    END
     LABEL
       type truetype
       size 9

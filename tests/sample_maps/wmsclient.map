@@ -27,13 +27,13 @@ LAYER
   STATUS DEFAULT
   DEBUG 1
   #CONNECTION "http://mstest.tiles.osgeo.org/wms/vmap0?"
-  CONNECTION "http://demo.mapserver.org/cgi-bin/mapserv?map=/osgeo/mapserver/msautotest/world/world.map&"
+  CONNECTION "https://demo.mapserver.org/cgi-bin/msautotest?"
   CONNECTIONTYPE WMS
   METADATA
     "wms_srs"             "EPSG:4326"
     "wms_name"            "world_merc"
     "wms_server_version"  "1.1.1"
-    "wms_format"          "image/gif"
+    "wms_format"          "image/png"
   END
 END
 

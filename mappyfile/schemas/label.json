@@ -270,7 +270,7 @@
       "default": 1,
       "minimum": 1,
       "maximum": 10,
-      "oneOf": [
+      "anyOf": [
         {
           "type": "integer"
         },

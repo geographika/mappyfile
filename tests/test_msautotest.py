@@ -1,13 +1,19 @@
-"""
+r"""
 Parse all the test Mapfiles in msautotests, write them to a new file,
 and then test that these also parse correctly
+
+Setup instructions:
+
+- clone the MapServer repository https://github.com/mapserver/mapserver
+- point the ``fld`` variable at the bottom of this file to the location of msautotest
+- if requried set the ``create_new_copy`` to True on the first run to avoid modifying the original files
+
+Check the WARNING output for parsing errors
 """
 import os
 import logging
 import glob
 import shutil
-import json
-
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
@@ -61,26 +67,11 @@ def main(msautotest_fld, create_new_copy=True):
     transformer = MapfileToDict()
     pp = PrettyPrinter()
 
-    # these two maps aren't in utf8
-    # see https://github.com/mapserver/mapserver/pull/5460
-    # ignore_list = ["wms_inspire_scenario1.map","wms_inspire_scenario2.map"]
-
-    # transparent_layer.map has an extra END, see https://github.com/mapserver/mapserver/pull/5468
-    # polyline_no_clip.map needs symbol names in quotes, and SYMBOL is ambiguous
-
-    ignore_list = [
-        "polyline_no_clip.map",
-        "poly-label-multiline-pos-auto.map",
-        "poly-label-pos-auto.map",
-        "embed_sb_rgba.map",
-        "embed_sb_rgba_offset.map",
-    ]  # has attributes all on the same line
+    # list of Maps we cannot currently parse with mappyfile
+    ignore_list = ["centerline.map"]
 
     mapfiles = glob.glob(msautotest_fld + "/**/*.map")
     mapfiles = [f for f in mapfiles if os.path.basename(f) not in ignore_list]
-
-    # target_map = "polyline_no_clip.map"
-    # mapfiles = [f for f in mapfiles if os.path.basename(f) in (target_map)]
 
     v = Validator()
 
@@ -94,21 +85,22 @@ def main(msautotest_fld, create_new_copy=True):
         try:
             mappyfile.save(d, output_file)
         except Exception:
-            logging.warning(json.dumps(d, indent=4))
+            logging.warning(d)
             logging.warning("%s could not be successfully re-written", fn)
             raise
 
         # now try reading it again
-        # print(json.dumps(d, indent=4))
+        # print(d)
         d = parse_mapfile(parser, transformer, pp, output_file)
 
         errors = v.validate(d, add_comments=True)
         if errors:
             logging.warning("{} failed validation".format(fn))
+            logging.warning(errors)
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.WARNING)
     fld = r"D:\GitHub\mapserver\msautotest"
     main(fld, create_new_copy=False)
     print("Done!")
