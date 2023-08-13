@@ -11,7 +11,6 @@ import collections
 import pytest
 from mappyfile.parser import Parser
 from mappyfile.pprint import PrettyPrinter
-from mappyfile.quoter import Quoter
 from mappyfile.transformer import MapfileToDict
 from mappyfile.ordereddict import DefaultOrderedDict
 import mappyfile
@@ -39,20 +38,6 @@ def test_nested_quotes():
         '<SrcDataSource relativeToVRT="0">data/shppoly</SrcDataSource><SrcLayer>poly</SrcLayer></OGRVRTLayer></OGRVRTDataSource>" END'
     )
     assert res == exp
-
-
-def test_standardise_quotes():
-    v = '"the_geom from (select * from road where "name_e"=\'Trans-Canada Highway\' order by gid) as foo using unique gid using srid=3978"'
-
-    q = Quoter(quote='"')
-    v2 = q.standardise_quotes(v)
-    exp = r'''"the_geom from (select * from road where \"name_e\"='Trans-Canada Highway' order by gid) as foo using unique gid using srid=3978"'''
-    assert v2 == exp
-
-    q = Quoter(quote="'")
-    v2 = q.standardise_quotes(v)
-    exp = r"""'the_geom from (select * from road where "name_e"=\'Trans-Canada Highway\' order by gid) as foo using unique gid using srid=3978'"""
-    assert v2 == exp
 
 
 def test_already_escaped():

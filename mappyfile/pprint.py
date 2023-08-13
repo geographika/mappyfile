@@ -39,7 +39,7 @@ from mappyfile.tokens import (
 )
 from mappyfile.validator import Validator
 from mappyfile.quoter import Quoter
-import mappyfile as utils
+from mappyfile import dictutils
 from typing import Any
 
 
@@ -124,7 +124,7 @@ class PrettyPrinter:
             return
         for key in list(composite.keys()):
             if self.is_complex_type(composite, key, level):
-                utils.dict_move_to_end(composite, key)
+                dictutils.dict_move_to_end(composite, key)
 
     def whitespace(self, level: int, indent: int) -> str:
         return self.spacer * (level + indent)

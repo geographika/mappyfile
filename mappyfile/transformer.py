@@ -230,7 +230,8 @@ class MapfileTransformer(Transformer):
 
                         def depth(iterable):
                             return (
-                                isinstance(iterable, (tuple, list)) and max(map(depth, iterable)) + 1
+                                isinstance(iterable, (tuple, list))
+                                and max(map(depth, iterable)) + 1
                             )
 
                         if depth(existing_points) == 2:

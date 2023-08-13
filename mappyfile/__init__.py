@@ -37,16 +37,22 @@ from types import ModuleType
 # pylint: disable=redefined-builtin
 from mappyfile.utils import (
     open,
+    create,
     load,
     loads,
-    find,
-    findall,
-    findunique,
     dumps,
     dump,
     save,
+    validate,
 )
-from mappyfile.utils import findkey, update, validate, create, dict_move_to_end
+from mappyfile.dictutils import (
+    find,
+    findall,
+    findkey,
+    findunique,
+    update,
+    dict_move_to_end,
+)
 
 __version__ = "0.9.7"
 
