@@ -35,7 +35,7 @@ import logging
 import json
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileTransformer
-from mappyfile.pprint import Quoter
+from mappyfile.quoter import Quoter
 import xmltodict
 
 

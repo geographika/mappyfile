@@ -40,6 +40,9 @@ from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
 from .parser import lark_cython
 from typing import Any
+from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
+from mappyfile.ordereddict import CaseInsensitiveOrderedDict
+from mappyfile.quoter import Quoter
 
 
 if lark_cython:
@@ -56,15 +59,10 @@ else:
         return t
 
 
-from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
-from mappyfile.ordereddict import CaseInsensitiveOrderedDict
-from mappyfile.pprint import Quoter
-
-
 log = logging.getLogger("mappyfile")
 
 
-class MapfileTransformer(Transformer, object):
+class MapfileTransformer(Transformer):
     def __init__(self, include_position: bool = False, include_comments: bool = False):
         self.quoter = Quoter()
         self.include_position = include_position
@@ -96,8 +94,8 @@ class MapfileTransformer(Transformer, object):
         # several CLASSes)
         if len(composites) == 1:
             return composites[0]
-        else:
-            return composites
+
+        return composites
 
     def get_position_dict(self, d: dict) -> dict:
         if "__position__" in d:
@@ -128,8 +126,8 @@ class MapfileTransformer(Transformer, object):
     def plural(self, s: str) -> str:
         if s.endswith("s"):
             return s + "es"
-        else:
-            return s + "s"
+
+        return s + "s"
 
     def create_position_dict(self, key_token, values) -> dict:
         line, column = key_token.line, key_token.column
@@ -230,9 +228,9 @@ class MapfileTransformer(Transformer, object):
                         # allow for multipart features in a nested list
                         existing_points = composite_dict[key_name]
 
-                        def depth(L):
+                        def depth(iterable):
                             return (
-                                isinstance(L, (tuple, list)) and max(map(depth, L)) + 1
+                                isinstance(iterable, (tuple, list)) and max(map(depth, iterable)) + 1
                             )
 
                         if depth(existing_points) == 2:
@@ -316,7 +314,7 @@ class MapfileTransformer(Transformer, object):
             else:
                 # list of values
                 values = [v.value for v in value_tokens]  # type: ignore
-                d["__tokens__"] = [key_token] + [t for t in value_tokens]
+                d["__tokens__"] = [key_token] + list(value_tokens)
         else:
             # single value
             value_token = value_tokens[0]
@@ -374,9 +372,10 @@ class MapfileTransformer(Transformer, object):
 
             if k in d.keys():
                 log.warning(
-                    "A duplicate key ({}) was found in {}. Only the last value ({}) will be used. ".format(
-                        k, type_, v
-                    )
+                    "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
+                    k,
+                    type_,
+                    v,
                 )
 
             d[k] = v
@@ -428,7 +427,7 @@ class MapfileTransformer(Transformer, object):
         return self.process_value_pairs(tokens, "validation")
 
     def projection(self, tokens):
-        key, body = self.check_composite_tokens("projection", tokens)
+        _, body = self.check_composite_tokens("projection", tokens)
         projection_strings = [self.clean_string(v.value) for v in body]
 
         key_token = tokens[0]
@@ -439,7 +438,7 @@ class MapfileTransformer(Transformer, object):
         return self.attr(tokens)
 
     def process_pair_lists(self, key_name, tokens):
-        key, body = self.check_composite_tokens(key_name, tokens)
+        _, body = self.check_composite_tokens(key_name, tokens)
         pairs = [(v[0].value, v[1].value) for v in body]
 
         key_token = tokens[0]
@@ -462,18 +461,18 @@ class MapfileTransformer(Transformer, object):
         parts = [str(p.value) for p in t]
         v = " ".join(parts)
 
-        v = "( {} )".format(v)
+        v = f"( {v} )"
         t[0].value = v
         return t[0]
 
     def and_test(self, t):
         assert len(t) == 2
-        t[0].value = "( {} AND {} )".format(t[0].value, t[1].value)
+        t[0].value = f"( {t[0].value} AND {t[1].value} )"
         return t[0]
 
     def or_test(self, t):
         assert len(t) == 2
-        t[0].value = "( {} OR {} )".format(t[0].value, t[1].value)
+        t[0].value = f"( {t[0].value} OR {t[1].value} )"
         return t[0]
 
     def compare_op(self, t):
@@ -482,7 +481,7 @@ class MapfileTransformer(Transformer, object):
 
     def not_expression(self, t):
         v = t[0]
-        v.value = "NOT {}".format(v.value)
+        v.value = f"NOT {v.value}"
         return v
 
     def expression(self, t):
@@ -491,38 +490,38 @@ class MapfileTransformer(Transformer, object):
         )  # convert to string for boolean expressions e.g. (true)
 
         if not self.quoter.in_parenthesis(exp):
-            t[0].value = "({})".format(exp)
+            t[0].value = f"({exp})"
 
         return t[0]
 
     def add(self, t):
         assert len(t) == 2
-        t[0].value = "{} + {}".format(t[0].value, t[1].value)
+        t[0].value = f"{t[0].value} + {t[1].value}"
         return t[0]
 
     def sub(self, t):
         assert len(t) == 2
-        t[0].value = "{} - {}".format(t[0].value, t[1].value)
+        t[0].value = f"{t[0].value} - {t[1].value}"
         return t[0]
 
     def div(self, t):
         assert len(t) == 2
-        t[0].value = "{} / {}".format(t[0].value, t[1].value)
+        t[0].value = f"{t[0].value} / {t[1].value}"
         return t[0]
 
     def mul(self, t):
         assert len(t) == 2
-        t[0].value = "{} * {}".format(t[0].value, t[1].value)
+        t[0].value = f"{t[0].value} * {t[1].value}"
         return t[0]
 
     def power(self, t):
         assert len(t) == 2
-        t[0].value = "{} ^ {}".format(t[0].value, t[1].value)
+        t[0].value = f"{t[0].value} ^ {t[1].value}"
         return t[0]
 
     def neg(self, t):
         assert len(t) == 1
-        t[0].value = "-{}".format(t[0].value)
+        t[0].value = f"-{t[0].value}"
         return t[0]
 
     def runtime_var(self, t):
@@ -544,7 +543,7 @@ class MapfileTransformer(Transformer, object):
         """
         func, params = t
         func_name = func.value
-        func.value = "({}({}))".format(func_name, params)
+        func.value = f"({func_name}({params}))"
         return func
 
     def func_params(self, t):
@@ -554,7 +553,7 @@ class MapfileTransformer(Transformer, object):
     def attr_bind(self, t):
         assert len(t) == 1
         t = t[0]
-        t.value = "[{}]".format(t.value)
+        t.value = f"[{t.value}]"
         return t
 
     def extent(self, t):
@@ -728,23 +727,23 @@ class CommentsTransformer(Transformer_InPlace):
     composite = _save_composite_comments
 
 
-class MapfileToDict(object):
+class MapfileToDict:
     def __init__(
         self,
         include_position=False,
         include_comments=False,
-        transformerClass=MapfileTransformer,
+        transformer_class=MapfileTransformer,
         **kwargs,
     ):
         self.include_position = include_position
         self.include_comments = include_comments
-        self.transformerClass = transformerClass
+        self.transformer_class = transformer_class
         self.kwargs = kwargs
 
     def transform(self, tree):
         tree = Canonize().transform(tree)
 
-        self.mapfile_transformer = self.transformerClass(
+        self.mapfile_transformer = self.transformer_class(
             include_position=self.include_position,
             include_comments=self.include_comments,
             **self.kwargs,

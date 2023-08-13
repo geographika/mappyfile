@@ -80,6 +80,7 @@ def main(ctx, verbose, quiet):
     ctx.obj["verbosity"] = verbosity
 
 
+# pylint: disable=redefined-builtin
 @main.command(short_help="Format a Mapfile")
 @click.argument("input-mapfile", nargs=1, type=click.Path(exists=True))
 @click.argument("output-mapfile", nargs=1, type=click.Path())
@@ -117,8 +118,9 @@ def main(ctx, verbose, quiet):
     help="Keep Mapfile comments in the output (experimental)",
 )  # noqa
 @click.pass_context
+# pylint: disable=too-many-arguments
 def format(
-    ctx,
+    _,
     input_mapfile,
     output_mapfile,
     indent,
@@ -178,12 +180,12 @@ def format(
 )  # noqa
 @click.option(
     "--version",
-    default=7.6,
+    default=8.2,
     show_default=True,
     help="The MapServer version number used to validate the Mapfile",
 )  # noqa
 @click.pass_context
-def validate(ctx, mapfiles, expand, version):
+def validate(_, mapfiles, expand, version):
     """
     Validate Mapfile(s) against the Mapfile schema
 
@@ -204,9 +206,7 @@ def validate(ctx, mapfiles, expand, version):
     all_mapfiles = get_mapfiles(mapfiles)
 
     if len(all_mapfiles) == 0:
-        click.echo(
-            "No Mapfiles found at the following paths: {}".format(",".join(mapfiles))
-        )
+        click.echo(f"No Mapfiles found at the following paths: {','.join(mapfiles)}")
         return
 
     validation_count = 0
@@ -218,26 +218,25 @@ def validate(ctx, mapfiles, expand, version):
             d = mappyfile.open(fn, expand_includes=expand, include_position=True)
         except Exception as ex:
             logger.exception(ex)
-            click.echo("{} failed to parse successfully".format(fn))
+            click.echo(f"{fn} failed to parse successfully")
             continue
 
         validation_messages = mappyfile.validate(d, version)
         if validation_messages:
             for v in validation_messages:
                 v["fn"] = fn
+                # pylint: disable=consider-using-f-string
                 msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(
                     **v
                 )
                 click.echo(msg)
                 errors += 1
         else:
-            click.echo("{} validated successfully".format(fn))
+            click.echo(f"{fn} validated successfully")
             validation_count += 1
 
     click.echo(
-        "{} file(s) validated ({} successfully)".format(
-            len(all_mapfiles), validation_count
-        )
+        f"{len(all_mapfiles)} file(s) validated ({validation_count} successfully)"
     )
     sys.exit(errors)
 
@@ -250,7 +249,7 @@ def validate(ctx, mapfiles, expand, version):
     help="The MapServer version number used to validate the Mapfile",
 )  # noqa
 @click.pass_context
-def schema(ctx, output_file, version=None):
+def schema(_, output_file, version=None):
     """
     Save the Mapfile schema to a file. Set the version parameter to output a specific version.
     Note output-file will be overwritten if it already exists.

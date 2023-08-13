@@ -10,7 +10,8 @@ import json
 import collections
 import pytest
 from mappyfile.parser import Parser
-from mappyfile.pprint import PrettyPrinter, Quoter
+from mappyfile.pprint import PrettyPrinter
+from mappyfile.quoter import Quoter
 from mappyfile.transformer import MapfileToDict
 from mappyfile.ordereddict import DefaultOrderedDict
 import mappyfile

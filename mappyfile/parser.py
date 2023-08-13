@@ -52,17 +52,14 @@ SYMBOL_ATTRIBUTES = {
     "NAME",
     "COLOR",
     "TYPE",
-    "FONT",
     "CHARACTER",
     "POINTS",
     "TRANSPARENT",
 }
 
 
-class Parser(object):
-    def __init__(
-        self, expand_includes: bool = True, include_comments: bool = False, **kwargs
-    ):
+class Parser:
+    def __init__(self, expand_includes: bool = True, include_comments: bool = False):
         self.expand_includes = expand_includes
         self.include_comments = include_comments
         self._comments: list[Any] = []
@@ -79,7 +76,9 @@ class Parser(object):
                 "COMMENT": self._comments.append,
                 "CCOMMENT": self._comments.append,
             }
-            extra_args.update(dict(propagate_positions=True, lexer_callbacks=callbacks))
+            extra_args.update(
+                {"propagate_positions": True, "lexer_callbacks": callbacks}
+            )
 
         return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
 
@@ -110,7 +109,7 @@ class Parser(object):
         for idx, l in enumerate(lines):
             if l.strip().lower().startswith("include"):
                 if _nested_includes == 5:
-                    raise Exception("Maximum nested include exceeded! (MaxNested=5)")
+                    raise ValueError("Maximum nested include exceeded! (MaxNested=5)")
 
                 inc_file_path = self._get_include_filename(l)
 
@@ -227,7 +226,7 @@ class Parser(object):
             return tree
         except (ParseError, UnexpectedInput) as ex:
             if fn:
-                log.error("Parsing of {} unsuccessful".format(fn))
+                log.error("Parsing of %s unsuccessful", fn)
             else:
                 log.error("Parsing of Mapfile unsuccessful")
             log.info(ex)

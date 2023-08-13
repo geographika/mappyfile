@@ -34,7 +34,7 @@ from collections import OrderedDict
 import logging
 import jsonschema
 import jsonref
-import mappyfile as utils
+from mappyfile import utils
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT4
 from typing import Any
@@ -43,7 +43,7 @@ from typing import Any
 log = logging.getLogger("mappyfile")
 
 
-class Validator(object):
+class Validator:
     def __init__(self):
         self.schemas = {}
         self.expanded_schemas = {}
@@ -63,7 +63,7 @@ class Validator(object):
             schemas_folder = "/" + schemas_folder
 
         host = ""
-        root_schema_path = "file://{}/{}".format(host, schemas_folder) + "/"
+        root_schema_path = f"file://{host}/{schemas_folder}/"
 
         return root_schema_path
 
@@ -81,14 +81,14 @@ class Validator(object):
         schema_file = os.path.join(schemas_folder, schema_name)
 
         if not os.path.isfile(schema_file):
-            raise IOError("The file %s does not exist" % schema_file)
+            raise IOError(f"The file {schema_file} does not exist")
 
         return schema_file
 
     def get_json_from_file(self, schema_name: str):
         if schema_name not in self.schemas:
             schema_file = self.get_schema_file(schema_name)
-            with open(schema_file) as f:
+            with open(schema_file, encoding="utf-8") as f:
                 try:
                     jsn_schema = json.load(f)
                 except ValueError as ex:
@@ -185,13 +185,14 @@ class Validator(object):
     def convert_lowercase(self, x: Any) -> Any:
         if isinstance(x, list):
             return [self.convert_lowercase(v) for v in x]
-        elif isinstance(x, dict):
+
+        if isinstance(x, dict):
             return OrderedDict(
                 (k.lower(), self.convert_lowercase(v)) for k, v in x.items()
             )
-        else:
-            if isinstance(x, (str, bytes)):
-                x = x.lower()
+
+        if isinstance(x, (str, bytes)):
+            x = x.lower()
 
         return x
 
@@ -221,7 +222,7 @@ class Validator(object):
             key = path[-1]
             d = utils.findkey(rootdict, *path[:-1])
 
-        error_message = "ERROR: Invalid value in {}".format(key.upper())
+        error_message = f"ERROR: Invalid value in {key.upper()}"
 
         # add a comment to the dict structure
 
@@ -229,7 +230,7 @@ class Validator(object):
             if "__comments__" not in d:
                 d["__comments__"] = OrderedDict()
 
-            d["__comments__"][key] = "# {}".format(error_message)
+            d["__comments__"][key] = f"# {error_message}"
 
         error_dict = {"error": error.message, "message": error_message}
 
@@ -316,7 +317,7 @@ class Validator(object):
             schemas_folder = self.get_schemas_folder()
             base_uri = self.get_schema_path(schemas_folder)
 
-            with open(fn) as f:
+            with open(fn, encoding="utf-8") as f:
                 jsn_schema = jsonref.load(f, base_uri=base_uri)
 
                 # cache the schema for future use
