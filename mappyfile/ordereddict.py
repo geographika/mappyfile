@@ -48,11 +48,12 @@ class DefaultOrderedDict(OrderedDict):
     Based on: http://code.activestate.com/recipes/523034-emulate-collectionsdefaultdict/
     """
 
-    def __init__(self, default_factory=None, *a, **kw):
+    # pylint: disable=keyword-arg-before-vararg
+    def __init__(self, default_factory=None, *args, **kwargs):
         if default_factory is not None and not callable(default_factory):
             raise TypeError("First argument must be callable")
 
-        OrderedDict.__init__(self, *a, **kw)
+        OrderedDict.__init__(self, *args, **kwargs)
         self.default_factory = default_factory
 
     def __getitem__(self, key):
@@ -82,7 +83,7 @@ class DefaultOrderedDict(OrderedDict):
         return type(self), args, None, None, iter(self.items())
 
     def copy(self):
-        return self.__copy__()
+        return copy.copy(self)
 
     def __copy__(self):
         return type(self)(self.default_factory, self)
@@ -145,4 +146,4 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
     def _convert_keys(self):
         for k in list(self.keys()):
             v = super().pop(k)
-            self.__setitem__(k, v)
+            self[k] = v

@@ -102,17 +102,24 @@ class PrettyPrinter:
         composite.
         """
         length = 0
+
+        ignore_list = (
+            "metadata",
+            "validation",
+            "values",
+            "connectionoptions",
+            "pattern",
+            "projection",
+            "points",
+            "config",
+        )
+
         for attr, value in composite.items():
             attr_length = len(attr)
             if (
                 not self.__is_metadata(attr)
-                and attr
-                not in ("metadata", "validation", "values", "connectionoptions")
+                and attr not in ignore_list
                 and not self.is_hidden_container(attr, value)
-                and not attr == "pattern"
-                and not attr == "projection"
-                and not attr == "points"
-                and not attr == "config"
                 and not self.is_composite(value)
             ):
                 length = max(length, attr_length)

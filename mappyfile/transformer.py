@@ -71,24 +71,11 @@ class MapfileTransformer(Transformer):
     def key_name(self, token) -> str:
         return token.value.lower()
 
-    def start(self, children):
+    def start(self, composites):
         """
         Parses a MapServer Mapfile
         Parsing of partial Mapfiles or lists of composites is also possible
         """
-
-        composites = []
-
-        for composite_dict in children:
-            if False and self.include_position:
-                key_token = composite_dict[1]
-                key_name = key_token.value.lower()
-                composites_position = self.get_position_dict(composite_dict)
-                composites_position[key_name] = self.create_position_dict(
-                    key_token, None
-                )
-
-            composites.append(composite_dict)
 
         # only return a list when there are multiple root composites (e.g.
         # several CLASSes)
@@ -96,14 +83,6 @@ class MapfileTransformer(Transformer):
             return composites[0]
 
         return composites
-
-    def get_position_dict(self, d: dict) -> dict:
-        if "__position__" in d:
-            position_dict = d["__position__"]
-        else:
-            position_dict = d["__position__"] = OrderedDict()
-
-        return position_dict
 
     def flatten(self, values: list[Any]) -> list[Any]:
         flat_list = []
@@ -153,6 +132,64 @@ class MapfileTransformer(Transformer):
     def composite_type(self, t):
         return t
 
+    def _process_composite_config(
+        self,
+        composite_dict: dict,
+        attribute_dict: dict,
+        position_dict: (dict | None),
+        pos: int,
+    ):
+        key_name = "config"
+
+        # there may be several config dicts - one for each setting
+        if key_name not in composite_dict:
+            # create an initial OrderedDict
+            composite_dict[key_name] = CaseInsensitiveOrderedDict(
+                CaseInsensitiveOrderedDict
+            )
+        # populate the existing config dict
+        cfg_dict = composite_dict[key_name]
+        cfg_dict.update(attribute_dict[key_name])
+
+        if position_dict is not None:
+            if key_name not in position_dict:
+                position_dict[key_name] = OrderedDict()
+
+            subkey_name = self.get_single_key(attribute_dict[key_name])
+            position_dict[key_name][subkey_name] = pos
+
+    def _process_composite_points(
+        self,
+        composite_dict: dict,
+        attribute_dict: dict,
+        position_dict: (dict | None),
+        pos: int,
+    ):
+        key_name = "points"
+
+        if key_name not in composite_dict:
+            composite_dict[key_name] = attribute_dict[key_name]
+        else:
+            # if points are already in a feature then
+            # allow for multipart features in a nested list
+            existing_points = composite_dict[key_name]
+
+            if calculate_depth(existing_points) == 2:
+                composite_dict[key_name] = [existing_points]
+
+            if key_name not in composite_dict:
+                composite_dict[key_name] = []
+            composite_dict[key_name].append(attribute_dict[key_name])
+
+        if position_dict is not None:
+            if key_name not in position_dict:
+                position_dict[key_name] = pos
+            else:
+                existing_pos = position_dict[key_name]
+                if isinstance(existing_pos, dict):
+                    position_dict[key_name] = [existing_pos]
+                position_dict[key_name].append(pos)
+
     def composite(self, t):
         """
         Handle the composite types e.g. CLASS..END
@@ -174,8 +211,10 @@ class MapfileTransformer(Transformer):
         composite_dict["__type__"] = key_name
 
         if self.include_position:
-            pd = self.create_position_dict(key_token, None)
-            composite_dict["__position__"] = pd
+            position_dict = self.create_position_dict(key_token, None)
+            composite_dict["__position__"] = position_dict
+        else:
+            position_dict = None
 
         if self.include_comments:
             comments_dict = composite_dict["__comments__"] = OrderedDict()
@@ -203,69 +242,28 @@ class MapfileTransformer(Transformer):
                 key_name = self.get_single_key(d)
 
                 if key_name == "config":
-                    # there may be several config dicts - one for each setting
-                    if key_name not in composite_dict:
-                        # create an initial OrderedDict
-                        composite_dict[key_name] = CaseInsensitiveOrderedDict(
-                            CaseInsensitiveOrderedDict
-                        )
-                    # populate the existing config dict
-                    cfg_dict = composite_dict[key_name]
-                    cfg_dict.update(d[key_name])
-
-                    if self.include_position:
-                        if key_name not in pd:
-                            pd[key_name] = OrderedDict()
-
-                        subkey_name = self.get_single_key(d[key_name])
-                        pd[key_name][subkey_name] = pos
-
+                    self._process_composite_config(
+                        composite_dict, d, position_dict, pos
+                    )
                 elif key_name == "points":
-                    if key_name not in composite_dict:
-                        composite_dict[key_name] = d[key_name]
-                    else:
-                        # if points are already in a feature then
-                        # allow for multipart features in a nested list
-                        existing_points = composite_dict[key_name]
-
-                        def depth(iterable):
-                            return (
-                                isinstance(iterable, (tuple, list))
-                                and max(map(depth, iterable)) + 1
-                            )
-
-                        if depth(existing_points) == 2:
-                            composite_dict[key_name] = [existing_points]
-
-                        if key_name not in composite_dict:
-                            composite_dict[key_name] = []
-                        composite_dict[key_name].append(d[key_name])
-
-                    if self.include_position:
-                        if key_name not in pd:
-                            pd[key_name] = pos
-                        else:
-                            existing_pos = pd[key_name]
-                            if isinstance(existing_pos, dict):
-                                pd[key_name] = [existing_pos]
-                            pd[key_name].append(pos)
-
+                    self._process_composite_points(
+                        composite_dict, d, position_dict, pos
+                    )
                 elif key_name in REPEATED_KEYS:
                     if key_name not in composite_dict:
                         composite_dict[key_name] = []
 
                     composite_dict[key_name].append(d[key_name])
 
-                    if self.include_position:
-                        if key_name not in pd:
-                            pd[key_name] = []
-                        pd[key_name].append(pos)
-
+                    if position_dict:
+                        if key_name not in position_dict:
+                            position_dict[key_name] = []
+                        position_dict[key_name].append(pos)
                 else:
                     assert len(d.items()) == 1
-                    if self.include_position:
+                    if position_dict:
                         # hoist position details to composite
-                        pd[key_name] = pos
+                        position_dict[key_name] = pos
                     if self.include_comments and comments:
                         # hoist comments to composite
                         comments_dict[key_name] = comments
@@ -765,3 +763,12 @@ class Canonize(Transformer_InPlace):
         tree.data = "composite"
         tree.children.insert(0, composite_type)
         return tree
+
+
+def calculate_depth(iterable):
+    """
+    A helper function to get the max length + 1 in a list of lists
+    """
+    return (
+        isinstance(iterable, (tuple, list)) and max(map(calculate_depth, iterable)) + 1
+    )
