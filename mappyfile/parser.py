@@ -35,13 +35,22 @@ from lark import Lark, ParseError, Tree, UnexpectedInput
 from typing import Any, IO
 
 
-try:
-    import lark_cython
-except ImportError:
-    lark_cython = None
-
-
 log = logging.getLogger("mappyfile")
+
+
+def string_to_boolean(string_value: str):
+    return string_value.lower() not in ("false", "no", "0", "off")
+
+
+use_cython = string_to_boolean(os.environ.get("MAPPYFILE_USE_CYTHON", "True"))
+lark_cython = None
+
+if use_cython:
+    try:
+        import lark_cython
+    except ImportError:
+        pass
+
 
 SYMBOL_ATTRIBUTES = {
     "ANCHORPOINT",
