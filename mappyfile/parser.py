@@ -47,7 +47,7 @@ lark_cython = None
 
 if use_cython:
     try:
-        import lark_cython
+        import lark_cython  # type: ignore
     except ImportError:
         pass
 
