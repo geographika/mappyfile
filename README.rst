@@ -31,9 +31,19 @@ mappyfile is available on `PyPI <https://pypi.org/project/mappyfile/>`_ (the Pyt
 This will also install its required dependencies - `Lark <https://github.com/lark-parser/lark>`__, and 
 `jsonschema <https://github.com/python-jsonschema/jsonschema>`_. 
 
+To install the optional `lark-cython <https://github.com/lark-parser/lark_cython>`_ library
+for better performance on CPython you can run the following command:
+
 .. code-block:: console
 
     pip install mappyfile[lark_cython]
+
+mappyfile is also available on `conda <https://anaconda.org/conda-forge/mappyfile>`_. Install as
+follows:
+
+.. code-block:: console
+
+    conda install -c conda-forge mappyfile
 
 Documentation
 -------------
@@ -101,6 +111,7 @@ Contributors
 * Loïc Gasser `@loicgasser <https://github.com/loicgasser>`_
 * Ian Turton `@ianturton <https://github.com/ianturton>`_
 * `@thorag76 <https://github.com/thorag76>`_
+* TC Haddad `@tchaddad <https://github.com/tchaddad>`_ (Conda support)
 
 .. |Version| image:: https://img.shields.io/pypi/v/mappyfile.svg
    :target: https://pypi.python.org/pypi/mappyfile

@@ -3,7 +3,6 @@
 
 A Python library to create, parse, modify, and format `MapServer <http://mapserver.org/documentation.html>`_ Mapfiles. 
 
-+ Python 2 and 3 compatible
 + Pure Python - no MapServer dependencies
 + Open Source License (MIT)
 
@@ -30,8 +29,64 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     api/main.rst
     testing.rst
     development.rst
+    HISTORY.rst
 
 .. image:: images/class_parsed.png
+
+Installation
+------------
+
+mappyfile is available on `PyPI <https://pypi.org/project/mappyfile/>`_ (the Python Package Index), and can be installed using pip:
+
+.. code-block:: console
+
+    pip install mappyfile
+
+This will also install its required dependencies - `Lark <https://github.com/lark-parser/lark>`__, and 
+`jsonschema <https://github.com/python-jsonschema/jsonschema>`_. 
+
+To install the optional `lark-cython <https://github.com/lark-parser/lark_cython>`_ library
+for better performance on CPython you can run the following command:
+
+.. code-block:: console
+
+    pip install mappyfile[lark_cython]
+
+If lark-cython is installed it will be used automatically. If it is installed and you want to disable its
+use in mappyfile you can set the ``MAPPYFILE_USE_CYTHON`` to ``False`` (or any falsy value). 
+
+.. code-block:: console
+
+    # Linux
+    export MAPPYFILE_USE_CYTHON="False"
+
+    # Windows PowerShell
+    $env:MAPPYFILE_USE_CYTHON="False"
+
+    # Windows Command Line
+    set MAPPYFILE_USE_CYTHON=False
+
+mappyfile is also available on `conda <https://anaconda.org/conda-forge/mappyfile>`_. Install as
+follows:
+
+.. code-block:: console
+
+    conda install -c conda-forge mappyfile
+
+To setup a Conda environment containing mappyfile from scratch on Windows download
+`Miniconda3 Windows 64-bit <https://conda.io/projects/conda/en/latest/user-guide/install/windows.html>`_
+and run the following commands:
+
+.. code-block:: console
+
+    conda create --name mappyfile-env
+    conda activate mappyfile-env
+
+    conda config --add channels conda-forge
+    conda config --set channel_priority strict
+    conda install mappyfile --yes
+
+    mappyfile --help
 
 What is mappyfile?
 ------------------
@@ -169,8 +224,6 @@ Future development plans, leading to a v1.0 release include:
 + Add a plugins page to the docs
 + Add an example of creating Mapfiles using YAML
 + Create a new ``prune`` function to remove redundant default settings from a Mapfile
-
-.. include:: HISTORY.rst
 
 
 .. _Stop using MapScript: https://sgillies.net/2006/11/29/stop-using-mapscript.html
