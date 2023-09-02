@@ -1,5 +1,4 @@
 import logging
-import os
 import tempfile
 from mappyfile import cli
 import pytest
