@@ -6,11 +6,11 @@
 MS RFC 123: Mapfile JSON Schema
 =========================================================================
 
-:Date:  2018/03
+:Date:  2023/08
 :Author: Seth Girvin
 :Contact: sethg@geographika.co.uk
 :Status: Proposed
-:Version: MapServer 7.4
+:Version: MapServer 8.4
 
 1. Introduction and Background
 ==============================

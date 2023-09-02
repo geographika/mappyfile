@@ -37,6 +37,25 @@ Resolution of long-standing parsing issues, and all msautotest examples are now 
   the associated JSONSchema `pull request <https://github.com/python-jsonschema/jsonschema/pull/1049>`_
   and the `migration approach <https://python-jsonschema.readthedocs.io/en/stable/referencing/#migrating-from-refresolver>`_.
 
+- **Breaking API Change** - in the ``MapfileToDict`` class the parameter ``transformerClass`` has been renamed ``transformer_class``.
+  An example of how to fix this is shown below:
+
+  .. code-block:: python
+
+    from mappyfile.transformer import MapfileToDict
+    from mappyfile_colors import ColorsTransformer
+
+    m = MapfileToDict(
+        include_position=True,
+        include_comments=True,
+        # replace the following parameter
+        # transformerClass=ColorsTransformer,
+        transformer_class=ColorsTransformer,
+        conversion_type=None,
+        include_color_names=True,
+    )
+
+
 0.9.7 03/04/2022
 ++++++++++++++++
 

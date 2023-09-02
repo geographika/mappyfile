@@ -1,30 +1,10 @@
+.. _editing:
+
 Editing a Mapfile
 =================
 
-Data Clauses
-------------
-
-Some Mapfile keywords can be repeated several times within the same parent block. These 
-keywords are ``PROCESSING``, ``FORMATOPTION``, ``INCLUDE``, and ``DATA``. 
-
-MS RFC 86: Scale-dependant String Substitutions
-
-.. code-block:: mapfile
-
-    LAYER
-      SCALETOKEN
-        NAME "%priority%"
-        VALUES
-          "0" "1"
-          "1000" "2"
-          "10000" "3"
-        END
-      END
-      DATA "the_geom from mytable_%priority%"  #data comes from a specific table
-      DATA "/path/to/roads_%priority%.shp"  #data comes from a specific shapefile
-      DATA "the_geom_%priority% from roads" #data comes from a specific column in the table
-      DATA "the_geom_%priority% from (select * from roads where priority > %priority%) as foo" #data is filtered
-    END
+This page gives an overview of how a Mapfile that has been :ref:`transformed <transformer>` into a mappyfile Python
+dictionary can be edited. Example of using mappyfile and MapServer Python MapScript are provided side-by-side.
 
 Converting from MapScript
 -------------------------
@@ -47,7 +27,8 @@ with mappyfile.
     # mapscript - standard MapScript API
     mymap.setMetaData("ows_title", "My WMS Map")
 
-    # mapscript - new hash table API - added as a convenience to the Python MapScript bindings only
+    # mapscript - new hash table API - added as a convenience 
+    # to the Python MapScript bindings only
     mymap["metadata"]["ows_title"] = "My WMS Map"
 
     # mappyfile
