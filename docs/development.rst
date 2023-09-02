@@ -31,6 +31,8 @@ Run from the root of the mappyfile project folder:
     cd $MAPPYFILE_PATH
     pip install -e .
     pip install -r requirements-dev.txt
+    # optionally install lark_cython
+    pip install -e .[lark_cython]
 
 Testing Locally
 ---------------

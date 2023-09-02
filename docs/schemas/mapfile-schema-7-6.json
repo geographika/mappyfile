@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "additionalProperties": false,
     "patternProperties": {
         "^__[a-z]+__$": {}
@@ -449,7 +449,7 @@
                                             },
                                             "maxoverlapangle": {
                                                 "default": 22.5,
-                                                "maximum": 0,
+                                                "maximum": 360,
                                                 "metadata": {
                                                     "minVersion": 6.0
                                                 },
@@ -595,13 +595,7 @@
                                                 ]
                                             },
                                             "priority": {
-                                                "default": 1,
-                                                "maximum": 10,
-                                                "metadata": {
-                                                    "minVersion": 5.0
-                                                },
-                                                "minimum": 1,
-                                                "oneOf": [
+                                                "anyOf": [
                                                     {
                                                         "type": "integer"
                                                     },
@@ -610,7 +604,13 @@
                                                         "pattern": "^\\[(.*?)\\]$",
                                                         "type": "string"
                                                     }
-                                                ]
+                                                ],
+                                                "default": 1,
+                                                "maximum": 10,
+                                                "metadata": {
+                                                    "minVersion": 5.0
+                                                },
+                                                "minimum": 1
                                             },
                                             "repeatdistance": {
                                                 "default": 0,
@@ -1074,12 +1074,10 @@
                                                             "type": "array"
                                                         },
                                                         "rangeitem": {
-                                                            "description": "attribute",
-                                                            "pattern": "^\\[(.*?)\\]$",
                                                             "type": "string"
                                                         },
                                                         "size": {
-                                                            "oneOf": [
+                                                            "anyOf": [
                                                                 {
                                                                     "exclusiveMinimum": 0,
                                                                     "type": "number"
@@ -1092,7 +1090,8 @@
                                                                     "pattern": "^\\[(.*?)\\]$",
                                                                     "type": "string"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "exclusiveMinimum": 1
                                                         },
                                                         "symbol": {
                                                             "oneOf": [
@@ -1665,12 +1664,10 @@
                                                                 "type": "array"
                                                             },
                                                             "rangeitem": {
-                                                                "description": "attribute",
-                                                                "pattern": "^\\[(.*?)\\]$",
                                                                 "type": "string"
                                                             },
                                                             "size": {
-                                                                "oneOf": [
+                                                                "anyOf": [
                                                                     {
                                                                         "exclusiveMinimum": 0,
                                                                         "type": "number"
@@ -1683,7 +1680,8 @@
                                                                         "pattern": "^\\[(.*?)\\]$",
                                                                         "type": "string"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "exclusiveMinimum": 1
                                                             },
                                                             "symbol": {
                                                                 "oneOf": [
@@ -1837,7 +1835,6 @@
                                                         },
                                                         "type": "object"
                                                     },
-                                                    "maxItems": 1,
                                                     "minItems": 1,
                                                     "type": "array"
                                                 }
@@ -2287,12 +2284,10 @@
                                                 "type": "array"
                                             },
                                             "rangeitem": {
-                                                "description": "attribute",
-                                                "pattern": "^\\[(.*?)\\]$",
                                                 "type": "string"
                                             },
                                             "size": {
-                                                "oneOf": [
+                                                "anyOf": [
                                                     {
                                                         "exclusiveMinimum": 0,
                                                         "type": "number"
@@ -2305,7 +2300,8 @@
                                                         "pattern": "^\\[(.*?)\\]$",
                                                         "type": "string"
                                                     }
-                                                ]
+                                                ],
+                                                "exclusiveMinimum": 1
                                             },
                                             "symbol": {
                                                 "oneOf": [
@@ -2823,14 +2819,12 @@
                             "uvraster",
                             "wfs",
                             "wms",
-                            "mygis"
+                            "mygis",
+                            "flatgeobuf"
                         ]
                     },
                     "data": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                        "type": "string"
                     },
                     "debug": {
                         "allOf": [
@@ -2998,7 +2992,7 @@
                                 "type": "array"
                             },
                             "labelformat": {
-                                "oneOf": [
+                                "anyOf": [
                                     {
                                         "type": "string"
                                     },
@@ -3389,7 +3383,8 @@
                             "polygon",
                             "raster",
                             "query",
-                            "annotation"
+                            "annotation",
+                            "tileindex"
                         ]
                     },
                     "units": {
@@ -3684,7 +3679,7 @@
                             },
                             "maxoverlapangle": {
                                 "default": 22.5,
-                                "maximum": 0,
+                                "maximum": 360,
                                 "metadata": {
                                     "minVersion": 6.0
                                 },
@@ -3830,13 +3825,7 @@
                                 ]
                             },
                             "priority": {
-                                "default": 1,
-                                "maximum": 10,
-                                "metadata": {
-                                    "minVersion": 5.0
-                                },
-                                "minimum": 1,
-                                "oneOf": [
+                                "anyOf": [
                                     {
                                         "type": "integer"
                                     },
@@ -3845,7 +3834,13 @@
                                         "pattern": "^\\[(.*?)\\]$",
                                         "type": "string"
                                     }
-                                ]
+                                ],
+                                "default": 1,
+                                "maximum": 10,
+                                "metadata": {
+                                    "minVersion": 5.0
+                                },
+                                "minimum": 1
                             },
                             "repeatdistance": {
                                 "default": 0,
@@ -4309,12 +4304,10 @@
                                             "type": "array"
                                         },
                                         "rangeitem": {
-                                            "description": "attribute",
-                                            "pattern": "^\\[(.*?)\\]$",
                                             "type": "string"
                                         },
                                         "size": {
-                                            "oneOf": [
+                                            "anyOf": [
                                                 {
                                                     "exclusiveMinimum": 0,
                                                     "type": "number"
@@ -4327,7 +4320,8 @@
                                                     "pattern": "^\\[(.*?)\\]$",
                                                     "type": "string"
                                                 }
-                                            ]
+                                            ],
+                                            "exclusiveMinimum": 1
                                         },
                                         "symbol": {
                                             "oneOf": [
@@ -5160,7 +5154,7 @@
                             },
                             "maxoverlapangle": {
                                 "default": 22.5,
-                                "maximum": 0,
+                                "maximum": 360,
                                 "metadata": {
                                     "minVersion": 6.0
                                 },
@@ -5306,13 +5300,7 @@
                                 ]
                             },
                             "priority": {
-                                "default": 1,
-                                "maximum": 10,
-                                "metadata": {
-                                    "minVersion": 5.0
-                                },
-                                "minimum": 1,
-                                "oneOf": [
+                                "anyOf": [
                                     {
                                         "type": "integer"
                                     },
@@ -5321,7 +5309,13 @@
                                         "pattern": "^\\[(.*?)\\]$",
                                         "type": "string"
                                     }
-                                ]
+                                ],
+                                "default": 1,
+                                "maximum": 10,
+                                "metadata": {
+                                    "minVersion": 5.0
+                                },
+                                "minimum": 1
                             },
                             "repeatdistance": {
                                 "default": 0,
@@ -5785,12 +5779,10 @@
                                             "type": "array"
                                         },
                                         "rangeitem": {
-                                            "description": "attribute",
-                                            "pattern": "^\\[(.*?)\\]$",
                                             "type": "string"
                                         },
                                         "size": {
-                                            "oneOf": [
+                                            "anyOf": [
                                                 {
                                                     "exclusiveMinimum": 0,
                                                     "type": "number"
@@ -5803,7 +5795,8 @@
                                                     "pattern": "^\\[(.*?)\\]$",
                                                     "type": "string"
                                                 }
-                                            ]
+                                            ],
+                                            "exclusiveMinimum": 1
                                         },
                                         "symbol": {
                                             "oneOf": [

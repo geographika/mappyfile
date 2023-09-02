@@ -1,5 +1,4 @@
 import logging
-import os
 import tempfile
 from mappyfile import cli
 import pytest
@@ -12,7 +11,6 @@ def test_get_mapfiles():
     mapfiles = [tf.name]
     found_mapfiles = cli.get_mapfiles(mapfiles)
     print(found_mapfiles)
-    os.remove(tf.name)
 
 
 def run_tests():
