@@ -21,7 +21,8 @@ The result:
 Formatting of Mapfiles can be applied using the high-level mappyfile API - see :ref:`mapfile-reader-writer-api`, 
 or using the command-line :ref:`client-format`. 
 
-Please try the online interactive demo at http://mappyfile.geographika.net/ to experiment with the various formatting options in mappyfile. 
+Please try the online interactive demo at https://app.mapserverstudio.net/ to experiment with the various formatting options in mappyfile. 
+Documentation for MapServer Studio formatting can be found `here <https://mapserverstudio.net/help/formatting.html>`_.
 
 Options
 -------

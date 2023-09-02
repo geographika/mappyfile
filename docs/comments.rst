@@ -1,39 +1,19 @@
-Comments Design Notes
-=====================
+Comments
+========
 
-Parsing
--------
+mappyfile can remove or keep Mapfile comments. This page discusses how comments are retained when using mappyfile.
+mappyfile supports both single-line comments starting with a ``#`` and also C-style multi-line comments.
 
-There are currently 2 comment tokens in the grammar:
+In a Mapfile comments can appear anywhere. That means that in the context of a classic parser (such as lark), 
+a ``COMMENT?`` would have to be added between practically every token. This can be done automatically
+but it will slow down some parsers (like Earley), or possibly complicate others (like LALR), and 
+create a parse-tree that is much harder to process. This means it's much easier to get rid of them at the lexer.
 
-.. code-block:: bat
+However mappyfile takes a creative approach that makes comments accessible within the tree as a "comment" attribute.
 
-    COMMENT: /\#[^\n]*/
-    CCOMMENT.3: /\/[*].*?[*]\//s
-
-Questions
-+++++++++
-
-+ Would the comment tokens have to be added throughout the grammar? This would result
-  in a messy, hard to read grammar. Is there any way to add comment tokens automatically?
-
-From ``erezsh``:
-
-    Regarding comments, you are correct that the problem is that comments can appear anywhere. 
-    That means that in the context of a classic parser (such as lark), you will have to add COMMENT? 
-    between practically every token. It can be done automatically (in fact Lark implements such operations), 
-    but it will slow down some parsers (like earley), or possibly complicate others (like lalr), and even if not, 
-    it will create a parse-tree that is obviously much harder to process. So, you can see that it's much easier 
-    to get rid of them at the lexer.
-    Having said that, with some creativity it should be possible to make comments accessible within the tree, 
-    for example as a "comment" attribute.
-
-+ Is it therefore possible to have this as an option that can be enabled (with comments removed by default)?
-
-Transformer
------------
-
-See ``tests/test_comments.py`` for some sample tests. 
+The next sections descibe how comments are stored in the mappyfile Python dictionary structure, and output using
+the pretty-printer. See `test_comments.py <https://github.com/geographika/mappyfile/blob/master/tests/test_comments.py>`_
+for some sample tests.
 
 Attribute Comments
 ++++++++++++++++++
@@ -65,7 +45,7 @@ the "__comments__" property:
     }
 
 The location of the comment will decide which attribute it is associated with. A comment will 
-always be associated with its preceeding attribute. New lines will be ignored, so the Mapfile
+always be associated with its preceding attribute. New lines will be ignored, so the Mapfile
 below will produce the same output as above:
 
 .. code-block:: mapfile
@@ -79,12 +59,11 @@ below will produce the same output as above:
         # Type comment
     END
 
-If a comment falls within the middle of an attribute value, it will also be associated the preceeding
-attribute. In the case below the comment will be associated with ``COLOR``. 
+If a comment falls within the middle of an attribute value, it will be removed (even though this seems to be valid within a Mapfile):
 
 .. code-block:: mapfile
 
-        COLOR  255 #comment
+        COLOR  255 #comment will be removed
         0 0
 
 Composite Level Comments

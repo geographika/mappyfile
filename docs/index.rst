@@ -18,7 +18,7 @@ A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.fos
     :titlesonly:
 
     Parsing <parser.rst>
-    Transforming (draft) <transformer.rst>
+    Transforming <transformer.rst>
     editing.rst
     Pretty Printing <pretty_printing.rst>
     comments.rst

@@ -30,7 +30,7 @@ setup(
         "Topic :: Text Processing :: Linguistic",
         "Topic :: Software Development :: Build Tools",
     ],
-    package_data={"": ["*.lark"], "mappyfile": ["schemas/*.json"]},
+    package_data={"": ["*.lark"], "mappyfile": ["py.typed", "schemas/*.json"]},
     url="http://github.com/geographika/mappyfile",
     author="Seth Girvin",
     author_email="sethg@geographika.co.uk",
@@ -38,7 +38,7 @@ setup(
     packages=["mappyfile"],
     install_requires=[
         "lark>=1.1.5",
-        "jsonschema>=4.0",
+        "jsonschema>=4.18.0",
         "jsonref==1.1.0",
         "click",
     ],

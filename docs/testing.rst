@@ -19,7 +19,7 @@ that includes 100s of Mapfiles. For example:
 + https://github.com/mapserver/mapserver/tree/main/msautotest/gdal
 
 These have been downloaded and added to the ``/tests/sample_maps`` folder and are tested as part of the automated pytest test suite. 
-Includes are not currently included - extension names of include files differ - sometimes .map and sometimes .include. In addition they are sometimes
+Includes are not currently included - extension names of include files differ - sometimes ``.map`` and sometimes ``.include``. In addition they are sometimes
 stored in an ``includes`` folder, and sometimes in a ``data`` folder. These includes are currently added to an ``ignore_list`` in the
 `test_sample_maps.py <https://github.com/geographika/mappyfile/blob/master/tests/test_sample_maps.py>`_ test file.
 
