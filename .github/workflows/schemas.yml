@@ -12,7 +12,6 @@ jobs:
   # see https://github.com/ad-m/github-push-action
   jsonschemas:
     name: Update JSONSchemas in docs
-    needs: test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
