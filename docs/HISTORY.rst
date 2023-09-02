@@ -4,6 +4,9 @@ Releases
 1.0.0 13/08/2023
 ++++++++++++++++
 
++ **Support for Python 2.7 has now been dropped.**
+  See `#166 <https://github.com/geographika/mappyfile/issues/166>`_ - Drop Python 2.7 support 
+
 + All mappyfile dicts now have human readable output when displayed as a string:
 
   .. code-block:: python
