@@ -22,6 +22,8 @@ sphinx:
 #   - requirements: docs/requirements.txt
 
 python:
-   install:
+  install:
+    - requirements: docs/requirements.txt
+    # Install our python package before building the docs
     - method: pip
       path: .
