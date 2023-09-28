@@ -74,4 +74,4 @@ jobs:
         pip3 install --upgrade coveralls
         coveralls --service=github --finish
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
