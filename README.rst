@@ -4,6 +4,10 @@ mappyfile
 | |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| |Downloads|
 
 A pure Python parser for working with `MapServer <https://mapserver.org>`_ MapFiles, built using `Lark <https://github.com/lark-parser/lark>`__
+mappyfile is an official `OSGeo Community Project <https://www.osgeo.org/projects/mappyfile/>`_.
+
+.. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/OSGeo_community_small.png
+    :align: right
 
 mappyfile is used for formatting and validation in https://app.mapserverstudio.net/, and can be tested for free on any
 of your Mapfiles. If you find mappyfile useful please consider signing up for a professional account at 
@@ -129,5 +133,6 @@ Contributors
 .. |Coveralls| image:: https://coveralls.io/repos/github/geographika/mappyfile/badge.svg?branch=master
     :target: https://coveralls.io/github/geographika/mappyfile?branch=master
 
-.. |Downloads| image:: http://pepy.tech/badge/mappyfile
-    :target: http://pepy.tech/project/mappyfile
+.. |Downloads| image:: https://static.pepy.tech/badge/mappyfile
+    :target: https://www.pepy.tech/projects/mappyfile
+    

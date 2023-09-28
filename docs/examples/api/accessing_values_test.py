@@ -1,6 +1,3 @@
-import mappyfile
-
-
 def test():
     # START OF API EXAMPLE
     import mappyfile

@@ -56,19 +56,19 @@ a version ``1.0.0`` release is now out!
                 "type": "POLYGON"
             },
 
-+ Updating of resolving JSON references due to deprecated ``jsonschema.RefResolver`` - see 
++ Approach to resolving JSON references updated due to the deprecated ``jsonschema.RefResolver`` - see 
   `this link <https://python-jsonschema.readthedocs.io/en/v4.18.4/referencing/#resolving-references-from-the-file-system>`_,
   the associated JSONSchema `pull request <https://github.com/python-jsonschema/jsonschema/pull/1049>`_
   and the `migration approach <https://python-jsonschema.readthedocs.io/en/stable/referencing/#migrating-from-refresolver>`_.
 
 Other improvements and fixes in the v1.0.0 release:
 
-+ `#196 <https://github.com/geographika/mappyfile/pull/196>`_ - Codebase fixes for ``Prospector`` warnings
++ `#196 <https://github.com/geographika/mappyfile/pull/196>`_ - Code base fixes for ``Prospector`` warnings
 + `#195 <https://github.com/geographika/mappyfile/pull/195>`_ - Update test suite from latest msautotests
 + `#194 <https://github.com/geographika/mappyfile/pull/194>`_ - Docs overhaul in preparation for v1 release
 + `#193 <https://github.com/geographika/mappyfile/pull/193>`_ - Update to ``jsonschema`` v4 and replace deprecated ``RefResolver``
-+ `#191 <https://github.com/geographika/mappyfile/pull/191>`_ - Simplify processing of Comments
-+ `#189 <https://github.com/geographika/mappyfile/pull/189>`_ - Add type hints to the codebase
++ `#191 <https://github.com/geographika/mappyfile/pull/191>`_ - Simplify processing of comments
++ `#189 <https://github.com/geographika/mappyfile/pull/189>`_ - Add type hints to the code base
 + `#153 <https://github.com/geographika/mappyfile/pull/153>`_ - Support querying items without the given key in 
   ``utils.findunique()``- thanks @DonQueso89 for fix
 + Schema fixes for ``grid``, ``label``, ``style``, ``leader``, add ``flatgeobuf``
