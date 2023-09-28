@@ -9,15 +9,15 @@ mappyfile is used for formatting and validation in https://app.mapserverstudio.n
 of your Mapfiles. If you find mappyfile useful please consider signing up for a professional account at 
 https://mapserverstudio.net/. This will help to fund maintenance and further development of both mappyfile and MapServer.
 
-A presentation on mappyfile was given at `FOSS4G Europe 2017 <https://europe.foss4g.org/2017/Home>`_ - slides are available 
-`for download here </docs/_static/foss4ge2017_mappyfile_sgirvin.pdf>`_.
+mappyfile was first introduced in a presentation at `FOSS4G Europe 2017 <https://europe.foss4g.org/2017/Home>`_ - slides are available 
+:download:`to download here </docs/_static/foss4ge2017_mappyfile_sgirvin.pdf>`.
 
 .. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/class_parsed_small.png
 
 Requirements
 ------------
 
-* Python Python 3.8 or higher
+* Python 3.8 or higher
 
 Installation
 ------------
@@ -96,7 +96,7 @@ Three command line tools are available - ``format``, ``validate``, and ``schema`
 
     mappyfile format raster.map formatted_raster.map
     mappyfile validate D:\ms-ogc-workshop\ms4w\apps\ms-ogc-workshop\**\*.map
-    mappyfile schema mapfile-schema-7-6.json --version=7.6
+    mappyfile schema mapfile-schema-8-0.json --version=8.0
 
 Authors
 -------
@@ -111,6 +111,7 @@ Contributors
 * Loïc Gasser `@loicgasser <https://github.com/loicgasser>`_
 * Ian Turton `@ianturton <https://github.com/ianturton>`_
 * `@thorag76 <https://github.com/thorag76>`_
+* `@DonQueso89 <https://github.com/DonQueso89>`_
 * TC Haddad `@tchaddad <https://github.com/tchaddad>`_ (Conda support)
 
 .. |Version| image:: https://img.shields.io/pypi/v/mappyfile.svg

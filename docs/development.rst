@@ -104,15 +104,6 @@ To build the Sphinx documentation:
 
 .. code-block:: ps1
 
-    cd $MAPPYFILE_PATH/docs
-    pip install sphinx -U
-    .\make.bat html
-    "_build/html/index.html"
-
-Alternatively:
-
-.. code-block:: ps1
-
     sphinx-build -b html "$MAPPYFILE_PATH\docs" "$MAPPYFILE_PATH\_build"
     # to force a rebuild of all files
     sphinx-build -a -E -b html "$MAPPYFILE_PATH\docs" "$MAPPYFILE_PATH\_build"
@@ -125,3 +116,12 @@ To run in a local browser:
     C:\Python310\python -m http.server --directory="$MAPPYFILE_PATH\_build" 57921
 
     # open browser and go to http://localhost:57921
+
+To automatically rebuild docs using `watchdog <https://pypi.org/project/watchdog/>`_:
+
+.. code-block:: ps1
+
+    # run the following to automatically rebuild the project
+    # python -m pip install -U "watchdog[watchmedo]"
+    cd $MAPPYFILE_PATH
+    watchmedo shell-command --patterns="*.rst;*.txt" --recursive --command='sphinx-build -b html "./docs" "./_build"' ./docs

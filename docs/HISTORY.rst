@@ -1,11 +1,40 @@
 Releases
 --------
 
-1.0.0 13/08/2023
+1.0.0 28/09/2023
 ++++++++++++++++
 
+In celebration of becoming an official `OSGeo Community Project <https://www.osgeo.org/projects/mappyfile/>`_, 
+a version ``1.0.0`` release is now out!
+
 + **Support for Python 2.7 has now been dropped.**
-  See `#166 <https://github.com/geographika/mappyfile/issues/166>`_ - Drop Python 2.7 support 
+  See `#166 <https://github.com/geographika/mappyfile/issues/166>`_ - Drop Python 2.7 support. The codebase has had all Python2 specific
+  code removed - see `#188 <https://github.com/geographika/mappyfile/issues/188>`_.
+
++ **Breaking Change** - in the ``MapfileToDict`` class the parameter ``transformerClass`` has been renamed ``transformer_class``.
+  An example of how to fix this is shown below:
+
+  .. code-block:: python
+
+    from mappyfile.transformer import MapfileToDict
+    from mappyfile_colors import ColorsTransformer
+
+    m = MapfileToDict(
+        include_position=True,
+        include_comments=True,
+        # replace the following parameter
+        # transformerClass=ColorsTransformer,
+        transformer_class=ColorsTransformer,
+        conversion_type=None,
+        include_color_names=True,
+    )
+
++ Support added for `lark_cython <https://github.com/lark-parser/lark_cython>`_ - see `#178 <https://github.com/geographika/mappyfile/issues/178>`_ - thanks @erezsh.
+  To use ``lark_cython`` is as simple as installing the option with ``pip``:
+
+  .. code-block:: bash
+
+      pip install mappyfile[lark_cython]
 
 + All mappyfile dicts now have human readable output when displayed as a string:
 
@@ -27,33 +56,28 @@ Releases
                 "type": "POLYGON"
             },
 
-Resolution of long-standing parsing issues, and all msautotest examples are now passed successfully:
-
-+ `#48 <https://github.com/geographika/mappyfile/issues/48>`_ - SYMBOL ambiguity
-+ `#98 <https://github.com/geographika/mappyfile/issues/98>`_ - Unquoted attribute names fail to parse
-
 + Updating of resolving JSON references due to deprecated ``jsonschema.RefResolver`` - see 
   `this link <https://python-jsonschema.readthedocs.io/en/v4.18.4/referencing/#resolving-references-from-the-file-system>`_,
   the associated JSONSchema `pull request <https://github.com/python-jsonschema/jsonschema/pull/1049>`_
   and the `migration approach <https://python-jsonschema.readthedocs.io/en/stable/referencing/#migrating-from-refresolver>`_.
 
-- **Breaking API Change** - in the ``MapfileToDict`` class the parameter ``transformerClass`` has been renamed ``transformer_class``.
-  An example of how to fix this is shown below:
+Other improvements and fixes in the v1.0.0 release:
 
-  .. code-block:: python
++ `#196 <https://github.com/geographika/mappyfile/pull/196>`_ - Codebase fixes for ``Prospector`` warnings
++ `#195 <https://github.com/geographika/mappyfile/pull/195>`_ - Update test suite from latest msautotests
++ `#194 <https://github.com/geographika/mappyfile/pull/194>`_ - Docs overhaul in preparation for v1 release
++ `#193 <https://github.com/geographika/mappyfile/pull/193>`_ - Update to ``jsonschema`` v4 and replace deprecated ``RefResolver``
++ `#191 <https://github.com/geographika/mappyfile/pull/191>`_ - Simplify processing of Comments
++ `#189 <https://github.com/geographika/mappyfile/pull/189>`_ - Add type hints to the codebase
++ `#153 <https://github.com/geographika/mappyfile/pull/153>`_ - Support querying items without the given key in 
+  ``utils.findunique()``- thanks @DonQueso89 for fix
++ Schema fixes for ``grid``, ``label``, ``style``, ``leader``, add ``flatgeobuf``
++ Code reformatted using `black <https://pypi.org/project/black/>`_
 
-    from mappyfile.transformer import MapfileToDict
-    from mappyfile_colors import ColorsTransformer
+Resolution of long-standing parsing issues, and all msautotest examples now pass successfully:
 
-    m = MapfileToDict(
-        include_position=True,
-        include_comments=True,
-        # replace the following parameter
-        # transformerClass=ColorsTransformer,
-        transformer_class=ColorsTransformer,
-        conversion_type=None,
-        include_color_names=True,
-    )
++ `#48 <https://github.com/geographika/mappyfile/issues/48>`_ - SYMBOL ambiguity
++ `#98 <https://github.com/geographika/mappyfile/issues/98>`_ - Unquoted attribute names fail to parse
 
 
 0.9.7 03/04/2022
@@ -99,7 +123,7 @@ Resolution of long-standing parsing issues, and all msautotest examples are now 
 0.9.2 28/08/2021
 ++++++++++++++++
 
-+ Add the "idw" to ``LAYER` ``CONNECIONTYPE``
++ Add the "idw" to ``LAYER`` ``CONNECIONTYPE``
 + Correct "minVersion" of ``LABEL`` ``EXPRESSION``
 + Add validation to ``LEGEND`` ``LABELS``
 + Add correct validation for ``MAP`` ``LEGEND`` and ``OUTPUTFORMAT``
@@ -278,21 +302,21 @@ Resolution of long-standing parsing issues, and all msautotest examples are now 
 0.5.1 (05/01/2018)
 ++++++++++++++++++
 
-+ `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Remove unnecessary parser keyword`
++ `#45 <https://github.com/geographika/mappyfile/issues/45>`_ Remove unnecessary parser keyword
 
 0.5.0 (01/11/2017)
 ++++++++++++++++++
 
 + Add in jsonschema and validation class
-+ `#44 <https://github.com/geographika/mappyfile/issues/44>`_ Includes should be relative to Mapfile`
++ `#44 <https://github.com/geographika/mappyfile/issues/44>`_ Includes should be relative to Mapfile
 
 0.4.3 (28/08/2017)
 ++++++++++++++++++
 
-+ `#36 <https://github.com/geographika/mappyfile/pull/36>`_ Create a unique logger for mappyfile logger` 
-+ `#35 <https://github.com/geographika/mappyfile/pull/35>`_ Add support for missing arithmetic expressions and run flake8 within tox` 
++ `#36 <https://github.com/geographika/mappyfile/pull/36>`_ Create a unique logger for mappyfile logger
++ `#35 <https://github.com/geographika/mappyfile/pull/35>`_ Add support for missing arithmetic expressions and run flake8 within tox
   - thanks @loicgrasser
-+ `#33 <https://github.com/geographika/mappyfile/pull/33>`_ Fix max recursion limit count` - thanks @loicgrasser
++ `#33 <https://github.com/geographika/mappyfile/pull/33>`_ Fix max recursion limit count - thanks @loicgrasser
 
 
 0.4.0 (18/08/2017)
@@ -300,9 +324,9 @@ Resolution of long-standing parsing issues, and all msautotest examples are now 
 
 + Add a LALR grammar and parser, now a 8k line Mapfile is now parsed 12x faster
 + Add a experimental validator module using jsonschema
-+ `#30 <https://github.com/geographika/mappyfile/pull/30>`_ Flake8 support` - thanks @loicgrasser
-+ `#28 <https://github.com/geographika/mappyfile/pull/28>`_ Add support for relative path for nested include` - thanks @loicgrasser
-+ `#25 <https://github.com/geographika/mappyfile/issues/25>`_ Expression grammar not allowing !`
++ `#30 <https://github.com/geographika/mappyfile/pull/30>`_ Flake8 support - thanks @loicgrasser
++ `#28 <https://github.com/geographika/mappyfile/pull/28>`_ Add support for relative path for nested include - thanks @loicgrasser
++ `#25 <https://github.com/geographika/mappyfile/issues/25>`_ Expression grammar not allowing ``!``
  
 0.3.2
 +++++
@@ -321,12 +345,12 @@ Resolution of long-standing parsing issues, and all msautotest examples are now 
 + Allow multiple composites to be parsed directly (e.g. ``CLASS..END CLASS..END``)
 + Allow direct parsing of the ``METADATA`` and ``VALIDATION`` blocks
 + UTF-8 checks when opening a Mapfile
-+ `#23 <https://github.com/geographika/mappyfile/issues/23>`_ Alternative NE and EQ comparisons not defined`
-+ `#22 <https://github.com/geographika/mappyfile/issues/22>`_ Handle AUTO Projection setting`
-+ `#21 <https://github.com/geographika/mappyfile/issues/21>`_ INCLUDES throw error when no cwd set`
-+ `#20 <https://github.com/geographika/mappyfile/issues/20>`_ Only the first FORMATOPTION is kept after transform`
-+ `#19 <https://github.com/geographika/mappyfile/issues/19>`_ IMAGEMODE FEATURE throws parsing error`
-+ `#18 <https://github.com/geographika/mappyfile/issues/18>`_ CONFIG keyword not capitalised`
++ `#23 <https://github.com/geographika/mappyfile/issues/23>`_ Alternative NE and EQ comparisons not defined
++ `#22 <https://github.com/geographika/mappyfile/issues/22>`_ Handle AUTO Projection setting
++ `#21 <https://github.com/geographika/mappyfile/issues/21>`_ INCLUDES throw error when no cwd set
++ `#20 <https://github.com/geographika/mappyfile/issues/20>`_ Only the first FORMATOPTION is kept after transform
++ `#19 <https://github.com/geographika/mappyfile/issues/19>`_ IMAGEMODE FEATURE throws parsing error
++ `#18 <https://github.com/geographika/mappyfile/issues/18>`_ CONFIG keyword not capitalised
 
 Older Releases
 ++++++++++++++
