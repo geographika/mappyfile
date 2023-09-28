@@ -6,9 +6,9 @@ image: Visual Studio 2019
 environment:
 
   global:
-    TWINE_USERNAME: geographika
+    TWINE_USERNAME: __token__
     TWINE_PASSWORD:
-      secure: 6yuYlaTUIL8SRBakWTke8w==
+      secure: $(MAPPYFILE_DEPLOY)
 
   matrix:
 
