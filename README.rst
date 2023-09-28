@@ -3,7 +3,7 @@ mappyfile
 
 | |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| |Downloads|
 
-A pure Python parser for working with `MapServer <https://mapserver.org>`_ MapFiles, built using `Lark <https://github.com/lark-parser/lark>`__
+A pure Python parser for working with `MapServer <https://mapserver.org>`_ MapFiles, built using `Lark <https://github.com/lark-parser/lark>`__.
 mappyfile is an official `OSGeo Community Project <https://www.osgeo.org/projects/mappyfile/>`_.
 
 .. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/OSGeo_community_small.png
