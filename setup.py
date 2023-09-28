@@ -17,6 +17,7 @@ setup(
     version=__version__,
     description="A pure Python MapFile parser for working with MapServer",
     long_description=readme(),
+    long_description_content_type="text/x-rst",
     classifiers=[
         # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
         "Development Status :: 5 - Production/Stable",

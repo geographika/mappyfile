@@ -13,11 +13,6 @@ mappyfile is used for formatting and validation in https://app.mapserverstudio.n
 of your Mapfiles. If you find mappyfile useful please consider signing up for a professional account at 
 https://mapserverstudio.net/. This will help to fund maintenance and further development of both mappyfile and MapServer.
 
-mappyfile was first introduced in a presentation at `FOSS4G Europe 2017 <https://europe.foss4g.org/2017/Home>`_ - slides are available 
-:download:`to download here </docs/_static/foss4ge2017_mappyfile_sgirvin.pdf>`.
-
-.. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/class_parsed_small.png
-
 Requirements
 ------------
 
@@ -53,6 +48,8 @@ Documentation
 -------------
 
 Full documentation is available at http://mappyfile.readthedocs.io/en/latest/
+
+.. image:: https://raw.githubusercontent.com/geographika/mappyfile/master/docs/images/class_parsed_small.png
 
 Usage
 -----
