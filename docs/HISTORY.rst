@@ -29,6 +29,20 @@ a version ``1.0.0`` release is now out!
         include_color_names=True,
     )
 
++ **Breaking Change** - ``LAYER`` ``DATA`` has been changed in the schema from a list to a simple string.
+
+  .. code-block:: python
+
+      layer = {
+          '__type__': 'layer',
+          // pre v1 the data clause had to be in a list
+          // 'data': ['/path/to/data']
+          // in v1 this should now be a string
+          'data': '/path/to/data'
+      }
+
+      mappyfile.dumps(layer)
+
 + Support added for `lark_cython <https://github.com/lark-parser/lark_cython>`_ - see `#178 <https://github.com/geographika/mappyfile/issues/178>`_ - thanks @erezsh.
   To use ``lark_cython`` is as simple as installing the option with ``pip``:
 
