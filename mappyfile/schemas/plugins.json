@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+  },
+  "patternProperties": {
+    "^__[a-z]+__$": {}
+  },
+  "additionalProperties": {
+    "type": "string"
+  }
+}

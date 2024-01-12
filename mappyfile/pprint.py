@@ -323,7 +323,14 @@ class PrettyPrinter:
 
         for composite in composites:
             type_ = composite["__type__"]
-            if type_ in ("metadata", "validation", "connectionoptions"):
+            if type_ in (
+                "metadata",
+                "validation",
+                "connectionoptions",
+                "env",
+                "maps",
+                "plugins",
+            ):
                 # types are being parsed directly, and not as an attr of a parent
                 lines += self.process_key_dict(type_, composite, level=0)
             else:
@@ -341,11 +348,19 @@ class PrettyPrinter:
         try:
             attr_props = props[attr]
         except KeyError as ex:
-            log.error(
-                "The key '%s' was not found in the JSON schema for '%s'", attr, type_
-            )
-            log.error(ex)
-            return {}
+            if (
+                jsn_schema["additionalProperties"]
+                and type(jsn_schema["additionalProperties"]) is dict
+            ):
+                return jsn_schema["additionalProperties"]
+            else:
+                log.error(
+                    "The key '%s' was not found in the JSON schema for '%s'",
+                    attr,
+                    type_,
+                )
+                log.error(ex)
+                return {}
 
         return attr_props
 

@@ -622,6 +622,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
-    # test_double_error()
+    # run_tests()
+    test_lowercase()
     print("Done!")

@@ -12,7 +12,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_comments.py</StartupFile>
+    <StartupFile>tests\test_config.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -203,12 +203,17 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\_static\placeholder.txt" />
     <Content Include="docs\_templates\placeholder.txt" />
     <Content Include="MANIFEST.in" />
+    <Content Include="mappyfile\configfile.lark" />
     <Content Include="mappyfile\mapfile.lark" />
     <Content Include="mappyfile\py.typed" />
     <Content Include="mappyfile\schemas\expression.json">
       <SubType>Code</SubType>
     </Content>
     <Content Include="mappyfile\schemas\connectionoptions.json" />
+    <Content Include="mappyfile\schemas\config.json" />
+    <Content Include="mappyfile\schemas\env.json" />
+    <Content Include="mappyfile\schemas\plugins.json" />
+    <Content Include="mappyfile\schemas\maps.json" />
     <Content Include="mappyfile\schemas\points.json" />
     <Content Include="mappyfile\schemas\symbolset.json" />
     <Content Include="mappyfile\schemas\web.json" />
@@ -1187,6 +1192,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Compile Include="tests\test_quoter.py" />
     <Compile Include="tests\test_sample_maps.py" />
     <Compile Include="tests\test_snippets.py" />
+    <Compile Include="tests\test_config.py" />
     <Compile Include="tests\test_symbolset.py">
       <SubType>Code</SubType>
     </Compile>

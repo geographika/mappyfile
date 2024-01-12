@@ -640,6 +640,19 @@ class MapfileTransformer(Transformer):
         v.value = "{%s}" % list_values
         return v
 
+    # functions for transforming MapServer config files
+    def configfile(self, t):
+        return t
+
+    def env(self, tokens):
+        return self.process_value_pairs(tokens, "env")
+
+    def maps(self, tokens):
+        return self.process_value_pairs(tokens, "maps")
+
+    def plugins(self, tokens):
+        return self.process_value_pairs(tokens, "plugins")
+
 
 class CommentsTransformer(Transformer_InPlace):
     """

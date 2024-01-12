@@ -68,13 +68,24 @@ SYMBOL_ATTRIBUTES = {
 
 
 class Parser:
-    def __init__(self, expand_includes: bool = True, include_comments: bool = False):
+    def __init__(
+        self,
+        expand_includes: bool = True,
+        include_comments: bool = False,
+        is_config: bool = False,
+    ):
         self.expand_includes = expand_includes
         self.include_comments = include_comments
         self._comments: list[Any] = []
-        self.lalr = self._create_lalr_parser()
 
-    def _create_lalr_parser(self) -> Any:
+        if is_config:
+            grammar_file = "configfile.lark"
+        else:
+            grammar_file = "mapfile.lark"
+
+        self.lalr = self._create_lalr_parser(grammar_file)
+
+    def _create_lalr_parser(self, grammar_file: str) -> Any:
         extra_args = {}
 
         if lark_cython:
@@ -89,7 +100,7 @@ class Parser:
                 {"propagate_positions": True, "lexer_callbacks": callbacks}
             )
 
-        return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
+        return Lark.open(grammar_file, rel_to=__file__, parser="lalr", **extra_args)
 
     def _get_include_filename(self, line: str) -> str:
         if "#" in line:

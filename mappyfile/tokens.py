@@ -267,6 +267,9 @@ SINGLETON_COMPOSITE_NAMES = frozenset(
     validation
     values
     web
+    env
+    maps
+    plugins
 """.split()
 )
 

@@ -1,0 +1,75 @@
+// =================================================================
+// 
+// Authors: Seth Girvin
+// 
+// Copyright (c) 2024 Seth Girvin
+// 
+// Permission is hereby granted, free of charge, to any person
+// obtaining a copy of this software and associated documentation
+// files (the "Software"), to deal in the Software without
+// restriction, including without limitation the rights to use,
+// copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following
+// conditions:
+// 
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+// OTHER DEALINGS IN THE SOFTWARE.
+// 
+// =================================================================
+
+// start: "CONFIG"i composite+ _END   -> configfile
+
+start: composite
+
+composite: composite_type composite_body _END
+
+// composite: env
+//     | maps
+//     | plugins
+
+composite_body: _composite_item*
+_composite_item: (composite|attr)
+
+// !env: "ENV"i string_pair* _END
+// !maps: "MAPS"i string_pair* _END
+// !plugins: "PLUGINS"i string_pair* _END
+
+!composite_type: "CONFIG"i
+            | "ENV"i
+            | "MAPS"i
+            | "PLUGINS"i
+
+string: DOUBLE_QUOTED_STRING | SINGLE_QUOTED_STRING | ESCAPED_STRING
+string_pair: (string|UNQUOTED_STRING) (string|UNQUOTED_STRING)
+
+attr: (string | UNQUOTED_STRING | composite_type) (string | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)
+%declare UNQUOTED_STRING_VALUE  // generated using the interactive parser. See issues #48, #98
+
+UNQUOTED_STRING: /[a-z0-9_\xc0-\xff\-:]+/i
+UNQUOTED_STRING_SPACE: /[a-z0-9\xc0-\xff_\-: ']+/i
+DOUBLE_QUOTED_STRING: "\"" ("\\\""|/[^"]/)* "\"" "i"?
+SINGLE_QUOTED_STRING: "'" ("\\'"|/[^']/)* "'" "i"?
+ESCAPED_STRING: /`.*?`i?/
+
+COMMENT: /\#[^\n]*/
+CCOMMENT.3: /\/[*].*?[*]\//s
+
+_END: "END"i
+
+WS: /[ \t\f]+/
+_NL: /[\r\n]+/
+
+%ignore COMMENT
+%ignore CCOMMENT
+%ignore WS
+%ignore _NL
