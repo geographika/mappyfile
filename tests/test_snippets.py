@@ -1023,6 +1023,20 @@ END"""
     assert output(s, schema_name="leader") == exp
 
 
+def test_class_regex_expression():
+    s = """
+CLASS
+    EXPRESSION /*1/
+    STYLE
+        COLOR 0 255 0
+    END
+END"""
+
+    print(output(s, schema_name="class"))
+    exp = "CLASS EXPRESSION /*1/ STYLE COLOR 0 255 0 END END"
+    assert output(s, schema_name="class") == exp
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -1036,6 +1050,7 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # test_multiple_compfilters()
-    test_geomtransform_nested_function()
+    # test_geomtransform_nested_function()
+    test_class_regex_expression()
     # run_tests()
     print("Done!")
