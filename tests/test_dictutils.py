@@ -129,6 +129,15 @@ def test_findall_itasca():
     assert layers[0]["name"] == "ctyrdln3"
 
 
+def test_findall_itasca2():
+    fn = "./tests/mapfiles/itasca2.map"
+    d = mappyfile.open(fn)
+    layers = mappyfile.findall(d["layers"], "type", "POINT")
+    print(len(layers))
+    assert len(layers) == 4
+    assert layers[0]["name"] == "ctyrdln3"
+
+
 def test_update():
     s1 = """
     MAP
@@ -391,5 +400,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
     test_findall_missing_value()
-    test_findall_itasca()
+    test_findall_itasca2()
     print("Done!")
