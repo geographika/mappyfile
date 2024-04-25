@@ -1,0 +1,546 @@
+#
+# Start of map file
+#
+MAP
+  NAME ITASCA
+  STATUS ON
+  SIZE 600 600
+
+  PROJECTION
+    "init=epsg:26915"
+  END
+
+  EXTENT 388107.634400379 5203120.88405952 500896.339019834 5310243.30613897
+  UNITS METERS
+  SHAPEPATH "data"
+  IMAGECOLOR 255 255 255
+
+  IMAGETYPE PNG
+
+  #
+  # Start of symbol definitions (we're only using a few)
+  #
+  SYMBOL
+    NAME 'circle'
+    TYPE ELLIPSE
+    POINTS 1 1 END
+    FILLED TRUE
+  END
+
+  SYMBOL
+    NAME 'star'
+    TYPE VECTOR
+    FILLED TRUE
+    POINTS
+      0 .375
+      .35 .375
+      .5 0
+      .65 .375
+      1 .375
+      .75 .625
+      .875 1
+      .5 .75
+      .125 1
+      .25 .625
+    END
+  END 
+
+  OUTPUTFORMAT
+    NAME "geojson"
+    DRIVER "OGR/GEOJSON"
+    MIMETYPE "application/json"
+    FORMATOPTION "FORM=SIMPLE"
+    FORMATOPTION "STORAGE=memory"
+  END
+
+  OUTPUTFORMAT
+    NAME "png"
+    DRIVER AGG/PNG
+    MIMETYPE "image/png"
+    IMAGEMODE RGB
+    EXTENSION "png"
+    FORMATOPTION "GAMMA=0.75"
+    TRANSPARENT ON
+  END
+
+  #
+  # Start of web interface definition (including WMS enabling metadata)
+  #
+  WEB
+    HEADER "templates/header.html"
+    TEMPLATE "itasca_basic.html" # this can be changed by the index.html web application
+    FOOTER "templates/footer.html"
+    MINSCALEDENOM 1000
+    MAXSCALEDENOM 1550000
+
+    # TOCHECK change the next two lines to match your setup
+    IMAGEPATH "/var/www/html/tmp/"
+    IMAGEURL "/tmp/"
+
+    METADATA
+      OWS_TITLE "MapServer Itasca Demo"
+      OWS_ABSTRACT "This is a MapServer demo application for Itasca County located in north central Minnesota."
+      WMS_ACCESSCONSTRAINTS "none"
+      OWS_ENABLE_REQUEST "*"
+
+      # TOCHECK change the next two lines to match your setup
+      OGA_HTML_TEMPLATE_DIRECTORY "/usr/share/mapserver/ogcapi/templates/html-plain/"
+      OGA_ONLINERESOURCE "http://localhost/cgi-bin/mapserv/itasca/ogcapi"
+
+      # TOCHECK change this value to match your setup
+      OWS_ONLINERESOURCE "http://localhost/cgi-bin/mapserv?map=/usr/local/www/docs_maps/mapserver_demos/itasca/itasca.map&"
+      WFS_SRS "EPSG:26915 EPSG:3857 EPSG:4326"
+      WFS_GETFEATURE_FORMATLIST "gml,geojson"
+      WMS_SRS "EPSG:26915 EPSG:3857"
+    END
+  END
+
+  #
+  # Start of reference map
+  #
+  REFERENCE
+    IMAGE graphics/reference.png
+    EXTENT 393234.393701263 5205405.16440722 495769.579718949 5307959.02579127
+    SIZE 120 120
+    STATUS ON
+    MINBOXSIZE 5
+    MAXBOXSIZE 100
+    COLOR 255 0 0
+    OUTLINECOLOR 0 0 0
+    MARKERSIZE 8
+    MARKER 'star'
+  END
+
+  #
+  # Start of legend
+  #
+  LEGEND
+    KEYSIZE 18 12
+    LABEL
+      TYPE BITMAP
+      SIZE MEDIUM
+      COLOR 0 0 89
+    END
+    STATUS ON
+  END
+
+  #
+  # Start of scalebar
+  #
+  SCALEBAR
+    IMAGECOLOR 0 0 0
+    LABEL
+      COLOR 255 255 255
+      SIZE TINY
+    END
+    STYLE 1
+    SIZE 100 2
+    COLOR 255 255 255
+    UNITS MILES
+    INTERVALS 1
+    TRANSPARENT ON
+    STATUS ON
+  END
+  
+  #
+  # Start of layer definitions
+  #
+  LAYER
+    NAME drgs
+    TYPE RASTER
+    STATUS OFF
+
+    # OFFSITE 31
+    OFFSITE 252 252 252
+ 
+    CLASS
+      NAME 'Digital Raster Graphic'
+      KEYIMAGE graphics/drgs_keyimage.png
+    END
+ 
+    METADATA
+      OWS_TITLE "USGS 1:250,000 Digital Raster Graphic"
+      OWS_ABSTRACT "Hibbing and Bemidji quadrangles."
+      WMS_SRS "EPSG:26915"
+    END
+    TILEINDEX drgidx
+  END
+
+  LAYER
+    NAME ctybdpy2
+    TYPE POLYGON
+    STATUS OFF
+    DATA ctybdpy2
+    TEMPLATE "ttt"
+
+    # no need for a background IF the USGS quads are being drawn
+    REQUIRES "![drgs]"
+
+    CLASSITEM 'cty_name'
+    CLASS
+      EXPRESSION 'Itasca'
+      STYLE
+        OUTLINECOLOR 128 128 128
+        COLOR 225 225 185
+      END
+    END
+    CLASS # every other county in the state
+      EXPRESSION /./ 
+       STYLE 
+        OUTLINECOLOR 128 128 128
+        COLOR 255 255 255
+      END
+    END
+    METADATA
+      OWS_TITLE "County Boundary"
+      OWS_ABSTRACT "Itasca County boundary shapefile."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END
+
+  LAYER
+    NAME mcd90py2
+    GROUP cities
+    TYPE POLYGON
+    DATA mcd90py2
+    STATUS OFF
+    CLASSITEM city_name	
+    CLASS
+      NAME "Cities & Towns"
+      EXPRESSION /./
+      STYLE 
+        COLOR 255 225 90
+      END
+      TEMPLATE "templates/mcd90py2.html"
+    END
+
+    HEADER "templates/mcd90py2_header.html"
+    FOOTER "templates/mcd90py2_footer.html"
+
+    METADATA
+      OWS_TITLE "Minor Civil Divisions"
+      OWS_ABSTRACT "Minor civil divisions for Itasca County (boundaries only)."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END
+
+  LAYER
+    NAME twprgpy3
+    TYPE POLYGON
+    DATA twprgpy3
+    TEMPLATE "ttt"
+    STATUS OFF
+    CLASS
+      NAME 'Townships'
+      STYLE
+        SYMBOL 'circle'
+        SIZE 2        
+        OUTLINECOLOR 181 181 145
+      END
+    END
+    METADATA
+      OWS_TITLE "Township Boundaries"
+      OWS_ABSTRACT "Pulic Land Survey (PLS) township boundaries for Itasca County."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END
+
+  LAYER
+    NAME lakespy2
+    TYPE POLYGON
+    STATUS OFF
+    DATA lakespy2
+
+    PROJECTION
+        'init=epsg:26915' 
+    END
+
+    CLASS
+      NAME 'Lakes & Rivers'
+      TEMPLATE "templates/lakespy2.html"
+      STYLE
+        COLOR 49 117 185
+      END
+    END
+
+    HEADER "templates/lakespy2_header.html"
+    FOOTER "templates/lakespy2_footer.html"
+    
+    TOLERANCE 3
+
+    METADATA
+      OWS_TITLE "Lakes and Rivers"
+      OWS_ABSTRACT "DLG lake and river polygons for Itasca County."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END # lakes
+
+  LAYER
+    NAME dlgstln2
+    TYPE LINE
+    STATUS OFF
+    DATA dlgstln2
+
+    CLASS
+      NAME "Streams"
+      TEMPLATE "templates/dlgstln2.html"        
+      STYLE
+        COLOR 49 117 185
+      END
+    END
+
+    HEADER "templates/dlgstln2_header.html"
+    FOOTER "templates/dlgstln2_footer.html"
+
+    TOLERANCE 5
+
+    METADATA
+      OWS_TITLE "Streams"
+      OWS_ABSTRACT "DLG streams for Itasca County."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END # streams
+
+  LAYER
+    NAME ctyrdln3
+    GROUP roads
+    MAXSCALEDENOM 300000
+    STATUS OFF
+    DATA ctyrdln3
+    TEMPLATE "ttt"
+    TYPE LINE
+    CLASS
+      STYLE
+        COLOR 0 0 0
+      END
+    END
+
+    PROJECTION
+        'init=epsg:26915' 
+    END
+
+    METADATA
+      OWS_TITLE "County Roads"
+      OWS_ABSTRACT "County roads (lines only) derived from MNDOT roads layer."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END # county roads
+
+  LAYER
+    NAME ctyrdln3_anno
+    GROUP roads
+    MAXSCALEDENOM 300000
+    STATUS OFF
+    DATA ctyrdln3
+    TEMPLATE "ttt"
+    TYPE LINE
+    LABELITEM "road_name"
+    CLASS
+      LABEL
+        MINFEATURESIZE 40
+        MINDISTANCE 150
+        POSITION CC
+        SIZE TINY
+        COLOR 0 0 0
+        STYLE
+          COLOR 255 255 255
+          SYMBOL 'symbols/ctyhwy.png'
+        END        
+      END
+    END
+        
+    METADATA
+      OWS_TITLE "County Roads"
+      OWS_ABSTRACT "County roads (shields only) derived from MNDOT roads layer."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END # county road annotation
+
+  LAYER
+    NAME majrdln3
+    GROUP roads
+    MAXSCALEDENOM 600000
+    STATUS OFF
+    DATA majrdln3
+    TEMPLATE "ttt"
+    TYPE LINE
+    CLASS
+      NAME "Roads"
+      STYLE
+        COLOR 0 0 0
+      END
+    END
+
+    METADATA
+      OWS_TITLE "Highways"
+      OWS_ABSTRACT "Highways- state, US and interstate (lines only) derived from MNDOT roads layer."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END # highways
+
+  LAYER
+    NAME majrdln3_anno
+    GROUP roads
+    MAXSCALEDENOM 600000
+    STATUS OFF
+    DATA majrdln3
+    TEMPLATE "ttt"
+    TYPE LINE
+    LABELITEM "road_num"    
+    CLASSITEM "road_class"
+    CLASS
+      EXPRESSION "3"
+      LABEL
+        MINFEATURESIZE 50
+        MINDISTANCE 150
+        POSITION CC
+        SIZE TINY
+        COLOR 0 0 0
+        STYLE
+          COLOR 0 0 0 # dummy color
+          SYMBOL 'symbols/sthwy.png'
+        END        
+      END
+    END
+    CLASS
+      EXPRESSION "2" 
+      LABEL
+        MINFEATURESIZE 50
+        MINDISTANCE 150
+        POSITION CC
+        SIZE TINY
+        COLOR 0 0 0
+        STYLE
+          COLOR 0 0 0 # dummy color
+          SYMBOL 'symbols/ushwy.png'
+        END        
+      END
+    END
+    CLASS
+      EXPRESSION "1" 
+      LABEL
+        MINFEATURESIZE 50
+        MINDISTANCE 150
+        POSITION CC
+        SIZE TINY
+        COLOR 255 255 255
+        STYLE 
+          COLOR 0 0 0 # dummy color
+          SYMBOL 'symbols/interstate.png'
+        END        
+      END
+    END
+
+    METADATA
+      OWS_TITLE "Highways"
+      OWS_ABSTRACT "Highways- state, US and interstate (shields only) derived from MNDOT roads layer."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END # highway annotation
+
+  LAYER
+    NAME airports
+    TYPE POINT
+    DATA airports
+    PROJECTION
+        'init=epsg:26915' 
+    END
+    STATUS OFF
+    CLASS
+      NAME 'Airports'
+      STYLE
+        COLOR 128 255 164
+        SYMBOL 'circle'
+        SIZE 7
+      END
+      TEMPLATE "templates/airports.html"
+    END
+
+    HEADER "templates/airports_header.html"
+    FOOTER "templates/airports_footer.html"
+
+    TOLERANCE 5
+
+    METADATA
+      OWS_TITLE "Airports"
+      OWS_ABSTRACT "Airport runways for Itasca County."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END
+
+  LAYER
+    NAME mcd90py2_anno
+    GROUP cities
+    TEMPLATE "ttt"
+    TYPE POINT
+    DATA mcd90py2
+    STATUS OFF
+    LABELITEM "city_name"
+    CLASSITEM "city_name"
+    LABELMAXSCALEDENOM 500000
+    CLASS
+      EXPRESSION /./      
+      LABEL
+        COLOR 0 0 0
+        SHADOWCOLOR 218 218 218
+        SHADOWSIZE 2 2
+        TYPE BITMAP
+        SIZE MEDIUM
+        POSITION CC
+        PARTIALS FALSE
+        BUFFER 2
+      END
+    END
+
+    METADATA
+      OWS_TITLE "Minor Civil Divisions"
+      OWS_ABSTRACT "Minor civil divisions for Itasca County (annotation only)."
+      WMS_SRS "EPSG:26915"
+
+      GML_INCLUDE_ITEMS "all"
+      GML_FEATUREID "FID"
+      GML_TYPES "auto"
+    END
+  END
+
+END # Map File
