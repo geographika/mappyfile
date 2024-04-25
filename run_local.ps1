@@ -1,5 +1,9 @@
+# C:\Python310\python -m venv C:\VirtualEnvs\mappyfile3
 C:\VirtualEnvs\mappyfile3\Scripts\activate.ps1
 cd D:\GitHub\mappyfile
+
+# pip install .[lark_cython]
+# pip install -r requirements-dev.txt
 
 black .
 flake8 .
