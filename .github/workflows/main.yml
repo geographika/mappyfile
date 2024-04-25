@@ -57,7 +57,8 @@ jobs:
         env:
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
           COVERALLS_PARALLEL: true
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
 
   # see https://github.com/marketplace/actions/coveralls-github-action
@@ -74,4 +75,4 @@ jobs:
         pip3 install --upgrade coveralls
         coveralls --service=github --finish
       env:
-        GITHUB_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
