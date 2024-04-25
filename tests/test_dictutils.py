@@ -89,6 +89,46 @@ def test_findall():
     assert layers[0]["name"] == "Layer1"
 
 
+def test_findall_missing_value():
+    s = """
+    MAP
+        LAYER
+            NAME "Layer1"
+            TYPE POLYGON
+            GROUP "test"
+        END
+        LAYER
+            NAME "Layer2"
+            TYPE POLYGON
+            GROUP "1test"
+        END
+        LAYER
+            NAME "Layer3"
+            TYPE POLYGON
+            GROUP "test2"
+        END
+        LAYER
+            NAME "Layer4"
+            TYPE POLYGON
+            # GROUP "test"
+        END
+    END
+    """
+
+    d = mappyfile.loads(s)
+    layers = mappyfile.findall(d["layers"], "group", "test")
+    assert len(layers) == 1
+    assert layers[0]["name"] == "Layer1"
+
+
+def test_findall_itasca():
+    fn = "./tests/mapfiles/itasca2.map"
+    d = mappyfile.open(fn)
+    layers = mappyfile.findall(d["layers"], "group", "roads")
+    assert len(layers) == 4
+    assert layers[0]["name"] == "ctyrdln3"
+
+
 def test_update():
     s1 = """
     MAP
@@ -349,6 +389,7 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
-    # test_findunique()
+    # run_tests()
+    test_findall_missing_value()
+    test_findall_itasca()
     print("Done!")

@@ -136,7 +136,7 @@ def findall(lst: list[dict], key: str, value: Any) -> list[dict]:
         layers = mappyfile.findall(d["layers"], "group", "test")
         assert len(layers) == 2
     """
-    return [item for item in lst if item[key.lower()] in value]
+    return [item for item in lst if item[key.lower()] and item[key.lower()] in value]
 
 
 def findunique(lst, key):
