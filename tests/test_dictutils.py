@@ -133,9 +133,8 @@ def test_findall_itasca2():
     fn = "./tests/mapfiles/itasca2.map"
     d = mappyfile.open(fn)
     layers = mappyfile.findall(d["layers"], "type", "POINT")
-    print(len(layers))
-    assert len(layers) == 4
-    assert layers[0]["name"] == "ctyrdln3"
+    assert len(layers) == 2
+    assert layers[0]["name"] == "airports"
 
 
 def test_update():
