@@ -68,11 +68,14 @@ SYMBOL_ATTRIBUTES = {
 
 
 class Parser:
-    def __init__(self, expand_includes: bool = True, include_comments: bool = False):
+    def __init__(
+        self, expand_includes: bool = True, include_comments: bool = False, **kwargs
+    ):
         self.expand_includes = expand_includes
         self.include_comments = include_comments
         self._comments: list[Any] = []
         self.lalr = self._create_lalr_parser()
+        self.kwargs = kwargs
 
     def _create_lalr_parser(self) -> Any:
         extra_args = {}
@@ -107,7 +110,7 @@ class Parser:
         return inc_file_path.strip("'").strip('"')
 
     def load_includes(
-        self, text: str, fn: (str | None) = None, _nested_includes: int = 0
+        self, text: str, fn: str | None = None, _nested_includes: int = 0
     ) -> str:
         # Per default use working directory of the process
         if fn is None:
@@ -200,7 +203,7 @@ class Parser:
         text = self.open_file(fn)
         return self.parse(text, fn=fn)
 
-    def parse(self, text: str, fn: (str | None) = None) -> Any:
+    def parse(self, text: str, fn: str | None = None) -> Any:
         """
         Parse the Mapfile
         """

@@ -4,6 +4,19 @@ import io
 import tempfile
 import mappyfile
 import pytest
+from mappyfile.transformer import MapfileTransformer, MapfileToDict
+from mappyfile.parser import Parser
+
+
+class CustomTransformer(MapfileTransformer):
+    def __init__(
+        self,
+        include_position=False,
+        include_comments=False,
+        custom_parameter=False,
+    ):
+        self.custom_parameter = custom_parameter
+        super().__init__(include_position, include_comments)
 
 
 def test_open():
@@ -35,6 +48,19 @@ def test_loads():
 
     d = mappyfile.loads(s, include_comments=True)
     assert d["name"] == "TEST"
+
+
+def test_loads_kwargs():
+    s = """MAP NAME "TEST" END"""
+    d = mappyfile.loads(s, transformer_class=CustomTransformer, custom_parameter=True)
+    assert d["name"] == "TEST"
+
+    p = Parser(expand_includes=True, include_comments=True, custom_parameter=True)
+    assert p.kwargs["custom_parameter"] is True
+    m = MapfileToDict(
+        include_position=True, include_comments=True, custom_parameter=True
+    )
+    assert m.kwargs["custom_parameter"] is True
 
 
 def test_dump():
@@ -159,5 +185,5 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_create_missing()
+    test_loads_kwargs()
     print("Done!")
