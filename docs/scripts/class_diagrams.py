@@ -1,32 +1,28 @@
 r"""
 Create MapServer class diagrams
 
-Requires https://graphviz.gitlab.io/_pages/Download/Download_windows.html
-https://stackoverflow.com/questions/1494492/graphviz-how-to-go-from-dot-to-a-graph
+Requires https://graphviz.gitlab.io/_pages/Download/Download_windows.html (tested with graphviz-11.0.0 (64-bit) EXE installer)
+For DOT language see http://www.graphviz.org/doc/info/attrs.html
+See also https://stackoverflow.com/questions/1494492/graphviz-how-to-go-from-dot-to-a-graph
+For Entity Relationship diagram example see https://graphviz.readthedocs.io/en/stable/examples.html#er-py
 
-For DOT languge see http://www.graphviz.org/doc/info/attrs.html
 
-cd C:\Program Files (x86)\Graphviz2.38\bin
-dot -Tpng D:\GitHub\mappyfile\mapfile_classes.dot -o outfile.png
-outfile.png
+pip install pydot
 
-For Entity Relationship diagrams:
+# to generate diagrams run the following in PowerShell
 
-https://graphviz.readthedocs.io/en/stable/examples.html#er-py
+C:\VirtualEnvs\mappyfile3\Scripts\activate.ps1
+$env:Path = "C:\Program Files\Graphviz\bin;" + $env:Path
+# dot -Tpng D:\GitHub\mappyfile\mapfile_classes.dot -o outfile.png
 
+cd D:\GitHub\mappyfile\docs\scripts
+python class_diagrams.py
 """
 
 import os
 import pydot
 
-# import pprint
-
-
 FONT = "Lucida Sans"
-
-
-def graphviz_setup(gviz_path):
-    os.environ["PATH"] = gviz_path + ";" + os.environ["PATH"]
 
 
 def add_child(graph, child_id, child_label, parent_id, colour):
@@ -66,11 +62,8 @@ def save_file(graph, fn):
     os.startfile(filename)
 
 
-def main(gviz_path, layer_only=False):
-    graphviz_setup(gviz_path)
-    graph = pydot.Dot(graph_type="digraph", rankdir="TB")
-
-    layer_children = {
+def layer_children():
+    return {
         "CLASS": {
             "LABEL": {"STYLE": {}},
             "CONNECTIONOPTIONS": {},
@@ -89,11 +82,11 @@ def main(gviz_path, layer_only=False):
         "VALIDATION": {},
     }
 
-    # pprint.pprint(layer_children)
 
-    classes = {
+def map_children():
+    return {
         "MAP": {
-            "LAYER": layer_children,
+            "LAYER": layer_children(),
             "LEGEND": {"LABEL": {}},
             "PROJECTION": {},
             "QUERYMAP": {},
@@ -104,14 +97,42 @@ def main(gviz_path, layer_only=False):
         }
     }
 
-    if layer_only:
-        root = "LAYER"
-        classes = classes["MAP"]
-        fn = "layer_classes"
-    else:
-        fn = "map_classes"
-        (root,) = classes.keys()
 
+def simple_classes():
+    return {
+        "MAP": {
+            "LAYER": {
+                "CLASS": {
+                    "STYLE": {},
+                }
+            },
+            "PROJECTION": {},
+            "SYMBOL": {},
+            "WEB": {
+                "METADATA": {},
+            },
+        }
+    }
+
+
+def very_simple_classes():
+    return {
+        "MAP": {
+            "LAYER": {
+                "CLASS": {
+                    "STYLE": {},
+                }
+            },
+            "PROJECTION": {},
+            "WEB": {
+                "METADATA": {},
+            },
+        }
+    }
+
+
+def generate_graph(root, classes, fn):
+    graph = pydot.Dot(graph_type="digraph", rankdir="TB")
     node = pydot.Node(
         root,
         style="filled",
@@ -125,8 +146,16 @@ def main(gviz_path, layer_only=False):
     save_file(graph, fn)
 
 
+def main():
+
+    # pprint.pprint(layer_children)
+    classes = map_children()
+    generate_graph(root="LAYER", classes=classes["MAP"], fn="layer_classes")
+    generate_graph(root="MAP", classes=classes, fn="map_classes")
+    generate_graph(root="MAP", classes=simple_classes(), fn="simple_classes")
+    generate_graph(root="MAP", classes=very_simple_classes(), fn="very_simple_classes")
+
+
 if __name__ == "__main__":
-    gviz_path = r"C:\Program Files (x86)\Graphviz2.38\bin"
-    main(gviz_path, True)
-    main(gviz_path, False)
+    main()
     print("Done!")
