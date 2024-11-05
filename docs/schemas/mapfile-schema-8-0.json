@@ -2577,12 +2577,9 @@
                     ]
                 },
                 "imagecolor": {
-                    "items": {
-                        "type": "number"
-                    },
-                    "maxItems": 4,
-                    "minItems": 4,
-                    "type": "array"
+                    "additionalProperties": true,
+                    "properties": {},
+                    "type": "object"
                 },
                 "include": {
                     "items": {
@@ -3601,11 +3598,23 @@
                     ]
                 },
                 "position": {
-                    "enum": [
-                        "on",
-                        "off"
-                    ],
-                    "type": "string"
+                    "oneOf": [
+                        {
+                            "items": {
+                                "maximum": 255,
+                                "minimum": -1,
+                                "type": "number"
+                            },
+                            "maxItems": 3,
+                            "minItems": 3,
+                            "type": "array"
+                        },
+                        {
+                            "example": "#aa33cc",
+                            "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
+                            "type": "string"
+                        }
+                    ]
                 },
                 "postlabelcache": {
                     "type": "boolean"
@@ -4127,14 +4136,9 @@
                 "color": {
                     "enum": [
                         "on",
-                        "off",
-                        0,
-                        1,
-                        2,
-                        3,
-                        4,
-                        5
-                    ]
+                        "off"
+                    ],
+                    "type": "string"
                 },
                 "extent": {
                     "items": {
@@ -4149,22 +4153,15 @@
                     "type": "string"
                 },
                 "imagecolor": {
-                    "oneOf": [
-                        {
-                            "items": {
-                                "maximum": 255,
-                                "minimum": -1,
-                                "type": "number"
-                            },
-                            "maxItems": 3,
-                            "minItems": 3,
-                            "type": "array"
-                        },
-                        {
-                            "example": "#aa33cc",
-                            "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                            "type": "string"
-                        }
+                    "enum": [
+                        "on",
+                        "off",
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
                     ]
                 },
                 "include": {
@@ -5962,20 +5959,18 @@
                 "transparent": {
                     "allOf": [
                         {
-                            "oneOf": [
+                            "anyOf": [
                                 {
-                                    "items": {
-                                        "maximum": 255,
-                                        "minimum": -1,
-                                        "type": "number"
-                                    },
-                                    "maxItems": 3,
-                                    "minItems": 3,
-                                    "type": "array"
+                                    "type": "string"
                                 },
                                 {
-                                    "example": "#aa33cc",
-                                    "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
+                                    "description": "expression",
+                                    "pattern": "^\\((.*?)\\)$",
+                                    "type": "string"
+                                },
+                                {
+                                    "description": "regex",
+                                    "pattern": "^/(.*?)/$",
                                     "type": "string"
                                 }
                             ]
@@ -5983,21 +5978,12 @@
                     ]
                 },
                 "units": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "description": "expression",
-                            "pattern": "^\\((.*?)\\)$",
-                            "type": "string"
-                        },
-                        {
-                            "description": "regex",
-                            "pattern": "^/(.*?)/$",
-                            "type": "string"
-                        }
-                    ]
+                    "items": {
+                        "type": "number"
+                    },
+                    "maxItems": 4,
+                    "minItems": 4,
+                    "type": "array"
                 }
             },
             "type": "object"
@@ -6242,12 +6228,9 @@
                             ]
                         },
                         "imagecolor": {
-                            "items": {
-                                "type": "number"
-                            },
-                            "maxItems": 4,
-                            "minItems": 4,
-                            "type": "array"
+                            "additionalProperties": true,
+                            "properties": {},
+                            "type": "object"
                         },
                         "include": {
                             "items": {
@@ -7266,11 +7249,23 @@
                             ]
                         },
                         "position": {
-                            "enum": [
-                                "on",
-                                "off"
-                            ],
-                            "type": "string"
+                            "oneOf": [
+                                {
+                                    "items": {
+                                        "maximum": 255,
+                                        "minimum": -1,
+                                        "type": "number"
+                                    },
+                                    "maxItems": 3,
+                                    "minItems": 3,
+                                    "type": "array"
+                                },
+                                {
+                                    "example": "#aa33cc",
+                                    "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
+                                    "type": "string"
+                                }
+                            ]
                         },
                         "postlabelcache": {
                             "type": "boolean"
