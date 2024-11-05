@@ -12,7 +12,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_utils.py</StartupFile>
+    <StartupFile>tests\test_validation.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -1199,6 +1199,15 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="C:\VirtualEnvs\mappyfile313\">
+      <Id>mappyfile313</Id>
+      <Version>0.0</Version>
+      <Description>mappyfile313 (Python 3.13 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="C:\VirtualEnvs\mappyfile3\">
       <Id>mappyfile3</Id>
       <Version>3.10</Version>

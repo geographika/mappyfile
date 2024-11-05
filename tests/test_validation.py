@@ -333,6 +333,8 @@ def test_deref():
     print(json.dumps(deref_schema, indent=4))
     print(deref_schema["properties"]["filter"])
     assert list(deref_schema["properties"]["filter"].keys())[0] == "anyOf"
+    print(json.dumps(deref_schema["properties"]["filter"]))
+    assert json.dumps(deref_schema["properties"]["filter"]) is not None
 
 
 def test_cached_schema():
@@ -622,6 +624,7 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    run_tests()
+    # run_tests()
     # test_double_error()
+    test_deref()
     print("Done!")
