@@ -88,9 +88,14 @@ class Validator:
     def get_json_from_file(self, schema_name: str):
         if schema_name not in self.schemas:
             schema_file = self.get_schema_file(schema_name)
+            schemas_folder = self.get_schemas_folder()
+            base_uri = self.get_schema_path(schemas_folder)
+
             with open(schema_file, encoding="utf-8") as f:
                 try:
-                    jsn_schema = json.load(f)
+                    jsn_schema = jsonref.load(
+                        f, base_uri=base_uri, lazy_load=False, proxies=False
+                    )
                 except ValueError as ex:
                     log.error("Could not load %s", schema_file)
                     raise ex
@@ -123,7 +128,7 @@ class Validator:
         return True
 
     def get_versioned_schema(
-        self, version: (float | None), schema_name: str = "map"
+        self, version: float | None, schema_name: str = "map"
     ) -> dict:
         """
         Get a fully expanded JSON schema for a specific MapServer
@@ -278,7 +283,7 @@ class Validator:
         value: Any,
         add_comments: bool = False,
         schema_name: str = "map",
-        version: (float | None) = None,
+        version: float | None = None,
     ):
         """
         verbose - also return the jsonschema error details
@@ -300,7 +305,7 @@ class Validator:
         return error_messages
 
     def get_expanded_schema(
-        self, schema_name: str, version: (float | None) = None
+        self, schema_name: str, version: float | None = None
     ) -> dict:
         """
         Return a schema file with all $ref properties expanded

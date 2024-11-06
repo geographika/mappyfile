@@ -618,6 +618,13 @@ def test_get_versioned_schema():
     assert "defresolution" in jsn["properties"].keys()
 
 
+def test_validating_mapfile():
+    fn = "./tests/sample_maps/256_overlay_res.map"
+    d = mappyfile.open(fn, expand_includes=True, include_position=True)
+    validation_messages = mappyfile.validate(d)
+    assert len(validation_messages) == 0
+
+
 def run_tests():
     pytest.main(["tests/test_validation.py"])
 
@@ -626,5 +633,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
     # test_double_error()
-    test_deref()
+    test_validating_mapfile()
     print("Done!")
