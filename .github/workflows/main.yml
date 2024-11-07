@@ -39,7 +39,7 @@ jobs:
       - name: Command line tests
         run: |
           mappyfile schema mapfile-schema.json
-          mappyfile schema mapfile-schema-8-0.json --version=8.0
+          mappyfile schema mapfile-schema-8-2.json --version=8.2
           mappyfile validate tests/sample_maps/256_overlay_res.map
           mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
       - name: Test API examples
