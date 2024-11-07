@@ -19,6 +19,7 @@ https://docutils.readthedocs.io/en/sphinx-docs/howto/rst-roles.html
 https://github.com/sphinx-doc/sphinx/issues/2922#issuecomment-243377010
 Unfortunately, Sphinx is a monolithic application. So there is no way to use only parsers.
 """
+
 import glob, os, codecs
 
 import docutils.frontend

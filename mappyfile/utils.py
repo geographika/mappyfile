@@ -424,7 +424,7 @@ def dumps(
     )
 
 
-def validate(d: dict, version: (float | None) = None) -> list:
+def validate(d: dict, version: float | None = None) -> list:
     """
     Validate a mappyfile dictionary by using the Mapfile schema.
     An optional version number can be used to specify a specific

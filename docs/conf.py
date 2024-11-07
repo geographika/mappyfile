@@ -571,7 +571,7 @@ class MapFileLexer(RegexLexer):
             # quotes, percents and backslashes must be parsed one at a time
             (r'[\'"\\]', String),
             # unhandled string formatting sign
-            (r"%", String)
+            (r"%", String),
             # newlines are an error (use "nl" state)
         ],
         "nl": [(r"\n", String)],

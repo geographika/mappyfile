@@ -136,7 +136,7 @@ class MapfileTransformer(Transformer):
         self,
         composite_dict: dict,
         attribute_dict: dict,
-        position_dict: (dict | None),
+        position_dict: dict | None,
         pos: int,
     ):
         key_name = "config"
@@ -162,7 +162,7 @@ class MapfileTransformer(Transformer):
         self,
         composite_dict: dict,
         attribute_dict: dict,
-        position_dict: (dict | None),
+        position_dict: dict | None,
         pos: int,
     ):
         key_name = "points"

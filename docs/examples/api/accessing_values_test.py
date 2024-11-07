@@ -1,6 +1,7 @@
 def test():
     # START OF API EXAMPLE
     import mappyfile
+
     # open will accept a filename (mappyfile.loads will accept a string)
     mapfile = mappyfile.open("./docs/examples/raster.map")
 

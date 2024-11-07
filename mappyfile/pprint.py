@@ -224,7 +224,7 @@ class PrettyPrinter:
         return lines
 
     def process_projection(
-        self, key, lst: (str | list[str]), level: int, projection_comments: str
+        self, key, lst: str | list[str], level: int, projection_comments: str
     ) -> list[str]:
         lines = [self.add_start_line(key, level)]
 
@@ -308,7 +308,7 @@ class PrettyPrinter:
             return True
         return False
 
-    def pprint(self, composites: (dict | list[dict])) -> str:
+    def pprint(self, composites: dict | list[dict]) -> str:
         """
         Print out a nicely indented Mapfile
         """

@@ -123,7 +123,7 @@ class Validator:
         return True
 
     def get_versioned_schema(
-        self, version: (float | None), schema_name: str = "map"
+        self, version: float | None, schema_name: str = "map"
     ) -> dict:
         """
         Get a fully expanded JSON schema for a specific MapServer
@@ -278,7 +278,7 @@ class Validator:
         value: Any,
         add_comments: bool = False,
         schema_name: str = "map",
-        version: (float | None) = None,
+        version: float | None = None,
     ):
         """
         verbose - also return the jsonschema error details
@@ -300,7 +300,7 @@ class Validator:
         return error_messages
 
     def get_expanded_schema(
-        self, schema_name: str, version: (float | None) = None
+        self, schema_name: str, version: float | None = None
     ) -> dict:
         """
         Return a schema file with all $ref properties expanded

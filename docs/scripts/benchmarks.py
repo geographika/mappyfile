@@ -8,6 +8,7 @@ With lark:
     10 loops, best of 5: 274 msec per loop
 
 """
+
 import timeit
 
 N = 100

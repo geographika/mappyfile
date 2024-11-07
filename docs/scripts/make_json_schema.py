@@ -9,6 +9,7 @@ SET "output_folder=D:\GitHub\mappyfile\docs\schemas\"
 jsonschema2rst %input_folder% %output_folder%
 
 """
+
 import os
 import json
 from jsonschema import Draft4Validator
