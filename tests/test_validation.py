@@ -632,7 +632,7 @@ def test_get_outputformat_schema():
     ]
 
 
-def test_get_versioned_schema():
+def test_get_full_versioned_schema():
     validator = Validator()
     versioned_schema = validator.get_versioned_schema(8.2, "map")
     # print(json.dumps(versioned_schema, indent=4))
@@ -655,5 +655,5 @@ if __name__ == "__main__":
     # test_double_error()
     # test_deref()
     # test_get_outputformat_schema()
-    test_get_versioned_schema()
+    test_get_full_versioned_schema()
     print("Done!")
