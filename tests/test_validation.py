@@ -618,6 +618,33 @@ def test_get_versioned_schema():
     assert "defresolution" in jsn["properties"].keys()
 
 
+def test_get_outputformat_schema():
+    validator = Validator()
+    schema_name = "outputformat.json"
+    jsn = validator.get_json_from_file(schema_name)
+    # print(json.dumps(jsn, indent=4))
+    assert jsn["properties"]["transparent"]["oneOf"][1]["$ref"] == "onoff.json"
+    expanded_schema = validator.get_expanded_schema(schema_name)
+    # print(json.dumps(expanded_schema, indent=4))
+    assert expanded_schema["properties"]["transparent"]["oneOf"][1]["enum"] == [
+        "on",
+        "off",
+    ]
+
+
+def test_get_versioned_schema():
+    validator = Validator()
+    versioned_schema = validator.get_versioned_schema(8.2, "map")
+    # print(json.dumps(versioned_schema, indent=4))
+    output_formats = versioned_schema["properties"]["outputformats"]["items"]
+    # print(json.dumps(output_formats, indent=4))
+    # print(json.dumps(versioned_schema, indent=4))
+    assert output_formats["properties"]["transparent"]["oneOf"][1]["enum"] == [
+        "on",
+        "off",
+    ]
+
+
 def run_tests():
     pytest.main(["tests/test_validation.py"])
 
@@ -626,5 +653,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
     # test_double_error()
-    test_deref()
+    # test_deref()
+    # test_get_outputformat_schema()
+    test_get_versioned_schema()
     print("Done!")
