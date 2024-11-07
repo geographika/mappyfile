@@ -2,6 +2,7 @@
 C:\VirtualEnvs\mappyfile3\Scripts\activate.ps1
 cd D:\GitHub\mappyfile
 
+# the following installs mappyfile with the optional lark_cython extension
 # pip install .[lark_cython]
 # pip install -r requirements-dev.txt
 
