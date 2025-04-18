@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyfile313|$(MSBuildProjectFullPath)</InterpreterId>
     <StartupFile>tests\test_validation.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
@@ -1157,6 +1157,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Compile Include="misc\docs_parser.py" />
     <Compile Include="misc\test_docs_parser.py" />
     <Compile Include="misc\token_generator.py" />
+    <Compile Include="misc\validation_benchmark.py" />
     <Compile Include="misc\__init__.py" />
     <Compile Include="setup.py" />
     <Compile Include="tests\mapfiles\basemaps\generate_style.py" />
