@@ -58,6 +58,9 @@ jobs:
         run: |
           pytest --cov mappyfile --cov-report= tests/
       - name: Upload coverage data to coveralls.io
+        # currently get errors as coveralls not yet available for 3.13
+        # and get ImportError: cannot import name 'Reporter' from 'coverage.report'
+        if: matrix.python-version != '3.13'
         run: |
           coveralls
         env:
