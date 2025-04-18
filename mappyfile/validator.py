@@ -319,7 +319,7 @@ class Validator:
 
             with open(fn, encoding="utf-8") as f:
                 jsn_schema = jsonref.load(
-                    f, base_uri=base_uri, lazy_load=False, proxies=False
+                    f, base_uri=base_uri, lazy_load=True, proxies=False
                 )
 
                 # cache the schema for future use
