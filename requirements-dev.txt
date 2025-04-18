@@ -17,5 +17,5 @@ mypy
 types-jsonschema
 
 # for demo scripts
-# Pillow
+Pillow
 shapely
