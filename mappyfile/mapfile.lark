@@ -28,7 +28,13 @@
 // =================================================================
 
 start: "SYMBOLSET"i composite_body _END   -> symbolset
+     | "CONFIG"i _config_body _END         -> config
      | composite+
+
+_config_body: config_item*
+config_item: "ENV"i attr* _END -> env
+            | "MAPS"i attr* _END -> maps
+            | "PLUGINS"i attr* _END -> plugins
 
 composite: composite_type composite_body _END
        | metadata
