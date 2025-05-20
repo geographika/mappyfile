@@ -1,5 +1,5 @@
 # C:\Python310\python -m venv C:\VirtualEnvs\mappyfile3
-C:\VirtualEnvs\mappyfile3\Scripts\activate.ps1
+C:\VirtualEnvs\mappyfile313\Scripts\activate.ps1
 cd D:\GitHub\mappyfile
 
 # the following installs mappyfile with the optional lark_cython extension
@@ -14,5 +14,5 @@ flake8 .
 # mypy mappyfile tests --check-untyped-defs
 mypy mappyfile tests
 
-# pytest
-pytest --doctest-modules --ignore=./docs/examples/pretty_printing.py
+pytest --doctest-modules
+# pytest ./tests
