@@ -8,10 +8,10 @@ try:
 except ImportError:
     raise
 
-from helper import create_image
-
-
 sys.path.append(os.path.abspath("./docs/examples"))
+
+
+from helper import create_image  # noqa: E402
 
 
 def create_frame(mapfile, line, dist):

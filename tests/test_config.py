@@ -26,7 +26,7 @@ def test_parser_validation():
     END
     """
     with pytest.raises(UnexpectedCharacters) as e:
-        res = p.parse(config_text_bad1)
+        p.parse(config_text_bad1)
     assert e.value.line == 4
 
     # Test mapfile composites inside the config
@@ -39,5 +39,4 @@ def test_parser_validation():
     END
     """
     with pytest.raises(UnexpectedToken) as e:
-        res = p.parse(config_text_bad2)
-
+        p.parse(config_text_bad2)
