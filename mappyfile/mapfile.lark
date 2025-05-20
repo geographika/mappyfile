@@ -114,7 +114,7 @@ expression: "(" or_test ")"
 // ?multiply: (multiply "*")? (func_call | value)
 
 func_call: UNQUOTED_STRING "(" func_params ")"
-func_params: value ("," value)*
+func_params: atom ("," atom)*
 
 !true: "TRUE"i
 !false: "FALSE"i
