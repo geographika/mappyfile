@@ -1009,7 +1009,6 @@ END"""
     assert output(s, schema_name="leader") == exp
 
 
-@pytest.mark.xfail
 def test_geomtransform_nested_function():
     s = """
 LAYER
@@ -1019,8 +1018,8 @@ LAYER
 END"""
 
     print(output(s, schema_name="layer"))
-    exp = "LAYER NAME 'centerline1' TYPE LINE GEOMTRANSFORM (centerline(densify([shape],5))) END"
-    assert output(s, schema_name="leader") == exp
+    exp = "LAYER NAME 'centerline1' TYPE LINE GEOMTRANSFORM (centerline((densify([shape],5)))) END"
+    assert output(s, schema_name="layer") == exp
 
 
 def test_class_regex_expression():
