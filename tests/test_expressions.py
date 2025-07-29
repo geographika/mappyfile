@@ -444,6 +444,20 @@ def test_list_with_apostrophe():
     assert output(s) == exp
 
 
+def test_alternate_not_expression():
+    """
+    See https://github.com/geographika/mappyfile/issues/220
+    """
+    s = """
+    CLASS
+      EXPRESSION ('[CTY_NAME]' <> 'Aitkin')
+    END
+    """
+
+    exp = "CLASS EXPRESSION ( '[CTY_NAME]' <> 'Aitkin' ) END"
+    assert output(s) == exp
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -455,6 +469,6 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    test_list_with_apostrophe()
+    test_alternate_not_expression()
     # run_tests()
     print("Done!")
