@@ -12,10 +12,12 @@ sys.path.append(os.path.abspath("./docs/examples"))
 def dilation(mapfile):
     line = LineString([(0, 0), (1, 1), (0, 2), (2, 2), (3, 1), (1, 0)])
     ll = mappyfile.find(mapfile["layers"], "name", "line")
+    assert ll is not None
     ll["features"][0]["wkt"] = line.wkt
 
     dilated = line.buffer(0.5, cap_style=3)
     pl = mappyfile.find(mapfile["layers"], "name", "polygon")
+    assert pl is not None
     pl["features"][0]["wkt"] = dilated.wkt
 
     mapfile["extent"] = " ".join(map(str, dilated.buffer(0.8).bounds))
@@ -28,9 +30,11 @@ def erosion(mapfile, dilated):
     If we wanted to start from scratch we could simply reread it
     """
     ll = mappyfile.find(mapfile["layers"], "name", "line")
+    assert ll is not None
     ll["status"] = "OFF"
 
     pl = mappyfile.find(mapfile["layers"], "name", "polygon")
+    assert pl is not None
 
     # make a deep copy of the polygon layer in the Map
     # so any modification are made to this layer only

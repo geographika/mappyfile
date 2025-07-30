@@ -22,6 +22,7 @@ def _create_image_from_map(map_file, out_img, format):
     os.environ["PATH"] = DLL_LOCATION + ";" + os.environ["PATH"]
 
     p = Popen(params, stdout=PIPE, bufsize=1)
+    assert p.stdout is not None
     with p.stdout:
         for line in iter(p.stdout.readline, b""):
             print(line)

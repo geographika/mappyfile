@@ -18,6 +18,8 @@ def create_image_from_map(map_file, dll_location):
     logging.debug(" ".join(params))
 
     p = Popen(params, stdout=PIPE, bufsize=1)
+    assert p.stdout is not None
+
     with p.stdout:
         print(map_file)
         for line in iter(p.stdout.readline, b""):
