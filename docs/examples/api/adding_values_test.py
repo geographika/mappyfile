@@ -32,6 +32,7 @@ def test_class():
     # START OF ADD CLASS EXAMPLE
     # find a layer using its name
     layer = mappyfile.find(mapfile["layers"], "name", "sea")
+    assert layer is not None
 
     new_class_string = """
     CLASS

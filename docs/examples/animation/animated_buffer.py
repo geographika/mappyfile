@@ -17,12 +17,15 @@ from helper import create_image  # noqa: E402
 def create_frame(mapfile, line, dist):
     # get the polygon layer
     pl = mappyfile.find(mapfile["layers"], "name", "polygon")
+    assert pl is not None
     # buffer the line
     dilated = line.buffer(dist, cap_style=3)
     # now set the FEATURES in the Mapfile to be the WKT from Shapely
     pl["features"][0]["wkt"] = "'%s'" % dilated.wkt
     # create an image from this Mapfile
-    return create_image("animation_%s" % str(dist), mapfile, format="gif")
+    return create_image(
+        "animation_%s" % str(dist), mapfile, output_folder="", format="gif"
+    )
 
 
 def create_frames(mapfile):
@@ -74,7 +77,7 @@ def create_animation(img_files):
 
 def main():
     mf = "./docs/examples/animation/animated_buffer.map"
-    mapfile = mappyfile.load(mf)
+    mapfile = mappyfile.open(mf)
     img_files = create_frames(mapfile)
     create_animation(img_files)
 

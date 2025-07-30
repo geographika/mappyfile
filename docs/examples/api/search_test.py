@@ -8,10 +8,12 @@ def test():
 
     # search for a layer by name
     layer = mappyfile.find(mapfile["layers"], "name", "sea")
+    assert layer is not None
     print(layer["name"])  # "sea"
 
     # search for all layers in a group
     for layer in mappyfile.findall(mapfile["layers"], "group", "my_group"):
+        assert layer is not None
         print(layer["name"])
 
     # END OF API EXAMPLE
