@@ -38,5 +38,5 @@ def test_parser_validation():
     END
     END
     """
-    with pytest.raises(UnexpectedToken) as e:
+    with pytest.raises(UnexpectedToken):
         p.parse(config_text_bad2)
