@@ -36,6 +36,7 @@
 # =================================================================
 
 from collections import OrderedDict
+from typing import Any
 import copy
 from mappyfile.tokens import OBJECT_LIST_KEYS
 import json
@@ -138,10 +139,11 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
         # pylint: disable=protected-access
         return super().setdefault(self.__class__._k(key), *args, **kwargs)
 
-    def update(self, e=None, **f):
-        if e is not None:
-            super().update(self.__class__(CaseInsensitiveOrderedDict, e))
-        super().update(self.__class__(CaseInsensitiveOrderedDict, **f))
+    def update(self, *args: Any, **kwargs: Any) -> None:
+        for arg in args:
+            super().update(self.__class__(CaseInsensitiveOrderedDict, arg))
+        if kwargs:
+            super().update(self.__class__(CaseInsensitiveOrderedDict, **kwargs))
 
     def _convert_keys(self):
         for k in list(self.keys()):

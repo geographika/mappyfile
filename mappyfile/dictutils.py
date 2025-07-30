@@ -195,7 +195,7 @@ def findunique(lst, key):
     )
 
 
-def findkey(d: dict, *keys: list[Any]) -> dict:
+def findkey(d: dict, *keys: Any) -> dict:
     """
     Get a value from a dictionary based on a list of keys and/or list indexes.
 
