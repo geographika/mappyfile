@@ -61,7 +61,8 @@ def _create_image_from_map(map_file, out_img, format):
         return None
     else:
         logging.info("Created %s", out_img)
-        os.startfile(out_img)
+        # os.startfile is only available on Windows
+        # os.startfile(out_img)
 
     return out_img
 
