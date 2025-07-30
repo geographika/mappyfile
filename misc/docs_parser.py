@@ -4,7 +4,7 @@ Either parse C code or rst. Easier to do latter
 https://dzone.com/articles/a-brief-tutorial-on-parsing-restructuredtext-rest
 https://github.com/eliben/code-for-blog/blob/master/2017/parsing-rst/rst-link-check.py
 
-The root cause of the problem is indeed the fact that registering new roles/directives affects docutils 
+The root cause of the problem is indeed the fact that registering new roles/directives affects docutils
 globally. I don't think this can be easily solved.
 
 https://github.com/sphinx-doc/sphinx/issues/2799
