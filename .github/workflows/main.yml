@@ -39,7 +39,7 @@ jobs:
           flake8 .
       - name: Check types with mypy
         run: |
-          mypy mappyfile tests docs/examples
+          mypy mappyfile tests docs/examples --check-untyped-defs
       - name: Command line tests
         run: |
           mappyfile schema mapfile-schema.json

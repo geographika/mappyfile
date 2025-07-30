@@ -12,7 +12,7 @@ flake8 .
 # mypy --install-types
 # to check within functions missing types
 # mypy mappyfile tests --check-untyped-defs
-mypy mappyfile tests
+mypy mappyfile tests docs/examples --check-untyped-defs
 
 pytest --doctest-modules
 # pytest ./tests
