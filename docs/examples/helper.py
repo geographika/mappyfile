@@ -29,5 +29,4 @@ def _create_image_from_map(map_file, out_img, format):
 
     p.wait()  # wait for the subprocess to exit
 
-    # os.startfile(out_img)
     return out_img

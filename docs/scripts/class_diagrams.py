@@ -19,7 +19,6 @@ cd D:\GitHub\mappyfile\docs\scripts
 python class_diagrams.py
 """
 
-import os
 import pydot
 
 FONT = "Lucida Sans"
@@ -59,7 +58,6 @@ def save_file(graph, fn):
     filename = "%s.png" % fn
     graph.write_png(filename)
     graph.write("%s.dot" % fn)
-    os.startfile(filename)
 
 
 def layer_children():

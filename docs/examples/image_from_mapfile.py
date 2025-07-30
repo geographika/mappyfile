@@ -1,7 +1,18 @@
+import subprocess
 from subprocess import Popen, PIPE
 import tempfile
 import logging
+import sys
 import os
+
+
+def open_file(path: str):
+    if sys.platform == "win32":
+        os.startfile(path)  # subprocess not needed here
+    elif sys.platform == "darwin":
+        subprocess.run(["open", path], check=True)
+    else:
+        subprocess.run(["xdg-open", path], check=True)
 
 
 def create_image_from_map(map_file, dll_location):
@@ -27,7 +38,7 @@ def create_image_from_map(map_file, dll_location):
 
     p.wait()  # wait for the subprocess to exit
 
-    os.startfile(of.name)
+    open_file(of.name)
 
 
 if __name__ == "__main__":
