@@ -88,6 +88,7 @@ class Validator:
     def get_json_from_file(self, schema_name: str):
         if schema_name not in self.schemas:
             schema_file = self.get_schema_file(schema_name)
+
             with open(schema_file, encoding="utf-8") as f:
                 try:
                     jsn_schema = json.load(f)
@@ -197,7 +198,7 @@ class Validator:
         return x
 
     def create_message(
-        self, rootdict: dict, path: str, error, add_comments: bool
+        self, rootdict: dict, path: list[Any], error, add_comments: bool
     ) -> dict:
         """
         Add a validation comment to the dictionary
