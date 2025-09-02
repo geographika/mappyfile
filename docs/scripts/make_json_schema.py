@@ -1,6 +1,4 @@
 r"""
-jsonref
-
 Docs
 
 C:\VirtualEnvs\mappyfile\Scripts\activate.bat
@@ -12,7 +10,7 @@ jsonschema2rst %input_folder% %output_folder%
 
 import os
 import json
-from jsonschema import Draft4Validator
+from jsonschema import Draft202012Validator
 import glob
 from mappyfile.validator import Validator
 
@@ -22,7 +20,7 @@ def check_schema(fn):
 
     with open(fn) as f:
         jsn = json.load(f)
-        Draft4Validator.check_schema(jsn)
+        Draft202012Validator.check_schema(jsn)
 
 
 def save_full_schema(output_file):

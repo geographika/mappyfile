@@ -32,8 +32,8 @@ import json
 import os
 from collections import OrderedDict
 import logging
+from functools import lru_cache
 import jsonschema
-import jsonref
 from mappyfile import dictutils
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT202012
@@ -67,9 +67,11 @@ class Validator:
 
         return root_schema_path
 
+    @lru_cache(maxsize=None)
     def get_schemas_folder(self) -> str:
         return os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
 
+    @lru_cache(maxsize=None)
     def get_schema_file(self, schema_name: str) -> str:
         file_extension = os.path.splitext(schema_name)[1]
 
@@ -298,6 +300,21 @@ class Validator:
 
         return error_messages
 
+    def expand_refs(self, schema: str):
+
+        if isinstance(schema, dict):
+            if "$ref" in schema:
+                schema_name = schema["$ref"]
+                ref_schema = self.get_json_from_file(schema_name)
+                return self.expand_refs(ref_schema)
+
+            return {k: self.expand_refs(v) for k, v in schema.items()}
+
+        elif isinstance(schema, list):
+            return [self.expand_refs(item) for item in schema]
+
+        return schema
+
     def get_expanded_schema(
         self, schema_name: str, version: float | None = None
     ) -> dict:
@@ -312,17 +329,12 @@ class Validator:
             cache_schema_name = schema_name
 
         if cache_schema_name not in self.expanded_schemas:
-            fn = self.get_schema_file(schema_name)
-            schemas_folder = self.get_schemas_folder()
-            base_uri = self.get_schema_path(schemas_folder)
 
-            with open(fn, encoding="utf-8") as f:
-                jsn_schema = jsonref.load(
-                    f, base_uri=base_uri, lazy_load=True, proxies=False
-                )
+            root_schema = self.get_json_from_file(schema_name)
+            jsn_schema = self.expand_refs(root_schema)
 
-                # cache the schema for future use
-                self.expanded_schemas[cache_schema_name] = jsn_schema
+            # cache the schema for future use
+            self.expanded_schemas[cache_schema_name] = jsn_schema
         else:
             jsn_schema = self.expanded_schemas[cache_schema_name]
 
