@@ -36,7 +36,7 @@ import jsonschema
 import jsonref
 from mappyfile import dictutils
 from referencing import Registry, Resource
-from referencing.jsonschema import DRAFT4
+from referencing.jsonschema import DRAFT202012
 from typing import Any
 
 
@@ -105,7 +105,7 @@ class Validator:
 
     def retrieve_from_filesystem(self, schema_name: str):
         jsn_schema = self.get_json_from_file(schema_name)
-        return Resource.from_contents(jsn_schema, default_specification=DRAFT4)
+        return Resource.from_contents(jsn_schema, default_specification=DRAFT202012)
 
     def is_valid_for_version(self, d: dict, version: float) -> bool:
         """
@@ -167,18 +167,16 @@ class Validator:
 
         return properties
 
-    def get_schema_validator(self, schema_name: str) -> jsonschema.Draft4Validator:
+    def get_schema_validator(self, schema_name: str) -> jsonschema.Draft202012Validator:
         """
-        Had to remove the id property from map.json or it uses URLs for validation
-        See various issues at https://github.com/Julian/jsonschema/pull/306
-        This is fixed in versions after Draft4
+        Create a schema validator
         """
 
         jsn_schema = self.get_json_from_file(schema_name)
 
         registry: Registry = Registry(retrieve=self.retrieve_from_filesystem)  # type: ignore
 
-        validator = jsonschema.Draft4Validator(schema=jsn_schema, registry=registry)  # type: ignore
+        validator = jsonschema.Draft202012Validator(schema=jsn_schema, registry=registry)  # type: ignore
         # validator.check_schema(jsn_schema) # check schema is valid - commented out as for testing only
 
         return validator
@@ -264,7 +262,7 @@ class Validator:
         return error_messages
 
     def _get_errors(
-        self, d: dict, validator: jsonschema.Draft4Validator, add_comments: bool
+        self, d: dict, validator: jsonschema.Draft202012Validator, add_comments: bool
     ) -> list[dict]:
         lowercase_dict = self.convert_lowercase(d)
         jsn = json.loads(json.dumps(lowercase_dict), object_pairs_hook=OrderedDict)
@@ -286,7 +284,7 @@ class Validator:
         """
         if version:
             jsn_schema = self.get_versioned_schema(version, schema_name)
-            validator = jsonschema.Draft4Validator(schema=jsn_schema)
+            validator = jsonschema.Draft202012Validator(schema=jsn_schema)
         else:
             validator = self.get_schema_validator(schema_name)
 
