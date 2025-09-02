@@ -354,7 +354,9 @@ class PrettyPrinter:
 
     def check_options_list(self, options_list, value):
         for option in options_list:
-            if "enum" in option and value.lower() in option["enum"]:
+            if ("enum" in option and value.lower() in option["enum"]) or (
+                "const" in option and value.lower() in option["const"]
+            ):
                 if value.lower() == "end":
                     # in GEOTRANSFORM "end" is an attribute value
                     return self.quoter.add_quotes(value)

@@ -4,5 +4,6 @@
     "type": "number"
   },
   "minItems": 4,
-  "maxItems": 4
+  "maxItems": 4,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

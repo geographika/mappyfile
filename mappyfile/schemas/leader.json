@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "leader" ]
+      "const": "leader"
     },
     "include": {
       "type": "array",
@@ -15,8 +15,7 @@
       }
     },
     "gridstep": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "integer"
     },
     "maxdistance": {
       "type": "integer"
@@ -28,5 +27,6 @@
         "$ref": "style.json"
       }
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

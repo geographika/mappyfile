@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "cluster" ]
+      "const": "cluster"
     },
     "include": {
       "type": "array",
@@ -16,8 +16,7 @@
     },
     "maxdistance": {
       "type": "number",
-      "default": 10,
-      "exclusiveMinimum": 0
+      "default": 10
     },
     "region": {
       "oneOf": [
@@ -41,5 +40,6 @@
     "filter": {
       "$ref": "expression.json"
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "scaletoken" ]
+      "const": "scaletoken"
     },
     "include": {
       "type": "array",
@@ -19,9 +19,9 @@
     },
     "values": {
       "type": "object",
-      "properties": {
-      },
+      "properties": {},
       "additionalProperties": true
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

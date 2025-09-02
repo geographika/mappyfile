@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "scalebar" ]
+      "const": "scalebar"
     },
     "include": {
       "type": "array",
@@ -16,7 +16,11 @@
     },
     "align": {
       "type": "string",
-      "enum": [ "left", "center", "right" ],
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ],
       "additionalProperties": false,
       "metadata": {
         "minVersion": 5.2
@@ -61,7 +65,10 @@
       "type": "boolean"
     },
     "size": {
-      "default": [ 200, 3 ],
+      "default": [
+        200,
+        3
+      ],
       "type": "array",
       "items": {
         "type": "integer",
@@ -74,7 +81,11 @@
     "status": {
       "default": "off",
       "type": "string",
-      "enum": [ "on", "off", "embed" ]
+      "enum": [
+        "on",
+        "off",
+        "embed"
+      ]
     },
     "style": {
       "type": "integer",
@@ -130,9 +141,7 @@
       "metadata": {
         "minVersion": 7.2
       }
-    },
-    "outlinecolor": {
-      "$ref": "color.json"
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

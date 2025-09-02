@@ -7,6 +7,9 @@
       },
       "minItems": 1
     },
-    { "enum": [ "auto" ] }
-  ]
+    {
+      "const": "auto"
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

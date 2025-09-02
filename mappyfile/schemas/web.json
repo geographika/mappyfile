@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "web" ]
+      "const": "web"
     },
     "include": {
       "type": "array",
@@ -54,14 +54,14 @@
       "type": "string",
       "description": "filename",
       "metadata": {
-        "maxVersion": 8.0
+        "maxVersion": 8
       }
     },
     "maxscaledenom": {
       "type": "number",
-      "minimum":  0,
+      "minimum": 0,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "maxscale": {
@@ -80,7 +80,7 @@
       "type": "number",
       "minimum": 0,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "minscale": {
@@ -103,11 +103,12 @@
       "type": "string",
       "description": "path",
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "validation": {
       "$ref": "validation.json"
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }
