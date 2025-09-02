@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "style" ]
+      "const": "style"
     },
     "include": {
       "type": "array",
@@ -24,7 +24,9 @@
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute"
         },
-        { "enum": [ "auto" ] }
+        {
+          "const": "auto"
+        }
       ]
     },
     "angleitem": {
@@ -52,13 +54,15 @@
     },
     "color": {
       "oneOf": [
-        { "$ref": "color.json" },
+        {
+          "$ref": "color.json"
+        },
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute",
           "metadata": {
-            "minVersion": 5.0
+            "minVersion": 5
           }
         }
       ]
@@ -94,13 +98,22 @@
     "gap": {
       "type": "number",
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "geomtransform": {
       "oneOf": [
         {
-          "enum": [ "bbox", "centroid", "end", "labelpnt", "labelpoly", "labelcenter", "start", "vertices" ]
+          "enum": [
+            "bbox",
+            "centroid",
+            "end",
+            "labelpnt",
+            "labelpoly",
+            "labelcenter",
+            "start",
+            "vertices"
+          ]
         },
         {
           "type": "string",
@@ -120,41 +133,47 @@
       }
     },
     "linecap": {
-      "enum": [ "butt", "round", "square" ],
+      "enum": [
+        "butt",
+        "round",
+        "square"
+      ],
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "linejoin": {
-      "enum": [ "round", "miter", "bevel", "none" ],
+      "enum": [
+        "round",
+        "miter",
+        "bevel",
+        "none"
+      ],
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "linejoinmaxsize": {
       "type": "integer",
-      "exclusiveMinimum": 0,
       "default": 3,
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "maxscaledenom": {
       "type": "number",
       "minimum": 0,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "maxsize": {
       "type": "number",
-      "default": 500,
-      "exclusiveMinimum": 0
+      "default": 500
     },
     "maxwidth": {
       "type": "number",
-      "default": 32,
-      "exclusiveMinimum": 0
+      "default": 32
     },
     "minscaledenom": {
       "type": "number",
@@ -189,7 +208,9 @@
     },
     "opacity": {
       "oneOf": [
-        { "type": "integer" },
+        {
+          "type": "integer"
+        },
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
@@ -202,13 +223,15 @@
     },
     "outlinecolor": {
       "oneOf": [
-        { "$ref": "color.json" },
+        {
+          "$ref": "color.json"
+        },
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute",
           "metadata": {
-            "minVersion": 5.0
+            "minVersion": 5
           }
         }
       ]
@@ -237,7 +260,7 @@
         }
       ],
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "polaroffset": {
@@ -264,18 +287,16 @@
       "type": "string"
     },
     "size": {
-      "exclusiveMinimum": 1,
       "anyOf": [
         {
-          "type": "number",
-          "exclusiveMinimum": 0
+          "type": "number"
         },
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute",
           "metadata": {
-            "minVersion": 5.0
+            "minVersion": 5
           }
         },
         {
@@ -308,7 +329,7 @@
       "oneOf": [
         {
           "type": "number",
-          "default": 1.0,
+          "default": 1,
           "minimum": 0
         },
         {
@@ -321,5 +342,6 @@
         }
       ]
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

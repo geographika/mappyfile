@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "label" ]
+      "const": "label"
     },
     "include": {
       "type": "array",
@@ -18,7 +18,11 @@
       "oneOf": [
         {
           "type": "string",
-          "enum": [ "left", "center", "right" ],
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
           "additionalProperties": false
         },
         {
@@ -36,7 +40,11 @@
       "oneOf": [
         {
           "type": "string",
-          "enum": [ "auto", "auto2", "follow" ],
+          "enum": [
+            "auto",
+            "auto2",
+            "follow"
+          ],
           "additionalProperties": false
         },
         {
@@ -49,7 +57,7 @@
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute",
           "metadata": {
-            "minVersion": 5.0
+            "minVersion": 5
           }
         }
       ]
@@ -65,7 +73,7 @@
         }
       ],
       "metadata": {
-        "maxVersion": 6.0
+        "maxVersion": 6
       }
     },
     "backgroundshadowcolor": {
@@ -75,7 +83,7 @@
         }
       ],
       "metadata": {
-        "maxVersion": 6.0
+        "maxVersion": 6
       }
     },
     "backgroundshadowsize": {
@@ -86,7 +94,7 @@
         }
       ],
       "metadata": {
-        "maxVersion": 6.0
+        "maxVersion": 6
       }
     },
     "buffer": {
@@ -95,13 +103,15 @@
     },
     "color": {
       "oneOf": [
-        { "$ref": "color.json" },
+        {
+          "$ref": "color.json"
+        },
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute",
           "metadata": {
-            "minVersion": 5.0
+            "minVersion": 5
           }
         }
       ]
@@ -144,7 +154,7 @@
           "type": "boolean"
         },
         {
-          "enum": [ "group" ],
+          "const": "group",
           "metadata": {
             "minVersion": 6.2
           }
@@ -153,7 +163,6 @@
     },
     "maxlength": {
       "type": "integer",
-      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
@@ -164,7 +173,7 @@
       "minimum": 0,
       "maximum": 360,
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "maxscaledenom": {
@@ -176,19 +185,18 @@
     },
     "maxsize": {
       "type": "integer",
-      "default": 256,
-      "exclusiveMinimum": 0
+      "default": 256
     },
     "mindistance": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "integer"
     },
     "minfeaturesize": {
       "oneOf": [
-        { "enum": [ "auto" ] },
         {
-          "type": "integer",
-          "exclusiveMinimum": 0
+          "const": "auto"
+        },
+        {
+          "type": "integer"
         }
       ]
     },
@@ -201,11 +209,13 @@
     },
     "minsize": {
       "type": "integer",
-      "exclusiveMinimum": 0,
       "default": 4
     },
     "offset": {
-      "default": [ 0, 0 ],
+      "default": [
+        0,
+        0
+      ],
       "oneOf": [
         {
           "type": "array",
@@ -232,20 +242,21 @@
     },
     "outlinecolor": {
       "oneOf": [
-        { "$ref": "color.json" },
+        {
+          "$ref": "color.json"
+        },
         {
           "type": "string",
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute",
           "metadata": {
-            "minVersion": 5.0
+            "minVersion": 5
           }
         }
       ]
     },
     "outlinewidth": {
       "type": "integer",
-      "exclusiveMinimum": 0,
       "default": 1
     },
     "partials": {
@@ -255,7 +266,9 @@
     "position": {
       "default": "cc",
       "oneOf": [
-        { "enum": [ "auto" ] },
+        {
+          "const": "auto"
+        },
         {
           "$ref": "position.json"
         },
@@ -291,13 +304,12 @@
         }
       ],
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "repeatdistance": {
       "type": "integer",
       "default": 0,
-      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.6
       }
@@ -306,7 +318,10 @@
       "$ref": "color.json"
     },
     "shadowsize": {
-      "default": [ 1, 1 ],
+      "default": [
+        1,
+        1
+      ],
       "oneOf": [
         {
           "type": "array",
@@ -318,7 +333,7 @@
         },
         {
           "type": "array",
-          "items": [
+          "prefixItems": [
             {
               "type": "integer"
             },
@@ -331,21 +346,26 @@
           "minItems": 2,
           "maxItems": 2,
           "metadata": {
-            "minVersion": 6.0
+            "minVersion": 6
           }
         }
       ]
     },
     "size": {
       "default": 10,
-      "exclusiveMinimum": 1,
       "anyOf": [
         {
           "type": "integer"
         },
         {
           "type": "string",
-          "enum": [ "tiny", "small", "medium", "large", "giant" ],
+          "enum": [
+            "tiny",
+            "small",
+            "medium",
+            "large",
+            "giant"
+          ],
           "additionalProperties": false
         },
         {
@@ -353,7 +373,7 @@
           "pattern": "^\\[(.*?)\\]$",
           "description": "attribute",
           "metadata": {
-            "minVersion": 5.0
+            "minVersion": 5
           }
         },
         {
@@ -386,7 +406,10 @@
     },
     "type": {
       "type": "string",
-      "enum": [ "bitmap", "truetype" ],
+      "enum": [
+        "bitmap",
+        "truetype"
+      ],
       "additionalProperties": false
     },
     "wrap": {
@@ -394,5 +417,6 @@
       "minLength": 1,
       "maxLength": 1
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

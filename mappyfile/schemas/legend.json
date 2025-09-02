@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "legend" ]
+      "const": "legend"
     },
     "include": {
       "type": "array",
@@ -28,7 +28,10 @@
       }
     },
     "keysize": {
-      "default": [ 20, 10 ],
+      "default": [
+        20,
+        10
+      ],
       "type": "array",
       "items": {
         "type": "integer",
@@ -39,7 +42,10 @@
       "maxItems": 2
     },
     "keyspacing": {
-      "default": [ 5, 5 ],
+      "default": [
+        5,
+        5
+      ],
       "type": "array",
       "items": {
         "type": "integer",
@@ -69,7 +75,11 @@
     "status": {
       "default": "off",
       "type": "string",
-      "enum": [ "on", "off", "embed" ]
+      "enum": [
+        "on",
+        "off",
+        "embed"
+      ]
     },
     "template": {
       "type": "string",
@@ -85,5 +95,6 @@
         "maxVersion": 7.6
       }
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

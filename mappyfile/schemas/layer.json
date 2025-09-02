@@ -2,12 +2,14 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
-  "required": [ "type" ],
+  "required": [
+    "type"
+  ],
   "properties": {
     "__type__": {
-      "enum": [ "layer" ]
+      "const": "layer"
     },
     "__comments__": {
       "type": "object"
@@ -40,7 +42,7 @@
         }
       ],
       "metadata": {
-        "minVersion": 6.0
+        "minVersion": 6
       }
     },
     "composites": {
@@ -49,7 +51,7 @@
         "$ref": "composite.json"
       },
       "metadata": {
-        "minVersion": 7.0
+        "minVersion": 7
       }
     },
     "connection": {
@@ -66,7 +68,23 @@
       }
     },
     "connectiontype": {
-      "enum": [ "contour", "kerneldensity", "idw", "local", "ogr", "oraclespatial", "plugin", "postgis", "sde", "union", "uvraster", "wfs", "wms", "mygis", "flatgeobuf" ]
+      "enum": [
+        "contour",
+        "kerneldensity",
+        "idw",
+        "local",
+        "ogr",
+        "oraclespatial",
+        "plugin",
+        "postgis",
+        "sde",
+        "union",
+        "uvraster",
+        "wfs",
+        "wms",
+        "mygis",
+        "flatgeobuf"
+      ]
     },
     "data": {
       "type": "string"
@@ -78,7 +96,7 @@
         }
       ],
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "dump": {
@@ -97,7 +115,7 @@
     "encoding": {
       "type": "string",
       "metadata": {
-        "minVersion": 7.0
+        "minVersion": 7
       }
     },
     "extent": {
@@ -162,27 +180,27 @@
     "labelmaxscale": {
       "type": "number",
       "metadata": {
-        "maxVersion": 5.0
+        "maxVersion": 5
       }
     },
     "labelminscale": {
       "type": "number",
       "metadata": {
-        "maxVersion": 5.0
+        "maxVersion": 5
       }
     },
     "labelmaxscaledenom": {
       "type": "number",
       "minimum": 0,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "labelminscaledenom": {
       "type": "number",
       "minimum": 0,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "labelrequires": {
@@ -191,7 +209,7 @@
     "labelsizeitem": {
       "type": "string",
       "metadata": {
-        "maxVersion": 5.0
+        "maxVersion": 5
       }
     },
     "mask": {
@@ -201,12 +219,10 @@
       }
     },
     "maxfeatures": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "integer"
     },
     "maxgeowidth": {
       "type": "number",
-      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
@@ -215,25 +231,23 @@
       "type": "number",
       "minimum": 0,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "maxscale": {
       "type": "number",
       "metadata": {
-        "maxVersion": 5.0
+        "maxVersion": 5
       }
     },
     "metadata": {
       "$ref": "metadata.json"
     },
     "minfeaturesize": {
-      "type": "number",
-      "exclusiveMinimum": 0
+      "type": "number"
     },
     "mingeowidth": {
       "type": "number",
-      "exclusiveMinimum": 0,
       "metadata": {
         "minVersion": 5.4
       }
@@ -242,13 +256,13 @@
       "type": "number",
       "minimum": 0,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "minscale": {
       "type": "number",
       "metadata": {
-        "maxVersion": 5.0
+        "maxVersion": 5
       }
     },
     "name": {
@@ -291,12 +305,24 @@
       }
     },
     "sizeunits": {
-      "enum": [ "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "pixels" ]
+      "enum": [
+        "feet",
+        "inches",
+        "kilometers",
+        "meters",
+        "miles",
+        "nauticalmiles",
+        "pixels"
+      ]
     },
     "status": {
       "default": "off",
       "type": "string",
-      "enum": [ "on", "off", "default" ]
+      "enum": [
+        "on",
+        "off",
+        "default"
+      ]
     },
     "styleitem": {
       "type": "string"
@@ -305,7 +331,7 @@
       "type": "number",
       "minimum": 1,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "template": {
@@ -322,11 +348,19 @@
       "type": "string"
     },
     "tolerance": {
-      "type": "number",
-      "exclusiveMinimum": 0
+      "type": "number"
     },
     "toleranceunits": {
-      "enum": [ "pixels", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "dd" ]
+      "enum": [
+        "pixels",
+        "feet",
+        "inches",
+        "kilometers",
+        "meters",
+        "miles",
+        "nauticalmiles",
+        "dd"
+      ]
     },
     "transparency": {
       "oneOf": [
@@ -334,7 +368,7 @@
           "type": "integer"
         },
         {
-          "enum": [ "alpha" ]
+          "const": "alpha"
         }
       ],
       "metadata": {
@@ -352,26 +386,47 @@
       ]
     },
     "type": {
-      "enum": [ "chart", "circle", "line", "point", "polygon", "raster", "query", "annotation", "tileindex" ]
+      "enum": [
+        "chart",
+        "circle",
+        "line",
+        "point",
+        "polygon",
+        "raster",
+        "query",
+        "annotation",
+        "tileindex"
+      ]
     },
     "units": {
       "default": "meters",
-      "enum": [ "dd", "feet", "inches", "kilometers", "meters", "miles", "nauticalmiles", "percentages", "pixels" ]
+      "enum": [
+        "dd",
+        "feet",
+        "inches",
+        "kilometers",
+        "meters",
+        "miles",
+        "nauticalmiles",
+        "percentages",
+        "pixels"
+      ]
     },
     "utfdata": {
       "type": "string",
       "metadata": {
-        "minVersion": 7.0
+        "minVersion": 7
       }
     },
     "utfitem": {
       "type": "string",
       "metadata": {
-        "minVersion": 7.0
+        "minVersion": 7
       }
     },
     "validation": {
       "$ref": "validation.json"
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

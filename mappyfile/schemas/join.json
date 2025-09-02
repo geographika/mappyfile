@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "join" ]
+      "const": "join"
     },
     "include": {
       "type": "array",
@@ -43,13 +43,21 @@
     },
     "type": {
       "type": "string",
-      "enum": [ "one-to-one", "one-to-many" ],
+      "enum": [
+        "one-to-one",
+        "one-to-many"
+      ],
       "additionalProperties": false
     },
     "connectiontype": {
       "type": "string",
-      "enum": [ "csv", "mysql", "postgresql" ],
+      "enum": [
+        "csv",
+        "mysql",
+        "postgresql"
+      ],
       "additionalProperties": false
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

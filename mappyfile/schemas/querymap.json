@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "querymap" ]
+      "const": "querymap"
     },
     "include": {
       "type": "array",
@@ -18,11 +18,14 @@
       "$ref": "color.json"
     },
     "size": {
-      "default": [ -1, -1 ],
+      "default": [
+        -1,
+        -1
+      ],
       "type": "array",
       "items": {
         "type": "integer",
-        "minimum":  -1
+        "minimum": -1
       },
       "minItems": 2,
       "maxItems": 2
@@ -34,8 +37,13 @@
     "style": {
       "default": "hilite",
       "type": "string",
-      "enum": [ "normal", "hilite", "selected" ],
+      "enum": [
+        "normal",
+        "hilite",
+        "selected"
+      ],
       "additionalProperties": false
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

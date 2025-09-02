@@ -2,11 +2,11 @@
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "grid" ]
+      "const": "grid"
     },
     "include": {
       "type": "array",
@@ -20,35 +20,34 @@
           "type": "string"
         },
         {
-          "enum": [ "dd", "ddmm", "ddmmss" ]
+          "enum": [
+            "dd",
+            "ddmm",
+            "ddmmss"
+          ]
         }
       ]
     },
     "minarcs": {
       "type": "number",
-      "default": 16,
-      "exclusiveMinimum": 0
+      "default": 16
     },
     "maxarcs": {
-      "type": "number",
-      "exclusiveMinimum": 0
+      "type": "number"
     },
     "mininterval": {
-      "type": "number",
-      "exclusiveMinimum": 0
+      "type": "number"
     },
     "maxinterval": {
-      "type": "number",
-      "exclusiveMinimum": 0
+      "type": "number"
     },
     "minsubdivide": {
-      "type": "number",
-      "exclusiveMinimum": 0
+      "type": "number"
     },
     "maxsubdivide": {
       "type": "number",
-      "default": 256,
-      "exclusiveMinimum": 0
+      "default": 256
     }
-  }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

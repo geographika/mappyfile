@@ -6,5 +6,6 @@
     "maximum": 255
   },
   "minItems": 3,
-  "maxItems": 3
+  "maxItems": 3,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }

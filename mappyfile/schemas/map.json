@@ -1,13 +1,13 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
-    "^__[a-z]+__$": {}
+    "^__[a-z]+__$": true
   },
   "properties": {
     "__type__": {
-      "enum": [ "map" ]
+      "const": "map"
     },
     "include": {
       "type": "array",
@@ -24,18 +24,30 @@
     "config": {
       "type": "object",
       "properties": {
-        "CGI_CONTEXT_URL": { "type": "string" },
-        "MS_ENCRYPTION_KEY": { "type": "string" },
-        "MS_ERRORFILE": { "type": "string" },
+        "CGI_CONTEXT_URL": {
+          "type": "string"
+        },
+        "MS_ENCRYPTION_KEY": {
+          "type": "string"
+        },
+        "MS_ERRORFILE": {
+          "type": "string"
+        },
         "MS_NONSQUARE": {
           "$ref": "yesno.json"
         },
         "ON_MISSING_DATA": {
           "type": "string",
           "default": "FAIL",
-          "enum": [ "FAIL", "LOG", "IGNORE" ]
+          "enum": [
+            "FAIL",
+            "LOG",
+            "IGNORE"
+          ]
         },
-        "PROJ_LIB": { "type": "string" }
+        "PROJ_LIB": {
+          "type": "string"
+        }
       },
       "additionalProperties": true
     },
@@ -53,7 +65,7 @@
         }
       ],
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "defresolution": {
@@ -139,7 +151,7 @@
       "type": "number",
       "minimum": 1,
       "metadata": {
-        "minVersion": 5.0
+        "minVersion": 5
       }
     },
     "scalebar": {
@@ -149,7 +161,10 @@
       "type": "string"
     },
     "size": {
-      "default": [ -1, -1 ],
+      "default": [
+        -1,
+        -1
+      ],
       "type": "array",
       "items": {
         "type": "integer"

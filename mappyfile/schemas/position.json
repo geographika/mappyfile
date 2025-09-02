@@ -1,3 +1,14 @@
 {
-  "enum": [ "ul", "uc", "ur", "cl", "cc", "cr", "ll", "lc", "lr" ]
+  "enum": [
+    "ul",
+    "uc",
+    "ur",
+    "cl",
+    "cc",
+    "cr",
+    "ll",
+    "lc",
+    "lr"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
 }
