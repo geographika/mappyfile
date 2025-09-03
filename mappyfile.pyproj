@@ -11,8 +11,8 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile313|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_validation.py</StartupFile>
+    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
+    <StartupFile>tests\test_config.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -206,11 +206,15 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="MANIFEST.in" />
     <Content Include="mappyfile\mapfile.lark" />
     <Content Include="mappyfile\py.typed" />
+    <Content Include="mappyfile\schemas\plugins.json" />
+    <Content Include="mappyfile\schemas\maps.json" />
     <Content Include="mappyfile\schemas\expression.json">
       <SubType>Code</SubType>
     </Content>
     <Content Include="mappyfile\schemas\connectionoptions.json" />
+    <Content Include="mappyfile\schemas\env.json" />
     <Content Include="mappyfile\schemas\points.json" />
+    <Content Include="mappyfile\schemas\config.json" />
     <Content Include="mappyfile\schemas\symbolset.json" />
     <Content Include="mappyfile\schemas\web.json" />
     <Content Include="mappyfile\schemas\validation.json" />
@@ -1173,6 +1177,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Compile Include="tests\test_comments.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\test_config.py" />
     <Compile Include="tests\test_dictutils.py" />
     <Compile Include="tests\test_errors.py" />
     <Compile Include="tests\test_expressions.py">
@@ -1204,6 +1209,15 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="..\..\VirtualEnvs\mappyfile\">
+      <Id>mappyfile</Id>
+      <Version>3.10</Version>
+      <Description>mappyfile (Python 3.10 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="C:\VirtualEnvs\mappyfile313\">
       <Id>mappyfile313</Id>
       <Version>0.0</Version>

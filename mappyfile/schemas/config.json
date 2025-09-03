@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^__[a-z]+__$": {}
+  },
+  "properties": {
+    "env": {
+      "$ref": "env.json"
+    },
+    "maps": {
+      "$ref": "maps.json"
+    },
+    "plugins": {
+      "$ref": "plugins.json"
+    }
+  }
+}

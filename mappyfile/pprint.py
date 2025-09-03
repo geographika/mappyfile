@@ -33,6 +33,7 @@ import numbers
 from mappyfile.tokens import (
     COMPOSITE_NAMES,
     SINGLETON_COMPOSITE_NAMES,
+    CONFIG_COMPOSITE_NAMES,
     REPEATED_KEYS,
     COMPLEX_TYPES,
     OBJECT_LIST_KEYS,
@@ -512,7 +513,7 @@ class PrettyPrinter:
 
         if isinstance(composite, dict) and "__type__" in composite:
             type_ = composite["__type__"]
-            assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES)
+            assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES).union(CONFIG_COMPOSITE_NAMES)
             is_hidden = False
             self._add_type_comment(level, comments, lines)
             s = self.whitespace(level, 0) + type_.upper()
