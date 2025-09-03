@@ -726,6 +726,21 @@ class CommentsTransformer(Transformer_InPlace):
     composite = _save_composite_comments
 
 
+class ConfigfileTransformer(MapfileTransformer):
+    def config(self, tree):
+
+        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
+        composite_dict["__type__"] = "config"
+
+        for t in tree:
+            self.composite(t)
+        #    key = t.data.lower()
+        #    value = t.children
+        #    composite_dict[key] = value
+
+        return composite_dict
+
+
 class MapfileToDict:
     def __init__(
         self,
@@ -764,6 +779,13 @@ class Canonize(Transformer_InPlace):
         tree.children.insert(0, composite_type)
         return tree
 
+    #@v_args(tree=True)
+    #def config(self, tree):
+    #    composite_type = Tree("composite_type", [Token("config", "config")])
+    #
+    #    tree.data = "composite"
+    #    tree.children.insert(0, composite_type)
+    #    return tree
 
 def calculate_depth(iterable):
     """

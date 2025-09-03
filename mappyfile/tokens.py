@@ -270,6 +270,14 @@ SINGLETON_COMPOSITE_NAMES = frozenset(
 """.split()
 )
 
+CONFIG_COMPOSITE_NAMES = frozenset(
+    """
+    env
+    maps
+    plugins
+""".split()
+)
+
 ATTRIBUTE_NAMES = (
     frozenset(
         """
