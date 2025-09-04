@@ -478,9 +478,9 @@ def _pprint(
     return pp.pprint(d)
 
 
-def create(type: str, version=None) -> dict:
+def create(type: str, version=None, add_defaults=False) -> dict:
     """
-    Create a new mappyfile object, using MapServer defaults (if any).
+    Create a new mappyfile object, and add MapServer defaults (if any).
 
     Parameters
     ----------
@@ -506,10 +506,10 @@ def create(type: str, version=None) -> dict:
     d = DefaultOrderedDict()
     d["__type__"] = type
 
-    properties = sorted(schema["properties"].items())
-
-    for key, value in properties:
-        if "default" in value:
-            d[key] = value["default"]
+    if add_defaults is True:
+        properties = sorted(schema["properties"].items())
+        for key, value in properties:
+            if "default" in value:
+                d[key] = value["default"]
 
     return d
