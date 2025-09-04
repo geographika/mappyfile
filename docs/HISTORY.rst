@@ -1,6 +1,29 @@
 Releases
 --------
 
+1.1.0 Coming Soon
++++++++++++++++++
+
++ **Breaking Change** - :ref:`create <api-create>` now creates an empty block by default.
+  Pass ``add_default=True`` to include the default MapServer parameters.
+
+1.0.1 31/05/2024
+++++++++++++++++
+
+Patch release and CI (Continuous Integration) updates.
+
+`Full changlog <https://github.com/geographika/mappyfile/compare/v1.0.1...v1.0.2>`__.
+
+1.0.1 25/04/2024
+++++++++++++++++
+
+Patch release.
+
++ `#206 <https://github.com/geographika/mappyfile/pull/206>`_ - Ensure findall works when properties are missing
+
+`Full changlog <https://github.com/geographika/mappyfile/compare/v1.0.0...v1.0.1>`__.
+
+
 1.0.0 28/09/2023
 ++++++++++++++++
 
