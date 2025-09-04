@@ -118,27 +118,36 @@ def test_dump_with_end_comments():
     assert output == 'MAP 	NAME "TEST" END # MAP'
 
 
-def test_create_map():
-    d = mappyfile.utils.create("map")
+def test_create_map_with_defaults():
+    d = mappyfile.utils.create("map", add_defaults=True)
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
-    print(output)
     assert (
         output
         == "MAP ANGLE 0 DEBUG 0 DEFRESOLUTION 72 IMAGETYPE 'png' MAXSIZE 4096 NAME 'MS' RESOLUTION 72 SIZE -1 -1 END"
     )
 
 
-def test_create_layer():
-    d = mappyfile.utils.create("layer")
+def test_create_map():
+    d = mappyfile.utils.create("map")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
-    print(output)
+    assert output == "MAP END"
+
+
+def test_create_layer_with_defaults():
+    d = mappyfile.utils.create("layer", add_defaults=True)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     assert output == "LAYER STATUS OFF TILEITEM 'location' UNITS METERS END"
 
 
-def test_create_label():
-    d = mappyfile.utils.create("label")
+def test_create_layer():
+    d = mappyfile.utils.create("layer", add_defaults=False)
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
-    print(output)
+    assert output == "LAYER END"
+
+
+def test_create_label_with_defaults():
+    d = mappyfile.utils.create("label", add_defaults=True)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     assert (
         output
         == "LABEL ANGLE 0 ANTIALIAS FALSE BACKGROUNDSHADOWSIZE FALSE BUFFER 0 FORCE FALSE MAXOVERLAPANGLE 22.5 MAXSIZE 256 MINSIZE 4 "
@@ -146,25 +155,46 @@ def test_create_label():
     )
 
 
-def test_create_symbol():
-    d = mappyfile.utils.create("symbol")
+def test_create_label():
+    d = mappyfile.utils.create("label")
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
-    print(output)
+    assert output == "LABEL END"
+
+
+def test_create_symbol_with_defaults():
+    d = mappyfile.utils.create("symbol", add_defaults=True)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
     assert output == "SYMBOL ANCHORPOINT 0.5 0.5 ANTIALIAS FALSE FILLED FALSE END"
+
+
+def test_create_symbol():
+    d = mappyfile.utils.create("symbol", add_defaults=False)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    assert output == "SYMBOL END"
+
+
+def test_create_symbol_v6_with_defaults():
+    d = mappyfile.utils.create("symbol", version=6.0, add_defaults=True)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    assert output == "SYMBOL ANTIALIAS FALSE FILLED FALSE END"
 
 
 def test_create_symbol_v6():
     d = mappyfile.utils.create("symbol", version=6.0)
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
-    print(output)
-    assert output == "SYMBOL ANTIALIAS FALSE FILLED FALSE END"
+    assert output == "SYMBOL END"
+
+
+def test_create_symbol_v8_with_defaults():
+    d = mappyfile.utils.create("symbol", version=8.0, add_defaults=True)
+    output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
+    assert output == "SYMBOL ANCHORPOINT 0.5 0.5 FILLED FALSE END"
 
 
 def test_create_symbol_v8():
-    d = mappyfile.utils.create("symbol", version=8.0)
+    d = mappyfile.utils.create("symbol", version=8.0, add_defaults=False)
     output = mappyfile.dumps(d, indent=0, newlinechar=" ", quote="'")
-    print(output)
-    assert output == "SYMBOL ANCHORPOINT 0.5 0.5 FILLED FALSE END"
+    assert output == "SYMBOL END"
 
 
 def test_create_missing():
