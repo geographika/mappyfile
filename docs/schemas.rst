@@ -43,11 +43,17 @@ If MapServer uses default values for an object, the `create` function can be use
 a new object using these defaults. For example to output a `MAP` object with default settings
 run the following code:
 
+.. note::
+
+    From mappyfile 1.1+ by default an empty ``MAP END`` object is created. 
+    The value ``add_defaults=True`` has to be passed to ``create`` to add in
+    the MapServer default settings.
+
 .. code-block:: python
 
     import mappyfile
 
-    m = mappyfile.create("map", version=8.0)
+    m = mappyfile.create("map", version=8.0, add_defaults=True)
     print(m)
     mappyfile.dumps(m)
 

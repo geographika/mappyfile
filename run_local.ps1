@@ -16,3 +16,10 @@ mypy mappyfile tests docs/examples --check-untyped-defs
 
 pytest --doctest-modules
 # pytest ./tests
+
+
+# docs
+
+sphinx-build -b html "./docs" "./_build" -W
+python -m http.server --directory=./_build 57921
+# http://localhost:57921
