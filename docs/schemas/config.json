@@ -1,0 +1,28 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "patternProperties": {
+        "^__[a-z]+__$": true
+    },
+    "properties": {
+        "env": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true,
+            "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "maps": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true,
+            "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "plugins": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": true,
+            "$schema": "https://json-schema.org/draft/2020-12/schema"
+        }
+    }
+}
