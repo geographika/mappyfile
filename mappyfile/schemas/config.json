@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^__[a-z]+__$": true
+  },
+  "properties": {
+    "env": {
+      "$ref": "env.json"
+    },
+    "maps": {
+      "$ref": "maps.json"
+    },
+    "plugins": {
+      "$ref": "plugins.json"
+    }
+  }
+}
