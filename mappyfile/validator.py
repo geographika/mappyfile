@@ -126,7 +126,7 @@ class Validator:
         return True
 
     def get_versioned_schema(
-        self, version: float | None, schema_name: str = "map"
+        self, version: float | None = None, schema_name: str = "map"
     ) -> dict:
         """
         Get a fully expanded JSON schema for a specific MapServer

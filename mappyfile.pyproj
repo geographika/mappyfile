@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile313|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
     <StartupFile>tests\test_validation.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
@@ -166,6 +166,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\requirements.txt" />
     <Content Include="docs\rfc.rst" />
     <Content Include="docs\schemas.rst" />
+    <Content Include="docs\schemas\config.json" />
     <Content Include="docs\schemas\mapfile-latest.json" />
     <Content Include="docs\schemas\mapfile-schema-7-6.json" />
     <Content Include="docs\schemas\mapfile-schema-8-0.json" />
@@ -206,10 +207,14 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="MANIFEST.in" />
     <Content Include="mappyfile\mapfile.lark" />
     <Content Include="mappyfile\py.typed" />
+    <Content Include="mappyfile\schemas\config.json" />
+    <Content Include="mappyfile\schemas\env.json" />
     <Content Include="mappyfile\schemas\expression.json">
       <SubType>Code</SubType>
     </Content>
     <Content Include="mappyfile\schemas\connectionoptions.json" />
+    <Content Include="mappyfile\schemas\maps.json" />
+    <Content Include="mappyfile\schemas\plugins.json" />
     <Content Include="mappyfile\schemas\points.json" />
     <Content Include="mappyfile\schemas\symbolset.json" />
     <Content Include="mappyfile\schemas\web.json" />
@@ -1092,6 +1097,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="tests\sample_maps\wms_uvraster_lonwrap180.map" />
     <Content Include="tests\sample_maps\wms_uvraster_map_reprojection.map" />
     <Content Include="tree.png" />
+    <Content Include="validate_schemas.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="docs\conf.py" />

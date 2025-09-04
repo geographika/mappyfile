@@ -44,9 +44,20 @@ def save_full_schema(output_file):
     check_schema(output_file)
 
 
+def save_config_schema(output_file):
+    validator = Validator()
+    jsn = validator.get_expanded_schema("config.json")
+    config_schema = json.dumps(jsn, indent=4, sort_keys=False)
+
+    with open(output_file, "w") as f:
+        f.write(config_schema)
+
+
 if __name__ == "__main__":
     project_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     output_file = os.path.join(project_dir, "docs", "schemas", "mapfile.json")
     print(output_file)
     save_full_schema(output_file)
+    output_file = os.path.join(project_dir, "docs", "schemas", "config.json")
+    save_config_schema(output_file)
     print("Done!")
