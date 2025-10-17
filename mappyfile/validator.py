@@ -30,6 +30,8 @@
 from __future__ import annotations
 import json
 import os
+from pathlib import Path
+import platform
 from collections import OrderedDict
 import logging
 from functools import lru_cache
@@ -69,7 +71,13 @@ class Validator:
 
     @lru_cache(maxsize=None)
     def get_schemas_folder(self) -> str:
-        return os.path.join(os.path.dirname(os.path.realpath(__file__)), "schemas")
+        base = Path(__file__).parent
+        if platform.system() == "Windows":
+            # keep drive letters (and avoid UNC paths)
+            return str((base / "schemas").absolute())
+        else:
+            # resolve symlinks on Unix-like systems
+            return str((base / "schemas").resolve())
 
     @lru_cache(maxsize=None)
     def get_schema_file(self, schema_name: str) -> str:
