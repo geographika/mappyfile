@@ -324,7 +324,14 @@ class PrettyPrinter:
 
         for composite in composites:
             type_ = composite["__type__"]
-            if type_ in ("metadata", "validation", "connectionoptions", "env", "maps", "plugins"):
+            if type_ in (
+                "metadata",
+                "validation",
+                "connectionoptions",
+                "env",
+                "maps",
+                "plugins",
+            ):
                 # types are being parsed directly, and not as an attr of a parent
                 lines += self.process_key_dict(type_, composite, level=0)
             else:
@@ -513,7 +520,9 @@ class PrettyPrinter:
 
         if isinstance(composite, dict) and "__type__" in composite:
             type_ = composite["__type__"]
-            assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES).union(CONFIG_COMPOSITE_NAMES)
+            assert type_ in COMPOSITE_NAMES.union(SINGLETON_COMPOSITE_NAMES).union(
+                CONFIG_COMPOSITE_NAMES
+            )
             is_hidden = False
             self._add_type_comment(level, comments, lines)
             s = self.whitespace(level, 0) + type_.upper()
@@ -537,7 +546,15 @@ class PrettyPrinter:
                     lines += self._format(v, level + 1)
             elif attr == "pattern":
                 lines += self.format_pair_list(attr, value, level)
-            elif attr in ("metadata", "validation", "values", "connectionoptions", "env", "maps"):
+            elif attr in (
+                "metadata",
+                "validation",
+                "values",
+                "connectionoptions",
+                "env",
+                "maps",
+                "plugins",
+            ):
                 # metadata and values are also composites
                 # but will be processed here
                 lines += self.process_key_dict(attr, value, level)

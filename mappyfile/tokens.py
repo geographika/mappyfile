@@ -57,9 +57,6 @@ COMPLEX_TYPES = frozenset(
     web
     layer
     symbol
-    env
-    maps
-    plugins
     """.split()
 )
 
