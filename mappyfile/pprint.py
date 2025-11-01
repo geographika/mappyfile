@@ -324,7 +324,7 @@ class PrettyPrinter:
 
         for composite in composites:
             type_ = composite["__type__"]
-            if type_ in ("metadata", "validation", "connectionoptions"):
+            if type_ in ("metadata", "validation", "connectionoptions", "env", "maps", "plugins"):
                 # types are being parsed directly, and not as an attr of a parent
                 lines += self.process_key_dict(type_, composite, level=0)
             else:
@@ -537,7 +537,7 @@ class PrettyPrinter:
                     lines += self._format(v, level + 1)
             elif attr == "pattern":
                 lines += self.format_pair_list(attr, value, level)
-            elif attr in ("metadata", "validation", "values", "connectionoptions"):
+            elif attr in ("metadata", "validation", "values", "connectionoptions", "env", "maps"):
                 # metadata and values are also composites
                 # but will be processed here
                 lines += self.process_key_dict(attr, value, level)

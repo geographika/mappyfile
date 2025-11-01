@@ -255,13 +255,13 @@ class MapfileTransformer(Transformer):
 
                     composite_dict[key_name].append(d[key_name])
 
-                    if position_dict:
+                    if position_dict is not None:
                         if key_name not in position_dict:
                             position_dict[key_name] = []
                         position_dict[key_name].append(pos)
                 else:
                     assert len(d.items()) == 1
-                    if position_dict:
+                    if position_dict is not None:
                         # hoist position details to composite
                         position_dict[key_name] = pos
                     if self.include_comments and comments:
@@ -329,7 +329,9 @@ class MapfileTransformer(Transformer):
 
         return d
 
-    def check_composite_tokens(self, name: str, tokens) -> tuple[str, list[Any]]:
+    def check_composite_tokens(
+        self, name: str, tokens: list[Any]
+    ) -> tuple[str, list[Any]]:
         """
         Return the key and contents of a KEY..END block
         for PATTERN, POINTS, and PROJECTION
@@ -728,15 +730,52 @@ class CommentsTransformer(Transformer_InPlace):
 
 class ConfigfileTransformer(MapfileTransformer):
     def config(self, tree):
-
         composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
         composite_dict["__type__"] = "config"
 
         for t in tree:
-            self.composite(t)
-        #    key = t.data.lower()
-        #    value = t.children
-        #    composite_dict[key] = value
+            key = t.data.lower()
+
+            atts_dict = OrderedDict()
+
+            if self.include_comments:
+                comments_dict = atts_dict["__comments__"] = OrderedDict()
+
+            if self.include_position:
+                # self.create_position_dict(key_name, None)
+                position_dict = atts_dict["__position__"] = OrderedDict()
+
+            for c in t.children:
+                # first remove dicts that are no longer required
+                pos = c.pop("__position__")
+                c.pop(
+                    "__tokens__", None
+                )  # tokens are no longer needed now we have the positions
+                comments = c.pop("__comments__", None)
+
+                #  simple attribute
+                assert len(c.items()) == 1
+                att = list(c.items())[0]
+                att_key = att[0]
+                att_value = att[1]
+
+                if self.include_position:
+                    # hoist position details to composite
+                    position_dict[att_key] = pos
+                if self.include_comments and comments:
+                    # hoist comments to composite
+                    comments_dict[att_key] = comments
+
+                if att_key in atts_dict.keys():
+                    log.warning(
+                        "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
+                        att_key,
+                        key,
+                        att_value,
+                    )
+                atts_dict[att_key] = att_value
+
+            composite_dict[key] = atts_dict
 
         return composite_dict
 
@@ -779,13 +818,6 @@ class Canonize(Transformer_InPlace):
         tree.children.insert(0, composite_type)
         return tree
 
-    #@v_args(tree=True)
-    #def config(self, tree):
-    #    composite_type = Tree("composite_type", [Token("config", "config")])
-    #
-    #    tree.data = "composite"
-    #    tree.children.insert(0, composite_type)
-    #    return tree
 
 def calculate_depth(iterable):
     """
