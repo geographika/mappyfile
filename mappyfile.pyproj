@@ -11,8 +11,8 @@
     <OutputPath>.</OutputPath>
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
-    <InterpreterId>MSBuild|mappyfile3|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_validation.py</StartupFile>
+    <InterpreterId>MSBuild|mappyfile|$(MSBuildProjectFullPath)</InterpreterId>
+    <StartupFile>tests\test_utils.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -112,6 +112,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Folder Include="tests\samples\layers\" />
     <Folder Include="tests\samples\mapfile_include\" />
     <Folder Include="tests\samples\mapfile_include\include\" />
+    <Folder Include="tests\samples\configs\" />
     <Folder Include="tests\sample_maps\" />
   </ItemGroup>
   <ItemGroup>
@@ -656,7 +657,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="tests\mapfiles\performance\run3-py36\map6.map.txt" />
     <Content Include="tests\mapfiles\performance\run3-py36\map7.map.txt" />
     <Content Include="tests\mapfiles\performance\run3-py36\ReadMe.txt" />
+    <Content Include="tests\samples\configs\config1.cfg" />
     <Content Include="tests\samples\connection.map" />
+    <Content Include="tests\samples\empty.map" />
     <Content Include="tests\samples\include1_nested_path.map" />
     <Content Include="tests\samples\include1_recursive.map" />
     <Content Include="tests\samples\include2_recursive.map" />
