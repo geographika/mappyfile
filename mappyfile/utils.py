@@ -33,7 +33,11 @@ import warnings
 import functools
 from mappyfile.ordereddict import DefaultOrderedDict
 from mappyfile.parser import Parser
-from mappyfile.transformer import MapfileToDict
+from mappyfile.transformer import (
+    MapfileToDict,
+    MapfileTransformer,
+    ConfigfileTransformer,
+)
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.validator import Validator
 from typing import IO
@@ -59,6 +63,31 @@ def deprecated(func):
         return func(*args, **kwargs)
 
     return new_func
+
+
+def _transform(
+    ast,
+    include_comments: bool = False,
+    include_position: bool = False,
+    **kwargs,
+) -> dict:
+    if "transformer_class" not in kwargs:
+        if ast.data and ast.data == "config":
+            transformer_class = ConfigfileTransformer
+        else:
+            transformer_class = MapfileTransformer
+    else:
+        # a transformer_class was set as an argument
+        transformer_class = kwargs.pop("transformer_class")
+
+    m = MapfileToDict(
+        include_position=include_position,
+        include_comments=include_comments,
+        transformer_class=transformer_class,
+        **kwargs,
+    )
+    d = m.transform(ast)
+    return d
 
 
 # pylint: disable=redefined-builtin
@@ -103,15 +132,12 @@ def open(
     Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
 
     """
+
     p = Parser(
         expand_includes=expand_includes, include_comments=include_comments, **kwargs
     )
     ast = p.parse_file(fn)
-    m = MapfileToDict(
-        include_position=include_position, include_comments=include_comments, **kwargs
-    )
-    d = m.transform(ast)
-    return d
+    return _transform(ast, include_comments, include_position, **kwargs)
 
 
 def load(
@@ -159,11 +185,7 @@ def load(
         expand_includes=expand_includes, include_comments=include_comments, **kwargs
     )
     ast = p.load(fp)
-    m = MapfileToDict(
-        include_position=include_position, include_comments=include_comments, **kwargs
-    )
-    d = m.transform(ast)
-    return d
+    return _transform(ast, include_comments, include_position, **kwargs)
 
 
 def loads(
@@ -209,11 +231,7 @@ def loads(
         expand_includes=expand_includes, include_comments=include_comments, **kwargs
     )
     ast = p.parse(s)
-    m = MapfileToDict(
-        include_position=include_position, include_comments=include_comments, **kwargs
-    )
-    d = m.transform(ast)
-    return d
+    return _transform(ast, include_comments, include_position, **kwargs)
 
 
 # pylint: disable=too-many-arguments

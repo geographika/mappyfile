@@ -208,6 +208,9 @@ class Parser:
         Parse the Mapfile
         """
 
+        if text.strip() == "":
+            raise ValueError(f"The file {fn} is empty")
+
         if self.expand_includes:
             text = self.load_includes(text, fn=fn)
 

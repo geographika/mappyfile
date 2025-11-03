@@ -208,6 +208,85 @@ def test_create_missing():
     assert error_raised is True
 
 
+def test_open_empty():
+    fn = "./tests/samples/empty.map"
+
+    with pytest.raises(ValueError):
+        mappyfile.open(fn)
+
+
+def test_open_config():
+    fn = "./tests/samples/configs/config1.cfg"
+    d = mappyfile.open(fn)
+    assert len(d["env"]) == 2
+    assert d["env"]["ms_map_pattern"] == "."
+
+    assert len(d["maps"]) == 2
+    assert d["maps"]["test1"] == "C:/Maps/test1.map"
+
+    assert len(d["plugins"]) == 1
+    assert (
+        d["plugins"]["mssql"]
+        == r"C:\MapServer\bin\ms\plugins\mssql2008\msplugin_mssql2008.dll"
+    )
+
+
+def test_loads_config():
+    fn = "./tests/samples/configs/config1.cfg"
+    with open(fn) as f:
+        s = f.read()
+
+    d = mappyfile.loads(s)
+    assert len(d["env"]) == 2
+    assert d["env"]["ms_map_pattern"] == "."
+
+    assert len(d["maps"]) == 2
+    assert d["maps"]["test1"] == "C:/Maps/test1.map"
+
+    assert len(d["plugins"]) == 1
+    assert (
+        d["plugins"]["mssql"]
+        == r"C:\MapServer\bin\ms\plugins\mssql2008\msplugin_mssql2008.dll"
+    )
+
+
+def test_load_config():
+    fn = "./tests/samples/configs/config1.cfg"
+    with open(fn) as fp:
+        d = mappyfile.load(fp)
+
+    assert len(d["env"]) == 2
+    assert d["env"]["ms_map_pattern"] == "."
+
+    assert len(d["maps"]) == 2
+    assert d["maps"]["test1"] == "C:/Maps/test1.map"
+
+    assert len(d["plugins"]) == 1
+    assert (
+        d["plugins"]["mssql"]
+        == r"C:\MapServer\bin\ms\plugins\mssql2008\msplugin_mssql2008.dll"
+    )
+
+
+def test_loads_config():
+    fn = "./tests/samples/configs/config1.cfg"
+    with open(fn) as f:
+        s = f.read()
+
+    d = mappyfile.loads(s)
+    assert len(d["env"]) == 2
+    assert d["env"]["ms_map_pattern"] == "."
+
+    assert len(d["maps"]) == 2
+    assert d["maps"]["test1"] == "C:/Maps/test1.map"
+
+    assert len(d["plugins"]) == 1
+    assert (
+        d["plugins"]["mssql"]
+        == r"C:\MapServer\bin\ms\plugins\mssql2008\msplugin_mssql2008.dll"
+    )
+
+
 def run_tests():
     pytest.main(["tests/test_utils.py"])
 
@@ -215,5 +294,7 @@ def run_tests():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     # run_tests()
-    test_loads_kwargs()
+    # test_loads_kwargs()
+    # test_open_empty()
+    test_loads_config()
     print("Done!")
