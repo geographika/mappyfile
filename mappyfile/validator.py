@@ -309,7 +309,6 @@ class Validator:
         return error_messages
 
     def expand_refs(self, schema: str):
-
         if isinstance(schema, dict):
             if "$ref" in schema:
                 schema_name = schema["$ref"]
@@ -337,7 +336,6 @@ class Validator:
             cache_schema_name = schema_name
 
         if cache_schema_name not in self.expanded_schemas:
-
             root_schema = self.get_json_from_file(schema_name)
             jsn_schema = self.expand_refs(root_schema)
 

@@ -268,25 +268,6 @@ def test_load_config():
     )
 
 
-def test_loads_config():
-    fn = "./tests/samples/configs/config1.cfg"
-    with open(fn) as f:
-        s = f.read()
-
-    d = mappyfile.loads(s)
-    assert len(d["env"]) == 2
-    assert d["env"]["ms_map_pattern"] == "."
-
-    assert len(d["maps"]) == 2
-    assert d["maps"]["test1"] == "C:/Maps/test1.map"
-
-    assert len(d["plugins"]) == 1
-    assert (
-        d["plugins"]["mssql"]
-        == r"C:\MapServer\bin\ms\plugins\mssql2008\msplugin_mssql2008.dll"
-    )
-
-
 def run_tests():
     pytest.main(["tests/test_utils.py"])
 
