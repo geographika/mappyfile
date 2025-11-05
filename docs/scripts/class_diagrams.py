@@ -145,7 +145,6 @@ def generate_graph(root, classes, fn):
 
 
 def main():
-
     # pprint.pprint(layer_children)
     classes = map_children()
     generate_graph(root="LAYER", classes=classes["MAP"], fn="layer_classes")

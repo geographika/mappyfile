@@ -736,7 +736,7 @@ class ConfigfileTransformer(MapfileTransformer):
         for t in tree:
             key = t.data.lower()
 
-            atts_dict = OrderedDict()
+            atts_dict: OrderedDict[str, Any] = OrderedDict()
 
             if self.include_comments:
                 comments_dict = atts_dict["__comments__"] = OrderedDict()

@@ -40,7 +40,7 @@ from mappyfile.transformer import (
 )
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.validator import Validator
-from typing import IO
+from typing import IO, Any, Type
 
 
 def deprecated(func):
@@ -71,6 +71,7 @@ def _transform(
     include_position: bool = False,
     **kwargs,
 ) -> dict:
+    transformer_class: Type[Any]
     if "transformer_class" not in kwargs:
         if ast.data and ast.data == "config":
             transformer_class = ConfigfileTransformer
