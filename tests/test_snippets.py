@@ -1046,10 +1046,24 @@ def run_tests():
     pytest.main(["tests/test_snippets.py"])
 
 
+def test_class_fallack():
+    s = """
+CLASS
+    STYLE
+      COLOR 34 20 164
+    END # STYLE
+    FALLBACK TRUE
+END"""
+
+    print(output(s, schema_name="class"))
+    exp = "CLASS STYLE COLOR 34 20 164 END FALLBACK TRUE END"
+    assert output(s, schema_name="class") == exp
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # test_multiple_compfilters()
     # test_geomtransform_nested_function()
-    test_class_regex_expression()
+    test_class_fallack()
     # run_tests()
     print("Done!")
