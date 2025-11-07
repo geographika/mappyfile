@@ -642,6 +642,15 @@ class MapfileTransformer(Transformer):
         v.value = "{%s}" % list_values
         return v
 
+    def classauto(self, t):
+        key_token = t[0]
+        key_name = self.key_name(key_token)
+        pd = self.create_position_dict(key_token, None)
+        d: dict = OrderedDict()
+        d["__position__"] = pd
+        d[key_name] = None
+        return d
+
 
 class CommentsTransformer(Transformer_InPlace):
     """

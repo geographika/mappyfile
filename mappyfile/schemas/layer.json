@@ -159,6 +159,12 @@
     "header": {
       "type": "string"
     },
+    "identify": {
+      "$ref": "identify.json",
+      "metadata": {
+        "minVersion": 8.6
+      }
+    },
     "joins": {
       "type": "array",
       "items": {

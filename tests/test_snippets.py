@@ -1036,17 +1036,7 @@ END"""
     assert output(s, schema_name="class") == exp
 
 
-def run_tests():
-    r"""
-    Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
-    #stdin_get_value = sys.stdin.read
-    Or get AttributeError: '_ReplInput' object has no attribute 'read'
-    """
-    # pytest.main(["tests/test_snippets.py::test_style_pattern"])
-    pytest.main(["tests/test_snippets.py"])
-
-
-def test_class_fallack():
+def test_class_fallback():
     s = """
 CLASS
     STYLE
@@ -1060,10 +1050,36 @@ END"""
     assert output(s, schema_name="class") == exp
 
 
+def test_layer_identify():
+    s = """
+LAYER
+    TYPE POLYGON
+    IDENTIFY
+        TOLERANCE 5  # optional
+        TOLERANCEUNITS meters
+        CLASSAUTO
+    END
+END"""
+
+    print(output(s, schema_name="layer"))
+    exp = "LAYER TYPE POLYGON IDENTIFY TOLERANCE 5 TOLERANCEUNITS METERS CLASSAUTO END END"
+    assert output(s, schema_name="layer") == exp
+
+
+def run_tests():
+    r"""
+    Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
+    #stdin_get_value = sys.stdin.read
+    Or get AttributeError: '_ReplInput' object has no attribute 'read'
+    """
+    # pytest.main(["tests/test_snippets.py::test_style_pattern"])
+    pytest.main(["tests/test_snippets.py"])
+
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # test_multiple_compfilters()
     # test_geomtransform_nested_function()
-    test_class_fallack()
+    test_layer_identify()
     # run_tests()
     print("Done!")

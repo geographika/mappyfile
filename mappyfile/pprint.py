@@ -151,7 +151,11 @@ class PrettyPrinter:
     ) -> str:
         if (aligned_max_indent is None) or (aligned_max_indent == 0):
             aligned_max_indent = len(key) + 1
-        indent = " " * (aligned_max_indent - len(key))
+        if value == "":
+            indent = ""  # for keywords with no values, do not add a space
+        else:
+            indent = " " * (aligned_max_indent - len(key))
+
         tmpl = "{spacer}{key}{indent}{value}"
         d = {"spacer": spacer, "key": key, "value": value, "indent": indent}
         return tmpl.format(**d)
@@ -398,6 +402,12 @@ class PrettyPrinter:
                 return str(value).upper()  # value is from a set list, no need for quote
 
             return value
+
+        if "type" in attr_props and attr_props["type"] == "null":
+            # for keywords without a value return an empty string
+            # currently only CLASSAUTO is the only keyword without a value
+            assert attr.lower() == "classauto"
+            return ""
 
         if (
             "type" in attr_props and attr_props["type"] == "string"

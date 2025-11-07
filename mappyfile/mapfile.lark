@@ -42,7 +42,7 @@ composite: composite_type composite_body _END
        | connectionoptions
 
 composite_body: _composite_item*
-_composite_item: (composite|attr|points|projection|pattern|values|config)
+_composite_item: (composite|attr|points|projection|pattern|values|config|classauto)
 
 !projection: "PROJECTION"i (string*|AUTO) _END
 !config: "CONFIG"i (string | UNQUOTED_STRING) (string | UNQUOTED_STRING)
@@ -78,6 +78,7 @@ string_pair: (string|UNQUOTED_STRING) (string|UNQUOTED_STRING)
 
 attr_bind_pair: attr_bind attr_bind
 attr_mixed_pair: attr_bind (int|float) | (int|float) attr_bind
+classauto: CLASSAUTO
 float: SIGNED_FLOAT
 float_pair: float float
 path: PATH
@@ -124,6 +125,7 @@ func_params: atom ("," atom)*
             | "COMPOSITE"i
             | "FEATURE"i
             | "GRID"i
+            | "IDENTIFY"i
             | "JOIN"i
             | "LABEL"i
             | "LAYER"i
@@ -139,6 +141,7 @@ func_params: atom ("," atom)*
             | "WEB"i
             | "SYMBOL"i
 
+CLASSAUTO: "CLASSAUTO"i
 AUTO: "AUTO"i
 PATH: /([a-z0-9_]*\.*\/|[a-z0-9_]+[.\/])[a-z0-9_\/\.-]+/i
 

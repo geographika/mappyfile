@@ -43,6 +43,7 @@ COMPLEX_TYPES = frozenset(
     composite
     feature
     grid
+    identify
     join
     label
     leader
@@ -111,6 +112,7 @@ COMPOSITE_NAMES = frozenset(
     graticule
     group
     header
+    identify
     image
     imagecolor
     imagetype
@@ -256,6 +258,7 @@ SINGLETON_COMPOSITE_NAMES = frozenset(
     cluster
     connectionoptions
     grid
+    identify
     leader
     legend
     metadata
