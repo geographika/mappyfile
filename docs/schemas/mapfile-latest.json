@@ -266,6 +266,13 @@
                                         }
                                     ]
                                 },
+                                "fallback": {
+                                    "default": false,
+                                    "metadata": {
+                                        "minVersion": 8.6
+                                    },
+                                    "type": "boolean"
+                                },
                                 "group": {
                                     "type": "string"
                                 },
