@@ -649,6 +649,46 @@ def test_get_full_versioned_schema():
     ]
 
 
+def test_fallback_validation():
+    s = """
+    MAP
+        LAYER
+            TYPE POLYGON
+            CLASS
+                FALLBACK TRUE
+            END
+        END
+    END
+    """
+    errors = validate(s)
+    print(errors)
+    assert len(errors) == 0
+
+    d = mappyfile.loads(s, include_position=False)
+    v = Validator()
+    errors = v.validate(d, add_comments=True, version=8.4)
+    print(errors)
+    assert len(errors) == 1
+
+
+def test_fallback_old_version_validation():
+    s = """
+    MAP
+        LAYER
+            TYPE POLYGON
+            CLASS
+                FALLBACK TRUE
+            END
+        END
+    END
+    """
+    d = mappyfile.loads(s, include_position=False)
+    v = Validator()
+    errors = v.validate(d, add_comments=True, version=8.4)
+    print(errors)
+    assert len(errors) == 1
+
+
 def run_tests():
     pytest.main(["tests/test_validation.py"])
 
@@ -659,5 +699,5 @@ if __name__ == "__main__":
     # test_double_error()
     # test_deref()
     # test_get_outputformat_schema()
-    test_get_full_versioned_schema()
+    test_fallback_validation()
     print("Done!")

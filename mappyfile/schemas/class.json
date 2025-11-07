@@ -45,6 +45,13 @@
     "expression": {
       "$ref": "expression.json"
     },
+    "fallback": {
+      "type": "boolean",
+      "default": false,
+      "metadata": {
+        "minVersion": 8.6
+      }
+    },
     "group": {
       "type": "string"
     },
