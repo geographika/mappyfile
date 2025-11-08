@@ -3202,6 +3202,40 @@
                     "header": {
                         "type": "string"
                     },
+                    "identify": {
+                        "$schema": "https://json-schema.org/draft/2020-12/schema",
+                        "additionalProperties": false,
+                        "metadata": {
+                            "minVersion": 8.6
+                        },
+                        "patternProperties": {
+                            "^__[a-z]+__$": true
+                        },
+                        "properties": {
+                            "__type__": {
+                                "const": "identify"
+                            },
+                            "classauto": {
+                                "type": "null"
+                            },
+                            "tolerance": {
+                                "type": "number"
+                            },
+                            "toleranceunits": {
+                                "enum": [
+                                    "feet",
+                                    "inches",
+                                    "kilometers",
+                                    "meters",
+                                    "miles",
+                                    "nauticalmiles",
+                                    "pixels",
+                                    "dd"
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    },
                     "include": {
                         "items": {
                             "type": "string"
