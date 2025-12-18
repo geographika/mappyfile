@@ -1,18 +1,53 @@
 Releases
 --------
 
-1.1.0 Coming Soon
-+++++++++++++++++
+1.1.0 19/12/2025
+++++++++++++++++
 
 + **Breaking Change** - :ref:`create <api-create>` now creates an empty block by default.
-  Pass ``add_default=True`` to include the default MapServer parameters.
+  Pass ``add_default=True`` to include the default MapServer parameters (for example a ``MAP`` has a default ``ANGLE`` of ``0``).
+  Defaults are part of the mappyfile schema objects. 
 
-1.0.1 31/05/2024
+  `#225 <https://github.com/geographika/mappyfile/pull/225>`_ - Only add default MapServer values explicitly when using `create` function.
+
+**New feature** - support for MapServer CONFIG files. See :ref:`config-files`.
+
++ `#238 <https://github.com/geographika/mappyfile/pull/238>`_ - Add cli validation for CONFIG files
++ `#237 <https://github.com/geographika/mappyfile/pull/237>`_ - Support quoted keys in CONFIG files
++ `#226 <https://github.com/geographika/mappyfile/pull/226>`_ - Add CONFIG schema files
++ `#231 <https://github.com/geographika/mappyfile/pull/231>`_ - Add a new transformer for MapServer config files
+
+Mapfile syntax updates and support for new features:
+
++ `#233 <https://github.com/geographika/mappyfile/pull/233>`_ - Add support for `IDENTIFY <https://mapserver.org/mapfile/identify.html>`__ blocks.
++ `#232 <https://github.com/geographika/mappyfile/pull/232>`_ - Add support for `CLASS FALLBACK <https://mapserver.org/mapfile/class.html#mapfile-class-fallback>`__.
++ `#221 <https://github.com/geographika/mappyfile/pull/221>`_ - Add <> for expressions
+
+Bug fixes:
+
++ `#227 <https://github.com/geographika/mappyfile/pull/227>`_ - Find schemas using Path module and avoid UNC paths on Windows
++ `#219 <https://github.com/geographika/mappyfile/pull/219>`_ - Attempt to solve issue #199 (update grammar and tests)
+
+General Maintenance:
+
++ `#224 <https://github.com/geographika/mappyfile/pull/224>`_ - Remove dependency on jsonref
++ `#223 <https://github.com/geographika/mappyfile/pull/223>`_ - Update JSON Schemas to Draft202012
++ `#222 <https://github.com/geographika/mappyfile/pull/222>`_ - Add mypy type fixes
++ `#218 <https://github.com/geographika/mappyfile/pull/218>`_ - Add tests for checking schemas are correctly created
++ `#215 <https://github.com/geographika/mappyfile/pull/215>`_ - Turn off proxies and lazy_load in jsonref
++ `#236 <https://github.com/geographika/mappyfile/pull/236>`_ - Bump sphinx from 8.2.3 to 9.0.4
++ `#228 <https://github.com/geographika/mappyfile/pull/228>`_ - Bump sphinx from 8.1.3 to 8.2.3
++ `#217 <https://github.com/geographika/mappyfile/pull/217>`_ - Bump sphinx from 8.1.0 to 8.1.3
++ `#214 <https://github.com/geographika/mappyfile/pull/214>`_ - Bump sphinx from 7.3.7 to 8.1.0
+
+`Full changelog <https://github.com/geographika/mappyfile/compare/v1.0.2...v1.1.0>`__.
+
+1.0.2 31/05/2024
 ++++++++++++++++
 
 Patch release and CI (Continuous Integration) updates.
 
-`Full changlog <https://github.com/geographika/mappyfile/compare/v1.0.1...v1.0.2>`__.
+`Full changelog <https://github.com/geographika/mappyfile/compare/v1.0.1...v1.0.2>`__.
 
 1.0.1 25/04/2024
 ++++++++++++++++
@@ -21,7 +56,7 @@ Patch release.
 
 + `#206 <https://github.com/geographika/mappyfile/pull/206>`_ - Ensure findall works when properties are missing
 
-`Full changlog <https://github.com/geographika/mappyfile/compare/v1.0.0...v1.0.1>`__.
+`Full changelog <https://github.com/geographika/mappyfile/compare/v1.0.0...v1.0.1>`__.
 
 
 1.0.0 28/09/2023

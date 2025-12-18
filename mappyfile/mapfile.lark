@@ -55,7 +55,7 @@ _composite_item: (composite|attr|points|projection|pattern|values|config|classau
 !validation: "VALIDATION"i string_pair* _END
 !connectionoptions: "CONNECTIONOPTIONS"i string_pair* _END
 
-# allow quoted or unquoted keys for CONFIG sections
+// allow quoted or unquoted keys for CONFIG sections
 config_attr: (UNQUOTED_STRING | composite_type | string) (value | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)
 
 attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)

@@ -1,7 +1,7 @@
 Usage: mappyfile format [OPTIONS] INPUT_MAPFILE OUTPUT_MAPFILE
 
   Format a the input-mapfile and save as output-mapfile. Note output-mapfile
-  will be  overwritten if it already exists.
+  will be overwritten if it already exists.
 
   Example of formatting a single Mapfile:
 
@@ -30,7 +30,7 @@ Options:
   --newlinechar TEXT          The character used to insert newlines in the
                               Mapfile [default: \n]
   --expand / --no-expand      Expand any INCLUDE directives found in the
-                              Mapfile  [default: True]
+                              Mapfile  [default: expand]
   --comments / --no-comments  Keep Mapfile comments in the output
-                              (experimental)  [default: False]
+                              (experimental)  [default: no-comments]
   --help                      Show this message and exit.
