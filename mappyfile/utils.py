@@ -443,7 +443,7 @@ def dumps(
     )
 
 
-def validate(d: dict, version: float | None = None) -> list:
+def validate(d: dict, version: float | None = None, schema_name: str = "map") -> list:
     """
     Validate a mappyfile dictionary by using the Mapfile schema.
     An optional version number can be used to specify a specific
@@ -465,7 +465,7 @@ def validate(d: dict, version: float | None = None) -> list:
 
     """
     v = Validator()
-    return v.validate(d, version=version)
+    return v.validate(d, version=version, schema_name=schema_name)
 
 
 def _save(output_file: str, string: str) -> None:
@@ -499,7 +499,8 @@ def _pprint(
 
 def create(type: str, version=None, add_defaults=False) -> dict:
     """
-    Create a new mappyfile object, and add MapServer defaults (if any).
+    Create a new mappyfile object. To add MapServer defaults (if any)
+    set ``add_defaults`` to ``True``.
 
     Parameters
     ----------
