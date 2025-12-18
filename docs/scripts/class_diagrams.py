@@ -73,6 +73,7 @@ def layer_children():
         "COMPOSITE": {},
         "FEATURE": {"POINTS": {}},
         "GRID": {},
+        "IDENTIFY": {},
         "JOIN": {},
         "METADATA": {},
         "PROJECTION": {},

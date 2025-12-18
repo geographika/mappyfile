@@ -180,7 +180,7 @@ def format(
 )  # noqa
 @click.option(
     "--version",
-    default=8.2,
+    default=8.6,
     show_default=True,
     help="The MapServer version number used to validate the Mapfile",
 )  # noqa

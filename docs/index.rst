@@ -29,6 +29,7 @@ mappyfile was first introduced in a presentation at `FOSS4G Europe 2017 <https:/
     validation.rst
     schemas.rst
     grammar.rst
+    config.rst
     python_integration.rst
     client.rst
     api/main.rst

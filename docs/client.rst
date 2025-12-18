@@ -4,7 +4,7 @@ Command-line Interface
 ======================
 
 mappyfile includes two command line applications, :ref:`client-format` and :ref:`client-validate`. A command line interface (CLI), allows mappyfile 
-to be easily integrated into Continuous Integration (CI) platforms such as Travis and Appveyor, and to automate validation and formatting
+to be easily integrated into Continuous Integration (CI) platforms such as GitHub Actions, Travis, and Appveyor, and to automate validation and formatting
 of Mapfiles. 
 
 .. _client-format:
@@ -15,11 +15,23 @@ format
 The ``format`` command can be used to apply consistent formatting and whitespace to a Mapfile, and to remove comments. 
 It has the same parameters as the :ref:`save <api-save>` function. 
 
+Example 1
++++++++++
+
 To format ``valid.map`` to a new ``valid_formatted.map`` file using the default formatting settings use the following syntax: 
 
 .. code-block:: bat
 
     mappyfile format valid.map valid_formatted.map
+
+Example 2
++++++++++
+
+To format a MapServer CONFIG file:
+
+.. code-block:: bat
+
+    mappyfile format C:\MapServer\apps\mapserver.conf C:\MapServer\apps\mapserver.formatted.conf --indent 2
 
 Other examples are included in the ``help`` documentation for the command, shown below. To display this at the command line run 
 the following: 
@@ -30,11 +42,6 @@ the following:
 
 .. literalinclude:: format.txt
     :language: console
-
-..
-    echo run from python3 as click in Python2 doesn't pick up the correct terminal size when redirecting to a file
-    mode con:cols=250
-    mappyfile format --help > docs/format.txt
 
 .. _client-validate:
 
@@ -100,6 +107,15 @@ To display the command's help text run the following:
     mappyfile validate --help > docs/validate.txt
     mappyfile validate C:/Temp/*.map > docs/validation_errors.txt
 
+Example 4
++++++++++
+
+To validate a MapServer CONFIG file:
+
+.. code-block:: bat
+
+    mappyfile validate C:\MapServer\apps\mapserver.conf
+
 .. _client-schema:
 
 schema
@@ -111,5 +127,5 @@ Save the Mapfile schema to a file. Set the version parameter to output a specifi
 
     mappyfile schema --help
 
-.. literalinclude:: format.txt
+.. literalinclude:: schema.txt
     :language: console
