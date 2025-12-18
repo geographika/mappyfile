@@ -221,13 +221,19 @@ def validate(_, mapfiles, expand, version):
             click.echo(f"{fn} failed to parse successfully")
             continue
 
-        validation_messages = mappyfile.validate(d, version)
+        schema_name = d.get("__type__", "map")
+        validation_messages = mappyfile.validate(d, version, schema_name)
         if validation_messages:
             for v in validation_messages:
                 v["fn"] = fn
-                # pylint: disable=consider-using-f-string
-                msg = "{fn} (Line: {line} Column: {column}) {message} - {error}".format(
-                    **v
+                msg = (
+                    "{fn} (Line: {line} Column: {column}) {message} - {error}"
+                ).format(
+                    fn=v.get("fn", "<unknown>"),
+                    line=v.get("line", "?"),
+                    column=v.get("column", "?"),
+                    message=v.get("message", ""),
+                    error=v.get("error", ""),
                 )
                 click.echo(msg)
                 errors += 1
