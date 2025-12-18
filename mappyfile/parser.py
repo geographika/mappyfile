@@ -159,7 +159,13 @@ class Parser:
             # when we encounter a new type that can have associated comments
             # assign all comments up to that point in the Mapfile to the node
             # for metadata we want to assign comments to the string_pair
-            if node.data in ("composite", "attr", "projection", "string_pair"):
+            if node.data in (
+                "composite",
+                "attr",
+                "projection",
+                "string_pair",
+                "config_attr",
+            ):
                 # for projection blocks capture any comments within the block
 
                 if node.data in ("projection"):

@@ -83,7 +83,7 @@ def test_config():
     s = pp.pprint(d)
     assert (
         s
-        == "CONFIG ENV 'ms_map_pattern' '.' 'proj_lib' 'C:/MapServer/bin/proj7/SHARE' END MAPS 'test1' 'C:/Maps/test1.map' 'test2' 'C:/Maps/test2.map' END END"
+        == "CONFIG ENV ms_map_pattern '.' proj_lib 'C:/MapServer/bin/proj7/SHARE' END MAPS test1 'C:/Maps/test1.map' test2 'C:/Maps/test2.map' END END"
     )
 
 
@@ -123,14 +123,48 @@ def test_config_with_comments():
         s
         == """CONFIG
 ENV
-'ms_map_pattern' '.' # block comment
-'proj_lib' 'C:/MapServer/bin/proj7/SHARE'
+ms_map_pattern '.' # block comment
+proj_lib 'C:/MapServer/bin/proj7/SHARE'
 END
 MAPS
-'test1' 'C:/Maps/test1.map' # this is a test map
-'test2' 'C:/Maps/test2.map' # another test map
+test1 'C:/Maps/test1.map' # this is a test map
+test2 'C:/Maps/test2.map' # another test map
 END
 END"""
+    )
+
+
+def test_config_with_quoted_keys():
+    config_text_ok = """CONFIG
+    ENV
+            MS_MAP_PATTERN "."
+            "PROJ_LIB" "C:/MapServer/bin/proj7/SHARE"
+    END
+    MAPS
+            test1 "C:/Maps/test1.map"
+            'test2' "C:/Maps/test2.map"
+    END
+    END
+    """
+    p = Parser()
+    tree: Tree = p.parse(config_text_ok)
+
+    m = MapfileToDict(
+        include_position=False,
+        include_comments=False,
+        transformer_class=ConfigfileTransformer,
+    )
+    d = m.transform(tree)
+
+    d["env"]["curl_ca_bundle"] = "C:/MapServer/bin/curl-ca-bundle.crt"
+    # import json
+    # print(json.dumps(d))
+    pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
+    s = pp.pprint(d)
+    assert (
+        s
+        == """CONFIG ENV ms_map_pattern '.' "proj_lib" 'C:/MapServer/bin/proj7/SHARE' curl_ca_bundle """
+        """'C:/MapServer/bin/curl-ca-bundle.crt' END MAPS test1 'C:/Maps/test1.map' 'test2' 'C:/Maps/test2.map' END END"""
     )
 
 
@@ -142,6 +176,7 @@ if __name__ == "__main__":
     # logging.basicConfig(level=logging.DEBUG)
     # run_tests()
     test_parser_validation()
-    # test_config()
+    test_config()
     test_config_with_comments()
+    test_config_with_quoted_keys()
     print("Done!")

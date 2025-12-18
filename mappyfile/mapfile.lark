@@ -32,9 +32,9 @@ start: "SYMBOLSET"i composite_body _END   -> symbolset
      | composite+
 
 _config_body: config_item*
-config_item: "ENV"i attr* _END -> env
-            | "MAPS"i attr* _END -> maps
-            | "PLUGINS"i attr* _END -> plugins
+config_item: "ENV"i config_attr* _END -> env
+            | "MAPS"i config_attr* _END -> maps
+            | "PLUGINS"i config_attr* _END -> plugins
 
 composite: composite_type composite_body _END
        | metadata
@@ -54,6 +54,9 @@ _composite_item: (composite|attr|points|projection|pattern|values|config|classau
 !metadata: "METADATA"i string_pair* _END
 !validation: "VALIDATION"i string_pair* _END
 !connectionoptions: "CONNECTIONOPTIONS"i string_pair* _END
+
+# allow quoted or unquoted keys for CONFIG sections
+config_attr: (UNQUOTED_STRING | composite_type | string) (value | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)
 
 attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)
 %declare UNQUOTED_STRING_VALUE  // generated using the interactive parser. See issues #48, #98

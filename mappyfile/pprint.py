@@ -160,7 +160,9 @@ class PrettyPrinter:
         d = {"spacer": spacer, "key": key, "value": value, "indent": indent}
         return tmpl.format(**d)
 
-    def process_key_dict(self, key: str, d: dict, level: int) -> list[str]:
+    def process_key_dict(
+        self, key: str, d: dict, level: int, quote_key: bool = True
+    ) -> list[str]:
         """
         Process key value dicts e.g. METADATA "key" "value"
         """
@@ -171,12 +173,14 @@ class PrettyPrinter:
         self._add_type_comment(level, comments, lines)
 
         lines += [self.add_start_line(key, level)]
-        lines += self.process_dict(d, level, comments)
+        lines += self.process_dict(d, level, comments, quote_key)
         lines.append(self.add_end_line(level, 1, key))
 
         return lines
 
-    def process_dict(self, d: dict, level: int, comments: dict) -> list[str]:
+    def process_dict(
+        self, d: dict, level: int, comments: dict, quote_key: bool = True
+    ) -> list[str]:
         """
         Process keys and values within a block
         """
@@ -189,7 +193,10 @@ class PrettyPrinter:
 
         for k, v in d.items():
             if not self.__is_metadata(k):
-                qk = self.quoter.add_quotes(k)
+                if quote_key:
+                    qk = self.quoter.add_quotes(k)
+                else:
+                    qk = k
                 qv = self.quoter.add_quotes(v)
                 line = self.__format_line(
                     self.whitespace(level, 2), qk, qv, aligned_max_indent
@@ -561,13 +568,16 @@ class PrettyPrinter:
                 "validation",
                 "values",
                 "connectionoptions",
-                "env",
-                "maps",
-                "plugins",
             ):
                 # metadata and values are also composites
                 # but will be processed here
                 lines += self.process_key_dict(attr, value, level)
+            elif attr in (
+                "env",
+                "maps",
+                "plugins",
+            ):
+                lines += self.process_key_dict(attr, value, level, quote_key=False)
 
             elif attr == "projection":
                 projection_comments = self.process_attribute_comment(comments, attr)

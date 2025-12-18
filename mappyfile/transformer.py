@@ -733,6 +733,7 @@ class CommentsTransformer(Transformer_InPlace):
 
     # below we assign callbacks to process comments for each of the following types
     attr = _save_attr_comments
+    config_attr = _save_attr_comments  # handled the same as other attr comments
     projection = _save_projection_comments
     composite = _save_composite_comments
 
@@ -787,6 +788,13 @@ class ConfigfileTransformer(MapfileTransformer):
             composite_dict[key] = atts_dict
 
         return composite_dict
+
+    def config_attr(self, tokens) -> dict:
+        """
+        Process CONFIG file attributes which can be quoted
+        or unquoted, otherwise they are identical to other attributes
+        """
+        return self.attr(tokens)
 
 
 class MapfileToDict:
