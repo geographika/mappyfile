@@ -1,7 +1,7 @@
 mappyfile
 =========
 
-| |Version| |Docs| |Build Status| |Coveralls| |Appveyor Build Status| |Downloads|
+| |Version| |Docs| |Build Status| |Coveralls| |Downloads|
 
 A pure Python parser for working with `MapServer <https://mapserver.org>`_ MapFiles, built using `Lark <https://github.com/lark-parser/lark>`__.
 mappyfile is an official `OSGeo Community Project <https://www.osgeo.org/projects/mappyfile/>`_.
@@ -123,9 +123,6 @@ Contributors
 
 .. |Build Status| image:: https://github.com/geographika/mappyfile/actions/workflows/main.yml/badge.svg
    :target: https://github.com/geographika/mappyfile/actions/workflows/main.yml
-
-.. |Appveyor Build Status| image:: https://ci.appveyor.com/api/projects/status/mk33l07478gfytwh?svg=true
-   :target: https://ci.appveyor.com/project/SethG/mappyfile
 
 .. |Coveralls| image:: https://coveralls.io/repos/github/geographika/mappyfile/badge.svg?branch=master
     :target: https://coveralls.io/github/geographika/mappyfile?branch=master
