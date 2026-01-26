@@ -54,7 +54,7 @@ from mappyfile.dictutils import (
     dict_move_to_end,
 )
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 __all__ = [
     "open",
