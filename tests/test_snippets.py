@@ -1066,6 +1066,30 @@ END"""
     assert output(s, schema_name="layer") == exp
 
 
+def test_raster_label():
+    s = """
+LAYER
+  NAME "temperature"
+  TYPE POINT
+  CONNECTIONTYPE RASTERLABEL
+  DATA data/temperature.tif
+  CLASS
+      TEXT (tostring([value],"%.1f")+"°")
+      LABEL
+        TYPE TRUETYPE
+        SIZE 7
+      END # label
+  END # class
+END"""
+
+    # print(output(s, schema_name="layer"))
+    exp = (
+        "LAYER NAME 'temperature' TYPE POINT CONNECTIONTYPE RASTERLABEL "
+        'DATA \'data/temperature.tif\' CLASS TEXT ((tostring([value],"%.1f")) + "°") LABEL TYPE TRUETYPE SIZE 7 END END END'
+    )
+    assert output(s, schema_name="layer") == exp
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -1080,6 +1104,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # test_multiple_compfilters()
     # test_geomtransform_nested_function()
-    test_layer_identify()
+    test_raster_label()
     # run_tests()
     print("Done!")

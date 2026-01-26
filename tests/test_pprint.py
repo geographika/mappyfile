@@ -305,7 +305,7 @@ def test_get_attribute_properties():
     pp = PrettyPrinter()
     props = pp.get_attribute_properties("layer", "connectiontype")
     print(props)
-    assert len(props["enum"]) == 15
+    assert len(props["enum"]) == 16
 
 
 def test_get_ref_attribute_properties():

@@ -83,7 +83,8 @@
         "wfs",
         "wms",
         "mygis",
-        "flatgeobuf"
+        "flatgeobuf",
+        "rasterlabel"
       ]
     },
     "data": {

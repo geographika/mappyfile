@@ -380,6 +380,7 @@ postgis
 plugin
 query
 raster
+rasterlabel
 right
 round
 selected
