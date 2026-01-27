@@ -436,6 +436,24 @@ def test_separate_complex_types():
     assert s.index("GROUP") < s.index("STYLE\n")
 
 
+def test_map_symbol():
+    mapfile = """MAP
+    SYMBOL
+        NAME    'circle'
+        TYPE    ELLIPSE
+        FILLED  TRUE
+        POINTS
+            1 1
+        END
+    END
+END"""
+    ast = mappyfile.loads(mapfile)
+    # print(ast)
+    pp = PrettyPrinter(indent=4, quote="'", newlinechar="\n", align_values=True)
+    s = pp.pprint(ast)
+    assert s == mapfile
+
+
 def run_tests():
     # pytest.main(["tests/test_pprint.py::test_format_list"])
     pytest.main(["tests/test_pprint.py"])
@@ -443,6 +461,7 @@ def run_tests():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
-    test_empty_composite()
+    # test_empty_composite()
+    test_map_symbol()
     # run_tests()
     print("Done!")

@@ -268,6 +268,27 @@ def test_load_config():
     )
 
 
+def test_load_dump_symbolset():
+
+    symbolset_string = (
+        "SYMBOLSET SYMBOL NAME 'circle' TYPE ELLIPSE FILLED TRUE POINTS 1 1 END END END"
+    )
+    symbolset_dict = mappyfile.loads(symbolset_string)
+    output_string = mappyfile.dumps(
+        symbolset_dict, indent=0, newlinechar=" ", quote="'"
+    )
+    print(output_string)
+    assert symbolset_string == output_string
+
+
+def test_load_dump_symbol():
+
+    symbol_string = "SYMBOL NAME 'circle' TYPE ELLIPSE FILLED TRUE POINTS 1 1 END END"
+    symbol_dict = mappyfile.loads(symbol_string)
+    output_string = mappyfile.dumps(symbol_dict, indent=0, newlinechar=" ", quote="'")
+    assert symbol_string == output_string
+
+
 def run_tests():
     pytest.main(["tests/test_utils.py"])
 
@@ -277,5 +298,7 @@ if __name__ == "__main__":
     # run_tests()
     # test_loads_kwargs()
     # test_open_empty()
-    test_loads_config()
+    # test_loads_config()
+    test_load_dump_symbolset()
+    test_load_dump_symbol()
     print("Done!")
