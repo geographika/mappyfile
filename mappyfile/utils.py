@@ -28,7 +28,6 @@
 # =================================================================
 
 from __future__ import annotations
-import codecs
 import warnings
 import functools
 from mappyfile.ordereddict import DefaultOrderedDict
@@ -469,7 +468,7 @@ def validate(d: dict, version: float | None = None, schema_name: str = "map") ->
 
 
 def _save(output_file: str, string: str) -> None:
-    with codecs.open(output_file, "w", encoding="utf-8") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(string)
 
 

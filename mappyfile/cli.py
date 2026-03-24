@@ -29,7 +29,6 @@
 
 import sys
 import os
-import codecs
 import json
 import glob
 import logging
@@ -147,11 +146,12 @@ def format(
         mappyfile format C:/Temp/valid.map C:/Temp/valid_formatted.map --no-expand --comments
     """
 
-    quote = codecs.decode(quote, "unicode_escape")  # ensure \t is handled as a tab
-    spacer = codecs.decode(spacer, "unicode_escape")  # ensure \t is handled as a tab
-    newlinechar = codecs.decode(
-        newlinechar, "unicode_escape"
-    )  # ensure \n is handled as a newline
+    # ensure \t is handled as a tab
+    quote = quote.encode("raw_unicode_escape").decode("unicode_escape")
+    spacer = spacer.encode("raw_unicode_escape").decode("unicode_escape")
+
+    # ensure \n is handled as a newline
+    newlinechar = newlinechar.encode("raw_unicode_escape").decode("unicode_escape")
 
     d = mappyfile.open(
         input_mapfile,
@@ -271,7 +271,7 @@ def schema(_, output_file, version=None):
     validator = Validator()
     jsn = validator.get_versioned_schema(version)
 
-    with codecs.open(output_file, "w", encoding="utf-8") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(json.dumps(jsn, sort_keys=True, indent=4))
 
     sys.exit(0)

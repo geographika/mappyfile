@@ -20,7 +20,7 @@ https://github.com/sphinx-doc/sphinx/issues/2922#issuecomment-243377010
 Unfortunately, Sphinx is a monolithic application. So there is no way to use only parsers.
 """
 
-import glob, os, codecs
+import glob, os
 
 import docutils.frontend
 import docutils.nodes
@@ -257,7 +257,7 @@ class TermVisitor(docutils.nodes.GenericNodeVisitor):
 
 
 def read_doc(fn, kwds):
-    with codecs.open(fn, encoding="utf-8") as fileobj:
+    with open(fn, encoding="utf-8") as fileobj:
         txt = fileobj.read()
 
     txt = unicode(txt)
