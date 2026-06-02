@@ -275,3 +275,91 @@ def schema(_, output_file, version=None):
         f.write(json.dumps(jsn, sort_keys=True, indent=4))
 
     sys.exit(0)
+
+
+@main.command(short_help="Export a Mapfile to YAML")
+@click.argument("input-mapfile", nargs=1, type=click.Path(exists=True))
+@click.argument("output-yaml", nargs=1, type=click.Path())
+@click.option(
+    "--expand/--no-expand",
+    default=True,
+    show_default=True,
+    help="Expand any INCLUDE directives found in the Mapfile",
+)
+@click.option(
+    "--comments/--no-comments",
+    default=False,
+    show_default=True,
+    help="Keep Mapfile comments in the output (experimental)",
+)
+@click.pass_context
+def yaml_export(_, input_mapfile, output_yaml, expand, comments):
+    """
+    Export a Mapfile to YAML format.
+
+    Example:
+
+        mappyfile yaml-export C:/Temp/mymap.map C:/Temp/mymap.yaml
+    """
+    import mappyfile.yaml
+
+    d = mappyfile.open(
+        input_mapfile,
+        expand_includes=expand,
+        include_comments=comments,
+    )
+    mappyfile.yaml.save(d, output_yaml)
+    click.echo(f"{input_mapfile} exported to {output_yaml}")
+    sys.exit(0)
+
+
+@main.command(short_help="Import a YAML file to a Mapfile")
+@click.argument("input-yaml", nargs=1, type=click.Path(exists=True))
+@click.argument("output-mapfile", nargs=1, type=click.Path())
+@click.option(
+    "--indent",
+    default=4,
+    show_default=True,
+    help="The number of spacer characters to indent structures in the Mapfile",
+)
+@click.option(
+    "--spacer",
+    default=" ",
+    help="The character to use for indenting structures in the Mapfile",
+)
+@click.option(
+    "--quote",
+    default='"',
+    help='The quote character to use in the Mapfile (double or single quotes). Ensure these are escaped e.g. \\" or \\\' [default: \\"]',
+)
+@click.option(
+    "--newlinechar",
+    default="\n",
+    help="The character used to insert newlines in the Mapfile [default: \\n]",
+)
+@click.pass_context
+def yaml_import(_, input_yaml, output_mapfile, indent, spacer, quote, newlinechar):
+    """
+    Import a YAML file and save as a Mapfile.
+
+    Example:
+
+        mappyfile yaml-import C:/Temp/mymap.yaml C:/Temp/mymap.map
+    """
+    import mappyfile.yaml
+
+    quote = quote.encode("raw_unicode_escape").decode("unicode_escape")
+    spacer = spacer.encode("raw_unicode_escape").decode("unicode_escape")
+    newlinechar = newlinechar.encode("raw_unicode_escape").decode("unicode_escape")
+
+    d = mappyfile.yaml.open(input_yaml)
+    mappyfile.save(
+        d,
+        output_mapfile,
+        indent=indent,
+        spacer=spacer,
+        quote=quote,
+        newlinechar=newlinechar,
+    )
+    click.echo(f"{input_yaml} imported to {output_mapfile}")
+    sys.exit(0)
