@@ -3219,6 +3219,9 @@
                             "classauto": {
                                 "type": "null"
                             },
+                            "classgroup": {
+                                "type": "string"
+                            },
                             "tolerance": {
                                 "type": "number"
                             },
