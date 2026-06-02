@@ -143,6 +143,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="docs\editing.rst" />
     <Content Include="docs\examples\animation\animated_buffer.map" />
     <Content Include="docs\examples\geometry\geometry.map" />
+    <Content Include="docs\examples\symbols.sym" />
     <Content Include="docs\format.txt" />
     <Content Include="docs\grammar.rst" />
     <Content Include="docs\images\animation.gif" />
