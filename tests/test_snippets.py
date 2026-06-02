@@ -1066,6 +1066,20 @@ END"""
     assert output(s, schema_name="layer") == exp
 
 
+def test_layer_identify2():
+    s = """
+LAYER
+    TYPE POLYGON
+    IDENTIFY
+        CLASSGROUP "test"
+    END
+END"""
+
+    print(output(s, schema_name="layer"))
+    exp = "LAYER TYPE POLYGON IDENTIFY CLASSGROUP 'test' END END"
+    assert output(s, schema_name="layer") == exp
+
+
 def test_raster_label():
     s = """
 LAYER
@@ -1104,6 +1118,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     # test_multiple_compfilters()
     # test_geomtransform_nested_function()
-    test_raster_label()
+    # test_raster_label()
+    test_layer_identify2()
     # run_tests()
     print("Done!")
