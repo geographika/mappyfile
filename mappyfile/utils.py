@@ -471,7 +471,7 @@ def validate(d: dict, version: float | None = None, schema_name: str = "map") ->
 
 
 def _save(output_file: str, string: str) -> None:
-    with builtins.open(output_file, "w", encoding="utf-8") as f:
+    with builtins.open(output_file, "w", encoding="utf-8", newline="") as f:
         f.write(string)
 
 
