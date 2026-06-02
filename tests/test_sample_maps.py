@@ -41,7 +41,7 @@ def test_all_maps():
     failing_maps = []
 
     for fn in os.listdir(sample_dir):
-        if fn not in ignore_list:
+        if fn not in ignore_list and fn.lower().endswith(".map"):
             print(fn)
             try:
                 ast = p.parse_file(os.path.join(sample_dir, fn))
@@ -72,7 +72,7 @@ def test_yaml_roundtrip_all_maps(tmp_path):
     failing_maps = []
 
     for fn in os.listdir(sample_dir):
-        if fn not in ignore_list:
+        if fn not in ignore_list and fn.lower().endswith(".map"):
             map_path = os.path.join(sample_dir, fn)
             yaml_path = tmp_path / f"{fn}.yaml"
             try:
