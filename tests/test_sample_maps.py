@@ -8,28 +8,31 @@ from mappyfile.pprint import PrettyPrinter
 from lark import UnexpectedToken
 from mappyfile.validator import Validator
 
+SAMPLE_DIR = os.path.join(os.path.dirname(__file__), "sample_maps")
+
+# the following "map" files are includes used by other mapfiles in msautotest
+# TODO - rename all these to .include in MapServer source to allow them to be more
+# easily processed
+
+IGNORE_LIST = [
+    "bdry_counpy2_mssql.map",
+    "bdry_counpy2_ogr.map",
+    "bdry_counpy2_postgis.map",
+    "bdry_counpy2_shapefile.map",
+    "indx_q100kpy4_ogr.map",
+    "indx_q100kpy4_shapefile.map",
+    "mssql_connection.map",
+    "quoted_text.MAP",
+    "style-size.map",
+    "wfs_ogr_export_metadata.map",
+]
+
 
 def test_all_maps():
-    sample_dir = os.path.join(os.path.dirname(__file__), "sample_maps")
-
-    # the following "map" files are includes used by other mapfiles in msautotest
-    # TODO - rename all these to .include in MapServer source to allow them to be more
-    # easily processed
-    ignore_list = [
-        "bdry_counpy2_mssql.map",
-        "bdry_counpy2_ogr.map",
-        "bdry_counpy2_postgis.map",
-        "bdry_counpy2_shapefile.map",
-        "indx_q100kpy4_ogr.map",
-        "indx_q100kpy4_shapefile.map",
-        "mssql_connection.map",
-        "quoted_text.MAP",
-        "style-size.map",
-        "wfs_ogr_export_metadata.map",
-    ]
+    sample_dir = SAMPLE_DIR
 
     # list any maps that are known not to parse and are to be fixed
-    ignore_list += ["centerline.map"]
+    ignore_list = IGNORE_LIST + ["centerline.map"]
 
     p = Parser(expand_includes=False)
     m = MapfileToDict(include_position=True)
@@ -57,6 +60,55 @@ def test_all_maps():
 
     logging.warning("The list of maps below have failed to parse")
     logging.warning(failing_maps)
+
+
+def test_yaml_roundtrip_all_maps(tmp_path):
+    import mappyfile.yaml
+
+    sample_dir = SAMPLE_DIR
+    ignore_list = IGNORE_LIST
+
+    v = Validator()
+    failing_maps = []
+
+    for fn in os.listdir(sample_dir):
+        if fn not in ignore_list:
+            map_path = os.path.join(sample_dir, fn)
+            yaml_path = tmp_path / f"{fn}.yaml"
+            try:
+                # load original mapfile
+                d = mappyfile.open(map_path, expand_includes=False)
+
+                # export to YAML
+                mappyfile.yaml.save(d, str(yaml_path))
+                assert yaml_path.exists(), f"YAML file not created for {fn}"
+
+                # load back from YAML
+                d2 = mappyfile.yaml.open(str(yaml_path))
+
+                # validate the round-tripped dict - log only, don't fail
+                errors = v.validate(d2)
+                if errors:
+                    logging.warning(
+                        "Validation errors after YAML round-trip for %s", fn
+                    )
+                    logging.warning(errors)
+
+                # compare output - log only, don't fail
+                original = mappyfile.dumps(d)
+                roundtrip = mappyfile.dumps(d2)
+                if original != roundtrip:
+                    logging.warning("Output mismatch after YAML round-trip for %s", fn)
+
+            except Exception as ex:
+                logging.warning("Cannot process %s for YAML round-trip", fn)
+                logging.error(ex)
+                failing_maps.append(fn)
+
+    if failing_maps:
+        logging.warning("The following maps failed YAML round-trip: %s", failing_maps)
+
+    assert len(failing_maps) == 0, f"YAML round-trip failed for: {failing_maps}"
 
 
 def test_includes():
@@ -149,5 +201,12 @@ if __name__ == "__main__":
     logging.getLogger("mappyfile").setLevel(logging.INFO)
     # run_tests()
     # test_unicode_map()
-    test_all_maps()
+    # test_all_maps()
+
+    import tempfile
+    from pathlib import Path
+
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        test_yaml_roundtrip_all_maps(Path(tmp_dir))
+
     print("Done!")

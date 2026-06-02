@@ -12,7 +12,7 @@
     <Name>mappyfile</Name>
     <RootNamespace>mappyfile</RootNamespace>
     <InterpreterId>MSBuild|mappyfile313|$(MSBuildProjectFullPath)</InterpreterId>
-    <StartupFile>tests\test_config.py</StartupFile>
+    <StartupFile>tests\test_utils.py</StartupFile>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <Environment>PATH=C:\MapServer\bin;%PATH%
@@ -267,6 +267,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Content Include="mappyfile\schemas\rgb.json" />
     <Content Include="mappyfile\schemas\layer.json" />
     <Content Include="mappyfile\schemas\map.json" />
+    <Content Include="mappyfile\yaml.py" />
     <Content Include="notes.private.txt" />
     <Content Include="pyproject.toml" />
     <Content Include="README.rst" />
@@ -1116,7 +1117,9 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Compile Include="docs\examples\api\readme.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="docs\examples\check_extents.py" />
     <Compile Include="docs\examples\geometry\geometry.py" />
+    <Compile Include="docs\examples\yaml_example.py" />
     <Compile Include="docs\scripts\benchmarks.py">
       <SubType>Code</SubType>
     </Compile>
@@ -1217,6 +1220,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Compile Include="tests\test_validation.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\test_yaml.py" />
     <Compile Include="tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
