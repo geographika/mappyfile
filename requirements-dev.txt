@@ -16,6 +16,7 @@ black
 mypy
 types-jsonschema
 pyyaml
+types-PyYAML
 
 # for demo scripts
 Pillow

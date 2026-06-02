@@ -12,7 +12,9 @@ module = [
     'glob2',
     'lark_cython',
     'PIL',
-    'shapely.geometry'
+    'shapely.geometry',
+    # ignore the virtual module
+    'mappyfile.yaml'
 ]
 ignore_missing_imports = true
 
