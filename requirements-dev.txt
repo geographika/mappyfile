@@ -15,6 +15,7 @@ sphinx
 black
 mypy
 types-jsonschema
+pyyaml
 
 # for demo scripts
 Pillow

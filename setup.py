@@ -48,6 +48,9 @@ setup(
         "lark_cython": [
             "lark_cython>=0.0.14",
         ],
+        "yaml": [
+            "pyyaml",
+        ],
     },
     zip_safe=False,
     entry_points={
