@@ -28,6 +28,7 @@
 # =================================================================
 
 import builtins
+import collections
 from typing import IO
 
 try:
@@ -53,6 +54,7 @@ def _make_dumper():
     dumper.add_representer(CaseInsensitiveOrderedDict, _represent_as_mapping)
     dumper.add_representer(DefaultOrderedDict, _represent_as_mapping)
     dumper.add_representer(tuple, _represent_tuple)
+    dumper.add_representer(collections.OrderedDict, _represent_as_mapping)
     return dumper
 
 
