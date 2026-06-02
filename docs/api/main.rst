@@ -90,3 +90,45 @@ Mapfile schema. See :ref:`validation-docs` for further details.
     :noindex:
 
     .. autofunction:: validate
+
+.. _yaml-api:
+
+YAML Functions
+--------------
+
+These are functions used to read and write Mapfile dictionaries to YAML format.
+Requires PyYAML to be installed: ``pip install mappyfile[yaml]``.
+
++ :func:`mappyfile.yaml.open`
++ :func:`mappyfile.yaml.load`
++ :func:`mappyfile.yaml.loads`
++ :func:`mappyfile.yaml.dump`
++ :func:`mappyfile.yaml.dumps`
++ :func:`mappyfile.yaml.save`
+
+.. automodule:: mappyfile.yaml
+    :noindex:
+
+.. _api-yaml-open:
+
+    .. autofunction:: open
+
+.. _api-yaml-load:
+
+    .. autofunction:: load
+
+.. _api-yaml-loads:
+
+    .. autofunction:: loads
+
+.. _api-yaml-dump:
+
+    .. autofunction:: dump
+
+.. _api-yaml-dumps:
+
+    .. autofunction:: dumps
+
+.. _api-yaml-save:
+
+    .. autofunction:: save

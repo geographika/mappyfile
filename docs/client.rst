@@ -129,3 +129,76 @@ Save the Mapfile schema to a file. Set the version parameter to output a specifi
 
 .. literalinclude:: schema.txt
     :language: console
+
+.. _client-yaml-export:
+
+yaml-export
+-----------
+
+The ``yaml-export`` command converts a Mapfile to YAML format. Requires PyYAML to be installed
+(``pip install mappyfile[yaml]``).
+
+Example 1
++++++++++
+
+To export a Mapfile to YAML using the default settings:
+
+.. code-block:: bat
+
+    mappyfile yaml-export mymap.map mymap.yaml
+
+Example 2
++++++++++
+
+To export without expanding any ``INCLUDE`` directives:
+
+.. code-block:: bat
+
+    mappyfile yaml-export mymap.map mymap.yaml --no-expand
+
+Example 3
++++++++++
+
+To export including any comments in the Mapfile:
+
+.. code-block:: bat
+
+    mappyfile yaml-export mymap.map mymap.yaml --comments
+
+To display the command's help text run the following:
+
+.. code-block:: bat
+
+    mappyfile yaml-export --help
+
+.. _client-yaml-import:
+
+yaml-import
+-----------
+
+The ``yaml-import`` command converts a YAML file back to a Mapfile. Requires PyYAML to be installed
+(``pip install mappyfile[yaml]``).
+
+Example 1
++++++++++
+
+To import a YAML file and save as a Mapfile using the default formatting settings:
+
+.. code-block:: bat
+
+    mappyfile yaml-import mymap.yaml mymap.map
+
+Example 2
++++++++++
+
+To import a YAML file and save as a Mapfile with custom indentation and single quotes:
+
+.. code-block:: bat
+
+    mappyfile yaml-import mymap.yaml mymap.map --indent=2 --quote="'"
+
+To display the command's help text run the following:
+
+.. code-block:: bat
+
+    mappyfile yaml-import --help

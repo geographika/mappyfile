@@ -1,0 +1,556 @@
+__type__: map
+name: ITASCA
+status: 'ON'
+size:
+- 600
+- 600
+projection:
+- init=epsg:26915
+extent:
+- 388107.634400379
+- 5203120.88405952
+- 500896.339019834
+- 5310243.30613897
+units: METERS
+shapepath: data
+imagecolor:
+- 255
+- 255
+- 255
+imagetype: PNG
+symbols:
+- __type__: symbol
+  name: circle
+  type: ELLIPSE
+  points:
+  - - 1
+    - 1
+  filled: true
+- __type__: symbol
+  name: star
+  type: VECTOR
+  filled: true
+  points:
+  - - 0
+    - 0.375
+  - - 0.35
+    - 0.375
+  - - 0.5
+    - 0
+  - - 0.65
+    - 0.375
+  - - 1
+    - 0.375
+  - - 0.75
+    - 0.625
+  - - 0.875
+    - 1
+  - - 0.5
+    - 0.75
+  - - 0.125
+    - 1
+  - - 0.25
+    - 0.625
+outputformats:
+- __type__: outputformat
+  name: geojson
+  driver: OGR/GEOJSON
+  mimetype: application/json
+  formatoption:
+  - FORM=SIMPLE
+  - STORAGE=memory
+- __type__: outputformat
+  name: png
+  driver: AGG/PNG
+  mimetype: image/png
+  imagemode: RGB
+  extension: png
+  formatoption:
+  - GAMMA=0.75
+  transparent: 'ON'
+web:
+  __type__: web
+  header: templates/header.html
+  template: itasca_basic.html
+  footer: templates/footer.html
+  minscaledenom: 1000
+  maxscaledenom: 1550000
+  imagepath: /var/www/html/tmp/
+  imageurl: /tmp/
+  metadata:
+    ows_title: MapServer Itasca Demo
+    ows_abstract: This is a MapServer demo application for Itasca County located in
+      north central Minnesota.
+    wms_accessconstraints: none
+    ows_enable_request: '*'
+    oga_html_template_directory: /usr/share/mapserver/ogcapi/templates/html-plain/
+    oga_onlineresource: http://localhost/cgi-bin/mapserv/itasca/ogcapi
+    ows_onlineresource: http://localhost/cgi-bin/mapserv?map=/usr/local/www/docs_maps/mapserver_demos/itasca/itasca.map&
+    wfs_srs: EPSG:26915 EPSG:3857 EPSG:4326
+    wfs_getfeature_formatlist: gml,geojson
+    wms_srs: EPSG:26915 EPSG:3857
+    __type__: metadata
+reference:
+  __type__: reference
+  image: graphics/reference.png
+  extent:
+  - 393234.393701263
+  - 5205405.16440722
+  - 495769.579718949
+  - 5307959.02579127
+  size:
+  - 120
+  - 120
+  status: 'ON'
+  minboxsize: 5
+  maxboxsize: 100
+  color:
+  - 255
+  - 0
+  - 0
+  outlinecolor:
+  - 0
+  - 0
+  - 0
+  markersize: 8
+  marker: star
+legend:
+  __type__: legend
+  keysize:
+  - 18
+  - 12
+  labels:
+  - __type__: label
+    type: BITMAP
+    size: MEDIUM
+    color:
+    - 0
+    - 0
+    - 89
+  status: 'ON'
+scalebar:
+  __type__: scalebar
+  imagecolor:
+  - 0
+  - 0
+  - 0
+  labels:
+  - __type__: label
+    color:
+    - 255
+    - 255
+    - 255
+    size: TINY
+  style: 1
+  size:
+  - 100
+  - 2
+  color:
+  - 255
+  - 255
+  - 255
+  units: MILES
+  intervals: 1
+  transparent: 'ON'
+  status: 'ON'
+layers:
+- __type__: layer
+  name: drgs
+  type: RASTER
+  status: 'OFF'
+  offsite:
+  - 252
+  - 252
+  - 252
+  classes:
+  - __type__: class
+    name: Digital Raster Graphic
+    keyimage: graphics/drgs_keyimage.png
+  metadata:
+    ows_title: USGS 1:250,000 Digital Raster Graphic
+    ows_abstract: Hibbing and Bemidji quadrangles.
+    wms_srs: EPSG:26915
+    __type__: metadata
+  tileindex: drgidx
+- __type__: layer
+  name: ctybdpy2
+  type: POLYGON
+  status: 'OFF'
+  data: ctybdpy2
+  template: ttt
+  requires: '![drgs]'
+  classitem: cty_name
+  classes:
+  - __type__: class
+    expression: Itasca
+    styles:
+    - __type__: style
+      outlinecolor:
+      - 128
+      - 128
+      - 128
+      color:
+      - 225
+      - 225
+      - 185
+  - __type__: class
+    expression: /./
+    styles:
+    - __type__: style
+      outlinecolor:
+      - 128
+      - 128
+      - 128
+      color:
+      - 255
+      - 255
+      - 255
+  metadata:
+    ows_title: County Boundary
+    ows_abstract: Itasca County boundary shapefile.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: mcd90py2
+  group: cities
+  type: POLYGON
+  data: mcd90py2
+  status: 'OFF'
+  classitem: city_name
+  classes:
+  - __type__: class
+    name: Cities & Towns
+    expression: /./
+    styles:
+    - __type__: style
+      color:
+      - 255
+      - 225
+      - 90
+    template: templates/mcd90py2.html
+  header: templates/mcd90py2_header.html
+  footer: templates/mcd90py2_footer.html
+  metadata:
+    ows_title: Minor Civil Divisions
+    ows_abstract: Minor civil divisions for Itasca County (boundaries only).
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: twprgpy3
+  type: POLYGON
+  data: twprgpy3
+  template: ttt
+  status: 'OFF'
+  classes:
+  - __type__: class
+    name: Townships
+    styles:
+    - __type__: style
+      symbol: circle
+      size: 2
+      outlinecolor:
+      - 181
+      - 181
+      - 145
+  metadata:
+    ows_title: Township Boundaries
+    ows_abstract: Pulic Land Survey (PLS) township boundaries for Itasca County.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: lakespy2
+  type: POLYGON
+  status: 'OFF'
+  data: lakespy2
+  projection:
+  - init=epsg:26915
+  classes:
+  - __type__: class
+    name: Lakes & Rivers
+    template: templates/lakespy2.html
+    styles:
+    - __type__: style
+      color:
+      - 49
+      - 117
+      - 185
+  header: templates/lakespy2_header.html
+  footer: templates/lakespy2_footer.html
+  tolerance: 3
+  metadata:
+    ows_title: Lakes and Rivers
+    ows_abstract: DLG lake and river polygons for Itasca County.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: dlgstln2
+  type: LINE
+  status: 'OFF'
+  data: dlgstln2
+  classes:
+  - __type__: class
+    name: Streams
+    template: templates/dlgstln2.html
+    styles:
+    - __type__: style
+      color:
+      - 49
+      - 117
+      - 185
+  header: templates/dlgstln2_header.html
+  footer: templates/dlgstln2_footer.html
+  tolerance: 5
+  metadata:
+    ows_title: Streams
+    ows_abstract: DLG streams for Itasca County.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: ctyrdln3
+  group: roads
+  maxscaledenom: 300000
+  status: 'OFF'
+  data: ctyrdln3
+  template: ttt
+  type: LINE
+  classes:
+  - __type__: class
+    styles:
+    - __type__: style
+      color:
+      - 0
+      - 0
+      - 0
+  projection:
+  - init=epsg:26915
+  metadata:
+    ows_title: County Roads
+    ows_abstract: County roads (lines only) derived from MNDOT roads layer.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: ctyrdln3_anno
+  group: roads
+  maxscaledenom: 300000
+  status: 'OFF'
+  data: ctyrdln3
+  template: ttt
+  type: LINE
+  labelitem: road_name
+  classes:
+  - __type__: class
+    labels:
+    - __type__: label
+      minfeaturesize: 40
+      mindistance: 150
+      position: CC
+      size: TINY
+      color:
+      - 0
+      - 0
+      - 0
+      styles:
+      - __type__: style
+        color:
+        - 255
+        - 255
+        - 255
+        symbol: symbols/ctyhwy.png
+  metadata:
+    ows_title: County Roads
+    ows_abstract: County roads (shields only) derived from MNDOT roads layer.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: majrdln3
+  group: roads
+  maxscaledenom: 600000
+  status: 'OFF'
+  data: majrdln3
+  template: ttt
+  type: LINE
+  classes:
+  - __type__: class
+    name: Roads
+    styles:
+    - __type__: style
+      color:
+      - 0
+      - 0
+      - 0
+  metadata:
+    ows_title: Highways
+    ows_abstract: Highways- state, US and interstate (lines only) derived from MNDOT
+      roads layer.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: majrdln3_anno
+  group: roads
+  maxscaledenom: 600000
+  status: 'OFF'
+  data: majrdln3
+  template: ttt
+  type: LINE
+  labelitem: road_num
+  classitem: road_class
+  classes:
+  - __type__: class
+    expression: '3'
+    labels:
+    - __type__: label
+      minfeaturesize: 50
+      mindistance: 150
+      position: CC
+      size: TINY
+      color:
+      - 0
+      - 0
+      - 0
+      styles:
+      - __type__: style
+        color:
+        - 0
+        - 0
+        - 0
+        symbol: symbols/sthwy.png
+  - __type__: class
+    expression: '2'
+    labels:
+    - __type__: label
+      minfeaturesize: 50
+      mindistance: 150
+      position: CC
+      size: TINY
+      color:
+      - 0
+      - 0
+      - 0
+      styles:
+      - __type__: style
+        color:
+        - 0
+        - 0
+        - 0
+        symbol: symbols/ushwy.png
+  - __type__: class
+    expression: '1'
+    labels:
+    - __type__: label
+      minfeaturesize: 50
+      mindistance: 150
+      position: CC
+      size: TINY
+      color:
+      - 255
+      - 255
+      - 255
+      styles:
+      - __type__: style
+        color:
+        - 0
+        - 0
+        - 0
+        symbol: symbols/interstate.png
+  metadata:
+    ows_title: Highways
+    ows_abstract: Highways- state, US and interstate (shields only) derived from MNDOT
+      roads layer.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: airports
+  type: POINT
+  data: airports
+  projection:
+  - init=epsg:26915
+  status: 'OFF'
+  classes:
+  - __type__: class
+    name: Airports
+    styles:
+    - __type__: style
+      color:
+      - 128
+      - 255
+      - 164
+      symbol: circle
+      size: 7
+    template: templates/airports.html
+  header: templates/airports_header.html
+  footer: templates/airports_footer.html
+  tolerance: 5
+  metadata:
+    ows_title: Airports
+    ows_abstract: Airport runways for Itasca County.
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
+- __type__: layer
+  name: mcd90py2_anno
+  group: cities
+  template: ttt
+  type: POINT
+  data: mcd90py2
+  status: 'OFF'
+  labelitem: city_name
+  classitem: city_name
+  labelmaxscaledenom: 500000
+  classes:
+  - __type__: class
+    expression: /./
+    labels:
+    - __type__: label
+      color:
+      - 0
+      - 0
+      - 0
+      shadowcolor:
+      - 218
+      - 218
+      - 218
+      shadowsize:
+      - 2
+      - 2
+      type: BITMAP
+      size: MEDIUM
+      position: CC
+      partials: false
+      buffer: 2
+  metadata:
+    ows_title: Minor Civil Divisions
+    ows_abstract: Minor civil divisions for Itasca County (annotation only).
+    wms_srs: EPSG:26915
+    gml_include_items: all
+    gml_featureid: FID
+    gml_types: auto
+    __type__: metadata
