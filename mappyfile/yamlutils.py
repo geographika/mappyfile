@@ -44,10 +44,15 @@ def _represent_as_mapping(dumper, data):
     return dumper.represent_mapping("tag:yaml.org,2002:map", data.items())
 
 
+def _represent_tuple(dumper, data):
+    return dumper.represent_sequence("tag:yaml.org,2002:seq", data)
+
+
 def _make_dumper():
     dumper = yaml.Dumper
     dumper.add_representer(CaseInsensitiveOrderedDict, _represent_as_mapping)
     dumper.add_representer(DefaultOrderedDict, _represent_as_mapping)
+    dumper.add_representer(tuple, _represent_tuple)
     return dumper
 
 
@@ -76,7 +81,7 @@ def open(fn: str) -> dict:
         d = mappyfile.yaml.open('mymap.yaml')
 
     """
-    with builtins.open(fn) as f:
+    with builtins.open(fn, encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 
@@ -102,7 +107,7 @@ def load(fp: IO[str]) -> dict:
     To load a YAML file using an open file object::
 
         import mappyfile.yaml
-        with open('mymap.yaml') as fp:
+        with open('mymap.yaml', encoding='utf-8') as fp:
             d = mappyfile.yaml.load(fp)
 
     """
@@ -215,7 +220,7 @@ def save(d: dict, fn: str, **kwargs) -> str:
     """
     kwargs.setdefault("default_flow_style", False)
     kwargs.setdefault("allow_unicode", True)
-    with builtins.open(fn, "w") as f:
+    with builtins.open(fn, "w", encoding="utf-8") as f:
         yaml.dump(d, f, Dumper=_make_dumper(), **kwargs)
     return fn
 
