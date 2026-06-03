@@ -23,6 +23,21 @@ END
 """
 
 
+def test_yaml_import_error(monkeypatch):
+    import sys
+
+    # remove all relevant modules to force re-import
+    monkeypatch.delitem(sys.modules, "mappyfile.yaml", raising=False)
+    monkeypatch.delitem(sys.modules, "mappyfile.yamlutils", raising=False)
+    monkeypatch.delitem(sys.modules, "yaml", raising=False)
+
+    # make yaml unimportable
+    monkeypatch.setitem(sys.modules, "yaml", None)
+
+    with pytest.raises(ImportError, match="PyYAML is required for YAML support"):
+        import mappyfile.yamlutils  # noqa: F401
+
+
 def test_yaml_dumps():
     d = mappyfile.loads(MAPFILE_STRING)
     yaml_string = mappyfile.yaml.dumps(d)
