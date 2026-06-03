@@ -124,4 +124,5 @@ if __name__ == "__main__":
     test_yaml_loads()
     test_yaml_roundtrip_string()
     test_yaml_nested_objects()
+    pytest.main([__file__ + "::test_yaml_import_error", "-v"])
     print("Done!")
