@@ -29,7 +29,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-          pip install .[lark_cython]
+          pip install .[lark_cython,yaml]
           pip list
       - name: Lint with flake8
         run: |
@@ -43,6 +43,8 @@ jobs:
           mappyfile schema mapfile-schema-8-2.json --version=8.2
           mappyfile validate tests/sample_maps/256_overlay_res.map
           mappyfile format tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res_formatted.map
+          mappyfile yaml-export tests/sample_maps/256_overlay_res.map tests/sample_maps/256_overlay_res.yaml
+          mappyfile yaml-import tests/sample_maps/256_overlay_res.yaml tests/sample_maps/256_overlay_res_roundtrip.map
       - name: Test API examples
         run: |
           pytest docs/examples/api/

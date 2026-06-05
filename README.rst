@@ -37,6 +37,8 @@ for better performance on CPython you can run the following command:
 
     pip install mappyfile[lark_cython]
 
+pip install mappyfile[lark_cython,yaml]
+
 mappyfile is also available on `conda <https://anaconda.org/conda-forge/mappyfile>`_. Install as
 follows:
 
@@ -91,13 +93,31 @@ From within Python scripts:
 
     print(mappyfile.dumps(mapfile, indent=1, spacer="\t"))
 
-Three command line tools are available - ``format``, ``validate``, and ``schema``:
+YAML support is available as an optional extra (``pip install mappyfile[yaml]``):
+
+.. code-block:: python
+
+    import mappyfile
+    import mappyfile.yaml
+
+    mapfile = mappyfile.open("./docs/examples/raster.map")
+
+    # export to YAML
+    mappyfile.yaml.save(mapfile, "raster.yaml")
+
+    # load back from YAML
+    mapfile2 = mappyfile.yaml.open("raster.yaml")
+    print(mappyfile.dumps(mapfile2))
+
+Command line tools are also available - ``format``, ``validate``, ``schema``, ``yaml-export``, and ``yaml-import``:
 
 .. code-block:: bat
 
     mappyfile format raster.map formatted_raster.map
     mappyfile validate D:\ms-ogc-workshop\ms4w\apps\ms-ogc-workshop\**\*.map
     mappyfile schema mapfile-schema-8-0.json --version=8.0
+    mappyfile yaml-export raster.map raster.yaml
+    mappyfile yaml-import raster.yaml raster.map
 
 Authors
 -------

@@ -28,6 +28,7 @@ mappyfile was first introduced in a presentation at `FOSS4G Europe 2017 <https:/
     comments.rst
     validation.rst
     schemas.rst
+    yaml.rst
     grammar.rst
     config.rst
     python_integration.rst
@@ -72,6 +73,13 @@ use in mappyfile you can set the ``MAPPYFILE_USE_CYTHON`` to ``False`` (or any f
 
     # Windows Command Line
     set MAPPYFILE_USE_CYTHON=False
+
+To install the optional `PyYAML <https://pyyaml.org/>`_ library for reading and writing
+Mapfiles in YAML format:
+
+.. code-block:: console
+
+    pip install mappyfile[yaml]
 
 mappyfile is also available on `conda <https://anaconda.org/conda-forge/mappyfile>`_. Install as
 follows:
@@ -146,13 +154,15 @@ Adding a new class to a layer:
     :start-after: # START OF ADD CLASS EXAMPLE
     :end-before: # END OF ADD CLASS EXAMPLE
 
-Three command line tools are also available - ``format``, ``validate``, and ``schema``:
+Command line tools are also available - ``format``, ``validate``, ``schema``, ``yaml-export``, and ``yaml-import``:
 
 .. code-block:: bat
 
     mappyfile format raster.map formatted_raster.map
     mappyfile validate D:\ms-ogc-workshop\ms4w\apps\ms-ogc-workshop\**\*.map
     mappyfile schema mapfile-schema-8-0.json --version=8.0
+    mappyfile yaml-export raster.map raster.yaml
+    mappyfile yaml-import raster.yaml raster.map
 
 What is mappyfile?
 ------------------
@@ -237,7 +247,6 @@ Future development plans include:
 + Setup an easy way to plug in "linters" to check various Mapfile settings and rules (e.g. configured correctly for WFS)
 + Create a Jupyter Notebook demonstrating mappyfile usage
 + Add a plugins page to the docs
-+ Add an example of creating Mapfiles using YAML
 + Create a new ``prune`` function to remove redundant default settings from a Mapfile
 
 
