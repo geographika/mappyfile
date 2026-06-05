@@ -5,7 +5,6 @@ import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
-from lark import UnexpectedToken
 from mappyfile.validator import Validator
 
 SAMPLE_DIR = os.path.join(os.path.dirname(__file__), "sample_maps")
@@ -27,7 +26,8 @@ IGNORE_LIST = [
 def get_map_files(extra_ignore=None):
     ignore = set(IGNORE_LIST + (extra_ignore or []))
     return [
-        fn for fn in os.listdir(SAMPLE_DIR)
+        fn
+        for fn in os.listdir(SAMPLE_DIR)
         if fn.lower().endswith(".map") and fn not in ignore
     ]
 
