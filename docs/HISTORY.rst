@@ -1,6 +1,23 @@
 Releases
 --------
 
+1.2.0 05/06/2026
+++++++++++++++++
+
+Adds YAML support for Mapfiles, and a new CLI tool to convert between Mapfiles and YAML. 
+This allows users to edit Mapfiles in YAML format. See :ref:`yaml` for more details.
+
++ `#249 <https://github.com/geographika/mappyfile/pull/249>`_ - Run test suite in parallel with full sample Mapfiles
++ `#248 <https://github.com/geographika/mappyfile/pull/248>`_ - Avoid YAML import errors
++ `#247 <https://github.com/geographika/mappyfile/pull/247>`_ - Add YAML import and export support
++ `#246 <https://github.com/geographika/mappyfile/pull/246>`_ - Write newlines exactly as in the string
++ `#245 <https://github.com/geographika/mappyfile/pull/245>`_ - Add SYMBOLSET example
++ `#244 <https://github.com/geographika/mappyfile/pull/244>`_ - Add IDENTIFY CLASSGROUP
++ `#243 <https://github.com/geographika/mappyfile/pull/243>`_ - Remove codecs (only required for py2)
++ `#242 <https://github.com/geographika/mappyfile/pull/242>`_ - Add additional SYMBOL and SYMBOLSET tests
+
+`Full changelog <https://github.com/geographika/mappyfile/compare/v1.1.1...v1.2.0>`__.
+
 1.1.0 19/12/2025
 ++++++++++++++++
 
