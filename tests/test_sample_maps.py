@@ -10,10 +10,6 @@ from mappyfile.validator import Validator
 
 SAMPLE_DIR = os.path.join(os.path.dirname(__file__), "sample_maps")
 
-# the following "map" files are includes used by other mapfiles in msautotest
-# TODO - rename all these to .include in MapServer source to allow them to be more
-# easily processed
-
 IGNORE_LIST = [
     "bdry_counpy2_mssql.map",
     "bdry_counpy2_ogr.map",
@@ -28,87 +24,48 @@ IGNORE_LIST = [
 ]
 
 
-def test_all_maps():
-    sample_dir = SAMPLE_DIR
+def get_map_files(extra_ignore=None):
+    ignore = set(IGNORE_LIST + (extra_ignore or []))
+    return [
+        fn for fn in os.listdir(SAMPLE_DIR)
+        if fn.lower().endswith(".map") and fn not in ignore
+    ]
 
-    # list any maps that are known not to parse and are to be fixed
-    ignore_list = IGNORE_LIST + ["centerline.map"]
 
-    p = Parser(expand_includes=False)
+@pytest.mark.parametrize("fn", get_map_files(extra_ignore=["centerline.map"]))
+def test_all_maps(fn):
+    p = Parser(expand_includes=True)
     m = MapfileToDict(include_position=True)
     v = Validator()
 
-    failing_maps = []
-
-    for fn in os.listdir(sample_dir):
-        if fn not in ignore_list and fn.lower().endswith(".map"):
-            print(fn)
-            try:
-                ast = p.parse_file(os.path.join(sample_dir, fn))
-                d = m.transform(ast)
-                errors = v.validate(d)
-                try:
-                    assert len(errors) == 0
-                except AssertionError as ex:
-                    logging.warning("Validation errors in %s ", fn)
-                    logging.error(ex)
-                    logging.warning(errors)
-            except (BaseException, UnexpectedToken) as ex:
-                logging.warning("Cannot process %s ", fn)
-                logging.error(ex)
-                failing_maps.append(fn)
-
-    logging.warning("The list of maps below have failed to parse")
-    logging.warning(failing_maps)
+    ast = p.parse_file(os.path.join(SAMPLE_DIR, fn))
+    d = m.transform(ast)
+    errors = v.validate(d)
+    assert len(errors) == 0, f"Validation errors in {fn}: {errors}"
 
 
-def test_yaml_roundtrip_all_maps(tmp_path):
+@pytest.mark.parametrize("fn", get_map_files())
+def test_yaml_roundtrip_all_maps(fn, tmp_path):
     import mappyfile.yaml
 
-    sample_dir = SAMPLE_DIR
-    ignore_list = IGNORE_LIST
-
     v = Validator()
-    failing_maps = []
+    map_path = os.path.join(SAMPLE_DIR, fn)
+    yaml_path = tmp_path / f"{fn}.yaml"
 
-    for fn in os.listdir(sample_dir):
-        if fn not in ignore_list and fn.lower().endswith(".map"):
-            map_path = os.path.join(sample_dir, fn)
-            yaml_path = tmp_path / f"{fn}.yaml"
-            try:
-                # load original mapfile
-                d = mappyfile.open(map_path, expand_includes=False)
+    d = mappyfile.open(map_path, expand_includes=True)
 
-                # export to YAML
-                mappyfile.yaml.save(d, str(yaml_path))
-                assert yaml_path.exists(), f"YAML file not created for {fn}"
+    mappyfile.yaml.save(d, str(yaml_path))
+    assert yaml_path.exists(), f"YAML file not created for {fn}"
 
-                # load back from YAML
-                d2 = mappyfile.yaml.open(str(yaml_path))
+    d2 = mappyfile.yaml.open(str(yaml_path))
 
-                # validate the round-tripped dict - log only, don't fail
-                errors = v.validate(d2)
-                if errors:
-                    logging.warning(
-                        "Validation errors after YAML round-trip for %s", fn
-                    )
-                    logging.warning(errors)
+    errors = v.validate(d2)
+    if errors:
+        logging.warning("Validation errors after YAML round-trip for %s", fn)
 
-                # compare output - log only, don't fail
-                original = mappyfile.dumps(d)
-                roundtrip = mappyfile.dumps(d2)
-                if original != roundtrip:
-                    logging.warning("Output mismatch after YAML round-trip for %s", fn)
-
-            except Exception as ex:
-                logging.warning("Cannot process %s for YAML round-trip", fn)
-                logging.error(ex)
-                failing_maps.append(fn)
-
-    if failing_maps:
-        logging.warning("The following maps failed YAML round-trip: %s", failing_maps)
-
-    assert len(failing_maps) == 0, f"YAML round-trip failed for: {failing_maps}"
+    original = mappyfile.dumps(d)
+    roundtrip = mappyfile.dumps(d2)
+    assert original == roundtrip, f"Output mismatch after YAML round-trip for {fn}"
 
 
 def test_includes():
