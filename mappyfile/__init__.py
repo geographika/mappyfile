@@ -54,10 +54,12 @@ from mappyfile.dictutils import (
     dict_move_to_end,
 )
 
-from mappyfile import yamlutils as _yamlutils
-
-sys.modules["mappyfile.yaml"] = _yamlutils
-yaml = _yamlutils
+try:
+    from mappyfile import yamlutils as _yamlutils
+    sys.modules["mappyfile.yaml"] = _yamlutils
+    yaml = _yamlutils
+except ImportError:
+    pass
 
 __version__ = "1.1.1"
 
