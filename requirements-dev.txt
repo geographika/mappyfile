@@ -8,6 +8,7 @@ pydot
 pyparsing
 pytest
 pytest-cov
+pytest-xdist
 virtualenv
 glob2
 coveralls
