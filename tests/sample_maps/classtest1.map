@@ -30,7 +30,10 @@ LAYER
   CLASS 
     NAME "Text"
     EXPRESSION ([pixel] == 0)
-    STYLE  COLOR -255 -255 -255  END
+    # following is not a valid color, it was used in MapServer to
+    # represent TRANSPARENCY in older versions
+    # STYLE  COLOR -255 -255 -255  END
+    STYLE  COLOR 0 0 0  END
   END
   CLASS 
     NAME "TextBackground"
