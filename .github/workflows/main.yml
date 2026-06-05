@@ -29,7 +29,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-          pip install .[yaml]
+          pip install .[lark_cython,yaml]
           pip list
       - name: Lint with flake8
         run: |
@@ -90,7 +90,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-          pip install .[lark_cython,yaml]
+          pip install .[yaml]
           pip list
       - name: Test without lark_cython
         env:
