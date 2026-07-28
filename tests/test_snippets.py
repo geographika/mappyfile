@@ -156,6 +156,22 @@ def test_style_pattern5():
     assert output(s, schema_name="style") == exp
 
 
+@pytest.mark.xfail
+def test_style_pattern_odd():
+    """
+    This is a valid pattern for line styles,
+    but the parser currently fails on odd numbers of values
+    """
+    s = """
+    STYLE
+        PATTERN 7 5 0 5 0 5 7 END
+    END
+    """
+
+    exp = "STYLE PATTERN 7 5 0 5 0 5 7 END END"
+    assert output(s, schema_name="style") == exp
+
+
 def test_style_offset_mixed():
     """
     Test an attribute and numerical pair for a STYLE OFFSET
@@ -1119,6 +1135,6 @@ if __name__ == "__main__":
     # test_multiple_compfilters()
     # test_geomtransform_nested_function()
     # test_raster_label()
-    test_layer_identify2()
+    test_style_pattern_odd()
     # run_tests()
     print("Done!")
