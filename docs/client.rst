@@ -65,6 +65,15 @@ If validation errors are encountered in the Mapfile they will be displayed in th
 .. literalinclude:: validation_errors.txt
     :language: console
 
+To display the command's help text run the following: 
+
+.. code-block:: bat
+
+    mappyfile validate --help
+
+.. literalinclude:: validate.txt
+    :language: console
+
 Example 1
 +++++++++
 
@@ -92,21 +101,6 @@ To validate a Mapfile for version 7.6 of MapServer:
 
     mappyfile validate /world.map --version=7.6
 
-To display the command's help text run the following: 
-
-.. code-block:: bat
-
-    mappyfile validate --help
-
-.. literalinclude:: validate.txt
-    :language: console
-
-..
-    echo run from python3 as click in Python2 doesn't pick up the correct terminal size when redirecting to a file
-    mode con:cols=200
-    mappyfile validate --help > docs/validate.txt
-    mappyfile validate C:/Temp/*.map > docs/validation_errors.txt
-
 Example 4
 +++++++++
 
@@ -115,6 +109,17 @@ To validate a MapServer CONFIG file:
 .. code-block:: bat
 
     mappyfile validate C:\MapServer\apps\mapserver.conf
+
+Example 5
++++++++++
+
+To validate all files named ``*.style``, with each containing a `STYLE` block:
+
+.. code-block:: bat
+
+    mappyfile validate ./mapfiles/**/*.style
+
+This is useful to find errors in ``INCLUDE`` files before merging into a large ``MAP`` file.
 
 .. _client-schema:
 
