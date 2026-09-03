@@ -2,10 +2,9 @@ import logging
 import json
 import inspect
 import pytest
-from mappyfile.parser import Parser
+from mappyfile.parser import Parser, UnexpectedToken  # inherits from ParseError
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.transformer import MapfileToDict
-from lark import UnexpectedToken  # inherits from ParseError
 
 
 def output(s):

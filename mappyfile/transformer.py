@@ -35,10 +35,7 @@ Python dict structure
 from __future__ import annotations
 import logging
 from collections import OrderedDict
-from lark import Tree
-from lark.visitors import Transformer_InPlace, Transformer, v_args
-from lark.lexer import Token
-from .parser import lark_cython
+from .parser import Tree, Transformer_InPlace, Transformer, v_args, Token, lark_cython
 from typing import Any
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 from mappyfile.ordereddict import CaseInsensitiveOrderedDict

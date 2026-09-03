@@ -1,6 +1,5 @@
 import pytest
-from lark import UnexpectedCharacters, UnexpectedToken, Tree
-from mappyfile.parser import Parser
+from mappyfile.parser import Parser, UnexpectedCharacters, UnexpectedToken, Tree
 from mappyfile.transformer import ConfigfileTransformer, MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 
