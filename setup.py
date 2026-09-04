@@ -45,6 +45,9 @@ setup(
         "click",
     ],
     extras_require={
+        "hyperlark": [
+            "hyperlark>=0.1.0b1; python_version >= '3.10'",
+        ],
         "lark_cython": [
             "lark_cython>=0.0.14",
         ],

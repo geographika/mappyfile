@@ -1,6 +1,5 @@
 import pytest
-from lark import UnexpectedCharacters, UnexpectedToken, Tree
-from mappyfile.parser import Parser
+from mappyfile.parser import Parser, UnexpectedCharacters, UnexpectedToken, Tree
 from mappyfile.transformer import ConfigfileTransformer, MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 
@@ -19,7 +18,7 @@ def test_parser_validation():
     """
     p = Parser()
     tree: Tree = p.parse(config_text_ok)
-    assert tree.data == "config"
+    assert tree.data == "config_file"
     assert tree.children[0].data == "env"
 
 

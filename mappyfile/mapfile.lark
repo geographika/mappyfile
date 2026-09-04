@@ -28,7 +28,7 @@
 // =================================================================
 
 start: "SYMBOLSET"i composite_body _END   -> symbolset
-     | "CONFIG"i _config_body _END         -> config
+     | "CONFIG"i _config_body _END         -> config_file
      | composite+
 
 _config_body: config_item*

@@ -10,6 +10,8 @@ exclude = [
 [[tool.mypy.overrides]]
 module = [
     'glob2',
+    'hyperlark',
+    'hyperlark.*',
     'lark_cython',
     'PIL',
     'shapely.geometry',

@@ -31,8 +31,7 @@ from __future__ import annotations
 import os
 import logging
 from io import open
-from lark import Lark, ParseError, Tree, UnexpectedInput
-from typing import Any, IO
+from typing import Any, IO, TYPE_CHECKING
 
 
 log = logging.getLogger("mappyfile")
@@ -42,14 +41,42 @@ def string_to_boolean(string_value: str):
     return string_value.lower() not in ("false", "no", "0", "off")
 
 
+# hyperlark (https://hyperlark.io/), a Rust implementation of Lark, is used when
+# installed, unless MAPPYFILE_USE_HYPERLARK is false. Otherwise lark is used,
+# sped up by lark_cython when installed, unless MAPPYFILE_USE_CYTHON is false.
+use_hyperlark = string_to_boolean(os.environ.get("MAPPYFILE_USE_HYPERLARK", "True"))
 use_cython = string_to_boolean(os.environ.get("MAPPYFILE_USE_CYTHON", "True"))
+hyperlark = None
 lark_cython = None
 
-if use_cython:
+if use_hyperlark:
+    try:
+        import hyperlark  # type: ignore
+    except ImportError:
+        pass
+
+if use_cython and hyperlark is None:
     try:
         import lark_cython  # type: ignore
     except ImportError:
         pass
+
+if TYPE_CHECKING or not hyperlark:
+    import lark as _engine  # mypy checks against lark - the two engines share its API
+else:
+    import hyperlark as _engine
+
+# used here, and re-exported for the transformer and the tests
+Lark = _engine.Lark
+Token = _engine.Token
+Tree = _engine.Tree
+Transformer = _engine.Transformer
+Transformer_InPlace = _engine.visitors.Transformer_InPlace
+v_args = _engine.v_args
+ParseError = _engine.ParseError
+UnexpectedInput = _engine.UnexpectedInput
+UnexpectedCharacters = _engine.UnexpectedCharacters
+UnexpectedToken = _engine.UnexpectedToken
 
 
 SYMBOL_ATTRIBUTES = {
@@ -69,10 +96,23 @@ SYMBOL_ATTRIBUTES = {
 
 class Parser:
     def __init__(
-        self, expand_includes: bool = True, include_comments: bool = False, **kwargs
+        self,
+        expand_includes: bool = True,
+        include_comments: bool = False,
+        transformer: Any = None,
+        **kwargs,
     ):
+        """
+        transformer: a Lark Transformer applied during the parse, so no parse
+        tree is built and parse() returns the transformer's result instead
+        """
+        if transformer is not None and include_comments:
+            raise ValueError(
+                "include_comments needs the parse tree, so it cannot be used with a transformer"
+            )
         self.expand_includes = expand_includes
         self.include_comments = include_comments
+        self.transformer = transformer
         self._comments: list[Any] = []
         self.lalr = self._create_lalr_parser()
         self.kwargs = kwargs
@@ -82,6 +122,9 @@ class Parser:
 
         if lark_cython:
             extra_args["_plugins"] = lark_cython.plugins
+
+        if self.transformer is not None:
+            extra_args["transformer"] = self.transformer
 
         if self.include_comments:
             callbacks = {
@@ -211,7 +254,8 @@ class Parser:
 
     def parse(self, text: str, fn: str | None = None) -> Any:
         """
-        Parse the Mapfile
+        Parse the Mapfile, returning the parse tree - or the transformer's
+        result if the Parser was created with one
         """
 
         if text.strip() == "":
@@ -223,28 +267,34 @@ class Parser:
         try:
             self._comments[:] = []  # clear any comments from a previous parse
             ip = self.lalr.parse_interactive(text)
+            # iter_parse yields each token before feeding it to the parser,
+            # so retyping a token here steers the parse, and prev_token is
+            # the last token the parser has consumed
+            prev_token = None
             for t in ip.iter_parse():
                 if t.type == "UNQUOTED_STRING":
                     # Unquoted strings after SYMBOL can only be values, not attributes
                     if (
-                        ip.parser_state.value_stack[-1] == "SYMBOL"
+                        prev_token is not None
+                        and prev_token.value.upper() == "SYMBOL"
                         and t.value.upper() not in SYMBOL_ATTRIBUTES
                     ):
                         t.type = "UNQUOTED_STRING_VALUE"
                 elif t.type == "GRID":
                     # Unquoted 'GRID' coming after NAME is always a value, not a composite type
-                    if ip.parser_state.value_stack[-1] == "NAME":
+                    if prev_token is not None and prev_token.value.upper() == "NAME":
                         t.type = "UNQUOTED_STRING_VALUE"
+                prev_token = t
 
-            tree = ip.resume_parse()
+            result = ip.resume_parse()  # the tree, or the transformer's output
             if self.include_comments:
                 self.comments_dict = {}
                 # create a dictionary using line numbers as keys, and comments as values
                 for c in self._comments:
                     self.comments_dict[c.line] = c.value.strip()
-                self._assign_comments(tree)
+                self._assign_comments(result)
 
-            return tree
+            return result
         except (ParseError, UnexpectedInput) as ex:
             if fn:
                 log.error("Parsing of %s unsuccessful", fn)
