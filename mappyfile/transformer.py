@@ -35,7 +35,14 @@ Python dict structure
 from __future__ import annotations
 import logging
 from collections import OrderedDict
-from .parser import Tree, Transformer_InPlace, Transformer, v_args, Token, lark_cython
+from .parser import (
+    Transformer_InPlace,
+    Transformer,
+    v_args,
+    Token,
+    UnexpectedToken,
+    lark_cython,
+)
 from typing import Any
 from mappyfile.tokens import SINGLETON_COMPOSITE_NAMES, REPEATED_KEYS
 from mappyfile.ordereddict import CaseInsensitiveOrderedDict
@@ -81,6 +88,13 @@ class MapfileTransformer(Transformer):
 
         return composites
 
+    def symbolset(self, t):
+        """
+        Parses a MapServer symbolset file - a SYMBOLSET..END block at the root
+        """
+        composite_type = self.composite_type([Token("symbolset", "symbolset")])
+        return self.composite([composite_type] + t)
+
     def flatten(self, values: list[Any]) -> list[Any]:
         flat_list = []
 
@@ -105,7 +119,10 @@ class MapfileTransformer(Transformer):
 
         return s + "s"
 
-    def create_position_dict(self, key_token, values) -> dict:
+    def create_position_dict(self, key_token, values) -> dict | None:
+        if not self.include_position:
+            return None
+
         line, column = key_token.line, key_token.column
         d = OrderedDict()
         d["line"] = line
@@ -286,9 +303,12 @@ class MapfileTransformer(Transformer):
 
         if isinstance(key_token, (list, tuple)):
             key_token = key_token[0]
-            assert self.key_name(key_token) in ("style", "symbol"), self.key_name(
-                key_token
-            )
+            if self.key_name(key_token) not in ("style", "symbol"):
+                # the grammar lets any block keyword start an attribute, but only
+                # STYLE and SYMBOL can be one; when transforming during the parse
+                # this is reached before the parser sees the token that made the
+                # input invalid, so report it as the parse error it is
+                raise UnexpectedToken(key_token, {"STYLE", "SYMBOL"})
 
         key_name = self.key_name(key_token)
         value_tokens = tokens[1:]
@@ -417,6 +437,63 @@ class MapfileTransformer(Transformer):
         t[1].value = self.clean_string(key)
         t[2].value = self.clean_string(value)
         return self.attr(t)
+
+    def config_file(self, tree):
+        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
+        composite_dict["__type__"] = "config"
+
+        for t in tree:
+            key = t.data.lower()
+
+            atts_dict: OrderedDict[str, Any] = OrderedDict()
+
+            if self.include_comments:
+                comments_dict = atts_dict["__comments__"] = OrderedDict()
+
+            if self.include_position:
+                # self.create_position_dict(key_name, None)
+                position_dict = atts_dict["__position__"] = OrderedDict()
+
+            for c in t.children:
+                # first remove dicts that are no longer required
+                pos = c.pop("__position__")
+                c.pop(
+                    "__tokens__", None
+                )  # tokens are no longer needed now we have the positions
+                comments = c.pop("__comments__", None)
+
+                #  simple attribute
+                assert len(c.items()) == 1
+                att = list(c.items())[0]
+                att_key = att[0]
+                att_value = att[1]
+
+                if self.include_position:
+                    # hoist position details to composite
+                    position_dict[att_key] = pos
+                if self.include_comments and comments:
+                    # hoist comments to composite
+                    comments_dict[att_key] = comments
+
+                if att_key in atts_dict.keys():
+                    log.warning(
+                        "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
+                        att_key,
+                        key,
+                        att_value,
+                    )
+                atts_dict[att_key] = att_value
+
+            composite_dict[key] = atts_dict
+
+        return composite_dict
+
+    def config_attr(self, tokens) -> dict:
+        """
+        Process CONFIG file attributes which can be quoted
+        or unquoted, otherwise they are identical to other attributes
+        """
+        return self.attr(tokens)
 
     def validation(self, tokens):
         """
@@ -736,62 +813,9 @@ class CommentsTransformer(Transformer_InPlace):
 
 
 class ConfigfileTransformer(MapfileTransformer):
-    def config(self, tree):
-        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
-        composite_dict["__type__"] = "config"
-
-        for t in tree:
-            key = t.data.lower()
-
-            atts_dict: OrderedDict[str, Any] = OrderedDict()
-
-            if self.include_comments:
-                comments_dict = atts_dict["__comments__"] = OrderedDict()
-
-            if self.include_position:
-                # self.create_position_dict(key_name, None)
-                position_dict = atts_dict["__position__"] = OrderedDict()
-
-            for c in t.children:
-                # first remove dicts that are no longer required
-                pos = c.pop("__position__")
-                c.pop(
-                    "__tokens__", None
-                )  # tokens are no longer needed now we have the positions
-                comments = c.pop("__comments__", None)
-
-                #  simple attribute
-                assert len(c.items()) == 1
-                att = list(c.items())[0]
-                att_key = att[0]
-                att_value = att[1]
-
-                if self.include_position:
-                    # hoist position details to composite
-                    position_dict[att_key] = pos
-                if self.include_comments and comments:
-                    # hoist comments to composite
-                    comments_dict[att_key] = comments
-
-                if att_key in atts_dict.keys():
-                    log.warning(
-                        "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
-                        att_key,
-                        key,
-                        att_value,
-                    )
-                atts_dict[att_key] = att_value
-
-            composite_dict[key] = atts_dict
-
-        return composite_dict
-
-    def config_attr(self, tokens) -> dict:
-        """
-        Process CONFIG file attributes which can be quoted
-        or unquoted, otherwise they are identical to other attributes
-        """
-        return self.attr(tokens)
+    """
+    Kept for compatibility - MapfileTransformer now handles CONFIG files too
+    """
 
 
 class MapfileToDict:
@@ -808,8 +832,6 @@ class MapfileToDict:
         self.kwargs = kwargs
 
     def transform(self, tree):
-        tree = Canonize().transform(tree)
-
         self.mapfile_transformer = self.transformer_class(
             include_position=self.include_position,
             include_comments=self.include_comments,
@@ -821,16 +843,6 @@ class MapfileToDict:
             tree = comments_transformer.transform(tree)
 
         return self.mapfile_transformer.transform(tree)
-
-
-class Canonize(Transformer_InPlace):
-    @v_args(tree=True)
-    def symbolset(self, tree):
-        composite_type = Tree("composite_type", [Token("symbolset", "symbolset")])
-
-        tree.data = "composite"
-        tree.children.insert(0, composite_type)
-        return tree
 
 
 def calculate_depth(iterable):

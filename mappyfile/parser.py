@@ -96,10 +96,23 @@ SYMBOL_ATTRIBUTES = {
 
 class Parser:
     def __init__(
-        self, expand_includes: bool = True, include_comments: bool = False, **kwargs
+        self,
+        expand_includes: bool = True,
+        include_comments: bool = False,
+        transformer: Any = None,
+        **kwargs,
     ):
+        """
+        transformer: a Lark Transformer applied during the parse, so no parse
+        tree is built and parse() returns the transformer's result instead
+        """
+        if transformer is not None and include_comments:
+            raise ValueError(
+                "include_comments needs the parse tree, so it cannot be used with a transformer"
+            )
         self.expand_includes = expand_includes
         self.include_comments = include_comments
+        self.transformer = transformer
         self._comments: list[Any] = []
         self.lalr = self._create_lalr_parser()
         self.kwargs = kwargs
@@ -109,6 +122,9 @@ class Parser:
 
         if lark_cython:
             extra_args["_plugins"] = lark_cython.plugins
+
+        if self.transformer is not None:
+            extra_args["transformer"] = self.transformer
 
         if self.include_comments:
             callbacks = {
@@ -238,7 +254,8 @@ class Parser:
 
     def parse(self, text: str, fn: str | None = None) -> Any:
         """
-        Parse the Mapfile
+        Parse the Mapfile, returning the parse tree - or the transformer's
+        result if the Parser was created with one
         """
 
         if text.strip() == "":
@@ -269,15 +286,15 @@ class Parser:
                         t.type = "UNQUOTED_STRING_VALUE"
                 prev_token = t
 
-            tree = ip.resume_parse()
+            result = ip.resume_parse()  # the tree, or the transformer's output
             if self.include_comments:
                 self.comments_dict = {}
                 # create a dictionary using line numbers as keys, and comments as values
                 for c in self._comments:
                     self.comments_dict[c.line] = c.value.strip()
-                self._assign_comments(tree)
+                self._assign_comments(result)
 
-            return tree
+            return result
         except (ParseError, UnexpectedInput) as ex:
             if fn:
                 log.error("Parsing of %s unsuccessful", fn)

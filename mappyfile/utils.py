@@ -35,14 +35,10 @@ import warnings
 import functools
 from mappyfile.ordereddict import DefaultOrderedDict
 from mappyfile.parser import Parser
-from mappyfile.transformer import (
-    MapfileToDict,
-    MapfileTransformer,
-    ConfigfileTransformer,
-)
+from mappyfile.transformer import MapfileToDict, MapfileTransformer
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.validator import Validator
-from typing import IO, Any, Type
+from typing import IO
 
 
 def deprecated(func):
@@ -67,29 +63,43 @@ def deprecated(func):
     return new_func
 
 
+def _parser(
+    expand_includes: bool,
+    include_comments: bool,
+    include_position: bool,
+    **kwargs,
+) -> Parser:
+    """
+    A Parser whose parse() returns the Mapfile dictionary directly: the
+    transformer runs as part of the parse, so no parse tree is built.
+    Comments are matched to tree nodes by line number after the parse, so with
+    include_comments the tree is returned instead and _transform runs on it.
+    """
+    if include_comments:
+        return Parser(expand_includes=expand_includes, include_comments=True, **kwargs)
+
+    transformer_class = kwargs.pop("transformer_class", MapfileTransformer)
+    transformer = transformer_class(
+        include_position=include_position, include_comments=False, **kwargs
+    )
+    return Parser(expand_includes=expand_includes, transformer=transformer, **kwargs)
+
+
 def _transform(
-    ast,
+    result,
     include_comments: bool = False,
     include_position: bool = False,
     **kwargs,
 ) -> dict:
-    transformer_class: Type[Any]
-    if "transformer_class" not in kwargs:
-        if ast.data and ast.data == "config":
-            transformer_class = ConfigfileTransformer
-        else:
-            transformer_class = MapfileTransformer
-    else:
-        # a transformer_class was set as an argument
-        transformer_class = kwargs.pop("transformer_class")
+    if not include_comments:
+        return result  # already transformed during the parse
 
     m = MapfileToDict(
         include_position=include_position,
         include_comments=include_comments,
-        transformer_class=transformer_class,
         **kwargs,
     )
-    d = m.transform(ast)
+    d = m.transform(result)
     return d
 
 
@@ -136,9 +146,7 @@ def open(
 
     """
 
-    p = Parser(
-        expand_includes=expand_includes, include_comments=include_comments, **kwargs
-    )
+    p = _parser(expand_includes, include_comments, include_position, **kwargs)
     ast = p.parse_file(fn)
     return _transform(ast, include_comments, include_position, **kwargs)
 
@@ -184,9 +192,7 @@ def load(
 
     Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
     """
-    p = Parser(
-        expand_includes=expand_includes, include_comments=include_comments, **kwargs
-    )
+    p = _parser(expand_includes, include_comments, include_position, **kwargs)
     ast = p.load(fp)
     return _transform(ast, include_comments, include_position, **kwargs)
 
@@ -230,9 +236,7 @@ def loads(
         assert d["name"] == "TEST"
 
     """
-    p = Parser(
-        expand_includes=expand_includes, include_comments=include_comments, **kwargs
-    )
+    p = _parser(expand_includes, include_comments, include_position, **kwargs)
     ast = p.parse(s)
     return _transform(ast, include_comments, include_position, **kwargs)
 
