@@ -31,7 +31,7 @@ from __future__ import annotations
 import os
 import logging
 from io import open
-from lark import Lark, ParseError, Tree, UnexpectedInput
+from lark import Lark, ParseError, Tree, UnexpectedInput, UnexpectedToken
 from typing import Any, IO
 
 
@@ -50,21 +50,6 @@ if use_cython:
         import lark_cython  # type: ignore
     except ImportError:
         pass
-
-
-SYMBOL_ATTRIBUTES = {
-    "ANCHORPOINT",
-    "ANTIALIAS",
-    "FILLED",
-    "FONT",
-    "IMAGE",
-    "NAME",
-    "COLOR",
-    "TYPE",
-    "CHARACTER",
-    "POINTS",
-    "TRANSPARENT",
-}
 
 
 class Parser:
@@ -222,21 +207,7 @@ class Parser:
 
         try:
             self._comments[:] = []  # clear any comments from a previous parse
-            ip = self.lalr.parse_interactive(text)
-            for t in ip.iter_parse():
-                if t.type == "UNQUOTED_STRING":
-                    # Unquoted strings after SYMBOL can only be values, not attributes
-                    if (
-                        ip.parser_state.value_stack[-1] == "SYMBOL"
-                        and t.value.upper() not in SYMBOL_ATTRIBUTES
-                    ):
-                        t.type = "UNQUOTED_STRING_VALUE"
-                elif t.type == "GRID":
-                    # Unquoted 'GRID' coming after NAME is always a value, not a composite type
-                    if ip.parser_state.value_stack[-1] == "NAME":
-                        t.type = "UNQUOTED_STRING_VALUE"
-
-            tree = ip.resume_parse()
+            tree = self.lalr.parse(text)
             if self.include_comments:
                 self.comments_dict = {}
                 # create a dictionary using line numbers as keys, and comments as values
@@ -246,6 +217,11 @@ class Parser:
 
             return tree
         except (ParseError, UnexpectedInput) as ex:
+            if isinstance(ex, UnexpectedToken):
+                try:
+                    ex.accepts  # str(ex) needs this; it fails on lark_cython's parser state
+                except AttributeError:
+                    ex.interactive_parser = None  # type: ignore[assignment]
             if fn:
                 log.error("Parsing of %s unsuccessful", fn)
             else:

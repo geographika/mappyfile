@@ -162,8 +162,9 @@ Two composite names - ``STYLE`` and ``SYMBOL``, are also attribute names. For ex
 
 This above example is not a problem to parse, but it becomes very tricky when compounded by the next issue - line-breaks.
 
-Resolving the `SYMBOL ambiguity <https://github.com/geographika/mappyfile/issues/48>`_ issue required the use of an interactive LALR
-parser. See `this commit <https://github.com/geographika/mappyfile/commit/96ca51720c6275ae1979dc6391be72fa3b0c72af>`_ for details.
+The grammar resolves the `SYMBOL ambiguity <https://github.com/geographika/mappyfile/issues/48>`_: a ``SYMBOL`` block starts
+with one of its keywords (``NAME``, ``TYPE``, ``POINTS``, ...), so ``SYMBOL`` followed by a name, as in ``SYMBOL circle``,
+is an attribute.
 
 
 Line-Break Fluidity

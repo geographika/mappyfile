@@ -134,6 +134,48 @@ END"""
     )
 
 
+def test_config_with_block_keyword_keys():
+    """
+    Map aliases and env names may be spelled like a Mapfile block keyword,
+    in any position in the section
+    """
+    config_text_ok = """CONFIG
+    MAPS
+            layer "C:/Maps/layer.map"
+            test1 "C:/Maps/test1.map"
+            web "C:/Maps/web.map"
+    END
+END
+"""
+    p = Parser()
+    m = MapfileToDict(
+        include_position=False,
+        include_comments=False,
+        transformer_class=ConfigfileTransformer,
+    )
+    d = m.transform(p.parse(config_text_ok))
+    pp = PrettyPrinter(indent=0, newlinechar=" ", quote="'")
+    assert pp.pprint(d) == (
+        "CONFIG MAPS layer 'C:/Maps/layer.map' test1 'C:/Maps/test1.map' "
+        "web 'C:/Maps/web.map' END END"
+    )
+
+
+@pytest.mark.parametrize("key, value", [("style", "normal"), ("symbol", "type")])
+def test_config_values_after_style_and_symbol(key, value):
+    """
+    After a STYLE or SYMBOL key in a CONFIG section, a word spelled like a
+    STYLE mode or a SYMBOL block key is a plain value, as after any other key
+    """
+    m = MapfileToDict(
+        include_position=False,
+        include_comments=False,
+        transformer_class=ConfigfileTransformer,
+    )
+    d = m.transform(Parser().parse(f"CONFIG ENV {key} {value} END END"))
+    assert d["env"] == {key: value}
+
+
 def test_config_with_quoted_keys():
     config_text_ok = """CONFIG
     ENV

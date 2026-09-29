@@ -1104,6 +1104,43 @@ END"""
     assert output(s, schema_name="layer") == exp
 
 
+def test_keyword_value_in_first_attribute():
+    """
+    An unquoted value spelled like a block keyword, in a nested block's first attribute
+    """
+    s = "MAP LAYER NAME legend TYPE POINT END END"
+    exp = "MAP LAYER NAME 'legend' TYPE POINT END END"
+    assert output(s) == exp
+
+
+def test_symbol_name_spelled_like_keyword():
+    s = "MAP SYMBOL NAME label TYPE ELLIPSE END END"
+    exp = "MAP SYMBOL NAME 'label' TYPE ELLIPSE END END"
+    assert output(s) == exp
+
+
+def test_lowercase_symbol_attribute():
+    s = "STYLE symbol circle SIZE 5 END"
+    exp = "STYLE SYMBOL 'circle' SIZE 5 END"
+    assert output(s, schema_name="style") == exp
+
+
+def test_symbol_first_key_backgroundcolor():
+    s = "MAP SYMBOL BACKGROUNDCOLOR 255 0 0 NAME 'x' TYPE ELLIPSE END END"
+    check_result(s)
+
+
+def test_labelitem_name_before_grid():
+    s = "LAYER NAME 'grid' TYPE LINE LABELITEM NAME GRID LABELFORMAT 'DD' END END"
+    exp = "LAYER NAME 'grid' TYPE LINE LABELITEM 'NAME' GRID LABELFORMAT DD END END"
+    assert output(s, schema_name="layer") == exp
+
+
+def test_querymap_style():
+    s = "MAP QUERYMAP STYLE NORMAL COLOR 255 0 0 END END"
+    check_result(s)
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
