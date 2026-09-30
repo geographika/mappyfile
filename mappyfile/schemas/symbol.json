@@ -35,9 +35,6 @@
         "maxVersion": 7.6
       }
     },
-    "backgroundcolor": {
-      "$ref": "color.json"
-    },
     "character": {
       "oneOf": [
         {

@@ -288,10 +288,8 @@ class MapfileTransformer(Transformer):
         key_token = tokens[0]
 
         if isinstance(key_token, (list, tuple)):
+            # a keyword key: STYLE or SYMBOL in a block, any block keyword in a CONFIG section
             key_token = key_token[0]
-            assert self.key_name(key_token) in ("style", "symbol"), self.key_name(
-                key_token
-            )
 
         key_name = self.key_name(key_token)
         value_tokens = tokens[1:]

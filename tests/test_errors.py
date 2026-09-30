@@ -99,6 +99,16 @@ def test_style_pattern_fail():
     assert output(s) == exp
 
 
+@pytest.mark.parametrize("s", ['MAP NAME "test" END END', 'MAP NAME "test"'])
+def test_error_message(s):
+    """
+    Check a parse error can be printed, both mid-stream and at the end of input
+    """
+    with pytest.raises(UnexpectedToken) as ex:
+        Parser().parse(s)
+    assert str(ex.value).startswith("Unexpected token")
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py

@@ -36,13 +36,26 @@ config_item: "ENV"i config_attr* _END -> env
             | "MAPS"i config_attr* _END -> maps
             | "PLUGINS"i config_attr* _END -> plugins
 
+// STYLE and SYMBOL can be both ordinary blocks and attribute keys.
+// To disambiguate, we give each one its own rule, constrained to its valid uses.
 composite: composite_type composite_body _END
+       | style composite_body _END
+       | symbol symbol_body _END
        | metadata
        | validation
        | connectionoptions
 
-composite_body: _composite_item*
-_composite_item: (composite|attr|points|projection|pattern|values|config|classauto)
+composite_body: composite_item*
+?composite_item: attr | block_item
+?block_item: composite|points|projection|pattern|values|config|classauto
+
+// SYMBOL starts a block when followed by one of its keywords, POINTS or END.
+// Otherwise it is an attribute.
+symbol_body: ((symbol_attr | points) composite_item*)? -> composite_body
+symbol_attr: symbol_key attr_value -> attr
+// Valid keys for SYMBOL, based on schemas/symbol.json
+!?symbol_key: "ANCHORPOINT"i | "ANTIALIAS"i | "CHARACTER"i | "FILLED"i
+            | "FONT"i | "IMAGE"i | "INCLUDE"i | "NAME"i | "TRANSPARENT"i | "TYPE"i
 
 !projection: "PROJECTION"i (string*|AUTO) _END
 !config: "CONFIG"i (string | UNQUOTED_STRING) (string | UNQUOTED_STRING)
@@ -55,15 +68,19 @@ _composite_item: (composite|attr|points|projection|pattern|values|config|classau
 !validation: "VALIDATION"i string_pair* _END
 !connectionoptions: "CONNECTIONOPTIONS"i string_pair* _END
 
-// allow quoted or unquoted keys for CONFIG sections
-config_attr: (UNQUOTED_STRING | composite_type | string) (value | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)
+// In config, accept quoted or unquoted keys, and keys used for blocks, including STYLE and SYMBOL.
+// We name them as terminals, not rules, so as to not share the parser state with the blocks.
+config_attr: (UNQUOTED_STRING | composite_type | STYLE | SYMBOL | string) (value | UNQUOTED_STRING)
 
-attr: (UNQUOTED_STRING | composite_type) (value | UNQUOTED_STRING | UNQUOTED_STRING_VALUE)
-%declare UNQUOTED_STRING_VALUE  // generated using the interactive parser. See issues #48, #98
+attr: (UNQUOTED_STRING | symbol) attr_value
+    | style (value | style_mode)
+?attr_value: value | UNQUOTED_STRING
+// The QUERYMAP STYLE values: keywords after STYLE, plain words anywhere else.
+!?style_mode: "NORMAL"i | "HILITE"i | "SELECTED"i
 
 ?value: string | int | float | expression | not_expression | attr_bind | path
 | regexp | runtime_var | list | NULL | true | false | extent | rgb | hexcolor
-| colorrange | hexcolorrange | num_pair | attr_bind_pair | attr_mixed_pair | _attr_keyword
+| colorrange | hexcolorrange | num_pair | attr_bind_pair | attr_mixed_pair | AUTO
 
 int: SIGNED_INT
 int_pair: int int
@@ -73,8 +90,6 @@ hexcolorrange: hexcolor hexcolor
 hexcolor: DOUBLE_QUOTED_HEXCOLOR | SINGLE_QUOTED_HEXCOLOR
 
 extent: (int|float) (int|float) (int|float) (int|float) 
-
-!_attr_keyword: "AUTO"i | "HILITE"i | "SELECTED"i 
 
 string: DOUBLE_QUOTED_STRING | SINGLE_QUOTED_STRING | ESCAPED_STRING
 string_pair: (string|UNQUOTED_STRING) (string|UNQUOTED_STRING)
@@ -140,9 +155,12 @@ func_params: atom ("," atom)*
             | "REFERENCE"i
             | "SCALEBAR"i
             | "SCALETOKEN"i
-            | "STYLE"i
             | "WEB"i
-            | "SYMBOL"i
+
+!style: STYLE -> composite_type
+!symbol: SYMBOL -> composite_type
+STYLE: "STYLE"i
+SYMBOL: "SYMBOL"i
 
 CLASSAUTO: "CLASSAUTO"i
 AUTO: "AUTO"i
