@@ -53,9 +53,9 @@ composite_body: composite_item*
 // Otherwise it is an attribute.
 symbol_body: ((symbol_attr | points) composite_item*)? -> composite_body
 symbol_attr: symbol_key attr_value -> attr
-// Valid keys for SYMBOL, based on schemas/symbol.json, plus COLOR.
-!?symbol_key: "ANCHORPOINT"i | "ANTIALIAS"i | "BACKGROUNDCOLOR"i | "CHARACTER"i
-            | "FILLED"i | "FONT"i | "IMAGE"i | "INCLUDE"i | "NAME"i | "TRANSPARENT"i | "TYPE"i
+// Valid keys for SYMBOL, based on schemas/symbol.json
+!?symbol_key: "ANCHORPOINT"i | "ANTIALIAS"i | "CHARACTER"i | "FILLED"i
+            | "FONT"i | "IMAGE"i | "INCLUDE"i | "NAME"i | "TRANSPARENT"i | "TYPE"i
 
 !projection: "PROJECTION"i (string*|AUTO) _END
 !config: "CONFIG"i (string | UNQUOTED_STRING) (string | UNQUOTED_STRING)

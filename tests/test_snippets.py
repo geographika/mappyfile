@@ -1139,11 +1139,6 @@ def test_lowercase_symbol_attribute():
     assert output(s, schema_name="style") == exp
 
 
-def test_symbol_first_key_backgroundcolor():
-    s = "MAP SYMBOL BACKGROUNDCOLOR 255 0 0 NAME 'x' TYPE ELLIPSE END END"
-    check_result(s)
-
-
 def test_labelitem_name_before_grid():
     s = "LAYER NAME 'grid' TYPE LINE LABELITEM NAME GRID LABELFORMAT 'DD' END END"
     exp = "LAYER NAME 'grid' TYPE LINE LABELITEM 'NAME' GRID LABELFORMAT DD END END"
