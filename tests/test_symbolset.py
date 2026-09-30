@@ -1,8 +1,7 @@
 import logging
-import glob
 import json
-import os
 import re
+from pathlib import Path
 import pytest
 import mappyfile
 from mappyfile.parser import Parser
@@ -37,14 +36,14 @@ def test_only_style_and_symbol_are_attribute_keywords():
     The grammar lets only STYLE and SYMBOL be a block keyword and an attribute key,
     so no other block keyword may be a plain attribute in any schema
     """
-    folder = os.path.dirname(mappyfile.__file__)
-    grammar = open(os.path.join(folder, "mapfile.lark"), encoding="utf-8").read()
+    folder = Path(mappyfile.__file__).parent
+    grammar = (folder / "mapfile.lark").read_text(encoding="utf-8")
     rule = re.search(r"!composite_type:(.*?)\n\n", grammar, re.S)
     assert rule is not None
     keywords = set(re.findall(r'"(\w+)"i', rule.group(1))) | {"STYLE", "SYMBOL"}
     schemas = {}
-    for fn in glob.glob(os.path.join(folder, "schemas", "*.json")):
-        schemas[os.path.basename(fn)] = json.load(open(fn, encoding="utf-8"))
+    for fn in (folder / "schemas").glob("*.json"):
+        schemas[fn.name] = json.loads(fn.read_text(encoding="utf-8"))
 
     def is_block(prop):
         if "$ref" in prop:
@@ -71,12 +70,14 @@ def test_symbol_keys_cover_the_schema():
     A SYMBOL block is recognised by its first key, so every key in the symbol
     schema must be in the grammar, apart from the blocks it has rules for
     """
-    folder = os.path.dirname(mappyfile.__file__)
-    grammar = open(os.path.join(folder, "mapfile.lark"), encoding="utf-8").read()
+    folder = Path(mappyfile.__file__).parent
+    grammar = (folder / "mapfile.lark").read_text(encoding="utf-8")
     rule = re.search(r"symbol_key:(.*?)\n\n", grammar, re.S)
     assert rule is not None
     keys = set(re.findall(r'"(\w+)"i', rule.group(1)))
-    schema = json.load(open(os.path.join(folder, "schemas", "symbol.json"), encoding="utf-8"))
+    schema = json.loads(
+        (folder / "schemas" / "symbol.json").read_text(encoding="utf-8")
+    )
     properties = {k.upper() for k in schema["properties"] if not k.startswith("__")}
     assert properties - {"POINTS"} <= keys
 
