@@ -517,6 +517,20 @@ def test_querymap():
     assert output(s) == exp
 
 
+def test_querymap_selected():
+    s = """
+    MAP
+        QUERYMAP
+            STATUS ON
+            SIZE 300 300
+            STYLE SELECTED
+        END
+    END
+    """
+    exp = "MAP QUERYMAP STATUS ON SIZE 300 300 STYLE SELECTED END END"
+    assert output(s) == exp
+
+
 def test_output_format_esri():
     s = """
     OUTPUTFORMAT
@@ -1141,6 +1155,50 @@ def test_querymap_style():
     check_result(s)
 
 
+def test_scalebar_style():
+
+    s = """
+    SCALEBAR
+        STYLE 1
+        TRANSPARENT OFF
+        LABEL
+            COLOR 0 0 0
+            size 9
+            type truetype
+            font "default"
+        END
+        SIZE 150 3
+        COLOR 0 0 0
+        BACKGROUNDCOLOR 255 255 255
+        OUTLINECOLOR 0 0 0
+        UNITS kilometers
+        INTERVALS 3
+        STATUS EMBED
+        OFFSET 5 5
+    END
+    """
+
+    exp = (
+        "SCALEBAR STYLE 1 TRANSPARENT OFF "
+        "LABEL COLOR 0 0 0 SIZE 9 TYPE TRUETYPE FONT 'default' END "
+        "SIZE 150 3 COLOR 0 0 0 BACKGROUNDCOLOR 255 255 255 OUTLINECOLOR 0 0 0 "
+        "UNITS KILOMETERS INTERVALS 3 STATUS EMBED OFFSET 5 5 END"
+    )
+    assert output(s, schema_name="scalebar") == exp
+
+
+def test_symbol_attribute_spelled_like_keyword_quotes():
+    s = "STYLE SYMBOL 'label' SIZE 5 END"
+    exp = "STYLE SYMBOL 'label' SIZE 5 END"
+    assert output(s, schema_name="style") == exp
+
+
+def test_symbol_attribute_spelled_like_keyword():
+    s = "STYLE SYMBOL label SIZE 5 END"
+    exp = "STYLE SYMBOL 'label' SIZE 5 END"
+    assert output(s, schema_name="style") == exp
+
+
 def run_tests():
     r"""
     Need to comment out the following line in C:\VirtualEnvs\mappyfile\Lib\site-packages\pep8.py
@@ -1156,6 +1214,6 @@ if __name__ == "__main__":
     # test_multiple_compfilters()
     # test_geomtransform_nested_function()
     # test_raster_label()
-    test_layer_identify2()
+    test_scalebar_style()
     # run_tests()
     print("Done!")

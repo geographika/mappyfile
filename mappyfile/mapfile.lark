@@ -49,12 +49,12 @@ composite_body: composite_item*
 ?composite_item: attr | block_item
 ?block_item: composite|points|projection|pattern|values|config|classauto
 
-// SYMBOL starts a block when followed by one of its keywords, a block or END.
+// SYMBOL starts a block when followed by one of its keywords, POINTS or END.
 // Otherwise it is an attribute.
-symbol_body: ((symbol_attr | block_item) composite_item*)? -> composite_body
+symbol_body: ((symbol_attr | points) composite_item*)? -> composite_body
 symbol_attr: symbol_key attr_value -> attr
 // Valid keys for SYMBOL, based on schemas/symbol.json, plus COLOR.
-!?symbol_key: "ANCHORPOINT"i | "ANTIALIAS"i | "BACKGROUNDCOLOR"i | "CHARACTER"i | "COLOR"i
+!?symbol_key: "ANCHORPOINT"i | "ANTIALIAS"i | "BACKGROUNDCOLOR"i | "CHARACTER"i
             | "FILLED"i | "FONT"i | "IMAGE"i | "INCLUDE"i | "NAME"i | "TRANSPARENT"i | "TYPE"i
 
 !projection: "PROJECTION"i (string*|AUTO) _END
