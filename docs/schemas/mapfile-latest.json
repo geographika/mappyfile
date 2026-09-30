@@ -1259,26 +1259,6 @@
                                                                             },
                                                                             "type": "boolean"
                                                                         },
-                                                                        "backgroundcolor": {
-                                                                            "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                                                            "oneOf": [
-                                                                                {
-                                                                                    "items": {
-                                                                                        "maximum": 255,
-                                                                                        "minimum": -1,
-                                                                                        "type": "number"
-                                                                                    },
-                                                                                    "maxItems": 3,
-                                                                                    "minItems": 3,
-                                                                                    "type": "array"
-                                                                                },
-                                                                                {
-                                                                                    "example": "#aa33cc",
-                                                                                    "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                                                                                    "type": "string"
-                                                                                }
-                                                                            ]
-                                                                        },
                                                                         "character": {
                                                                             "oneOf": [
                                                                                 {
@@ -1867,26 +1847,6 @@
                                                                                     "maxVersion": 7.6
                                                                                 },
                                                                                 "type": "boolean"
-                                                                            },
-                                                                            "backgroundcolor": {
-                                                                                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                                                                "oneOf": [
-                                                                                    {
-                                                                                        "items": {
-                                                                                            "maximum": 255,
-                                                                                            "minimum": -1,
-                                                                                            "type": "number"
-                                                                                        },
-                                                                                        "maxItems": 3,
-                                                                                        "minItems": 3,
-                                                                                        "type": "array"
-                                                                                    },
-                                                                                    {
-                                                                                        "example": "#aa33cc",
-                                                                                        "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                                                                                        "type": "string"
-                                                                                    }
-                                                                                ]
                                                                             },
                                                                             "character": {
                                                                                 "oneOf": [
@@ -2510,26 +2470,6 @@
                                                                 },
                                                                 "type": "boolean"
                                                             },
-                                                            "backgroundcolor": {
-                                                                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                                                "oneOf": [
-                                                                    {
-                                                                        "items": {
-                                                                            "maximum": 255,
-                                                                            "minimum": -1,
-                                                                            "type": "number"
-                                                                        },
-                                                                        "maxItems": 3,
-                                                                        "minItems": 3,
-                                                                        "type": "array"
-                                                                    },
-                                                                    {
-                                                                        "example": "#aa33cc",
-                                                                        "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                                                                        "type": "string"
-                                                                    }
-                                                                ]
-                                                            },
                                                             "character": {
                                                                 "oneOf": [
                                                                     {
@@ -2667,26 +2607,6 @@
                                                         "maxVersion": 7.6
                                                     },
                                                     "type": "boolean"
-                                                },
-                                                "backgroundcolor": {
-                                                    "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                                    "oneOf": [
-                                                        {
-                                                            "items": {
-                                                                "maximum": 255,
-                                                                "minimum": -1,
-                                                                "type": "number"
-                                                            },
-                                                            "maxItems": 3,
-                                                            "minItems": 3,
-                                                            "type": "array"
-                                                        },
-                                                        {
-                                                            "example": "#aa33cc",
-                                                            "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                                                            "type": "string"
-                                                        }
-                                                    ]
                                                 },
                                                 "character": {
                                                     "oneOf": [
@@ -4709,26 +4629,6 @@
                                                             },
                                                             "type": "boolean"
                                                         },
-                                                        "backgroundcolor": {
-                                                            "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                                            "oneOf": [
-                                                                {
-                                                                    "items": {
-                                                                        "maximum": 255,
-                                                                        "minimum": -1,
-                                                                        "type": "number"
-                                                                    },
-                                                                    "maxItems": 3,
-                                                                    "minItems": 3,
-                                                                    "type": "array"
-                                                                },
-                                                                {
-                                                                    "example": "#aa33cc",
-                                                                    "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                                                                    "type": "string"
-                                                                }
-                                                            ]
-                                                        },
                                                         "character": {
                                                             "oneOf": [
                                                                 {
@@ -6301,26 +6201,6 @@
                                                             },
                                                             "type": "boolean"
                                                         },
-                                                        "backgroundcolor": {
-                                                            "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                                            "oneOf": [
-                                                                {
-                                                                    "items": {
-                                                                        "maximum": 255,
-                                                                        "minimum": -1,
-                                                                        "type": "number"
-                                                                    },
-                                                                    "maxItems": 3,
-                                                                    "minItems": 3,
-                                                                    "type": "array"
-                                                                },
-                                                                {
-                                                                    "example": "#aa33cc",
-                                                                    "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                                                                    "type": "string"
-                                                                }
-                                                            ]
-                                                        },
                                                         "character": {
                                                             "oneOf": [
                                                                 {
@@ -6644,26 +6524,6 @@
                             "maxVersion": 7.6
                         },
                         "type": "boolean"
-                    },
-                    "backgroundcolor": {
-                        "$schema": "https://json-schema.org/draft/2020-12/schema",
-                        "oneOf": [
-                            {
-                                "items": {
-                                    "maximum": 255,
-                                    "minimum": -1,
-                                    "type": "number"
-                                },
-                                "maxItems": 3,
-                                "minItems": 3,
-                                "type": "array"
-                            },
-                            {
-                                "example": "#aa33cc",
-                                "pattern": "^#([a-fA-F0-9]{6,8}|[a-fA-F0-9]{3,4})$",
-                                "type": "string"
-                            }
-                        ]
                     },
                     "character": {
                         "oneOf": [
