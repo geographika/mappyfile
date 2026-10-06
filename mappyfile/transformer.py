@@ -419,6 +419,63 @@ class MapfileTransformer(Transformer):
         t[2].value = self.clean_string(value)
         return self.attr(t)
 
+    def config_file(self, tree):
+        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
+        composite_dict["__type__"] = "config"
+
+        for t in tree:
+            key = t.data.lower()
+
+            atts_dict: OrderedDict[str, Any] = OrderedDict()
+
+            if self.include_comments:
+                comments_dict = atts_dict["__comments__"] = OrderedDict()
+
+            if self.include_position:
+                # self.create_position_dict(key_name, None)
+                position_dict = atts_dict["__position__"] = OrderedDict()
+
+            for c in t.children:
+                # first remove dicts that are no longer required
+                pos = c.pop("__position__")
+                c.pop(
+                    "__tokens__", None
+                )  # tokens are no longer needed now we have the positions
+                comments = c.pop("__comments__", None)
+
+                #  simple attribute
+                assert len(c.items()) == 1
+                att = list(c.items())[0]
+                att_key = att[0]
+                att_value = att[1]
+
+                if self.include_position:
+                    # hoist position details to composite
+                    position_dict[att_key] = pos
+                if self.include_comments and comments:
+                    # hoist comments to composite
+                    comments_dict[att_key] = comments
+
+                if att_key in atts_dict.keys():
+                    log.warning(
+                        "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
+                        att_key,
+                        key,
+                        att_value,
+                    )
+                atts_dict[att_key] = att_value
+
+            composite_dict[key] = atts_dict
+
+        return composite_dict
+
+    def config_attr(self, tokens) -> dict:
+        """
+        Process CONFIG file attributes which can be quoted
+        or unquoted, otherwise they are identical to other attributes
+        """
+        return self.attr(tokens)
+
     def validation(self, tokens):
         """
         Create a dict for the validation items
@@ -737,62 +794,9 @@ class CommentsTransformer(Transformer_InPlace):
 
 
 class ConfigfileTransformer(MapfileTransformer):
-    def config(self, tree):
-        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
-        composite_dict["__type__"] = "config"
-
-        for t in tree:
-            key = t.data.lower()
-
-            atts_dict: OrderedDict[str, Any] = OrderedDict()
-
-            if self.include_comments:
-                comments_dict = atts_dict["__comments__"] = OrderedDict()
-
-            if self.include_position:
-                # self.create_position_dict(key_name, None)
-                position_dict = atts_dict["__position__"] = OrderedDict()
-
-            for c in t.children:
-                # first remove dicts that are no longer required
-                pos = c.pop("__position__")
-                c.pop(
-                    "__tokens__", None
-                )  # tokens are no longer needed now we have the positions
-                comments = c.pop("__comments__", None)
-
-                #  simple attribute
-                assert len(c.items()) == 1
-                att = list(c.items())[0]
-                att_key = att[0]
-                att_value = att[1]
-
-                if self.include_position:
-                    # hoist position details to composite
-                    position_dict[att_key] = pos
-                if self.include_comments and comments:
-                    # hoist comments to composite
-                    comments_dict[att_key] = comments
-
-                if att_key in atts_dict.keys():
-                    log.warning(
-                        "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
-                        att_key,
-                        key,
-                        att_value,
-                    )
-                atts_dict[att_key] = att_value
-
-            composite_dict[key] = atts_dict
-
-        return composite_dict
-
-    def config_attr(self, tokens) -> dict:
-        """
-        Process CONFIG file attributes which can be quoted
-        or unquoted, otherwise they are identical to other attributes
-        """
-        return self.attr(tokens)
+    """
+    Kept for compatibility - MapfileTransformer now handles CONFIG files too
+    """
 
 
 class MapfileToDict:

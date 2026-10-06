@@ -35,14 +35,10 @@ import warnings
 import functools
 from mappyfile.ordereddict import DefaultOrderedDict
 from mappyfile.parser import Parser
-from mappyfile.transformer import (
-    MapfileToDict,
-    MapfileTransformer,
-    ConfigfileTransformer,
-)
+from mappyfile.transformer import MapfileToDict
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.validator import Validator
-from typing import IO, Any, Type
+from typing import IO
 
 
 def deprecated(func):
@@ -73,20 +69,9 @@ def _transform(
     include_position: bool = False,
     **kwargs,
 ) -> dict:
-    transformer_class: Type[Any]
-    if "transformer_class" not in kwargs:
-        if ast.data and ast.data == "config":
-            transformer_class = ConfigfileTransformer
-        else:
-            transformer_class = MapfileTransformer
-    else:
-        # a transformer_class was set as an argument
-        transformer_class = kwargs.pop("transformer_class")
-
     m = MapfileToDict(
         include_position=include_position,
         include_comments=include_comments,
-        transformer_class=transformer_class,
         **kwargs,
     )
     d = m.transform(ast)
