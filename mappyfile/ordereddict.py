@@ -108,10 +108,6 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
     def _k(cls, key):
         return key.lower() if isinstance(key, str) else key
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._convert_keys()
-
     def __getitem__(self, key):
         return super().__getitem__(self.__class__._k(key))
 
@@ -144,8 +140,3 @@ class CaseInsensitiveOrderedDict(DefaultOrderedDict):
             super().update(self.__class__(CaseInsensitiveOrderedDict, arg))
         if kwargs:
             super().update(self.__class__(CaseInsensitiveOrderedDict, **kwargs))
-
-    def _convert_keys(self):
-        for k in list(self.keys()):
-            v = super().pop(k)
-            self[k] = v
