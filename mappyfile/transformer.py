@@ -35,7 +35,6 @@ Python dict structure
 from __future__ import annotations
 import logging
 from collections import OrderedDict
-from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
 from .parser import lark_cython
@@ -83,6 +82,13 @@ class MapfileTransformer(Transformer):
             return composites[0]
 
         return composites
+
+    def symbolset(self, t):
+        """
+        Parses a MapServer symbolset file - a SYMBOLSET..END block at the root
+        """
+        composite_type = self.composite_type([Token("symbolset", "symbolset")])
+        return self.composite([composite_type] + t)
 
     def flatten(self, values: list[Any]) -> list[Any]:
         flat_list = []
@@ -813,8 +819,6 @@ class MapfileToDict:
         self.kwargs = kwargs
 
     def transform(self, tree):
-        tree = Canonize().transform(tree)
-
         self.mapfile_transformer = self.transformer_class(
             include_position=self.include_position,
             include_comments=self.include_comments,
@@ -826,16 +830,6 @@ class MapfileToDict:
             tree = comments_transformer.transform(tree)
 
         return self.mapfile_transformer.transform(tree)
-
-
-class Canonize(Transformer_InPlace):
-    @v_args(tree=True)
-    def symbolset(self, tree):
-        composite_type = Tree("composite_type", [Token("symbolset", "symbolset")])
-
-        tree.data = "composite"
-        tree.children.insert(0, composite_type)
-        return tree
 
 
 def calculate_depth(iterable):
