@@ -45,13 +45,11 @@ from mappyfile.quoter import Quoter
 
 
 if lark_cython:
-    TOKEN_TYPES = (Token, lark_cython.Token)
 
     def update_token_value(t, value):
         return Token.new_borrow_pos(t.type, value, t)
 
 else:
-    TOKEN_TYPES = Token  # type: ignore
 
     def update_token_value(t, value):
         t.value = value
@@ -91,20 +89,13 @@ class MapfileTransformer(Transformer):
         return self.composite([composite_type] + t)
 
     def flatten(self, values: list[Any]) -> list[Any]:
-        flat_list = []
+        flat_list: list[Any] = []
 
         for v in values:
-            if isinstance(v, TOKEN_TYPES):
-                flat_list.append(v)
-            elif isinstance(v, list):
+            if isinstance(v, (list, tuple)):
                 flat_list += v
-            elif isinstance(v, tuple):
-                flat_list += v
-            elif isinstance(v, dict):
-                assert "__tokens__" in v
-                flat_list += v["__tokens__"]
             else:
-                raise ValueError("Attribute value type not supported", v)
+                flat_list.append(v)  # a token
 
         return flat_list
 
@@ -281,15 +272,6 @@ class MapfileTransformer(Transformer):
     def clean_string(self, val: str) -> str:
         return self.quoter.remove_quotes(val)
 
-    def attr_name(self, tokens) -> str:
-        t = tokens[0]
-        if not isinstance(t, TOKEN_TYPES):
-            #  handle ambiguities
-            t = t[0]
-            assert t.value.lower() in ("symbol", "style")
-
-        return t
-
     def attr(self, tokens) -> dict:
         key_token = tokens[0]
 
@@ -346,19 +328,7 @@ class MapfileTransformer(Transformer):
         assert key.value.lower() == name
         assert tokens[-1].value.lower() == "end"
 
-        if len(tokens) == 2:
-            body = []  # empty TYPE..END block
-        else:
-            body = tokens[1:-1]
-
-        body_tokens = []
-
-        for t in body:
-            if isinstance(t, dict):
-                body_tokens.append(t["__tokens__"])
-            else:
-                body_tokens.append(t)
-        return key, body_tokens
+        return key, tokens[1:-1]
 
     def process_value_pairs(self, tokens, type_) -> dict:
         """
