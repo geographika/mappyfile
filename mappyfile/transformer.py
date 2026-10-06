@@ -292,6 +292,10 @@ class MapfileTransformer(Transformer):
         d: dict = OrderedDict()
         d["__position__"] = pd
 
+        if self.include_comments:
+            # read by plugins that turn tokens into comments (mappyfile-colors)
+            d["__tokens__"] = [key_token, *value_tokens]
+
         if len(value_tokens) > 1:
             if key_name == "config":
                 assert len(value_tokens) == 2
@@ -299,14 +303,9 @@ class MapfileTransformer(Transformer):
             else:
                 # list of values
                 values = [v.value for v in value_tokens]  # type: ignore
-                d["__tokens__"] = [key_token] + list(value_tokens)
         else:
             # single value
-            value_token = value_tokens[0]
-            # store the original tokens so they can be processed
-            # differently for METADATA, VALIDATION, and VALUES
-            d["__tokens__"] = [key_token, value_token]
-            values = value_token.value
+            values = value_tokens[0].value
 
             if self.quoter.is_string(values):
                 values = self.clean_string(values)  # type: ignore

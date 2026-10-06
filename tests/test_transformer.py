@@ -402,6 +402,17 @@ def test_transformer_during_parse():
         Parser(include_comments=True, transformer=MapfileTransformer())
 
 
+def test_attr_tokens_only_with_comments():
+    """
+    Plugins such as mappyfile-colors read an attribute's tokens when comments are
+    included; otherwise they are not kept
+    """
+    attr = next(Parser().parse("CLASS COLOR 1 2 3 END").find_data("attr"))
+    d = MapfileTransformer(include_comments=True).transform(attr)
+    assert [t.value for t in d["__tokens__"]] == ["COLOR", 1, 2, 3]
+    assert "__tokens__" not in MapfileTransformer().transform(attr)
+
+
 def run_tests():
     # pytest.main(["tests/test_transformer.py::test_config_directive"])
     pytest.main(["tests/test_transformer.py"])
