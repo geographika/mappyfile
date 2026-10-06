@@ -119,9 +119,8 @@ class MapfileTransformer(Transformer):
         return d
 
     def get_single_key(self, d: dict):
-        keys = list(d.keys())  # convert to list for py3
-        assert len(keys) == 1
-        return keys[0]
+        (key,) = d  # fails unless there is exactly one
+        return key
 
     def composite_body(self, t):
         return t
@@ -257,7 +256,6 @@ class MapfileTransformer(Transformer):
                             position_dict[key_name] = []
                         position_dict[key_name].append(pos)
                 else:
-                    assert len(d.items()) == 1
                     if position_dict is not None:
                         # hoist position details to composite
                         position_dict[key_name] = pos
@@ -288,7 +286,7 @@ class MapfileTransformer(Transformer):
             assert len(value_tokens) == 1
             value_tokens = value_tokens[0]
 
-        d: dict = OrderedDict()
+        d: dict = {}
         if self.include_position:
             d["__position__"] = self.create_position_dict(key_token, value_tokens)
 
@@ -671,7 +669,7 @@ class MapfileTransformer(Transformer):
     def classauto(self, t):
         key_token = t[0]
         key_name = self.key_name(key_token)
-        d: dict = OrderedDict()
+        d: dict = {}
         if self.include_position:
             d["__position__"] = self.create_position_dict(key_token, None)
         d[key_name] = None
