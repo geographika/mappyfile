@@ -63,19 +63,32 @@ def deprecated(func):
     return new_func
 
 
-def _transform(
-    ast,
-    include_comments: bool = False,
-    include_position: bool = False,
+def _parse(
+    text: str,
+    fn: str | None,
+    expand_includes: bool,
+    include_comments: bool,
+    include_position: bool,
     **kwargs,
 ) -> dict:
+    """
+    Without comments the transformer runs inside the parse and no tree is
+    built. Comments are matched to tree nodes by line once the parse is
+    done, so include_comments builds the tree first and transforms it after.
+    """
     m = MapfileToDict(
         include_position=include_position,
         include_comments=include_comments,
         **kwargs,
     )
-    d = m.transform(ast)
-    return d
+    if include_comments:
+        p = Parser(expand_includes=expand_includes, include_comments=True, **kwargs)
+        return m.transform(p.parse(text, fn))
+
+    p = Parser(
+        expand_includes=expand_includes, transformer=m.create_transformer(), **kwargs
+    )
+    return p.parse(text, fn)
 
 
 # pylint: disable=redefined-builtin
@@ -121,11 +134,14 @@ def open(
 
     """
 
-    p = Parser(
-        expand_includes=expand_includes, include_comments=include_comments, **kwargs
+    return _parse(
+        Parser.open_file(fn),
+        fn,
+        expand_includes,
+        include_comments,
+        include_position,
+        **kwargs,
     )
-    ast = p.parse_file(fn)
-    return _transform(ast, include_comments, include_position, **kwargs)
 
 
 def load(
@@ -169,11 +185,14 @@ def load(
 
     Partial Mapfiles can also be opened, for example a file containing a ``LAYER`` object.
     """
-    p = Parser(
-        expand_includes=expand_includes, include_comments=include_comments, **kwargs
+    return _parse(
+        fp.read(),
+        getattr(fp, "name", None),
+        expand_includes,
+        include_comments,
+        include_position,
+        **kwargs,
     )
-    ast = p.load(fp)
-    return _transform(ast, include_comments, include_position, **kwargs)
 
 
 def loads(
@@ -215,11 +234,9 @@ def loads(
         assert d["name"] == "TEST"
 
     """
-    p = Parser(
-        expand_includes=expand_includes, include_comments=include_comments, **kwargs
+    return _parse(
+        s, None, expand_includes, include_comments, include_position, **kwargs
     )
-    ast = p.parse(s)
-    return _transform(ast, include_comments, include_position, **kwargs)
 
 
 # pylint: disable=too-many-arguments

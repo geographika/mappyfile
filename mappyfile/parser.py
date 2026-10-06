@@ -54,16 +54,29 @@ if use_cython:
 
 class Parser:
     def __init__(
-        self, expand_includes: bool = True, include_comments: bool = False, **kwargs
+        self,
+        expand_includes: bool = True,
+        include_comments: bool = False,
+        transformer: Any = None,
+        **kwargs,
     ):
+        """
+        transformer: a Lark Transformer applied during the parse, so no parse
+        tree is built and parse() returns the transformer's result instead
+        """
+        if transformer is not None and include_comments:
+            raise ValueError(
+                "include_comments needs the parse tree, so it cannot be used with a transformer"
+            )
         self.expand_includes = expand_includes
         self.include_comments = include_comments
+        self.transformer = transformer
         self._comments: list[Any] = []
         self.lalr = self._create_lalr_parser()
         self.kwargs = kwargs
 
     def _create_lalr_parser(self) -> Any:
-        extra_args = {}
+        extra_args: dict[str, Any] = {"transformer": self.transformer}
 
         if lark_cython:
             extra_args["_plugins"] = lark_cython.plugins
@@ -178,7 +191,8 @@ class Parser:
             fn = None
         return self.parse(text, fn)
 
-    def open_file(self, fn: str):
+    @staticmethod
+    def open_file(fn: str):
         try:
             with open(fn, "r", encoding="utf-8") as f:
                 return f.read()
@@ -196,7 +210,8 @@ class Parser:
 
     def parse(self, text: str, fn: str | None = None) -> Any:
         """
-        Parse the Mapfile
+        Parse the Mapfile, returning the parse tree - or the transformer's
+        result if the Parser was created with one
         """
 
         if text.strip() == "":

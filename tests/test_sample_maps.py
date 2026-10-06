@@ -3,11 +3,13 @@ import logging
 import pytest
 import mappyfile
 from mappyfile.parser import Parser
-from mappyfile.transformer import MapfileToDict
+from mappyfile.transformer import MapfileToDict, MapfileTransformer
 from mappyfile.pprint import PrettyPrinter
 from mappyfile.validator import Validator
 
 SAMPLE_DIR = os.path.join(os.path.dirname(__file__), "sample_maps")
+# transforms during the parse, as mappyfile.open does; built once for the module
+FOLD_PARSER = Parser(transformer=MapfileTransformer(include_position=True))
 
 IGNORE_LIST = [
     "bdry_counpy2_mssql.map",
@@ -40,6 +42,7 @@ def test_all_maps(fn):
 
     ast = p.parse_file(os.path.join(SAMPLE_DIR, fn))
     d = m.transform(ast)
+    assert FOLD_PARSER.parse_file(os.path.join(SAMPLE_DIR, fn)) == d
     errors = v.validate(d)
     assert len(errors) == 0, f"Validation errors in {fn}: {errors}"
 

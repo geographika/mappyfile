@@ -818,12 +818,15 @@ class MapfileToDict:
         self.transformer_class = transformer_class
         self.kwargs = kwargs
 
-    def transform(self, tree):
-        self.mapfile_transformer = self.transformer_class(
+    def create_transformer(self):
+        return self.transformer_class(
             include_position=self.include_position,
             include_comments=self.include_comments,
             **self.kwargs,
         )
+
+    def transform(self, tree):
+        self.mapfile_transformer = self.create_transformer()
 
         if self.include_comments:
             comments_transformer = CommentsTransformer(self.mapfile_transformer)

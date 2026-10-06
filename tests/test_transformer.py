@@ -1,5 +1,6 @@
 import json
 import pytest
+import mappyfile
 from mappyfile.parser import Parser
 from mappyfile.transformer import MapfileToDict, MapfileTransformer
 
@@ -372,6 +373,33 @@ def test_custom_transformer():
     print(d)
     assert m.mapfile_transformer.__class__.__name__ == "CustomTransformer"
     assert m.mapfile_transformer.custom_param == "custom"
+
+
+def test_transformer_during_parse():
+    """
+    A transformer given to the Parser runs as part of the parse, with no parse
+    tree, and gives the same result as transforming the tree afterwards. This is
+    the path mappyfile.loads/load/open take.
+    """
+    samples = [
+        """MAP NAME "test" CONFIG "MS_ERRORFILE" "stderr" LAYER NAME "l" TYPE POLYGON END END""",
+        """SYMBOLSET SYMBOL NAME "circle" TYPE ELLIPSE END END""",
+        """CONFIG ENV MS_MAP_PATTERN "." END MAPS test1 "C:/Maps/test1.map" END END""",
+        """LAYER NAME "a" END LAYER NAME "b" END""",
+        """GRID LABELFORMAT "DD" END""",
+    ]
+    tree_parser = Parser()
+    for include_position in (False, True):
+        to_dict = MapfileToDict(include_position=include_position)
+        transformer = MapfileTransformer(include_position=include_position)
+        parser = Parser(transformer=transformer)
+        for s in samples:
+            expected = to_dict.transform(tree_parser.parse(s))
+            assert parser.parse(s) == expected
+            assert mappyfile.loads(s, include_position=include_position) == expected
+
+    with pytest.raises(ValueError):
+        Parser(include_comments=True, transformer=MapfileTransformer())
 
 
 def run_tests():
