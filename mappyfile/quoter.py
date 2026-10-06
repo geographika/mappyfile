@@ -84,10 +84,8 @@ class Quoter:
         if isinstance(val, list):
             return list(map(self.remove_quotes, val))
 
-        if not self.is_string(val):
-            return val
-
-        if self.in_quotes(val):
+        # the same test as in_quotes, without its three nested calls
+        if isinstance(val, str) and val[:1] == val[-1:] and val[:1] in ("'", '"'):
             return val[1:-1]
 
         return val

@@ -305,7 +305,7 @@ class MapfileTransformer(Transformer):
             # single value
             values = value_tokens[0].value
 
-            if self.quoter.is_string(values):
+            if isinstance(values, str):
                 values = self.clean_string(values)  # type: ignore
 
         d[key_name] = values
