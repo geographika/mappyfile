@@ -413,6 +413,15 @@ def test_attr_tokens_only_with_comments():
     assert "__tokens__" not in MapfileTransformer().transform(attr)
 
 
+def test_value_positions():
+    d = mappyfile.loads("MAP\n  SIZE 600 400\nEND", include_position=True)
+    assert d["__position__"]["size"] == {
+        "line": 2,
+        "column": 3,
+        "values": [(2, 8), (2, 12)],
+    }
+
+
 def run_tests():
     # pytest.main(["tests/test_transformer.py::test_config_directive"])
     pytest.main(["tests/test_transformer.py"])

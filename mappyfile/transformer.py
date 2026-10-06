@@ -230,7 +230,7 @@ class MapfileTransformer(Transformer):
                     composite_dict[plural_key].append(d)
             else:
                 #  simple attribute
-                pos = d.pop("__position__")
+                pos = d.pop("__position__", None)
                 d.pop(
                     "__tokens__", None
                 )  # tokens are no longer needed now we have the positions
@@ -288,9 +288,9 @@ class MapfileTransformer(Transformer):
             assert len(value_tokens) == 1
             value_tokens = value_tokens[0]
 
-        pd = self.create_position_dict(key_token, value_tokens)
         d: dict = OrderedDict()
-        d["__position__"] = pd
+        if self.include_position:
+            d["__position__"] = self.create_position_dict(key_token, value_tokens)
 
         if self.include_comments:
             # read by plugins that turn tokens into comments (mappyfile-colors)
@@ -412,7 +412,7 @@ class MapfileTransformer(Transformer):
 
             for c in t.children:
                 # first remove dicts that are no longer required
-                pos = c.pop("__position__")
+                pos = c.pop("__position__", None)
                 c.pop(
                     "__tokens__", None
                 )  # tokens are no longer needed now we have the positions
@@ -671,9 +671,9 @@ class MapfileTransformer(Transformer):
     def classauto(self, t):
         key_token = t[0]
         key_name = self.key_name(key_token)
-        pd = self.create_position_dict(key_token, None)
         d: dict = OrderedDict()
-        d["__position__"] = pd
+        if self.include_position:
+            d["__position__"] = self.create_position_dict(key_token, None)
         d[key_name] = None
         return d
 
