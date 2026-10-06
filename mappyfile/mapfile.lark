@@ -91,7 +91,7 @@ hexcolor: DOUBLE_QUOTED_HEXCOLOR | SINGLE_QUOTED_HEXCOLOR
 
 extent: (int|float) (int|float) (int|float) (int|float) 
 
-string: DOUBLE_QUOTED_STRING | SINGLE_QUOTED_STRING | ESCAPED_STRING
+?string: DOUBLE_QUOTED_STRING | SINGLE_QUOTED_STRING | ESCAPED_STRING
 string_pair: (string|UNQUOTED_STRING) (string|UNQUOTED_STRING)
 
 attr_bind_pair: attr_bind attr_bind

@@ -653,10 +653,6 @@ class MapfileTransformer(Transformer):
         v = t[0]
         return v
 
-    def string(self, t):
-        v = t[0]
-        return v
-
     def path(self, t):
         return t[0]
 
@@ -739,19 +735,8 @@ class CommentsTransformer(Transformer_InPlace):
         if len(metadata) > 2:
             string_pairs = metadata[1:-1]  # get all metadata pairs
             for sp in string_pairs:
-                # get the raw metadata key
-
-                if isinstance(sp.children[0], TOKEN_TYPES):
-                    token = sp.children[0]
-                    assert token.type == "UNQUOTED_STRING"
-                    key = token.value
-                else:
-                    # quoted string (double or single)
-                    token = sp.children[0].children[0]
-                    key = token.value
-
-                # clean it to match the dict key
-                key = self._mapfile_todict.clean_string(key).lower()
+                # clean the raw metadata key to match the dict key
+                key = self._mapfile_todict.clean_string(sp.children[0].value).lower()
                 assert key in d.keys()
                 key_comments = self.get_comments(sp.meta)
                 d["__comments__"][key] = key_comments

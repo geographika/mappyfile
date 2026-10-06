@@ -29,7 +29,7 @@ The tree is stored as a Python object, shown below:
 
     Tree(start, [Tree(composite, [Tree(composite_type, [Token(__MAP39, 'MAP')]), 
     Tree(composite_body, [Tree(attr, [Token(UNQUOTED_STRING, 'NAME'), 
-    Tree(string, [Token(SINGLE_QUOTED_STRING, "'Test'")])])])])])
+    Token(SINGLE_QUOTED_STRING, "'Test'")])])])])
 
 This can formatted as follows:
 
@@ -41,7 +41,7 @@ This can formatted as follows:
         composite_body
           attr
             NAME
-            string	'Test'
+            'Test'
 
 The grammar file contains rules and `terminals <http://www.parsifalsoft.com/gloss.html#Terminal>`_, 
 and the parser matches these to the input text to create the tree. 
