@@ -19,7 +19,7 @@ def test_parser_validation():
     """
     p = Parser()
     tree: Tree = p.parse(config_text_ok)
-    assert tree.data == "config"
+    assert tree.data == "config_file"
     assert tree.children[0].data == "env"
 
 

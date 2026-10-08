@@ -35,7 +35,6 @@ Python dict structure
 from __future__ import annotations
 import logging
 from collections import OrderedDict
-from lark import Tree
 from lark.visitors import Transformer_InPlace, Transformer, v_args
 from lark.lexer import Token
 from .parser import lark_cython
@@ -46,13 +45,11 @@ from mappyfile.quoter import Quoter
 
 
 if lark_cython:
-    TOKEN_TYPES = (Token, lark_cython.Token)
 
     def update_token_value(t, value):
         return Token.new_borrow_pos(t.type, value, t)
 
 else:
-    TOKEN_TYPES = Token  # type: ignore
 
     def update_token_value(t, value):
         t.value = value
@@ -84,21 +81,21 @@ class MapfileTransformer(Transformer):
 
         return composites
 
+    def symbolset(self, t):
+        """
+        Parses a MapServer symbolset file - a SYMBOLSET..END block at the root
+        """
+        composite_type = self.composite_type([Token("symbolset", "symbolset")])
+        return self.composite([composite_type] + t)
+
     def flatten(self, values: list[Any]) -> list[Any]:
-        flat_list = []
+        flat_list: list[Any] = []
 
         for v in values:
-            if isinstance(v, TOKEN_TYPES):
-                flat_list.append(v)
-            elif isinstance(v, list):
+            if isinstance(v, (list, tuple)):
                 flat_list += v
-            elif isinstance(v, tuple):
-                flat_list += v
-            elif isinstance(v, dict):
-                assert "__tokens__" in v
-                flat_list += v["__tokens__"]
             else:
-                raise ValueError("Attribute value type not supported", v)
+                flat_list.append(v)  # a token
 
         return flat_list
 
@@ -122,9 +119,8 @@ class MapfileTransformer(Transformer):
         return d
 
     def get_single_key(self, d: dict):
-        keys = list(d.keys())  # convert to list for py3
-        assert len(keys) == 1
-        return keys[0]
+        (key,) = d  # fails unless there is exactly one
+        return key
 
     def composite_body(self, t):
         return t
@@ -233,7 +229,7 @@ class MapfileTransformer(Transformer):
                     composite_dict[plural_key].append(d)
             else:
                 #  simple attribute
-                pos = d.pop("__position__")
+                pos = d.pop("__position__", None)
                 d.pop(
                     "__tokens__", None
                 )  # tokens are no longer needed now we have the positions
@@ -260,7 +256,6 @@ class MapfileTransformer(Transformer):
                             position_dict[key_name] = []
                         position_dict[key_name].append(pos)
                 else:
-                    assert len(d.items()) == 1
                     if position_dict is not None:
                         # hoist position details to composite
                         position_dict[key_name] = pos
@@ -274,15 +269,6 @@ class MapfileTransformer(Transformer):
 
     def clean_string(self, val: str) -> str:
         return self.quoter.remove_quotes(val)
-
-    def attr_name(self, tokens) -> str:
-        t = tokens[0]
-        if not isinstance(t, TOKEN_TYPES):
-            #  handle ambiguities
-            t = t[0]
-            assert t.value.lower() in ("symbol", "style")
-
-        return t
 
     def attr(self, tokens) -> dict:
         key_token = tokens[0]
@@ -300,9 +286,13 @@ class MapfileTransformer(Transformer):
             assert len(value_tokens) == 1
             value_tokens = value_tokens[0]
 
-        pd = self.create_position_dict(key_token, value_tokens)
-        d: dict = OrderedDict()
-        d["__position__"] = pd
+        d: dict = {}
+        if self.include_position:
+            d["__position__"] = self.create_position_dict(key_token, value_tokens)
+
+        if self.include_comments:
+            # read by plugins that turn tokens into comments (mappyfile-colors)
+            d["__tokens__"] = [key_token, *value_tokens]
 
         if len(value_tokens) > 1:
             if key_name == "config":
@@ -311,16 +301,11 @@ class MapfileTransformer(Transformer):
             else:
                 # list of values
                 values = [v.value for v in value_tokens]  # type: ignore
-                d["__tokens__"] = [key_token] + list(value_tokens)
         else:
             # single value
-            value_token = value_tokens[0]
-            # store the original tokens so they can be processed
-            # differently for METADATA, VALIDATION, and VALUES
-            d["__tokens__"] = [key_token, value_token]
-            values = value_token.value
+            values = value_tokens[0].value
 
-            if self.quoter.is_string(values):
+            if isinstance(values, str):
                 values = self.clean_string(values)  # type: ignore
 
         d[key_name] = values
@@ -340,19 +325,7 @@ class MapfileTransformer(Transformer):
         assert key.value.lower() == name
         assert tokens[-1].value.lower() == "end"
 
-        if len(tokens) == 2:
-            body = []  # empty TYPE..END block
-        else:
-            body = tokens[1:-1]
-
-        body_tokens = []
-
-        for t in body:
-            if isinstance(t, dict):
-                body_tokens.append(t["__tokens__"])
-            else:
-                body_tokens.append(t)
-        return key, body_tokens
+        return key, tokens[1:-1]
 
     def process_value_pairs(self, tokens, type_) -> dict:
         """
@@ -418,6 +391,63 @@ class MapfileTransformer(Transformer):
         t[1].value = self.clean_string(key)
         t[2].value = self.clean_string(value)
         return self.attr(t)
+
+    def config_file(self, tree):
+        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
+        composite_dict["__type__"] = "config"
+
+        for t in tree:
+            key = t.data.lower()
+
+            atts_dict: OrderedDict[str, Any] = OrderedDict()
+
+            if self.include_comments:
+                comments_dict = atts_dict["__comments__"] = OrderedDict()
+
+            if self.include_position:
+                # self.create_position_dict(key_name, None)
+                position_dict = atts_dict["__position__"] = OrderedDict()
+
+            for c in t.children:
+                # first remove dicts that are no longer required
+                pos = c.pop("__position__", None)
+                c.pop(
+                    "__tokens__", None
+                )  # tokens are no longer needed now we have the positions
+                comments = c.pop("__comments__", None)
+
+                #  simple attribute
+                assert len(c.items()) == 1
+                att = list(c.items())[0]
+                att_key = att[0]
+                att_value = att[1]
+
+                if self.include_position:
+                    # hoist position details to composite
+                    position_dict[att_key] = pos
+                if self.include_comments and comments:
+                    # hoist comments to composite
+                    comments_dict[att_key] = comments
+
+                if att_key in atts_dict.keys():
+                    log.warning(
+                        "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
+                        att_key,
+                        key,
+                        att_value,
+                    )
+                atts_dict[att_key] = att_value
+
+            composite_dict[key] = atts_dict
+
+        return composite_dict
+
+    def config_attr(self, tokens) -> dict:
+        """
+        Process CONFIG file attributes which can be quoted
+        or unquoted, otherwise they are identical to other attributes
+        """
+        return self.attr(tokens)
 
     def validation(self, tokens):
         """
@@ -590,10 +620,6 @@ class MapfileTransformer(Transformer):
         v = t[0]
         return v
 
-    def string(self, t):
-        v = t[0]
-        return v
-
     def path(self, t):
         return t[0]
 
@@ -643,9 +669,9 @@ class MapfileTransformer(Transformer):
     def classauto(self, t):
         key_token = t[0]
         key_name = self.key_name(key_token)
-        pd = self.create_position_dict(key_token, None)
-        d: dict = OrderedDict()
-        d["__position__"] = pd
+        d: dict = {}
+        if self.include_position:
+            d["__position__"] = self.create_position_dict(key_token, None)
         d[key_name] = None
         return d
 
@@ -676,19 +702,8 @@ class CommentsTransformer(Transformer_InPlace):
         if len(metadata) > 2:
             string_pairs = metadata[1:-1]  # get all metadata pairs
             for sp in string_pairs:
-                # get the raw metadata key
-
-                if isinstance(sp.children[0], TOKEN_TYPES):
-                    token = sp.children[0]
-                    assert token.type == "UNQUOTED_STRING"
-                    key = token.value
-                else:
-                    # quoted string (double or single)
-                    token = sp.children[0].children[0]
-                    key = token.value
-
-                # clean it to match the dict key
-                key = self._mapfile_todict.clean_string(key).lower()
+                # clean the raw metadata key to match the dict key
+                key = self._mapfile_todict.clean_string(sp.children[0].value).lower()
                 assert key in d.keys()
                 key_comments = self.get_comments(sp.meta)
                 d["__comments__"][key] = key_comments
@@ -737,62 +752,9 @@ class CommentsTransformer(Transformer_InPlace):
 
 
 class ConfigfileTransformer(MapfileTransformer):
-    def config(self, tree):
-        composite_dict = CaseInsensitiveOrderedDict(CaseInsensitiveOrderedDict)
-        composite_dict["__type__"] = "config"
-
-        for t in tree:
-            key = t.data.lower()
-
-            atts_dict: OrderedDict[str, Any] = OrderedDict()
-
-            if self.include_comments:
-                comments_dict = atts_dict["__comments__"] = OrderedDict()
-
-            if self.include_position:
-                # self.create_position_dict(key_name, None)
-                position_dict = atts_dict["__position__"] = OrderedDict()
-
-            for c in t.children:
-                # first remove dicts that are no longer required
-                pos = c.pop("__position__")
-                c.pop(
-                    "__tokens__", None
-                )  # tokens are no longer needed now we have the positions
-                comments = c.pop("__comments__", None)
-
-                #  simple attribute
-                assert len(c.items()) == 1
-                att = list(c.items())[0]
-                att_key = att[0]
-                att_value = att[1]
-
-                if self.include_position:
-                    # hoist position details to composite
-                    position_dict[att_key] = pos
-                if self.include_comments and comments:
-                    # hoist comments to composite
-                    comments_dict[att_key] = comments
-
-                if att_key in atts_dict.keys():
-                    log.warning(
-                        "A duplicate key (%s) was found in %s. Only the last value (%s) will be used. ",
-                        att_key,
-                        key,
-                        att_value,
-                    )
-                atts_dict[att_key] = att_value
-
-            composite_dict[key] = atts_dict
-
-        return composite_dict
-
-    def config_attr(self, tokens) -> dict:
-        """
-        Process CONFIG file attributes which can be quoted
-        or unquoted, otherwise they are identical to other attributes
-        """
-        return self.attr(tokens)
+    """
+    Kept for compatibility - MapfileTransformer now handles CONFIG files too
+    """
 
 
 class MapfileToDict:
@@ -808,30 +770,21 @@ class MapfileToDict:
         self.transformer_class = transformer_class
         self.kwargs = kwargs
 
-    def transform(self, tree):
-        tree = Canonize().transform(tree)
-
-        self.mapfile_transformer = self.transformer_class(
+    def create_transformer(self):
+        return self.transformer_class(
             include_position=self.include_position,
             include_comments=self.include_comments,
             **self.kwargs,
         )
+
+    def transform(self, tree):
+        self.mapfile_transformer = self.create_transformer()
 
         if self.include_comments:
             comments_transformer = CommentsTransformer(self.mapfile_transformer)
             tree = comments_transformer.transform(tree)
 
         return self.mapfile_transformer.transform(tree)
-
-
-class Canonize(Transformer_InPlace):
-    @v_args(tree=True)
-    def symbolset(self, tree):
-        composite_type = Tree("composite_type", [Token("symbolset", "symbolset")])
-
-        tree.data = "composite"
-        tree.children.insert(0, composite_type)
-        return tree
 
 
 def calculate_depth(iterable):

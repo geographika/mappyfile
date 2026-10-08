@@ -3,8 +3,9 @@
 Transforming
 ============
 
-mappyfile parses a Mapfile and turns it into a Abstract Syntax Tree (AST). The mappyfile
-`transformer class <https://github.com/geographika/mappyfile/blob/master/mappyfile/transformer.py>`_ then turns this tree into a Python dictionary. 
+mappyfile parses a Mapfile into a Python dictionary, which the mappyfile
+`transformer class <https://github.com/geographika/mappyfile/blob/master/mappyfile/transformer.py>`_ builds while parsing
+(an Abstract Syntax Tree (AST) is built first only when comments are included). 
 Using a dictionary provides the Python developer with a familiar data structure that can be used to edit the Mapfile further - see :ref:`editing`.
 
 For example taking the Mapfile below:
