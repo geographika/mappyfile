@@ -74,6 +74,33 @@ use in mappyfile you can set the ``MAPPYFILE_USE_CYTHON`` to ``False`` (or any f
     # Windows Command Line
     set MAPPYFILE_USE_CYTHON=False
 
+To install the optional `Hyperlark <https://hyperlark.io/>`_ engine, a Rust implementation of Lark:
+
+.. code-block:: console
+
+    pip install mappyfile[hyperlark]
+
+Hyperlark is free for non-commercial use, and it makes mappyfile around 5x faster than lark-cython.
+
+It supports Python 3.10+, and free-threaded 3.14.
+It comes with binaries for x86-64 and ARM64 Linux, macOS 13+, and x86-64 Windows.
+
+If Hyperlark is installed it will be used automatically, in place of lark-cython, and it is essentially
+a drop-in replacement.
+If it is installed and you want to disable its use in mappyfile you can set ``MAPPYFILE_USE_HYPERLARK``
+to ``False`` (or any falsy value).
+
+.. code-block:: console
+
+    # Linux
+    export MAPPYFILE_USE_HYPERLARK="False"
+
+    # Windows PowerShell
+    $env:MAPPYFILE_USE_HYPERLARK="False"
+
+    # Windows Command Line
+    set MAPPYFILE_USE_HYPERLARK=False
+
 To install the optional `PyYAML <https://pyyaml.org/>`_ library for reading and writing
 Mapfiles in YAML format:
 

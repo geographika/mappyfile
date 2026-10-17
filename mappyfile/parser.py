@@ -32,7 +32,7 @@ import os
 import bisect
 import logging
 from io import open
-from lark import Lark, ParseError, UnexpectedInput, UnexpectedToken
+from lark import Lark, ParseError, Tree, UnexpectedInput, UnexpectedToken
 from typing import Any, IO
 
 
@@ -43,14 +43,44 @@ def string_to_boolean(string_value: str):
     return string_value.lower() not in ("false", "no", "0", "off")
 
 
+# Uses Hyperlark (https://hyperlark.io/) when it is installed, unless
+# MAPPYFILE_USE_HYPERLARK is false. Otherwise, uses Lark, sped up by lark_cython
+# when it is installed, unless MAPPYFILE_USE_CYTHON is false.
+use_hyperlark = string_to_boolean(os.environ.get("MAPPYFILE_USE_HYPERLARK", "True"))
 use_cython = string_to_boolean(os.environ.get("MAPPYFILE_USE_CYTHON", "True"))
+hyperlark: Any = None
 lark_cython = None
 
-if use_cython:
+if use_hyperlark:
+    try:
+        import hyperlark  # type: ignore
+        from hyperlark.compat import to_lark_error  # type: ignore
+    except ImportError:
+        hyperlark = None
+
+if use_cython and not hyperlark:
     try:
         import lark_cython  # type: ignore
     except ImportError:
         pass
+
+
+class _HyperlarkParser:
+    """
+    Hyperlark's parser for the Mapfile grammar. It builds lark's Tree and raises
+    lark's exception classes, so callers see the same classes as with lark
+    """
+
+    def __init__(self, **options):
+        self._parser = hyperlark.Lark.open(
+            "mapfile.lark", rel_to=__file__, parser="lalr", tree_class=Tree, **options
+        )
+
+    def parse(self, text: str) -> Any:
+        try:
+            return self._parser.parse(text)
+        except hyperlark.LarkError as ex:
+            raise to_lark_error(ex) from None
 
 
 class Parser:
@@ -79,15 +109,18 @@ class Parser:
     def _create_lalr_parser(self) -> Any:
         extra_args: dict[str, Any] = {"transformer": self.transformer}
 
-        if lark_cython:
-            extra_args["_plugins"] = lark_cython.plugins
-
         if self.include_comments:
             callbacks = {
                 "COMMENT": self._comments.append,
                 "CCOMMENT": self._comments.append,
             }
             extra_args["lexer_callbacks"] = callbacks
+
+        if hyperlark:
+            return _HyperlarkParser(**extra_args)
+
+        if lark_cython:
+            extra_args["_plugins"] = lark_cython.plugins
 
         return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
 

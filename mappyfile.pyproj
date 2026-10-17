@@ -1222,6 +1222,7 @@ PROJ_LIB=C:\MapServer\bin\proj\SHARE
     <Compile Include="tests\test_expressions.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\test_hyperlark.py" />
     <Compile Include="tests\test_includes.py">
       <SubType>Code</SubType>
     </Compile>
