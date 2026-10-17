@@ -29,9 +29,10 @@
 
 from __future__ import annotations
 import os
+import bisect
 import logging
 from io import open
-from lark import Lark, ParseError, Tree, UnexpectedInput, UnexpectedToken
+from lark import Lark, ParseError, UnexpectedInput, UnexpectedToken
 from typing import Any, IO
 
 
@@ -86,9 +87,7 @@ class Parser:
                 "COMMENT": self._comments.append,
                 "CCOMMENT": self._comments.append,
             }
-            extra_args.update(
-                {"propagate_positions": True, "lexer_callbacks": callbacks}
-            )
+            extra_args["lexer_callbacks"] = callbacks
 
         return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
 
@@ -144,42 +143,33 @@ class Parser:
             lines.insert(idx, txt)
         return "\n".join(lines)
 
+    # the nodes comments are attached to; in METADATA, its string_pairs
+    _COMMENT_NODES = frozenset(
+        ("composite", "attr", "projection", "string_pair", "config_attr")
+    )
+
     def _assign_comments(self, _tree: Any) -> None:
-        for node in _tree.children:
-            if not isinstance(node, Tree):
+        """
+        Visit the nodes in Mapfile order: each node that can have comments takes
+        the remaining comments up to its first line - for a projection up to its
+        END line, so it also takes the comments inside the block
+        """
+        lines = sorted(self.comments_dict)
+        i = 0
+        for node in _tree.iter_subtrees_topdown():
+            if node.data not in self._COMMENT_NODES:
                 continue
-
-            if not hasattr(node.meta, "line"):
-                continue
-
-            line = node.meta.line
-
-            # when we encounter a new type that can have associated comments
-            # assign all comments up to that point in the Mapfile to the node
-            # for metadata we want to assign comments to the string_pair
-            if node.data in (
-                "composite",
-                "attr",
-                "projection",
-                "string_pair",
-                "config_attr",
-            ):
-                # for projection blocks capture any comments within the block
-
-                if node.data in ("projection"):
-                    line = node.meta.end_line
-                line_numbers = list(sorted(self.comments_dict.keys()))
-                comments = []
-
-                for line_number in line_numbers:
-                    if line_number <= line:
-                        comments.append(self.comments_dict.pop(line_number))
-
-                if comments:
-                    node.meta.comments = comments  # type: ignore
-
-            if isinstance(node, Tree):
-                self._assign_comments(node)
+            if node.data == "projection":
+                token = node.children[-1]  # END
+            else:
+                token = next(node.scan_values(lambda v: v is not None), None)
+                if token is None:
+                    continue
+            j = bisect.bisect_right(lines, token.line, i)
+            if j > i:
+                comments = [self.comments_dict.pop(line) for line in lines[i:j]]
+                node.meta.comments = comments  # type: ignore
+                i = j
 
     def load(self, fp: IO[str]) -> Any:
         text = fp.read()
