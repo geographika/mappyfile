@@ -39,6 +39,17 @@ for better performance on CPython you can run the following command:
 
 pip install mappyfile[lark_cython,yaml]
 
+To install the optional `Hyperlark <https://hyperlark.io/>`_ engine, a Rust implementation of Lark:
+
+.. code-block:: console
+
+    pip install mappyfile[hyperlark]
+
+Hyperlark is free for non-commercial use, and it makes mappyfile around 5x faster than lark-cython.
+
+If Hyperlark is installed it will be used automatically, in place of lark-cython, and it is essentially
+a drop-in replacement.
+
 mappyfile is also available on `conda <https://anaconda.org/conda-forge/mappyfile>`_. Install as
 follows:
 

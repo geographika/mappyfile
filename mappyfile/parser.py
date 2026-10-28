@@ -29,6 +29,7 @@
 
 from __future__ import annotations
 import os
+import bisect
 import logging
 from io import open
 from lark import Lark, ParseError, Tree, UnexpectedInput, UnexpectedToken
@@ -42,14 +43,44 @@ def string_to_boolean(string_value: str):
     return string_value.lower() not in ("false", "no", "0", "off")
 
 
+# Uses Hyperlark (https://hyperlark.io/) when it is installed, unless
+# MAPPYFILE_USE_HYPERLARK is false. Otherwise, uses Lark, sped up by lark_cython
+# when it is installed, unless MAPPYFILE_USE_CYTHON is false.
+use_hyperlark = string_to_boolean(os.environ.get("MAPPYFILE_USE_HYPERLARK", "True"))
 use_cython = string_to_boolean(os.environ.get("MAPPYFILE_USE_CYTHON", "True"))
+hyperlark: Any = None
 lark_cython = None
 
-if use_cython:
+if use_hyperlark:
+    try:
+        import hyperlark  # type: ignore
+        from hyperlark.compat import to_lark_error  # type: ignore
+    except ImportError:
+        hyperlark = None
+
+if use_cython and not hyperlark:
     try:
         import lark_cython  # type: ignore
     except ImportError:
         pass
+
+
+class _HyperlarkParser:
+    """
+    Hyperlark's parser for the Mapfile grammar. It builds lark's Tree and raises
+    lark's exception classes, so callers see the same classes as with lark
+    """
+
+    def __init__(self, **options):
+        self._parser = hyperlark.Lark.open(
+            "mapfile.lark", rel_to=__file__, parser="lalr", tree_class=Tree, **options
+        )
+
+    def parse(self, text: str) -> Any:
+        try:
+            return self._parser.parse(text)
+        except hyperlark.LarkError as ex:
+            raise to_lark_error(ex) from None
 
 
 class Parser:
@@ -78,17 +109,18 @@ class Parser:
     def _create_lalr_parser(self) -> Any:
         extra_args: dict[str, Any] = {"transformer": self.transformer}
 
-        if lark_cython:
-            extra_args["_plugins"] = lark_cython.plugins
-
         if self.include_comments:
             callbacks = {
                 "COMMENT": self._comments.append,
                 "CCOMMENT": self._comments.append,
             }
-            extra_args.update(
-                {"propagate_positions": True, "lexer_callbacks": callbacks}
-            )
+            extra_args["lexer_callbacks"] = callbacks
+
+        if hyperlark:
+            return _HyperlarkParser(**extra_args)
+
+        if lark_cython:
+            extra_args["_plugins"] = lark_cython.plugins
 
         return Lark.open("mapfile.lark", rel_to=__file__, parser="lalr", **extra_args)
 
@@ -144,42 +176,33 @@ class Parser:
             lines.insert(idx, txt)
         return "\n".join(lines)
 
+    # the nodes comments are attached to; in METADATA, its string_pairs
+    _COMMENT_NODES = frozenset(
+        ("composite", "attr", "projection", "string_pair", "config_attr")
+    )
+
     def _assign_comments(self, _tree: Any) -> None:
-        for node in _tree.children:
-            if not isinstance(node, Tree):
+        """
+        Visit the nodes in Mapfile order: each node that can have comments takes
+        the remaining comments up to its first line - for a projection up to its
+        END line, so it also takes the comments inside the block
+        """
+        lines = sorted(self.comments_dict)
+        i = 0
+        for node in _tree.iter_subtrees_topdown():
+            if node.data not in self._COMMENT_NODES:
                 continue
-
-            if not hasattr(node.meta, "line"):
-                continue
-
-            line = node.meta.line
-
-            # when we encounter a new type that can have associated comments
-            # assign all comments up to that point in the Mapfile to the node
-            # for metadata we want to assign comments to the string_pair
-            if node.data in (
-                "composite",
-                "attr",
-                "projection",
-                "string_pair",
-                "config_attr",
-            ):
-                # for projection blocks capture any comments within the block
-
-                if node.data in ("projection"):
-                    line = node.meta.end_line
-                line_numbers = list(sorted(self.comments_dict.keys()))
-                comments = []
-
-                for line_number in line_numbers:
-                    if line_number <= line:
-                        comments.append(self.comments_dict.pop(line_number))
-
-                if comments:
-                    node.meta.comments = comments  # type: ignore
-
-            if isinstance(node, Tree):
-                self._assign_comments(node)
+            if node.data == "projection":
+                token = node.children[-1]  # END
+            else:
+                token = next(node.scan_values(lambda v: v is not None), None)
+                if token is None:
+                    continue
+            j = bisect.bisect_right(lines, token.line, i)
+            if j > i:
+                comments = [self.comments_dict.pop(line) for line in lines[i:j]]
+                node.meta.comments = comments  # type: ignore
+                i = j
 
     def load(self, fp: IO[str]) -> Any:
         text = fp.read()
